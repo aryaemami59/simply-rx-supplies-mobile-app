@@ -19,7 +19,13 @@ const intersection = (firstArray: string[], secondArray: string[]): string[] =>
 
 const createAsyncThunkFunc = (strVal: string, githubUrl: string) => {
   return createAsyncThunk(`${strVal}/fetch${strVal}`, async () => {
-    const response: Response = await fetch(githubUrl);
+    const response: Response = await fetch(githubUrl, {
+      method: "GET",
+      headers: {
+        Accept: "application/vnd.github.v3.raw.json",
+        Authorization: "Bearer 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",
+      },
+    });
     if (!response.ok) {
       return Promise.reject("Unable to fetch, status: " + response.status);
     }
