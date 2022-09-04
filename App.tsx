@@ -1,20 +1,36 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { Provider } from "react-redux";
+import { FC, memo, useEffect } from "react";
+import { View, StyleSheet, ActivityIndicator, Alert, Text } from "react-native";
+import Main from "./Main";
+import Constants from "expo-constants";
+import { store, useAppSelector, useAppDispatch } from "./src/redux/store";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import { NavigationContainer } from "@react-navigation/native";
+import {
+  checkIfLoading,
+  selectErrMsg,
+  fetchItems,
+  fetchVendors,
+  fetchNavList,
+} from "./src/redux/addedSlice";
 
-export default function App() {
+const App: FC = (): JSX.Element => {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaProvider>
+      <Provider store={store}>
+        <NavigationContainer>
+          <Main />
+        </NavigationContainer>
+      </Provider>
+    </SafeAreaProvider>
   );
-}
+};
+
+export default memo(App);
 
 const styles = StyleSheet.create({
-  container: {
+  ContainerStyle: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    // paddingTop: Constants.statusBarHeight,
   },
 });
