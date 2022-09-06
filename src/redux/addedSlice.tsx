@@ -12,6 +12,7 @@ import {
   GITHUB_URL_ITEMS,
   GITHUB_URL_VENDORS,
   GITHUB_URL_NAVLIST,
+  AUTH_TOKEN,
 } from "./fetchInfo";
 
 const intersection = (firstArray: string[], secondArray: string[]): string[] =>
@@ -23,7 +24,7 @@ const createAsyncThunkFunc = (strVal: string, githubUrl: string) => {
       method: "GET",
       headers: {
         Accept: "application/vnd.github.v3.raw.json",
-        Authorization: "Bearer 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",
+        Authorization: AUTH_TOKEN,
       },
     });
     if (!response.ok) {
