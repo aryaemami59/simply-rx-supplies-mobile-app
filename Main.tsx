@@ -5,6 +5,10 @@ import {
   Image,
   Platform,
   ActivityIndicator,
+  TouchableOpacity,
+  Modal,
+  NativeSyntheticEvent,
+  GestureResponderEvent,
 } from "react-native";
 import React, {
   createContext,
@@ -26,7 +30,7 @@ import {
   selectErrMsg,
 } from "./src/redux/addedSlice";
 import { ScrollView, TouchableHighlight } from "react-native-gesture-handler";
-import { Button, Header } from "@rneui/themed";
+import { Badge, Button, Header } from "@rneui/themed";
 import { LinearGradient } from "expo-linear-gradient";
 import { Icon } from "@rneui/themed";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -39,40 +43,70 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { selectItemsArr } from "./src/redux/addedSlice";
-import SideBarAccordion from "./src/components/SideBarAccordion";
+import SideBarAccordionVendor from "./src/components/SideBarAccordionVendor";
+import { useCallback } from "react";
+import SideBarAccordionList from "./src/components/SideBarAccordionList";
+import { Drawer as PaperDrawer } from "react-native-paper";
+import CartColumnList from "./src/components/CartColumnList";
 
-const Drawer = createDrawerNavigator();
+export const Drawer = createDrawerNavigator();
 
-// const HamburgerMenuIcon = ({ navigation }): JSX.Element => {
+function HomeScreen() {
+  // const Stack = createStackNavigator();
+
+  return (
+    <View style={{ padding: 10 }}>
+      <InputGroup />
+    </View>
+  );
+}
+
+// function DrawerContent() {
 //   return (
-//     <Icon
-//       name="bars"
-//       size={40}
-//       type="font-awesome"
-//       onPress={() => navigation.toggleDrawer()}
-//     />
-//     // <TouchableHighlight onPress={() => navigation.toggleDrawer()}>
-//     //   <FontAwesomeIcon icon={faBars} size={50} />
-//     // </TouchableHighlight>
+//     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+//       <Text>Drawer content</Text>
+//     </View>
 //   );
-// };
+// }
 
 const HomeNavigator = () => {
   const Stack = createStackNavigator();
+  const [showModal, setShowModal] = useState(false);
+
+  const clickHandler = useCallback((e: GestureResponderEvent) => {
+    setShowModal(prev => !prev);
+  }, []);
 
   return (
     <Stack.Navigator screenOptions={screenOptions}>
       <Stack.Screen
         name="home"
-        component={Button}
+        component={HomeScreen}
         options={({ navigation }) => ({
-          title: "Home",
+          headerTitle: "",
+          headerRight: () => (
+            <TouchableOpacity onPress={clickHandler}>
+              <Icon
+                name="shopping-cart"
+                type="font-awesome"
+                iconStyle={{ marginRight: 30, fontSize: 24, color: "#fff" }}
+              />
+              {/* <Badge status="success" /> */}
+              <CartColumnList
+                clickHandler={clickHandler}
+                showModal={showModal}
+                setShowModal={setShowModal}
+              />
+            </TouchableOpacity>
+          ),
           headerLeft: () => (
-            <Icon
-              name="bars"
-              type="font-awesome"
-              onPress={() => navigation.toggleDrawer()}
-            />
+            <TouchableOpacity onPress={navigation.toggleDrawer}>
+              <Icon
+                name="bars"
+                type="font-awesome"
+                iconStyle={{ marginLeft: 30, fontSize: 24, color: "#fff" }}
+              />
+            </TouchableOpacity>
           ),
         })}
       />
@@ -80,23 +114,31 @@ const HomeNavigator = () => {
   );
 };
 
+// const CartNavigator = () => {
+//   const Stack = createStackNavigator();
+
+//   return (
+
+//   )
+// };
+
 const screenOptions = {
   headerTintColor: "#fff",
   headerStyle: { backgroundColor: "#5637DD" },
 };
 
-const CustomDrawerContent = props => {
-  return (
-    <DrawerContentScrollView {...props}>
-      <View>
-        <View style={{ flex: 2 }}>
-          <Text style={{ margin: 10 }}>Choose Items By Vendor</Text>
-        </View>
-      </View>
-      <DrawerItemList {...props} labelStyle={{ fontWeight: "bold" }} />
-    </DrawerContentScrollView>
-  );
-};
+// const CustomDrawerContent = props => {
+//   return (
+//     <DrawerContentScrollView {...props}>
+//       <View>
+//         <View style={{ flex: 2 }}>
+//           <Text style={{ margin: 10 }}>Choose Items By Vendor</Text>
+//         </View>
+//       </View>
+//       <DrawerItemList {...props} labelStyle={{ fontWeight: "bold" }} />
+//     </DrawerContentScrollView>
+//   );
+// };
 
 export interface myContextInterface {
   darkTheme: boolean;
@@ -108,13 +150,14 @@ export const DarkMode = createContext<myContextInterface>({
   setDarkTheme: () => {},
 });
 
-// const getLocalStorageTheme = (): boolean =>
-//   localStorage.getItem("theme") ? !!localStorage.getItem("theme") : true;
-
 const Main: FC = (): JSX.Element => {
   const [darkTheme, setDarkTheme] = useState<boolean>(true);
+  const [open, setOpen] = useState(false);
   const dispatch = useAppDispatch();
-  // const allItems = useAppSelector(selectItemsArr);
+
+  const clickHandler = useCallback(() => {
+    setOpen(prev => !prev);
+  }, []);
 
   useEffect(() => {
     dispatch(fetchItems());
@@ -159,25 +202,12 @@ const Main: FC = (): JSX.Element => {
         paddingTop: Platform.OS === "ios" ? 0 : Constants.statusBarHeight,
       }}>
       <Drawer.Navigator
-        initialRouteName="bars"
-        // drawerContent={CustomDrawerContent}
-        drawerContent={() => <SideBarAccordion />}>
-        <Drawer.Screen
-          name="bars"
-          component={HomeNavigator}
-          options={{
-            title: "Home",
-            drawerIcon: ({ color }) => (
-              <Icon
-                name="bars"
-                reverseColor="red"
-                type="font-awesome"
-                size={40}
-                color={color}
-              />
-            ),
-          }}
-        />
+        screenOptions={{
+          headerShown: false,
+        }}
+        drawerContent={() => <SideBarAccordionList />}>
+        <Drawer.Screen name="Home" component={HomeNavigator} />
+        {/* <Drawer.Screen name="Cart" component={HomeNavigator} /> */}
       </Drawer.Navigator>
     </View>
   );

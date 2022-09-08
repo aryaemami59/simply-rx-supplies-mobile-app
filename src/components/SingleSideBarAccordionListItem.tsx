@@ -1,17 +1,17 @@
-import { ListItem } from "@rneui/themed";
+import { Button } from "@rneui/themed";
 import { FC, memo } from "react";
+import { itemInterface } from "../redux/addedSlice";
 
 interface Props {
-  vendorName: string;
+  itemObj: itemInterface;
 }
 
 const SingleSideBarAccordionListItem: FC<Props> = ({
-  vendorName,
+  itemObj,
 }): JSX.Element => {
-  
   return (
     <>
-      <ListItem></ListItem>
+      <Button title={itemObj.name} />
     </>
   );
 };

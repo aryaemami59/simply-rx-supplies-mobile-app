@@ -9,7 +9,7 @@ import React, {
   useState,
 } from "react";
 import { FC, memo } from "react";
-import { Input, Button, SearchBar } from "@rneui/themed";
+import { Input, Button, SearchBar, Card } from "@rneui/themed";
 import {
   clearListItems,
   itemInterface,
@@ -18,6 +18,9 @@ import {
 } from "../redux/addedSlice";
 import { useAppSelector, useAppDispatch } from "../redux/store";
 import { shallowEqual } from "react-redux";
+import { FlatList, ScrollView, Text, View } from "react-native";
+import { selectAllListItems } from "../redux/addedSlice";
+import SingleInputListItem from "./SingleInputListItem";
 
 const empty: [] = [];
 
@@ -46,6 +49,7 @@ const InputGroup: FC = (): JSX.Element => {
     selectItemsArr,
     shallowEqual
   );
+  const listItems = useAppSelector(selectAllListItems, shallowEqual);
   const dispatch = useAppDispatch();
   const inputRef: RefObject<HTMLInputElement> = useRef<null>(null);
   const [val, setVal]: [string, Dispatch<SetStateAction<string>>] =
@@ -77,7 +81,7 @@ const InputGroup: FC = (): JSX.Element => {
       return trimmedValue
         ? items
             .filter(({ name }) => name.toLowerCase().trim().match(re))
-            .slice(0, 100)
+            .slice(0, 50)
             .sort(
               (a, b) =>
                 sortResults(b, re, trimmedValue) -
@@ -97,14 +101,28 @@ const InputGroup: FC = (): JSX.Element => {
     [dispatch, listItemsFunc]
   );
 
+  const renderItems = ({ item }) => {
+    return <SingleInputListItem itemObj={item} />;
+  };
+
   return (
-    <SearchBar
-      placeholder="Search..."
-      round
-      // onClear={clickHandler}
-      onChangeText={changeVal}
-      value={val}
-    />
+    <>
+      <SearchBar
+        // lightTheme
+        // containerStyle={{ backgroundColor: "transparent" }}
+        placeholder="Search..."
+        round
+        onClear={clickHandler}
+        onChangeText={changeVal}
+        value={val}
+      />
+      {/* <ScrollView> */}
+      <FlatList data={listItems} renderItem={renderItems} />
+      {/* {listItems.map(e => (
+          <SingleInputListItem key={e.id} itemObj={e} />
+        ))}
+      </ScrollView> */}
+    </>
   );
 };
 

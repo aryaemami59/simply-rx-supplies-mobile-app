@@ -1,16 +1,24 @@
 import { FC, memo } from "react";
-import SideBarAccordion from "./SideBarAccordion";
+import SideBarAccordionVendor from "./SideBarAccordionVendor";
+import { useAppSelector } from "../redux/store";
+import { selectVendorsArr } from "../redux/addedSlice";
+import { ListItem } from "@rneui/themed";
+import { DrawerContentScrollView } from "@react-navigation/drawer";
 
 interface Props {
-  props: string
+  props: string;
 }
 
-const SideBarAccordionList: FC<Props> = ({ props }): JSX.Element => {
+const SideBarAccordionList: FC = props => {
+  const allVendors = useAppSelector(selectVendorsArr);
+
   return (
-    <>
-      <div></div>
-    </>
-  )
+    <DrawerContentScrollView {...props}>
+      {allVendors.map(e => (
+        <SideBarAccordionVendor key={e} vendorName={e} />
+      ))}
+    </DrawerContentScrollView>
+  );
 };
 
 export default memo(SideBarAccordionList);

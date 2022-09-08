@@ -12,21 +12,16 @@ import {
   GITHUB_URL_ITEMS,
   GITHUB_URL_VENDORS,
   GITHUB_URL_NAVLIST,
-  AUTH_TOKEN,
+  // AUTH_TOKEN,
 } from "./fetchInfo";
+import QRCode from "qrcode";
 
 const intersection = (firstArray: string[], secondArray: string[]): string[] =>
   firstArray.filter(e => !secondArray.includes(e));
 
 const createAsyncThunkFunc = (strVal: string, githubUrl: string) => {
   return createAsyncThunk(`${strVal}/fetch${strVal}`, async () => {
-    const response: Response = await fetch(githubUrl, {
-      method: "GET",
-      headers: {
-        Accept: "application/vnd.github.v3.raw.json",
-        Authorization: AUTH_TOKEN,
-      },
-    });
+    const response: Response = await fetch(githubUrl);
     if (!response.ok) {
       return Promise.reject("Unable to fetch, status: " + response.status);
     }
@@ -344,7 +339,7 @@ export const selectQRCodeContent =
   (state: RootState): string =>
     state.added[vendorName]
       .map(({ itemNumber }) => itemNumber)
-      .join(state.added.vendorsObj?.[vendorName].joinChars);
+      .join(state.added.vendorsObj![vendorName].joinChars);
 
 export const checkIfAddedToAllVendors =
   (itemObj: itemInterface) =>
