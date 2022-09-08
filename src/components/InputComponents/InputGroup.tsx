@@ -15,11 +15,11 @@ import {
   itemInterface,
   selectItemsArr,
   setListItems,
-} from "../redux/addedSlice";
-import { useAppSelector, useAppDispatch } from "../redux/store";
+  selectAllListItems,
+} from "../../redux/addedSlice";
+import { useAppSelector, useAppDispatch } from "../../redux/store";
 import { shallowEqual } from "react-redux";
 import { FlatList, ScrollView, Text, View } from "react-native";
-import { selectAllListItems } from "../redux/addedSlice";
 import SingleInputListItem from "./SingleInputListItem";
 
 const empty: [] = [];

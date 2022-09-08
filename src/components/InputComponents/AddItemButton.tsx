@@ -10,15 +10,15 @@ import {
   MouseEventHandler,
   SetStateAction,
 } from "react";
-import Modal from "modal-react-native-web";
+// import Modal from "modal-react-native-web";
 
 import {
   itemInterface,
   checkIfAddedToAllVendors,
   selectVendorsToAddTo,
   addItems,
-} from "../redux/addedSlice";
-import { useAppSelector, useAppDispatch } from "../redux/store";
+} from "../../redux/addedSlice";
+import { useAppSelector, useAppDispatch } from "../../redux/store";
 import { shallowEqual } from "react-redux";
 import { Text, View } from "react-native";
 

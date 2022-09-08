@@ -1,17 +1,11 @@
 import { FC, memo } from "react";
-import {
-  GestureResponderEvent,
-  Modal,
-  NativeSyntheticEvent,
-  Platform,
-  Text,
-} from "react-native";
+import { GestureResponderEvent, Modal, Text } from "react-native";
 import { Button } from "@rneui/themed";
-import { useAppSelector } from "../redux/store";
-import { selectVendorsArr } from "../redux/addedSlice";
-import CartVendorColumns from "./CartVendorColumns";
+import { useAppSelector } from "../../redux/store";
+import { selectVendorsArr } from "../../redux/addedSlice";
+import CartVendorColumns from "../CartColumnComponents/CartVendorColumns";
 import { View } from "react-native";
-import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import { SafeAreaView } from "react-native-safe-area-context";
 import Constants from "expo-constants";
 
 interface Props {
@@ -27,31 +21,18 @@ const CartColumnList: FC<Props> = ({
   const vendors = useAppSelector(selectVendorsArr);
 
   return (
-    // <View
-    //   style={{
-    //     flex: 1,
-    //     paddingTop: 10,
-    //   }}>
-    // <SafeAreaView>
     <Modal
       animationType="slide"
       transparent={false}
       visible={showModal}
       onRequestClose={clickHandler}>
-      {/* <View
-            style={{
-              flex: 1,
-              paddingTop: 15,
-            }}> */}
       <SafeAreaView
         style={{
-          // flex: 1,
           flexDirection: "row",
           justifyContent: "center",
           alignItems: "center",
           paddingTop: Constants.statusBarHeight,
           marginTop: Constants.statusBarHeight + 10,
-          // position: "relative",
         }}>
         <View>
           <Text style={{ color: "red" }}>Shopping Cart</Text>
@@ -67,9 +48,7 @@ const CartColumnList: FC<Props> = ({
       {vendors.map(e => (
         <CartVendorColumns key={e} vendorName={e} />
       ))}
-      {/* </View> */}
     </Modal>
-    // </View>
   );
 };
 

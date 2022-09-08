@@ -1,9 +1,8 @@
 import { ListItem } from "@rneui/themed";
 import { FC, memo, useCallback, useState } from "react";
-import { Drawer } from "../../Main";
 import SideBarAccordionListItems from "./SideBarAccordionListItems";
-import { useAppSelector } from "../redux/store";
-import { selectVendorOfficialName } from "../redux/addedSlice";
+import { useAppSelector } from "../../redux/store";
+import { selectVendorOfficialName } from "../../redux/addedSlice";
 
 interface Props {
   vendorName: string;

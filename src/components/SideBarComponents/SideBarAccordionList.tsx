@@ -1,7 +1,7 @@
 import { FC, memo } from "react";
 import SideBarAccordionVendor from "./SideBarAccordionVendor";
-import { useAppSelector } from "../redux/store";
-import { selectVendorsArr } from "../redux/addedSlice";
+import { useAppSelector } from "../../redux/store";
+import { selectVendorsArr } from "../../redux/addedSlice";
 import { ListItem } from "@rneui/themed";
 import { DrawerContentScrollView } from "@react-navigation/drawer";
 

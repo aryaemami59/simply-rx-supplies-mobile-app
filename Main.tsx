@@ -2,12 +2,9 @@ import {
   Text,
   View,
   StyleSheet,
-  Image,
   Platform,
   ActivityIndicator,
   TouchableOpacity,
-  Modal,
-  NativeSyntheticEvent,
   GestureResponderEvent,
 } from "react-native";
 import React, {
@@ -19,7 +16,7 @@ import React, {
   useEffect,
   useState,
 } from "react";
-import InputGroup from "./src/components/InputGroup";
+import InputGroup from "./src/components/InputComponents/InputGroup";
 import { useAppDispatch, useAppSelector } from "./src/redux/store";
 import Constants from "expo-constants";
 import {
@@ -29,25 +26,12 @@ import {
   checkIfLoading,
   selectErrMsg,
 } from "./src/redux/addedSlice";
-import { ScrollView, TouchableHighlight } from "react-native-gesture-handler";
-import { Badge, Button, Header } from "@rneui/themed";
-import { LinearGradient } from "expo-linear-gradient";
 import { Icon } from "@rneui/themed";
 import { createStackNavigator } from "@react-navigation/stack";
-import {
-  createDrawerNavigator,
-  DrawerContentScrollView,
-  DrawerItemList,
-} from "@react-navigation/drawer";
-// import { NavigationContainer } from "@react-navigation/native";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faBars } from "@fortawesome/free-solid-svg-icons";
-import { selectItemsArr } from "./src/redux/addedSlice";
-import SideBarAccordionVendor from "./src/components/SideBarAccordionVendor";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 import { useCallback } from "react";
-import SideBarAccordionList from "./src/components/SideBarAccordionList";
-import { Drawer as PaperDrawer } from "react-native-paper";
-import CartColumnList from "./src/components/CartColumnList";
+import SideBarAccordionList from "./src/components/SideBarComponents/SideBarAccordionList";
+import CartColumnList from "./src/components/InputComponents/CartColumnList";
 
 export const Drawer = createDrawerNavigator();
 

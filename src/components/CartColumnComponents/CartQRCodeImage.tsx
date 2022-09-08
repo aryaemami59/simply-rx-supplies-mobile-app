@@ -1,7 +1,7 @@
 import { FC, memo } from "react";
 // import QRCode from "qrcode";
-import { useAppSelector } from "../redux/store";
-import { selectQRCodeContent } from "../redux/addedSlice";
+import { useAppSelector } from "../../redux/store";
+import { selectQRCodeContent } from "../../redux/addedSlice";
 import { Image, View, Text } from "react-native";
 import QRCode from "react-native-qrcode-svg";
 // import QRCode from "react-native-qrcode";

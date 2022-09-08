@@ -1,10 +1,10 @@
 import { Badge, ListItem } from "@rneui/themed";
 import { FC, memo, useCallback, useState } from "react";
-import { useAppSelector } from "../redux/store";
+import { useAppSelector } from "../../redux/store";
 import {
   selectVendorOfficialName,
   addedItemsLength,
-} from "../redux/addedSlice";
+} from "../../redux/addedSlice";
 import CartColumnListItems from "./CartColumnListItems";
 import { View } from "react-native";
 import CartQRCodeImage from "./CartQRCodeImage";

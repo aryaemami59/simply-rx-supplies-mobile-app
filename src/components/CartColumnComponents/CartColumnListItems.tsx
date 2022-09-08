@@ -1,6 +1,6 @@
 import { FC, memo } from "react";
-import { useAppSelector } from "../redux/store";
-import { selectByVendor } from "../redux/addedSlice";
+import { useAppSelector } from "../../redux/store";
+import { selectByVendor } from "../../redux/addedSlice";
 import { ListItem } from "@rneui/themed";
 import { Text, View, Image } from "react-native";
 
