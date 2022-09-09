@@ -2,6 +2,7 @@ import { ButtonGroup } from "@rneui/themed";
 import { FC, memo } from "react";
 import { MaterialCommunityIcons, AntDesign } from "@expo/vector-icons";
 import ColumnZoomInIcon from "./ColumnZoomInIcon";
+import ColumnCollapseIcon from "./ColumnCollapseIcon";
 
 interface Props {
   props: string;
@@ -14,7 +15,8 @@ const ExpandCollapseButtonGroup: FC = (): JSX.Element => {
       innerBorderStyle={{ width: 0 }}
       buttons={[
         <ColumnZoomInIcon />,
-        <AntDesign name="minuscircleo" size={30} color="black" />,
+        <ColumnCollapseIcon />,
+        // <AntDesign name="minuscircleo" size={30} color="black" />,
         <AntDesign name="closecircleo" size={30} color="black" />,
       ]}
     />
