@@ -23,6 +23,7 @@ import Constants from "expo-constants";
 import * as Clipboard from "expo-clipboard";
 import ItemNameCart from "./ItemNameCart";
 import ItemNumberCart from "./ItemNumberCart";
+import BarcodeImageCart from "./BarcodeImageCart";
 
 interface Props {
   vendorName: string;
@@ -30,7 +31,7 @@ interface Props {
 
 const CartColumnListItems: FC<Props> = ({ vendorName }): JSX.Element => {
   const addedItems = useAppSelector(selectByVendor(vendorName));
-  const [showModal, setShowModal] = useState(false);
+  // const [showModal, setShowModal] = useState(false);
 
   // const copyToClipboard = (e: GestureResponderEvent, i) => {
   //   Clipboard.setString(i);
@@ -40,9 +41,9 @@ const CartColumnListItems: FC<Props> = ({ vendorName }): JSX.Element => {
   //   await Clipboard.setStringAsync(i);
   // };
 
-  const clickHandler = useCallback(() => {
-    setShowModal(prev => !prev);
-  }, []);
+  // const clickHandler = useCallback(() => {
+  //   setShowModal(prev => !prev);
+  // }, []);
 
   return (
     <ScrollView contentContainerStyle={{ alignItems: "center" }}>
@@ -64,17 +65,18 @@ const CartColumnListItems: FC<Props> = ({ vendorName }): JSX.Element => {
             />
             <ItemNameCart itemObj={e} />
             <ItemNumberCart itemObj={e} />
-            <Image
+            <BarcodeImageCart itemObj={e} />
+            {/* <Image
               source={{ uri: e.src }}
               style={{ width: 132, aspectRatio: 33 / 28 }}
             />
-            <Feather name="printer" size={30} color="black" />
-            <MaterialCommunityIcons
+            <Feather name="printer" size={30} color="black" /> */}
+            {/* <MaterialCommunityIcons
               name="magnify-close"
               size={30}
               onPress={clickHandler}
-            />
-            <Modal
+            /> */}
+            {/* <Modal
               animationType="slide"
               transparent={false}
               visible={showModal}
@@ -107,7 +109,7 @@ const CartColumnListItems: FC<Props> = ({ vendorName }): JSX.Element => {
                   />
                 </View>
               </SafeAreaView>
-            </Modal>
+            </Modal> */}
           </View>
         </ListItem>
       ))}
