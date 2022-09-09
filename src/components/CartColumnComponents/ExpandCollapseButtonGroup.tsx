@@ -1,6 +1,5 @@
 import { ButtonGroup } from "@rneui/themed";
 import { FC, memo } from "react";
-import { MaterialCommunityIcons, AntDesign } from "@expo/vector-icons";
 import ColumnZoomInIcon from "./ColumnZoomInIcon";
 import ColumnCollapseIcon from "./ColumnCollapseIcon";
 import ColumnExpandIcon from "./ColumnExpandIcon";
