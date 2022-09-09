@@ -1,31 +1,20 @@
-import { FC, memo, useCallback, useState } from "react";
-// import QRCode from "qrcode";
+import { FC, memo, useCallback } from "react";
 import { useAppSelector } from "../../redux/store";
 import {
   selectQRCodeContent,
   selectVendorsLinks,
 } from "../../redux/addedSlice";
-import { Image, View, Text, Modal } from "react-native";
+import { Text } from "react-native";
 import QRCode from "react-native-qrcode-svg";
-// import QRCode from "react-native-qrcode";
-import {
-  AntDesign,
-  Ionicons,
-  SimpleLineIcons,
-  MaterialCommunityIcons,
-} from "@expo/vector-icons";
-// import { ImageZoom } from "@likashefqet/react-native-image-zoom";
-import { EvilIcons, Feather } from "@expo/vector-icons";
-import { SafeAreaView } from "react-native-safe-area-context";
-import Constants from "expo-constants";
-import * as Print from "expo-print";
-import { Button, ButtonGroup } from "@rneui/themed";
+import { Feather } from "@expo/vector-icons";
+import { ButtonGroup } from "@rneui/themed";
 import { shareAsync } from "expo-sharing";
 import { Linking } from "react-native";
 import { selectVendorOfficialName } from "../../redux/addedSlice";
 import HideItemName from "./HideItemName";
 import HideItemNumber from "./HideItemNumber";
 import HideItemBarcode from "./HideItemBarcode";
+import QRCodeModal from "./QRCodeModal";
 
 interface Props {
   vendorName: string;
@@ -56,65 +45,26 @@ const CartQRCodeImage: FC<Props> = ({ vendorName }): JSX.Element => {
     selectQRCodeContent(vendorName)
   );
 
-  const [showModal, setShowModal] = useState(false);
-
-  const clickHandler = useCallback(() => {
-    setShowModal(prev => !prev);
-  }, []);
-
   const vendorLink = useAppSelector(selectVendorsLinks(vendorName));
 
   const officialVendorName = useAppSelector(
     selectVendorOfficialName(vendorName)
   );
 
+  const openLink = useCallback(() => {
+    Linking.openURL(vendorLink);
+  }, []);
+
   return (
     <>
       <QRCode value={itemNumbers} />
       <Feather name="printer" size={30} color="black" />
-      <MaterialCommunityIcons
-        name="magnify-close"
-        size={30}
-        onPress={clickHandler}
-      />
-      <Text onPress={() => Linking.openURL(vendorLink)}>
-        {officialVendorName} Website
-      </Text>
+      <QRCodeModal itemNumbers={itemNumbers} />
+      <Text onPress={openLink}>{officialVendorName} Website</Text>
       <ButtonGroup
         vertical
         buttons={[<HideItemName />, <HideItemNumber />, <HideItemBarcode />]}
       />
-      <Modal
-        animationType="slide"
-        transparent={false}
-        visible={showModal}
-        onRequestClose={clickHandler}>
-        <SafeAreaView
-          style={{
-            flexDirection: "row",
-            justifyContent: "center",
-            alignItems: "center",
-            paddingTop: Constants.statusBarHeight,
-            marginTop: Constants.statusBarHeight + 10,
-          }}>
-          <View>
-            <QRCode value={itemNumbers} size={250} />
-          </View>
-          <View
-            style={{
-              position: "absolute",
-              right: 0,
-              top: 0,
-            }}>
-            <EvilIcons
-              name="close"
-              color="#0000007f"
-              size={30}
-              onPress={clickHandler}
-            />
-          </View>
-        </SafeAreaView>
-      </Modal>
     </>
   );
 };
