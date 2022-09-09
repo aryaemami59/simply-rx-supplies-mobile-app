@@ -6,7 +6,7 @@ import {
   addedItemsLength,
 } from "../../redux/addedSlice";
 import CartColumnListItems from "./CartColumnListItems";
-import { View, Text, ScrollView } from "react-native";
+import { View, Text, ScrollView, StyleSheet } from "react-native";
 import CartQRCodeImage from "./CartQRCodeImage";
 
 interface Props {
@@ -28,10 +28,7 @@ const CartVendorColumns: FC<Props> = ({ vendorName }): JSX.Element => {
     <>
       <ListItem.Accordion
         bottomDivider
-        containerStyle={{
-          alignItems: "center",
-          justifyContent: "space-between",
-        }}
+        containerStyle={styles.accordionContainerStyle}
         isExpanded={expanded}
         onPress={clickHandler}
         pad={50}
@@ -41,15 +38,14 @@ const CartVendorColumns: FC<Props> = ({ vendorName }): JSX.Element => {
             <Badge
               status="success"
               value={addedItemsLen}
-              // containerStyle={{ alignSelf: "flex-end" }}
-              // containerStyle={{ position: "absolute", left: 20 }}
-              containerStyle={{ position: "absolute", right: 60 }}
+              containerStyle={styles.badgeContainerStyle}
             />
           </>
         }>
-        <View style={{ alignItems: "center", padding: 10 }}>
+        <View style={styles.accordionChildrenViewStyle}>
           {addedItemsLen ? (
-            <ScrollView contentContainerStyle={{ alignItems: "center" }}>
+            <ScrollView
+              contentContainerStyle={styles.scrollViewContentContainerStyle}>
               <CartQRCodeImage vendorName={vendorName} />
               <CartColumnListItems vendorName={vendorName} />
             </ScrollView>
@@ -61,5 +57,23 @@ const CartVendorColumns: FC<Props> = ({ vendorName }): JSX.Element => {
     </>
   );
 };
+
+const styles = StyleSheet.create({
+  accordionContainerStyle: {
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+  badgeContainerStyle: {
+    position: "absolute",
+    right: 60,
+  },
+  scrollViewContentContainerStyle: {
+    alignItems: "center",
+  },
+  accordionChildrenViewStyle: {
+    alignItems: "center",
+    padding: 10,
+  },
+});
 
 export default memo(CartVendorColumns);

@@ -43,4 +43,4 @@ const SingleSideBarAccordionListItem: FC<Props> = ({
   );
 };
 
-export default memo(SingleSideBarAccordionListItem);
+export default memo<Props>(SingleSideBarAccordionListItem);

@@ -34,6 +34,7 @@ import SideBarAccordionList from "./src/components/SideBarComponents/SideBarAcco
 import CartColumnList from "./src/components/InputComponents/CartColumnList";
 import { AntDesign, Ionicons, SimpleLineIcons } from "@expo/vector-icons";
 import { checkIfAnyItemsAdded } from "./src/redux/addedSlice";
+import { TypedNavigator } from "@react-navigation/native";
 
 export const Drawer = createDrawerNavigator();
 

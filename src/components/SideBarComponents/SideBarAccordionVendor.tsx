@@ -3,6 +3,7 @@ import { FC, memo, useCallback, useState } from "react";
 import SideBarAccordionListItems from "./SideBarAccordionListItems";
 import { useAppSelector } from "../../redux/store";
 import { selectVendorOfficialName } from "../../redux/addedSlice";
+import { StyleSheet } from "react-native";
 
 interface Props {
   vendorName: string;
@@ -10,19 +11,16 @@ interface Props {
 
 const SideBarAccordionVendor: FC<Props> = ({ vendorName }): JSX.Element => {
   const [expanded, setExpanded] = useState(false);
-  const officialVendorName = useAppSelector(
+  const officialVendorName: string = useAppSelector(
     selectVendorOfficialName(vendorName)
   );
-  const clickHandler = useCallback(() => {
-    setExpanded(prev => !prev);
+  const clickHandler = useCallback((): void => {
+    setExpanded((prev: boolean): boolean => !prev);
   }, []);
 
   return (
     <ListItem.Accordion
-      containerStyle={{
-        alignItems: "center",
-        justifyContent: "space-between",
-      }}
+      containerStyle={styles.accordionContainerStyle}
       key={vendorName}
       content={<ListItem.Title>{officialVendorName}</ListItem.Title>}
       isExpanded={expanded}
@@ -32,4 +30,11 @@ const SideBarAccordionVendor: FC<Props> = ({ vendorName }): JSX.Element => {
   );
 };
 
-export default memo(SideBarAccordionVendor);
+const styles = StyleSheet.create({
+  accordionContainerStyle: {
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+});
+
+export default memo<Props>(SideBarAccordionVendor);

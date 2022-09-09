@@ -12,7 +12,7 @@ interface Props {
 }
 
 const SideBarAccordionList: FC = props => {
-  const allVendors = useAppSelector(selectVendorsArr);
+  const allVendors: string[] = useAppSelector<string[]>(selectVendorsArr);
   const navList: string[] = useAppSelector<string[]>(
     selectNavsArr,
     shallowEqual

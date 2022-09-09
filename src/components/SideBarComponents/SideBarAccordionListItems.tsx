@@ -1,7 +1,7 @@
 import { ListItem } from "@rneui/themed";
 import { FC, memo } from "react";
 import { useAppSelector } from "../../redux/store";
-import { selectItemsByVendor } from "../../redux/addedSlice";
+import { selectItemsByVendor, itemInterface } from "../../redux/addedSlice";
 import { shallowEqual } from "react-redux";
 import SingleSideBarAccordionListItem from "./SingleSideBarAccordionListItem";
 
@@ -10,7 +10,10 @@ interface Props {
 }
 
 const SideBarAccordionListItems: FC<Props> = ({ vendorName }): JSX.Element => {
-  const items = useAppSelector(selectItemsByVendor(vendorName), shallowEqual);
+  const items: itemInterface[] = useAppSelector(
+    selectItemsByVendor(vendorName),
+    shallowEqual
+  );
 
   return (
     <>
@@ -23,4 +26,4 @@ const SideBarAccordionListItems: FC<Props> = ({ vendorName }): JSX.Element => {
   );
 };
 
-export default memo(SideBarAccordionListItems);
+export default memo<Props>(SideBarAccordionListItems);

@@ -4,6 +4,7 @@ import { itemInterface, selectSidebarNavs } from "../../redux/addedSlice";
 import { useAppSelector } from "../../redux/store";
 import { shallowEqual } from "react-redux";
 import SingleSideBarAccordionListItem from "./SingleSideBarAccordionListItem";
+import { StyleSheet } from "react-native";
 
 interface Props {
   category: string;
@@ -21,25 +22,27 @@ const SideBarAccordionNav: FC<Props> = ({ category }): JSX.Element => {
   );
 
   return (
-    <>
-      <ListItem.Accordion
-        containerStyle={{
-          alignItems: "center",
-          justifyContent: "space-between",
-        }}
-        content={<ListItem.Title>{category}</ListItem.Title>}
-        isExpanded={expanded}
-        onPress={clickHandler}>
-        {sidebarItems.map(f => (
-          <SingleSideBarAccordionListItem
-            category={category}
-            itemObj={f}
-            key={`${f.name}-SingleSideBarAccordionListItem`}
-          />
-        ))}
-      </ListItem.Accordion>
-    </>
+    <ListItem.Accordion
+      containerStyle={styles.accordionContainerStyle}
+      content={<ListItem.Title>{category}</ListItem.Title>}
+      isExpanded={expanded}
+      onPress={clickHandler}>
+      {sidebarItems.map(f => (
+        <SingleSideBarAccordionListItem
+          category={category}
+          itemObj={f}
+          key={`${f.name}-SingleSideBarAccordionListItem`}
+        />
+      ))}
+    </ListItem.Accordion>
   );
 };
+
+const styles = StyleSheet.create({
+  accordionContainerStyle: {
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+});
 
 export default memo(SideBarAccordionNav);
