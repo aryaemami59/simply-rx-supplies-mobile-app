@@ -11,10 +11,12 @@ import { shallowEqual } from "react-redux";
 
 interface Props {
   itemObj: itemInterface;
+  category?: string;
 }
 
 const SingleSideBarAccordionListItem: FC<Props> = ({
   itemObj,
+  category,
 }): JSX.Element => {
   const dispatch = useAppDispatch();
   const ifAddedToAllVendors: boolean = useAppSelector<boolean>(
