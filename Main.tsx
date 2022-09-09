@@ -71,24 +71,32 @@ const HomeNavigator = () => {
         name="home"
         component={HomeScreen}
         options={({ navigation }) => ({
-          headerTitle: "",
+          headerTitle: "RX Supplies",
+          headerTitleAlign: "center",
           headerRight: () => (
-            <TouchableOpacity onPress={clickHandler}>
-              <Ionicons
-                // type="font-awesome"
-                name={ifItemsAdded ? "cart" : "cart-outline"}
-                color="white"
-                size={40}
-                style={{ marginEnd: 20 }}
-                // iconStyle={{ marginRight: 30, fontSize: 24, color: "#fff" }}
-              />
-              {/* <Badge status="success" /> */}
-              <CartColumnList
-                clickHandler={clickHandler}
-                showModal={showModal}
-                setShowModal={setShowModal}
-              />
-            </TouchableOpacity>
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "space-evenly",
+              }}>
+              <>
+                <Ionicons name="contrast" size={30} color="white" />
+                <TouchableOpacity onPress={clickHandler}>
+                  <Ionicons
+                    name={ifItemsAdded ? "cart" : "cart-outline"}
+                    color="white"
+                    size={40}
+                    style={{ marginEnd: 20 }}
+                  />
+                  <CartColumnList
+                    clickHandler={clickHandler}
+                    showModal={showModal}
+                    setShowModal={setShowModal}
+                  />
+                </TouchableOpacity>
+              </>
+            </View>
           ),
           headerLeft: () => (
             <TouchableOpacity onPress={navigation.toggleDrawer}>
@@ -97,8 +105,6 @@ const HomeNavigator = () => {
                 color="white"
                 size={30}
                 style={{ marginStart: 20 }}
-                // type="font-awesome"
-                // iconStyle={{ marginLeft: 30, fontSize: 24, color: "#fff" }}
               />
             </TouchableOpacity>
           ),

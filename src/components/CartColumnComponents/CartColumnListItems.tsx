@@ -21,6 +21,8 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import Constants from "expo-constants";
 // import Clipboard from "@react-native-clipboard/clipboard";
 import * as Clipboard from "expo-clipboard";
+import ItemNameCart from "./ItemNameCart";
+import ItemNumberCart from "./ItemNumberCart";
 
 interface Props {
   vendorName: string;
@@ -34,9 +36,9 @@ const CartColumnListItems: FC<Props> = ({ vendorName }): JSX.Element => {
   //   Clipboard.setString(i);
   // };
 
-  const copyToClipboard = async (ev, i) => {
-    await Clipboard.setStringAsync(i);
-  };
+  // const copyToClipboard = async (ev, i) => {
+  //   await Clipboard.setStringAsync(i);
+  // };
 
   const clickHandler = useCallback(() => {
     setShowModal(prev => !prev);
@@ -49,7 +51,6 @@ const CartColumnListItems: FC<Props> = ({ vendorName }): JSX.Element => {
           <View style={{ alignItems: "center" }}>
             <ButtonGroup
               containerStyle={{ borderWidth: 0 }}
-              // buttonContainerStyle={{ borderWidth: 0 }}
               innerBorderStyle={{ width: 0 }}
               buttons={[
                 <MaterialCommunityIcons
@@ -61,32 +62,8 @@ const CartColumnListItems: FC<Props> = ({ vendorName }): JSX.Element => {
                 <AntDesign name="closecircleo" size={30} color="black" />,
               ]}
             />
-            <View style={{ alignItems: "center" }}>
-              <Text
-                onPress={ev => copyToClipboard(ev, e.name)}
-                style={{ textAlign: "center" }}>
-                Item Name: {e.name}
-              </Text>
-              <Fontisto
-                name="copy"
-                size={30}
-                color="black"
-                style={{ marginStart: 10 }}
-              />
-            </View>
-            <View style={{ alignItems: "center" }}>
-              <Text
-                onPress={ev => copyToClipboard(ev, e.itemNumber)}
-                style={{ textAlign: "center" }}>
-                Item Number: {e.itemNumber}
-              </Text>
-              <Fontisto
-                name="copy"
-                size={30}
-                color="black"
-                style={{ marginStart: 10 }}
-              />
-            </View>
+            <ItemNameCart itemObj={e} />
+            <ItemNumberCart itemObj={e} />
             <Image
               source={{ uri: e.src }}
               style={{ width: 132, aspectRatio: 33 / 28 }}
