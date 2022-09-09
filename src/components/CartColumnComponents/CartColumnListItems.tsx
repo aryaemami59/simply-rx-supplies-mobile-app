@@ -1,9 +1,8 @@
 import { FC, memo } from "react";
 import { useAppSelector } from "../../redux/store";
 import { selectByVendor } from "../../redux/addedSlice";
-import { ButtonGroup, ListItem } from "@rneui/themed";
+import { ListItem } from "@rneui/themed";
 import { View, ScrollView } from "react-native";
-import { MaterialCommunityIcons, AntDesign } from "@expo/vector-icons";
 import ItemNameCart from "./ItemNameCart";
 import ItemNumberCart from "./ItemNumberCart";
 import BarcodeImageCart from "./BarcodeImageCart";
@@ -22,19 +21,6 @@ const CartColumnListItems: FC<Props> = ({ vendorName }): JSX.Element => {
         <ListItem bottomDivider key={e.name}>
           <View style={{ alignItems: "center" }}>
             <ExpandCollapseButtonGroup />
-            {/* <ButtonGroup
-              containerStyle={{ borderWidth: 0 }}
-              innerBorderStyle={{ width: 0 }}
-              buttons={[
-                <MaterialCommunityIcons
-                  name="magnify-close"
-                  size={30}
-                  color="black"
-                />,
-                <AntDesign name="minuscircleo" size={30} color="black" />,
-                <AntDesign name="closecircleo" size={30} color="black" />,
-              ]}
-            /> */}
             <ItemNameCart itemObj={e} />
             <ItemNumberCart itemObj={e} />
             <BarcodeImageCart itemObj={e} />
