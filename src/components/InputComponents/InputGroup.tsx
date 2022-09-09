@@ -9,7 +9,7 @@ import React, {
   useState,
 } from "react";
 import { FC, memo } from "react";
-import { Input, Button, SearchBar, Card } from "@rneui/themed";
+import { Input, Button, SearchBar, Card, Icon } from "@rneui/themed";
 import {
   clearListItems,
   itemInterface,
@@ -108,13 +108,33 @@ const InputGroup: FC = (): JSX.Element => {
   return (
     <>
       <SearchBar
-        // lightTheme
-        // containerStyle={{ backgroundColor: "transparent" }}
+        lightTheme
+        containerStyle={{
+          backgroundColor: "transparent",
+          borderBottomWidth: 0,
+          borderTopWidth: 0,
+        }}
         placeholder="Search..."
         round
+        inputContainerStyle={{
+          borderRadius: 9999,
+          backgroundColor: "rgba(0, 0, 0, 0.3)",
+        }}
         onClear={clickHandler}
         onChangeText={changeVal}
         value={val}
+        inputStyle={{ color: "white" }}
+        placeholderTextColor="rgba(255,255,255,.5)"
+        searchIcon={
+          <Icon
+            name="search"
+            color="rgba(255,255,255,.5)"
+            type="font-awesome"
+          />
+        }
+        clearIcon={
+          <Icon name="close" color="rgba(255,255,255,.5)" type="EvilIcons" />
+        }
       />
       {/* <ScrollView> */}
       <FlatList data={listItems} renderItem={renderItems} />

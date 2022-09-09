@@ -1,4 +1,4 @@
-import { Badge, Button, lightColors, Tooltip } from "@rneui/themed";
+import { Badge, Button, Chip, lightColors, Tooltip } from "@rneui/themed";
 import {
   Dispatch,
   FC,
@@ -58,7 +58,14 @@ const AddItemButton: FC<Props> = ({ itemObj }): JSX.Element => {
   }, [IfAddedToAllVendors, showThenHide, dispatch, itemObj, vendors]);
   return (
     <>
-      <Button size="lg" onPress={clickHandler} title="Add Item" />
+      {/* <Button size="lg" onPress={clickHandler} title="Add Item" /> */}
+      <Chip
+        raised
+        size="lg"
+        onPress={clickHandler}
+        title="Add"
+        icon={{ name: "add", type: "Ionicons", color: "white" }}
+      />
       {/* <View key={`Collapse-AddItemButtonComponent-${itemObj.name}`}>
         <Tooltip
           closeOnlyOnBackdropPress

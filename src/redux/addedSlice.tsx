@@ -364,6 +364,12 @@ export const selectAllVendorOfficialNames = (state: RootState): string[] =>
     (e: string): string => state.added.vendorsObj![e].officialName
   );
 
+export const checkIfAnyItemsAdded = (state: RootState): boolean =>
+  state.added.vendorsArr!.reduce(
+    (acc, curr) => !!state.added[curr].length || acc,
+    false
+  );
+
 export const selectAllListItems = createSelector(
   (state: RootState): itemInterface[] => state.added.listItems,
   (listItems: itemInterface[]): itemInterface[] => listItems

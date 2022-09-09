@@ -7,6 +7,7 @@ import CartVendorColumns from "../CartColumnComponents/CartVendorColumns";
 import { View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Constants from "expo-constants";
+import { EvilIcons, Ionicons, SimpleLineIcons } from "@expo/vector-icons";
 
 interface Props {
   showModal: boolean;
@@ -41,8 +42,15 @@ const CartColumnList: FC<Props> = ({
           style={{
             position: "absolute",
             right: 0,
+            top: 0,
           }}>
-          <Button title="X" onPress={clickHandler} color="error" />
+          {/* <Button title="X" onPress={clickHandler} color="error" /> */}
+          <EvilIcons
+            name="close"
+            color="#0000007f"
+            size={30}
+            onPress={clickHandler}
+          />
         </View>
       </SafeAreaView>
       {vendors.map(e => (

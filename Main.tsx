@@ -32,6 +32,8 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import { useCallback } from "react";
 import SideBarAccordionList from "./src/components/SideBarComponents/SideBarAccordionList";
 import CartColumnList from "./src/components/InputComponents/CartColumnList";
+import { AntDesign, Ionicons, SimpleLineIcons } from "@expo/vector-icons";
+import { checkIfAnyItemsAdded } from "./src/redux/addedSlice";
 
 export const Drawer = createDrawerNavigator();
 
@@ -57,6 +59,8 @@ const HomeNavigator = () => {
   const Stack = createStackNavigator();
   const [showModal, setShowModal] = useState(false);
 
+  const ifItemsAdded: boolean = useAppSelector(checkIfAnyItemsAdded);
+
   const clickHandler = useCallback((e: GestureResponderEvent) => {
     setShowModal(prev => !prev);
   }, []);
@@ -70,10 +74,13 @@ const HomeNavigator = () => {
           headerTitle: "",
           headerRight: () => (
             <TouchableOpacity onPress={clickHandler}>
-              <Icon
-                name="shopping-cart"
-                type="font-awesome"
-                iconStyle={{ marginRight: 30, fontSize: 24, color: "#fff" }}
+              <Ionicons
+                // type="font-awesome"
+                name={ifItemsAdded ? "cart" : "cart-outline"}
+                color="white"
+                size={40}
+                style={{ marginEnd: 20 }}
+                // iconStyle={{ marginRight: 30, fontSize: 24, color: "#fff" }}
               />
               {/* <Badge status="success" /> */}
               <CartColumnList
@@ -85,10 +92,13 @@ const HomeNavigator = () => {
           ),
           headerLeft: () => (
             <TouchableOpacity onPress={navigation.toggleDrawer}>
-              <Icon
-                name="bars"
-                type="font-awesome"
-                iconStyle={{ marginLeft: 30, fontSize: 24, color: "#fff" }}
+              <SimpleLineIcons
+                name="menu"
+                color="white"
+                size={30}
+                style={{ marginStart: 20 }}
+                // type="font-awesome"
+                // iconStyle={{ marginLeft: 30, fontSize: 24, color: "#fff" }}
               />
             </TouchableOpacity>
           ),
@@ -108,7 +118,7 @@ const HomeNavigator = () => {
 
 const screenOptions = {
   headerTintColor: "#fff",
-  headerStyle: { backgroundColor: "#5637DD" },
+  headerStyle: { backgroundColor: "#0071dc" },
 };
 
 // const CustomDrawerContent = props => {
@@ -191,7 +201,6 @@ const Main: FC = (): JSX.Element => {
         }}
         drawerContent={() => <SideBarAccordionList />}>
         <Drawer.Screen name="Home" component={HomeNavigator} />
-        {/* <Drawer.Screen name="Cart" component={HomeNavigator} /> */}
       </Drawer.Navigator>
     </View>
   );

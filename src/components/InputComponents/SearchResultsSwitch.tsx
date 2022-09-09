@@ -5,8 +5,10 @@ import {
   setVendors,
   itemInterface,
 } from "../../redux/addedSlice";
-import { Card, Switch } from "@rneui/themed";
+import { Card } from "@rneui/themed";
 import { connect, ConnectedProps } from "react-redux";
+// import { Switch } from "react-native-switch";
+import { View, Text, Switch } from "react-native";
 
 type stateToPropsReturnType = {
   checked: boolean;
@@ -55,29 +57,46 @@ interface ParentProps {
 type myProps = ParentProps & PropsFromRedux;
 
 const SearchResultsSwitch: FC<myProps> = ({
-  // checked,
+  checked,
   itemObj,
   vendorName,
   disabled,
+  clickHandler,
 }): JSX.Element => {
-  const [checked, setChecked] = useState(false);
+  // const [checked, setChecked] = useState(false);
   const officialVendorName = useAppSelector(
     selectVendorOfficialName(vendorName)
   );
 
-  const clickHandler = useCallback(() => {
-    setChecked(prev => !prev);
-  }, []);
+  // const clickHandler = useCallback(() => {
+  //   setChecked(prev => !prev);
+  // }, []);
 
   return (
     <>
-      <Card.FeaturedTitle style={{ color: "black", textAlign: "center" }}>
-        <Switch
-          style={{ margin: 10 }}
-          value={checked}
-          onValueChange={clickHandler}
-        />
-        {officialVendorName}
+      <Card.FeaturedTitle
+        style={{ color: "black", textAlign: "center", flexDirection: "row" }}>
+        <View
+          style={{
+            margin: 10,
+            flex: 1,
+            alignItems: "center",
+            justifyContent: "center",
+          }}>
+          <Switch
+            style={{
+              margin: 10,
+              transform: [{ scaleX: 0.7 }, { scaleY: 0.7 }],
+            }}
+            value={checked}
+            onValueChange={clickHandler}
+            // activeText={"On"}
+            // inActiveText={"Off"}
+            // switchLeftPx={8}
+            // switchRightPx={8}
+          />
+          <Text>{officialVendorName}</Text>
+        </View>
       </Card.FeaturedTitle>
     </>
   );

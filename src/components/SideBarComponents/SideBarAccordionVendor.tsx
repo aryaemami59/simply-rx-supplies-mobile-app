@@ -19,6 +19,10 @@ const SideBarAccordionVendor: FC<Props> = ({ vendorName }): JSX.Element => {
 
   return (
     <ListItem.Accordion
+      containerStyle={{
+        alignItems: "center",
+        justifyContent: "space-between",
+      }}
       key={vendorName}
       content={<ListItem.Title>{officialVendorName}</ListItem.Title>}
       isExpanded={expanded}
