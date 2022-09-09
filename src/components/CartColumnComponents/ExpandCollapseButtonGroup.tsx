@@ -3,6 +3,7 @@ import { FC, memo } from "react";
 import { MaterialCommunityIcons, AntDesign } from "@expo/vector-icons";
 import ColumnZoomInIcon from "./ColumnZoomInIcon";
 import ColumnCollapseIcon from "./ColumnCollapseIcon";
+import ColumnExpandIcon from "./ColumnExpandIcon";
 
 interface Props {
   props: string;
@@ -16,8 +17,7 @@ const ExpandCollapseButtonGroup: FC = (): JSX.Element => {
       buttons={[
         <ColumnZoomInIcon />,
         <ColumnCollapseIcon />,
-        // <AntDesign name="minuscircleo" size={30} color="black" />,
-        <AntDesign name="closecircleo" size={30} color="black" />,
+        <ColumnExpandIcon />,
       ]}
     />
   );
