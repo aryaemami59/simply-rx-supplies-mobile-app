@@ -1,13 +1,12 @@
 import { FC, memo } from "react";
-import { GestureResponderEvent, Modal, Text } from "react-native";
-import { Button } from "@rneui/themed";
+import { GestureResponderEvent, Modal, Text, StyleSheet } from "react-native";
 import { useAppSelector } from "../../redux/store";
 import { selectVendorsArr } from "../../redux/addedSlice";
 import CartVendorColumns from "../CartColumnComponents/CartVendorColumns";
 import { View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Constants from "expo-constants";
-import { EvilIcons, Ionicons, SimpleLineIcons } from "@expo/vector-icons";
+import { EvilIcons } from "@expo/vector-icons";
 
 interface Props {
   showModal: boolean;
@@ -27,24 +26,11 @@ const CartColumnList: FC<Props> = ({
       transparent={false}
       visible={showModal}
       onRequestClose={clickHandler}>
-      <SafeAreaView
-        style={{
-          flexDirection: "row",
-          justifyContent: "center",
-          alignItems: "center",
-          paddingTop: Constants.statusBarHeight,
-          marginTop: Constants.statusBarHeight + 10,
-        }}>
+      <SafeAreaView style={styles.SafeAreaViewStyle}>
         <View>
-          <Text style={{ color: "red" }}>Shopping Cart</Text>
+          <Text style={styles.shoppingCartTextStyle}>Shopping Cart</Text>
         </View>
-        <View
-          style={{
-            position: "absolute",
-            right: 0,
-            top: 0,
-          }}>
-          {/* <Button title="X" onPress={clickHandler} color="error" /> */}
+        <View style={styles.closeIconViewStyle}>
           <EvilIcons
             name="close"
             color="#0000007f"
@@ -59,5 +45,23 @@ const CartColumnList: FC<Props> = ({
     </Modal>
   );
 };
+
+const styles = StyleSheet.create({
+  SafeAreaViewStyle: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    paddingTop: Constants.statusBarHeight,
+    marginTop: Constants.statusBarHeight + 10,
+  },
+  shoppingCartTextStyle: {
+    color: "red",
+  },
+  closeIconViewStyle: {
+    position: "absolute",
+    right: 0,
+    top: 0,
+  },
+});
 
 export default memo(CartColumnList);

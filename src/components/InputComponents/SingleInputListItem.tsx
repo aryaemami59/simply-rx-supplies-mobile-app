@@ -1,6 +1,6 @@
-import { Button, Card } from "@rneui/themed";
+import { Card } from "@rneui/themed";
 import { FC, memo } from "react";
-import { View, Image } from "react-native";
+import { View } from "react-native";
 import { itemInterface } from "../../redux/addedSlice";
 import AddItemButton from "./AddItemButton";
 import BarcodeImageSearchResults from "./BarcodeImageSearchResults";

@@ -16,30 +16,30 @@ interface Props {
 
 const SingleSideBarAccordionListItem: FC<Props> = ({
   itemObj,
-  category,
 }): JSX.Element => {
   const dispatch = useAppDispatch();
   const ifAddedToAllVendors: boolean = useAppSelector<boolean>(
     checkIfAddedToAllVendors(itemObj)
   );
+
   const vendors: string[] = useAppSelector<string[]>(
     selectVendorsToAddTo(itemObj),
     shallowEqual
   );
+
   const clickHandler = useCallback((): void => {
     ifAddedToAllVendors || dispatch(addItems({ itemObj, vendors }));
   }, [dispatch, itemObj, vendors, ifAddedToAllVendors]);
+
   return (
-    <>
-      <Button
-        title={itemObj.name}
-        radius="md"
-        onPress={clickHandler}
-        // type={ifAddedToAllVendors ? "outline" : "solid"}
-        // type={ifAddedToAllVendors ? "solid" : "outline"}
-        disabled={ifAddedToAllVendors ? true : false}
-      />
-    </>
+    <Button
+      title={itemObj.name}
+      radius="md"
+      onPress={clickHandler}
+      // type={ifAddedToAllVendors ? "outline" : "solid"}
+      // type={ifAddedToAllVendors ? "solid" : "outline"}
+      disabled={ifAddedToAllVendors ? true : false}
+    />
   );
 };
 

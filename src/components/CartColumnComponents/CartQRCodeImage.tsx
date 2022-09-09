@@ -23,6 +23,9 @@ import { Button, ButtonGroup } from "@rneui/themed";
 import { shareAsync } from "expo-sharing";
 import { Linking } from "react-native";
 import { selectVendorOfficialName } from "../../redux/addedSlice";
+import HideItemName from "./HideItemName";
+import HideItemNumber from "./HideItemNumber";
+import HideItemBarcode from "./HideItemBarcode";
 
 interface Props {
   vendorName: string;
@@ -69,7 +72,6 @@ const CartQRCodeImage: FC<Props> = ({ vendorName }): JSX.Element => {
     <>
       <QRCode value={itemNumbers} />
       <Feather name="printer" size={30} color="black" />
-      {/* <Button title="Print" onPress={printToFile} /> */}
       <MaterialCommunityIcons
         name="magnify-close"
         size={30}
@@ -80,11 +82,7 @@ const CartQRCodeImage: FC<Props> = ({ vendorName }): JSX.Element => {
       </Text>
       <ButtonGroup
         vertical
-        buttons={[
-          <Button size={"sm"} title="Hide Item Name" />,
-          <Button size={"sm"} title="Hide Item Number" />,
-          <Button size={"sm"} title="Hide Item Barcode" />,
-        ]}
+        buttons={[<HideItemName />, <HideItemNumber />, <HideItemBarcode />]}
       />
       <Modal
         animationType="slide"
