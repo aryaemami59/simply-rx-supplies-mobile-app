@@ -3,33 +3,31 @@ import { FC, memo } from "react";
 import { View, Image } from "react-native";
 import { itemInterface } from "../../redux/addedSlice";
 import AddItemButton from "./AddItemButton";
+import BarcodeImageSearchResults from "./BarcodeImageSearchResults";
 import SearchResultsSwitch from "./SearchResultsSwitch";
 
 interface Props {
-  itemObj: itemInterface;
+  item: itemInterface;
 }
 
-const SingleInputListItem: FC<Props> = ({ itemObj }): JSX.Element => {
+const SingleInputListItem: FC<Props> = ({ item }): JSX.Element => {
   return (
-    <View key={itemObj.id}>
+    <View key={item.id}>
       <Card>
-        <Card.Title>{itemObj.name}</Card.Title>
+        <Card.Title>{item.name}</Card.Title>
         <View style={{ flexDirection: "row", justifyContent: "center" }}>
-          {itemObj.vendors.map((e: string) => (
-            <SearchResultsSwitch key={e} vendorName={e} itemObj={itemObj} />
+          {item.vendors.map((e: string) => (
+            <SearchResultsSwitch key={e} vendorName={e} itemObj={item} />
           ))}
         </View>
         <View style={{ alignItems: "center" }}>
-          <Image
-            source={{ uri: itemObj.src }}
-            style={{ width: 132, aspectRatio: 33 / 28 }}
-          />
+          <BarcodeImageSearchResults itemObj={item} />
         </View>
         <Card.FeaturedSubtitle style={{ color: "black", textAlign: "center" }}>
-          Item Number: {itemObj.itemNumber}
+          Item Number: {item.itemNumber}
         </Card.FeaturedSubtitle>
         <Card.Divider />
-        <AddItemButton itemObj={itemObj} />
+        <AddItemButton itemObj={item} />
       </Card>
     </View>
   );

@@ -1,15 +1,14 @@
-import React, {
-  ChangeEvent,
+import {
   Dispatch,
-  MouseEventHandler,
   RefObject,
   SetStateAction,
   useCallback,
   useRef,
   useState,
+  FC,
+  memo,
 } from "react";
-import { FC, memo } from "react";
-import { Input, Button, SearchBar, Card, Icon } from "@rneui/themed";
+import { SearchBar, Icon } from "@rneui/themed";
 import {
   clearListItems,
   itemInterface,
@@ -19,7 +18,7 @@ import {
 } from "../../redux/addedSlice";
 import { useAppSelector, useAppDispatch } from "../../redux/store";
 import { shallowEqual } from "react-redux";
-import { FlatList, ScrollView, Text, View } from "react-native";
+import { FlatList, StyleSheet } from "react-native";
 import SingleInputListItem from "./SingleInputListItem";
 
 const empty: [] = [];
@@ -101,29 +100,22 @@ const InputGroup: FC = (): JSX.Element => {
     [dispatch, listItemsFunc]
   );
 
-  const renderItems = ({ item }) => {
-    return <SingleInputListItem itemObj={item} />;
-  };
+  const renderItems = useCallback(({ item }): JSX.Element => {
+    return <SingleInputListItem item={item} />;
+  }, []);
 
   return (
     <>
       <SearchBar
         lightTheme
-        containerStyle={{
-          backgroundColor: "transparent",
-          borderBottomWidth: 0,
-          borderTopWidth: 0,
-        }}
+        containerStyle={styles.containerStyle}
         placeholder="Search..."
         round
-        inputContainerStyle={{
-          borderRadius: 9999,
-          backgroundColor: "rgba(0, 0, 0, 0.3)",
-        }}
+        inputContainerStyle={styles.inputContainerStyle}
         onClear={clickHandler}
         onChangeText={changeVal}
         value={val}
-        inputStyle={{ color: "white" }}
+        inputStyle={styles.inputStyle}
         placeholderTextColor="rgba(255,255,255,.5)"
         searchIcon={
           <Icon
@@ -136,14 +128,24 @@ const InputGroup: FC = (): JSX.Element => {
           <Icon name="close" color="rgba(255,255,255,.5)" type="EvilIcons" />
         }
       />
-      {/* <ScrollView> */}
       <FlatList data={listItems} renderItem={renderItems} />
-      {/* {listItems.map(e => (
-          <SingleInputListItem key={e.id} itemObj={e} />
-        ))}
-      </ScrollView> */}
     </>
   );
 };
+
+const styles = StyleSheet.create({
+  containerStyle: {
+    backgroundColor: "transparent",
+    borderBottomWidth: 0,
+    borderTopWidth: 0,
+  },
+  inputContainerStyle: {
+    borderRadius: 9999,
+    backgroundColor: "rgba(0, 0, 0, 0.3)",
+  },
+  inputStyle: {
+    color: "white",
+  },
+});
 
 export default memo(InputGroup);

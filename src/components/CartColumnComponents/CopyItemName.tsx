@@ -12,15 +12,13 @@ const CopyItemName: FC<Props> = ({ itemObj }): JSX.Element => {
     await Clipboard.setStringAsync(itemObj.name);
   };
   return (
-    <>
-      <Fontisto
-        onPress={copyToClipboard}
-        name="copy"
-        size={30}
-        color="black"
-        style={{ marginStart: 10 }}
-      />
-    </>
+    <Fontisto
+      onPress={copyToClipboard}
+      name="copy"
+      size={30}
+      color="black"
+      style={{ marginStart: 10 }}
+    />
   );
 };
 
