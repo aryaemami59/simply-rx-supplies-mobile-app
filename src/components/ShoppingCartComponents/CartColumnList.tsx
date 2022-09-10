@@ -2,7 +2,7 @@ import { FC, memo } from "react";
 import { GestureResponderEvent, Modal, Text, StyleSheet } from "react-native";
 import { useAppSelector } from "../../redux/store";
 import { selectVendorsArr } from "../../redux/addedSlice";
-import CartVendorColumns from "../CartColumnComponents/CartVendorColumns";
+import CartVendorColumns from "./CartVendorColumns";
 import { View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Constants from "expo-constants";

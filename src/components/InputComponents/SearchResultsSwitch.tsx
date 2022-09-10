@@ -1,4 +1,4 @@
-import { FC, memo, useCallback, useState } from "react";
+import { FC, memo } from "react";
 import { useAppSelector, RootState, AppDispatch } from "../../redux/store";
 import {
   selectVendorOfficialName,
@@ -63,7 +63,6 @@ const SearchResultsSwitch: FC<myProps> = ({
   disabled,
   clickHandler,
 }): JSX.Element => {
-  // const [checked, setChecked] = useState(false);
   const officialVendorName = useAppSelector(
     selectVendorOfficialName(vendorName)
   );

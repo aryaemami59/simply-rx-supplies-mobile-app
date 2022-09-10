@@ -11,7 +11,7 @@ interface Props {
 }
 
 const SideBarAccordionNav: FC<Props> = ({ category }): JSX.Element => {
-  const [expanded, setExpanded] = useState(false);
+  const [expanded, setExpanded] = useState<boolean>(false);
 
   const clickHandler = useCallback(() => {
     setExpanded(prev => !prev);
@@ -26,6 +26,7 @@ const SideBarAccordionNav: FC<Props> = ({ category }): JSX.Element => {
       containerStyle={styles.accordionContainerStyle}
       content={<ListItem.Title>{category}</ListItem.Title>}
       isExpanded={expanded}
+      bottomDivider
       onPress={clickHandler}>
       {sidebarItems.map(f => (
         <SingleSideBarAccordionListItem

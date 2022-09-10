@@ -10,7 +10,7 @@ interface Props {
 }
 
 const SideBarAccordionVendor: FC<Props> = ({ vendorName }): JSX.Element => {
-  const [expanded, setExpanded] = useState(false);
+  const [expanded, setExpanded] = useState<boolean>(false);
   const officialVendorName: string = useAppSelector(
     selectVendorOfficialName(vendorName)
   );
@@ -24,6 +24,7 @@ const SideBarAccordionVendor: FC<Props> = ({ vendorName }): JSX.Element => {
       key={vendorName}
       content={<ListItem.Title>{officialVendorName}</ListItem.Title>}
       isExpanded={expanded}
+      bottomDivider
       onPress={clickHandler}>
       <SideBarAccordionListItems vendorName={vendorName} />
     </ListItem.Accordion>

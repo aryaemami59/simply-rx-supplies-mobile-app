@@ -10,7 +10,7 @@ interface Props {
 }
 
 const BarcodeImageModal: FC<Props> = ({ itemObj }): JSX.Element => {
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState<boolean>(false);
   const clickHandler = useCallback((): void => {
     setShowModal((prev: boolean) => !prev);
   }, []);

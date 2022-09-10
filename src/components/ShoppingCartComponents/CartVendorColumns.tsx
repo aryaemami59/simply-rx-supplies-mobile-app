@@ -36,7 +36,9 @@ const CartVendorColumns: FC<Props> = ({ vendorName }): JSX.Element => {
           <>
             <ListItem.Title>{officialVendorName}</ListItem.Title>
             <Badge
-              status="success"
+              // badgeStyle={{ padding: 10 }}
+              textStyle={{ fontWeight: "bold" }}
+              status={addedItemsLen ? "success" : "primary"}
               value={addedItemsLen}
               containerStyle={styles.badgeContainerStyle}
             />

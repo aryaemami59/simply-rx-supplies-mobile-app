@@ -4,8 +4,8 @@ import {
   StyleSheet,
   Platform,
   ActivityIndicator,
-  TouchableOpacity,
   GestureResponderEvent,
+  TouchableOpacity,
 } from "react-native";
 import React, {
   createContext,
@@ -26,120 +26,183 @@ import {
   checkIfLoading,
   selectErrMsg,
 } from "./src/redux/addedSlice";
-import { Icon } from "@rneui/themed";
+import { Button } from "@rneui/themed";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { useCallback } from "react";
 import SideBarAccordionList from "./src/components/SideBarComponents/SideBarAccordionList";
-import CartColumnList from "./src/components/InputComponents/CartColumnList";
 import { AntDesign, Ionicons, SimpleLineIcons } from "@expo/vector-icons";
 import { checkIfAnyItemsAdded } from "./src/redux/addedSlice";
-import { TypedNavigator } from "@react-navigation/native";
+import ItemsByCategoryScreen from "./src/components/Screens/ItemsByCategoryScreen";
+import CartColumnList from "./src/components/ShoppingCartComponents/CartColumnList";
+import HomeScreen from "./src/components/Screens/HomeScreen";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import ItemLookupScreen from "./src/components/Screens/ItemLookupScreen";
+import ItemsByVendorScreen from "./src/components/Screens/ItemsByVendorScreen";
+import ShoppingCartScreen from "./src/components/Screens/ShoppingCartScreen";
+import HeaderRight from "./src/components/HeaderComponents/HeaderRight";
+import HeaderLeft from "./src/components/HeaderComponents/HeaderLeft";
 
-export const Drawer = createDrawerNavigator();
+const Tab = createBottomTabNavigator<RootStackParamList>();
 
-function HomeScreen() {
-  // const Stack = createStackNavigator();
-
+export function MyTabs() {
   return (
-    <View style={{ padding: 10 }}>
-      <InputGroup />
-    </View>
+    <Tab.Navigator screenOptions={{ headerShown: false }}>
+      <Tab.Screen
+        name="Home"
+        component={HomeNavigator}
+        options={{ headerTitle: "RX Supplies", headerTitleAlign: "center" }}
+      />
+      <Tab.Screen name="ItemsByCategory" component={ItemsByCategoryNavigator} />
+      <Drawer.Screen
+        options={{ title: "Item Lookup" }}
+        name="ItemLookup"
+        component={ItemLookupScreen}
+      />
+      {/* <Drawer.Screen
+        name="ItemsByCategory"
+        component={ItemsByCategoryScreen}
+        options={{ title: "Items By Category" }}
+      /> */}
+      <Drawer.Screen
+        options={{ title: "Items By Vendor" }}
+        name="ItemsByVendor"
+        component={ItemsByVendorScreen}
+      />
+      <Drawer.Screen
+        options={{ title: "Shopping Cart" }}
+        name="ShoppingCart"
+        component={ShoppingCartScreen}
+      />
+    </Tab.Navigator>
   );
 }
-
-// function DrawerContent() {
+// const Home = ({ navigation }) => {
 //   return (
-//     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-//       <Text>Drawer content</Text>
+//     <View>
+//       <Text>Home</Text>
+//       <Button title="Home" onPress={() => navigation.navigate("Nav")} />
+//     </View>
+//   );
+// };
+
+export type RootStackParamList = {
+  Home: undefined;
+  ItemLookup: undefined;
+  ItemsByCategory: undefined;
+  ItemsByVendor: undefined;
+  ShoppingCart: undefined;
+  Tabs: undefined;
+};
+
+// const Stack = createStackNavigator<RootStackParamList>();
+
+// const HomeStack = createStackNavigator(screens);
+
+// export const MYAPP = () => {
+//   return (
+//     <Stack.Navigator>
+//       <Stack.Screen name="Home" component={Home} />
+//       <Stack.Screen name="Nav" component={NavScreen} />
+//     </Stack.Navigator>
+//   );
+// };
+
+// export const MYAPP = createAppContainer(HomeStack);
+
+export const Drawer = createDrawerNavigator<RootStackParamList>();
+
+// function HomeScreen({ navigation }) {
+
+//   return (
+//     <View style={{ padding: 10 }}>
+//       <Button title="go to nav" onPress={() => navigation.navigate("Nav")} />
+//       <InputGroup />
 //     </View>
 //   );
 // }
 
 const HomeNavigator = () => {
-  const Stack = createStackNavigator();
-  const [showModal, setShowModal] = useState(false);
+  const Stack = createStackNavigator<RootStackParamList>();
+  const [showModal, setShowModal] = useState<boolean>(false);
 
-  const ifItemsAdded: boolean = useAppSelector(checkIfAnyItemsAdded);
+  // const ifItemsAdded: boolean = useAppSelector(checkIfAnyItemsAdded);
 
   const clickHandler = useCallback((e: GestureResponderEvent) => {
     setShowModal(prev => !prev);
   }, []);
 
   return (
-    <Stack.Navigator screenOptions={screenOptions}>
-      <Stack.Screen
-        name="home"
-        component={HomeScreen}
-        options={({ navigation }) => ({
-          headerTitle: "RX Supplies",
-          headerTitleAlign: "center",
-          headerRight: () => (
-            <View
-              style={{
-                flexDirection: "row",
-                alignItems: "center",
-                justifyContent: "space-evenly",
-              }}>
-              <>
-                <Ionicons name="contrast" size={30} color="white" />
-                <TouchableOpacity onPress={clickHandler}>
-                  <Ionicons
-                    name={ifItemsAdded ? "cart" : "cart-outline"}
-                    color="white"
-                    size={40}
-                    style={{ marginEnd: 20 }}
-                  />
-                  <CartColumnList
-                    clickHandler={clickHandler}
-                    showModal={showModal}
-                    setShowModal={setShowModal}
-                  />
-                </TouchableOpacity>
-              </>
-            </View>
-          ),
-          headerLeft: () => (
-            <TouchableOpacity onPress={navigation.toggleDrawer}>
-              <SimpleLineIcons
-                name="menu"
-                color="white"
-                size={30}
-                style={{ marginStart: 20 }}
-              />
-            </TouchableOpacity>
-          ),
-        })}
-      />
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="Home" component={HomeScreen} />
+      {/* <Stack.Screen name="ItemsByCategory" component={ItemsByCategoryScreen} /> */}
     </Stack.Navigator>
+    // <View>
+    //   <Text>Home</Text>
+    //   <Button title="go home" />
+    // </View>
+    // <Stack.Navigator screenOptions={screenOptions}>
+    //   <Stack.Screen
+    //     name="home"
+    //     component={HomeScreen}
+    //     options={({ navigation }) => ({
+    //       headerTitle: "RX Supplies",
+    //       headerTitleAlign: "center",
+    //       headerRight: () => (
+    //         <View
+    //           style={{
+    //             flexDirection: "row",
+    //             alignItems: "center",
+    //             justifyContent: "space-evenly",
+    //           }}>
+    //           <>
+    //             <Ionicons name="contrast" size={30} color="white" />
+    //             <TouchableOpacity onPress={clickHandler}>
+    //               <Ionicons
+    //                 name={ifItemsAdded ? "cart" : "cart-outline"}
+    //                 color="white"
+    //                 size={40}
+    //                 style={{ marginEnd: 20 }}
+    //               />
+    //               <CartColumnList
+    //                 clickHandler={clickHandler}
+    //                 showModal={showModal}
+    //                 setShowModal={setShowModal}
+    //               />
+    //             </TouchableOpacity>
+    //           </>
+    //         </View>
+    //       ),
+    //       headerLeft: () => (
+    //         <TouchableOpacity onPress={navigation.toggleDrawer}>
+    //           <SimpleLineIcons
+    //             name="menu"
+    //             color="white"
+    //             size={30}
+    //             style={{ marginStart: 20 }}
+    //           />
+    //         </TouchableOpacity>
+    //       ),
+    //     })}
+    //   />
+    // </Stack.Navigator>
   );
 };
 
-// const CartNavigator = () => {
-//   const Stack = createStackNavigator();
+const ItemsByCategoryNavigator = () => {
+  const Stack = createStackNavigator<RootStackParamList>();
 
-//   return (
-
-//   )
-// };
+  return (
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="ItemsByCategory" component={ItemsByCategoryScreen} />
+    </Stack.Navigator>
+  );
+};
 
 const screenOptions = {
   headerTintColor: "#fff",
   headerStyle: { backgroundColor: "#0071dc" },
 };
-
-// const CustomDrawerContent = props => {
-//   return (
-//     <DrawerContentScrollView {...props}>
-//       <View>
-//         <View style={{ flex: 2 }}>
-//           <Text style={{ margin: 10 }}>Choose Items By Vendor</Text>
-//         </View>
-//       </View>
-//       <DrawerItemList {...props} labelStyle={{ fontWeight: "bold" }} />
-//     </DrawerContentScrollView>
-//   );
-// };
 
 export interface myContextInterface {
   darkTheme: boolean;
@@ -152,13 +215,7 @@ export const DarkMode = createContext<myContextInterface>({
 });
 
 const Main: FC = (): JSX.Element => {
-  const [darkTheme, setDarkTheme] = useState<boolean>(true);
-  const [open, setOpen] = useState(false);
   const dispatch = useAppDispatch();
-
-  const clickHandler = useCallback(() => {
-    setOpen(prev => !prev);
-  }, []);
 
   useEffect(() => {
     dispatch(fetchItems());
@@ -171,12 +228,7 @@ const Main: FC = (): JSX.Element => {
 
   if (isLoading) {
     return (
-      <View
-        style={{
-          justifyContent: "center",
-          alignItems: "center",
-          height: "100%",
-        }}>
+      <View style={styles.isLoadingStyle}>
         <ActivityIndicator size="large" color="aqua" />
       </View>
     );
@@ -196,19 +248,116 @@ const Main: FC = (): JSX.Element => {
     );
   }
 
-  return (
-    <View
-      style={{
-        flex: 1,
-        paddingTop: Platform.OS === "ios" ? 0 : Constants.statusBarHeight,
-      }}>
+  const MyDrawer = () => {
+    return (
       <Drawer.Navigator
-        screenOptions={{
-          headerShown: false,
-        }}
-        drawerContent={() => <SideBarAccordionList />}>
-        <Drawer.Screen name="Home" component={HomeNavigator} />
+        screenOptions={({ navigation }) => ({
+          ...screenOptions,
+          headerRight: () => <HeaderRight navigation={navigation} />,
+          headerLeft: () => <HeaderLeft navigation={navigation} />,
+        })}>
+        {/* <Drawer.Screen
+          options={{ headerTitle: "RX Supplies", headerTitleAlign: "center" }}
+          name="Tabs"
+          component={MyTabs}
+        /> */}
+        <Drawer.Screen
+          options={{ headerTitle: "RX Supplies", headerTitleAlign: "center" }}
+          name="Home"
+          component={HomeScreen}
+        />
+        <Drawer.Screen
+          options={{ title: "Item Lookup" }}
+          name="ItemLookup"
+          component={ItemLookupScreen}
+        />
+        <Drawer.Screen
+          name="ItemsByCategory"
+          component={ItemsByCategoryScreen}
+          options={{ title: "Items By Category" }}
+        />
+        <Drawer.Screen
+          options={{ title: "Items By Vendor" }}
+          name="ItemsByVendor"
+          component={ItemsByVendorScreen}
+        />
+        <Drawer.Screen
+          options={{ title: "Shopping Cart" }}
+          name="ShoppingCart"
+          component={ShoppingCartScreen}
+        />
       </Drawer.Navigator>
+    );
+  };
+
+  return (
+    <View style={styles.ContainerStyle}>
+      <MyDrawer />
+      {/* <Drawer.Navigator
+        screenOptions={({ navigation }) => ({
+          ...screenOptions,
+          headerRight: () => <HeaderRight navigation={navigation} />,
+          headerLeft: () => <HeaderLeft navigation={navigation} />,
+        })}>
+        <Drawer.Screen
+          options={{ headerTitle: "RX Supplies", headerTitleAlign: "center" }}
+          name="Home"
+          component={HomeScreen}
+        />
+        <Drawer.Screen
+          options={{ title: "Item Lookup" }}
+          name="ItemLookup"
+          component={ItemLookupScreen}
+        />
+        <Drawer.Screen
+          name="ItemsByCategory"
+          component={ItemsByCategoryScreen}
+          options={{ title: "Items By Category" }}
+        />
+        <Drawer.Screen
+          options={{ title: "Items By Vendor" }}
+          name="ItemsByVendor"
+          component={ItemsByVendorScreen}
+        />
+        <Drawer.Screen
+          options={{ title: "Shopping Cart" }}
+          name="ShoppingCart"
+          component={ShoppingCartScreen}
+        />
+      </Drawer.Navigator> */}
+      {/* <Tab.Navigator
+        screenOptions={({ navigation }) => ({
+          ...screenOptions,
+          headerRight: () => <HeaderRight navigation={navigation} />,
+          headerLeft: () => <HeaderLeft navigation={navigation} />,
+        })}>
+        <Tab.Screen
+          options={{ headerTitle: "RX Supplies", headerTitleAlign: "center" }}
+          name="Home"
+          component={HomeScreen}
+        />
+        <Tab.Screen
+          options={{ title: "Item Lookup" }}
+          name="ItemLookup"
+          component={ItemLookupScreen}
+        />
+        <Tab.Screen name="Tabs" component={MyDrawer} /> */}
+      {/* <Tab.Screen
+          name="ItemsByCategory"
+          component={ItemsByCategoryScreen}
+          options={{ title: "Items By Category" }}
+        />
+        <Tab.Screen
+          options={{ title: "Items By Vendor" }}
+          name="ItemsByVendor"
+          component={ItemsByVendorScreen}
+        /> */}
+      {/* <Tab.Screen
+          options={{ title: "Shopping Cart" }}
+          name="ShoppingCart"
+          component={ShoppingCartScreen}
+        />
+      </Tab.Navigator> */}
     </View>
   );
 };
@@ -218,18 +367,21 @@ export default memo(Main);
 const styles = StyleSheet.create({
   ContainerStyle: {
     flex: 1,
-    paddingTop: Constants.statusBarHeight,
+    paddingTop: Platform.OS === "ios" ? 0 : Constants.statusBarHeight,
+  },
+  isLoadingStyle: {
+    justifyContent: "center",
+    alignItems: "center",
+    height: "100%",
   },
   DarkModeStyle: {
     backgroundColor: "gray",
     color: "white",
     height: "100%",
-    // flex: 1,
   },
   LightModeStyle: {
     backgroundColor: "white",
     color: "black",
     height: "100%",
-    // flex: 1,
   },
 });

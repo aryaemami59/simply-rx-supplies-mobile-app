@@ -10,7 +10,7 @@ interface Props {
 }
 
 const QRCodeModal: FC<Props> = ({ itemNumbers }): JSX.Element => {
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState<boolean>(false);
 
   const clickHandler = useCallback(() => {
     setShowModal(prev => !prev);
