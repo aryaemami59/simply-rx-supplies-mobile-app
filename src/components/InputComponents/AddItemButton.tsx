@@ -20,7 +20,7 @@ import {
 } from "../../redux/addedSlice";
 import { useAppSelector, useAppDispatch } from "../../redux/store";
 import { shallowEqual } from "react-redux";
-import { Text, View } from "react-native";
+import { Text, View, StyleSheet } from "react-native";
 
 interface Props {
   itemObj: itemInterface;
@@ -64,6 +64,8 @@ const AddItemButton: FC<Props> = ({ itemObj }): JSX.Element => {
         size="lg"
         onPress={clickHandler}
         title="Add"
+        titleStyle={styles.titleStyle}
+        buttonStyle={styles.buttonStyle}
         icon={{ name: "add", type: "Ionicons", color: "white" }}
       />
       {/* <View key={`Collapse-AddItemButtonComponent-${itemObj.name}`}>
@@ -81,5 +83,15 @@ const AddItemButton: FC<Props> = ({ itemObj }): JSX.Element => {
     </>
   );
 };
+
+const styles = StyleSheet.create({
+  buttonStyle: {
+    backgroundColor: "#0071dc",
+  },
+  titleStyle: {
+    fontWeight: "700",
+    // fontFamily: "Helvetica Neue,Helvetica,Arial,sans-serif",
+  },
+});
 
 export default memo(AddItemButton);

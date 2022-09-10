@@ -26,7 +26,7 @@ import {
   checkIfLoading,
   selectErrMsg,
 } from "./src/redux/addedSlice";
-import { Button } from "@rneui/themed";
+import { Button, Icon } from "@rneui/themed";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { useCallback } from "react";
@@ -50,21 +50,31 @@ export function MyTabs() {
     <Tab.Navigator screenOptions={{ headerShown: false }}>
       <Tab.Screen
         name="Home"
-        component={HomeNavigator}
-        options={{ headerTitle: "RX Supplies", headerTitleAlign: "center" }}
+        // component={HomeNavigator}
+        component={HomeScreen}
+        options={({ navigation }) => ({
+          tabBarIcon: () => (
+            <Icon
+              name="search"
+              type="font-awesome"
+              onPress={() => navigation.navigate("ItemLookup")}
+            />
+          ),
+        })}
+        // options={{ headerTitle: "RX Supplies", headerTitleAlign: "center" }}
       />
-      <Tab.Screen name="ItemsByCategory" component={ItemsByCategoryNavigator} />
+      {/* <Tab.Screen name="ItemsByCategory" component={ItemsByCategoryNavigator} />
       <Drawer.Screen
         options={{ title: "Item Lookup" }}
         name="ItemLookup"
         component={ItemLookupScreen}
-      />
+      /> */}
       {/* <Drawer.Screen
         name="ItemsByCategory"
         component={ItemsByCategoryScreen}
         options={{ title: "Items By Category" }}
       /> */}
-      <Drawer.Screen
+      {/* <Drawer.Screen
         options={{ title: "Items By Vendor" }}
         name="ItemsByVendor"
         component={ItemsByVendorScreen}
@@ -73,7 +83,7 @@ export function MyTabs() {
         options={{ title: "Shopping Cart" }}
         name="ShoppingCart"
         component={ShoppingCartScreen}
-      />
+      /> */}
     </Tab.Navigator>
   );
 }
@@ -134,7 +144,7 @@ const HomeNavigator = () => {
 
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen name="Home" component={MyTabs} />
       {/* <Stack.Screen name="ItemsByCategory" component={ItemsByCategoryScreen} /> */}
     </Stack.Navigator>
     // <View>
@@ -265,6 +275,7 @@ const Main: FC = (): JSX.Element => {
           options={{ headerTitle: "RX Supplies", headerTitleAlign: "center" }}
           name="Home"
           component={HomeScreen}
+          // component={HomeNavigator}
         />
         <Drawer.Screen
           options={{ title: "Item Lookup" }}

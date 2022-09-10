@@ -1,10 +1,14 @@
-import { createStackNavigator, StackScreenProps } from "@react-navigation/stack";
+import {
+  createStackNavigator,
+  StackScreenProps,
+} from "@react-navigation/stack";
 import { FC, memo } from "react";
 import { RootStackParamList } from "../../../Main";
-import { Button } from "@rneui/themed";
+import { Chip, Icon } from "@rneui/themed";
 import { View, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { DrawerScreenProps } from "@react-navigation/drawer";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 type Props = DrawerScreenProps<RootStackParamList, "Home">;
 
@@ -14,17 +18,56 @@ export const screenOptions = {
 };
 
 const HomeScreen: FC<Props> = ({ navigation }): JSX.Element => {
-
-  // const Stack = createStackNavigator();
-
   return (
     <>
       <SafeAreaView>
         <View style={styles.containerStyle}>
-          <Button title="Item Lookup" />
-          <Button title="Items By Vendor" />
-          <Button title="Items By Category" />
-          <Button title="Shopping Cart" />
+          <Chip
+            raised
+            titleStyle={styles.titleStyle}
+            buttonStyle={styles.buttonStyle}
+            title="Item Lookup"
+            icon={
+              <Icon name="search" color="white" type="font-awesome" size={20} />
+            }
+            size="lg"
+            onPress={() => navigation.navigate("ItemLookup")}
+          />
+          <Chip
+            raised
+            titleStyle={styles.titleStyle}
+            buttonStyle={styles.buttonStyle}
+            title="Items By Vendor"
+            icon={
+              <MaterialCommunityIcons
+                name="store-search-outline"
+                color="white"
+                size={24}
+              />
+            }
+            size="lg"
+            onPress={() => navigation.navigate("ItemsByVendor")}
+          />
+          <Chip
+            raised
+            icon={<Icon name="category" type="MaterialIcons" color="white" />}
+            titleStyle={styles.titleStyle}
+            buttonStyle={styles.buttonStyle}
+            title="Items By Category"
+            size="lg"
+            onPress={() => navigation.navigate("ItemsByCategory")}
+          />
+          <Chip
+            raised
+            titleStyle={styles.titleStyle}
+            buttonStyle={styles.buttonStyle}
+            title="Shopping Cart"
+            size="lg"
+            icon={
+              <Icon name="shopping-cart" color="white" type="MaterialIcons" />
+            }
+            onPress={() => navigation.navigate("ShoppingCart")}
+          />
         </View>
       </SafeAreaView>
     </>
@@ -37,6 +80,12 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     height: "100%",
     padding: 30,
+  },
+  buttonStyle: {
+    backgroundColor: "#0071dc",
+  },
+  titleStyle: {
+    fontWeight: "700",
   },
 });
 
