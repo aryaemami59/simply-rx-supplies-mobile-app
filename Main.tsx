@@ -271,7 +271,7 @@ const Main: FC = (): JSX.Element => {
       <Tab.Navigator
         screenOptions={({ navigation }) => ({
           headerShown: false,
-          // tabbar
+          
           // ...screenOptions,
           // headerRight: () => <HeaderRight navigation={navigation} />,
           // headerLeft: () => <HeaderLeft navigation={navigation} />,
@@ -291,7 +291,6 @@ const Main: FC = (): JSX.Element => {
                 size={size}
               />
             ),
-            // tabBarActiveTintColor: "red",
           }}
         />
         <Tab.Screen
