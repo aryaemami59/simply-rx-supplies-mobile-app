@@ -13,7 +13,7 @@ const BarcodeImageCart: FC<Props> = ({ itemObj }): JSX.Element => {
   return (
     <>
       <Image source={{ uri: itemObj.src }} style={styles.ImageStyle} />
-      <Feather name="printer" size={30} color="black" />
+      {/* <Feather name="printer" size={30} color="black" /> */}
       <BarcodeImageModal itemObj={itemObj} />
     </>
   );

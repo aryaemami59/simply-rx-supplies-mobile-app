@@ -13,7 +13,7 @@ const ItemLookupScreen: FC<Props> = ({ navigation }): JSX.Element => {
     <>
       {/* <SafeAreaView> */}
       <View style={styles.containerStyle}>
-        <InputGroup />
+        <InputGroup navigation={navigation} />
       </View>
       {/* </SafeAreaView> */}
     </>

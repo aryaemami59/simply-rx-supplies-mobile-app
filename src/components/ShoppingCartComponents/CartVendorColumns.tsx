@@ -25,38 +25,34 @@ const CartVendorColumns: FC<Props> = ({ vendorName }): JSX.Element => {
   }, []);
 
   return (
-    <>
-      <ListItem.Accordion
-        bottomDivider
-        containerStyle={styles.accordionContainerStyle}
-        isExpanded={expanded}
-        onPress={clickHandler}
-        pad={50}
-        content={
-          <>
-            <ListItem.Title>{officialVendorName}</ListItem.Title>
-            <Badge
-              // badgeStyle={{ padding: 10 }}
-              textStyle={{ fontWeight: "bold" }}
-              status={addedItemsLen ? "success" : "primary"}
-              value={addedItemsLen}
-              containerStyle={styles.badgeContainerStyle}
-            />
-          </>
-        }>
-        <View style={styles.accordionChildrenViewStyle}>
-          {addedItemsLen ? (
-            <ScrollView
-              contentContainerStyle={styles.scrollViewContentContainerStyle}>
-              <CartQRCodeImage vendorName={vendorName} />
-              <CartColumnListItems vendorName={vendorName} />
-            </ScrollView>
-          ) : (
-            <Text>No Item Has Been Added Yet!</Text>
-          )}
+    <ListItem.Accordion
+      bottomDivider
+      containerStyle={styles.accordionContainerStyle}
+      isExpanded={expanded}
+      onPress={clickHandler}
+      pad={50}
+      content={
+        <>
+          <ListItem.Title>{officialVendorName}</ListItem.Title>
+          <Badge
+            textStyle={{ fontWeight: "bold" }}
+            status={addedItemsLen ? "success" : "primary"}
+            value={addedItemsLen}
+            containerStyle={styles.badgeContainerStyle}
+          />
+        </>
+      }>
+      {addedItemsLen ? (
+        <View style={{ alignItems: "center" }}>
+          <CartQRCodeImage vendorName={vendorName} />
+          <CartColumnListItems vendorName={vendorName} />
         </View>
-      </ListItem.Accordion>
-    </>
+      ) : (
+        <Text style={{ textAlign: "center", paddingVertical: 20 }}>
+          No Item Has Been Added Yet!
+        </Text>
+      )}
+    </ListItem.Accordion>
   );
 };
 
@@ -75,6 +71,7 @@ const styles = StyleSheet.create({
   accordionChildrenViewStyle: {
     alignItems: "center",
     padding: 10,
+    height: "100%",
   },
 });
 

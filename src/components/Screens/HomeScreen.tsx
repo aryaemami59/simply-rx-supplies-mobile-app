@@ -17,6 +17,8 @@ export const screenOptions = {
   headerStyle: { backgroundColor: "#0071dc" },
 };
 
+// const Stack = createStackNavigator();
+
 const HomeScreen: FC<Props> = ({ navigation }): JSX.Element => {
   return (
     <>
@@ -57,7 +59,7 @@ const HomeScreen: FC<Props> = ({ navigation }): JSX.Element => {
             size="lg"
             onPress={() => navigation.navigate("ItemsByCategory")}
           />
-          <Chip
+          {/* <Chip
             raised
             titleStyle={styles.titleStyle}
             buttonStyle={styles.buttonStyle}
@@ -67,7 +69,7 @@ const HomeScreen: FC<Props> = ({ navigation }): JSX.Element => {
               <Icon name="shopping-cart" color="white" type="MaterialIcons" />
             }
             onPress={() => navigation.navigate("ShoppingCart")}
-          />
+          /> */}
         </View>
       </SafeAreaView>
     </>

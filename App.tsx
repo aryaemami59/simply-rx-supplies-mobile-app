@@ -6,7 +6,7 @@ import { store } from "./src/redux/store";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { NavigationContainer } from "@react-navigation/native";
 import { Provider as PaperProvider } from "react-native-paper";
-import { MyTabs } from "./Main";
+// import { MyTabs } from "./Main";
 
 const App: FC = (): JSX.Element => {
   return (

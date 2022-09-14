@@ -1,22 +1,15 @@
-import {
-  Text,
-  View,
-  StyleSheet,
-  Platform,
-  ActivityIndicator,
-  GestureResponderEvent,
-  TouchableOpacity,
-} from "react-native";
+// @ts-nocheck
+import { Text, View, StyleSheet, Platform } from "react-native";
 import React, {
   createContext,
   Dispatch,
   FC,
   memo,
   SetStateAction,
+  useCallback,
   useEffect,
-  useState,
+  useRef,
 } from "react";
-import InputGroup from "./src/components/InputComponents/InputGroup";
 import { useAppDispatch, useAppSelector } from "./src/redux/store";
 import Constants from "expo-constants";
 import {
@@ -26,15 +19,10 @@ import {
   checkIfLoading,
   selectErrMsg,
 } from "./src/redux/addedSlice";
-import { Button, Icon } from "@rneui/themed";
+import { Button, Header, Icon, SearchBar } from "@rneui/themed";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createDrawerNavigator } from "@react-navigation/drawer";
-import { useCallback } from "react";
-import SideBarAccordionList from "./src/components/SideBarComponents/SideBarAccordionList";
-import { AntDesign, Ionicons, SimpleLineIcons } from "@expo/vector-icons";
-import { checkIfAnyItemsAdded } from "./src/redux/addedSlice";
 import ItemsByCategoryScreen from "./src/components/Screens/ItemsByCategoryScreen";
-import CartColumnList from "./src/components/ShoppingCartComponents/CartColumnList";
 import HomeScreen from "./src/components/Screens/HomeScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import ItemLookupScreen from "./src/components/Screens/ItemLookupScreen";
@@ -42,59 +30,11 @@ import ItemsByVendorScreen from "./src/components/Screens/ItemsByVendorScreen";
 import ShoppingCartScreen from "./src/components/Screens/ShoppingCartScreen";
 import HeaderRight from "./src/components/HeaderComponents/HeaderRight";
 import HeaderLeft from "./src/components/HeaderComponents/HeaderLeft";
-
-const Tab = createBottomTabNavigator<RootStackParamList>();
-
-export function MyTabs() {
-  return (
-    <Tab.Navigator screenOptions={{ headerShown: false }}>
-      <Tab.Screen
-        name="Home"
-        // component={HomeNavigator}
-        component={HomeScreen}
-        options={({ navigation }) => ({
-          tabBarIcon: () => (
-            <Icon
-              name="search"
-              type="font-awesome"
-              onPress={() => navigation.navigate("ItemLookup")}
-            />
-          ),
-        })}
-        // options={{ headerTitle: "RX Supplies", headerTitleAlign: "center" }}
-      />
-      {/* <Tab.Screen name="ItemsByCategory" component={ItemsByCategoryNavigator} />
-      <Drawer.Screen
-        options={{ title: "Item Lookup" }}
-        name="ItemLookup"
-        component={ItemLookupScreen}
-      /> */}
-      {/* <Drawer.Screen
-        name="ItemsByCategory"
-        component={ItemsByCategoryScreen}
-        options={{ title: "Items By Category" }}
-      /> */}
-      {/* <Drawer.Screen
-        options={{ title: "Items By Vendor" }}
-        name="ItemsByVendor"
-        component={ItemsByVendorScreen}
-      />
-      <Drawer.Screen
-        options={{ title: "Shopping Cart" }}
-        name="ShoppingCart"
-        component={ShoppingCartScreen}
-      /> */}
-    </Tab.Navigator>
-  );
-}
-// const Home = ({ navigation }) => {
-//   return (
-//     <View>
-//       <Text>Home</Text>
-//       <Button title="Home" onPress={() => navigation.navigate("Nav")} />
-//     </View>
-//   );
-// };
+import IsLoadingComponents from "./IsLoadingComponents";
+import ErrMsgComponent from "./ErrMsgComponent";
+import InputGroup from "./src/components/InputComponents/InputGroup";
+// import { screenOptions } from "./src/components/Screens/HomeScreen";
+import { useIsFocused } from "@react-navigation/native";
 
 export type RootStackParamList = {
   Home: undefined;
@@ -103,116 +43,198 @@ export type RootStackParamList = {
   ItemsByVendor: undefined;
   ShoppingCart: undefined;
   Tabs: undefined;
+  Login: undefined;
+  Register: undefined;
+  HomeNavigator: undefined;
 };
 
-// const Stack = createStackNavigator<RootStackParamList>();
+const Tab = createBottomTabNavigator<RootStackParamList>();
 
-// const HomeStack = createStackNavigator(screens);
-
-// export const MYAPP = () => {
+// export function MyTabs() {
 //   return (
-//     <Stack.Navigator>
-//       <Stack.Screen name="Home" component={Home} />
-//       <Stack.Screen name="Nav" component={NavScreen} />
-//     </Stack.Navigator>
-//   );
-// };
-
-// export const MYAPP = createAppContainer(HomeStack);
-
-export const Drawer = createDrawerNavigator<RootStackParamList>();
-
-// function HomeScreen({ navigation }) {
-
-//   return (
-//     <View style={{ padding: 10 }}>
-//       <Button title="go to nav" onPress={() => navigation.navigate("Nav")} />
-//       <InputGroup />
-//     </View>
+//     <Tab.Navigator screenOptions={{ headerShown: false }}>
+//       <Tab.Screen
+//         name="Home"
+//         // component={HomeNavigator}
+//         component={HomeScreen}
+//         options={({ navigation }) => ({
+//           tabBarIcon: () => (
+//             <Icon
+//               name="search"
+//               type="font-awesome"
+//               onPress={() => navigation.navigate("ItemLookup")}
+//             />
+//           ),
+//         })}
+//       />
+//     </Tab.Navigator>
 //   );
 // }
 
-const HomeNavigator = () => {
-  const Stack = createStackNavigator<RootStackParamList>();
-  const [showModal, setShowModal] = useState<boolean>(false);
+const HomeStack = createStackNavigator();
+const ItemLookupStack = createStackNavigator();
+const ShoppingCartStack = createStackNavigator();
+const ItemsByCategoryStack = createStackNavigator<RootStackParamList>();
 
-  // const ifItemsAdded: boolean = useAppSelector(checkIfAnyItemsAdded);
+const ShoppingCartStackScreen = () => {
+  return (
+    <ShoppingCartStack.Navigator>
+      <ShoppingCartStack.Screen
+        name="ShoppingCartScreen"
+        component={ShoppingCartScreen}
+      />
+    </ShoppingCartStack.Navigator>
+  );
+};
 
-  const clickHandler = useCallback((e: GestureResponderEvent) => {
-    setShowModal(prev => !prev);
+const HomeStackScreen = ({ navigation }) => {
+  const inputRef = useRef(null);
+  const isFocused = useIsFocused();
+  !isFocused && inputRef.current.blur();
+  useEffect(() => {
+    const unsubscribe = navigation.addListener("focus", () => {
+      inputRef.current.blur();
+    });
+    return unsubscribe;
+    // inputRef.current.isFocused && inputRef.current?.blur();
+  });
+
+  const focusHandler = useCallback(() => {
+    // const unsubscribe = navigation.addListener("focus", () => {
+    //   inputRef.current.blur();
+    // });
+    navigation.navigate("ItemLookup");
+    // return unsubscribe;
+    inputRef.current.blur();
   }, []);
 
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Home" component={MyTabs} />
-      {/* <Stack.Screen name="ItemsByCategory" component={ItemsByCategoryScreen} /> */}
-    </Stack.Navigator>
-    // <View>
-    //   <Text>Home</Text>
-    //   <Button title="go home" />
-    // </View>
-    // <Stack.Navigator screenOptions={screenOptions}>
-    //   <Stack.Screen
-    //     name="home"
-    //     component={HomeScreen}
-    //     options={({ navigation }) => ({
-    //       headerTitle: "RX Supplies",
-    //       headerTitleAlign: "center",
-    //       headerRight: () => (
-    //         <View
-    //           style={{
-    //             flexDirection: "row",
-    //             alignItems: "center",
-    //             justifyContent: "space-evenly",
-    //           }}>
-    //           <>
-    //             <Ionicons name="contrast" size={30} color="white" />
-    //             <TouchableOpacity onPress={clickHandler}>
-    //               <Ionicons
-    //                 name={ifItemsAdded ? "cart" : "cart-outline"}
-    //                 color="white"
-    //                 size={40}
-    //                 style={{ marginEnd: 20 }}
-    //               />
-    //               <CartColumnList
-    //                 clickHandler={clickHandler}
-    //                 showModal={showModal}
-    //                 setShowModal={setShowModal}
-    //               />
-    //             </TouchableOpacity>
-    //           </>
-    //         </View>
-    //       ),
-    //       headerLeft: () => (
-    //         <TouchableOpacity onPress={navigation.toggleDrawer}>
-    //           <SimpleLineIcons
-    //             name="menu"
-    //             color="white"
-    //             size={30}
-    //             style={{ marginStart: 20 }}
-    //           />
-    //         </TouchableOpacity>
-    //       ),
-    //     })}
-    //   />
-    // </Stack.Navigator>
+    <HomeStack.Navigator
+      screenOptions={({ navigation }) => ({
+        header: () => (
+          <Header
+            leftContainerStyle={{ display: "none" }}
+            rightContainerStyle={{ display: "none" }}
+            centerComponent={
+              <SearchBar
+                ref={inputRef}
+                onFocus={focusHandler}
+                lightTheme
+                containerStyle={{
+                  backgroundColor: "transparent",
+                  borderBottomWidth: 0,
+                  borderTopWidth: 0,
+                  width: "100%",
+                }}
+                placeholder="Search..."
+                round
+                inputContainerStyle={{
+                  borderRadius: 9999,
+                  backgroundColor: "rgba(0, 0, 0, 0.3)",
+                }}
+                inputStyle={{
+                  color: "white",
+                }}
+                placeholderTextColor="rgba(255,255,255,.5)"
+                searchIcon={
+                  <Icon
+                    name="search"
+                    color="rgba(255,255,255,.5)"
+                    type="font-awesome"
+                  />
+                }
+                clearIcon={
+                  <Icon
+                    name="close"
+                    color="rgba(255,255,255,.5)"
+                    type="EvilIcons"
+                  />
+                }
+              />
+            }
+          />
+        ),
+      })}
+      // screenOptions={({ navigation }) => ({
+      //   headerTitle: "RX Supplies",
+      //   headerTitleAlign: "center",
+      //   headerStyle: {
+      //     backgroundColor: "#0071dc",
+      //   },
+      //   headerBackTitleStyle: {
+      //     color: "white",
+      //   },
+      //   headerBackTitleVisible: false,
+      //   headerTintColor: "white",
+      //   headerTitleStyle: {
+      //     color: "white",
+      //   },
+      //   headerRight: () => <HeaderRight navigation={navigation} />,
+      // })}
+    >
+      <HomeStack.Screen name="HomeNavigator" component={HomeScreen} />
+      <HomeStack.Screen
+        name="ShoppingCart"
+        component={ShoppingCartScreen}
+        options={({ navigation }) => ({
+          headerTitle: "Shopping Cart",
+        })}
+      />
+    </HomeStack.Navigator>
   );
 };
 
-const ItemsByCategoryNavigator = () => {
-  const Stack = createStackNavigator<RootStackParamList>();
-
+const ItemsByCategoryStackScreen = () => {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="ItemsByCategory" component={ItemsByCategoryScreen} />
-    </Stack.Navigator>
+    <ItemsByCategoryStack.Navigator screenOptions={{ headerShown: false }}>
+      <ItemsByCategoryStack.Screen
+        name="ItemsByCategory"
+        component={ItemsByCategoryScreen}
+      />
+    </ItemsByCategoryStack.Navigator>
   );
 };
 
-const screenOptions = {
-  headerTintColor: "#fff",
-  headerStyle: { backgroundColor: "#0071dc" },
+const ItemLookupStackScreen = () => {
+  return (
+    <ItemLookupStack.Navigator
+      screenOptions={{ headerShown: false }}
+      // screenOptions={({ navigation }) => ({
+      //   headerTitle: "Item Lookup",
+      //   headerTitleAlign: "center",
+      //   headerStyle: {
+      //     backgroundColor: "#0071dc",
+      //   },
+      //   headerBackTitleStyle: {
+      //     color: "white",
+      //   },
+      //   headerBackTitleVisible: false,
+      //   headerTintColor: "white",
+      //   headerTitleStyle: {
+      //     color: "white",
+      //   },
+      //   headerRight: () => <HeaderRight navigation={navigation} />,
+      // })}
+    >
+      <ItemLookupStack.Screen
+        name="ItemLookupScreen"
+        component={ItemLookupScreen}
+      />
+      <ItemLookupStack.Screen
+        name="ShoppingCart"
+        component={ShoppingCartScreen}
+        options={({ navigation }) => ({
+          headerTitle: "Shopping Cart",
+        })}
+      />
+    </ItemLookupStack.Navigator>
+  );
 };
+
+// const screenOptions = {
+//   headerTintColor: "#fff",
+//   headerStyle: { backgroundColor: "#0071dc" },
+// };
 
 export interface myContextInterface {
   darkTheme: boolean;
@@ -237,26 +259,61 @@ const Main: FC = (): JSX.Element => {
   const errMsg: string = useAppSelector(selectErrMsg);
 
   if (isLoading) {
-    return (
-      <View style={styles.isLoadingStyle}>
-        <ActivityIndicator size="large" color="aqua" />
-      </View>
-    );
+    return <IsLoadingComponents />;
   }
 
   if (errMsg) {
-    return (
-      <View>
-        <Text style={{ color: "red", fontSize: 40 }}>
-          Oh snap! You got an error!
-        </Text>
-        <Text style={{ color: "red", fontSize: 28 }}>
-          Looks like there was a problem loading the page. Either refresh the
-          page or try again later.
-        </Text>
-      </View>
-    );
+    return <ErrMsgComponent />;
   }
+
+  const MyTabs = () => {
+    return (
+      <Tab.Navigator
+        screenOptions={({ navigation }) => ({
+          headerShown: false,
+          // tabbar
+          // ...screenOptions,
+          // headerRight: () => <HeaderRight navigation={navigation} />,
+          // headerLeft: () => <HeaderLeft navigation={navigation} />,
+        })}>
+        <Tab.Screen
+          name="Home"
+          component={HomeStackScreen}
+          options={{
+            headerTitle: "RX Supplies",
+            headerTitleAlign: "center",
+            tabBarIcon: ({ focused, color, size }) => (
+              <Icon
+                name={focused ? "home" : "home-outline"}
+                type="ionicon"
+                focused={focused}
+                color={color}
+                size={size}
+              />
+            ),
+            // tabBarActiveTintColor: "red",
+          }}
+        />
+        <Tab.Screen
+          name="ItemLookup"
+          component={ItemLookupStackScreen}
+          options={{
+            headerTitle: "Item Lookup",
+            headerTitleAlign: "center",
+            tabBarIcon: ({ focused, color, size }) => (
+              <Icon
+                name="search"
+                type="font-awesome"
+                focused={focused}
+                color={color}
+                size={size}
+              />
+            ),
+          }}
+        />
+      </Tab.Navigator>
+    );
+  };
 
   const MyDrawer = () => {
     return (
@@ -266,16 +323,11 @@ const Main: FC = (): JSX.Element => {
           headerRight: () => <HeaderRight navigation={navigation} />,
           headerLeft: () => <HeaderLeft navigation={navigation} />,
         })}>
-        {/* <Drawer.Screen
-          options={{ headerTitle: "RX Supplies", headerTitleAlign: "center" }}
-          name="Tabs"
-          component={MyTabs}
-        /> */}
         <Drawer.Screen
           options={{ headerTitle: "RX Supplies", headerTitleAlign: "center" }}
           name="Home"
-          component={HomeScreen}
-          // component={HomeNavigator}
+          // component={HomeScreen}
+          component={HomeStackScreen}
         />
         <Drawer.Screen
           options={{ title: "Item Lookup" }}
@@ -284,7 +336,8 @@ const Main: FC = (): JSX.Element => {
         />
         <Drawer.Screen
           name="ItemsByCategory"
-          component={ItemsByCategoryScreen}
+          component={ItemsByCategoryStackScreen}
+          // component={ItemsByCategoryScreen}
           options={{ title: "Items By Category" }}
         />
         <Drawer.Screen
@@ -303,7 +356,8 @@ const Main: FC = (): JSX.Element => {
 
   return (
     <View style={styles.ContainerStyle}>
-      <MyDrawer />
+      <MyTabs />
+      {/* <MyDrawer /> */}
       {/* <Drawer.Navigator
         screenOptions={({ navigation }) => ({
           ...screenOptions,
@@ -379,11 +433,6 @@ const styles = StyleSheet.create({
   ContainerStyle: {
     flex: 1,
     paddingTop: Platform.OS === "ios" ? 0 : Constants.statusBarHeight,
-  },
-  isLoadingStyle: {
-    justifyContent: "center",
-    alignItems: "center",
-    height: "100%",
   },
   DarkModeStyle: {
     backgroundColor: "gray",

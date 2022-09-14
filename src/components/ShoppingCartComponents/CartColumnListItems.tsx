@@ -16,10 +16,21 @@ const CartColumnListItems: FC<Props> = ({ vendorName }): JSX.Element => {
   const addedItems = useAppSelector(selectByVendor(vendorName));
 
   return (
-    <ScrollView contentContainerStyle={{ alignItems: "center" }}>
+    // <ScrollView contentContainerStyle={{ alignItems: "center" }}>
+    // <View style={{ paddingBottom: 100 }}>
+    <>
       {addedItems.map(e => (
-        <ListItem bottomDivider key={e.name}>
-          <View style={{ alignItems: "center" }}>
+        <ListItem
+          bottomDivider
+          key={e.name}
+          // style={{ alignItems: "center", justifyContent: "center" }}
+        >
+          <View
+            style={{
+              alignItems: "center",
+              width: "100%",
+              // paddingVertical: 50,
+            }}>
             <ExpandCollapseButtonGroup />
             <ItemNameCart itemObj={e} />
             <ItemNumberCart itemObj={e} />
@@ -27,7 +38,9 @@ const CartColumnListItems: FC<Props> = ({ vendorName }): JSX.Element => {
           </View>
         </ListItem>
       ))}
-    </ScrollView>
+    </>
+    // </View>
+    // {/* </ScrollView> */}
   );
 };
 

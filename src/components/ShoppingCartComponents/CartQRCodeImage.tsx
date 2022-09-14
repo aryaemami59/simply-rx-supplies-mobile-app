@@ -4,7 +4,7 @@ import {
   selectQRCodeContent,
   selectVendorsLinks,
 } from "../../redux/addedSlice";
-import { Text } from "react-native";
+import { Text, StyleSheet } from "react-native";
 import QRCode from "react-native-qrcode-svg";
 import { Feather } from "@expo/vector-icons";
 import { ButtonGroup } from "@rneui/themed";
@@ -58,15 +58,30 @@ const CartQRCodeImage: FC<Props> = ({ vendorName }): JSX.Element => {
   return (
     <>
       <QRCode value={itemNumbers} />
-      <Feather name="printer" size={30} color="black" />
+      {/* <Feather name="printer" size={30} color="black" /> */}
       <QRCodeModal itemNumbers={itemNumbers} />
       <Text onPress={openLink}>{officialVendorName} Website</Text>
       <ButtonGroup
+        innerBorderStyle={{ width: 0 }}
+        containerStyle={{
+          borderWidth: 0,
+          // alignItems: "center",
+          // justifyContent: "center",
+          width: "100%",
+        }}
         vertical
+        // buttonStyle={styles.buttonStyle}
         buttons={[<HideItemName />, <HideItemNumber />, <HideItemBarcode />]}
       />
     </>
   );
 };
+
+const styles = StyleSheet.create({
+  buttonStyle: {
+    backgroundColor: "#0071dc",
+    width: "100%",
+  },
+});
 
 export default memo(CartQRCodeImage);

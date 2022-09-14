@@ -1,3 +1,4 @@
+// @ts-nocheck
 import {
   Dispatch,
   RefObject,
@@ -7,6 +8,10 @@ import {
   useState,
   FC,
   memo,
+  useEffect,
+  Ref,
+  LegacyRef,
+  Component,
 } from "react";
 import { SearchBar, Icon } from "@rneui/themed";
 import {
@@ -18,8 +23,25 @@ import {
 } from "../../redux/addedSlice";
 import { useAppSelector, useAppDispatch } from "../../redux/store";
 import { shallowEqual } from "react-redux";
-import { FlatList, StyleSheet } from "react-native";
+import {
+  FlatList,
+  StyleSheet,
+  TextInput,
+  Animated,
+  Easing,
+  ViewProps,
+  ViewStyle,
+} from "react-native";
 import SingleInputListItem from "./SingleInputListItem";
+import { Header } from "@rneui/themed";
+import { useIsFocused } from "@react-navigation/native";
+import * as Animatable from "react-native-animatable";
+
+// let inputWidth = "100%";
+
+const clearIcon = (
+  <Icon name="close" color="rgba(255,255,255,.5)" type="EvilIcons" />
+);
 
 const empty: [] = [];
 
@@ -43,16 +65,43 @@ const sortResults = (
   return 0;
 };
 
-const InputGroup: FC = (): JSX.Element => {
+const InputGroup = ({ navigation }): JSX.Element => {
+  // const [inputWidth, setInputWidth] = useState("100%");
+  const view: Ref<Animatable.AnimatableComponent<ViewProps, ViewStyle>> =
+    useRef<null>(null);
+  // const inputWidthValue = useRef(new Animated.Value(80)).current;
+  // const inputWidthScale = Animated.timing(inputWidthValue, {
+  //   toValue: 100,
+  //   duration: 2000,
+  //   useNativeDriver: true,
+  // });
+  const isFocused = useIsFocused();
   const items: itemInterface[] = useAppSelector<itemInterface[]>(
     selectItemsArr,
     shallowEqual
   );
   const listItems = useAppSelector(selectAllListItems, shallowEqual);
   const dispatch = useAppDispatch();
-  const inputRef: RefObject<HTMLInputElement> = useRef<null>(null);
+  const inputRef: Ref<TextInput> = useRef<null>(null);
   const [val, setVal]: [string, Dispatch<SetStateAction<string>>] =
     useState<string>("");
+
+  useEffect(() => {
+    // isFocused && inputRef.current?.focus();
+    isFocused ? inputRef.current?.focus() : view.current?.transitionTo("100%");
+    // isFocused ? inputRef.current?.focus() : inputRef.current?.blur();
+    // view.current && view.current.transition("80%", "100%");
+  }, [isFocused]);
+
+  const focusHandler = useCallback(() => {
+    view.current?.transitionTo({ width: "100%" });
+    // setInputWidth("100%");
+  }, []);
+
+  const blurHandler = useCallback(() => {
+    view.current?.transitionTo({ width: "80%" });
+    // setInputWidth("80%");
+  }, []);
 
   const clickHandler = useCallback((): void => {
     dispatch(clearListItems());
@@ -106,26 +155,45 @@ const InputGroup: FC = (): JSX.Element => {
 
   return (
     <>
-      <SearchBar
-        lightTheme
-        containerStyle={styles.containerStyle}
-        placeholder="Search..."
-        round
-        inputContainerStyle={styles.inputContainerStyle}
-        onClear={clickHandler}
-        onChangeText={changeVal}
-        value={val}
-        inputStyle={styles.inputStyle}
-        placeholderTextColor="rgba(255,255,255,.5)"
-        searchIcon={
-          <Icon
-            name="search"
-            color="rgba(255,255,255,.5)"
-            type="font-awesome"
-          />
-        }
-        clearIcon={
-          <Icon name="close" color="rgba(255,255,255,.5)" type="EvilIcons" />
+      <Header
+        leftContainerStyle={{ display: "none" }}
+        rightContainerStyle={{ display: "none" }}
+        centerComponent={
+          <Animatable.View
+            ref={view}
+            transition={"width"}
+            style={{ width: "100%" }}>
+            <SearchBar
+              ref={inputRef}
+              lightTheme
+              onFocus={focusHandler}
+              onBlur={blurHandler}
+              containerStyle={styles.containerStyle}
+              placeholder="Search..."
+              round
+              inputContainerStyle={styles.inputContainerStyle}
+              onClear={clickHandler}
+              onChangeText={changeVal}
+              value={val}
+              inputStyle={styles.inputStyle}
+              placeholderTextColor="rgba(255,255,255,.5)"
+              searchIcon={
+                <Icon
+                  name="search"
+                  color="rgba(255,255,255,.5)"
+                  type="font-awesome"
+                />
+              }
+              clearIcon={
+                <Icon
+                  name="close"
+                  color="rgba(255,255,255,.5)"
+                  type="EvilIcons"
+                  onPress={clickHandler}
+                />
+              }
+            />
+          </Animatable.View>
         }
       />
       <FlatList data={listItems} renderItem={renderItems} />
@@ -138,6 +206,7 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent",
     borderBottomWidth: 0,
     borderTopWidth: 0,
+    // width: inputWidth,
   },
   inputContainerStyle: {
     borderRadius: 9999,
