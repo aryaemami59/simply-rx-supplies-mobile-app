@@ -1,10 +1,9 @@
 import { FC, memo } from "react";
 import { useAppSelector } from "../../redux/store";
 import { checkIfAnyItemsAdded } from "../../redux/addedSlice";
-import { Badge, Icon } from "@rneui/themed";
-import { BottomTabNavigationOptions } from "@react-navigation/bottom-tabs";
-import { tabBarIconProps } from "../../../Main";
-// type tabBarIconType = BottomTabNavigationOptions["tabBarIcon"];
+import { Badge } from "@rneui/themed";
+import { tabBarIconProps } from "../../../CustomTypes/types";
+import { Ionicons } from "@expo/vector-icons";
 
 type Props = tabBarIconProps;
 
@@ -16,9 +15,8 @@ const TabBarIconShoppingCart: FC<Props> = ({
   const ifAdded = useAppSelector(checkIfAnyItemsAdded);
   return (
     <>
-      <Icon
+      <Ionicons
         name={ifAdded ? "cart" : "cart-outline"}
-        type="ionicon"
         color={color}
         size={30}
       />

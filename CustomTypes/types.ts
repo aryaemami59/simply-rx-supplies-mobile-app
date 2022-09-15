@@ -23,6 +23,7 @@ export type RootTabParamList = {
   Home: undefined;
   ItemLookup: undefined;
   ShoppingCart: undefined;
+  ItemsReference: undefined;
 };
 
 export type HomeStackParamList = {
@@ -43,6 +44,10 @@ export type ItemsByCategoryStackParamList = {
 
 export type ItemsByVendorStackParamList = {
   ItemsByVendor: undefined;
+};
+
+export type ItemsReferenceStackParamList = {
+  ItemsReference: undefined;
 };
 
 export interface myContextInterface {

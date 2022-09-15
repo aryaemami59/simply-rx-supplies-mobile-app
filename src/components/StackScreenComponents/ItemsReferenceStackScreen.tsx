@@ -1,13 +1,12 @@
 import { FC, memo } from "react";
 import {
-  StackHeaderProps,
   createStackNavigator,
+  StackHeaderProps,
 } from "@react-navigation/stack";
+import ItemsReferenceScreen from "../Screens/ItemsReferenceScreen";
 import HeaderHomeStackNavigator from "../HeaderComponents/HeaderHomeStackNavigator";
-import { HomeStackParamList } from "../../../CustomTypes/types";
-import HomeScreen from "../Screens/HomeScreen";
 
-const Stack = createStackNavigator<HomeStackParamList>();
+const Stack = createStackNavigator();
 
 const header = (props: StackHeaderProps): JSX.Element => (
   <HeaderHomeStackNavigator {...props} />
@@ -17,12 +16,12 @@ const screenOptions = {
   header,
 } as const;
 
-const HomeStackScreen: FC = (): JSX.Element => {
+const ItemsReferenceStackScreen: FC = (): JSX.Element => {
   return (
     <Stack.Navigator screenOptions={screenOptions}>
-      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen name="ItemsReference" component={ItemsReferenceScreen} />
     </Stack.Navigator>
   );
 };
 
-export default memo(HomeStackScreen);
+export default memo(ItemsReferenceStackScreen);

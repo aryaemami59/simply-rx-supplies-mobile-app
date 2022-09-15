@@ -7,6 +7,8 @@ import TabBarIconHome from "./TabBarIconHome";
 import HomeStackScreen from "../StackScreenComponents/HomeStackScreen";
 import ItemLookupStackScreen from "../StackScreenComponents/ItemLookupStackScreen";
 import ShoppingCartStackScreen from "../StackScreenComponents/ShoppingCartStackScreen";
+import ItemsReferenceStackScreen from "../StackScreenComponents/ItemsReferenceStackScreen";
+import TabBarIconItemsReference from "./TabBarIconItemsReference";
 
 const TabBarIconHomeRender = (props: tabBarIconProps): JSX.Element => (
   <TabBarIconHome {...props} />
@@ -19,6 +21,10 @@ const TabBarIconShoppingCartRender = (props: tabBarIconProps): JSX.Element => (
 const TabBarIconItemLookupRender = (props: tabBarIconProps): JSX.Element => (
   <TabBarIconItemLookup {...props} />
 );
+
+const TabBarIconItemsReferenceRender = (
+  props: tabBarIconProps
+): JSX.Element => <TabBarIconItemsReference {...props} />;
 
 const HomeOptions = {
   tabBarIcon: TabBarIconHomeRender,
@@ -42,6 +48,13 @@ const ShoppingCartOptions = {
   headerTitleAlign: "center",
 } as const;
 
+const ItemsReferenceOptions = {
+  tabBarLabel: "Items Reference",
+  tabBarIcon: TabBarIconItemsReferenceRender,
+  headerTitle: "Items Reference",
+  headerTitleAlign: "center",
+} as const;
+
 const TabBarMain: FC = (): JSX.Element => {
   return (
     <Tab.Navigator screenOptions={hideHeader}>
@@ -59,6 +72,11 @@ const TabBarMain: FC = (): JSX.Element => {
         name="ShoppingCart"
         component={ShoppingCartStackScreen}
         options={ShoppingCartOptions}
+      />
+      <Tab.Screen
+        name="ItemsReference"
+        component={ItemsReferenceStackScreen}
+        options={ItemsReferenceOptions}
       />
     </Tab.Navigator>
   );
