@@ -1,6 +1,7 @@
 import { FC, memo } from "react";
 import { Button, Chip } from "@rneui/themed";
 import { StyleSheet } from "react-native";
+import { mainColor } from "../../shared/sharedStyles";
 
 interface Props {
   props: string;
@@ -18,8 +19,7 @@ const HideItemBarcode: FC = (): JSX.Element => {
 
 const styles = StyleSheet.create({
   buttonStyle: {
-    backgroundColor: "#0071dc",
-    // width: "100%",
+    backgroundColor: mainColor,
   },
 });
 

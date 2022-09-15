@@ -5,9 +5,7 @@ import { Badge } from "@rneui/themed";
 import { tabBarIconProps } from "../../../CustomTypes/types";
 import { Ionicons } from "@expo/vector-icons";
 
-type Props = tabBarIconProps;
-
-const TabBarIconShoppingCart: FC<Props> = ({
+const TabBarIconShoppingCart: FC<tabBarIconProps> = ({
   focused,
   color,
   size,
@@ -36,4 +34,4 @@ const TabBarIconShoppingCart: FC<Props> = ({
   );
 };
 
-export default memo<Props>(TabBarIconShoppingCart);
+export default memo<tabBarIconProps>(TabBarIconShoppingCart);

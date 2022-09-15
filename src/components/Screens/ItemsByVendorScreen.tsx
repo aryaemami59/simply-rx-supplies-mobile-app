@@ -1,11 +1,6 @@
 import { FC, memo } from "react";
-import { StackScreenProps } from "@react-navigation/stack";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { View, StyleSheet } from "react-native";
-import { DrawerScreenProps } from "@react-navigation/drawer";
+import { StyleSheet } from "react-native";
 import ParentItemsByVendor from "../ItemsByVendorComponents/ParentItemsByVendor";
-
-// type Props = DrawerScreenProps<RootStackParamList, "ItemsByVendor">;
 
 const ItemsByVendorScreen: FC = (): JSX.Element => {
   return <ParentItemsByVendor />;

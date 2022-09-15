@@ -1,10 +1,8 @@
 import { Icon } from "@rneui/themed";
 import { FC, memo } from "react";
-import { tabBarIconProps } from "../../../Main";
+import { tabBarIconProps } from "../../../CustomTypes/types";
 
-type Props = tabBarIconProps;
-
-const TabBarIconItemLookup: FC<Props> = ({
+const TabBarIconItemLookup: FC<tabBarIconProps> = ({
   focused,
   color,
   size,
@@ -12,4 +10,4 @@ const TabBarIconItemLookup: FC<Props> = ({
   return <Icon name="search" type="font-awesome" color={color} size={size} />;
 };
 
-export default memo(TabBarIconItemLookup);
+export default memo<tabBarIconProps>(TabBarIconItemLookup);

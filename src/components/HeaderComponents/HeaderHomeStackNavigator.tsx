@@ -1,12 +1,13 @@
-import { StackHeaderProps } from "@react-navigation/stack";
+import { StackHeaderProps, StackNavigationProp } from "@react-navigation/stack";
 import { Header, Icon, SearchBar } from "@rneui/themed";
 import { FC, memo, useEffect, useRef, useCallback } from "react";
 import { TextInput } from "react-native";
-import { useIsFocused } from "@react-navigation/native";
+import { useIsFocused, useNavigation } from "@react-navigation/native";
+import { RootStackParamList } from "../../../CustomTypes/types";
+import { MaterialIcons, FontAwesome, EvilIcons } from "@expo/vector-icons";
 
-const HeaderHomeStackNavigator: FC<StackHeaderProps> = ({
-  navigation,
-}): JSX.Element => {
+const HeaderHomeStackNavigator: FC<StackHeaderProps> = (): JSX.Element => {
+  const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
   const inputRef = useRef<TextInput>(null);
   const isFocused = useIsFocused();
   !isFocused && inputRef.current?.blur();
@@ -48,15 +49,9 @@ const HeaderHomeStackNavigator: FC<StackHeaderProps> = ({
           }}
           placeholderTextColor="rgba(255,255,255,.5)"
           searchIcon={
-            <Icon
-              name="search"
-              color="rgba(255,255,255,.5)"
-              type="font-awesome"
-            />
+            <FontAwesome name="search" color="rgba(255,255,255,.5)" />
           }
-          clearIcon={
-            <Icon name="close" color="rgba(255,255,255,.5)" type="EvilIcons" />
-          }
+          clearIcon={<EvilIcons name="close" color="rgba(255,255,255,.5)" />}
         />
       }
     />

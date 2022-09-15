@@ -15,6 +15,7 @@ import HideItemName from "./HideItemName";
 import HideItemNumber from "./HideItemNumber";
 import HideItemBarcode from "./HideItemBarcode";
 import QRCodeModal from "./QRCodeModal";
+import { mainColor } from "../../shared/sharedStyles";
 
 interface Props {
   vendorName: string;
@@ -79,7 +80,7 @@ const CartQRCodeImage: FC<Props> = ({ vendorName }): JSX.Element => {
 
 const styles = StyleSheet.create({
   buttonStyle: {
-    backgroundColor: "#0071dc",
+    backgroundColor: mainColor,
     width: "100%",
   },
 });

@@ -2,18 +2,13 @@ import { FC, memo } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { ItemLookupStackParamList } from "../../../CustomTypes/types";
 import ItemLookupScreen from "../Screens/ItemLookupScreen";
-
-const hideHeader = {
-  headerShown: false,
-} as const;
+import { HEADER_SHOWN_FALSE } from "../../shared/sharedScreenOptions";
 
 const Stack = createStackNavigator<ItemLookupStackParamList>();
 
-// const ItemLookupScreenRender = props => <ItemLookupScreen {...props} />;
-
 const ItemLookupStackScreen: FC = (): JSX.Element => {
   return (
-    <Stack.Navigator screenOptions={hideHeader}>
+    <Stack.Navigator screenOptions={HEADER_SHOWN_FALSE}>
       <Stack.Screen name="ItemLookupScreen" component={ItemLookupScreen} />
     </Stack.Navigator>
   );

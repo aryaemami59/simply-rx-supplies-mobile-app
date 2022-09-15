@@ -1,10 +1,12 @@
 import { Icon } from "@rneui/themed";
 import { FC, memo } from "react";
-import { tabBarIconProps } from "../../../Main";
+import { tabBarIconProps } from "../../../CustomTypes/types";
 
-type Props = tabBarIconProps;
-
-const TabBarIconHome: FC<Props> = ({ focused, color, size }): JSX.Element => {
+const TabBarIconHome: FC<tabBarIconProps> = ({
+  focused,
+  color,
+  size,
+}): JSX.Element => {
   return (
     <Icon
       name={focused ? "home" : "home-outline"}

@@ -1,4 +1,4 @@
-import { Badge, Button, Chip, lightColors, Tooltip } from "@rneui/themed";
+import { Chip } from "@rneui/themed";
 import {
   Dispatch,
   FC,
@@ -7,10 +7,8 @@ import {
   useRef,
   useState,
   useCallback,
-  MouseEventHandler,
   SetStateAction,
 } from "react";
-// import Modal from "modal-react-native-web";
 
 import {
   itemInterface,
@@ -20,7 +18,8 @@ import {
 } from "../../redux/addedSlice";
 import { useAppSelector, useAppDispatch } from "../../redux/store";
 import { shallowEqual } from "react-redux";
-import { Text, View, StyleSheet, Keyboard } from "react-native";
+import { StyleSheet, Keyboard } from "react-native";
+import { fontWeightBold, mainColor } from "../../shared/sharedStyles";
 
 interface Props {
   itemObj: itemInterface;
@@ -87,11 +86,10 @@ const AddItemButton: FC<Props> = ({ itemObj }): JSX.Element => {
 
 const styles = StyleSheet.create({
   buttonStyle: {
-    backgroundColor: "#0071dc",
+    backgroundColor: mainColor,
   },
   titleStyle: {
-    fontWeight: "700",
-    // fontFamily: "Helvetica Neue,Helvetica,Arial,sans-serif",
+    fontWeight: fontWeightBold,
   },
 });
 

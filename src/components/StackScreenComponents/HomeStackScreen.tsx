@@ -1,33 +1,18 @@
 import { FC, memo } from "react";
 import {
-  StackHeaderProps,
   createStackNavigator,
-  StackNavigationProp,
+  StackNavigationOptions,
 } from "@react-navigation/stack";
 import HeaderHomeStackNavigator from "../HeaderComponents/HeaderHomeStackNavigator";
-import {
-  HomeStackParamList,
-  RootStackParamList,
-} from "../../../CustomTypes/types";
+import { HomeStackParamList } from "../../../CustomTypes/types";
 import HomeScreen from "../Screens/HomeScreen";
-import { StackScreenProps } from "@react-navigation/stack";
+import { screenOptions } from "../../shared/sharedScreenOptions";
 
 const Stack = createStackNavigator<HomeStackParamList>();
-type Props = StackScreenProps<RootStackParamList, "Home">;
-// type navigationType = StackNavigationProp<
-//   RootStackParamList,
-//   "Home",
-//   undefined
-// >;
-const header = (props: StackHeaderProps): JSX.Element => (
-  <HeaderHomeStackNavigator {...props} />
-);
 
-// const HomeScreenRender = props => <HomeScreen {...props} />;
-
-const screenOptions = {
-  header,
-} as const;
+// const screenOptions: StackNavigationOptions = {
+//   header: props => <HeaderHomeStackNavigator {...props} />,
+// } as const;
 
 const HomeStackScreen: FC = (): JSX.Element => {
   return (

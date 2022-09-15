@@ -2,8 +2,6 @@ import { FC, memo } from "react";
 import { View, StyleSheet } from "react-native";
 import InputGroup from "../InputComponents/InputGroup";
 
-// type Props = StackScreenProps<ItemLookupStackParamList, "ItemLookupScreen">;
-
 const ItemLookupScreen: FC = (): JSX.Element => {
   return (
     <View style={styles.containerStyle}>

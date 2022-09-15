@@ -10,14 +10,7 @@ import {
 } from "@expo/vector-icons";
 import { RootStackParamList } from "../../../CustomTypes/types";
 import { useNavigation } from "@react-navigation/native";
-
-// type Props = StackScreenProps<HomeStackParamList, "HomeScreen">;
-// type Props = StackScreenProps<RootStackParamList, "Home">;
-
-export const screenOptions = {
-  headerTintColor: "#fff",
-  headerStyle: { backgroundColor: "#0071dc" },
-};
+import { fontWeightBold, mainColor } from "../../shared/sharedStyles";
 
 const HomeScreen: FC = (): JSX.Element => {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
@@ -82,10 +75,10 @@ const styles = StyleSheet.create({
     padding: 30,
   },
   buttonStyle: {
-    backgroundColor: "#0071dc",
+    backgroundColor: mainColor,
   },
   titleStyle: {
-    fontWeight: "700",
+    fontWeight: fontWeightBold,
   },
 });
 

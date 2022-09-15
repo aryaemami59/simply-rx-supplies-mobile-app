@@ -1,10 +1,7 @@
 import { FC, memo } from "react";
-import { Button, Chip } from "@rneui/themed";
+import { Chip } from "@rneui/themed";
 import { StyleSheet } from "react-native";
-
-interface Props {
-  props: string;
-}
+import { mainColor } from "../../shared/sharedStyles";
 
 const HideItemNumber: FC = (): JSX.Element => {
   return (
@@ -14,8 +11,7 @@ const HideItemNumber: FC = (): JSX.Element => {
 
 const styles = StyleSheet.create({
   buttonStyle: {
-    backgroundColor: "#0071dc",
-    // width: "100%",
+    backgroundColor: mainColor,
   },
 });
 

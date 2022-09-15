@@ -1,21 +1,10 @@
 import { FC, memo } from "react";
-import {
-  createStackNavigator,
-  StackHeaderProps,
-} from "@react-navigation/stack";
+import { createStackNavigator } from "@react-navigation/stack";
 import ItemsReferenceScreen from "../Screens/ItemsReferenceScreen";
-import HeaderHomeStackNavigator from "../HeaderComponents/HeaderHomeStackNavigator";
 import { ItemsReferenceStackParamList } from "../../../CustomTypes/types";
+import { screenOptions } from "../../shared/sharedScreenOptions";
 
 const Stack = createStackNavigator<ItemsReferenceStackParamList>();
-
-const header = (props: StackHeaderProps): JSX.Element => (
-  <HeaderHomeStackNavigator {...props} />
-);
-
-const screenOptions = {
-  header,
-} as const;
 
 const ItemsReferenceStackScreen: FC = (): JSX.Element => {
   return (

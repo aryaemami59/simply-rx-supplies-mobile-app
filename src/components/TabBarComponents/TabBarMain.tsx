@@ -1,5 +1,8 @@
 import { FC, memo } from "react";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import {
+  BottomTabNavigationOptions,
+  createBottomTabNavigator,
+} from "@react-navigation/bottom-tabs";
 import { RootTabParamList, tabBarIconProps } from "../../../CustomTypes/types";
 import TabBarIconShoppingCart from "./TabBarIconShoppingCart";
 import TabBarIconItemLookup from "./TabBarIconItemLookup";
@@ -9,55 +12,38 @@ import ItemLookupStackScreen from "../StackScreenComponents/ItemLookupStackScree
 import ShoppingCartStackScreen from "../StackScreenComponents/ShoppingCartStackScreen";
 import ItemsReferenceStackScreen from "../StackScreenComponents/ItemsReferenceStackScreen";
 import TabBarIconItemsReference from "./TabBarIconItemsReference";
-
-const TabBarIconHomeRender = (props: tabBarIconProps): JSX.Element => (
-  <TabBarIconHome {...props} />
-);
-
-const TabBarIconShoppingCartRender = (props: tabBarIconProps): JSX.Element => (
-  <TabBarIconShoppingCart {...props} />
-);
-
-const TabBarIconItemLookupRender = (props: tabBarIconProps): JSX.Element => (
-  <TabBarIconItemLookup {...props} />
-);
-
-const TabBarIconItemsReferenceRender = (
-  props: tabBarIconProps
-): JSX.Element => <TabBarIconItemsReference {...props} />;
-
-const HomeOptions = {
-  tabBarIcon: TabBarIconHomeRender,
-} as const;
-
-const ItemLookupOptions = {
-  tabBarLabel: "Item Lookup",
-  tabBarIcon: TabBarIconItemLookupRender,
-} as const;
+import { HEADER_SHOWN_FALSE } from "../../shared/sharedScreenOptions";
 
 const Tab = createBottomTabNavigator<RootTabParamList>();
 
-const hideHeader = {
-  headerShown: false,
+const HomeOptions: BottomTabNavigationOptions = {
+  tabBarIcon: (props: tabBarIconProps) => <TabBarIconHome {...props} />,
+};
+
+const ItemLookupOptions: BottomTabNavigationOptions = {
+  tabBarLabel: "Item Lookup",
+  tabBarIcon: (props: tabBarIconProps) => <TabBarIconItemLookup {...props} />,
 } as const;
 
-const ShoppingCartOptions = {
+const ShoppingCartOptions: BottomTabNavigationOptions = {
   tabBarLabel: "Shopping Cart",
-  tabBarIcon: TabBarIconShoppingCartRender,
+  tabBarIcon: (props: tabBarIconProps) => <TabBarIconShoppingCart {...props} />,
   headerTitle: "Shopping Cart",
   headerTitleAlign: "center",
 } as const;
 
-const ItemsReferenceOptions = {
+const ItemsReferenceOptions: BottomTabNavigationOptions = {
   tabBarLabel: "Items Reference",
-  tabBarIcon: TabBarIconItemsReferenceRender,
+  tabBarIcon: (props: tabBarIconProps) => (
+    <TabBarIconItemsReference {...props} />
+  ),
   headerTitle: "Items Reference",
   headerTitleAlign: "center",
 } as const;
 
 const TabBarMain: FC = (): JSX.Element => {
   return (
-    <Tab.Navigator screenOptions={hideHeader}>
+    <Tab.Navigator screenOptions={HEADER_SHOWN_FALSE}>
       <Tab.Screen
         name="Home"
         component={HomeStackScreen}
