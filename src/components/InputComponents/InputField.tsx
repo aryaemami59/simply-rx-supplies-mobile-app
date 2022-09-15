@@ -1,27 +1,6 @@
-import {
-  Header,
-  Icon,
-  SearchBar,
-  SearchBarDefaultProps,
-  SearchBarProps,
-} from "@rneui/themed";
-import {
-  FC,
-  memo,
-  useState,
-  useCallback,
-  Ref,
-  useRef,
-  Component,
-  RefObject,
-} from "react";
-import {
-  StyleSheet,
-  TextInput,
-  View,
-  ViewProps,
-  ViewStyle,
-} from "react-native";
+import { Header, Icon, SearchBar } from "@rneui/themed";
+import { FC, memo, useState, useCallback, useRef } from "react";
+import { StyleSheet, TextInput, View } from "react-native";
 import * as Animatable from "react-native-animatable";
 import {
   clearListItems,
@@ -32,10 +11,6 @@ import {
 import { useAppDispatch, useAppSelector } from "../../redux/store";
 import { useFocusEffect } from "@react-navigation/native";
 import { shallowEqual } from "react-redux";
-
-interface Props {
-  props: string;
-}
 
 const empty: [] = [];
 
@@ -68,6 +43,7 @@ const InputField: FC = (): JSX.Element => {
   const view = useRef<Animatable.View & View>(null);
   const inputRef = useRef<TextInput>(null);
   const dispatch = useAppDispatch();
+
   const focusHandler = useCallback(() => {
     view.current?.transitionTo({ width: "100%" });
   }, []);
@@ -141,6 +117,7 @@ const InputField: FC = (): JSX.Element => {
           transition={"width"}
           style={{ width: "100%" }}>
           <SearchBar
+            returnKeyType="search"
             ref={inputRef}
             lightTheme
             onFocus={focusHandler}

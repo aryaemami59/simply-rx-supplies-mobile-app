@@ -1,65 +1,60 @@
-import {
-  createStackNavigator,
-  StackScreenProps,
-} from "@react-navigation/stack";
+import { StackScreenProps } from "@react-navigation/stack";
 import { FC, memo } from "react";
-import { RootStackParamList } from "../../../Main";
 import { Chip, Icon } from "@rneui/themed";
 import { View, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { DrawerScreenProps } from "@react-navigation/drawer";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import {
+  MaterialCommunityIcons,
+  FontAwesome5,
+  MaterialIcons,
+} from "@expo/vector-icons";
+import { RootStackParamList } from "../../../CustomTypes/types";
 
-type Props = DrawerScreenProps<RootStackParamList, "Home">;
+type Props = StackScreenProps<RootStackParamList, "Home">;
 
 export const screenOptions = {
   headerTintColor: "#fff",
   headerStyle: { backgroundColor: "#0071dc" },
 };
 
-// const Stack = createStackNavigator();
-
 const HomeScreen: FC<Props> = ({ navigation }): JSX.Element => {
   return (
-    <>
-      <SafeAreaView>
-        <View style={styles.containerStyle}>
-          <Chip
-            raised
-            titleStyle={styles.titleStyle}
-            buttonStyle={styles.buttonStyle}
-            title="Item Lookup"
-            icon={
-              <Icon name="search" color="white" type="font-awesome" size={20} />
-            }
-            size="lg"
-            onPress={() => navigation.navigate("ItemLookup")}
-          />
-          <Chip
-            raised
-            titleStyle={styles.titleStyle}
-            buttonStyle={styles.buttonStyle}
-            title="Items By Vendor"
-            icon={
-              <MaterialCommunityIcons
-                name="store-search-outline"
-                color="white"
-                size={24}
-              />
-            }
-            size="lg"
-            onPress={() => navigation.navigate("ItemsByVendor")}
-          />
-          <Chip
-            raised
-            icon={<Icon name="category" type="MaterialIcons" color="white" />}
-            titleStyle={styles.titleStyle}
-            buttonStyle={styles.buttonStyle}
-            title="Items By Category"
-            size="lg"
-            onPress={() => navigation.navigate("ItemsByCategory")}
-          />
-          {/* <Chip
+    <SafeAreaView>
+      <View style={styles.containerStyle}>
+        <Chip
+          raised
+          titleStyle={styles.titleStyle}
+          buttonStyle={styles.buttonStyle}
+          title="Item Lookup"
+          icon={<FontAwesome5 name="search" color="white" size={24} />}
+          size="lg"
+          onPress={() => navigation.navigate("ItemLookup")}
+        />
+        <Chip
+          raised
+          titleStyle={styles.titleStyle}
+          buttonStyle={styles.buttonStyle}
+          title="Items By Vendor"
+          icon={
+            <MaterialCommunityIcons
+              name="store-search-outline"
+              color="white"
+              size={24}
+            />
+          }
+          size="lg"
+          onPress={() => navigation.navigate("ItemsByVendor")}
+        />
+        <Chip
+          raised
+          icon={<MaterialIcons name="category" color="white" size={24} />}
+          titleStyle={styles.titleStyle}
+          buttonStyle={styles.buttonStyle}
+          title="Items By Category"
+          size="lg"
+          onPress={() => navigation.navigate("ItemsByCategory")}
+        />
+        {/* <Chip
             raised
             titleStyle={styles.titleStyle}
             buttonStyle={styles.buttonStyle}
@@ -70,9 +65,8 @@ const HomeScreen: FC<Props> = ({ navigation }): JSX.Element => {
             }
             onPress={() => navigation.navigate("ShoppingCart")}
           /> */}
-        </View>
-      </SafeAreaView>
-    </>
+      </View>
+    </SafeAreaView>
   );
 };
 

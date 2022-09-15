@@ -4,10 +4,6 @@ import { selectVendorsArr } from "../../redux/addedSlice";
 import CartVendorColumns from "./CartVendorColumns";
 import { ScrollView } from "react-native";
 
-interface Props {
-  props: string;
-}
-
 const ParentShoppingCart: FC = (): JSX.Element => {
   const vendors = useAppSelector(selectVendorsArr);
 

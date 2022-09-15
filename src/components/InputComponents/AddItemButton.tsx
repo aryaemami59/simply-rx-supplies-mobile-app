@@ -20,7 +20,7 @@ import {
 } from "../../redux/addedSlice";
 import { useAppSelector, useAppDispatch } from "../../redux/store";
 import { shallowEqual } from "react-redux";
-import { Text, View, StyleSheet } from "react-native";
+import { Text, View, StyleSheet, Keyboard } from "react-native";
 
 interface Props {
   itemObj: itemInterface;
@@ -52,6 +52,7 @@ const AddItemButton: FC<Props> = ({ itemObj }): JSX.Element => {
   }, [showBadge, hideBadge]);
 
   const clickHandler = useCallback((): void => {
+    Keyboard.dismiss();
     IfAddedToAllVendors
       ? showThenHide()
       : dispatch(addItems({ itemObj, vendors }));
