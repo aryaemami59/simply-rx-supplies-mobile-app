@@ -1,12 +1,10 @@
 import { FC, memo } from "react";
 import { View, StyleSheet } from "react-native";
-import { StackScreenProps } from "@react-navigation/stack";
 import InputGroup from "../InputComponents/InputGroup";
-import { ItemLookupStackParamList } from "../../../CustomTypes/types";
 
-type Props = StackScreenProps<ItemLookupStackParamList, "ItemLookup">;
+// type Props = StackScreenProps<ItemLookupStackParamList, "ItemLookupScreen">;
 
-const ItemLookupScreen: FC<Props> = ({ navigation }): JSX.Element => {
+const ItemLookupScreen: FC = (): JSX.Element => {
   return (
     <View style={styles.containerStyle}>
       <InputGroup />

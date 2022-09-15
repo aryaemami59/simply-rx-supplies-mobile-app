@@ -23,7 +23,7 @@ const header = (props: StackHeaderProps): JSX.Element => (
   <HeaderHomeStackNavigator {...props} />
 );
 
-const HomeScreenRender = props => <HomeScreen {...props} />;
+// const HomeScreenRender = props => <HomeScreen {...props} />;
 
 const screenOptions = {
   header,
@@ -32,7 +32,7 @@ const screenOptions = {
 const HomeStackScreen: FC = (): JSX.Element => {
   return (
     <Stack.Navigator screenOptions={screenOptions}>
-      <Stack.Screen name="HomeScreen" component={HomeScreenRender} />
+      <Stack.Screen name="HomeScreen" component={HomeScreen} />
     </Stack.Navigator>
   );
 };

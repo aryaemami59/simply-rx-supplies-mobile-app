@@ -3,9 +3,9 @@ import ParentShoppingCart from "../ShoppingCartComponents/ParentShoppingCart";
 import { StackScreenProps } from "@react-navigation/stack";
 import { ShoppingCartStackParamList } from "../../../CustomTypes/types";
 
-type Props = StackScreenProps<ShoppingCartStackParamList, "ShoppingCart">;
+// type Props = StackScreenProps<ShoppingCartStackParamList, "ShoppingCartScreen">;
 
-const ShoppingCartScreen: FC<Props> = ({ navigation }: Props): JSX.Element => {
+const ShoppingCartScreen: FC = (): JSX.Element => {
   return <ParentShoppingCart />;
 };
 

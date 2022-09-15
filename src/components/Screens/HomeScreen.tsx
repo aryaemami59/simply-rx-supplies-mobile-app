@@ -1,6 +1,6 @@
-import { StackNavigationProp, StackScreenProps } from "@react-navigation/stack";
+import { StackNavigationProp } from "@react-navigation/stack";
 import { FC, memo } from "react";
-import { Chip, Icon } from "@rneui/themed";
+import { Chip } from "@rneui/themed";
 import { View, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import {
@@ -8,21 +8,18 @@ import {
   FontAwesome5,
   MaterialIcons,
 } from "@expo/vector-icons";
-import {
-  RootStackParamList,
-  HomeStackParamList,
-} from "../../../CustomTypes/types";
+import { RootStackParamList } from "../../../CustomTypes/types";
 import { useNavigation } from "@react-navigation/native";
 
 // type Props = StackScreenProps<HomeStackParamList, "HomeScreen">;
-type Props = StackScreenProps<RootStackParamList, "Home">;
+// type Props = StackScreenProps<RootStackParamList, "Home">;
 
 export const screenOptions = {
   headerTintColor: "#fff",
   headerStyle: { backgroundColor: "#0071dc" },
 };
 
-const HomeScreen: FC<Props> = (): JSX.Element => {
+const HomeScreen: FC = (): JSX.Element => {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
 
   return (
@@ -92,4 +89,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default memo<Props>(HomeScreen);
+export default memo(HomeScreen);

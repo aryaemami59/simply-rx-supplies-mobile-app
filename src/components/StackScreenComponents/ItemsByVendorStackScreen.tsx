@@ -9,14 +9,14 @@ const hideHeader = {
 
 const Stack = createStackNavigator<ItemsByVendorStackParamList>();
 
-const ItemsByVendorScreenRender = props => <ItemsByVendorScreen {...props} />;
+// const ItemsByVendorScreenRender = props => <ItemsByVendorScreen {...props} />;
 
 const ItemsByVendorStackScreen: FC = (): JSX.Element => {
   return (
     <Stack.Navigator screenOptions={hideHeader}>
       <Stack.Screen
         name="ItemsByVendorScreen"
-        component={ItemsByVendorScreenRender}
+        component={ItemsByVendorScreen}
       />
     </Stack.Navigator>
   );

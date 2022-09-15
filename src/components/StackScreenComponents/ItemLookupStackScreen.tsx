@@ -9,15 +9,12 @@ const hideHeader = {
 
 const Stack = createStackNavigator<ItemLookupStackParamList>();
 
-const ItemLookupScreenRender = props => <ItemLookupScreen {...props} />;
+// const ItemLookupScreenRender = props => <ItemLookupScreen {...props} />;
 
 const ItemLookupStackScreen: FC = (): JSX.Element => {
   return (
     <Stack.Navigator screenOptions={hideHeader}>
-      <Stack.Screen
-        name="ItemLookupScreen"
-        component={ItemLookupScreenRender}
-      />
+      <Stack.Screen name="ItemLookupScreen" component={ItemLookupScreen} />
     </Stack.Navigator>
   );
 };
