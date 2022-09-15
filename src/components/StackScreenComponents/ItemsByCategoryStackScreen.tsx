@@ -9,10 +9,17 @@ const hideHeader = {
 
 const Stack = createStackNavigator<ItemsByCategoryStackParamList>();
 
+const ItemsByCategoryScreenRender = props => (
+  <ItemsByCategoryScreen {...props} />
+);
+
 const ItemsByCategoryStackScreen: FC = (): JSX.Element => {
   return (
     <Stack.Navigator screenOptions={hideHeader}>
-      <Stack.Screen name="ItemsByCategory" component={ItemsByCategoryScreen} />
+      <Stack.Screen
+        name="ItemsByCategoryScreen"
+        component={ItemsByCategoryScreenRender}
+      />
     </Stack.Navigator>
   );
 };

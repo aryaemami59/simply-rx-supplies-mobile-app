@@ -1,16 +1,12 @@
 import { Dispatch, SetStateAction } from "react";
 
 export type RootStackParamList = {
-  Home: undefined;
+  Home: HomeStackParamList;
   ItemLookup: undefined;
   ItemsByCategory: undefined;
   ItemsByVendor: undefined;
   ShoppingCart: undefined;
-  // Tabs: undefined;
-  // Login: undefined;
-  // Register: undefined;
-  // HomeNavigator: undefined;
-  // ShoppingCartScreen: undefined;
+  ItemsReference: ItemsReferenceTopTabParamList;
 };
 
 export type tabBarIconProps = {
@@ -27,27 +23,33 @@ export type RootTabParamList = {
 };
 
 export type HomeStackParamList = {
-  Home: undefined;
+  // Home: undefined;
+  HomeScreen: undefined;
 };
 
 export type ItemLookupStackParamList = {
-  ItemLookup: undefined;
+  ItemLookupScreen: undefined;
 };
 
 export type ShoppingCartStackParamList = {
-  ShoppingCart: undefined;
+  ShoppingCartScreen: undefined;
 };
 
 export type ItemsByCategoryStackParamList = {
-  ItemsByCategory: undefined;
+  ItemsByCategoryScreen: undefined;
 };
 
 export type ItemsByVendorStackParamList = {
-  ItemsByVendor: undefined;
+  ItemsByVendorScreen: undefined;
 };
 
 export type ItemsReferenceStackParamList = {
-  ItemsReference: undefined;
+  ItemsReferenceScreen: undefined;
+};
+
+export type ItemsReferenceTopTabParamList = {
+  ItemsByVendor: ItemsByVendorStackParamList;
+  ItemsByCategory: ItemsByCategoryStackParamList;
 };
 
 export interface myContextInterface {

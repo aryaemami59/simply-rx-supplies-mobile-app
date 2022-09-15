@@ -1,12 +1,10 @@
 import { FC, memo } from "react";
-import { createStackNavigator } from "@react-navigation/stack";
-import { ItemsReferenceStackParamList } from "../../../CustomTypes/types";
+import { ItemsReferenceTopTabParamList } from "../../../CustomTypes/types";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import ItemsByVendorStackScreen from "../StackScreenComponents/ItemsByVendorStackScreen";
 import ItemsByCategoryStackScreen from "../StackScreenComponents/ItemsByCategoryStackScreen";
 
-// const Stack = createStackNavigator<ItemsReferenceStackParamList>();
-const Tab = createMaterialTopTabNavigator();
+const Tab = createMaterialTopTabNavigator<ItemsReferenceTopTabParamList>();
 
 const ItemsReferenceScreen: FC = (): JSX.Element => {
   return (

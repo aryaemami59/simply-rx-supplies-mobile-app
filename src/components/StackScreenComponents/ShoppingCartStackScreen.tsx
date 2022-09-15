@@ -5,12 +5,14 @@ import ShoppingCartScreen from "../Screens/ShoppingCartScreen";
 
 const Stack = createStackNavigator<ShoppingCartStackParamList>();
 
+const ShoppingCartScreenRender = props => <ShoppingCartScreen {...props} />;
+
 const ShoppingCartStackScreen: FC = (): JSX.Element => {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="ShoppingCart"
-        component={ShoppingCartScreen}
+        name="ShoppingCartScreen"
+        component={ShoppingCartScreenRender}
         options={{ headerTitle: "Shopping Cart" }}
       />
     </Stack.Navigator>

@@ -2,6 +2,7 @@
   "expo": {
     "name": "RX Supplies",
     "slug": "rx-supplies",
+    "owner": "aryaemami59",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -16,7 +17,8 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.aryaemami59.rxsupplies"
     },
     "android": {
       "adaptiveIcon": {
@@ -26,6 +28,11 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "f28497ee-7028-4428-9dab-66dd58ea0afe"
+      }
     }
   }
 }

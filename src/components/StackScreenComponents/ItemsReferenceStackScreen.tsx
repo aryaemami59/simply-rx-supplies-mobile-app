@@ -5,8 +5,9 @@ import {
 } from "@react-navigation/stack";
 import ItemsReferenceScreen from "../Screens/ItemsReferenceScreen";
 import HeaderHomeStackNavigator from "../HeaderComponents/HeaderHomeStackNavigator";
+import { ItemsReferenceStackParamList } from "../../../CustomTypes/types";
 
-const Stack = createStackNavigator();
+const Stack = createStackNavigator<ItemsReferenceStackParamList>();
 
 const header = (props: StackHeaderProps): JSX.Element => (
   <HeaderHomeStackNavigator {...props} />
@@ -19,7 +20,10 @@ const screenOptions = {
 const ItemsReferenceStackScreen: FC = (): JSX.Element => {
   return (
     <Stack.Navigator screenOptions={screenOptions}>
-      <Stack.Screen name="ItemsReference" component={ItemsReferenceScreen} />
+      <Stack.Screen
+        name="ItemsReferenceScreen"
+        component={ItemsReferenceScreen}
+      />
     </Stack.Navigator>
   );
 };
