@@ -1,4 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
+import { screenOptions } from "../src/shared/sharedScreenOptions";
 
 export type RootStackParamList = {
   Home: HomeStackParamList;
@@ -16,10 +17,10 @@ export type tabBarIconProps = {
 };
 
 export type RootTabParamList = {
-  Home: undefined;
-  ItemLookup: undefined;
-  ShoppingCart: undefined;
-  ItemsReference: undefined;
+  Home: HomeStackParamList;
+  ItemLookup: ItemLookupStackParamList;
+  ShoppingCart: ShoppingCartStackParamList;
+  ItemsReference: ItemsReferenceStackParamList;
 };
 
 export type HomeStackParamList = {
@@ -32,7 +33,9 @@ export type ItemLookupStackParamList = {
 };
 
 export type ShoppingCartStackParamList = {
-  ShoppingCartScreen: undefined;
+  // ShoppingCartScreen: string;
+  ShoppingCartScreen: VendorColumnStackParamList;
+  // ShoppingCartScreen: undefined;
 };
 
 export type ItemsByCategoryStackParamList = {
@@ -44,13 +47,34 @@ export type ItemsByVendorStackParamList = {
 };
 
 export type ItemsReferenceStackParamList = {
-  ItemsReferenceScreen: undefined;
+  ItemsReferenceScreen: ItemsReferenceTopTabParamList;
 };
 
 export type ItemsReferenceTopTabParamList = {
   ItemsByVendor: ItemsByVendorStackParamList;
   ItemsByCategory: ItemsByCategoryStackParamList;
 };
+
+export type VendorColumnStackParamList = {
+  [key: string]: { vendorName: string };
+  // OI: { name: string };
+  // GNFR: { name: string };
+  // SOC: { name: string };
+  // VS: { name: string };
+  // MS: { name: string };
+  // COV: { name: string };
+  // FORS: { name: string };
+};
+// export type VendorColumnStackParamList = {
+//   MCK: undefined;
+//   OI: undefined;
+//   GNFR: undefined;
+//   SOC: undefined;
+//   VS: undefined;
+//   MS: undefined;
+//   COV: undefined;
+//   FORS: undefined;
+// };
 
 export interface myContextInterface {
   darkTheme: boolean;

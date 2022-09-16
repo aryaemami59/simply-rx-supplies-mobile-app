@@ -2,34 +2,48 @@ import { FC, memo } from "react";
 import { useAppSelector } from "../../redux/store";
 import { selectByVendor } from "../../redux/addedSlice";
 import { ListItem } from "@rneui/themed";
-import { View, ScrollView } from "react-native";
+import { View, Text } from "react-native";
 import ItemNameCart from "./ItemNameCart";
 import ItemNumberCart from "./ItemNumberCart";
 import BarcodeImageCart from "./BarcodeImageCart";
 import ExpandCollapseButtonGroup from "./ExpandCollapseButtonGroup";
+// import { VendorColumnStack } from "./CartVendorColumns";
+import { createStackNavigator } from "@react-navigation/stack";
 
-interface Props {
-  vendorName: string;
-}
+// interface Props {
+//   vendorName: string;
+// }
+const Stack = createStackNavigator();
 
-const CartColumnListItems: FC<Props> = ({ vendorName }): JSX.Element => {
-  const addedItems = useAppSelector(selectByVendor(vendorName));
+export const VendorColumnStack = ({ navigation, route }) => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name={route.params.vendorName}
+        component={props => <CartColumnListItems {...props} />}
+      />
+    </Stack.Navigator>
+  );
+};
+const CartColumnListItems = ({
+  // vendorName,
+  navigation,
+  route,
+}): JSX.Element => {
+  const addedItems = useAppSelector(selectByVendor(route.params.name));
+  // const addedItems = useAppSelector(selectByVendor(vendorName));
 
   return (
-    // <ScrollView contentContainerStyle={{ alignItems: "center" }}>
-    // <View style={{ paddingBottom: 100 }}>
     <>
+      {/* <View>
+        <Text>{route.params.name}</Text>
+      </View> */}
       {addedItems.map(e => (
-        <ListItem
-          bottomDivider
-          key={e.name}
-          // style={{ alignItems: "center", justifyContent: "center" }}
-        >
+        <ListItem bottomDivider key={e.name}>
           <View
             style={{
               alignItems: "center",
               width: "100%",
-              // paddingVertical: 50,
             }}>
             <ExpandCollapseButtonGroup />
             <ItemNameCart itemObj={e} />
@@ -39,8 +53,6 @@ const CartColumnListItems: FC<Props> = ({ vendorName }): JSX.Element => {
         </ListItem>
       ))}
     </>
-    // </View>
-    // {/* </ScrollView> */}
   );
 };
 
