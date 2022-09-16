@@ -3,14 +3,20 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { ShoppingCartStackParamList } from "../../../CustomTypes/types";
 import ShoppingCartScreen from "../Screens/ShoppingCartScreen";
 import { useAppSelector } from "../../redux/store";
-import { selectVendorsArr } from "../../redux/addedSlice";
+import {
+  selectVendorsArr,
+  selectAllVendorOfficialNames,
+} from "../../redux/addedSlice";
 import CartColumnListItemsScreen from "../Screens/CartColumnListItemsScreen";
 import { screenOptions } from "../../shared/sharedScreenOptions";
+import { mainColor } from "../../shared/sharedStyles";
 
 const Stack = createStackNavigator<ShoppingCartStackParamList>();
 
 const ShoppingCartStackScreen: FC = (): JSX.Element => {
   const vendors = useAppSelector(selectVendorsArr);
+  const officialNames = useAppSelector(selectAllVendorOfficialNames);
+
   return (
     <Stack.Navigator
     // screenOptions={screenOptions}
@@ -18,10 +24,26 @@ const ShoppingCartStackScreen: FC = (): JSX.Element => {
       <Stack.Screen
         name="ShoppingCartScreen"
         component={ShoppingCartScreen}
-        options={{ headerTitle: "Shopping Cart" }}
+        options={{
+          headerTitle: "Shopping Cart",
+          headerStyle: { backgroundColor: mainColor },
+          headerTitleStyle: { color: "white" },
+        }}
       />
-      {vendors.map((e: string) => (
-        <Stack.Screen key={e} name={e} component={CartColumnListItemsScreen} />
+      {vendors.map((e: string, i: number) => (
+        <Stack.Screen
+          options={{
+            headerTitle: officialNames[i],
+            headerStyle: { backgroundColor: mainColor },
+            headerTitleStyle: { color: "white" },
+            headerBackTitleStyle: { color: "white" },
+            headerBackTitleVisible: false,
+            headerTintColor: "white",
+          }}
+          key={e}
+          name={e}
+          component={CartColumnListItemsScreen}
+        />
       ))}
     </Stack.Navigator>
   );
