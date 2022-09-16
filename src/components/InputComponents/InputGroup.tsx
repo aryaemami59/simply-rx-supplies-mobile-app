@@ -19,7 +19,7 @@ const InputGroup: FC = (): JSX.Element => {
       <FlatList
         data={listItems}
         renderItem={renderItems}
-        keyboardShouldPersistTaps="always"
+        keyboardShouldPersistTaps="handled"
       />
     </>
   );

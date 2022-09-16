@@ -69,4 +69,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default memo(CartVendorColumns);
+export default memo<Props>(CartVendorColumns);

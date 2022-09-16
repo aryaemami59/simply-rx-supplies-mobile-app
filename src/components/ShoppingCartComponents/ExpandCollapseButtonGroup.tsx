@@ -4,12 +4,13 @@ import ColumnZoomInIcon from "./ColumnZoomInIcon";
 import ColumnCollapseIcon from "./ColumnCollapseIcon";
 import ColumnExpandIcon from "./ColumnExpandIcon";
 
-interface Props {
-  props: string;
-}
-
 const ExpandCollapseButtonGroup: FC = (): JSX.Element => {
   return (
+    // <>
+    //   <ColumnZoomInIcon />
+    //   <ColumnCollapseIcon />
+    //   <ColumnExpandIcon />
+    // </>
     <ButtonGroup
       containerStyle={{ borderWidth: 0 }}
       innerBorderStyle={{ width: 0 }}

@@ -1,4 +1,4 @@
-import { Header, Icon, SearchBar } from "@rneui/themed";
+import { Header, SearchBar } from "@rneui/themed";
 import { FC, memo, useState, useCallback, useRef } from "react";
 import { StyleSheet, TextInput, View } from "react-native";
 import * as Animatable from "react-native-animatable";
@@ -12,7 +12,13 @@ import { useAppDispatch, useAppSelector } from "../../redux/store";
 import { useFocusEffect } from "@react-navigation/native";
 import { shallowEqual } from "react-redux";
 import { FontAwesome, EvilIcons } from "@expo/vector-icons";
-import { mainColor } from "../../shared/sharedStyles";
+import { width80 } from "../../shared/sharedStyles";
+import {
+  mainColor,
+  displayNone,
+  width100,
+  colorWhite,
+} from "../../shared/sharedStyles";
 
 const empty: [] = [];
 
@@ -47,11 +53,11 @@ const InputField: FC = (): JSX.Element => {
   const dispatch = useAppDispatch();
 
   const focusHandler = useCallback(() => {
-    view.current?.transitionTo({ width: "100%" });
+    view.current?.transitionTo(width100);
   }, []);
 
   const blurHandler = useCallback(() => {
-    view.current?.transitionTo({ width: "80%" });
+    view.current?.transitionTo(width80);
   }, []);
 
   const clickHandler = useCallback((): void => {
@@ -64,7 +70,7 @@ const InputField: FC = (): JSX.Element => {
     useCallback(() => {
       inputRef.current?.focus();
       return () => {
-        view.current?.transitionTo({ width: "100%" });
+        view.current?.transitionTo(width100);
       };
     }, [])
   );
@@ -111,18 +117,12 @@ const InputField: FC = (): JSX.Element => {
 
   return (
     <Header
-      // barStyle="dark-content"
-      // style={{ height: 200 }}
-      // backgroundImageStyle={{ height: 200 }}
-      containerStyle={{ height: 105 }}
+      containerStyle={styles.headerContainerStyle}
       backgroundColor={mainColor}
-      leftContainerStyle={{ display: "none" }}
-      rightContainerStyle={{ display: "none" }}
+      leftContainerStyle={displayNone}
+      rightContainerStyle={displayNone}
       centerComponent={
-        <Animatable.View
-          ref={view}
-          transition={"width"}
-          style={{ width: "100%" }}>
+        <Animatable.View ref={view} transition="width" style={width100}>
           <SearchBar
             returnKeyType="search"
             ref={inputRef}
@@ -138,7 +138,7 @@ const InputField: FC = (): JSX.Element => {
             onClear={clickHandler}
             onChangeText={changeVal}
             value={val}
-            inputStyle={styles.inputStyle}
+            inputStyle={colorWhite}
             placeholderTextColor="rgba(255,255,255,.5)"
             searchIcon={
               <FontAwesome
@@ -168,12 +168,12 @@ const styles = StyleSheet.create({
     borderBottomWidth: 0,
     borderTopWidth: 0,
   },
+  headerContainerStyle: {
+    height: 105,
+  },
   inputContainerStyle: {
     borderRadius: 9999,
     backgroundColor: "rgba(0, 0, 0, 0.3)",
-  },
-  inputStyle: {
-    color: "white",
   },
 });
 

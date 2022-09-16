@@ -62,18 +62,18 @@ const CartQRCodeImage: FC<Props> = ({ vendorName }): JSX.Element => {
       {/* <Feather name="printer" size={30} color="black" /> */}
       <QRCodeModal itemNumbers={itemNumbers} />
       <Text onPress={openLink}>{officialVendorName} Website</Text>
-      <ButtonGroup
+      <HideItemName />
+      <HideItemNumber />
+      <HideItemBarcode />
+      {/* <ButtonGroup
         innerBorderStyle={{ width: 0 }}
         containerStyle={{
           borderWidth: 0,
-          // alignItems: "center",
-          // justifyContent: "center",
           width: "100%",
         }}
         vertical
-        // buttonStyle={styles.buttonStyle}
         buttons={[<HideItemName />, <HideItemNumber />, <HideItemBarcode />]}
-      />
+      /> */}
     </>
   );
 };
