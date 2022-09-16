@@ -47,10 +47,16 @@ export type ItemsByCategoryStackParamList = {
 
 export type ItemsByVendorStackParamList = {
   ItemsByVendorScreen: undefined;
+} & {
+  [key: string]: { vendorName: string };
 };
 
 export type ItemsReferenceStackParamList = {
   ItemsReferenceScreen: ItemsReferenceTopTabParamList;
+} & {
+  [key: string]: { vendorName: string };
+} & {
+  [key: string]: { category: string };
 };
 
 export type ItemsReferenceTopTabParamList = {

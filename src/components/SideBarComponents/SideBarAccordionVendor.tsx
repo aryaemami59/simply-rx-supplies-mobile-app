@@ -7,26 +7,30 @@ import { StyleSheet } from "react-native";
 
 interface Props {
   vendorName: string;
+  onPress: () => void;
 }
 
-const SideBarAccordionVendor: FC<Props> = ({ vendorName }): JSX.Element => {
-  const [expanded, setExpanded] = useState<boolean>(false);
+const SideBarAccordionVendor: FC<Props> = ({
+  vendorName,
+  onPress,
+}): JSX.Element => {
+  // const [expanded, setExpanded] = useState<boolean>(false);
   const officialVendorName: string = useAppSelector(
     selectVendorOfficialName(vendorName)
   );
-  const clickHandler = useCallback((): void => {
-    setExpanded((prev: boolean): boolean => !prev);
-  }, []);
+  // const clickHandler = useCallback((): void => {
+  //   setExpanded((prev: boolean): boolean => !prev);
+  // }, []);
 
   return (
     <ListItem.Accordion
       containerStyle={styles.accordionContainerStyle}
       key={vendorName}
       content={<ListItem.Title>{officialVendorName}</ListItem.Title>}
-      isExpanded={expanded}
+      // isExpanded={expanded}
       bottomDivider
-      onPress={clickHandler}>
-      <SideBarAccordionListItems vendorName={vendorName} />
+      onPress={onPress}>
+      {/* <SideBarAccordionListItems /> */}
     </ListItem.Accordion>
   );
 };

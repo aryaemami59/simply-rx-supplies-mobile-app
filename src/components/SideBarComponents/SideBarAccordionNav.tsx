@@ -8,14 +8,16 @@ import { StyleSheet } from "react-native";
 
 interface Props {
   category: string;
+  onPress: () => void;
 }
 
-const SideBarAccordionNav: FC<Props> = ({ category }): JSX.Element => {
-  const [expanded, setExpanded] = useState<boolean>(false);
+const SideBarAccordionNav: FC<Props> = ({ category, onPress }): JSX.Element => {
+  // const { category } = route.params;
+  // const [expanded, setExpanded] = useState<boolean>(false);
 
-  const clickHandler = useCallback(() => {
-    setExpanded(prev => !prev);
-  }, []);
+  // const clickHandler = useCallback(() => {
+  //   setExpanded(prev => !prev);
+  // }, []);
   const sidebarItems: itemInterface[] = useAppSelector<itemInterface[]>(
     selectSidebarNavs(category),
     shallowEqual
@@ -25,16 +27,16 @@ const SideBarAccordionNav: FC<Props> = ({ category }): JSX.Element => {
     <ListItem.Accordion
       containerStyle={styles.accordionContainerStyle}
       content={<ListItem.Title>{category}</ListItem.Title>}
-      isExpanded={expanded}
+      // isExpanded={expanded}
       bottomDivider
-      onPress={clickHandler}>
-      {sidebarItems.map(f => (
+      onPress={onPress}>
+      {/* {sidebarItems.map(f => (
         <SingleSideBarAccordionListItem
           category={category}
           itemObj={f}
           key={`${f.name}-SingleSideBarAccordionListItem`}
         />
-      ))}
+      ))} */}
     </ListItem.Accordion>
   );
 };
