@@ -1,9 +1,5 @@
 import { ListItem } from "@rneui/themed";
-import { FC, memo, useCallback, useState } from "react";
-import { itemInterface, selectSidebarNavs } from "../../redux/addedSlice";
-import { useAppSelector } from "../../redux/store";
-import { shallowEqual } from "react-redux";
-import SingleSideBarAccordionListItem from "./SingleSideBarAccordionListItem";
+import { FC, memo } from "react";
 import { StyleSheet } from "react-native";
 
 interface Props {
@@ -12,32 +8,15 @@ interface Props {
 }
 
 const SideBarAccordionNav: FC<Props> = ({ category, onPress }): JSX.Element => {
-  // const { category } = route.params;
-  // const [expanded, setExpanded] = useState<boolean>(false);
-
-  // const clickHandler = useCallback(() => {
-  //   setExpanded(prev => !prev);
-  // }, []);
-  const sidebarItems: itemInterface[] = useAppSelector<itemInterface[]>(
-    selectSidebarNavs(category),
-    shallowEqual
-  );
-
   return (
-    <ListItem.Accordion
+    <ListItem
       containerStyle={styles.accordionContainerStyle}
-      content={<ListItem.Title>{category}</ListItem.Title>}
-      // isExpanded={expanded}
       bottomDivider
       onPress={onPress}>
-      {/* {sidebarItems.map(f => (
-        <SingleSideBarAccordionListItem
-          category={category}
-          itemObj={f}
-          key={`${f.name}-SingleSideBarAccordionListItem`}
-        />
-      ))} */}
-    </ListItem.Accordion>
+      <ListItem.Content>
+        <ListItem.Title>{category}</ListItem.Title>
+      </ListItem.Content>
+    </ListItem>
   );
 };
 
@@ -48,4 +27,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default memo(SideBarAccordionNav);
+export default memo<Props>(SideBarAccordionNav);

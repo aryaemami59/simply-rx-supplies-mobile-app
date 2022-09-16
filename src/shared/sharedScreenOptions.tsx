@@ -4,11 +4,16 @@ import { mainColor } from "./sharedStyles";
 
 export const screenOptions: StackNavigationOptions = {
   header: props => <HeaderHomeStackNavigator {...props} />,
-  // headerBackgroundContainerStyle: { backgroundColor: "white" },
-  // header
 } as const;
 
 export const HEADER_SHOWN_FALSE = {
   headerShown: false,
-  // headerStyle: { backgroundColor: mainColor },
+} as const;
+
+export const refHeaderOptions: StackNavigationOptions = {
+  headerTitleStyle: { color: "white" },
+  headerBackTitleStyle: { color: "white" },
+  headerBackTitleVisible: false,
+  headerTintColor: "white",
+  headerStyle: { backgroundColor: mainColor },
 } as const;

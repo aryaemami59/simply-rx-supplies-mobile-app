@@ -2,7 +2,10 @@ import { FC, memo } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import ItemsReferenceScreen from "../Screens/ItemsReferenceScreen";
 import { ItemsReferenceStackParamList } from "../../../CustomTypes/types";
-import { screenOptions } from "../../shared/sharedScreenOptions";
+import {
+  screenOptions,
+  refHeaderOptions,
+} from "../../shared/sharedScreenOptions";
 import { useAppSelector } from "../../redux/store";
 import {
   selectVendorsArr,
@@ -37,21 +40,15 @@ const ItemsReferenceStackScreen: FC = (): JSX.Element => {
       />
       {allVendors.map((e: string, i: number) => (
         <Stack.Screen
-          options={{
-            headerTitle: officialNames[i],
-            headerStyle: { backgroundColor: mainColor },
-            headerTitleStyle: { color: "white" },
-            headerBackTitleStyle: { color: "white" },
-            headerBackTitleVisible: false,
-            headerTintColor: "white",
-          }}
+          options={{ ...refHeaderOptions, headerTitle: officialNames[i] }}
           key={e}
           name={`${e}-ref`}
           component={SideBarAccordionListItems}
         />
       ))}
-      {navList.map(e => (
+      {navList.map((e: string) => (
         <Stack.Screen
+          options={refHeaderOptions}
           key={e}
           name={e}
           component={CategorySideBarAccordionListItems}

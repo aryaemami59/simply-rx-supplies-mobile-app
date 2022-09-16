@@ -11,7 +11,6 @@ import { shallowEqual } from "react-redux";
 
 interface Props {
   itemObj: itemInterface;
-  category?: string;
 }
 
 const SingleSideBarAccordionListItem: FC<Props> = ({
@@ -36,8 +35,6 @@ const SingleSideBarAccordionListItem: FC<Props> = ({
       title={itemObj.name}
       radius="md"
       onPress={clickHandler}
-      // type={ifAddedToAllVendors ? "outline" : "solid"}
-      // type={ifAddedToAllVendors ? "solid" : "outline"}
       disabled={ifAddedToAllVendors ? true : false}
     />
   );

@@ -42,12 +42,13 @@ export type ShoppingCartStackParamList = {
 };
 
 export type ItemsByCategoryStackParamList = {
-  ItemsByCategoryScreen: undefined;
+  [key: string]: { category: string };
+  // ItemsByCategoryScreen: undefined;
 };
 
 export type ItemsByVendorStackParamList = {
-  ItemsByVendorScreen: undefined;
-} & {
+  //   ItemsByVendorScreen: undefined;
+  // } & {
   [key: string]: { vendorName: string };
 };
 

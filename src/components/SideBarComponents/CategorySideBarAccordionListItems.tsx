@@ -4,23 +4,25 @@ import { useAppSelector } from "../../redux/store";
 import { shallowEqual } from "react-redux";
 import SingleSideBarAccordionListItem from "./SingleSideBarAccordionListItem";
 import { ScrollView } from "react-native";
+import { StackScreenProps } from "@react-navigation/stack";
+import { ItemsReferenceStackParamList } from "../../../CustomTypes/types";
 
-// interface Props {
-//   props: string;
-// }
+type Props = StackScreenProps<ItemsReferenceStackParamList>;
 
-const CategorySideBarAccordionListItems = ({ route }): JSX.Element => {
+const CategorySideBarAccordionListItems: FC<Props> = ({
+  route,
+}): JSX.Element => {
   const { category } = route.params;
 
   const sidebarItems: itemInterface[] = useAppSelector<itemInterface[]>(
     selectSidebarNavs(category),
     shallowEqual
   );
+
   return (
     <ScrollView>
       {sidebarItems.map(f => (
         <SingleSideBarAccordionListItem
-          category={category}
           itemObj={f}
           key={`${f.name}-SingleSideBarAccordionListItem`}
         />
@@ -29,4 +31,4 @@ const CategorySideBarAccordionListItems = ({ route }): JSX.Element => {
   );
 };
 
-export default memo(CategorySideBarAccordionListItems);
+export default memo<Props>(CategorySideBarAccordionListItems);
