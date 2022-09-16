@@ -34,7 +34,10 @@ export type ItemLookupStackParamList = {
 
 export type ShoppingCartStackParamList = {
   // ShoppingCartScreen: string;
-  ShoppingCartScreen: VendorColumnStackParamList;
+  ShoppingCartScreen: undefined;
+} & {
+  [key: string]: { vendorName: string };
+  // ShoppingCartScreen: VendorColumnStackParamList;
   // ShoppingCartScreen: undefined;
 };
 
@@ -55,15 +58,24 @@ export type ItemsReferenceTopTabParamList = {
   ItemsByCategory: ItemsByCategoryStackParamList;
 };
 
+export type vendorNameType =
+  | "OI"
+  | "GNFR"
+  | "SOC"
+  | "VS"
+  | "MS"
+  | "COV"
+  | "FORS";
+
 export type VendorColumnStackParamList = {
   [key: string]: { vendorName: string };
-  // OI: { name: string };
-  // GNFR: { name: string };
-  // SOC: { name: string };
-  // VS: { name: string };
-  // MS: { name: string };
-  // COV: { name: string };
-  // FORS: { name: string };
+  // OI: { vendorName: string };
+  // GNFR: { vendorName: string };
+  // SOC: { vendorName: string };
+  // VS: { vendorName: string };
+  // MS: { vendorName: string };
+  // COV: { vendorName: string };
+  // FORS: { vendorName: string };
 };
 // export type VendorColumnStackParamList = {
 //   MCK: undefined;

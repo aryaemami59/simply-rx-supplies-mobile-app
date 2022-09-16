@@ -4,22 +4,24 @@ import { ShoppingCartStackParamList } from "../../../CustomTypes/types";
 import ShoppingCartScreen from "../Screens/ShoppingCartScreen";
 import { useAppSelector } from "../../redux/store";
 import { selectVendorsArr } from "../../redux/addedSlice";
-import CartColumnListItems from "../ShoppingCartComponents/CartColumnListItems";
+import CartColumnListItemsScreen from "../Screens/CartColumnListItemsScreen";
+import { screenOptions } from "../../shared/sharedScreenOptions";
 
-const Stack = createStackNavigator();
-// const Stack = createStackNavigator<ShoppingCartStackParamList>();
+const Stack = createStackNavigator<ShoppingCartStackParamList>();
 
 const ShoppingCartStackScreen: FC = (): JSX.Element => {
   const vendors = useAppSelector(selectVendorsArr);
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+    // screenOptions={screenOptions}
+    >
       <Stack.Screen
         name="ShoppingCartScreen"
         component={ShoppingCartScreen}
         options={{ headerTitle: "Shopping Cart" }}
       />
-      {vendors.map(e => (
-        <Stack.Screen name={e} component={CartColumnListItems} />
+      {vendors.map((e: string) => (
+        <Stack.Screen key={e} name={e} component={CartColumnListItemsScreen} />
       ))}
     </Stack.Navigator>
   );
