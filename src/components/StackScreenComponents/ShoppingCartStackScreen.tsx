@@ -24,11 +24,13 @@ const ShoppingCartStackScreen: FC = (): JSX.Element => {
       <Stack.Screen
         name="ShoppingCartScreen"
         component={ShoppingCartScreen}
-        options={{
-          headerTitle: "Shopping Cart",
-          headerStyle: { backgroundColor: mainColor },
-          headerTitleStyle: { color: "white" },
-        }}
+        options={screenOptions}
+        // options={{
+        //   headerTitle: "Shopping Cart",
+        //   headerStyle: { backgroundColor: mainColor },
+        //   headerBackgroundContainerStyle: { height: 105 },
+        //   headerTitleStyle: { color: "white" },
+        // }}
       />
       {vendors.map((e: string, i: number) => (
         <Stack.Screen

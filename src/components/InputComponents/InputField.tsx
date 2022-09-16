@@ -11,6 +11,8 @@ import {
 import { useAppDispatch, useAppSelector } from "../../redux/store";
 import { useFocusEffect } from "@react-navigation/native";
 import { shallowEqual } from "react-redux";
+import { FontAwesome, EvilIcons } from "@expo/vector-icons";
+import { mainColor } from "../../shared/sharedStyles";
 
 const empty: [] = [];
 
@@ -109,6 +111,11 @@ const InputField: FC = (): JSX.Element => {
 
   return (
     <Header
+      // barStyle="dark-content"
+      // style={{ height: 200 }}
+      // backgroundImageStyle={{ height: 200 }}
+      containerStyle={{ height: 105 }}
+      backgroundColor={mainColor}
       leftContainerStyle={{ display: "none" }}
       rightContainerStyle={{ display: "none" }}
       centerComponent={
@@ -120,6 +127,8 @@ const InputField: FC = (): JSX.Element => {
             returnKeyType="search"
             ref={inputRef}
             lightTheme
+            keyboardAppearance="dark"
+            autoFocus
             onFocus={focusHandler}
             onBlur={blurHandler}
             containerStyle={styles.containerStyle}
@@ -132,18 +141,18 @@ const InputField: FC = (): JSX.Element => {
             inputStyle={styles.inputStyle}
             placeholderTextColor="rgba(255,255,255,.5)"
             searchIcon={
-              <Icon
+              <FontAwesome
                 name="search"
                 color="rgba(255,255,255,.5)"
-                type="font-awesome"
+                size={24}
               />
             }
             clearIcon={
-              <Icon
+              <EvilIcons
                 name="close"
                 color="rgba(255,255,255,.5)"
-                type="EvilIcons"
                 onPress={clickHandler}
+                size={24}
               />
             }
           />

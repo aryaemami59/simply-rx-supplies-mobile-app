@@ -1,7 +1,5 @@
 import { FC, memo } from "react";
-import {
-  createStackNavigator,
-} from "@react-navigation/stack";
+import { createStackNavigator } from "@react-navigation/stack";
 import { HomeStackParamList } from "../../../CustomTypes/types";
 import HomeScreen from "../Screens/HomeScreen";
 import { screenOptions } from "../../shared/sharedScreenOptions";

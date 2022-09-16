@@ -22,6 +22,8 @@ const HomeScreen: FC = (): JSX.Element => {
           raised
           titleStyle={styles.titleStyle}
           buttonStyle={styles.buttonStyle}
+          containerStyle={styles.buttonStyle}
+          color={mainColor}
           title="Item Lookup"
           icon={<FontAwesome5 name="search" color="white" size={24} />}
           size="lg"
@@ -31,6 +33,8 @@ const HomeScreen: FC = (): JSX.Element => {
           raised
           titleStyle={styles.titleStyle}
           buttonStyle={styles.buttonStyle}
+          containerStyle={styles.buttonStyle}
+          color={mainColor}
           title="Items By Vendor"
           icon={
             <MaterialCommunityIcons
@@ -47,6 +51,8 @@ const HomeScreen: FC = (): JSX.Element => {
           icon={<MaterialIcons name="category" color="white" size={24} />}
           titleStyle={styles.titleStyle}
           buttonStyle={styles.buttonStyle}
+          containerStyle={styles.buttonStyle}
+          color={mainColor}
           title="Items By Category"
           size="lg"
           onPress={() => navigation.navigate("ItemsByCategory")}
@@ -58,7 +64,7 @@ const HomeScreen: FC = (): JSX.Element => {
             title="Shopping Cart"
             size="lg"
             icon={
-              <Icon name="shopping-cart" color="white" type="MaterialIcons" />
+              <MaterialIcons name="shopping-cart" color="white" type="MaterialIcons" />
             }
             onPress={() => navigation.navigate("ShoppingCart")}
           /> */}
@@ -73,6 +79,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     height: "100%",
     padding: 30,
+    // backgroundColor: "white",
   },
   buttonStyle: {
     backgroundColor: mainColor,

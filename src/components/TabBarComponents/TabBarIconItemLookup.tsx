@@ -1,13 +1,13 @@
-import { Icon } from "@rneui/themed";
 import { FC, memo } from "react";
 import { tabBarIconProps } from "../../../CustomTypes/types";
+import { FontAwesome } from "@expo/vector-icons";
 
 const TabBarIconItemLookup: FC<tabBarIconProps> = ({
   focused,
   color,
   size,
 }): JSX.Element => {
-  return <Icon name="search" type="font-awesome" color={color} size={size} />;
+  return <FontAwesome name="search" color={color} size={size} />;
 };
 
 export default memo<tabBarIconProps>(TabBarIconItemLookup);

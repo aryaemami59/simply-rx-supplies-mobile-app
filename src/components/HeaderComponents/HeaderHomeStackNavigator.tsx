@@ -5,6 +5,7 @@ import { TextInput } from "react-native";
 import { useIsFocused, useNavigation } from "@react-navigation/native";
 import { RootStackParamList } from "../../../CustomTypes/types";
 import { MaterialIcons, FontAwesome, EvilIcons } from "@expo/vector-icons";
+import { mainColor } from "../../shared/sharedStyles";
 
 const HeaderHomeStackNavigator: FC<StackHeaderProps> = (): JSX.Element => {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
@@ -25,13 +26,14 @@ const HeaderHomeStackNavigator: FC<StackHeaderProps> = (): JSX.Element => {
 
   return (
     <Header
+      backgroundColor={mainColor}
       leftContainerStyle={{ display: "none" }}
       rightContainerStyle={{ display: "none" }}
       centerComponent={
         <SearchBar
           ref={inputRef}
           onFocus={focusHandler}
-          lightTheme
+          // lightTheme={false}
           containerStyle={{
             backgroundColor: "transparent",
             borderBottomWidth: 0,
@@ -49,7 +51,7 @@ const HeaderHomeStackNavigator: FC<StackHeaderProps> = (): JSX.Element => {
           }}
           placeholderTextColor="rgba(255,255,255,.5)"
           searchIcon={
-            <FontAwesome name="search" color="rgba(255,255,255,.5)" />
+            <FontAwesome name="search" color="rgba(255,255,255,.5)" size={24} />
           }
           clearIcon={<EvilIcons name="close" color="rgba(255,255,255,.5)" />}
         />

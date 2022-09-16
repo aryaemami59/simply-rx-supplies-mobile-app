@@ -13,6 +13,7 @@ import ShoppingCartStackScreen from "../StackScreenComponents/ShoppingCartStackS
 import ItemsReferenceStackScreen from "../StackScreenComponents/ItemsReferenceStackScreen";
 import TabBarIconItemsReference from "./TabBarIconItemsReference";
 import { HEADER_SHOWN_FALSE } from "../../shared/sharedScreenOptions";
+import { mainColor } from "../../shared/sharedStyles";
 
 const Tab = createBottomTabNavigator<RootTabParamList>();
 
@@ -22,6 +23,7 @@ const HomeOptions: BottomTabNavigationOptions = {
 
 const ItemLookupOptions: BottomTabNavigationOptions = {
   tabBarLabel: "Item Lookup",
+  // headerStyle: { backgroundColor: mainColor },
   tabBarIcon: (props: tabBarIconProps) => <TabBarIconItemLookup {...props} />,
 } as const;
 
@@ -48,6 +50,7 @@ const TabBarMain: FC = (): JSX.Element => {
         name="Home"
         component={HomeStackScreen}
         options={HomeOptions}
+        // options={{ headerStyle }}
       />
       <Tab.Screen
         name="ItemLookup"

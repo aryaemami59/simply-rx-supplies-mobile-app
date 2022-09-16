@@ -52,9 +52,10 @@ const styles = StyleSheet.create({
   ContainerStyle: {
     flex: 1,
     paddingTop: Platform.OS === "ios" ? 0 : Constants.statusBarHeight,
+    backgroundColor: "white",
   },
   DarkModeStyle: {
-    backgroundColor: "gray",
+    // backgroundColor: "gray",
     color: "white",
     height: "100%",
   },
