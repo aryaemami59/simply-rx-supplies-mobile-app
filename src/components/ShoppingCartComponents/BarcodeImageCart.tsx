@@ -1,10 +1,13 @@
-import { FC, memo } from "react";
+import { FC, memo, useCallback } from "react";
 import { itemInterface } from "../../redux/addedSlice";
-import { Image, StyleSheet } from "react-native";
+import { Image, StyleSheet, Pressable } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import Constants from "expo-constants";
 import BarcodeImageModal from "./BarcodeImageModal";
 import { useAppSelector } from "../../redux/store";
+import { useNavigation } from "@react-navigation/native";
+import { ShoppingCartStackParamList } from "../../../CustomTypes/types";
+import { StackNavigationProp } from "@react-navigation/stack";
 
 interface Props {
   itemObj: itemInterface;
@@ -15,13 +18,21 @@ const BarcodeImageCart: FC<Props> = ({ itemObj }): JSX.Element => {
     (state): boolean => state.added.showItemBarcode
   );
 
+  const { src } = itemObj;
+
+  const navigation =
+    useNavigation<StackNavigationProp<ShoppingCartStackParamList>>();
+
+  const clickHandler = useCallback(() => {
+    navigation.push("BarcodeImage", { src });
+  }, []);
+
   return (
     <>
       {itemBarcodeShown ? (
-        <>
-          <Image source={{ uri: itemObj.src }} style={styles.ImageStyle} />
-          <BarcodeImageModal itemObj={itemObj} />
-        </>
+        <Pressable onPress={clickHandler}>
+          <Image source={{ uri: src }} style={styles.ImageStyle} />
+        </Pressable>
       ) : (
         ""
       )}

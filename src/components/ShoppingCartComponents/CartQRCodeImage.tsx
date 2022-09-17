@@ -1,13 +1,13 @@
-import { FC, memo, useCallback } from "react";
+import { FC, memo, useCallback, useState } from "react";
 import { useAppSelector } from "../../redux/store";
 import {
   selectQRCodeContent,
   selectVendorsLinks,
 } from "../../redux/addedSlice";
-import { Text, StyleSheet } from "react-native";
+import { Text, StyleSheet, Pressable } from "react-native";
 import QRCode from "react-native-qrcode-svg";
 import { Feather } from "@expo/vector-icons";
-import { ButtonGroup } from "@rneui/themed";
+import { ButtonGroup, Dialog } from "@rneui/themed";
 import { shareAsync } from "expo-sharing";
 import { Linking } from "react-native";
 import { selectVendorOfficialName } from "../../redux/addedSlice";
@@ -16,64 +16,46 @@ import HideItemNumber from "./HideItemNumber";
 import HideItemBarcode from "./HideItemBarcode";
 import QRCodeModal from "./QRCodeModal";
 import { mainColor } from "../../shared/sharedStyles";
+import { useNavigation } from "@react-navigation/native";
+import { StackScreenProps, StackNavigationProp } from "@react-navigation/stack";
+import { ShoppingCartStackParamList } from "../../../CustomTypes/types";
+// import { VendorItemsStackParamList } from "../../../CustomTypes/types";
 
-interface Props {
+// interface Props {
+//   vendorName: string;
+//   onPress: () => void
+// }
+
+// type Props = StackScreenProps<VendorItemsStackParamList, "QRImage">;
+
+type Props = {
   vendorName: string;
-}
+};
+
 const CartQRCodeImage: FC<Props> = ({ vendorName }): JSX.Element => {
-  // const html = `
-  // <html>
-  //   <head>
-  //     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
-  //   </head>
-  //   <body style="text-align: center;">
-  //     <img
-  //       src="https://d30j33t1r58ioz.cloudfront.net/static/guides/sdk.png"
-  //       style="width: 90vw;" />
-  //   </body>
-  // </html>
-  // `;
-  // const [selectedPrinter, setSelectedPrinter] = useState();
-  // const printToFile = async () => {
-  //   // On iOS/android prints the given html. On web prints the HTML from the current page.
-  //   const { uri } = await Print.printToFileAsync({
-  //     html,
-  //   });
-  //   console.log("File has been saved to:", uri);
-  //   await shareAsync(uri, { UTI: ".pdf", mimeType: "application/pdf" });
-  // };
+  // const { vendorName } = route.params;
   const itemNumbers: string = useAppSelector<string>(
     selectQRCodeContent(vendorName)
   );
 
-  const vendorLink = useAppSelector(selectVendorsLinks(vendorName));
+  const navigation =
+    useNavigation<StackNavigationProp<ShoppingCartStackParamList>>();
+  // const navigation =
+  //   useNavigation<StackNavigationProp<VendorItemsStackParamList>>();
 
-  const officialVendorName = useAppSelector(
-    selectVendorOfficialName(vendorName)
-  );
-
-  const openLink = useCallback(() => {
-    Linking.openURL(vendorLink);
+  const clickHandler = useCallback(() => {
+    navigation.navigate("QRImage", { itemNumbers });
   }, []);
 
   return (
     <>
-      <QRCode value={itemNumbers} />
-      {/* <Feather name="printer" size={30} color="black" /> */}
-      <QRCodeModal itemNumbers={itemNumbers} />
-      <Text onPress={openLink}>{officialVendorName} Website</Text>
+      <Pressable onPress={clickHandler}>
+        <QRCode value={itemNumbers} />
+      </Pressable>
+      {/* <Text onPress={openLink}>{officialVendorName} Website</Text>
       <HideItemName />
       <HideItemNumber />
-      <HideItemBarcode />
-      {/* <ButtonGroup
-        innerBorderStyle={{ width: 0 }}
-        containerStyle={{
-          borderWidth: 0,
-          width: "100%",
-        }}
-        vertical
-        buttons={[<HideItemName />, <HideItemNumber />, <HideItemBarcode />]}
-      /> */}
+      <HideItemBarcode /> */}
     </>
   );
 };

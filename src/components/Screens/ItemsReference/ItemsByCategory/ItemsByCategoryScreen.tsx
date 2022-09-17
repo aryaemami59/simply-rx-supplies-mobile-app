@@ -1,15 +1,18 @@
 import { FC, memo } from "react";
-import { useAppSelector } from "../../redux/store";
-import { selectNavsArr } from "../../redux/addedSlice";
+import { useAppSelector } from "../../../../redux/store";
+import { selectNavsArr } from "../../../../redux/addedSlice";
 import { shallowEqual } from "react-redux";
 import { ScrollView } from "react-native";
-import SideBarAccordionNav from "../SideBarComponents/SideBarAccordionNav";
+import SideBarAccordionNav from "../../../SideBarComponents/SideBarAccordionNav";
 import { StackScreenProps } from "@react-navigation/stack";
-import { ItemsByCategoryStackParamList } from "../../../CustomTypes/types";
+import { ItemsByCategoryStackParamList } from "../../../../../CustomTypes/types";
 
 type Props = StackScreenProps<ItemsByCategoryStackParamList>;
 
-const ItemsByCategoryScreen: FC<Props> = ({ navigation }): JSX.Element => {
+const ItemsByCategoryScreen: FC<Props> = ({
+  navigation,
+  route,
+}): JSX.Element => {
   const navList: string[] = useAppSelector<string[]>(
     selectNavsArr,
     shallowEqual
@@ -18,11 +21,7 @@ const ItemsByCategoryScreen: FC<Props> = ({ navigation }): JSX.Element => {
   return (
     <ScrollView>
       {navList.map(e => (
-        <SideBarAccordionNav
-          key={e}
-          category={e}
-          onPress={() => navigation.push(e, { category: e })}
-        />
+        <SideBarAccordionNav key={e} category={e} />
       ))}
     </ScrollView>
   );

@@ -1,12 +1,18 @@
 import { FC, memo } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import { HomeStackParamList } from "../../../CustomTypes/types";
-import HomeScreen from "../Screens/HomeScreen";
+import {
+  HomeStackParamList,
+  RootTabParamList,
+} from "../../../CustomTypes/types";
+import HomeScreen from "../Screens/Home/HomeScreen";
 import { screenOptions } from "../../shared/sharedScreenOptions";
+import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
 
 const Stack = createStackNavigator<HomeStackParamList>();
 
-const HomeStackScreen: FC = (): JSX.Element => {
+type Props = BottomTabScreenProps<RootTabParamList, "Home">;
+
+const HomeStackScreen: FC<Props> = ({ navigation, route }): JSX.Element => {
   return (
     <Stack.Navigator screenOptions={screenOptions}>
       <Stack.Screen name="HomeScreen" component={HomeScreen} />
@@ -14,4 +20,4 @@ const HomeStackScreen: FC = (): JSX.Element => {
   );
 };
 
-export default memo(HomeStackScreen);
+export default memo<Props>(HomeStackScreen);

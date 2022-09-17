@@ -1,4 +1,4 @@
-import { StackNavigationProp } from "@react-navigation/stack";
+import { StackNavigationProp, StackScreenProps } from "@react-navigation/stack";
 import { FC, memo } from "react";
 import { Chip } from "@rneui/themed";
 import { View, StyleSheet } from "react-native";
@@ -8,12 +8,17 @@ import {
   FontAwesome5,
   MaterialIcons,
 } from "@expo/vector-icons";
-import { RootStackParamList } from "../../../CustomTypes/types";
+import {
+  RootStackParamList,
+  HomeStackParamList,
+} from "../../../../CustomTypes/types";
 import { useNavigation } from "@react-navigation/native";
-import { fontWeightBold, mainColor } from "../../shared/sharedStyles";
+import { fontWeightBold, mainColor } from "../../../shared/sharedStyles";
 
-const HomeScreen: FC = (): JSX.Element => {
-  const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+type Props = StackScreenProps<HomeStackParamList, "HomeScreen">;
+
+const HomeScreen: FC<Props> = ({ navigation, route }): JSX.Element => {
+  // const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
 
   return (
     <SafeAreaView>
@@ -89,4 +94,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default memo(HomeScreen);
+export default memo<Props>(HomeScreen);

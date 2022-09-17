@@ -20,7 +20,7 @@ const ItemNumberCart: FC<Props> = ({ itemObj }): JSX.Element => {
           <Text style={{ textAlign: "center" }}>
             Item Number: {itemObj.itemNumber}
           </Text>
-          <CopyItemNumber itemObj={itemObj} />
+          {/* <CopyItemNumber itemObj={itemObj} /> */}
         </View>
       ) : (
         ""

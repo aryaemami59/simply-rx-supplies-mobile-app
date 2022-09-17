@@ -1,54 +1,51 @@
 import { FC, memo } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import { ShoppingCartStackParamList } from "../../../CustomTypes/types";
-import ShoppingCartScreen from "../Screens/ShoppingCartScreen";
-import { useAppSelector } from "../../redux/store";
 import {
-  selectVendorsArr,
-  selectAllVendorOfficialNames,
-} from "../../redux/addedSlice";
-import CartColumnListItemsScreen from "../Screens/CartColumnListItemsScreen";
-import { screenOptions } from "../../shared/sharedScreenOptions";
-import { mainColor } from "../../shared/sharedStyles";
+  ShoppingCartStackParamList,
+  RootTabParamList,
+} from "../../../CustomTypes/types";
+import ShoppingCartScreen from "../Screens/ShoppingCart/ShoppingCartScreen";
+import CartColumnListItemsScreen from "../Screens/ShoppingCart/VendorColumn/CartColumnListItemsScreen";
+import {
+  screenOptions,
+  refHeaderOptions,
+} from "../../shared/sharedScreenOptions";
+import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
+import QRCodeScreen from "../ShoppingCartComponents/QRCodeScreen";
+import BarcodeImageScreen from "../ShoppingCartComponents/BarcodeImageScreen";
 
 const Stack = createStackNavigator<ShoppingCartStackParamList>();
 
-const ShoppingCartStackScreen: FC = (): JSX.Element => {
-  const vendors = useAppSelector(selectVendorsArr);
-  const officialNames = useAppSelector(selectAllVendorOfficialNames);
+type Props = BottomTabScreenProps<RootTabParamList, "ShoppingCart">;
 
+const ShoppingCartStackScreen: FC<Props> = ({
+  navigation,
+  route,
+}): JSX.Element => {
   return (
-    <Stack.Navigator
-    // screenOptions={screenOptions}
-    >
+    <Stack.Navigator>
       <Stack.Screen
         name="ShoppingCartScreen"
         component={ShoppingCartScreen}
         options={screenOptions}
-        // options={{
-        //   headerTitle: "Shopping Cart",
-        //   headerStyle: { backgroundColor: mainColor },
-        //   headerBackgroundContainerStyle: { height: 105 },
-        //   headerTitleStyle: { color: "white" },
-        // }}
       />
-      {vendors.map((e: string, i: number) => (
-        <Stack.Screen
-          options={{
-            headerTitle: officialNames[i],
-            headerStyle: { backgroundColor: mainColor },
-            headerTitleStyle: { color: "white" },
-            headerBackTitleStyle: { color: "white" },
-            headerBackTitleVisible: false,
-            headerTintColor: "white",
-          }}
-          key={e}
-          name={e}
-          component={CartColumnListItemsScreen}
-        />
-      ))}
+      <Stack.Screen
+        name="VendorItems"
+        component={CartColumnListItemsScreen}
+        options={refHeaderOptions}
+      />
+      <Stack.Screen
+        name="QRImage"
+        component={QRCodeScreen}
+        options={refHeaderOptions}
+      />
+      <Stack.Screen
+        name="BarcodeImage"
+        component={BarcodeImageScreen}
+        options={refHeaderOptions}
+      />
     </Stack.Navigator>
   );
 };
 
-export default memo(ShoppingCartStackScreen);
+export default memo<Props>(ShoppingCartStackScreen);

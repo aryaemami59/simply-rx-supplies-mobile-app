@@ -13,7 +13,8 @@ import ShoppingCartStackScreen from "../StackScreenComponents/ShoppingCartStackS
 import ItemsReferenceStackScreen from "../StackScreenComponents/ItemsReferenceStackScreen";
 import TabBarIconItemsReference from "./TabBarIconItemsReference";
 import { HEADER_SHOWN_FALSE } from "../../shared/sharedScreenOptions";
-import { mainColor } from "../../shared/sharedStyles";
+import { useAppSelector } from "../../redux/store";
+import { checkIfAnyItemsAdded } from "../../redux/addedSlice";
 
 const Tab = createBottomTabNavigator<RootTabParamList>();
 
@@ -23,7 +24,6 @@ const HomeOptions: BottomTabNavigationOptions = {
 
 const ItemLookupOptions: BottomTabNavigationOptions = {
   tabBarLabel: "Item Lookup",
-  // headerStyle: { backgroundColor: mainColor },
   tabBarIcon: (props: tabBarIconProps) => <TabBarIconItemLookup {...props} />,
 } as const;
 
@@ -44,13 +44,13 @@ const ItemsReferenceOptions: BottomTabNavigationOptions = {
 } as const;
 
 const TabBarMain: FC = (): JSX.Element => {
+  const ifItemsAdded: boolean = useAppSelector(checkIfAnyItemsAdded);
   return (
     <Tab.Navigator screenOptions={HEADER_SHOWN_FALSE}>
       <Tab.Screen
         name="Home"
         component={HomeStackScreen}
         options={HomeOptions}
-        // options={{ headerStyle }}
       />
       <Tab.Screen
         name="ItemLookup"
@@ -60,7 +60,18 @@ const TabBarMain: FC = (): JSX.Element => {
       <Tab.Screen
         name="ShoppingCart"
         component={ShoppingCartStackScreen}
-        options={ShoppingCartOptions}
+        options={{
+          ...ShoppingCartOptions,
+          tabBarBadge: ifItemsAdded ? "" : undefined,
+          tabBarBadgeStyle: {
+            paddingHorizontal: 0,
+            maxWidth: 10,
+            minWidth: 10,
+            minHeight: 10,
+            maxHeight: 10,
+            borderRadius: 5,
+          },
+        }}
       />
       <Tab.Screen
         name="ItemsReference"

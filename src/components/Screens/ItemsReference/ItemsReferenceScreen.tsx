@@ -1,12 +1,24 @@
 import { FC, memo } from "react";
-import { ItemsReferenceTopTabParamList } from "../../../CustomTypes/types";
+import {
+  ItemsReferenceTopTabParamList,
+  ItemsReferenceStackParamList,
+} from "../../../../CustomTypes/types";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-import ItemsByVendorStackScreen from "../StackScreenComponents/ItemsByVendorStackScreen";
-import ItemsByCategoryStackScreen from "../StackScreenComponents/ItemsByCategoryStackScreen";
+import ItemsByVendorStackScreen from "../../StackScreenComponents/ItemsByVendorStackScreen";
+import ItemsByCategoryStackScreen from "../../StackScreenComponents/ItemsByCategoryStackScreen";
+import { StackScreenProps } from "@react-navigation/stack";
+
+type Props = StackScreenProps<
+  ItemsReferenceStackParamList,
+  "ItemsReferenceScreen"
+>;
 
 const Tab = createMaterialTopTabNavigator<ItemsReferenceTopTabParamList>();
 
-const ItemsReferenceScreen: FC = (): JSX.Element => {
+const ItemsReferenceScreen: FC<Props> = ({
+  navigation,
+  route,
+}): JSX.Element => {
   return (
     <Tab.Navigator>
       <Tab.Screen
@@ -27,4 +39,4 @@ const ItemsReferenceScreen: FC = (): JSX.Element => {
   );
 };
 
-export default memo(ItemsReferenceScreen);
+export default memo<Props>(ItemsReferenceScreen);

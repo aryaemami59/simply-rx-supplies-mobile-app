@@ -18,7 +18,7 @@ const ItemNameCart: FC<Props> = ({ itemObj }): JSX.Element => {
       {itemNameShown ? (
         <View style={{ alignItems: "center" }}>
           <Text style={{ textAlign: "center" }}>Item Name: {itemObj.name}</Text>
-          <CopyItemName itemObj={itemObj} />
+          {/* <CopyItemName itemObj={itemObj} /> */}
         </View>
       ) : (
         ""

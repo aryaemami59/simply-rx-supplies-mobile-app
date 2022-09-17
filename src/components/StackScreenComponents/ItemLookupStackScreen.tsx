@@ -1,12 +1,21 @@
 import { FC, memo } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import { ItemLookupStackParamList } from "../../../CustomTypes/types";
-import ItemLookupScreen from "../Screens/ItemLookupScreen";
+import {
+  ItemLookupStackParamList,
+  RootTabParamList,
+} from "../../../CustomTypes/types";
+import ItemLookupScreen from "../Screens/ItemLookUp/ItemLookupScreen";
 import { HEADER_SHOWN_FALSE } from "../../shared/sharedScreenOptions";
+import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
 
 const Stack = createStackNavigator<ItemLookupStackParamList>();
 
-const ItemLookupStackScreen: FC = (): JSX.Element => {
+type Props = BottomTabScreenProps<RootTabParamList, "ItemLookup">;
+
+const ItemLookupStackScreen: FC<Props> = ({
+  navigation,
+  route,
+}): JSX.Element => {
   return (
     <Stack.Navigator screenOptions={HEADER_SHOWN_FALSE}>
       <Stack.Screen name="ItemLookupScreen" component={ItemLookupScreen} />
@@ -14,4 +23,4 @@ const ItemLookupStackScreen: FC = (): JSX.Element => {
   );
 };
 
-export default memo(ItemLookupStackScreen);
+export default memo<Props>(ItemLookupStackScreen);

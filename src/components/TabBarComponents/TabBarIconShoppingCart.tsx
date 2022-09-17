@@ -18,7 +18,7 @@ const TabBarIconShoppingCart: FC<tabBarIconProps> = ({
         color={color}
         size={30}
       />
-      {ifAdded ? (
+      {/* {ifAdded ? (
         <Badge
           status="error"
           containerStyle={{
@@ -29,7 +29,7 @@ const TabBarIconShoppingCart: FC<tabBarIconProps> = ({
         />
       ) : (
         ""
-      )}
+      )} */}
     </>
   );
 };

@@ -1,4 +1,4 @@
-import { FC, memo } from "react";
+import { FC, memo, useEffect } from "react";
 import { itemInterface, selectSidebarNavs } from "../../redux/addedSlice";
 import { useAppSelector } from "../../redux/store";
 import { shallowEqual } from "react-redux";
@@ -7,17 +7,22 @@ import { ScrollView } from "react-native";
 import { StackScreenProps } from "@react-navigation/stack";
 import { ItemsReferenceStackParamList } from "../../../CustomTypes/types";
 
-type Props = StackScreenProps<ItemsReferenceStackParamList>;
+type Props = StackScreenProps<
+  ItemsReferenceStackParamList,
+  "ItemsByCategoryListItems"
+>;
 
-const CategorySideBarAccordionListItems: FC<Props> = ({
-  route,
-}): JSX.Element => {
+const CategoryItems: FC<Props> = ({ navigation, route }): JSX.Element => {
   const { category } = route.params;
 
   const sidebarItems: itemInterface[] = useAppSelector<itemInterface[]>(
     selectSidebarNavs(category),
     shallowEqual
   );
+
+  useEffect(() => {
+    navigation.setOptions({ headerTitle: category });
+  }, []);
 
   return (
     <ScrollView>
@@ -31,4 +36,4 @@ const CategorySideBarAccordionListItems: FC<Props> = ({
   );
 };
 
-export default memo<Props>(CategorySideBarAccordionListItems);
+export default memo<Props>(CategoryItems);

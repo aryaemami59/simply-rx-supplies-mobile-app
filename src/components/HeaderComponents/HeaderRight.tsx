@@ -4,13 +4,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { useAppSelector } from "../../redux/store";
 import { checkIfAnyItemsAdded } from "../../redux/addedSlice";
 import { Badge } from "@rneui/themed";
-// import { StackScreenProps } from "@react-navigation/stack";
-// import { RootStackParamList } from "../../../Main";
-// import {
-//   DrawerHeaderProps,
-//   DrawerNavigationProp,
-//   DrawerScreenProps,
-// } from "@react-navigation/drawer";
+import { useNavigation } from "@react-navigation/native";
 
 export type HeaderRightProps = {
   tintColor?: string;
@@ -18,14 +12,14 @@ export type HeaderRightProps = {
   pressOpacity?: number;
 };
 
-// type Props = DrawerNavigationProp<
-//   RootStackParamList,
-//   keyof RootStackParamList
-// > &
-//   HeaderRightProps;
-
-const HeaderRight = ({ navigation }): JSX.Element => {
+const HeaderRight: FC<HeaderRightProps> = ({
+  tintColor,
+  pressColor,
+  pressOpacity,
+}): JSX.Element => {
   const ifItemsAdded: boolean = useAppSelector(checkIfAnyItemsAdded);
+  const navigation = useNavigation();
+
   const clickHandler = useCallback(() => {
     navigation.navigate("ShoppingCart");
   }, []);

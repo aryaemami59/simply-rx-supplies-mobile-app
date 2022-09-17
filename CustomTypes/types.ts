@@ -24,8 +24,10 @@ export type RootTabParamList = {
 };
 
 export type HomeStackParamList = {
-  // Home: undefined;
   HomeScreen: undefined;
+  ItemLookup: undefined;
+  ItemsByVendor: undefined;
+  ItemsByCategory: undefined;
 };
 
 export type ItemLookupStackParamList = {
@@ -33,31 +35,34 @@ export type ItemLookupStackParamList = {
 };
 
 export type ShoppingCartStackParamList = {
-  // ShoppingCartScreen: string;
   ShoppingCartScreen: undefined;
-} & {
-  [key: string]: { vendorName: string };
-  // ShoppingCartScreen: VendorColumnStackParamList;
-  // ShoppingCartScreen: undefined;
+  QRImage: { itemNumbers: string };
+  BarcodeImage: { src: string };
+  // VendorItems: VendorItemsStackParamList;
+  VendorItems: { vendorName: string };
 };
 
+// export type VendorItemsStackParamList = {
+//   VendorItemsScreen: { vendorName: string };
+//   QRImage: { itemNumbers: string };
+// };
+
 export type ItemsByCategoryStackParamList = {
-  [key: string]: { category: string };
-  // ItemsByCategoryScreen: undefined;
+  ItemsByCategoryScreen: { category: string };
+  // [key: string]: { category: string };
+  // CategoryItems: { category: string };
 };
 
 export type ItemsByVendorStackParamList = {
-  //   ItemsByVendorScreen: undefined;
+  ItemsByVendorScreen: { vendorName: string };
   // } & {
-  [key: string]: { vendorName: string };
+  //   [key: string]: { vendorName: string };
 };
 
 export type ItemsReferenceStackParamList = {
-  ItemsReferenceScreen: ItemsReferenceTopTabParamList;
-} & {
-  [key: string]: { vendorName: string };
-} & {
-  [key: string]: { category: string };
+  ItemsReferenceScreen: undefined;
+  ItemsByVendorListItems: { vendorName: string };
+  ItemsByCategoryListItems: { category: string };
 };
 
 export type ItemsReferenceTopTabParamList = {
@@ -75,15 +80,12 @@ export type vendorNameType =
   | "FORS";
 
 export type VendorColumnStackParamList = {
-  [key: string]: { vendorName: string };
-  // OI: { vendorName: string };
-  // GNFR: { vendorName: string };
-  // SOC: { vendorName: string };
-  // VS: { vendorName: string };
-  // MS: { vendorName: string };
-  // COV: { vendorName: string };
-  // FORS: { vendorName: string };
+  // VendorItems: { vendorName: string };
 };
+
+// export type VendorColumnStackParamList = {
+//   VendorItems: { itemNumbers: string };
+// };
 // export type VendorColumnStackParamList = {
 //   MCK: undefined;
 //   OI: undefined;
