@@ -4,7 +4,7 @@ import {
   selectQRCodeContent,
   selectVendorsLinks,
 } from "../../redux/addedSlice";
-import { Text, StyleSheet, Pressable } from "react-native";
+import { Text, StyleSheet, Pressable, TouchableOpacity } from "react-native";
 import QRCode from "react-native-qrcode-svg";
 import { Feather } from "@expo/vector-icons";
 import { ButtonGroup, Dialog } from "@rneui/themed";
@@ -49,9 +49,9 @@ const CartQRCodeImage: FC<Props> = ({ vendorName }): JSX.Element => {
 
   return (
     <>
-      <Pressable onPress={clickHandler}>
+      <TouchableOpacity onPress={clickHandler}>
         <QRCode value={itemNumbers} />
-      </Pressable>
+      </TouchableOpacity>
       {/* <Text onPress={openLink}>{officialVendorName} Website</Text>
       <HideItemName />
       <HideItemNumber />

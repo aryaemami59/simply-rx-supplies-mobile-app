@@ -1,6 +1,6 @@
 import { FC, memo, useCallback } from "react";
 import { itemInterface } from "../../redux/addedSlice";
-import { Image, StyleSheet, Pressable } from "react-native";
+import { Image, StyleSheet, Pressable, TouchableOpacity } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import Constants from "expo-constants";
 import BarcodeImageModal from "./BarcodeImageModal";
@@ -9,9 +9,9 @@ import { useNavigation } from "@react-navigation/native";
 import { ShoppingCartStackParamList } from "../../../CustomTypes/types";
 import { StackNavigationProp } from "@react-navigation/stack";
 
-interface Props {
+type Props = {
   itemObj: itemInterface;
-}
+};
 
 const BarcodeImageCart: FC<Props> = ({ itemObj }): JSX.Element => {
   const itemBarcodeShown: boolean = useAppSelector<boolean>(
@@ -30,9 +30,9 @@ const BarcodeImageCart: FC<Props> = ({ itemObj }): JSX.Element => {
   return (
     <>
       {itemBarcodeShown ? (
-        <Pressable onPress={clickHandler}>
+        <TouchableOpacity onPress={clickHandler}>
           <Image source={{ uri: src }} style={styles.ImageStyle} />
-        </Pressable>
+        </TouchableOpacity>
       ) : (
         ""
       )}
