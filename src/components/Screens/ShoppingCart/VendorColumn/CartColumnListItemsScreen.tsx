@@ -1,59 +1,23 @@
 import { FC, memo, useCallback, useEffect } from "react";
 import { useAppSelector } from "../../../../redux/store";
-import {
-  selectByVendor,
-  addedItemsLength,
-  selectQRCodeContent,
-} from "../../../../redux/addedSlice";
+import { selectByVendor, addedItemsLength } from "../../../../redux/addedSlice";
 import { Card, ListItem } from "@rneui/themed";
 import { View, Text, ScrollView, StyleSheet, Linking } from "react-native";
 import ItemNameCart from "../../../ShoppingCartComponents/ItemNameCart";
 import ItemNumberCart from "../../../ShoppingCartComponents/ItemNumberCart";
 import BarcodeImageCart from "../../../ShoppingCartComponents/BarcodeImageCart";
 import ExpandCollapseButtonGroup from "../../../ShoppingCartComponents/ExpandCollapseButtonGroup";
-import {
-  StackScreenProps,
-  createStackNavigator,
-} from "@react-navigation/stack";
+import { StackScreenProps } from "@react-navigation/stack";
 import CartQRCodeImage from "../../../ShoppingCartComponents/CartQRCodeImage";
-import {
-  VendorColumnStackParamList,
-  ShoppingCartStackParamList,
-} from "../../../../../CustomTypes/types";
-import { AI_CENTER, mainColor } from "../../../../shared/sharedStyles";
-import {
-  selectVendorsArr,
-  selectVendorsLinks,
-} from "../../../../redux/addedSlice";
-// import QRCode from "react-native-qrcode-svg";
-// import { VendorItemsStackParamList } from "../../../../../CustomTypes/types";
+import { ShoppingCartStackParamList } from "../../../../../CustomTypes/types";
+import { AI_CENTER } from "../../../../shared/sharedStyles";
+import { selectVendorsLinks } from "../../../../redux/addedSlice";
 import HideItemName from "../../../ShoppingCartComponents/HideItemName";
 import HideItemNumber from "../../../ShoppingCartComponents/HideItemNumber";
 import HideItemBarcode from "../../../ShoppingCartComponents/HideItemBarcode";
 import { selectVendorOfficialName } from "../../../../redux/addedSlice";
-import QRCodeScreen from "../../../ShoppingCartComponents/QRCodeScreen";
 
 type Props = StackScreenProps<ShoppingCartStackParamList, "VendorItems">;
-// type Props = StackScreenProps<ShoppingCartStackParamList, "VendorItems">;
-
-// const Stack = createStackNavigator<VendorItemsStackParamList>();
-
-// const CartColumnListItemsScreen: FC<Props> = ({ navigation, route }) => {
-//   const { vendorName } = route.params;
-//   return (
-//     <Stack.Navigator>
-//       <Stack.Screen
-//         name="VendorItemsScreen"
-//         component={CartColumnListItemsScreenComponent}
-//         initialParams={{ vendorName }}
-//       />
-//       <Stack.Screen name="QRImage" component={QRCodeScreen} />
-//     </Stack.Navigator>
-//   );
-// };
-
-// type MyProps = StackScreenProps<VendorItemsStackParamList, "VendorItemsScreen">;
-// type MyProps = StackScreenProps<ShoppingCartStackParamList, "VendorItems">;
 
 const CartColumnListItemsScreen: FC<Props> = ({
   navigation,
@@ -62,9 +26,6 @@ const CartColumnListItemsScreen: FC<Props> = ({
   const { vendorName } = route.params;
   const addedItems = useAppSelector(selectByVendor(vendorName));
   const addedItemsLen = useAppSelector(addedItemsLength(vendorName));
-  // const itemNumbers: string = useAppSelector<string>(
-  //   selectQRCodeContent(vendorName)
-  // );
   const vendorLink = useAppSelector(selectVendorsLinks(vendorName));
 
   const openLink = useCallback(() => {
@@ -78,11 +39,6 @@ const CartColumnListItemsScreen: FC<Props> = ({
   useEffect(() => {
     navigation.setOptions({
       headerTitle: officialVendorName,
-      // headerStyle: { backgroundColor: mainColor },
-      // headerTitleStyle: { color: "white" },
-      // headerBackTitleStyle: { color: "white" },
-      // headerBackTitleVisible: false,
-      // headerTintColor: "white",
     });
   }, []);
 
@@ -131,4 +87,3 @@ const styles = StyleSheet.create({
 });
 
 export default memo<Props>(CartColumnListItemsScreen);
-// export default memo(CartColumnListItemsScreen);
