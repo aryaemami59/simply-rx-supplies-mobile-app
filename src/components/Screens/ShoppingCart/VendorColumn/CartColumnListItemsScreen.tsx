@@ -10,7 +10,7 @@ import ExpandCollapseButtonGroup from "../../../ShoppingCartComponents/ExpandCol
 import { StackScreenProps } from "@react-navigation/stack";
 import CartQRCodeImage from "../../../ShoppingCartComponents/CartQRCodeImage";
 import { ShoppingCartStackParamList } from "../../../../../CustomTypes/types";
-import { AI_CENTER } from "../../../../shared/sharedStyles";
+import { AI_CENTER, width100 } from "../../../../shared/sharedStyles";
 import { selectVendorsLinks } from "../../../../redux/addedSlice";
 import HideItemName from "../../../ShoppingCartComponents/HideItemName";
 import HideItemNumber from "../../../ShoppingCartComponents/HideItemNumber";
@@ -44,16 +44,52 @@ const CartColumnListItemsScreen: FC<Props> = ({
 
   return (
     <>
-      <ScrollView>
+      <ScrollView
+        contentContainerStyle={{
+          flexGrow: 1,
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}>
         {addedItemsLen ? (
-          <View style={AI_CENTER}>
+          <View
+            style={{
+              ...AI_CENTER,
+              justifyContent: "space-between",
+              flex: 1,
+              // alignItems: "center",
+            }}>
             <Card>
-              <View style={{ alignItems: "center", justifyContent: "center" }}>
-                <CartQRCodeImage vendorName={vendorName} />
-                <Text onPress={openLink}>{officialVendorName} Website</Text>
-                <HideItemName />
-                <HideItemNumber />
-                <HideItemBarcode />
+              <View
+                style={{
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  // height: 200,
+                  // flex: 1,
+                }}>
+                <View
+                  style={{
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                  }}>
+                  <View style={{ paddingVertical: 10 }}>
+                    <CartQRCodeImage vendorName={vendorName} />
+                  </View>
+                  <View style={{ paddingVertical: 10 }}>
+                    <Text onPress={openLink}>{officialVendorName} Website</Text>
+                  </View>
+                </View>
+                <View
+                  style={{
+                    justifyContent: "space-between",
+                    // flex: 1,
+                    // width: "100%",
+                    height: 100,
+                    // alignItems: "center",
+                  }}>
+                  <HideItemName />
+                  <HideItemNumber />
+                  <HideItemBarcode />
+                </View>
               </View>
               {addedItems.map(e => (
                 <ListItem bottomDivider key={e.name}>
@@ -82,7 +118,9 @@ const styles = StyleSheet.create({
   },
   viewStyle: {
     alignItems: "center",
+    justifyContent: "space-between",
     width: "100%",
+    // flex: 1,
   },
 });
 

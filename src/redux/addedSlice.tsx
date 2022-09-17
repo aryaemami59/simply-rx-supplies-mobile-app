@@ -14,7 +14,6 @@ import {
   GITHUB_URL_NAVLIST,
   // AUTH_TOKEN,
 } from "./fetchInfo";
-// import QRCode from "qrcode";
 
 const intersection = (firstArray: string[], secondArray: string[]): string[] =>
   firstArray.filter(e => !secondArray.includes(e));
