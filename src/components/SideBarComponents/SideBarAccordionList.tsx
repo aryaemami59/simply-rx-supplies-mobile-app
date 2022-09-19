@@ -6,13 +6,15 @@ import { ListItem } from "@rneui/themed";
 import { DrawerContentScrollView } from "@react-navigation/drawer";
 import { shallowEqual } from "react-redux";
 import SideBarAccordionNav from "./SideBarAccordionNav";
+import { vendorNameType } from "../../../CustomTypes/types";
 
 interface Props {
   props: string;
 }
 
 const SideBarAccordionList: FC = props => {
-  const allVendors: string[] = useAppSelector<string[]>(selectVendorsArr);
+  const allVendors: vendorNameType[] =
+    useAppSelector<vendorNameType[]>(selectVendorsArr);
   const navList: string[] = useAppSelector<string[]>(
     selectNavsArr,
     shallowEqual

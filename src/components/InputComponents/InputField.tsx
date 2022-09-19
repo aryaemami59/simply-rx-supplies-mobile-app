@@ -4,7 +4,6 @@ import { StyleSheet, TextInput, View } from "react-native";
 import * as Animatable from "react-native-animatable";
 import {
   clearListItems,
-  itemInterface,
   selectItemsArr,
   setListItems,
 } from "../../redux/addedSlice";
@@ -13,6 +12,7 @@ import { useFocusEffect } from "@react-navigation/native";
 import { shallowEqual } from "react-redux";
 import { FontAwesome, EvilIcons } from "@expo/vector-icons";
 import { width80 } from "../../shared/sharedStyles";
+import { itemInterface, OnChangeText } from "../../../CustomTypes/types";
 import {
   mainColor,
   displayNone,
@@ -106,7 +106,7 @@ const InputField: FC = (): JSX.Element => {
     [items]
   );
 
-  const changeVal = useCallback(
+  const changeVal: OnChangeText = useCallback(
     (text: string): void => {
       const listItems: itemInterface[] = listItemsFunc(text);
       setVal(text);

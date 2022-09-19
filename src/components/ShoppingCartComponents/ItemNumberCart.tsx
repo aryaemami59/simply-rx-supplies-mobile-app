@@ -1,12 +1,12 @@
 import { FC, memo } from "react";
 import { View, Text } from "react-native";
-import { itemInterface } from "../../redux/addedSlice";
 import CopyItemNumber from "./CopyItemNumber";
 import { useAppSelector } from "../../redux/store";
+import { itemInterface } from "../../../CustomTypes/types";
 
-interface Props {
+type Props = {
   itemObj: itemInterface;
-}
+};
 
 const ItemNumberCart: FC<Props> = ({ itemObj }): JSX.Element => {
   const itemNumberShown: boolean = useAppSelector<boolean>(
@@ -29,4 +29,4 @@ const ItemNumberCart: FC<Props> = ({ itemObj }): JSX.Element => {
   );
 };
 
-export default memo(ItemNumberCart);
+export default memo<Props>(ItemNumberCart);

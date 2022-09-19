@@ -1,11 +1,11 @@
 import { FC, memo } from "react";
 import { Fontisto } from "@expo/vector-icons";
-import { itemInterface } from "../../redux/addedSlice";
 import * as Clipboard from "expo-clipboard";
+import { itemInterface } from "../../../CustomTypes/types";
 
-interface Props {
+type Props = {
   itemObj: itemInterface;
-}
+};
 
 const CopyItemNumber: FC<Props> = ({ itemObj }): JSX.Element => {
   const copyToClipboard = async () => {

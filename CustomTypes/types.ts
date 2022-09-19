@@ -1,6 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import { vendorNameType } from "../src/redux/addedSlice";
-import { screenOptions } from "../src/shared/sharedScreenOptions";
+// import { vendorNameType } from "../src/redux/addedSlice";
 
 export type RootStackParamList = {
   Home: HomeStackParamList;
@@ -39,25 +38,15 @@ export type ShoppingCartStackParamList = {
   ShoppingCartScreen: undefined;
   QRImage: { itemNumbers: string };
   BarcodeImage: { src: string };
-  // VendorItems: VendorItemsStackParamList;
   VendorItems: { vendorName: vendorNameType };
 };
 
-// export type VendorItemsStackParamList = {
-//   VendorItemsScreen: { vendorName: string };
-//   QRImage: { itemNumbers: string };
-// };
-
 export type ItemsByCategoryStackParamList = {
   ItemsByCategoryScreen: { category: string };
-  // [key: string]: { category: string };
-  // CategoryItems: { category: string };
 };
 
 export type ItemsByVendorStackParamList = {
   ItemsByVendorScreen: { vendorName: vendorNameType };
-  // } & {
-  //   [key: string]: { vendorName: string };
 };
 
 export type ItemsReferenceStackParamList = {
@@ -71,34 +60,90 @@ export type ItemsReferenceTopTabParamList = {
   ItemsByCategory: ItemsByCategoryStackParamList;
 };
 
-// export type vendorNameType =
-//   | "OI"
-//   | "GNFR"
-//   | "SOC"
-//   | "VS"
-//   | "MS"
-//   | "COV"
-//   | "FORS";
-
-export type VendorColumnStackParamList = {
-  // VendorItems: { vendorName: string };
-};
-
-// export type VendorColumnStackParamList = {
-//   VendorItems: { itemNumbers: string };
-// };
-// export type VendorColumnStackParamList = {
-//   MCK: undefined;
-//   OI: undefined;
-//   GNFR: undefined;
-//   SOC: undefined;
-//   VS: undefined;
-//   MS: undefined;
-//   COV: undefined;
-//   FORS: undefined;
-// };
-
-export interface myContextInterface {
+export type myContextInterface = {
   darkTheme: boolean;
   setDarkTheme: Dispatch<SetStateAction<boolean>>;
-}
+};
+
+export type itemInterface = {
+  readonly id: number;
+  readonly name: string;
+  readonly itemNumber: string;
+  readonly keywords: string[];
+  readonly nav: string[];
+  readonly vendors: vendorNameType[];
+  readonly src: string;
+  vendorsToAdd?: vendorNameType[];
+  vendorsAdded?: vendorNameType[];
+};
+
+export type vendorInterface = {
+  id: number;
+  officialName: officialVendorNameType;
+  abbrName: vendorNameType;
+  link: string;
+  joinChars: string;
+  items: itemInterface[];
+};
+
+export type vendorsObjInterface = {
+  [key in vendorNameType]: vendorInterface;
+};
+
+export type navsObjInterface = {
+  [key in vendorNameType]: itemInterface[];
+};
+
+export type addedState = {
+  listItems: itemInterface[];
+  compact: boolean;
+  showItemNumber: boolean;
+  showItemBarcode: boolean;
+  showItemName: boolean;
+  vendorsIsLoading: boolean;
+  navListIsLoading: boolean;
+  errMsg: string;
+  vendorsArr?: vendorNameType[];
+  vendorsObj?: vendorsObjInterface;
+  navsArr?: string[];
+  navsObj?: navsObjInterface;
+};
+
+export type ItemName = string;
+
+export type vendorNameType =
+  | "OI"
+  | "GNFR"
+  | "SOC"
+  | "VS"
+  | "MS"
+  | "COV"
+  | "FORS";
+
+export type officialVendorNameType =
+  | "McKesson"
+  | "OrderInsite"
+  | "GNFR"
+  | "Sign Order Catalog"
+  | "VaxServe"
+  | "MCK MedSurge"
+  | "Covap"
+  | "FORS";
+
+export type itemState = {
+  itemsArr: itemInterface[];
+  isLoading: boolean;
+  errMsg: string;
+};
+
+export type addItemsInterface = {
+  itemObj: itemInterface;
+  vendors: vendorNameType[];
+};
+
+export type addItemsByVendorInterface = {
+  itemObj: itemInterface;
+  vendorName: vendorNameType;
+};
+
+export type OnChangeText = (text: string) => void;

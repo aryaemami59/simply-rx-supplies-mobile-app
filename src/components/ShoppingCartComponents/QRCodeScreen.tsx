@@ -11,7 +11,6 @@ import * as Sharing from "expo-sharing";
 import { Svg } from "react-native-svg";
 import { Octicons } from "@expo/vector-icons";
 import * as ImageManipulator from "expo-image-manipulator";
-
 // import { ToastAndroid } from "react-native";
 // import CameraRoll from "@react-native-community/cameraroll";
 // import RNFS from "react-native-fs";

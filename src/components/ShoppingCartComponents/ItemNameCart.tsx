@@ -1,12 +1,12 @@
 import { FC, memo } from "react";
 import { View, Text } from "react-native";
-import { itemInterface } from "../../redux/addedSlice";
 import CopyItemName from "./CopyItemName";
 import { useAppSelector } from "../../redux/store";
+import { itemInterface } from "../../../CustomTypes/types";
 
-interface Props {
+type Props = {
   itemObj: itemInterface;
-}
+};
 
 const ItemNameCart: FC<Props> = ({ itemObj }): JSX.Element => {
   const itemNameShown: boolean = useAppSelector<boolean>(

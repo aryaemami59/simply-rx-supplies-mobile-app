@@ -2,11 +2,8 @@ import { Card, CheckBox } from "@rneui/themed";
 import { FC, memo, useState } from "react";
 import { View, Text } from "react-native";
 import {
-  itemInterface,
   selectVendorsArr,
   selectAllVendorOfficialNames,
-  vendorNameType,
-  officialVendorNameType,
 } from "../../redux/addedSlice";
 import AddItemButton from "./AddItemButton";
 import BarcodeImageSearchResults from "./BarcodeImageSearchResults";
@@ -15,6 +12,11 @@ import ImagedCardView from "react-native-imaged-card-view";
 // import CardContainer from 'react-native-imaged-card-view';
 import { useAppSelector } from "../../redux/store";
 import SearchResultsVendorCheckbox from "./SearchResultsVendorCheckbox";
+import {
+  itemInterface,
+  officialVendorNameType,
+  vendorNameType,
+} from "../../../CustomTypes/types";
 
 type Props = {
   item: itemInterface;

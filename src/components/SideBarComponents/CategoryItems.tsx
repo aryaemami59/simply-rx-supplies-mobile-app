@@ -1,11 +1,14 @@
 import { FC, memo, useEffect } from "react";
-import { itemInterface, selectSidebarNavs } from "../../redux/addedSlice";
+import { selectSidebarNavs } from "../../redux/addedSlice";
 import { useAppSelector } from "../../redux/store";
 import { shallowEqual } from "react-redux";
 import SingleSideBarAccordionListItem from "./SingleSideBarAccordionListItem";
 import { ScrollView } from "react-native";
 import { StackScreenProps } from "@react-navigation/stack";
-import { ItemsReferenceStackParamList } from "../../../CustomTypes/types";
+import {
+  ItemsReferenceStackParamList,
+  itemInterface,
+} from "../../../CustomTypes/types";
 
 type Props = StackScreenProps<
   ItemsReferenceStackParamList,

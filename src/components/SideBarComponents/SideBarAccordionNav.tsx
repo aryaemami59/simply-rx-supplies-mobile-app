@@ -5,10 +5,9 @@ import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { ItemsReferenceStackParamList } from "../../../CustomTypes/types";
 
-interface Props {
+type Props = {
   category: string;
-  // onPress: () => void;
-}
+};
 
 const SideBarAccordionNav: FC<Props> = ({ category }): JSX.Element => {
   const navigation =

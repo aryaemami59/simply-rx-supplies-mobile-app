@@ -11,16 +11,15 @@ import {
 } from "react";
 
 import {
-  itemInterface,
   checkIfAddedToAllVendors,
   selectVendorsToAddTo,
   addItems,
-  vendorNameType,
 } from "../../redux/addedSlice";
 import { useAppSelector, useAppDispatch } from "../../redux/store";
 import { shallowEqual } from "react-redux";
 import { StyleSheet, Keyboard } from "react-native";
 import { fontWeightBold, mainColor } from "../../shared/sharedStyles";
+import { itemInterface, vendorNameType } from "../../../CustomTypes/types";
 
 interface Props {
   itemObj: itemInterface;

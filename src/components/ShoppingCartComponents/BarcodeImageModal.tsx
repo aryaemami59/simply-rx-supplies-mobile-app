@@ -2,8 +2,8 @@ import { FC, memo, useCallback, useState } from "react";
 import { MaterialCommunityIcons, EvilIcons } from "@expo/vector-icons";
 import { Modal, View, Image, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { itemInterface } from "../../redux/addedSlice";
 import Constants from "expo-constants";
+import { itemInterface } from "../../../CustomTypes/types";
 
 interface Props {
   itemObj: itemInterface;

@@ -1,13 +1,13 @@
 import { Button } from "@rneui/themed";
 import { FC, memo, useCallback } from "react";
 import {
-  itemInterface,
   checkIfAddedToAllVendors,
   selectVendorsToAddTo,
   addItems,
 } from "../../redux/addedSlice";
 import { useAppDispatch, useAppSelector } from "../../redux/store";
 import { shallowEqual } from "react-redux";
+import { itemInterface, vendorNameType } from "../../../CustomTypes/types";
 
 interface Props {
   itemObj: itemInterface;
@@ -21,7 +21,7 @@ const SingleSideBarAccordionListItem: FC<Props> = ({
     checkIfAddedToAllVendors(itemObj)
   );
 
-  const vendors: string[] = useAppSelector<string[]>(
+  const vendors: vendorNameType[] = useAppSelector<vendorNameType[]>(
     selectVendorsToAddTo(itemObj),
     shallowEqual
   );

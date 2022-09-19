@@ -5,15 +5,28 @@ import {
   Reducer,
   AnyAction,
   PayloadAction,
+  ActionReducerMapBuilder,
+  AsyncThunk,
+  AsyncThunkAction,
 } from "@reduxjs/toolkit";
 import { createSelector } from "reselect";
-import { RootState } from "./store";
+import { AppDispatch, RootState } from "./store";
 import {
   GITHUB_URL_ITEMS,
   GITHUB_URL_VENDORS,
   GITHUB_URL_NAVLIST,
-  // AUTH_TOKEN,
 } from "./fetchInfo";
+import {
+  addedState,
+  addItemsByVendorInterface,
+  addItemsInterface,
+  itemInterface,
+  itemState,
+  navsObjInterface,
+  officialVendorNameType,
+  vendorNameType,
+  vendorsObjInterface,
+} from "../../CustomTypes/types";
 
 const intersection = (firstArray: string[], secondArray: string[]): string[] =>
   firstArray.filter(e => !secondArray.includes(e));
@@ -30,92 +43,63 @@ const createAsyncThunkFunc = (strVal: string, githubUrl: string) => {
   });
 };
 
-export const fetchItems = createAsyncThunkFunc("items", GITHUB_URL_ITEMS);
+// export const fetchItems: AsyncThunk<
+//   itemInterface[],
+//   void,
+//   { state: itemState }
+// > = createAsyncThunk(`${"items"}/fetch${"items"}`, async () => {
+//   const response: Response = await fetch(GITHUB_URL_ITEMS);
+//   if (!response.ok) {
+//     return Promise.reject("Unable to fetch, status: " + response.status);
+//   }
+//   const data = await response.json();
+//   const myItems = await data["items"];
+//   return myItems;
+// });
+// export const fetchVendors = createAsyncThunk(
+//   `${"vendors"}/fetch${"vendors"}`,
+//   async () => {
+//     const response: Response = await fetch(GITHUB_URL_ITEMS);
+//     if (!response.ok) {
+//       return Promise.reject("Unable to fetch, status: " + response.status);
+//     }
+//     const data = await response.json();
+//     const myItems = await data["vendors"];
+//     return myItems;
+//   }
+// );
+// export const fetchNavList = createAsyncThunk(
+//   `${"navs"}/fetch${"navs"}`,
+//   async () => {
+//     const response: Response = await fetch(GITHUB_URL_ITEMS);
+//     if (!response.ok) {
+//       return Promise.reject("Unable to fetch, status: " + response.status);
+//     }
+//     const data = await response.json();
+//     const myItems = await data["navs"];
+//     return myItems;
+//   }
+// );
+// export const fetchItems = createAsyncThunkFunc("items", GITHUB_URL_ITEMS);
+export const fetchItems: AsyncThunk<
+  itemInterface[],
+  void,
+  { dispatch: AppDispatch }
+> = createAsyncThunkFunc("items", GITHUB_URL_ITEMS);
 
-export const fetchVendors = createAsyncThunkFunc("vendors", GITHUB_URL_VENDORS);
+export const fetchVendors: AsyncThunk<
+  vendorsObjInterface,
+  void,
+  { dispatch: AppDispatch }
+> = createAsyncThunkFunc("vendors", GITHUB_URL_VENDORS);
 
-export const fetchNavList = createAsyncThunkFunc("navs", GITHUB_URL_NAVLIST);
+export const fetchNavList: AsyncThunk<
+  navsObjInterface,
+  void,
+  { dispatch: AppDispatch }
+> = createAsyncThunkFunc("navs", GITHUB_URL_NAVLIST);
 
 const empty: [] = [];
-
-export type itemInterface = {
-  readonly id: number;
-  readonly name: string;
-  readonly itemNumber: string;
-  readonly keywords: string[];
-  readonly nav: string[];
-  readonly vendors: vendorNameType[];
-  // readonly vendors: string[];
-  readonly src: string;
-  vendorsToAdd?: vendorNameType[];
-  // vendorsToAdd?: string[];
-  // vendorsToAdd?: string[] | [];
-  vendorsAdded?: vendorNameType[];
-  // vendorsAdded?: string[] | [];
-};
-
-type vendorInterface = {
-  id: number;
-  officialName: officialVendorNameType;
-  abbrName: vendorNameType;
-  link: string;
-  joinChars: string;
-  items: itemInterface[];
-};
-
-type vendorsObjInterface = {
-  [key in vendorNameType]: vendorInterface;
-};
-
-type navsObjInterface = {
-  [key in vendorNameType]: itemInterface[];
-};
-// interface navsObjInterface {
-//   [key: string]: itemInterface[];
-// }
-
-type addedState = {
-  listItems: itemInterface[];
-  compact: boolean;
-  showItemNumber: boolean;
-  showItemBarcode: boolean;
-  showItemName: boolean;
-  vendorsIsLoading: boolean;
-  navListIsLoading: boolean;
-  errMsg: string;
-  vendorsArr?: vendorNameType[];
-  // vendorsArr?: string[];
-  vendorsObj?: vendorsObjInterface;
-  navsArr?: string[];
-  navsObj?: navsObjInterface;
-};
-
-type ItemName = string;
-
-export type vendorNameType =
-  | "OI"
-  | "GNFR"
-  | "SOC"
-  | "VS"
-  | "MS"
-  | "COV"
-  | "FORS";
-
-export type officialVendorNameType =
-  | "McKesson"
-  | "OrderInsite"
-  | "GNFR"
-  | "Sign Order Catalog"
-  | "VaxServe"
-  | "MCK MedSurge"
-  | "Covap"
-  | "FORS";
-
-interface itemState {
-  itemsArr: itemInterface[];
-  isLoading: boolean;
-  errMsg: string;
-}
 
 const initialState: addedState = {
   listItems: empty,
@@ -128,22 +112,11 @@ const initialState: addedState = {
   errMsg: "",
 };
 
-const itemInitialState: itemState = {
+const itemInitialState = {
   itemsArr: empty,
   isLoading: true,
   errMsg: "",
-};
-
-interface addItemsInterface {
-  itemObj: itemInterface;
-  vendors: vendorNameType[];
-}
-
-interface addItemsByVendorInterface {
-  itemObj: itemInterface;
-  // vendorName: string;
-  vendorName: vendorNameType;
-}
+} as itemState;
 
 export const addedSlice = createSlice({
   name: "added",
@@ -222,8 +195,7 @@ export const addedSlice = createSlice({
         const payload: vendorsObjInterface = action.payload;
         const keys = Object.keys(payload) as vendorNameType[];
         state.vendorsArr = keys;
-        // state.vendorsArr = Object.keys(action.payload) as vendorNameType[];
-        state.vendorsObj = action.payload;
+        state.vendorsObj = payload as vendorsObjInterface;
         let val: vendorNameType;
         for (val in payload) {
           state[val] = empty;
@@ -275,7 +247,7 @@ export const itemSlice = createSlice({
       });
     },
   },
-  extraReducers: builder => {
+  extraReducers: (builder: ActionReducerMapBuilder<itemState>) => {
     builder.addCase(fetchItems.pending, (state: itemState) => {
       state.isLoading = true;
     });

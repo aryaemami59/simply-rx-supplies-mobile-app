@@ -1,6 +1,6 @@
 import { FC, memo } from "react";
 import { Image } from "react-native";
-import { itemInterface } from "../../redux/addedSlice";
+import { itemInterface } from "../../../CustomTypes/types";
 
 interface Props {
   itemObj: itemInterface;

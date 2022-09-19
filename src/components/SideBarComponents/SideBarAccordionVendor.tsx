@@ -2,15 +2,15 @@ import { ListItem } from "@rneui/themed";
 import { FC, memo, useCallback, useState } from "react";
 import VendorItems from "./VendorItems";
 import { useAppSelector } from "../../redux/store";
-import {
-  officialVendorNameType,
-  selectVendorOfficialName,
-  vendorNameType,
-} from "../../redux/addedSlice";
+import { selectVendorOfficialName } from "../../redux/addedSlice";
 import { StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { ItemsReferenceStackParamList } from "../../../CustomTypes/types";
+import {
+  ItemsReferenceStackParamList,
+  officialVendorNameType,
+  vendorNameType,
+} from "../../../CustomTypes/types";
 
 interface Props {
   vendorName: vendorNameType;

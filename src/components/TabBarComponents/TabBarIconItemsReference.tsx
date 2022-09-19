@@ -2,7 +2,9 @@ import { FC, memo } from "react";
 import { tabBarIconProps } from "../../../CustomTypes/types";
 import { MaterialIcons } from "@expo/vector-icons";
 
-const TabBarIconItemsReference: FC<tabBarIconProps> = ({
+type Props = tabBarIconProps;
+
+const TabBarIconItemsReference: FC<Props> = ({
   focused,
   color,
   size,
@@ -10,4 +12,4 @@ const TabBarIconItemsReference: FC<tabBarIconProps> = ({
   return <MaterialIcons name="filter-list" color={color} size={size} />;
 };
 
-export default memo<tabBarIconProps>(TabBarIconItemsReference);
+export default memo<Props>(TabBarIconItemsReference);

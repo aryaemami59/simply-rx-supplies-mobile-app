@@ -2,16 +2,23 @@ import { useCallback, FC, memo } from "react";
 import { selectAllListItems } from "../../redux/addedSlice";
 import { useAppSelector } from "../../redux/store";
 import { shallowEqual } from "react-redux";
-import { FlatList, StyleSheet } from "react-native";
+import { FlatList, StyleSheet, ListRenderItem } from "react-native";
 import SingleInputListItem from "./SingleInputListItem";
 import InputField from "./InputField";
+import { itemInterface } from "../../../CustomTypes/types";
 
 const InputGroup: FC = (): JSX.Element => {
-  const listItems = useAppSelector(selectAllListItems, shallowEqual);
+  const listItems = useAppSelector<itemInterface[]>(
+    selectAllListItems,
+    shallowEqual
+  );
 
-  const renderItems = useCallback(({ item }): JSX.Element => {
-    return <SingleInputListItem item={item} />;
-  }, []);
+  const renderItems: ListRenderItem<itemInterface> = useCallback(
+    ({ item }): JSX.Element => {
+      return <SingleInputListItem item={item} />;
+    },
+    []
+  );
 
   return (
     <>

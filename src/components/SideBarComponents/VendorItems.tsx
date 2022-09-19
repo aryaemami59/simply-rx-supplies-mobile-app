@@ -3,9 +3,7 @@ import { FC, memo, useEffect } from "react";
 import { useAppSelector } from "../../redux/store";
 import {
   selectItemsByVendor,
-  itemInterface,
   selectVendorOfficialName,
-  officialVendorNameType,
 } from "../../redux/addedSlice";
 import { shallowEqual } from "react-redux";
 import SingleSideBarAccordionListItem from "./SingleSideBarAccordionListItem";
@@ -15,6 +13,10 @@ import {
   ItemsByVendorStackParamList,
 } from "../../../CustomTypes/types";
 import { StackScreenProps } from "@react-navigation/stack";
+import {
+  officialVendorNameType,
+  itemInterface,
+} from "../../../CustomTypes/types";
 
 type Props = StackScreenProps<
   ItemsReferenceStackParamList,

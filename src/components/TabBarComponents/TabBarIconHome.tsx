@@ -1,13 +1,10 @@
-import { Icon } from "@rneui/themed";
 import { FC, memo } from "react";
 import { tabBarIconProps } from "../../../CustomTypes/types";
 import { Ionicons } from "@expo/vector-icons";
 
-const TabBarIconHome: FC<tabBarIconProps> = ({
-  focused,
-  color,
-  size,
-}): JSX.Element => {
+type Props = tabBarIconProps;
+
+const TabBarIconHome: FC<Props> = ({ focused, color, size }): JSX.Element => {
   return (
     <Ionicons
       name={focused ? "home" : "home-outline"}
@@ -17,4 +14,4 @@ const TabBarIconHome: FC<tabBarIconProps> = ({
   );
 };
 
-export default memo(TabBarIconHome);
+export default memo<Props>(TabBarIconHome);

@@ -3,7 +3,6 @@ import { useAppSelector } from "../../redux/store";
 import {
   selectQRCodeContent,
   selectVendorsLinks,
-  vendorNameType,
 } from "../../redux/addedSlice";
 import { Text, StyleSheet, Pressable, TouchableOpacity } from "react-native";
 import QRCode from "react-native-qrcode-svg";
@@ -19,7 +18,10 @@ import QRCodeModal from "./QRCodeModal";
 import { mainColor } from "../../shared/sharedStyles";
 import { useNavigation } from "@react-navigation/native";
 import { StackScreenProps, StackNavigationProp } from "@react-navigation/stack";
-import { ShoppingCartStackParamList } from "../../../CustomTypes/types";
+import {
+  ShoppingCartStackParamList,
+  vendorNameType,
+} from "../../../CustomTypes/types";
 // import { VendorItemsStackParamList } from "../../../CustomTypes/types";
 
 // type Props = StackScreenProps<VendorItemsStackParamList, "QRImage">;

@@ -2,7 +2,9 @@ import { FC, memo } from "react";
 import { tabBarIconProps } from "../../../CustomTypes/types";
 import { FontAwesome } from "@expo/vector-icons";
 
-const TabBarIconItemLookup: FC<tabBarIconProps> = ({
+type Props = tabBarIconProps;
+
+const TabBarIconItemLookup: FC<Props> = ({
   focused,
   color,
   size,
@@ -10,4 +12,4 @@ const TabBarIconItemLookup: FC<tabBarIconProps> = ({
   return <FontAwesome name="search" color={color} size={size} />;
 };
 
-export default memo<tabBarIconProps>(TabBarIconItemLookup);
+export default memo<Props>(TabBarIconItemLookup);

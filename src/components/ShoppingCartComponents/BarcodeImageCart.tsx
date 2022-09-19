@@ -1,12 +1,14 @@
 import { FC, memo, useCallback } from "react";
-import { itemInterface } from "../../redux/addedSlice";
 import { Image, StyleSheet, Pressable, TouchableOpacity } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import Constants from "expo-constants";
 import BarcodeImageModal from "./BarcodeImageModal";
 import { useAppSelector } from "../../redux/store";
 import { useNavigation } from "@react-navigation/native";
-import { ShoppingCartStackParamList } from "../../../CustomTypes/types";
+import {
+  itemInterface,
+  ShoppingCartStackParamList,
+} from "../../../CustomTypes/types";
 import { StackNavigationProp } from "@react-navigation/stack";
 
 type Props = {

@@ -44,7 +44,7 @@ const ItemsReferenceOptions: BottomTabNavigationOptions = {
 } as const;
 
 const TabBarMain: FC = (): JSX.Element => {
-  const ifItemsAdded: boolean = useAppSelector(checkIfAnyItemsAdded);
+  const ifItemsAdded: boolean = useAppSelector<boolean>(checkIfAnyItemsAdded);
   return (
     <Tab.Navigator screenOptions={HEADER_SHOWN_FALSE}>
       <Tab.Screen

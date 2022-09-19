@@ -5,9 +5,9 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import Constants from "expo-constants";
 import QRCode from "react-native-qrcode-svg";
 
-interface Props {
+type Props = {
   itemNumbers: string;
-}
+};
 
 const QRCodeModal: FC<Props> = ({ itemNumbers }): JSX.Element => {
   const [showModal, setShowModal] = useState<boolean>(false);
@@ -60,4 +60,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default memo(QRCodeModal);
+export default memo<Props>(QRCodeModal);

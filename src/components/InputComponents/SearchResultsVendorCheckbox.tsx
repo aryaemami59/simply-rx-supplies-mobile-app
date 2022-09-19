@@ -2,12 +2,11 @@ import { CheckBox } from "@rneui/themed";
 import { FC, memo, useState, useCallback } from "react";
 import { connect, ConnectedProps } from "react-redux";
 import {
-  setVendors,
   itemInterface,
-  setVendorsForAll,
   officialVendorNameType,
   vendorNameType,
-} from "../../redux/addedSlice";
+} from "../../../CustomTypes/types";
+import { setVendors, setVendorsForAll } from "../../redux/addedSlice";
 import { AppDispatch, useAppDispatch, RootState } from "../../redux/store";
 
 type Props = {
