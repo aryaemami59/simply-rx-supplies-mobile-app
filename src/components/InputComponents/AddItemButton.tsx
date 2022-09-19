@@ -15,6 +15,7 @@ import {
   checkIfAddedToAllVendors,
   selectVendorsToAddTo,
   addItems,
+  vendorNameType,
 } from "../../redux/addedSlice";
 import { useAppSelector, useAppDispatch } from "../../redux/store";
 import { shallowEqual } from "react-redux";
@@ -31,7 +32,7 @@ const AddItemButton: FC<Props> = ({ itemObj }): JSX.Element => {
   const IfAddedToAllVendors: boolean = useAppSelector<boolean>(
     checkIfAddedToAllVendors(itemObj)
   );
-  const vendors: string[] = useAppSelector<string[]>(
+  const vendors: vendorNameType[] = useAppSelector<vendorNameType[]>(
     selectVendorsToAddTo(itemObj),
     shallowEqual
   );

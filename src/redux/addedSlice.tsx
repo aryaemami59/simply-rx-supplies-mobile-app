@@ -44,28 +44,35 @@ export type itemInterface = {
   readonly itemNumber: string;
   readonly keywords: string[];
   readonly nav: string[];
-  readonly vendors: string[];
+  readonly vendors: vendorNameType[];
+  // readonly vendors: string[];
   readonly src: string;
-  vendorsToAdd?: string[] | [];
-  vendorsAdded?: string[] | [];
+  vendorsToAdd?: vendorNameType[];
+  // vendorsToAdd?: string[];
+  // vendorsToAdd?: string[] | [];
+  vendorsAdded?: vendorNameType[];
+  // vendorsAdded?: string[] | [];
 };
 
 type vendorInterface = {
   id: number;
-  officialName: string;
-  abbrName: string;
+  officialName: officialVendorNameType;
+  abbrName: vendorNameType;
   link: string;
   joinChars: string;
   items: itemInterface[];
 };
 
 type vendorsObjInterface = {
-  [key: string]: vendorInterface;
+  [key in vendorNameType]: vendorInterface;
 };
 
-interface navsObjInterface {
-  [key: string]: itemInterface[];
-}
+type navsObjInterface = {
+  [key in vendorNameType]: itemInterface[];
+};
+// interface navsObjInterface {
+//   [key: string]: itemInterface[];
+// }
 
 type addedState = {
   listItems: itemInterface[];
@@ -76,11 +83,33 @@ type addedState = {
   vendorsIsLoading: boolean;
   navListIsLoading: boolean;
   errMsg: string;
-  vendorsArr?: string[];
+  vendorsArr?: vendorNameType[];
+  // vendorsArr?: string[];
   vendorsObj?: vendorsObjInterface;
   navsArr?: string[];
   navsObj?: navsObjInterface;
 };
+
+type ItemName = string;
+
+export type vendorNameType =
+  | "OI"
+  | "GNFR"
+  | "SOC"
+  | "VS"
+  | "MS"
+  | "COV"
+  | "FORS";
+
+export type officialVendorNameType =
+  | "McKesson"
+  | "OrderInsite"
+  | "GNFR"
+  | "Sign Order Catalog"
+  | "VaxServe"
+  | "MCK MedSurge"
+  | "Covap"
+  | "FORS";
 
 interface itemState {
   itemsArr: itemInterface[];
@@ -107,12 +136,13 @@ const itemInitialState: itemState = {
 
 interface addItemsInterface {
   itemObj: itemInterface;
-  vendors: string[];
+  vendors: vendorNameType[];
 }
 
 interface addItemsByVendorInterface {
   itemObj: itemInterface;
-  vendorName: string;
+  // vendorName: string;
+  vendorName: vendorNameType;
 }
 
 export const addedSlice = createSlice({
@@ -123,7 +153,7 @@ export const addedSlice = createSlice({
       state: addedState,
       action: PayloadAction<addItemsInterface>
     ): void => {
-      action.payload.vendors.forEach((e: string): void => {
+      action.payload.vendors.forEach((e: vendorNameType): void => {
         if (!current(state[e]).includes(action.payload.itemObj)) {
           state[e].push(action.payload.itemObj);
           state.listItems = state.listItems.filter(
@@ -189,9 +219,13 @@ export const addedSlice = createSlice({
     builder.addCase(
       fetchVendors.fulfilled,
       (state: addedState, action: PayloadAction<vendorsObjInterface>): void => {
-        state.vendorsArr = Object.keys(action.payload);
+        const payload: vendorsObjInterface = action.payload;
+        const keys = Object.keys(payload) as vendorNameType[];
+        state.vendorsArr = keys;
+        // state.vendorsArr = Object.keys(action.payload) as vendorNameType[];
         state.vendorsObj = action.payload;
-        for (const val in action.payload) {
+        let val: vendorNameType;
+        for (val in payload) {
           state[val] = empty;
         }
         state.vendorsIsLoading = false;
@@ -221,11 +255,24 @@ export const itemSlice = createSlice({
         action.payload.itemObj.name
       ].vendorsToAdd.includes(action.payload.vendorName)
         ? state[action.payload.itemObj.name].vendorsToAdd.filter(
-            (e: string) => e !== action.payload.vendorName
+            (e: vendorNameType) => e !== action.payload.vendorName
           )
         : state[action.payload.itemObj.name].vendorsToAdd.concat(
             action.payload.vendorName
           );
+    },
+    setVendorsForAll: (
+      state: itemState,
+      action: PayloadAction<vendorNameType>
+    ) => {
+      const affectedItems = state.itemsArr
+        .filter((e: itemInterface) => e.vendors!.includes(action.payload))
+        .map(({ name }: itemInterface) => name);
+      affectedItems.forEach(e => {
+        state[e].vendorsToAdd = state[e].vendorsToAdd.filter(
+          (e: vendorNameType) => e !== action.payload
+        );
+      });
     },
   },
   extraReducers: builder => {
@@ -293,15 +340,15 @@ export const itemSlice = createSlice({
 });
 
 export const selectByVendor =
-  (vendorName: string) =>
+  (vendorName: vendorNameType) =>
   (state: RootState): itemInterface[] =>
     state.added[vendorName];
 
-export const selectVendorsArr = (state: RootState): string[] =>
+export const selectVendorsArr = (state: RootState): vendorNameType[] =>
   state.added.vendorsArr ? state.added.vendorsArr : empty;
 
 export const selectVendorsLinks =
-  (vendorName: string) =>
+  (vendorName: vendorNameType) =>
   (state: RootState): string =>
     state.added.vendorsObj ? state.added.vendorsObj[vendorName].link : "";
 
@@ -309,23 +356,23 @@ export const selectNavsArr = (state: RootState): string[] =>
   state.added.navsArr ? state.added.navsArr : empty;
 
 export const addedItemsLength =
-  (vendorName: string) =>
+  (vendorName: vendorNameType) =>
   (state: RootState): number =>
     state.added[vendorName].length;
 
 export const checkIfAddedToOneVendor =
-  (itemObj: itemInterface, vendorName: string) =>
+  (itemObj: itemInterface, vendorName: vendorNameType) =>
   (state: RootState): boolean =>
     state.item[itemObj.name].vendorsAdded.includes(vendorName);
 
 export const selectItemsByVendor =
-  (vendorName: string) =>
+  (vendorName: vendorNameType) =>
   (state: RootState): itemInterface[] =>
     state.added.vendorsObj ? state.added.vendorsObj[vendorName].items : empty;
 
 export const selectVendorsToAddTo =
   (itemObj: itemInterface) =>
-  (state: RootState): string[] =>
+  (state: RootState): vendorNameType[] =>
     state.item[itemObj.name].vendorsToAdd;
 
 export const selectSidebarNavs =
@@ -334,7 +381,7 @@ export const selectSidebarNavs =
     state.added.navsObj ? state.added.navsObj[category] : empty;
 
 export const selectQRCodeContent =
-  (vendorName: string) =>
+  (vendorName: vendorNameType) =>
   (state: RootState): string =>
     state.added[vendorName]
       .map(({ itemNumber }) => itemNumber)
@@ -346,7 +393,7 @@ export const checkIfAddedToAllVendors =
     state.item[itemObj.name].vendorsAdded.length === itemObj.vendors.length;
 
 export const checkIfItemAddedToOneVendor =
-  (vendorName: string, itemObj: itemInterface) =>
+  (vendorName: vendorNameType, itemObj: itemInterface) =>
   (state: RootState): boolean =>
     state.item[itemObj.name].vendorsAdded.includes(vendorName);
 
@@ -354,18 +401,22 @@ export const selectItemsArr = (state: RootState): itemInterface[] =>
   state.item.itemsArr;
 
 export const selectVendorOfficialName =
-  (vendorName: string) =>
-  (state: RootState): string =>
+  (vendorName: vendorNameType) =>
+  (state: RootState): officialVendorNameType =>
     state.added.vendorsObj![vendorName].officialName;
 
-export const selectAllVendorOfficialNames = (state: RootState): string[] =>
+export const selectAllVendorOfficialNames = (
+  state: RootState
+): officialVendorNameType[] =>
   state.added.vendorsArr!.map(
-    (e: string): string => state.added.vendorsObj![e].officialName
+    (e: vendorNameType): officialVendorNameType =>
+      state.added.vendorsObj![e].officialName
   );
 
 export const checkIfAnyItemsAdded = (state: RootState): boolean =>
   state.added.vendorsArr!.reduce(
-    (acc, curr) => !!state.added[curr].length || acc,
+    (acc: boolean, curr: vendorNameType): boolean =>
+      !!state.added[curr].length || acc,
     false
   );
 
@@ -394,7 +445,7 @@ export const {
   ToggleItemName,
 } = addedSlice.actions;
 
-export const { setVendors } = itemSlice.actions;
+export const { setVendors, setVendorsForAll } = itemSlice.actions;
 
 export const itemReducer: Reducer<itemState, AnyAction> = itemSlice.reducer;
 

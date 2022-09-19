@@ -5,6 +5,7 @@ import {
   selectItemsByVendor,
   itemInterface,
   selectVendorOfficialName,
+  officialVendorNameType,
 } from "../../redux/addedSlice";
 import { shallowEqual } from "react-redux";
 import SingleSideBarAccordionListItem from "./SingleSideBarAccordionListItem";
@@ -22,9 +23,10 @@ type Props = StackScreenProps<
 
 const VendorItems: FC<Props> = ({ navigation, route }): JSX.Element => {
   const { vendorName } = route.params;
-  const officialVendorName: string = useAppSelector<string>(
-    selectVendorOfficialName(vendorName)
-  );
+  const officialVendorName: officialVendorNameType =
+    useAppSelector<officialVendorNameType>(
+      selectVendorOfficialName(vendorName)
+    );
   const items: itemInterface[] = useAppSelector<itemInterface[]>(
     selectItemsByVendor(vendorName),
     shallowEqual

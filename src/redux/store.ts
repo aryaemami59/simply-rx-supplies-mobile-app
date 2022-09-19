@@ -9,6 +9,10 @@ export const store = configureStore({
     added: addedReducer,
     item: itemReducer,
   },
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
   // middleware: getDefaultMiddleware => getDefaultMiddleware().concat([logger]),
 });
 export type RootState = ReturnType<typeof store.getState>;

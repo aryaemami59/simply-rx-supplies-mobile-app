@@ -1,4 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
+import { vendorNameType } from "../src/redux/addedSlice";
 import { screenOptions } from "../src/shared/sharedScreenOptions";
 
 export type RootStackParamList = {
@@ -39,7 +40,7 @@ export type ShoppingCartStackParamList = {
   QRImage: { itemNumbers: string };
   BarcodeImage: { src: string };
   // VendorItems: VendorItemsStackParamList;
-  VendorItems: { vendorName: string };
+  VendorItems: { vendorName: vendorNameType };
 };
 
 // export type VendorItemsStackParamList = {
@@ -54,14 +55,14 @@ export type ItemsByCategoryStackParamList = {
 };
 
 export type ItemsByVendorStackParamList = {
-  ItemsByVendorScreen: { vendorName: string };
+  ItemsByVendorScreen: { vendorName: vendorNameType };
   // } & {
   //   [key: string]: { vendorName: string };
 };
 
 export type ItemsReferenceStackParamList = {
   ItemsReferenceScreen: undefined;
-  ItemsByVendorListItems: { vendorName: string };
+  ItemsByVendorListItems: { vendorName: vendorNameType };
   ItemsByCategoryListItems: { category: string };
 };
 
@@ -70,14 +71,14 @@ export type ItemsReferenceTopTabParamList = {
   ItemsByCategory: ItemsByCategoryStackParamList;
 };
 
-export type vendorNameType =
-  | "OI"
-  | "GNFR"
-  | "SOC"
-  | "VS"
-  | "MS"
-  | "COV"
-  | "FORS";
+// export type vendorNameType =
+//   | "OI"
+//   | "GNFR"
+//   | "SOC"
+//   | "VS"
+//   | "MS"
+//   | "COV"
+//   | "FORS";
 
 export type VendorColumnStackParamList = {
   // VendorItems: { vendorName: string };

@@ -2,14 +2,18 @@ import { ListItem } from "@rneui/themed";
 import { FC, memo, useCallback, useState } from "react";
 import VendorItems from "./VendorItems";
 import { useAppSelector } from "../../redux/store";
-import { selectVendorOfficialName } from "../../redux/addedSlice";
+import {
+  officialVendorNameType,
+  selectVendorOfficialName,
+  vendorNameType,
+} from "../../redux/addedSlice";
 import { StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { ItemsReferenceStackParamList } from "../../../CustomTypes/types";
 
 interface Props {
-  vendorName: string;
+  vendorName: vendorNameType;
   // onPress: () => void;
 }
 
@@ -18,9 +22,10 @@ const SideBarAccordionVendor: FC<Props> = ({
   // onPress,
 }): JSX.Element => {
   // const [expanded, setExpanded] = useState<boolean>(false);
-  const officialVendorName: string = useAppSelector(
-    selectVendorOfficialName(vendorName)
-  );
+  const officialVendorName: officialVendorNameType =
+    useAppSelector<officialVendorNameType>(
+      selectVendorOfficialName(vendorName)
+    );
   // const clickHandler = useCallback((): void => {
   //   setExpanded((prev: boolean): boolean => !prev);
   // }, []);

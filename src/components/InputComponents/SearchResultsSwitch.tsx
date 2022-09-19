@@ -4,11 +4,15 @@ import {
   selectVendorOfficialName,
   setVendors,
   itemInterface,
+  vendorNameType,
 } from "../../redux/addedSlice";
 import { Card } from "@rneui/themed";
 import { connect, ConnectedProps } from "react-redux";
 // import { Switch } from "react-native-switch";
-import { View, Text, Switch } from "react-native";
+import { View, Text } from "react-native";
+// import { Switch } from "react-native";
+import { Switch } from "react-native-paper";
+import { mainColor } from "../../shared/sharedStyles";
 
 type stateToPropsReturnType = {
   checked: boolean;
@@ -32,9 +36,9 @@ const mapStateToProps = (
 const mapDispatchToProps = (
   dispatch: AppDispatch,
   ownProps: ParentProps
-): { clickHandler: () => void } => {
+): { onToggleSwitch: () => void } => {
   return {
-    clickHandler: () => {
+    onToggleSwitch: () => {
       dispatch(
         setVendors({
           itemObj: ownProps.itemObj,
@@ -50,7 +54,7 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
 interface ParentProps {
-  vendorName: string;
+  vendorName: vendorNameType;
   itemObj: itemInterface;
 }
 
@@ -61,13 +65,13 @@ const SearchResultsSwitch: FC<myProps> = ({
   itemObj,
   vendorName,
   disabled,
-  clickHandler,
+  onToggleSwitch,
 }): JSX.Element => {
   const officialVendorName = useAppSelector(
     selectVendorOfficialName(vendorName)
   );
 
-  // const clickHandler = useCallback(() => {
+  // const onToggleSwitch = useCallback(() => {
   //   setChecked(prev => !prev);
   // }, []);
 
@@ -85,10 +89,11 @@ const SearchResultsSwitch: FC<myProps> = ({
           <Switch
             style={{
               margin: 10,
-              transform: [{ scaleX: 0.7 }, { scaleY: 0.7 }],
+              // transform: [{ scaleX: 0.7 }, { scaleY: 0.7 }],
             }}
             value={checked}
-            onValueChange={clickHandler}
+            onValueChange={onToggleSwitch}
+            color={mainColor}
             // activeText={"On"}
             // inActiveText={"Off"}
             // switchLeftPx={8}

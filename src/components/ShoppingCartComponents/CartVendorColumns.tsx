@@ -4,6 +4,7 @@ import { useAppSelector } from "../../redux/store";
 import {
   selectVendorOfficialName,
   addedItemsLength,
+  vendorNameType,
 } from "../../redux/addedSlice";
 import { StyleSheet } from "react-native";
 import TouchableScale from "react-native-touchable-scale";
@@ -12,7 +13,7 @@ import { ShoppingCartStackParamList } from "../../../CustomTypes/types";
 import { StackNavigationProp } from "@react-navigation/stack";
 
 type Props = {
-  vendorName: string;
+  vendorName: vendorNameType;
 };
 
 const CartVendorColumns: FC<Props> = ({ vendorName }): JSX.Element => {
