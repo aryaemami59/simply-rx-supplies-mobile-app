@@ -74,6 +74,7 @@ const InputGroup: FC = (): JSX.Element => {
       <BottomSheet
         isVisible={visible}
         onBackdropPress={hideBottomSheet}
+        modalProps={{  } }
         containerStyle={{ paddingBottom: 50 }}>
         <View>
           {officialVendorNames.map((e: officialVendorNameType, i: number) => (

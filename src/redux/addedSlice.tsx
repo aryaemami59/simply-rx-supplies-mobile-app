@@ -77,6 +77,7 @@ const itemInitialState = {
   itemsArr: empty,
   isLoading: true,
   errMsg: "",
+  vendorsChecked: {},
 } as itemState;
 
 export const addedSlice = createSlice({
@@ -131,6 +132,9 @@ export const addedSlice = createSlice({
     ToggleItemName: (state: addedState): void => {
       state.showItemName = !state.showItemName;
     },
+    // ToggleVendorChecked: (state: addedState, action: PayloadAction<vendorNameType>) => {
+    //   state
+    // }
   },
   extraReducers: builder => {
     builder.addCase(fetchVendors.pending, (state: addedState): void => {
@@ -159,6 +163,7 @@ export const addedSlice = createSlice({
         let val: vendorNameType;
         for (val in payload) {
           state[val] = empty;
+          // state.
         }
         state.vendorsIsLoading = false;
         state.errMsg = "";
@@ -193,10 +198,11 @@ export const itemSlice = createSlice({
             action.payload.vendorName
           );
     },
-    setVendorsForAll: (
+    setVendorsForAllUncheck: (
       state: itemState,
       action: PayloadAction<vendorNameType>
     ) => {
+      state.vendorsChecked[action.payload] = false;
       const affectedItems = state.itemsArr
         .filter((e: ItemObjType) => e.vendors!.includes(action.payload))
         .map(({ name }: ItemObjType) => name);
@@ -204,6 +210,19 @@ export const itemSlice = createSlice({
         state[e]!.vendorsToAdd = state[e]!.vendorsToAdd!.filter(
           (e: vendorNameType) => e !== action.payload
         );
+      });
+    },
+    setVendorsForAllCheck: (
+      state: itemState,
+      action: PayloadAction<vendorNameType>
+    ) => {
+      state.vendorsChecked[action.payload] = true;
+      const affectedItems = state.itemsArr
+        .filter((e: ItemObjType) => e.vendors!.includes(action.payload))
+        .map(({ name }: ItemObjType) => name);
+      affectedItems.forEach(e => {
+        !state[e]!.vendorsToAdd.includes(action.payload) &&
+          state[e]!.vendorsToAdd.push(action.payload);
       });
     },
   },
@@ -224,6 +243,16 @@ export const itemSlice = createSlice({
         state.isLoading = false;
         state.errMsg = "";
         state.itemsArr = action.payload;
+      }
+    );
+    builder.addCase(
+      fetchVendors.fulfilled,
+      (state: itemState, action: PayloadAction<vendorsObjInterface>) => {
+        const payload: vendorsObjInterface = action.payload;
+        const keys: vendorNameType[] = Object.keys(payload) as vendorNameType[];
+        for (const vendorObj of keys) {
+          state.vendorsChecked[vendorObj] = true;
+        }
       }
     );
     builder.addCase(fetchItems.rejected, (state: itemState, action): void => {
@@ -355,6 +384,11 @@ export const checkIfAnyItemsAdded = (state: RootState): boolean =>
     false
   );
 
+export const selectVendorsChecked =
+  (vendorName: vendorNameType) =>
+  (state: RootState): boolean =>
+    state.item!.vendorsChecked[vendorName]!;
+
 export const selectAllListItems = createSelector(
   (state: RootState): ItemObjType[] => state.added.listItems,
   (listItems: ItemObjType[]): ItemObjType[] => listItems
@@ -380,7 +414,8 @@ export const {
   ToggleItemName,
 } = addedSlice.actions;
 
-export const { setVendors, setVendorsForAll } = itemSlice.actions;
+export const { setVendors, setVendorsForAllUncheck, setVendorsForAllCheck } =
+  itemSlice.actions;
 
 export const itemReducer: Reducer<itemState, AnyAction> = itemSlice.reducer;
 

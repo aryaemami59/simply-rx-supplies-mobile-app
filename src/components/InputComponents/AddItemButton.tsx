@@ -51,7 +51,7 @@ const AddItemButton: FC<Props> = ({ itemObj }): JSX.Element => {
   }, [showBadge, hideBadge]);
 
   const clickHandler = useCallback((): void => {
-    Keyboard.dismiss();
+    // Keyboard.dismiss();
     IfAddedToAllVendors
       ? showThenHide()
       : dispatch(addItems({ itemObj, vendors }));

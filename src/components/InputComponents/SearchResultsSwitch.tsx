@@ -1,7 +1,7 @@
 import { FC, memo } from "react";
 import { useAppSelector, RootState, AppDispatch } from "../../redux/store";
 import { selectVendorOfficialName, setVendors } from "../../redux/addedSlice";
-import { Card } from "@rneui/themed";
+import { Card, ListItem } from "@rneui/themed";
 import { connect, ConnectedProps } from "react-redux";
 // import { Switch } from "react-native-switch";
 import { View, Text } from "react-native";
@@ -20,10 +20,10 @@ const mapStateToProps = (
   ownProps: ParentProps
 ): stateToPropsReturnType => {
   return {
-    checked: state.item[ownProps.itemObj.name].vendorsToAdd.includes(
+    checked: state.item[ownProps.itemObj.name]!.vendorsToAdd.includes(
       ownProps.vendorName
     ),
-    disabled: state.item[ownProps.itemObj.name].vendorsAdded.includes(
+    disabled: state.item[ownProps.itemObj.name]!.vendorsAdded.includes(
       ownProps.vendorName
     ),
   };
@@ -73,7 +73,13 @@ const SearchResultsSwitch: FC<myProps> = ({
 
   return (
     <>
-      <Card.FeaturedTitle
+      <ListItem.CheckBox
+        checked={checked}
+        disabled={disabled}
+        onPress={onToggleSwitch}
+        title={officialVendorName}
+      />
+      {/* <Card.FeaturedTitle
         style={{ color: "black", textAlign: "center", flexDirection: "row" }}>
         <View
           style={{
@@ -81,23 +87,16 @@ const SearchResultsSwitch: FC<myProps> = ({
             flex: 1,
             alignItems: "center",
             justifyContent: "center",
-          }}>
-          <Switch
-            style={{
-              margin: 10,
-              // transform: [{ scaleX: 0.7 }, { scaleY: 0.7 }],
-            }}
-            value={checked}
-            onValueChange={onToggleSwitch}
-            color={mainColor}
-            // activeText={"On"}
-            // inActiveText={"Off"}
-            // switchLeftPx={8}
-            // switchRightPx={8}
-          />
-          <Text>{officialVendorName}</Text>
-        </View>
-      </Card.FeaturedTitle>
+          }}> */}
+      {/* <Switch
+        disabled={disabled}
+        value={checked}
+        onValueChange={onToggleSwitch}
+        color={mainColor}
+      />
+      <Text>{officialVendorName}</Text> */}
+      {/* </View>
+      </Card.FeaturedTitle> */}
     </>
   );
 };

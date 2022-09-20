@@ -1,7 +1,6 @@
 import { AsyncThunk } from "@reduxjs/toolkit";
 import { Dispatch, SetStateAction } from "react";
 import { AppDispatch } from "../src/redux/store";
-// import { vendorNameType } from "../src/redux/addedSlice";
 
 export type RootStackParamList = {
   Home: HomeStackParamList;
@@ -94,6 +93,10 @@ export type vendorsObjInterface = {
 
 export type navsObjInterface = {
   [key in Category]: ItemObjType[];
+};
+
+export type VendorChecked = {
+  [key in vendorNameType]?: boolean;
 };
 
 export type addedState = {
@@ -526,6 +529,8 @@ export type ItemNamesType =
 export type itemState = {
   itemsArr: ItemObjType[];
   isLoading: boolean;
+  vendorsChecked: VendorChecked;
+  // vendorChecked: boolean;
   errMsg: string;
 } & {
   [key in ItemName]?: ItemObjType;
