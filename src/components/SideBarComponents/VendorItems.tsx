@@ -15,7 +15,7 @@ import {
 import { StackScreenProps } from "@react-navigation/stack";
 import {
   officialVendorNameType,
-  itemInterface,
+  ItemObjType,
 } from "../../../CustomTypes/types";
 
 type Props = StackScreenProps<
@@ -29,7 +29,7 @@ const VendorItems: FC<Props> = ({ navigation, route }): JSX.Element => {
     useAppSelector<officialVendorNameType>(
       selectVendorOfficialName(vendorName)
     );
-  const items: itemInterface[] = useAppSelector<itemInterface[]>(
+  const items: ItemObjType[] = useAppSelector<ItemObjType[]>(
     selectItemsByVendor(vendorName),
     shallowEqual
   );

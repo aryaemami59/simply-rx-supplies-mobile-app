@@ -1,10 +1,10 @@
 import { FC, memo } from "react";
 import { Fontisto } from "@expo/vector-icons";
 import * as Clipboard from "expo-clipboard";
-import { itemInterface } from "../../../CustomTypes/types";
+import { ItemObjType } from "../../../CustomTypes/types";
 
 type Props = {
-  itemObj: itemInterface;
+  itemObj: ItemObjType;
 };
 
 const CopyItemName: FC<Props> = ({ itemObj }): JSX.Element => {

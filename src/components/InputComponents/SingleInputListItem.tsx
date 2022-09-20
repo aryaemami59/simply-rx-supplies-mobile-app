@@ -13,13 +13,13 @@ import ImagedCardView from "react-native-imaged-card-view";
 import { useAppSelector } from "../../redux/store";
 import SearchResultsVendorCheckbox from "./SearchResultsVendorCheckbox";
 import {
-  itemInterface,
+  ItemObjType,
   officialVendorNameType,
   vendorNameType,
 } from "../../../CustomTypes/types";
 
 type Props = {
-  item: itemInterface;
+  item: ItemObjType;
 };
 
 const SingleInputListItem: FC<Props> = ({ item }): JSX.Element => {
@@ -45,10 +45,10 @@ const SingleInputListItem: FC<Props> = ({ item }): JSX.Element => {
           uri: item.src,
         }}
       /> */}
-      <Text style={{ textAlign: "center", fontSize: 20 }}>
+      {/* <Text style={{ textAlign: "center", fontSize: 20 }}>
         Uncheck to exclude vendors
-      </Text>
-      <View
+      </Text> */}
+      {/* <View
         style={{
           flexDirection: "row",
           flexWrap: "wrap",
@@ -61,7 +61,7 @@ const SingleInputListItem: FC<Props> = ({ item }): JSX.Element => {
             vendorName={vendors[i]}
           />
         ))}
-      </View>
+      </View> */}
       <Card>
         <Card.Title style={{ fontSize: 20 }}>{item.name}</Card.Title>
         <View style={{ flexDirection: "row", justifyContent: "center" }}>

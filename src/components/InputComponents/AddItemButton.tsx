@@ -19,10 +19,10 @@ import { useAppSelector, useAppDispatch } from "../../redux/store";
 import { shallowEqual } from "react-redux";
 import { StyleSheet, Keyboard } from "react-native";
 import { fontWeightBold, mainColor } from "../../shared/sharedStyles";
-import { itemInterface, vendorNameType } from "../../../CustomTypes/types";
+import { ItemObjType, vendorNameType } from "../../../CustomTypes/types";
 
 interface Props {
-  itemObj: itemInterface;
+  itemObj: ItemObjType;
 }
 
 const AddItemButton: FC<Props> = ({ itemObj }): JSX.Element => {

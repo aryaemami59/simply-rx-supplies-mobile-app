@@ -1,9 +1,9 @@
 import { FC, memo } from "react";
 import { Image } from "react-native";
-import { itemInterface } from "../../../CustomTypes/types";
+import { ItemObjType } from "../../../CustomTypes/types";
 
 interface Props {
-  itemObj: itemInterface;
+  itemObj: ItemObjType;
 }
 
 const BarcodeImageSearchResults: FC<Props> = ({ itemObj }): JSX.Element => {

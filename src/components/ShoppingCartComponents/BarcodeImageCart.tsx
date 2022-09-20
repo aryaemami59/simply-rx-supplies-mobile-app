@@ -6,13 +6,13 @@ import BarcodeImageModal from "./BarcodeImageModal";
 import { useAppSelector } from "../../redux/store";
 import { useNavigation } from "@react-navigation/native";
 import {
-  itemInterface,
+  ItemObjType,
   ShoppingCartStackParamList,
 } from "../../../CustomTypes/types";
 import { StackNavigationProp } from "@react-navigation/stack";
 
 type Props = {
-  itemObj: itemInterface;
+  itemObj: ItemObjType;
 };
 
 const BarcodeImageCart: FC<Props> = ({ itemObj }): JSX.Element => {

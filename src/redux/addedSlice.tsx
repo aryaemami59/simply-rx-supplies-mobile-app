@@ -6,11 +6,10 @@ import {
   AnyAction,
   PayloadAction,
   ActionReducerMapBuilder,
-  AsyncThunk,
-  AsyncThunkAction,
 } from "@reduxjs/toolkit";
 import { createSelector } from "reselect";
-import { AppDispatch, RootState } from "./store";
+import { RootState } from "./store";
+import { Category, Link } from "../../CustomTypes/types";
 import {
   GITHUB_URL_ITEMS,
   GITHUB_URL_VENDORS,
@@ -20,7 +19,10 @@ import {
   addedState,
   addItemsByVendorInterface,
   addItemsInterface,
-  itemInterface,
+  FetchItems,
+  FetchNavList,
+  FetchVendors,
+  ItemObjType,
   itemState,
   navsObjInterface,
   officialVendorNameType,
@@ -43,61 +45,20 @@ const createAsyncThunkFunc = (strVal: string, githubUrl: string) => {
   });
 };
 
-// export const fetchItems: AsyncThunk<
-//   itemInterface[],
-//   void,
-//   { state: itemState }
-// > = createAsyncThunk(`${"items"}/fetch${"items"}`, async () => {
-//   const response: Response = await fetch(GITHUB_URL_ITEMS);
-//   if (!response.ok) {
-//     return Promise.reject("Unable to fetch, status: " + response.status);
-//   }
-//   const data = await response.json();
-//   const myItems = await data["items"];
-//   return myItems;
-// });
-// export const fetchVendors = createAsyncThunk(
-//   `${"vendors"}/fetch${"vendors"}`,
-//   async () => {
-//     const response: Response = await fetch(GITHUB_URL_ITEMS);
-//     if (!response.ok) {
-//       return Promise.reject("Unable to fetch, status: " + response.status);
-//     }
-//     const data = await response.json();
-//     const myItems = await data["vendors"];
-//     return myItems;
-//   }
-// );
-// export const fetchNavList = createAsyncThunk(
-//   `${"navs"}/fetch${"navs"}`,
-//   async () => {
-//     const response: Response = await fetch(GITHUB_URL_ITEMS);
-//     if (!response.ok) {
-//       return Promise.reject("Unable to fetch, status: " + response.status);
-//     }
-//     const data = await response.json();
-//     const myItems = await data["navs"];
-//     return myItems;
-//   }
-// );
-// export const fetchItems = createAsyncThunkFunc("items", GITHUB_URL_ITEMS);
-export const fetchItems: AsyncThunk<
-  itemInterface[],
-  void,
-  { dispatch: AppDispatch }
-> = createAsyncThunkFunc("items", GITHUB_URL_ITEMS);
+export const fetchItems: FetchItems = createAsyncThunkFunc(
+  "items",
+  GITHUB_URL_ITEMS
+);
 
-export const fetchVendors: AsyncThunk<
-  vendorsObjInterface,
-  void,
-  { dispatch: AppDispatch }
-> = createAsyncThunkFunc("vendors", GITHUB_URL_VENDORS);
+export const fetchVendors: FetchVendors = createAsyncThunkFunc(
+  "vendors",
+  GITHUB_URL_VENDORS
+);
 
-export const fetchNavList: AsyncThunk<
-  navsObjInterface,
-  void,
-  { dispatch: AppDispatch }
-> = createAsyncThunkFunc("navs", GITHUB_URL_NAVLIST);
+export const fetchNavList: FetchNavList = createAsyncThunkFunc(
+  "navs",
+  GITHUB_URL_NAVLIST
+);
 
 const empty: [] = [];
 
@@ -147,13 +108,11 @@ export const addedSlice = createSlice({
     ) => {
       state[action.payload.vendorName] = state[
         action.payload.vendorName
-      ].filter(
-        ({ name }: itemInterface) => name !== action.payload.itemObj.name
-      );
+      ].filter(({ name }: ItemObjType) => name !== action.payload.itemObj.name);
     },
     setListItems: (
       state: addedState,
-      action: PayloadAction<itemInterface[]>
+      action: PayloadAction<ItemObjType[]>
     ): void => {
       state.listItems = action.payload;
     },
@@ -184,7 +143,8 @@ export const addedSlice = createSlice({
       fetchNavList.fulfilled,
       (state: addedState, action: PayloadAction<navsObjInterface>): void => {
         state.navsObj = action.payload;
-        state.navsArr = Object.keys(action.payload);
+        const keys = Object.keys(action.payload) as Category[];
+        state.navsArr = keys;
         state.navListIsLoading = false;
         state.errMsg = "";
       }
@@ -223,13 +183,13 @@ export const itemSlice = createSlice({
       state: itemState,
       action: PayloadAction<addItemsByVendorInterface>
     ): void => {
-      state[action.payload.itemObj.name].vendorsToAdd = state[
+      state[action.payload.itemObj.name]!.vendorsToAdd = state[
         action.payload.itemObj.name
-      ].vendorsToAdd.includes(action.payload.vendorName)
-        ? state[action.payload.itemObj.name].vendorsToAdd.filter(
+      ]!.vendorsToAdd!.includes(action.payload.vendorName)
+        ? state[action.payload.itemObj.name]!.vendorsToAdd!.filter(
             (e: vendorNameType) => e !== action.payload.vendorName
           )
-        : state[action.payload.itemObj.name].vendorsToAdd.concat(
+        : state[action.payload.itemObj.name]!.vendorsToAdd!.concat(
             action.payload.vendorName
           );
     },
@@ -238,10 +198,10 @@ export const itemSlice = createSlice({
       action: PayloadAction<vendorNameType>
     ) => {
       const affectedItems = state.itemsArr
-        .filter((e: itemInterface) => e.vendors!.includes(action.payload))
-        .map(({ name }: itemInterface) => name);
+        .filter((e: ItemObjType) => e.vendors!.includes(action.payload))
+        .map(({ name }: ItemObjType) => name);
       affectedItems.forEach(e => {
-        state[e].vendorsToAdd = state[e].vendorsToAdd.filter(
+        state[e]!.vendorsToAdd = state[e]!.vendorsToAdd!.filter(
           (e: vendorNameType) => e !== action.payload
         );
       });
@@ -253,9 +213,10 @@ export const itemSlice = createSlice({
     });
     builder.addCase(
       fetchItems.fulfilled,
-      (state: itemState, action: PayloadAction<itemInterface[]>): void => {
+      (state: itemState, action: PayloadAction<ItemObjType[]>): void => {
         for (const itemObj of action.payload) {
           state[itemObj.name] = {
+            ...itemObj,
             vendorsToAdd: itemObj.vendors,
             vendorsAdded: empty,
           };
@@ -270,42 +231,44 @@ export const itemSlice = createSlice({
       state.errMsg = action.error.message || "Fetch failed";
     });
     builder.addCase(addItems, (state: itemState, action): void => {
-      state[action.payload.itemObj.name].vendorsAdded = [
-        ...state[action.payload.itemObj.name].vendorsAdded,
-        ...state[action.payload.itemObj.name].vendorsToAdd,
+      state[action.payload.itemObj.name]!.vendorsAdded = [
+        ...state[action.payload.itemObj.name]!.vendorsAdded,
+        ...state[action.payload.itemObj.name]!.vendorsToAdd,
       ];
-      state[action.payload.itemObj.name].vendorsToAdd = state[
+      state[action.payload.itemObj.name]!.vendorsToAdd = state[
         action.payload.itemObj.name
-      ].vendorsToAdd.length
-        ? intersection(
+      ]!.vendorsToAdd.length
+        ? (intersection(
             action.payload.itemObj.vendors,
-            state[action.payload.itemObj.name].vendorsAdded
-          )
+            state[action.payload.itemObj.name]!.vendorsAdded
+          ) as vendorNameType[])
         : empty;
     });
     builder.addCase(
       addItemsByVendor,
       (state: itemState, action: PayloadAction<addItemsByVendorInterface>) => {
-        state[action.payload.itemObj.name].vendorsAdded = [
-          ...state[action.payload.itemObj.name].vendorsAdded,
+        state[action.payload.itemObj.name]!.vendorsAdded = [
+          ...state[action.payload.itemObj.name]!.vendorsAdded,
           action.payload.vendorName,
         ];
-        state[action.payload.itemObj.name].vendorsToAdd = state[
+        state[action.payload.itemObj.name]!.vendorsToAdd = state[
           action.payload.itemObj.name
-        ].vendorsToAdd.length
-          ? intersection(
+        ]!.vendorsToAdd.length
+          ? (intersection(
               action.payload.itemObj.vendors,
-              state[action.payload.itemObj.name].vendorsAdded
-            )
+              state[action.payload.itemObj.name]!.vendorsAdded
+            ) as vendorNameType[])
           : empty;
       }
     );
     builder.addCase(
       removeItems,
       (state: itemState, action: PayloadAction<addItemsByVendorInterface>) => {
-        state[action.payload.itemObj.name].vendorsAdded = state[
+        state[action.payload.itemObj.name]!.vendorsAdded = state[
           action.payload.itemObj.name
-        ].vendorsAdded.filter((e: string) => e !== action.payload.vendorName);
+        ]!.vendorsAdded.filter(
+          (e: vendorNameType) => e !== action.payload.vendorName
+        );
       }
     );
   },
@@ -313,7 +276,7 @@ export const itemSlice = createSlice({
 
 export const selectByVendor =
   (vendorName: vendorNameType) =>
-  (state: RootState): itemInterface[] =>
+  (state: RootState): ItemObjType[] =>
     state.added[vendorName];
 
 export const selectVendorsArr = (state: RootState): vendorNameType[] =>
@@ -321,10 +284,10 @@ export const selectVendorsArr = (state: RootState): vendorNameType[] =>
 
 export const selectVendorsLinks =
   (vendorName: vendorNameType) =>
-  (state: RootState): string =>
+  (state: RootState): Link =>
     state.added.vendorsObj ? state.added.vendorsObj[vendorName].link : "";
 
-export const selectNavsArr = (state: RootState): string[] =>
+export const selectNavsArr = (state: RootState): Category[] =>
   state.added.navsArr ? state.added.navsArr : empty;
 
 export const addedItemsLength =
@@ -333,23 +296,23 @@ export const addedItemsLength =
     state.added[vendorName].length;
 
 export const checkIfAddedToOneVendor =
-  (itemObj: itemInterface, vendorName: vendorNameType) =>
+  (itemObj: ItemObjType, vendorName: vendorNameType) =>
   (state: RootState): boolean =>
-    state.item[itemObj.name].vendorsAdded.includes(vendorName);
+    state.item[itemObj.name]!.vendorsAdded.includes(vendorName);
 
 export const selectItemsByVendor =
   (vendorName: vendorNameType) =>
-  (state: RootState): itemInterface[] =>
+  (state: RootState): ItemObjType[] =>
     state.added.vendorsObj ? state.added.vendorsObj[vendorName].items : empty;
 
 export const selectVendorsToAddTo =
-  (itemObj: itemInterface) =>
+  (itemObj: ItemObjType) =>
   (state: RootState): vendorNameType[] =>
-    state.item[itemObj.name].vendorsToAdd;
+    state.item[itemObj.name]!.vendorsToAdd;
 
 export const selectSidebarNavs =
-  (category: string) =>
-  (state: RootState): itemInterface[] =>
+  (category: Category) =>
+  (state: RootState): ItemObjType[] =>
     state.added.navsObj ? state.added.navsObj[category] : empty;
 
 export const selectQRCodeContent =
@@ -360,16 +323,16 @@ export const selectQRCodeContent =
       .join(state.added.vendorsObj![vendorName].joinChars);
 
 export const checkIfAddedToAllVendors =
-  (itemObj: itemInterface) =>
+  (itemObj: ItemObjType) =>
   (state: RootState): boolean =>
-    state.item[itemObj.name].vendorsAdded.length === itemObj.vendors.length;
+    state.item[itemObj.name]!.vendorsAdded.length === itemObj.vendors.length;
 
 export const checkIfItemAddedToOneVendor =
-  (vendorName: vendorNameType, itemObj: itemInterface) =>
+  (vendorName: vendorNameType, itemObj: ItemObjType) =>
   (state: RootState): boolean =>
-    state.item[itemObj.name].vendorsAdded.includes(vendorName);
+    state.item[itemObj.name]!.vendorsAdded.includes(vendorName);
 
-export const selectItemsArr = (state: RootState): itemInterface[] =>
+export const selectItemsArr = (state: RootState): ItemObjType[] =>
   state.item.itemsArr;
 
 export const selectVendorOfficialName =
@@ -393,8 +356,8 @@ export const checkIfAnyItemsAdded = (state: RootState): boolean =>
   );
 
 export const selectAllListItems = createSelector(
-  (state: RootState): itemInterface[] => state.added.listItems,
-  (listItems: itemInterface[]): itemInterface[] => listItems
+  (state: RootState): ItemObjType[] => state.added.listItems,
+  (listItems: ItemObjType[]): ItemObjType[] => listItems
 );
 
 export const checkIfLoading = (state: RootState): boolean =>

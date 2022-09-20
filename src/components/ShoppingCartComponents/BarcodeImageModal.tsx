@@ -3,10 +3,10 @@ import { MaterialCommunityIcons, EvilIcons } from "@expo/vector-icons";
 import { Modal, View, Image, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Constants from "expo-constants";
-import { itemInterface } from "../../../CustomTypes/types";
+import { ItemObjType } from "../../../CustomTypes/types";
 
 interface Props {
-  itemObj: itemInterface;
+  itemObj: ItemObjType;
 }
 
 const BarcodeImageModal: FC<Props> = ({ itemObj }): JSX.Element => {

@@ -2,10 +2,10 @@ import { FC, memo } from "react";
 import { View, Text } from "react-native";
 import CopyItemNumber from "./CopyItemNumber";
 import { useAppSelector } from "../../redux/store";
-import { itemInterface } from "../../../CustomTypes/types";
+import { ItemObjType } from "../../../CustomTypes/types";
 
 type Props = {
-  itemObj: itemInterface;
+  itemObj: ItemObjType;
 };
 
 const ItemNumberCart: FC<Props> = ({ itemObj }): JSX.Element => {

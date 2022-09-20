@@ -7,7 +7,7 @@ import { ScrollView } from "react-native";
 import { StackScreenProps } from "@react-navigation/stack";
 import {
   ItemsReferenceStackParamList,
-  itemInterface,
+  ItemObjType,
 } from "../../../CustomTypes/types";
 
 type Props = StackScreenProps<
@@ -18,7 +18,7 @@ type Props = StackScreenProps<
 const CategoryItems: FC<Props> = ({ navigation, route }): JSX.Element => {
   const { category } = route.params;
 
-  const sidebarItems: itemInterface[] = useAppSelector<itemInterface[]>(
+  const sidebarItems: ItemObjType[] = useAppSelector<ItemObjType[]>(
     selectSidebarNavs(category),
     shallowEqual
   );

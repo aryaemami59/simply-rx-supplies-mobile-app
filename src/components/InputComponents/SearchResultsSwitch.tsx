@@ -8,7 +8,7 @@ import { View, Text } from "react-native";
 // import { Switch } from "react-native";
 import { Switch } from "react-native-paper";
 import { mainColor } from "../../shared/sharedStyles";
-import { itemInterface, vendorNameType } from "../../../CustomTypes/types";
+import { ItemObjType, vendorNameType } from "../../../CustomTypes/types";
 
 type stateToPropsReturnType = {
   checked: boolean;
@@ -51,7 +51,7 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 
 interface ParentProps {
   vendorName: vendorNameType;
-  itemObj: itemInterface;
+  itemObj: ItemObjType;
 }
 
 type myProps = ParentProps & PropsFromRedux;

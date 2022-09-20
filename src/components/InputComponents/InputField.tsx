@@ -12,7 +12,7 @@ import { useFocusEffect } from "@react-navigation/native";
 import { shallowEqual } from "react-redux";
 import { FontAwesome, EvilIcons } from "@expo/vector-icons";
 import { width80 } from "../../shared/sharedStyles";
-import { itemInterface, OnChangeText } from "../../../CustomTypes/types";
+import { ItemObjType, OnChangeText } from "../../../CustomTypes/types";
 import {
   mainColor,
   displayNone,
@@ -23,7 +23,7 @@ import {
 const empty: [] = [];
 
 const sortResults = (
-  searchTerm: itemInterface,
+  searchTerm: ItemObjType,
   re: RegExp,
   trimmedValue: string
 ): number => {
@@ -44,7 +44,7 @@ const sortResults = (
 
 const InputField: FC = (): JSX.Element => {
   const [val, setVal] = useState<string>("");
-  const items: itemInterface[] = useAppSelector<itemInterface[]>(
+  const items: ItemObjType[] = useAppSelector<ItemObjType[]>(
     selectItemsArr,
     shallowEqual
   );
@@ -108,7 +108,7 @@ const InputField: FC = (): JSX.Element => {
 
   const changeVal: OnChangeText = useCallback(
     (text: string): void => {
-      const listItems: itemInterface[] = listItemsFunc(text);
+      const listItems: ItemObjType[] = listItemsFunc(text);
       setVal(text);
       dispatch(setListItems(listItems));
     },

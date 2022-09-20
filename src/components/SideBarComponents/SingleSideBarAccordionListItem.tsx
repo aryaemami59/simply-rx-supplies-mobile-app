@@ -7,10 +7,10 @@ import {
 } from "../../redux/addedSlice";
 import { useAppDispatch, useAppSelector } from "../../redux/store";
 import { shallowEqual } from "react-redux";
-import { itemInterface, vendorNameType } from "../../../CustomTypes/types";
+import { ItemObjType, vendorNameType } from "../../../CustomTypes/types";
 
 interface Props {
-  itemObj: itemInterface;
+  itemObj: ItemObjType;
 }
 
 const SingleSideBarAccordionListItem: FC<Props> = ({
