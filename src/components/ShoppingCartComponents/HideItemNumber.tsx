@@ -18,7 +18,7 @@ const HideItemNumber: FC = (): JSX.Element => {
     <Chip
       size="sm"
       radius="xl"
-      title={`${title} Item Number`}
+      title={`${title} Item Numbers`}
       buttonStyle={styles.buttonStyle}
       onPress={toggleItemNumber}
     />

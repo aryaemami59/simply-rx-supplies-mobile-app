@@ -23,7 +23,7 @@ const HideItemName: FC = (): JSX.Element => {
       <Chip
         size="sm"
         radius="xl"
-        title={`${title} Item Name`}
+        title={`${title} Item Names`}
         onPress={toggleItemName}
         buttonStyle={styles.buttonStyle}>
         {/* <Switch

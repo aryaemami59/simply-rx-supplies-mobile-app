@@ -9,12 +9,13 @@ import {
 } from "@reduxjs/toolkit";
 import { createSelector } from "reselect";
 import { RootState } from "./store";
-import { Category, Link } from "../../CustomTypes/types";
 import {
   GITHUB_URL_ITEMS,
   GITHUB_URL_VENDORS,
   GITHUB_URL_NAVLIST,
 } from "./fetchInfo";
+import fetch from "react-native-fetch-polyfill";
+
 import {
   addedState,
   addItemsByVendorInterface,
@@ -28,6 +29,8 @@ import {
   officialVendorNameType,
   vendorNameType,
   vendorsObjInterface,
+  Category,
+  Link,
 } from "../../CustomTypes/types";
 
 const intersection = (firstArray: string[], secondArray: string[]): string[] =>
@@ -35,7 +38,7 @@ const intersection = (firstArray: string[], secondArray: string[]): string[] =>
 
 const createAsyncThunkFunc = (strVal: string, githubUrl: string) => {
   return createAsyncThunk(`${strVal}/fetch${strVal}`, async () => {
-    const response: Response = await fetch(githubUrl);
+    const response: Response = await fetch(githubUrl, { timeout: 1000 });
     if (!response.ok) {
       return Promise.reject("Unable to fetch, status: " + response.status);
     }
@@ -132,9 +135,6 @@ export const addedSlice = createSlice({
     ToggleItemName: (state: addedState): void => {
       state.showItemName = !state.showItemName;
     },
-    // ToggleVendorChecked: (state: addedState, action: PayloadAction<vendorNameType>) => {
-    //   state
-    // }
   },
   extraReducers: builder => {
     builder.addCase(fetchVendors.pending, (state: addedState): void => {
@@ -163,7 +163,6 @@ export const addedSlice = createSlice({
         let val: vendorNameType;
         for (val in payload) {
           state[val] = empty;
-          // state.
         }
         state.vendorsIsLoading = false;
         state.errMsg = "";

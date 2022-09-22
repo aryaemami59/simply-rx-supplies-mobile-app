@@ -39,7 +39,11 @@ const SearchResultsVendorCheckbox: FC<Props> = ({
       activeOpacity={0.6}>
       <ListItem bottomDivider>
         <ListItem.Content style={{ width: "100%" }}>
-          <ListItem.CheckBox checked={checked} title={title} />
+          <ListItem.CheckBox
+            checked={checked}
+            title={title}
+            onPress={onToggleCheck}
+          />
         </ListItem.Content>
         <ListItem.Chevron />
       </ListItem>

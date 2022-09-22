@@ -18,7 +18,7 @@ const HideItemBarcode: FC = (): JSX.Element => {
     <Chip
       size="sm"
       radius="xl"
-      title={`${title} Item Barcode`}
+      title={`${title} Item Barcodes`}
       buttonStyle={styles.buttonStyle}
       onPress={toggleItemBarcode}
     />

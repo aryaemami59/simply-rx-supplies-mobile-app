@@ -9,7 +9,6 @@ import {
   MD3LightTheme as DefaultTheme,
   Provider as PaperProvider,
 } from "react-native-paper";
-// import { MyTabs } from "./Main";
 
 const theme = {
   ...DefaultTheme,
@@ -28,14 +27,15 @@ const App: FC = (): JSX.Element => {
           <NavigationContainer>
             <Main />
           </NavigationContainer>
-          {/* <NavigationContainer>
-            <MyTabs />
-          </NavigationContainer> */}
         </PaperProvider>
       </Provider>
     </SafeAreaProvider>
   );
 };
+
+import React from "react";
+// import { whyDidYouUpdate } from "why-did-you-update";
+// whyDidYouUpdate(React);
 
 export default memo(App);
 

@@ -67,10 +67,6 @@ const SearchResultsSwitch: FC<myProps> = ({
     selectVendorOfficialName(vendorName)
   );
 
-  // const onToggleSwitch = useCallback(() => {
-  //   setChecked(prev => !prev);
-  // }, []);
-
   return (
     <>
       <ListItem.CheckBox
