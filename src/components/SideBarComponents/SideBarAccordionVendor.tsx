@@ -1,6 +1,5 @@
 import { ListItem } from "@rneui/themed";
-import { FC, memo, useCallback, useState } from "react";
-import VendorItems from "./VendorItems";
+import { FC, memo, useCallback } from "react";
 import { useAppSelector } from "../../redux/store";
 import { selectVendorOfficialName } from "../../redux/addedSlice";
 import { StyleSheet } from "react-native";
@@ -12,23 +11,15 @@ import {
   vendorNameType,
 } from "../../../CustomTypes/types";
 
-interface Props {
+type Props = {
   vendorName: vendorNameType;
-  // onPress: () => void;
-}
+};
 
-const SideBarAccordionVendor: FC<Props> = ({
-  vendorName,
-  // onPress,
-}): JSX.Element => {
-  // const [expanded, setExpanded] = useState<boolean>(false);
+const SideBarAccordionVendor: FC<Props> = ({ vendorName }): JSX.Element => {
   const officialVendorName: officialVendorNameType =
     useAppSelector<officialVendorNameType>(
       selectVendorOfficialName(vendorName)
     );
-  // const clickHandler = useCallback((): void => {
-  //   setExpanded((prev: boolean): boolean => !prev);
-  // }, []);
 
   const navigation =
     useNavigation<StackNavigationProp<ItemsReferenceStackParamList>>();
@@ -42,11 +33,8 @@ const SideBarAccordionVendor: FC<Props> = ({
       containerStyle={styles.accordionContainerStyle}
       key={vendorName}
       content={<ListItem.Title>{officialVendorName}</ListItem.Title>}
-      // isExpanded={expanded}
       bottomDivider
-      onPress={clickHandler}>
-      {/* <SideBarAccordionListItems /> */}
-    </ListItem.Accordion>
+      onPress={clickHandler}></ListItem.Accordion>
   );
 };
 

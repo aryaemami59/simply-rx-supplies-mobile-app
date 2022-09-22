@@ -1,12 +1,5 @@
-import {
-  FlexAlignType,
-  FlexStyle,
-  StyleProp,
-  TextStyle,
-  ViewStyle,
-} from "react-native";
+import { FlexStyle, StyleProp, TextStyle, ViewStyle } from "react-native";
 
-// export const mainColor = "rgb(0, 113, 220)" as const;
 export const mainColor = "#0071dc" as const;
 
 export const fontWeightBold = "700" as const;
@@ -17,6 +10,10 @@ export const displayNone: StyleProp<ViewStyle> = {
 
 export const width100: FlexStyle = {
   width: "100%",
+} as const;
+
+export const fontWeight600: TextStyle = {
+  fontWeight: "600",
 } as const;
 
 export const height100: FlexStyle = {

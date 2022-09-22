@@ -6,11 +6,7 @@ import { Ionicons } from "@expo/vector-icons";
 
 type Props = tabBarIconProps;
 
-const TabBarIconShoppingCart: FC<Props> = ({
-  focused,
-  color,
-  size,
-}): JSX.Element => {
+const TabBarIconShoppingCart: FC<Props> = ({ color }): JSX.Element => {
   const ifAdded = useAppSelector(checkIfAnyItemsAdded);
   return (
     <>

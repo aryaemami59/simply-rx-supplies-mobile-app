@@ -78,7 +78,7 @@ export type ItemObjType = {
   vendorsAdded: vendorNameType[];
 };
 
-export type vendorInterface = {
+type vendorInterface = {
   id: number;
   officialName: officialVendorNameType;
   abbrName: vendorNameType;
@@ -95,7 +95,7 @@ export type navsObjInterface = {
   [key in Category]: ItemObjType[];
 };
 
-export type VendorChecked = {
+type VendorChecked = {
   [key in vendorNameType]?: boolean;
 };
 
@@ -114,13 +114,13 @@ export type addedState = {
   navsObj?: navsObjInterface;
 };
 
-export type ItemName = ItemNamesType;
-export type ItemNumber = string;
-export type Keyword = string;
+type ItemName = ItemNamesType;
+type ItemNumber = string;
+type Keyword = string;
 export type Category = CategoryType;
-export type Src = string;
+type Src = string;
 export type Link = string;
-export type JoinChars = string;
+type JoinChars = string;
 
 export type vendorNameType =
   | "OI"
@@ -141,7 +141,7 @@ export type officialVendorNameType =
   | "Covap"
   | "FORS";
 
-export type CategoryType =
+type CategoryType =
   | "Vials"
   | "Caps"
   | "Liquid Bottles"
@@ -161,7 +161,7 @@ export type CategoryType =
   | "Equipment"
   | "CardioCheck and A1C";
 
-export type ItemNamesType =
+type ItemNamesType =
   | "10 Dram Vials"
   | "13 Dram Vials"
   | "30 Dram Vials"
@@ -530,7 +530,6 @@ export type itemState = {
   itemsArr: ItemObjType[];
   isLoading: boolean;
   vendorsChecked: VendorChecked;
-  // vendorChecked: boolean;
   errMsg: string;
 } & {
   [key in ItemName]?: ItemObjType;

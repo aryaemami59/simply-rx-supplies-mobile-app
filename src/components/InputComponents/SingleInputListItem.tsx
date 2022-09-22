@@ -4,6 +4,7 @@ import { View } from "react-native";
 import AddItemButton from "./AddItemButton";
 import SearchResultsSwitch from "./SearchResultsSwitch";
 import { ItemObjType, vendorNameType } from "../../../CustomTypes/types";
+import { fontWeight600 } from "../../shared/sharedStyles";
 
 type Props = {
   item: ItemObjType;
@@ -14,9 +15,7 @@ const SingleInputListItem: FC<Props> = ({ item: itemObj }): JSX.Element => {
     <View key={itemObj.id}>
       <ListItem bottomDivider>
         <ListItem.Content>
-          <ListItem.Title style={{ fontWeight: "600" }}>
-            {itemObj.name}
-          </ListItem.Title>
+          <ListItem.Title style={fontWeight600}>{itemObj.name}</ListItem.Title>
           {itemObj.vendors.map((e: vendorNameType) => (
             <SearchResultsSwitch key={e} vendorName={e} itemObj={itemObj} />
           ))}
@@ -29,4 +28,4 @@ const SingleInputListItem: FC<Props> = ({ item: itemObj }): JSX.Element => {
   );
 };
 
-export default memo(SingleInputListItem);
+export default memo<Props>(SingleInputListItem);

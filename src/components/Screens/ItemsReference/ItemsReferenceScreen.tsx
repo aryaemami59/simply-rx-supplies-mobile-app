@@ -15,10 +15,7 @@ type Props = StackScreenProps<
 
 const Tab = createMaterialTopTabNavigator<ItemsReferenceTopTabParamList>();
 
-const ItemsReferenceScreen: FC<Props> = ({
-  navigation,
-  route,
-}): JSX.Element => {
+const ItemsReferenceScreen: FC<Props> = (): JSX.Element => {
   return (
     <Tab.Navigator>
       <Tab.Screen

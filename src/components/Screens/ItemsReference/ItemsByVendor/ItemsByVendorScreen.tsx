@@ -1,12 +1,11 @@
 import { FC, memo } from "react";
-import { StyleSheet } from "react-native";
 import SideBarAccordionVendor from "../../../SideBarComponents/SideBarAccordionVendor";
 import { useAppSelector } from "../../../../redux/store";
 import { selectVendorsArr } from "../../../../redux/addedSlice";
 import { StackScreenProps } from "@react-navigation/stack";
 import {
-  ItemLookupStackParamList,
   ItemsByVendorStackParamList,
+  vendorNameType,
 } from "../../../../../CustomTypes/types";
 
 type Props = StackScreenProps<
@@ -14,8 +13,9 @@ type Props = StackScreenProps<
   "ItemsByVendorScreen"
 >;
 
-const ItemsByVendorScreen: FC<Props> = ({ navigation, route }): JSX.Element => {
-  const allVendors: string[] = useAppSelector<string[]>(selectVendorsArr);
+const ItemsByVendorScreen: FC<Props> = (): JSX.Element => {
+  const allVendors: vendorNameType[] =
+    useAppSelector<vendorNameType[]>(selectVendorsArr);
 
   return (
     <>
@@ -25,14 +25,5 @@ const ItemsByVendorScreen: FC<Props> = ({ navigation, route }): JSX.Element => {
     </>
   );
 };
-
-const styles = StyleSheet.create({
-  containerStyle: {
-    alignItems: "stretch",
-    justifyContent: "space-between",
-    height: "100%",
-    padding: 30,
-  },
-});
 
 export default memo<Props>(ItemsByVendorScreen);

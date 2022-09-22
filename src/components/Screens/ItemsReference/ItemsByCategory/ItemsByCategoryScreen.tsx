@@ -9,10 +9,7 @@ import { ItemsByCategoryStackParamList } from "../../../../../CustomTypes/types"
 
 type Props = StackScreenProps<ItemsByCategoryStackParamList>;
 
-const ItemsByCategoryScreen: FC<Props> = ({
-  navigation,
-  route,
-}): JSX.Element => {
+const ItemsByCategoryScreen: FC<Props> = (): JSX.Element => {
   const navList: string[] = useAppSelector<string[]>(
     selectNavsArr,
     shallowEqual

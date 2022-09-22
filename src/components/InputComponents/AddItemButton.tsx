@@ -1,14 +1,5 @@
 import { Chip } from "@rneui/themed";
-import {
-  Dispatch,
-  FC,
-  memo,
-  RefObject,
-  useRef,
-  useState,
-  useCallback,
-  SetStateAction,
-} from "react";
+import { FC, memo, useState, useCallback } from "react";
 
 import {
   checkIfAddedToAllVendors,
@@ -17,17 +8,16 @@ import {
 } from "../../redux/addedSlice";
 import { useAppSelector, useAppDispatch } from "../../redux/store";
 import { shallowEqual } from "react-redux";
-import { StyleSheet, Keyboard } from "react-native";
+import { StyleSheet } from "react-native";
 import { fontWeightBold, mainColor } from "../../shared/sharedStyles";
 import { ItemObjType, vendorNameType } from "../../../CustomTypes/types";
 
-interface Props {
+type Props = {
   itemObj: ItemObjType;
-}
+};
 
 const AddItemButton: FC<Props> = ({ itemObj }): JSX.Element => {
-  const [show, setShow]: [boolean, Dispatch<SetStateAction<boolean>>] =
-    useState<boolean>(false);
+  useState<boolean>(false);
   const IfAddedToAllVendors: boolean = useAppSelector<boolean>(
     checkIfAddedToAllVendors(itemObj)
   );
@@ -36,29 +26,13 @@ const AddItemButton: FC<Props> = ({ itemObj }): JSX.Element => {
     shallowEqual
   );
   const dispatch = useAppDispatch();
-  const target: RefObject<HTMLButtonElement> = useRef<null>(null);
-
-  const showBadge = useCallback((): void => {
-    setShow(true);
-  }, []);
-  const hideBadge = useCallback((): void => {
-    setShow(false);
-  }, []);
-
-  const showThenHide = useCallback((): void => {
-    showBadge();
-    setTimeout(hideBadge, 1500);
-  }, [showBadge, hideBadge]);
 
   const clickHandler = useCallback((): void => {
-    // Keyboard.dismiss();
-    IfAddedToAllVendors
-      ? showThenHide()
-      : dispatch(addItems({ itemObj, vendors }));
-  }, [IfAddedToAllVendors, showThenHide, dispatch, itemObj, vendors]);
+    !IfAddedToAllVendors && dispatch(addItems({ itemObj, vendors }));
+  }, [IfAddedToAllVendors, dispatch, itemObj, vendors]);
+
   return (
     <>
-      {/* <Button size="lg" onPress={clickHandler} title="Add Item" /> */}
       <Chip
         raised
         size="lg"
@@ -68,18 +42,6 @@ const AddItemButton: FC<Props> = ({ itemObj }): JSX.Element => {
         buttonStyle={styles.buttonStyle}
         icon={{ name: "add", type: "Ionicons", color: "white" }}
       />
-      {/* <View key={`Collapse-AddItemButtonComponent-${itemObj.name}`}>
-        <Tooltip
-          closeOnlyOnBackdropPress
-          visible={show}
-          backgroundColor={lightColors.error}
-          ModalComponent={Modal}
-          popover={
-            <Badge value="This Item Has Already Been Added!" status="error" />
-          }
-          withPointer={false}
-        />
-      </View> */}
     </>
   );
 };
@@ -93,4 +55,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default memo(AddItemButton);
+export default memo<Props>(AddItemButton);

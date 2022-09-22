@@ -1,13 +1,8 @@
-import { useCallback, FC, memo } from "react";
+import { FC, memo } from "react";
 import { selectAllListItems } from "../../redux/addedSlice";
 import { useAppSelector } from "../../redux/store";
 import { shallowEqual } from "react-redux";
-import {
-  FlatList,
-  StyleSheet,
-  ListRenderItem,
-  ListRenderItemInfo,
-} from "react-native";
+import { FlatList, ListRenderItem, ListRenderItemInfo } from "react-native";
 import SingleInputListItem from "./SingleInputListItem";
 import InputField from "./InputField";
 import { ItemObjType } from "../../../CustomTypes/types";
@@ -43,20 +38,5 @@ const InputGroup: FC = (): JSX.Element => {
     </>
   );
 };
-
-const styles = StyleSheet.create({
-  containerStyle: {
-    backgroundColor: "transparent",
-    borderBottomWidth: 0,
-    borderTopWidth: 0,
-  },
-  inputContainerStyle: {
-    borderRadius: 9999,
-    backgroundColor: "rgba(0, 0, 0, 0.3)",
-  },
-  inputStyle: {
-    color: "white",
-  },
-});
 
 export default memo(InputGroup);

@@ -8,9 +8,10 @@ import {
 import {
   setVendorsForAllCheck,
   setVendorsForAllUncheck,
+  selectVendorsChecked,
 } from "../../redux/addedSlice";
 import { useAppDispatch, useAppSelector } from "../../redux/store";
-import { selectVendorsChecked } from "../../redux/addedSlice";
+import { width100 } from "../../shared/sharedStyles";
 
 type Props = {
   title: officialVendorNameType;
@@ -38,7 +39,7 @@ const SearchResultsVendorCheckbox: FC<Props> = ({
       onPress={onToggleCheck}
       activeOpacity={0.6}>
       <ListItem bottomDivider>
-        <ListItem.Content style={{ width: "100%" }}>
+        <ListItem.Content style={width100}>
           <ListItem.CheckBox
             checked={checked}
             title={title}

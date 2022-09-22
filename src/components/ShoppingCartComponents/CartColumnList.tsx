@@ -8,11 +8,11 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import Constants from "expo-constants";
 import { EvilIcons } from "@expo/vector-icons";
 
-interface Props {
+type Props = {
   showModal: boolean;
-  setShowModal: Function;
+  setShowModal: () => void;
   clickHandler: (e: GestureResponderEvent) => void;
-}
+};
 
 const CartColumnList: FC<Props> = ({
   showModal,

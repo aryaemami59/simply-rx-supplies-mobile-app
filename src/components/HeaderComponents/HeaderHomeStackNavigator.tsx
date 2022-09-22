@@ -1,13 +1,15 @@
 import { StackHeaderProps, StackNavigationProp } from "@react-navigation/stack";
-import { Header, Icon, SearchBar } from "@rneui/themed";
+import { Header, SearchBar } from "@rneui/themed";
 import { FC, memo, useEffect, useRef, useCallback } from "react";
 import { TextInput } from "react-native";
 import { useIsFocused, useNavigation } from "@react-navigation/native";
 import { RootStackParamList } from "../../../CustomTypes/types";
-import { MaterialIcons, FontAwesome, EvilIcons } from "@expo/vector-icons";
+import { FontAwesome, EvilIcons } from "@expo/vector-icons";
 import { mainColor } from "../../shared/sharedStyles";
 
-const HeaderHomeStackNavigator: FC<StackHeaderProps> = (): JSX.Element => {
+type Props = StackHeaderProps;
+
+const HeaderHomeStackNavigator: FC<Props> = (): JSX.Element => {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
   const inputRef = useRef<TextInput>(null);
   const isFocused = useIsFocused();
@@ -33,7 +35,6 @@ const HeaderHomeStackNavigator: FC<StackHeaderProps> = (): JSX.Element => {
         <SearchBar
           ref={inputRef}
           onFocus={focusHandler}
-          // lightTheme={false}
           containerStyle={{
             backgroundColor: "transparent",
             borderBottomWidth: 0,
@@ -60,4 +61,4 @@ const HeaderHomeStackNavigator: FC<StackHeaderProps> = (): JSX.Element => {
   );
 };
 
-export default memo(HeaderHomeStackNavigator);
+export default memo<Props>(HeaderHomeStackNavigator);

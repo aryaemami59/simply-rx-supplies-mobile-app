@@ -13,10 +13,6 @@ import { BottomSheet } from "@rneui/base";
 import { View } from "react-native";
 import SearchResultsVendorCheckbox from "./SearchResultsVendorCheckbox";
 
-type Props = {
-  props: string;
-};
-
 const BottomSheetComponent: FC = (): JSX.Element => {
   const [visible, setVisible] = useState<boolean>(false);
   const vendors = useAppSelector<vendorNameType[]>(selectVendorsArr);

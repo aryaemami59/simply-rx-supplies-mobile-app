@@ -1,4 +1,4 @@
-import { StackNavigationProp, StackScreenProps } from "@react-navigation/stack";
+import { StackScreenProps } from "@react-navigation/stack";
 import { FC, memo } from "react";
 import { Chip } from "@rneui/themed";
 import { View, StyleSheet } from "react-native";
@@ -8,18 +8,12 @@ import {
   FontAwesome5,
   MaterialIcons,
 } from "@expo/vector-icons";
-import {
-  RootStackParamList,
-  HomeStackParamList,
-} from "../../../../CustomTypes/types";
-import { useNavigation } from "@react-navigation/native";
+import { HomeStackParamList } from "../../../../CustomTypes/types";
 import { fontWeightBold, mainColor } from "../../../shared/sharedStyles";
 
 type Props = StackScreenProps<HomeStackParamList, "HomeScreen">;
 
-const HomeScreen: FC<Props> = ({ navigation, route }): JSX.Element => {
-  // const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
-
+const HomeScreen: FC<Props> = ({ navigation }): JSX.Element => {
   return (
     <SafeAreaView>
       <View style={styles.containerStyle}>
@@ -62,17 +56,6 @@ const HomeScreen: FC<Props> = ({ navigation, route }): JSX.Element => {
           size="lg"
           onPress={() => navigation.navigate("ItemsByCategory")}
         />
-        {/* <Chip
-            raised
-            titleStyle={styles.titleStyle}
-            buttonStyle={styles.buttonStyle}
-            title="Shopping Cart"
-            size="lg"
-            icon={
-              <MaterialIcons name="shopping-cart" color="white" type="MaterialIcons" />
-            }
-            onPress={() => navigation.navigate("ShoppingCart")}
-          /> */}
       </View>
     </SafeAreaView>
   );
@@ -84,7 +67,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     height: "100%",
     padding: 30,
-    // backgroundColor: "white",
   },
   buttonStyle: {
     backgroundColor: mainColor,

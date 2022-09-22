@@ -15,10 +15,7 @@ type Props = MaterialTopTabScreenProps<
 
 const Stack = createStackNavigator<ItemsByCategoryStackParamList>();
 
-const ItemsByCategoryStackScreen: FC<Props> = ({
-  navigation,
-  route,
-}): JSX.Element => {
+const ItemsByCategoryStackScreen: FC<Props> = (): JSX.Element => {
   return (
     <Stack.Navigator screenOptions={HEADER_SHOWN_FALSE}>
       <Stack.Screen

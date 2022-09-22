@@ -8,10 +8,7 @@ import {
 import { shallowEqual } from "react-redux";
 import SingleSideBarAccordionListItem from "./SingleSideBarAccordionListItem";
 import { ScrollView } from "react-native";
-import {
-  ItemsReferenceStackParamList,
-  ItemsByVendorStackParamList,
-} from "../../../CustomTypes/types";
+import { ItemsReferenceStackParamList } from "../../../CustomTypes/types";
 import { StackScreenProps } from "@react-navigation/stack";
 import {
   officialVendorNameType,

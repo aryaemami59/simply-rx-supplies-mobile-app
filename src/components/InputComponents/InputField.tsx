@@ -91,7 +91,7 @@ const InputField: FC = (): JSX.Element => {
         .split(/\s+/gi)
         .map((f: string) => `(?=.*${f})`)
         .join("");
-      const re: RegExp = new RegExp(`${reg}|${looseReg}`, "gi");
+      const re = new RegExp(`${reg}|${looseReg}`, "gi");
       return trimmedValue
         ? items
             .filter(({ name }) => name.toLowerCase().trim().match(re))

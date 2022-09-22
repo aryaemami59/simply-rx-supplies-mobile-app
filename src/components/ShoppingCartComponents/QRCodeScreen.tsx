@@ -10,7 +10,7 @@ import { Octicons } from "@expo/vector-icons";
 
 type Props = StackScreenProps<ShoppingCartStackParamList, "QRImage">;
 
-const QRCodeScreen: FC<Props> = ({ navigation, route }): JSX.Element => {
+const QRCodeScreen: FC<Props> = ({ route }): JSX.Element => {
   const { itemNumbers } = route.params;
 
   let svg = useRef<Svg>(null);

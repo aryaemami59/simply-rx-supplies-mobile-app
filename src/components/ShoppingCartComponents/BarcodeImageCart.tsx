@@ -1,8 +1,5 @@
 import { FC, memo, useCallback } from "react";
-import { Image, StyleSheet, Pressable, TouchableOpacity } from "react-native";
-import { Feather } from "@expo/vector-icons";
-import Constants from "expo-constants";
-import BarcodeImageModal from "./BarcodeImageModal";
+import { Image, StyleSheet, TouchableOpacity } from "react-native";
 import { useAppSelector } from "../../redux/store";
 import { useNavigation } from "@react-navigation/native";
 import {
@@ -42,9 +39,6 @@ const BarcodeImageCart: FC<Props> = ({ itemObj }): JSX.Element => {
   );
 };
 
-{
-  /* <Feather name="printer" size={30} color="black" /> */
-}
 const styles = StyleSheet.create({
   ImageStyle: {
     width: 132,

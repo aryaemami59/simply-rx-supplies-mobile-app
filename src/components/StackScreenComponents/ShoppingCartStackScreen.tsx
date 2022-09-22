@@ -18,10 +18,7 @@ const Stack = createStackNavigator<ShoppingCartStackParamList>();
 
 type Props = BottomTabScreenProps<RootTabParamList, "ShoppingCart">;
 
-const ShoppingCartStackScreen: FC<Props> = ({
-  navigation,
-  route,
-}): JSX.Element => {
+const ShoppingCartStackScreen: FC<Props> = (): JSX.Element => {
   return (
     <Stack.Navigator>
       <Stack.Screen
