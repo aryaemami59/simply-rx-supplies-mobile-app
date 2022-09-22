@@ -6,19 +6,19 @@ import {
   clearListItems,
   selectItemsArr,
   setListItems,
-} from "../../redux/addedSlice";
-import { useAppDispatch, useAppSelector } from "../../redux/store";
+} from "../../../../redux/addedSlice";
+import { useAppDispatch, useAppSelector } from "../../../../redux/store";
 import { useFocusEffect } from "@react-navigation/native";
 import { shallowEqual } from "react-redux";
 import { FontAwesome, EvilIcons } from "@expo/vector-icons";
-import { width80 } from "../../shared/sharedStyles";
-import { ItemObjType, OnChangeText } from "../../../CustomTypes/types";
+import { width80 } from "../../../../shared/sharedStyles";
+import { ItemObjType, OnChangeText } from "../../../../../CustomTypes/types";
 import {
   mainColor,
   displayNone,
   width100,
   colorWhite,
-} from "../../shared/sharedStyles";
+} from "../../../../shared/sharedStyles";
 
 const empty: [] = [];
 
@@ -169,7 +169,7 @@ const styles = StyleSheet.create({
     borderTopWidth: 0,
   },
   headerContainerStyle: {
-    height: 105,
+    // height: 105,
   },
   inputContainerStyle: {
     borderRadius: 9999,

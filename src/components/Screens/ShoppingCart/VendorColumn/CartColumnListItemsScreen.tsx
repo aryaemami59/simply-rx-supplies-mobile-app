@@ -1,6 +1,9 @@
 import { FC, memo, useCallback, useEffect } from "react";
 import { useAppSelector } from "../../../../redux/store";
-import { selectByVendor } from "../../../../redux/addedSlice";
+import {
+  selectByVendor,
+  checkIfAnyItemsAddedToOneVendor,
+} from "../../../../redux/addedSlice";
 import {
   View,
   Text,
@@ -23,6 +26,11 @@ import HideItemBarcode from "../../../ShoppingCartComponents/HideItemBarcode";
 import { selectVendorOfficialName } from "../../../../redux/addedSlice";
 import SingleCartListItems from "./SingleCartListItems";
 import { officialVendorNameType } from "../../../../../CustomTypes/types";
+import { Button, Chip } from "@rneui/themed";
+import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
+import { MaterialIcons } from "@expo/vector-icons";
+import { mainColor, fontWeightBold } from "../../../../shared/sharedStyles";
+import { TouchableOpacity } from "react-native";
 
 const renderItems: ListRenderItem<ItemObjType> = ({
   item,
@@ -32,7 +40,7 @@ const renderItems: ListRenderItem<ItemObjType> = ({
 
 const keyExtractor = (item: ItemObjType) => item.id.toString();
 
-type Props = StackScreenProps<ShoppingCartStackParamList, "VendorItems">;
+type Props = StackScreenProps<ShoppingCartStackParamList, "CartVendorItems">;
 
 const CartColumnListItemsScreen: FC<Props> = ({
   navigation,
@@ -41,6 +49,9 @@ const CartColumnListItemsScreen: FC<Props> = ({
   const { vendorName } = route.params;
   const addedItems = useAppSelector(selectByVendor(vendorName));
   const vendorLink = useAppSelector(selectVendorsLinks(vendorName));
+  const ifAnyItemsAdded = useAppSelector<boolean>(
+    checkIfAnyItemsAddedToOneVendor(vendorName)
+  );
 
   const openLink = useCallback(() => {
     Linking.openURL(vendorLink);
@@ -56,23 +67,14 @@ const CartColumnListItemsScreen: FC<Props> = ({
     });
   }, []);
 
+  const clickHandler = useCallback(() => {
+    navigation.navigate("ItemLookup");
+  }, []);
+
   return (
     <>
-      <View style={styles.bigContainer}>
-        {/* <View style={styles.CartQRCodeImageContainer}>
-          <CartQRCodeImage vendorName={vendorName} />
-        </View>
-        <View style={styles.vendorLinkContainer}>
-          <Text onPress={openLink}>{officialVendorName} Website</Text>
-        </View> */}
-        {/* <View style={styles.hideButtonsContainer}>
-          <HideItemName />
-          <HideItemNumber />
-          <HideItemBarcode />
-        </View> */}
-      </View>
-      <FlatList
-        ListHeaderComponent={
+      {/* <View style={styles.bigContainer}>
+        {ifAnyItemsAdded && (
           <>
             <View style={styles.CartQRCodeImageContainer}>
               <CartQRCodeImage vendorName={vendorName} />
@@ -81,9 +83,50 @@ const CartColumnListItemsScreen: FC<Props> = ({
               <Text onPress={openLink}>{officialVendorName} Website</Text>
             </View>
           </>
+        )}
+      </View> */}
+      {/* <View style={styles.hideButtonsContainer}>
+          <HideItemName />
+          <HideItemNumber />
+          <HideItemBarcode />
+        </View> */}
+      <FlatList
+        ListHeaderComponent={
+          <View style={styles.bigContainer}>
+            {ifAnyItemsAdded && (
+              <>
+                <View style={styles.CartQRCodeImageContainer}>
+                  <CartQRCodeImage vendorName={vendorName} />
+                </View>
+                <View style={styles.vendorLinkContainer}>
+                  <TouchableOpacity onPress={openLink}>
+                    <Text>{officialVendorName} Website</Text>
+                  </TouchableOpacity>
+                </View>
+              </>
+            )}
+          </View>
         }
         ListEmptyComponent={
-          <Text style={styles.textStyle}>No Item Has Been Added Yet!</Text>
+          <View style={styles.emptyContainer}>
+            <Text style={styles.textStyle}>No Item Has Been Added Yet!</Text>
+            <Chip
+              raised
+              titleStyle={styles.titleStyle}
+              buttonStyle={styles.buttonStyle}
+              title="Shopping Cart"
+              size="lg"
+              icon={
+                <MaterialIcons
+                  name="shopping-cart"
+                  color="white"
+                  type="MaterialIcons"
+                  size={24}
+                />
+              }
+              onPress={clickHandler}
+            />
+          </View>
         }
         removeClippedSubviews
         maxToRenderPerBatch={5}
@@ -122,6 +165,18 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     height: 100,
+  },
+  buttonStyle: {
+    backgroundColor: mainColor,
+  },
+  titleStyle: {
+    fontWeight: fontWeightBold,
+  },
+  emptyContainer: {
+    alignItems: "stretch",
+    justifyContent: "space-between",
+    height: "100%",
+    padding: 30,
   },
 });
 

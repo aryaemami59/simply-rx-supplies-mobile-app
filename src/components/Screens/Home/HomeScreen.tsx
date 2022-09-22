@@ -8,12 +8,19 @@ import {
   FontAwesome5,
   MaterialIcons,
 } from "@expo/vector-icons";
-import { HomeStackParamList } from "../../../../CustomTypes/types";
+import {
+  HomeStackParamList,
+  RootTabParamList,
+} from "../../../../CustomTypes/types";
 import { fontWeightBold, mainColor } from "../../../shared/sharedStyles";
+import { useNavigation } from "@react-navigation/native";
+import { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
 
 type Props = StackScreenProps<HomeStackParamList, "HomeScreen">;
 
+// const HomeScreen: FC<Props> = (): JSX.Element => {
 const HomeScreen: FC<Props> = ({ navigation }): JSX.Element => {
+  // const navigation = useNavigation<BottomTabNavigationProp<RootTabParamList>>();
   return (
     <SafeAreaView>
       <View style={styles.containerStyle}>
@@ -43,7 +50,14 @@ const HomeScreen: FC<Props> = ({ navigation }): JSX.Element => {
             />
           }
           size="lg"
-          onPress={() => navigation.navigate("ItemsByVendor")}
+          onPress={() =>
+            navigation.navigate("ItemsReference", {
+              screen: "ItemsReferenceScreen",
+              params: {
+                screen: "ItemsByVendor",
+              },
+            })
+          }
         />
         <Chip
           raised
@@ -54,7 +68,30 @@ const HomeScreen: FC<Props> = ({ navigation }): JSX.Element => {
           color={mainColor}
           title="Items By Category"
           size="lg"
-          onPress={() => navigation.navigate("ItemsByCategory")}
+          onPress={() =>
+            navigation.navigate("ItemsReference", {
+              screen: "ItemsReferenceScreen",
+              params: {
+                screen: "ItemsByCategory",
+              },
+            })
+          }
+        />
+        <Chip
+          raised
+          titleStyle={styles.titleStyle}
+          buttonStyle={styles.buttonStyle}
+          title="Shopping Cart"
+          size="lg"
+          icon={
+            <MaterialIcons
+              name="shopping-cart"
+              color="white"
+              type="MaterialIcons"
+              size={24}
+            />
+          }
+          onPress={() => navigation.navigate("ShoppingCart")}
         />
       </View>
     </SafeAreaView>

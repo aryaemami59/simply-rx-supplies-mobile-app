@@ -92,8 +92,8 @@ export const addedSlice = createSlice({
       action: PayloadAction<addItemsInterface>
     ): void => {
       action.payload.vendors.forEach((e: vendorNameType): void => {
-        if (!current(state[e]).includes(action.payload.itemObj)) {
-          state[e].push(action.payload.itemObj);
+        if (!current(state[e])!.includes(action.payload.itemObj)) {
+          state[e]!.push(action.payload.itemObj);
           state.listItems = state.listItems.filter(
             ({ name }) => name !== action.payload.itemObj.name
           );
@@ -104,7 +104,7 @@ export const addedSlice = createSlice({
       state: addedState,
       action: PayloadAction<addItemsByVendorInterface>
     ): void => {
-      state[action.payload.vendorName].push(action.payload.itemObj);
+      state[action.payload.vendorName]!.push(action.payload.itemObj);
     },
     removeItems: (
       state: addedState,
@@ -112,7 +112,9 @@ export const addedSlice = createSlice({
     ) => {
       state[action.payload.vendorName] = state[
         action.payload.vendorName
-      ].filter(({ name }: ItemObjType) => name !== action.payload.itemObj.name);
+      ]!.filter(
+        ({ name }: ItemObjType) => name !== action.payload.itemObj.name
+      );
     },
     setListItems: (
       state: addedState,
@@ -305,7 +307,7 @@ export const itemSlice = createSlice({
 export const selectByVendor =
   (vendorName: vendorNameType) =>
   (state: RootState): ItemObjType[] =>
-    state.added[vendorName];
+    state.added[vendorName]!;
 
 export const selectVendorsArr = (state: RootState): vendorNameType[] =>
   state.added.vendorsArr ? state.added.vendorsArr : empty;
@@ -321,7 +323,7 @@ export const selectNavsArr = (state: RootState): Category[] =>
 export const addedItemsLength =
   (vendorName: vendorNameType) =>
   (state: RootState): number =>
-    state.added[vendorName].length;
+    state.added[vendorName]!.length;
 
 export const checkIfAddedToOneVendor =
   (itemObj: ItemObjType, vendorName: vendorNameType) =>
@@ -346,9 +348,9 @@ export const selectSidebarNavs =
 export const selectQRCodeContent =
   (vendorName: vendorNameType) =>
   (state: RootState): string =>
-    state.added[vendorName]
-      .map(({ itemNumber }) => itemNumber)
-      .join(state.added.vendorsObj![vendorName].joinChars);
+    state.added[vendorName]!.map(({ itemNumber }) => itemNumber).join(
+      state.added.vendorsObj![vendorName].joinChars
+    );
 
 export const checkIfAddedToAllVendors =
   (itemObj: ItemObjType) =>
@@ -379,9 +381,14 @@ export const selectAllVendorOfficialNames = (
 export const checkIfAnyItemsAdded = (state: RootState): boolean =>
   state.added.vendorsArr!.reduce(
     (acc: boolean, curr: vendorNameType): boolean =>
-      !!state.added[curr].length || acc,
+      !!state.added[curr]!.length || acc,
     false
   );
+
+export const checkIfAnyItemsAddedToOneVendor =
+  (vendorName: vendorNameType) =>
+  (state: RootState): boolean =>
+    !!state.added[vendorName]!.length;
 
 export const selectVendorsChecked =
   (vendorName: vendorNameType) =>

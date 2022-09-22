@@ -55,7 +55,6 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
   },
   DarkModeStyle: {
-    // backgroundColor: "gray",
     color: "white",
     height: "100%",
   },

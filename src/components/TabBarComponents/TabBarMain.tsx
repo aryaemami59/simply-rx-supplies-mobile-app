@@ -50,7 +50,6 @@ const TabBarMain: FC = (): JSX.Element => {
       <Tab.Screen
         name="Home"
         component={HomeStackScreen}
-        // options={{}}
         options={HomeOptions}
       />
       <Tab.Screen

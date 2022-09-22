@@ -1,9 +1,9 @@
 import { FC, memo } from "react";
-import { useAppSelector, RootState, AppDispatch } from "../../redux/store";
-import { selectVendorOfficialName, setVendors } from "../../redux/addedSlice";
+import { useAppSelector, RootState, AppDispatch } from "../../../../redux/store";
+import { selectVendorOfficialName, setVendors } from "../../../../redux/addedSlice";
 import { ListItem } from "@rneui/themed";
 import { connect, ConnectedProps } from "react-redux";
-import { ItemObjType, vendorNameType } from "../../../CustomTypes/types";
+import { ItemObjType, vendorNameType } from "../../../../../CustomTypes/types";
 
 type stateToPropsReturnType = {
   checked: boolean;

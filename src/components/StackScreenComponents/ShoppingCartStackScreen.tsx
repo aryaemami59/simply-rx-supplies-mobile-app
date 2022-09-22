@@ -18,7 +18,10 @@ const Stack = createStackNavigator<ShoppingCartStackParamList>();
 
 type Props = BottomTabScreenProps<RootTabParamList, "ShoppingCart">;
 
-const ShoppingCartStackScreen: FC<Props> = (): JSX.Element => {
+const ShoppingCartStackScreen: FC<Props> = ({
+  navigation,
+  route,
+}): JSX.Element => {
   return (
     <Stack.Navigator>
       <Stack.Screen
@@ -27,7 +30,7 @@ const ShoppingCartStackScreen: FC<Props> = (): JSX.Element => {
         options={screenOptions}
       />
       <Stack.Screen
-        name="VendorItems"
+        name="CartVendorItems"
         component={CartColumnListItemsScreen}
         options={refHeaderOptions}
       />

@@ -3,14 +3,16 @@ import { FC, memo } from "react";
 import { View } from "react-native";
 import AddItemButton from "./AddItemButton";
 import SearchResultsSwitch from "./SearchResultsSwitch";
-import { ItemObjType, vendorNameType } from "../../../CustomTypes/types";
-import { fontWeight600 } from "../../shared/sharedStyles";
+import { ItemObjType, vendorNameType } from "../../../../../CustomTypes/types";
+import { fontWeight600 } from "../../../../shared/sharedStyles";
 
 type Props = {
   item: ItemObjType;
 };
 
-const SingleInputListItem: FC<Props> = ({ item: itemObj }): JSX.Element => {
+const SingleSearchResultsListItem: FC<Props> = ({
+  item: itemObj,
+}): JSX.Element => {
   return (
     <View key={itemObj.id}>
       <ListItem bottomDivider>
@@ -28,4 +30,4 @@ const SingleInputListItem: FC<Props> = ({ item: itemObj }): JSX.Element => {
   );
 };
 
-export default memo<Props>(SingleInputListItem);
+export default memo<Props>(SingleSearchResultsListItem);

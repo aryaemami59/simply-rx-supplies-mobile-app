@@ -5,12 +5,12 @@ import {
   checkIfAddedToAllVendors,
   selectVendorsToAddTo,
   addItems,
-} from "../../redux/addedSlice";
-import { useAppSelector, useAppDispatch } from "../../redux/store";
+} from "../../../../redux/addedSlice";
+import { useAppSelector, useAppDispatch } from "../../../../redux/store";
 import { shallowEqual } from "react-redux";
 import { StyleSheet } from "react-native";
-import { fontWeightBold, mainColor } from "../../shared/sharedStyles";
-import { ItemObjType, vendorNameType } from "../../../CustomTypes/types";
+import { fontWeightBold, mainColor } from "../../../../shared/sharedStyles";
+import { ItemObjType, vendorNameType } from "../../../../../CustomTypes/types";
 
 type Props = {
   itemObj: ItemObjType;

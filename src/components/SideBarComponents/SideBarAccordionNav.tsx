@@ -3,10 +3,13 @@ import { FC, memo, useCallback } from "react";
 import { StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { ItemsReferenceStackParamList } from "../../../CustomTypes/types";
+import {
+  Category,
+  ItemsReferenceStackParamList,
+} from "../../../CustomTypes/types";
 
 type Props = {
-  category: string;
+  category: Category;
 };
 
 const SideBarAccordionNav: FC<Props> = ({ category }): JSX.Element => {

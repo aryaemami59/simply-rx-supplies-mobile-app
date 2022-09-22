@@ -13,22 +13,23 @@ import {
   vendorNameType,
 } from "../../../CustomTypes/types";
 import { StackNavigationProp } from "@react-navigation/stack";
+import { officialVendorNameType } from "../../../CustomTypes/types";
 
 type Props = {
   vendorName: vendorNameType;
 };
 
 const CartVendorColumns: FC<Props> = ({ vendorName }): JSX.Element => {
-  const officialVendorName = useAppSelector(
+  const officialVendorName = useAppSelector<officialVendorNameType>(
     selectVendorOfficialName(vendorName)
   );
-  const addedItemsLen = useAppSelector(addedItemsLength(vendorName));
+  const addedItemsLen = useAppSelector<number>(addedItemsLength(vendorName));
 
   const navigation =
     useNavigation<StackNavigationProp<ShoppingCartStackParamList>>();
 
   const clickHandler = useCallback(() => {
-    navigation.push("VendorItems", { vendorName });
+    navigation.push("CartVendorItems", { vendorName });
   }, []);
 
   return (

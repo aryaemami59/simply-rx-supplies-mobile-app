@@ -1,17 +1,17 @@
 import { FC, memo, useState, useCallback } from "react";
-import { useAppSelector } from "../../redux/store";
+import { useAppSelector } from "../../../../redux/store";
 import {
   selectVendorsArr,
   selectAllVendorOfficialNames,
-} from "../../redux/addedSlice";
+} from "../../../../redux/addedSlice";
 import {
   officialVendorNameType,
   vendorNameType,
-} from "../../../CustomTypes/types";
+} from "../../../../../CustomTypes/types";
 import { Button } from "@rneui/themed";
 import { BottomSheet } from "@rneui/base";
 import { View } from "react-native";
-import SearchResultsVendorCheckbox from "./SearchResultsVendorCheckbox";
+import SearchResultsVendorCheckbox from "../SearchResults/SearchResultsVendorCheckbox";
 
 const BottomSheetComponent: FC = (): JSX.Element => {
   const [visible, setVisible] = useState<boolean>(false);

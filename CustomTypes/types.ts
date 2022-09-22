@@ -19,16 +19,31 @@ export type tabBarIconProps = {
 
 export type RootTabParamList = {
   Home: HomeStackParamList;
-  ItemLookup: ItemLookupStackParamList;
+  ItemLookup: undefined;
   ShoppingCart: ShoppingCartStackParamList;
-  ItemsReference: ItemsReferenceStackParamList;
+  ItemsReference: undefined;
+  // ItemsReference: {
+  //   screen: "ItemsReferenceScreen";
+  //   params: {
+  //     screen: "ItemsByVendor" | "ItemsByCategory";
+  //   };
+  // };
+  ItemsByCategory: undefined;
+  ItemsByVendor: undefined;
 };
 
 export type HomeStackParamList = {
   HomeScreen: undefined;
   ItemLookup: undefined;
-  ItemsByVendor: undefined;
+  ShoppingCart: undefined;
+  ItemsReference: {
+    screen: "ItemsReferenceScreen";
+    params: {
+      screen: "ItemsByVendor" | "ItemsByCategory";
+    };
+  };
   ItemsByCategory: undefined;
+  ItemsByVendor: undefined;
 };
 
 export type ItemLookupStackParamList = {
@@ -39,7 +54,8 @@ export type ShoppingCartStackParamList = {
   ShoppingCartScreen: undefined;
   QRImage: { itemNumbers: ItemNumber };
   BarcodeImage: { src: Src };
-  VendorItems: { vendorName: vendorNameType };
+  CartVendorItems: { vendorName: vendorNameType };
+  ItemLookup: undefined;
 };
 
 export type ItemsByCategoryStackParamList = {
@@ -112,6 +128,8 @@ export type addedState = {
   vendorsObj?: vendorsObjInterface;
   navsArr?: Category[];
   navsObj?: navsObjInterface;
+} & {
+  [key in vendorNameType]?: ItemObjType[];
 };
 
 type ItemName = ItemNamesType;

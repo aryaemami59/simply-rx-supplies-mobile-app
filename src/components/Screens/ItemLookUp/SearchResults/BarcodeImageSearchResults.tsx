@@ -1,6 +1,6 @@
 import { FC, memo, useMemo } from "react";
 import { Image, StyleSheet } from "react-native";
-import { ItemObjType } from "../../../CustomTypes/types";
+import { ItemObjType } from "../../../../../CustomTypes/types";
 
 type Props = {
   itemObj: ItemObjType;
