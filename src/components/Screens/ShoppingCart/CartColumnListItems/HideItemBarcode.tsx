@@ -1,9 +1,9 @@
 import { FC, memo, useCallback } from "react";
 import { Chip } from "@rneui/themed";
 import { StyleSheet } from "react-native";
-import { mainColor } from "../../shared/sharedStyles";
-import { ToggleItemBarcode } from "../../redux/addedSlice";
-import { useAppSelector, useAppDispatch } from "../../redux/store";
+import { useAppDispatch, useAppSelector } from "../../../../redux/store";
+import { ToggleItemBarcode } from "../../../../redux/addedSlice";
+import { mainColor } from "../../../../shared/sharedStyles";
 
 const HideItemBarcode: FC = (): JSX.Element => {
   const dispatch = useAppDispatch();

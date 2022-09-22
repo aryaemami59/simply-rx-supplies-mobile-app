@@ -33,14 +33,4 @@ const App: FC = (): JSX.Element => {
   );
 };
 
-import React from "react";
-// import { whyDidYouUpdate } from "why-did-you-update";
-// whyDidYouUpdate(React);
-
 export default memo(App);
-
-const styles = StyleSheet.create({
-  ContainerStyle: {
-    flex: 1,
-  },
-});

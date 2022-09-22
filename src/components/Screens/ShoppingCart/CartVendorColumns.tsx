@@ -29,7 +29,7 @@ const CartVendorColumns: FC<Props> = ({ vendorName }): JSX.Element => {
     useNavigation<StackNavigationProp<ShoppingCartStackParamList>>();
 
   const clickHandler = useCallback(() => {
-    navigation.push("CartVendorItems", { vendorName });
+    navigation.push("CartColumnListItems", { vendorName });
   }, []);
 
   return (

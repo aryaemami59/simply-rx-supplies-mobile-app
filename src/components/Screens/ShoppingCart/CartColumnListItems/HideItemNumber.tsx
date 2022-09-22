@@ -1,9 +1,9 @@
 import { FC, memo, useCallback } from "react";
 import { Chip } from "@rneui/themed";
 import { StyleSheet } from "react-native";
-import { mainColor } from "../../shared/sharedStyles";
-import { useAppDispatch, useAppSelector } from "../../redux/store";
-import { ToggleItemNumber } from "../../redux/addedSlice";
+import { useAppDispatch, useAppSelector } from "../../../../redux/store";
+import { ToggleItemNumber } from "../../../../redux/addedSlice";
+import { mainColor } from "../../../../shared/sharedStyles";
 
 const HideItemNumber: FC = (): JSX.Element => {
   const dispatch = useAppDispatch();

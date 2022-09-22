@@ -1,14 +1,14 @@
 import { FC, memo, useCallback } from "react";
-import { useAppSelector } from "../../redux/store";
-import { selectQRCodeContent } from "../../redux/addedSlice";
 import { TouchableOpacity } from "react-native";
 import QRCode from "react-native-qrcode-svg";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import {
-  ShoppingCartStackParamList,
   vendorNameType,
-} from "../../../CustomTypes/types";
+  ShoppingCartStackParamList,
+} from "../../../../../CustomTypes/types";
+import { useAppSelector } from "../../../../redux/store";
+import { selectQRCodeContent } from "../../../../redux/addedSlice";
 
 type Props = {
   vendorName: vendorNameType;
@@ -35,4 +35,4 @@ const CartQRCodeImage: FC<Props> = ({ vendorName }): JSX.Element => {
   );
 };
 
-export default memo(CartQRCodeImage);
+export default memo<Props>(CartQRCodeImage);
