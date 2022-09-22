@@ -59,19 +59,29 @@ const CartColumnListItemsScreen: FC<Props> = ({
   return (
     <>
       <View style={styles.bigContainer}>
-        <View style={styles.CartQRCodeImageContainer}>
+        {/* <View style={styles.CartQRCodeImageContainer}>
           <CartQRCodeImage vendorName={vendorName} />
         </View>
         <View style={styles.vendorLinkContainer}>
           <Text onPress={openLink}>{officialVendorName} Website</Text>
-        </View>
-        <View style={styles.hideButtonsContainer}>
+        </View> */}
+        {/* <View style={styles.hideButtonsContainer}>
           <HideItemName />
           <HideItemNumber />
           <HideItemBarcode />
-        </View>
+        </View> */}
       </View>
       <FlatList
+        ListHeaderComponent={
+          <>
+            <View style={styles.CartQRCodeImageContainer}>
+              <CartQRCodeImage vendorName={vendorName} />
+            </View>
+            <View style={styles.vendorLinkContainer}>
+              <Text onPress={openLink}>{officialVendorName} Website</Text>
+            </View>
+          </>
+        }
         ListEmptyComponent={
           <Text style={styles.textStyle}>No Item Has Been Added Yet!</Text>
         }
