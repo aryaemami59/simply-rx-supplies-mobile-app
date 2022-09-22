@@ -2,7 +2,7 @@ import { FC, memo } from "react";
 import { useAppSelector } from "../../../redux/store";
 import { selectVendorsArr } from "../../../redux/addedSlice";
 import { ScrollView } from "react-native";
-import CartVendorColumns from "../../ShoppingCartComponents/CartVendorColumns";
+import CartVendorColumns from "./CartVendorColumns";
 import { StackScreenProps } from "@react-navigation/stack";
 import {
   ShoppingCartStackParamList,

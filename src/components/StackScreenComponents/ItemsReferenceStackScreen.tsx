@@ -9,8 +9,8 @@ import {
   screenOptions,
   refHeaderOptions,
 } from "../../shared/sharedScreenOptions";
-import VendorItems from "../SideBarComponents/VendorItems";
-import CategoryItems from "../SideBarComponents/CategoryItems";
+import ItemsByVendorListItems from "../Screens/ItemsReference/ItemsByVendor/ItemsByVendorListItems";
+import CategoryItems from "../Screens/ItemsReference/ItemsByCategory/CategoryItems";
 import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
 
 type Props = BottomTabScreenProps<RootTabParamList, "ItemsReference">;
@@ -28,7 +28,7 @@ const ItemsReferenceStackScreen: FC<Props> = (): JSX.Element => {
       <Stack.Screen
         options={refHeaderOptions}
         name="ItemsByVendorListItems"
-        component={VendorItems}
+        component={ItemsByVendorListItems}
       />
       <Stack.Screen
         options={refHeaderOptions}

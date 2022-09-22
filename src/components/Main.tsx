@@ -1,6 +1,6 @@
 import { View, StyleSheet, Platform } from "react-native";
-import React, { createContext, FC, memo, useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "./src/redux/store";
+import React, { FC, memo, useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "../redux/store";
 import Constants from "expo-constants";
 import {
   fetchItems,
@@ -8,16 +8,10 @@ import {
   fetchNavList,
   checkIfLoading,
   selectErrMsg,
-} from "./src/redux/addedSlice";
-import IsLoadingComponents from "./IsLoadingComponents";
-import ErrMsgComponent from "./ErrMsgComponent";
-import { myContextInterface } from "./CustomTypes/types";
-import TabBarMain from "./src/components/TabBarComponents/TabBarMain";
-
-export const DarkMode = createContext<myContextInterface>({
-  darkTheme: true,
-  setDarkTheme: () => {},
-});
+} from "../redux/addedSlice";
+import IsLoadingComponents from "../shared/IsLoadingComponents";
+import ErrMsgComponent from "../shared/ErrMsgComponent";
+import TabBarMain from "./TabBarComponents/TabBarMain";
 
 const Main: FC = (): JSX.Element => {
   const dispatch = useAppDispatch();

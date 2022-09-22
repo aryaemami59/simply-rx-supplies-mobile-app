@@ -1,11 +1,11 @@
 import { FC, memo, useCallback } from "react";
 import { Image, StyleSheet, TouchableOpacity } from "react-native";
-import { useAppSelector } from "../../redux/store";
+import { useAppSelector } from "../../../../redux/store";
 import { useNavigation } from "@react-navigation/native";
 import {
   ItemObjType,
   ShoppingCartStackParamList,
-} from "../../../CustomTypes/types";
+} from "../../../../../CustomTypes/types";
 import { StackNavigationProp } from "@react-navigation/stack";
 
 type Props = {

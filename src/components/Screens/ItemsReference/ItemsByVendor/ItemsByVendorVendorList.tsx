@@ -1,7 +1,7 @@
 import { ListItem } from "@rneui/themed";
 import { FC, memo, useCallback } from "react";
-import { useAppSelector } from "../../redux/store";
-import { selectVendorOfficialName } from "../../redux/addedSlice";
+import { useAppSelector } from "../../../../redux/store";
+import { selectVendorOfficialName } from "../../../../redux/addedSlice";
 import { StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
@@ -9,13 +9,13 @@ import {
   ItemsReferenceStackParamList,
   officialVendorNameType,
   vendorNameType,
-} from "../../../CustomTypes/types";
+} from "../../../../../CustomTypes/types";
 
 type Props = {
   vendorName: vendorNameType;
 };
 
-const SideBarAccordionVendor: FC<Props> = ({ vendorName }): JSX.Element => {
+const ItemsByVendorVendorList: FC<Props> = ({ vendorName }): JSX.Element => {
   const officialVendorName: officialVendorNameType =
     useAppSelector<officialVendorNameType>(
       selectVendorOfficialName(vendorName)
@@ -45,4 +45,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default memo<Props>(SideBarAccordionVendor);
+export default memo<Props>(ItemsByVendorVendorList);

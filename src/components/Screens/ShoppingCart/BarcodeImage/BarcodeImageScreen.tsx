@@ -8,9 +8,9 @@ import {
   StyleSheet,
 } from "react-native";
 import { StackScreenProps } from "@react-navigation/stack";
-import { ShoppingCartStackParamList } from "../../../CustomTypes/types";
-import { height100, JC_AI_CENTER } from "../../shared/sharedStyles";
 import { Octicons } from "@expo/vector-icons";
+import { ShoppingCartStackParamList } from "../../../../../CustomTypes/types";
+import { height100, JC_AI_CENTER } from "../../../../shared/sharedStyles";
 
 type Props = StackScreenProps<ShoppingCartStackParamList, "BarcodeImage">;
 

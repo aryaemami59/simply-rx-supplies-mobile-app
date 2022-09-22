@@ -3,14 +3,17 @@ import { useAppSelector } from "../../../../redux/store";
 import { selectNavsArr } from "../../../../redux/addedSlice";
 import { shallowEqual } from "react-redux";
 import { ScrollView } from "react-native";
-import SideBarAccordionNav from "../../../SideBarComponents/SideBarAccordionNav";
+import CategoryList from "./CategoryList";
 import { StackScreenProps } from "@react-navigation/stack";
-import { ItemsByCategoryStackParamList } from "../../../../../CustomTypes/types";
+import {
+  Category,
+  ItemsByCategoryStackParamList,
+} from "../../../../../CustomTypes/types";
 
 type Props = StackScreenProps<ItemsByCategoryStackParamList>;
 
 const ItemsByCategoryScreen: FC<Props> = (): JSX.Element => {
-  const navList: string[] = useAppSelector<string[]>(
+  const navList: Category[] = useAppSelector<Category[]>(
     selectNavsArr,
     shallowEqual
   );
@@ -18,7 +21,7 @@ const ItemsByCategoryScreen: FC<Props> = (): JSX.Element => {
   return (
     <ScrollView>
       {navList.map(e => (
-        <SideBarAccordionNav key={e} category={e} />
+        <CategoryList key={e} category={e} />
       ))}
     </ScrollView>
   );

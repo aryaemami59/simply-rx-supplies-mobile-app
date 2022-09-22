@@ -1,14 +1,14 @@
 import { FC, memo, useEffect } from "react";
-import { selectSidebarNavs } from "../../redux/addedSlice";
-import { useAppSelector } from "../../redux/store";
+import { selectSidebarNavs } from "../../../../redux/addedSlice";
+import { useAppSelector } from "../../../../redux/store";
 import { shallowEqual } from "react-redux";
-import SingleSideBarAccordionListItem from "./SingleSideBarAccordionListItem";
+import SingleListItem from "../../../../shared/SingleListItem";
 import { ScrollView } from "react-native";
 import { StackScreenProps } from "@react-navigation/stack";
 import {
   ItemsReferenceStackParamList,
   ItemObjType,
-} from "../../../CustomTypes/types";
+} from "../../../../../CustomTypes/types";
 
 type Props = StackScreenProps<
   ItemsReferenceStackParamList,
@@ -30,7 +30,7 @@ const CategoryItems: FC<Props> = ({ navigation, route }): JSX.Element => {
   return (
     <ScrollView>
       {sidebarItems.map(f => (
-        <SingleSideBarAccordionListItem
+        <SingleListItem
           itemObj={f}
           key={`${f.name}-SingleSideBarAccordionListItem`}
         />

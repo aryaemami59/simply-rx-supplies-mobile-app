@@ -5,14 +5,14 @@ import {
   RootTabParamList,
 } from "../../../CustomTypes/types";
 import ShoppingCartScreen from "../Screens/ShoppingCart/ShoppingCartScreen";
-import CartColumnListItemsScreen from "../Screens/ShoppingCart/VendorColumn/CartColumnListItemsScreen";
+import CartColumnListItemsScreen from "../Screens/ShoppingCart/CartColumnListItems/CartColumnListItemsScreen";
 import {
   screenOptions,
   refHeaderOptions,
 } from "../../shared/sharedScreenOptions";
 import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
-import QRCodeScreen from "../ShoppingCartComponents/QRCodeScreen";
-import BarcodeImageScreen from "../ShoppingCartComponents/BarcodeImageScreen";
+import QRImageScreen from "../Screens/ShoppingCart/QRImage/QRImageScreen";
+import BarcodeImageScreen from "../Screens/ShoppingCart/BarcodeImage/BarcodeImageScreen";
 
 const Stack = createStackNavigator<ShoppingCartStackParamList>();
 
@@ -30,13 +30,13 @@ const ShoppingCartStackScreen: FC<Props> = ({
         options={screenOptions}
       />
       <Stack.Screen
-        name="CartVendorItems"
+        name="CartColumnListItems"
         component={CartColumnListItemsScreen}
         options={refHeaderOptions}
       />
       <Stack.Screen
         name="QRImage"
-        component={QRCodeScreen}
+        component={QRImageScreen}
         options={refHeaderOptions}
       />
       <Stack.Screen

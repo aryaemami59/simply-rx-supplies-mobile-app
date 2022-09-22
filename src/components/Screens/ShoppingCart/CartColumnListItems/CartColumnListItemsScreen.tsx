@@ -14,23 +14,19 @@ import {
   FlatList,
 } from "react-native";
 import { StackScreenProps } from "@react-navigation/stack";
-import CartQRCodeImage from "../../../ShoppingCartComponents/CartQRCodeImage";
 import {
   ShoppingCartStackParamList,
   ItemObjType,
 } from "../../../../../CustomTypes/types";
 import { selectVendorsLinks } from "../../../../redux/addedSlice";
-import HideItemName from "../../../ShoppingCartComponents/HideItemName";
-import HideItemNumber from "../../../ShoppingCartComponents/HideItemNumber";
-import HideItemBarcode from "../../../ShoppingCartComponents/HideItemBarcode";
 import { selectVendorOfficialName } from "../../../../redux/addedSlice";
 import SingleCartListItems from "./SingleCartListItems";
 import { officialVendorNameType } from "../../../../../CustomTypes/types";
-import { Button, Chip } from "@rneui/themed";
-import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
+import { Chip } from "@rneui/themed";
 import { MaterialIcons } from "@expo/vector-icons";
 import { mainColor, fontWeightBold } from "../../../../shared/sharedStyles";
 import { TouchableOpacity } from "react-native";
+import CartQRCodeImage from "../QRImage/CartQRCodeImage";
 
 const renderItems: ListRenderItem<ItemObjType> = ({
   item,
@@ -40,7 +36,10 @@ const renderItems: ListRenderItem<ItemObjType> = ({
 
 const keyExtractor = (item: ItemObjType) => item.id.toString();
 
-type Props = StackScreenProps<ShoppingCartStackParamList, "CartVendorItems">;
+type Props = StackScreenProps<
+  ShoppingCartStackParamList,
+  "CartColumnListItems"
+>;
 
 const CartColumnListItemsScreen: FC<Props> = ({
   navigation,

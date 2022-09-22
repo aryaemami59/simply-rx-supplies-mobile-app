@@ -54,7 +54,7 @@ export type ShoppingCartStackParamList = {
   ShoppingCartScreen: undefined;
   QRImage: { itemNumbers: ItemNumber };
   BarcodeImage: { src: Src };
-  CartVendorItems: { vendorName: vendorNameType };
+  CartColumnListItems: { vendorName: vendorNameType };
   ItemLookup: undefined;
 };
 

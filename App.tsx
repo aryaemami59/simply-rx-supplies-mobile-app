@@ -1,7 +1,7 @@
 import { Provider } from "react-redux";
 import { FC, memo } from "react";
 import { StyleSheet } from "react-native";
-import Main from "./Main";
+import Main from "./src/components/Main";
 import { store } from "./src/redux/store";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { NavigationContainer } from "@react-navigation/native";

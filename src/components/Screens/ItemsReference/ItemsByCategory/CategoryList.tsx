@@ -6,13 +6,13 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import {
   Category,
   ItemsReferenceStackParamList,
-} from "../../../CustomTypes/types";
+} from "../../../../../CustomTypes/types";
 
 type Props = {
   category: Category;
 };
 
-const SideBarAccordionNav: FC<Props> = ({ category }): JSX.Element => {
+const CategoryList: FC<Props> = ({ category }): JSX.Element => {
   const navigation =
     useNavigation<StackNavigationProp<ItemsReferenceStackParamList>>();
 
@@ -39,4 +39,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default memo<Props>(SideBarAccordionNav);
+export default memo<Props>(CategoryList);

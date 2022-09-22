@@ -1,16 +1,16 @@
 import { FC, memo, useRef } from "react";
 import { StackScreenProps } from "@react-navigation/stack";
 import QRCode from "react-native-qrcode-svg";
-import { ShoppingCartStackParamList } from "../../../CustomTypes/types";
 import { View, Platform, TouchableOpacity, StyleSheet } from "react-native";
 import { Share } from "react-native";
-import { JC_AI_CENTER, height100 } from "../../shared/sharedStyles";
 import { Svg } from "react-native-svg";
 import { Octicons } from "@expo/vector-icons";
+import { height100, JC_AI_CENTER } from "../../../../shared/sharedStyles";
+import { ShoppingCartStackParamList } from "../../../../../CustomTypes/types";
 
 type Props = StackScreenProps<ShoppingCartStackParamList, "QRImage">;
 
-const QRCodeScreen: FC<Props> = ({ route }): JSX.Element => {
+const QRImageScreen: FC<Props> = ({ route }): JSX.Element => {
   const { itemNumbers } = route.params;
 
   let svg = useRef<Svg>(null);
@@ -54,4 +54,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default memo<Props>(QRCodeScreen);
+export default memo<Props>(QRImageScreen);

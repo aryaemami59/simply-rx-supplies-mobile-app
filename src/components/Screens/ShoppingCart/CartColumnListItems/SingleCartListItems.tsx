@@ -1,10 +1,10 @@
 import { ListItem } from "@rneui/themed";
 import { FC, memo } from "react";
 import { View, StyleSheet } from "react-native";
-import BarcodeImageCart from "../../../ShoppingCartComponents/BarcodeImageCart";
-import ItemNameCart from "../../../ShoppingCartComponents/ItemNameCart";
-import ItemNumberCart from "../../../ShoppingCartComponents/ItemNumberCart";
+import BarcodeImageCart from "../BarcodeImage/BarcodeImageCart";
 import { ItemObjType } from "../../../../../CustomTypes/types";
+import ItemNameCart from "./ItemNameCart";
+import ItemNumberCart from "./ItemNumberCart";
 
 type Props = {
   item: ItemObjType;

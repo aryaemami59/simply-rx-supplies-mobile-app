@@ -1,5 +1,5 @@
 import { FC, memo } from "react";
-import SideBarAccordionVendor from "../../../SideBarComponents/SideBarAccordionVendor";
+import ItemsByVendorVendorList from "./ItemsByVendorVendorList";
 import { useAppSelector } from "../../../../redux/store";
 import { selectVendorsArr } from "../../../../redux/addedSlice";
 import { StackScreenProps } from "@react-navigation/stack";
@@ -20,7 +20,7 @@ const ItemsByVendorScreen: FC<Props> = (): JSX.Element => {
   return (
     <>
       {allVendors.map(e => (
-        <SideBarAccordionVendor key={e} vendorName={e} />
+        <ItemsByVendorVendorList key={e} vendorName={e} />
       ))}
     </>
   );

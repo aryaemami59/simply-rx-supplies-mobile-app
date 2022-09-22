@@ -1,19 +1,19 @@
 import { Badge, ListItem } from "@rneui/themed";
 import { FC, memo, useCallback } from "react";
-import { useAppSelector } from "../../redux/store";
+import { useAppSelector } from "../../../redux/store";
 import {
   selectVendorOfficialName,
   addedItemsLength,
-} from "../../redux/addedSlice";
+} from "../../../redux/addedSlice";
 import { StyleSheet } from "react-native";
 import TouchableScale from "react-native-touchable-scale";
 import { useNavigation } from "@react-navigation/native";
 import {
   ShoppingCartStackParamList,
   vendorNameType,
-} from "../../../CustomTypes/types";
+} from "../../../../CustomTypes/types";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { officialVendorNameType } from "../../../CustomTypes/types";
+import { officialVendorNameType } from "../../../../CustomTypes/types";
 
 type Props = {
   vendorName: vendorNameType;

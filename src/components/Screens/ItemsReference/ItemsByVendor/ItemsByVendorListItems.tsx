@@ -1,26 +1,29 @@
 import { ListItem } from "@rneui/themed";
 import { FC, memo, useEffect } from "react";
-import { useAppSelector } from "../../redux/store";
+import { useAppSelector } from "../../../../redux/store";
 import {
   selectItemsByVendor,
   selectVendorOfficialName,
-} from "../../redux/addedSlice";
+} from "../../../../redux/addedSlice";
 import { shallowEqual } from "react-redux";
-import SingleSideBarAccordionListItem from "./SingleSideBarAccordionListItem";
+import SingleListItem from "../../../../shared/SingleListItem";
 import { ScrollView } from "react-native";
-import { ItemsReferenceStackParamList } from "../../../CustomTypes/types";
+import { ItemsReferenceStackParamList } from "../../../../../CustomTypes/types";
 import { StackScreenProps } from "@react-navigation/stack";
 import {
   officialVendorNameType,
   ItemObjType,
-} from "../../../CustomTypes/types";
+} from "../../../../../CustomTypes/types";
 
 type Props = StackScreenProps<
   ItemsReferenceStackParamList,
   "ItemsByVendorListItems"
 >;
 
-const VendorItems: FC<Props> = ({ navigation, route }): JSX.Element => {
+const ItemsByVendorListItems: FC<Props> = ({
+  navigation,
+  route,
+}): JSX.Element => {
   const { vendorName } = route.params;
   const officialVendorName: officialVendorNameType =
     useAppSelector<officialVendorNameType>(
@@ -39,11 +42,11 @@ const VendorItems: FC<Props> = ({ navigation, route }): JSX.Element => {
     <ScrollView>
       {items.map(e => (
         <ListItem key={e.id}>
-          <SingleSideBarAccordionListItem itemObj={e} />
+          <SingleListItem itemObj={e} />
         </ListItem>
       ))}
     </ScrollView>
   );
 };
 
-export default memo<Props>(VendorItems);
+export default memo<Props>(ItemsByVendorListItems);

@@ -4,18 +4,16 @@ import {
   checkIfAddedToAllVendors,
   selectVendorsToAddTo,
   addItems,
-} from "../../redux/addedSlice";
-import { useAppDispatch, useAppSelector } from "../../redux/store";
+} from "../redux/addedSlice";
+import { useAppDispatch, useAppSelector } from "../redux/store";
 import { shallowEqual } from "react-redux";
-import { ItemObjType, vendorNameType } from "../../../CustomTypes/types";
+import { ItemObjType, vendorNameType } from "../../CustomTypes/types";
 
-interface Props {
+type Props = {
   itemObj: ItemObjType;
-}
+};
 
-const SingleSideBarAccordionListItem: FC<Props> = ({
-  itemObj,
-}): JSX.Element => {
+const SingleListItem: FC<Props> = ({ itemObj }): JSX.Element => {
   const dispatch = useAppDispatch();
   const ifAddedToAllVendors: boolean = useAppSelector<boolean>(
     checkIfAddedToAllVendors(itemObj)
@@ -40,4 +38,4 @@ const SingleSideBarAccordionListItem: FC<Props> = ({
   );
 };
 
-export default memo<Props>(SingleSideBarAccordionListItem);
+export default memo<Props>(SingleListItem);
