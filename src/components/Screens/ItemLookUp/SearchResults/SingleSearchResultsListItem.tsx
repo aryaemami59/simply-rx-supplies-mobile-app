@@ -2,7 +2,7 @@ import { ListItem } from "@rneui/themed";
 import { FC, memo } from "react";
 import { View } from "react-native";
 import AddItemButton from "./AddItemButton";
-import SearchResultsSwitch from "./SearchResultsSwitch";
+import SearchResultsSwitch from "./SearchResultsCheckBox";
 import { ItemObjType, vendorNameType } from "../../../../../CustomTypes/types";
 import { fontWeight600 } from "../../../../shared/sharedStyles";
 

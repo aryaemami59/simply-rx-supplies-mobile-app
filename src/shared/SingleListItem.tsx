@@ -11,18 +11,21 @@ import { ItemObjType, vendorNameType } from "../../CustomTypes/types";
 
 type Props = {
   itemObj: ItemObjType;
+  vendorName?: vendorNameType;
 };
 
-const SingleListItem: FC<Props> = ({ itemObj }): JSX.Element => {
+const SingleListItem: FC<Props> = ({ itemObj, vendorName }): JSX.Element => {
   const dispatch = useAppDispatch();
   const ifAddedToAllVendors: boolean = useAppSelector<boolean>(
     checkIfAddedToAllVendors(itemObj)
   );
 
-  const vendors: vendorNameType[] = useAppSelector<vendorNameType[]>(
-    selectVendorsToAddTo(itemObj),
-    shallowEqual
-  );
+  const vendors: vendorNameType[] = vendorName
+    ? [vendorName]
+    : useAppSelector<vendorNameType[]>(
+        selectVendorsToAddTo(itemObj),
+        shallowEqual
+      );
 
   const clickHandler = useCallback((): void => {
     ifAddedToAllVendors || dispatch(addItems({ itemObj, vendors }));
@@ -33,7 +36,7 @@ const SingleListItem: FC<Props> = ({ itemObj }): JSX.Element => {
       title={itemObj.name}
       radius="md"
       onPress={clickHandler}
-      disabled={ifAddedToAllVendors ? true : false}
+      disabled={ifAddedToAllVendors}
     />
   );
 };

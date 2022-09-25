@@ -2,13 +2,21 @@ import { FC, memo, useEffect } from "react";
 import { selectSidebarNavs } from "../../../../redux/addedSlice";
 import { useAppSelector } from "../../../../redux/store";
 import { shallowEqual } from "react-redux";
-import SingleListItem from "../../../../shared/SingleListItem";
-import { ScrollView } from "react-native";
+import { FlatList, ListRenderItem, ListRenderItemInfo } from "react-native";
 import { StackScreenProps } from "@react-navigation/stack";
 import {
   ItemsReferenceStackParamList,
   ItemObjType,
 } from "../../../../../CustomTypes/types";
+import ItemsByCategorySingleListItem from "./ItemsByCategorySingleListItem";
+
+const renderItems: ListRenderItem<ItemObjType> = ({
+  item,
+}: ListRenderItemInfo<ItemObjType>): JSX.Element => {
+  return <ItemsByCategorySingleListItem itemObj={item} />;
+};
+
+const keyExtractor = (item: ItemObjType) => item.id.toString();
 
 type Props = StackScreenProps<
   ItemsReferenceStackParamList,
@@ -18,7 +26,7 @@ type Props = StackScreenProps<
 const CategoryItems: FC<Props> = ({ navigation, route }): JSX.Element => {
   const { category } = route.params;
 
-  const sidebarItems: ItemObjType[] = useAppSelector<ItemObjType[]>(
+  const categoryListItems: ItemObjType[] = useAppSelector<ItemObjType[]>(
     selectSidebarNavs(category),
     shallowEqual
   );
@@ -28,14 +36,13 @@ const CategoryItems: FC<Props> = ({ navigation, route }): JSX.Element => {
   }, []);
 
   return (
-    <ScrollView>
-      {sidebarItems.map(f => (
-        <SingleListItem
-          itemObj={f}
-          key={`${f.name}-SingleSideBarAccordionListItem`}
-        />
-      ))}
-    </ScrollView>
+    <FlatList
+      removeClippedSubviews
+      data={categoryListItems}
+      renderItem={renderItems}
+      keyExtractor={keyExtractor}
+      keyboardShouldPersistTaps="handled"
+    />
   );
 };
 

@@ -7,13 +7,20 @@ import {
 } from "../../../../redux/addedSlice";
 import { shallowEqual } from "react-redux";
 import SingleListItem from "../../../../shared/SingleListItem";
-import { ScrollView } from "react-native";
+import {
+  FlatList,
+  ListRenderItem,
+  ListRenderItemInfo,
+  ScrollView,
+} from "react-native";
 import { ItemsReferenceStackParamList } from "../../../../../CustomTypes/types";
 import { StackScreenProps } from "@react-navigation/stack";
 import {
   officialVendorNameType,
   ItemObjType,
 } from "../../../../../CustomTypes/types";
+
+const keyExtractor = (item: ItemObjType) => item.id.toString();
 
 type Props = StackScreenProps<
   ItemsReferenceStackParamList,
@@ -29,6 +36,18 @@ const ItemsByVendorListItems: FC<Props> = ({
     useAppSelector<officialVendorNameType>(
       selectVendorOfficialName(vendorName)
     );
+
+  const renderItems: ListRenderItem<ItemObjType> = ({
+    item,
+  }: ListRenderItemInfo<ItemObjType>): JSX.Element => {
+    return (
+      <SingleListItem
+        itemObj={item}
+        vendorName={vendorName}
+      />
+    );
+  };
+
   const items: ItemObjType[] = useAppSelector<ItemObjType[]>(
     selectItemsByVendor(vendorName),
     shallowEqual
@@ -39,13 +58,22 @@ const ItemsByVendorListItems: FC<Props> = ({
   }, []);
 
   return (
-    <ScrollView>
-      {items.map(e => (
-        <ListItem key={e.id}>
-          <SingleListItem itemObj={e} />
-        </ListItem>
-      ))}
-    </ScrollView>
+    <FlatList
+      removeClippedSubviews
+      data={items}
+      renderItem={renderItems}
+      keyExtractor={keyExtractor}
+      keyboardShouldPersistTaps="handled"
+      extraData={vendorName}
+    />
+    // <ScrollView>
+    //   {items.map(e => (
+    //     <SingleListItem
+    //       key={`ItemsByVendorListItems${e.id}`}
+    //       itemObj={e}
+    //     />
+    //   ))}
+    // </ScrollView>
   );
 };
 

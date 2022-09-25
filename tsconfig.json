@@ -3,7 +3,7 @@
   "compilerOptions": {
     "target": "ESNext",
     "lib": ["ESNext", "DOM"],
-    "jsx": "react-native",
+    "jsx": "react-jsx",
     "module": "ES6",
     "moduleResolution": "node",
     "resolveJsonModule": true,

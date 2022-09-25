@@ -18,7 +18,7 @@ type Props = {
   vendorName: vendorNameType;
 };
 
-const SearchResultsVendorCheckbox: FC<Props> = ({
+const BottomSheetVendorCheckbox: FC<Props> = ({
   title,
   vendorName,
 }): JSX.Element => {
@@ -52,4 +52,4 @@ const SearchResultsVendorCheckbox: FC<Props> = ({
   );
 };
 
-export default memo<Props>(SearchResultsVendorCheckbox);
+export default memo<Props>(BottomSheetVendorCheckbox);

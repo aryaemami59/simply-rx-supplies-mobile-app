@@ -1,9 +1,20 @@
 import { FC, memo } from "react";
-import { useAppSelector, RootState, AppDispatch } from "../../../../redux/store";
-import { selectVendorOfficialName, setVendors } from "../../../../redux/addedSlice";
+import {
+  useAppSelector,
+  RootState,
+  AppDispatch,
+} from "../../../../redux/store";
+import {
+  selectVendorOfficialName,
+  setVendors,
+} from "../../../../redux/addedSlice";
 import { ListItem } from "@rneui/themed";
 import { connect, ConnectedProps } from "react-redux";
-import { ItemObjType, vendorNameType } from "../../../../../CustomTypes/types";
+import {
+  ItemObjType,
+  vendorNameType,
+  officialVendorNameType,
+} from "../../../../../CustomTypes/types";
 
 type stateToPropsReturnType = {
   checked: boolean;
@@ -51,13 +62,13 @@ interface ParentProps {
 
 type myProps = ParentProps & PropsFromRedux;
 
-const SearchResultsSwitch: FC<myProps> = ({
+const SearchResultsCheckBox: FC<myProps> = ({
   checked,
   vendorName,
   disabled,
   onToggleSwitch,
 }): JSX.Element => {
-  const officialVendorName = useAppSelector(
+  const officialVendorName = useAppSelector<officialVendorNameType>(
     selectVendorOfficialName(vendorName)
   );
 
@@ -73,4 +84,4 @@ const SearchResultsSwitch: FC<myProps> = ({
   );
 };
 
-export default connector(memo<myProps>(SearchResultsSwitch));
+export default connector(memo<myProps>(SearchResultsCheckBox));

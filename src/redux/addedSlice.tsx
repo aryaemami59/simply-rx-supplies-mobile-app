@@ -362,6 +362,10 @@ export const checkIfItemAddedToOneVendor =
   (state: RootState): boolean =>
     state.item[itemObj.name]!.vendorsAdded.includes(vendorName);
 
+export const checkVendorsToAdd =
+  (itemObj: ItemObjType, vendorName: vendorNameType) => (state: RootState): boolean =>
+    state.item[itemObj.name]!.vendorsToAdd.includes(vendorName);
+
 export const selectItemsArr = (state: RootState): ItemObjType[] =>
   state.item.itemsArr;
 

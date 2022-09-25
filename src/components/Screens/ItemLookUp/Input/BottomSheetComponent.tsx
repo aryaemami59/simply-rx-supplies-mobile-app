@@ -11,7 +11,7 @@ import {
 import { Button } from "@rneui/themed";
 import { BottomSheet } from "@rneui/base";
 import { View } from "react-native";
-import SearchResultsVendorCheckbox from "../SearchResults/SearchResultsVendorCheckbox";
+import BottomSheetVendorCheckbox from "../SearchResults/BottomSheetVendorCheckbox";
 
 const BottomSheetComponent: FC = (): JSX.Element => {
   const [visible, setVisible] = useState<boolean>(false);
@@ -37,7 +37,7 @@ const BottomSheetComponent: FC = (): JSX.Element => {
         containerStyle={{ paddingBottom: 50 }}>
         <View>
           {officialVendorNames.map((e: officialVendorNameType, i: number) => (
-            <SearchResultsVendorCheckbox
+            <BottomSheetVendorCheckbox
               key={e}
               title={e}
               vendorName={vendors[i]}
