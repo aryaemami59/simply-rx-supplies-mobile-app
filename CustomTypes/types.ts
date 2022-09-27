@@ -272,12 +272,12 @@ type ItemNamesType =
   | "ReliOn Novolin N Flexpen"
   | "ReliOn Novolin R Flexpen"
   | "ReliOn Novolin 70/30 Flexpen"
-  | 'ReliOn Insulin Syringes 6mm(15/64") 1 mL(Green Stripes)'
-  | 'ReliOn Insulin Syringes 6mm(15/64") 1/2 mL(Blue strips)'
-  | 'ReliOn Insulin Syringes 6mm(15/64") 3/10 mL(Purple Strips)'
-  | 'ReliOn Insulin Syringes 8mm(5/16") 1 mL(Green Stripes)'
-  | 'ReliOn Insulin Syringes 8mm(5/16") 1/2 mL(Blue Stripes)'
-  | 'ReliOn Insulin Syringes 8mm(5/16") 3/10 mL(Purple Stripes)'
+  | 'ReliOn Insulin Syringes 31 G X 6mm(15/64") 1 mL(Green Stripes)'
+  | 'ReliOn Insulin Syringes 31 G X 6mm(15/64") 1/2 mL(Blue strips)'
+  | 'ReliOn Insulin Syringes 31 G X 6mm(15/64") 3/10 mL(Purple Strips)'
+  | 'ReliOn Insulin Syringes 31 G X 8mm(5/16") 1 mL(Green Stripes)'
+  | 'ReliOn Insulin Syringes 31 G X 8mm(5/16") 1/2 mL(Blue Stripes)'
+  | 'ReliOn Insulin Syringes 31 G X 8mm(5/16") 3/10 mL(Purple Stripes)'
   | "ReliOn Pen Needles 31 G X 6 mm(Red Stripes)"
   | "ReliOn Pen Needles 31 G X 8 mm(Blue Stripes)"
   | "ReliOn Pen Needles 32 G X 4 mm(Green Stripes)"
