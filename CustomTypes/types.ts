@@ -53,7 +53,7 @@ export type ItemLookupStackParamList = {
 export type ShoppingCartStackParamList = {
   ShoppingCartScreen: undefined;
   QRImage: { itemNumbers: ItemNumber };
-  BarcodeImage: { src: Src };
+  BarcodeImage: { src: Src; name: ItemName };
   CartColumnListItems: { vendorName: vendorNameType };
   ItemLookup: undefined;
 };
@@ -100,7 +100,7 @@ type vendorInterface = {
   abbrName: vendorNameType;
   link: Link;
   joinChars: JoinChars;
-  items: ItemObjType[];
+  items: number[];
 };
 
 export type vendorsObjInterface = {
@@ -108,7 +108,7 @@ export type vendorsObjInterface = {
 };
 
 export type navsObjInterface = {
-  [key in Category]: ItemObjType[];
+  [key in Category]: number[];
 };
 
 type VendorChecked = {
@@ -130,6 +130,15 @@ export type addedState = {
   navsObj?: navsObjInterface;
 } & {
   [key in vendorNameType]?: ItemObjType[];
+};
+
+export type itemState = {
+  itemsArr: ItemObjType[];
+  isLoading: boolean;
+  vendorsChecked: VendorChecked;
+  errMsg: string;
+} & {
+  [key in ItemName]?: ItemObjType;
 };
 
 type ItemName = ItemNamesType;
@@ -543,15 +552,6 @@ type ItemNamesType =
   | "ZD620 Desktop Printer"
   | "Cisco 7962 IP Phone"
   | "TC70x Handheld";
-
-export type itemState = {
-  itemsArr: ItemObjType[];
-  isLoading: boolean;
-  vendorsChecked: VendorChecked;
-  errMsg: string;
-} & {
-  [key in ItemName]?: ItemObjType;
-};
 
 export type addItemsInterface = {
   itemObj: ItemObjType;

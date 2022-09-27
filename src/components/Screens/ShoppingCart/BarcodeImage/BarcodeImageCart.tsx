@@ -17,20 +17,23 @@ const BarcodeImageCart: FC<Props> = ({ itemObj }): JSX.Element => {
     (state): boolean => state.added.showItemBarcode
   );
 
-  const { src } = itemObj;
+  const { src, name } = itemObj;
 
   const navigation =
     useNavigation<StackNavigationProp<ShoppingCartStackParamList>>();
 
   const clickHandler = useCallback(() => {
-    navigation.push("BarcodeImage", { src });
+    navigation.push("BarcodeImage", { src, name });
   }, []);
 
   return (
     <>
       {itemBarcodeShown ? (
         <TouchableOpacity onPress={clickHandler}>
-          <Image source={{ uri: src }} style={styles.ImageStyle} />
+          <Image
+            source={{ uri: src }}
+            style={styles.ImageStyle}
+          />
         </TouchableOpacity>
       ) : (
         ""

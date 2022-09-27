@@ -1,4 +1,4 @@
-import { FC, memo } from "react";
+import { FC, memo, useEffect } from "react";
 import {
   Image,
   View,
@@ -14,21 +14,28 @@ import { height100, JC_AI_CENTER } from "../../../../shared/sharedStyles";
 
 type Props = StackScreenProps<ShoppingCartStackParamList, "BarcodeImage">;
 
-const BarcodeImageScreen: FC<Props> = ({ route }): JSX.Element => {
-  const { src } = route.params;
+const BarcodeImageScreen: FC<Props> = ({ navigation, route }): JSX.Element => {
+  const { src, name } = route.params;
 
   const shareBarcode = () => {
     Share.share({
-      title: "Barcode Image",
-      message: "This is the barcode image",
+      title: `Barcode Image for ${name}`,
+      message: `This is the barcode image for ${name}`,
       url: src,
     });
   };
 
+  useEffect(() => {
+    navigation.setOptions({ title: name });
+  }, []);
+
   return (
     <View style={styles.containerStyle}>
       <TouchableOpacity onLongPress={shareBarcode}>
-        <Image source={{ uri: src }} style={styles.imageStyle} />
+        <Image
+          source={{ uri: src }}
+          style={styles.imageStyle}
+        />
       </TouchableOpacity>
       <TouchableOpacity onPress={shareBarcode}>
         <Octicons

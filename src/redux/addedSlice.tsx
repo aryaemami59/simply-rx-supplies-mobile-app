@@ -333,7 +333,9 @@ export const checkIfAddedToOneVendor =
 export const selectItemsByVendor =
   (vendorName: vendorNameType) =>
   (state: RootState): ItemObjType[] =>
-    state.added.vendorsObj ? state.added.vendorsObj[vendorName].items : empty;
+    state.added.vendorsObj![vendorName].items.map(
+      (e: number) => state.item.itemsArr.find((f: ItemObjType) => f.id === e)!
+    );
 
 export const selectVendorsToAddTo =
   (itemObj: ItemObjType) =>
@@ -343,7 +345,9 @@ export const selectVendorsToAddTo =
 export const selectSidebarNavs =
   (category: Category) =>
   (state: RootState): ItemObjType[] =>
-    state.added.navsObj ? state.added.navsObj[category] : empty;
+    state.added.navsObj![category].map(
+      e => state.item.itemsArr.find(({ id }) => id === e)!
+    );
 
 export const selectQRCodeContent =
   (vendorName: vendorNameType) =>
@@ -363,7 +367,8 @@ export const checkIfItemAddedToOneVendor =
     state.item[itemObj.name]!.vendorsAdded.includes(vendorName);
 
 export const checkVendorsToAdd =
-  (itemObj: ItemObjType, vendorName: vendorNameType) => (state: RootState): boolean =>
+  (itemObj: ItemObjType, vendorName: vendorNameType) =>
+  (state: RootState): boolean =>
     state.item[itemObj.name]!.vendorsToAdd.includes(vendorName);
 
 export const selectItemsArr = (state: RootState): ItemObjType[] =>
