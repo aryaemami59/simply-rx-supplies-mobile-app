@@ -1,7 +1,7 @@
 import { FC, memo } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { ItemObjType } from "../../../../../CustomTypes/types";
-import { useAppSelector } from "../../../../redux/store";
+import { useAppSelector } from "../../../../redux/hooks";
 import { AI_CENTER } from "../../../../shared/sharedStyles";
 
 type Props = {

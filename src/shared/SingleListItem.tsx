@@ -5,7 +5,7 @@ import {
   selectVendorsToAddTo,
   addItems,
 } from "../redux/addedSlice";
-import { useAppDispatch, useAppSelector } from "../redux/store";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { shallowEqual } from "react-redux";
 import { ItemObjType, vendorNameType } from "../../CustomTypes/types";
 

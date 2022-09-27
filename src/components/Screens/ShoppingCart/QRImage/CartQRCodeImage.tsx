@@ -7,7 +7,7 @@ import {
   vendorNameType,
   ShoppingCartStackParamList,
 } from "../../../../../CustomTypes/types";
-import { useAppSelector } from "../../../../redux/store";
+import { useAppSelector } from "../../../../redux/hooks";
 import { selectQRCodeContent } from "../../../../redux/addedSlice";
 
 type Props = {

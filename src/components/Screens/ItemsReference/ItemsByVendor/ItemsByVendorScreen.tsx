@@ -1,6 +1,6 @@
 import { FC, memo } from "react";
 import ItemsByVendorVendorList from "./ItemsByVendorVendorList";
-import { useAppSelector } from "../../../../redux/store";
+import { useAppSelector } from "../../../../redux/hooks";
 import { selectVendorsArr } from "../../../../redux/addedSlice";
 import { StackScreenProps } from "@react-navigation/stack";
 import {
@@ -20,7 +20,10 @@ const ItemsByVendorScreen: FC<Props> = (): JSX.Element => {
   return (
     <>
       {allVendors.map(e => (
-        <ItemsByVendorVendorList key={e} vendorName={e} />
+        <ItemsByVendorVendorList
+          key={e}
+          vendorName={e}
+        />
       ))}
     </>
   );

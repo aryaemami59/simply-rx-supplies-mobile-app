@@ -13,7 +13,7 @@ import ShoppingCartStackScreen from "../StackScreenComponents/ShoppingCartStackS
 import ItemsReferenceStackScreen from "../StackScreenComponents/ItemsReferenceStackScreen";
 import TabBarIconItemsReference from "./TabBarIconItemsReference";
 import { HEADER_SHOWN_FALSE } from "../../shared/sharedScreenOptions";
-import { useAppSelector } from "../../redux/store";
+import { useAppSelector } from "../../redux/hooks";
 import { checkIfAnyItemsAdded } from "../../redux/addedSlice";
 
 const Tab = createBottomTabNavigator<RootTabParamList>();

@@ -1,8 +1,8 @@
 import { FC, memo } from "react";
-import { useAppSelector } from "../../redux/store";
 import { checkIfAnyItemsAdded } from "../../redux/addedSlice";
 import { tabBarIconProps } from "../../../CustomTypes/types";
 import { Ionicons } from "@expo/vector-icons";
+import { useAppSelector } from "../../redux/hooks";
 
 type Props = tabBarIconProps;
 

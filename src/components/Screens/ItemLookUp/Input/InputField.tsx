@@ -7,7 +7,7 @@ import {
   selectItemsArr,
   setListItems,
 } from "../../../../redux/addedSlice";
-import { useAppDispatch, useAppSelector } from "../../../../redux/store";
+import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
 import { useFocusEffect } from "@react-navigation/native";
 import { shallowEqual } from "react-redux";
 import { FontAwesome, EvilIcons } from "@expo/vector-icons";
@@ -122,7 +122,10 @@ const InputField: FC = (): JSX.Element => {
       leftContainerStyle={displayNone}
       rightContainerStyle={displayNone}
       centerComponent={
-        <Animatable.View ref={view} transition="width" style={width100}>
+        <Animatable.View
+          ref={view}
+          transition="width"
+          style={width100}>
           <SearchBar
             returnKeyType="search"
             ref={inputRef}

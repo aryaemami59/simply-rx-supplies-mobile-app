@@ -6,7 +6,7 @@ import {
   selectVendorsToAddTo,
   addItems,
 } from "../../../../redux/addedSlice";
-import { useAppSelector, useAppDispatch } from "../../../../redux/store";
+import { useAppSelector, useAppDispatch } from "../../../../redux/hooks";
 import { shallowEqual } from "react-redux";
 import { StyleSheet } from "react-native";
 import { fontWeightBold, mainColor } from "../../../../shared/sharedStyles";

@@ -1,7 +1,7 @@
 import { FC, memo, useCallback } from "react";
 import { Chip } from "@rneui/themed";
 import { StyleSheet } from "react-native";
-import { useAppDispatch, useAppSelector } from "../../../../redux/store";
+import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
 import { ToggleItemBarcode } from "../../../../redux/addedSlice";
 import { mainColor } from "../../../../shared/sharedStyles";
 

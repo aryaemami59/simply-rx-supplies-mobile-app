@@ -12,7 +12,7 @@ import {
   ItemObjType,
 } from "../../../../CustomTypes/types";
 import SingleSearchResultsListItem from "./SearchResults/SingleSearchResultsListItem";
-import { useAppSelector } from "../../../redux/store";
+import { useAppSelector } from "../../../redux/hooks";
 import { selectAllListItems } from "../../../redux/addedSlice";
 import { shallowEqual } from "react-redux";
 import InputField from "./Input/InputField";

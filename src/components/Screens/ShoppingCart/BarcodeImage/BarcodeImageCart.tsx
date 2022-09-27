@@ -1,6 +1,6 @@
 import { FC, memo, useCallback } from "react";
 import { Image, StyleSheet, TouchableOpacity } from "react-native";
-import { useAppSelector } from "../../../../redux/store";
+import { useAppSelector } from "../../../../redux/hooks";
 import { useNavigation } from "@react-navigation/native";
 import {
   ItemObjType,

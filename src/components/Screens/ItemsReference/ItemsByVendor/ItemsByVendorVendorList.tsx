@@ -1,6 +1,6 @@
 import { ListItem } from "@rneui/themed";
 import { FC, memo, useCallback } from "react";
-import { useAppSelector } from "../../../../redux/store";
+import { useAppSelector } from "../../../../redux/hooks";
 import { selectVendorOfficialName } from "../../../../redux/addedSlice";
 import { StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";

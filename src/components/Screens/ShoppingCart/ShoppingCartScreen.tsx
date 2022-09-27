@@ -1,5 +1,5 @@
 import { FC, memo } from "react";
-import { useAppSelector } from "../../../redux/store";
+import { useAppSelector } from "../../../redux/hooks";
 import { selectVendorsArr } from "../../../redux/addedSlice";
 import { ScrollView } from "react-native";
 import CartVendorColumns from "./CartVendorColumns";
@@ -17,7 +17,10 @@ const ShoppingCartScreen: FC<Props> = ({ navigation, route }): JSX.Element => {
   return (
     <ScrollView>
       {vendors.map((e: vendorNameType) => (
-        <CartVendorColumns key={e} vendorName={e} />
+        <CartVendorColumns
+          key={e}
+          vendorName={e}
+        />
       ))}
     </ScrollView>
   );

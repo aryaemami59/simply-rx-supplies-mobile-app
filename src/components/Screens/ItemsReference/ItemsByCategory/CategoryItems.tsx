@@ -1,6 +1,6 @@
 import { FC, memo, useEffect } from "react";
 import { selectSidebarNavs } from "../../../../redux/addedSlice";
-import { useAppSelector } from "../../../../redux/store";
+import { useAppSelector } from "../../../../redux/hooks";
 import { shallowEqual } from "react-redux";
 import { FlatList, ListRenderItem, ListRenderItemInfo } from "react-native";
 import { StackScreenProps } from "@react-navigation/stack";

@@ -1,6 +1,6 @@
 import { Badge, ListItem } from "@rneui/themed";
 import { FC, memo, useCallback } from "react";
-import { useAppSelector } from "../../../redux/store";
+import { useAppSelector } from "../../../redux/hooks";
 import {
   selectVendorOfficialName,
   addedItemsLength,

@@ -1,5 +1,5 @@
 import { FC, memo, useCallback, useEffect } from "react";
-import { useAppSelector } from "../../../../redux/store";
+import { useAppSelector } from "../../../../redux/hooks";
 import {
   selectByVendor,
   checkIfAnyItemsAddedToOneVendor,

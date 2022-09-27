@@ -1,6 +1,6 @@
 import { View, StyleSheet, Platform } from "react-native";
 import React, { FC, memo, useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "../redux/store";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import Constants from "expo-constants";
 import {
   fetchItems,

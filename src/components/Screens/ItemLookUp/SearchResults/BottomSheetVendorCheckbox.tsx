@@ -10,7 +10,7 @@ import {
   setVendorsForAllUncheck,
   selectVendorsChecked,
 } from "../../../../redux/addedSlice";
-import { useAppDispatch, useAppSelector } from "../../../../redux/store";
+import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
 import { width100 } from "../../../../shared/sharedStyles";
 
 type Props = {

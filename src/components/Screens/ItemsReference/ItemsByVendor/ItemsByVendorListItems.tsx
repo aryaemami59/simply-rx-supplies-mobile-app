@@ -1,6 +1,6 @@
 import { ListItem } from "@rneui/themed";
 import { FC, memo, useEffect } from "react";
-import { useAppSelector } from "../../../../redux/store";
+import { useAppSelector } from "../../../../redux/hooks";
 import {
   selectItemsByVendor,
   selectVendorOfficialName,

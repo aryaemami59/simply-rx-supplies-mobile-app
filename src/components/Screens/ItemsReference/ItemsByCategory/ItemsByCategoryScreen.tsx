@@ -1,5 +1,5 @@
 import { FC, memo } from "react";
-import { useAppSelector } from "../../../../redux/store";
+import { useAppSelector } from "../../../../redux/hooks";
 import { selectNavsArr } from "../../../../redux/addedSlice";
 import { shallowEqual } from "react-redux";
 import { ScrollView } from "react-native";
@@ -21,7 +21,10 @@ const ItemsByCategoryScreen: FC<Props> = (): JSX.Element => {
   return (
     <ScrollView>
       {navList.map(e => (
-        <CategoryList key={e} category={e} />
+        <CategoryList
+          key={e}
+          category={e}
+        />
       ))}
     </ScrollView>
   );

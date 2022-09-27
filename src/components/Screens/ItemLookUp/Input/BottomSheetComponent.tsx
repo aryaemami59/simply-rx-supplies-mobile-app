@@ -1,5 +1,5 @@
 import { FC, memo, useState, useCallback } from "react";
-import { useAppSelector } from "../../../../redux/store";
+import { useAppSelector } from "../../../../redux/hooks";
 import {
   selectVendorsArr,
   selectAllVendorOfficialNames,
@@ -30,7 +30,10 @@ const BottomSheetComponent: FC = (): JSX.Element => {
 
   return (
     <>
-      <Button onPress={showBottomSheet} title="Exclude Vendors" />
+      <Button
+        onPress={showBottomSheet}
+        title="Exclude Vendors"
+      />
       <BottomSheet
         isVisible={visible}
         onBackdropPress={hideBottomSheet}

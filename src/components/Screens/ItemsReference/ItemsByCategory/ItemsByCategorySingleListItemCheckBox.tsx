@@ -5,7 +5,7 @@ import {
   vendorNameType,
   officialVendorNameType,
 } from "../../../../../CustomTypes/types";
-import { useAppDispatch, useAppSelector } from "../../../../redux/store";
+import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
 import { checkIfAddedToOneVendor } from "../../../../redux/addedSlice";
 import {
   selectVendorOfficialName,
