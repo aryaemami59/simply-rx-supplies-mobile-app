@@ -1,5 +1,5 @@
 import { StackScreenProps } from "@react-navigation/stack";
-import { FC, memo } from "react";
+import { FC, memo, useCallback } from "react";
 import { Chip } from "@rneui/themed";
 import { View, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -11,9 +11,57 @@ import {
 import { HomeStackParamList } from "../../../../CustomTypes/types";
 import { fontWeight700, mainColor } from "../../../shared/sharedStyles";
 
+const searchIcon = <FontAwesome5 name="search" color="white" size={24} />;
+
+const storeSearchIcon = (
+  <MaterialCommunityIcons name="store-search-outline" color="white" size={24} />
+);
+
+const categoryIcon = <MaterialIcons name="category" color="white" size={24} />;
+
+const shoppingCartIcon = (
+  <MaterialIcons
+    name="shopping-cart"
+    color="white"
+    type="MaterialIcons"
+    size={24}
+  />
+);
 type Props = StackScreenProps<HomeStackParamList, "HomeScreen">;
 
-const HomeScreen: FC<Props> = ({ navigation }): JSX.Element => {
+const HomeScreen: FC<Props> = ({ navigation, route }): JSX.Element => {
+  const navigateToItemLookup = useCallback(
+    () => navigation.navigate("ItemLookup"),
+    [navigation]
+  );
+
+  const navigateToItemsByVendor = useCallback(
+    () =>
+      navigation.navigate("ItemsReference", {
+        screen: "ItemsReferenceScreen",
+        params: {
+          screen: "ItemsByVendor",
+        },
+      }),
+    [navigation]
+  );
+
+  const navigateToItemsByCategory = useCallback(
+    () =>
+      navigation.navigate("ItemsReference", {
+        screen: "ItemsReferenceScreen",
+        params: {
+          screen: "ItemsByCategory",
+        },
+      }),
+    [navigation]
+  );
+
+  const navigateToShoppingCart = useCallback(
+    () => navigation.navigate("ShoppingCart"),
+    [navigation]
+  );
+
   return (
     <SafeAreaView>
       <View style={styles.containerStyle}>
@@ -24,9 +72,9 @@ const HomeScreen: FC<Props> = ({ navigation }): JSX.Element => {
           containerStyle={styles.buttonStyle}
           color={mainColor}
           title="Item Lookup"
-          icon={<FontAwesome5 name="search" color="white" size={24} />}
+          icon={searchIcon}
           size="lg"
-          onPress={() => navigation.navigate("ItemLookup")}
+          onPress={navigateToItemLookup}
         />
         <Chip
           raised
@@ -35,40 +83,20 @@ const HomeScreen: FC<Props> = ({ navigation }): JSX.Element => {
           containerStyle={styles.buttonStyle}
           color={mainColor}
           title="Items By Vendor"
-          icon={
-            <MaterialCommunityIcons
-              name="store-search-outline"
-              color="white"
-              size={24}
-            />
-          }
+          icon={storeSearchIcon}
           size="lg"
-          onPress={() =>
-            navigation.navigate("ItemsReference", {
-              screen: "ItemsReferenceScreen",
-              params: {
-                screen: "ItemsByVendor",
-              },
-            })
-          }
+          onPress={navigateToItemsByVendor}
         />
         <Chip
           raised
-          icon={<MaterialIcons name="category" color="white" size={24} />}
+          icon={categoryIcon}
           titleStyle={styles.titleStyle}
           buttonStyle={styles.buttonStyle}
           containerStyle={styles.buttonStyle}
           color={mainColor}
           title="Items By Category"
           size="lg"
-          onPress={() =>
-            navigation.navigate("ItemsReference", {
-              screen: "ItemsReferenceScreen",
-              params: {
-                screen: "ItemsByCategory",
-              },
-            })
-          }
+          onPress={navigateToItemsByCategory}
         />
         <Chip
           raised
@@ -76,15 +104,8 @@ const HomeScreen: FC<Props> = ({ navigation }): JSX.Element => {
           buttonStyle={styles.buttonStyle}
           title="Shopping Cart"
           size="lg"
-          icon={
-            <MaterialIcons
-              name="shopping-cart"
-              color="white"
-              type="MaterialIcons"
-              size={24}
-            />
-          }
-          onPress={() => navigation.navigate("ShoppingCart")}
+          icon={shoppingCartIcon}
+          onPress={navigateToShoppingCart}
         />
       </View>
     </SafeAreaView>
