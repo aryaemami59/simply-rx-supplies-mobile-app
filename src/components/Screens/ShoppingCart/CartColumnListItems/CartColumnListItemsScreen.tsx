@@ -21,13 +21,18 @@ import {
 import { selectVendorsLinks } from "../../../../redux/addedSlice";
 import { selectVendorOfficialName } from "../../../../redux/addedSlice";
 import SingleCartListItems from "./SingleCartListItems";
-import { officialVendorNameType } from "../../../../../CustomTypes/types";
 import { Chip } from "@rneui/themed";
 import { MaterialIcons } from "@expo/vector-icons";
-import { mainColor, fontWeight700 } from "../../../../shared/sharedStyles";
+import {
+  fontWeight700,
+  backGroundMainColor,
+} from "../../../../shared/sharedStyles";
 import { TouchableOpacity } from "react-native";
 import CartQRCodeImage from "../QRImage/CartQRCodeImage";
 
+const shoppingCartIcon = (
+  <MaterialIcons name="shopping-cart" color="white" size={24} />
+);
 const renderItems: ListRenderItem<ItemObjType> = ({
   item,
 }: ListRenderItemInfo<ItemObjType>): JSX.Element => {
@@ -48,7 +53,7 @@ const CartColumnListItemsScreen: FC<Props> = ({
   const { vendorName } = route.params;
   const addedItems = useAppSelector(selectByVendor(vendorName));
   const vendorLink = useAppSelector(selectVendorsLinks(vendorName));
-  const ifAnyItemsAdded = useAppSelector<boolean>(
+  const ifAnyItemsAdded = useAppSelector(
     checkIfAnyItemsAddedToOneVendor(vendorName)
   );
 
@@ -56,7 +61,7 @@ const CartColumnListItemsScreen: FC<Props> = ({
     Linking.openURL(vendorLink);
   }, [vendorLink]);
 
-  const officialVendorName = useAppSelector<officialVendorNameType>(
+  const officialVendorName = useAppSelector(
     selectVendorOfficialName(vendorName)
   );
 
@@ -111,18 +116,11 @@ const CartColumnListItemsScreen: FC<Props> = ({
             <Text style={styles.textStyle}>No Item Has Been Added Yet!</Text>
             <Chip
               raised
-              titleStyle={styles.titleStyle}
-              buttonStyle={styles.buttonStyle}
+              titleStyle={fontWeight700}
+              buttonStyle={backGroundMainColor}
               title="Shopping Cart"
               size="lg"
-              icon={
-                <MaterialIcons
-                  name="shopping-cart"
-                  color="white"
-                  type="MaterialIcons"
-                  size={24}
-                />
-              }
+              icon={shoppingCartIcon}
               onPress={clickHandler}
             />
           </View>
@@ -164,12 +162,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     height: 100,
-  },
-  buttonStyle: {
-    backgroundColor: mainColor,
-  },
-  titleStyle: {
-    fontWeight: fontWeight700,
   },
   emptyContainer: {
     alignItems: "stretch",

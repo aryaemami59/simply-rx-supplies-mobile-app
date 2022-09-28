@@ -1,14 +1,12 @@
-import { FlexStyle, StyleProp, TextStyle, ViewStyle } from "react-native";
+import { FlexStyle, TextStyle, ViewStyle } from "react-native";
 
 export const mainColor = "#0071dc" as const;
 
-export const fontWeight700 = "700" as const;
-
-export const fontWeightBold: TextStyle = {
-  fontWeight: "bold",
+export const backGroundMainColor: ViewStyle = {
+  backgroundColor: mainColor,
 } as const;
 
-export const displayNone: StyleProp<ViewStyle> = {
+export const displayNone: ViewStyle = {
   display: "none",
 } as const;
 
@@ -16,8 +14,8 @@ export const width100: FlexStyle = {
   width: "100%",
 } as const;
 
-export const fontWeight600: TextStyle = {
-  fontWeight: "600",
+export const width80: FlexStyle = {
+  width: "80%",
 } as const;
 
 export const height100: FlexStyle = {
@@ -43,10 +41,22 @@ export const JC_AI_CENTER_HEIGHT100: FlexStyle = {
   height: "100%",
 } as const;
 
-export const width80: FlexStyle = {
-  width: "80%",
-} as const;
-
 export const colorWhite: TextStyle = {
   color: "white",
+} as const;
+
+export const textCenter: TextStyle = {
+  textAlign: "center",
+} as const;
+
+export const fontWeight600: TextStyle = {
+  fontWeight: "600",
+} as const;
+
+export const fontWeight700: TextStyle = {
+  fontWeight: "700",
+} as const;
+
+export const fontWeightBold: TextStyle = {
+  fontWeight: "bold",
 } as const;

@@ -1,5 +1,5 @@
 import { Chip } from "@rneui/themed";
-import { FC, memo, useState, useCallback } from "react";
+import { FC, memo, useCallback } from "react";
 
 import {
   checkIfAddedToAllVendors,
@@ -8,23 +8,29 @@ import {
 } from "../../../../redux/addedSlice";
 import { useAppSelector, useAppDispatch } from "../../../../redux/hooks";
 import { shallowEqual } from "react-redux";
-import { StyleSheet } from "react-native";
-import { fontWeight700, mainColor } from "../../../../shared/sharedStyles";
+import {
+  fontWeight700,
+  backGroundMainColor,
+} from "../../../../shared/sharedStyles";
 import { ItemObjType, vendorNameType } from "../../../../../CustomTypes/types";
+import { MaterialIcons } from "@expo/vector-icons";
+
+const icon = <MaterialIcons name="add" color="white" size={24} />;
 
 type Props = {
   itemObj: ItemObjType;
 };
 
 const AddItemButton: FC<Props> = ({ itemObj }): JSX.Element => {
-  useState<boolean>(false);
-  const IfAddedToAllVendors: boolean = useAppSelector<boolean>(
+  const IfAddedToAllVendors = useAppSelector<boolean>(
     checkIfAddedToAllVendors(itemObj)
   );
-  const vendors: vendorNameType[] = useAppSelector<vendorNameType[]>(
+
+  const vendors = useAppSelector<vendorNameType[]>(
     selectVendorsToAddTo(itemObj),
     shallowEqual
   );
+
   const dispatch = useAppDispatch();
 
   const clickHandler = useCallback((): void => {
@@ -38,21 +44,12 @@ const AddItemButton: FC<Props> = ({ itemObj }): JSX.Element => {
         size="lg"
         onPress={clickHandler}
         title="Add"
-        titleStyle={styles.titleStyle}
-        buttonStyle={styles.buttonStyle}
-        icon={{ name: "add", type: "Ionicons", color: "white" }}
+        titleStyle={fontWeight700}
+        buttonStyle={backGroundMainColor}
+        icon={icon}
       />
     </>
   );
 };
-
-const styles = StyleSheet.create({
-  buttonStyle: {
-    backgroundColor: mainColor,
-  },
-  titleStyle: {
-    fontWeight: fontWeight700,
-  },
-});
 
 export default memo<Props>(AddItemButton);

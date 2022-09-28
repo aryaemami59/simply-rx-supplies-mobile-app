@@ -1,5 +1,5 @@
 import { Header, SearchBar } from "@rneui/themed";
-import { FC, memo, useState, useCallback, useRef } from "react";
+import { FC, memo, useState, useCallback, useRef, useMemo } from "react";
 import { StyleSheet, TextInput, View } from "react-native";
 import * as Animatable from "react-native-animatable";
 import {
@@ -19,6 +19,10 @@ import {
   width100,
   colorWhite,
 } from "../../../../shared/sharedStyles";
+
+const searchIcon = (
+  <FontAwesome name="search" color="rgba(255,255,255,.5)" size={24} />
+);
 
 const empty: [] = [];
 
@@ -44,10 +48,7 @@ const sortResults = (
 
 const InputField: FC = (): JSX.Element => {
   const [val, setVal] = useState<string>("");
-  const items: ItemObjType[] = useAppSelector<ItemObjType[]>(
-    selectItemsArr,
-    shallowEqual
-  );
+  const items = useAppSelector(selectItemsArr, shallowEqual);
   const view = useRef<Animatable.View & View>(null);
   const inputRef = useRef<TextInput>(null);
   const dispatch = useAppDispatch();
@@ -87,7 +88,7 @@ const InputField: FC = (): JSX.Element => {
           i !== arr.length - 1 ? `(\\b(${f})+\\b)` : `(\\b(${f}))`
         )
         .join(".*");
-      const looseReg: string = trimmedValue
+      const looseReg = trimmedValue
         .split(/\s+/gi)
         .map((f: string) => `(?=.*${f})`)
         .join("");
@@ -107,25 +108,34 @@ const InputField: FC = (): JSX.Element => {
   );
 
   const changeVal: OnChangeText = useCallback(
-    (text: string): void => {
-      const listItems: ItemObjType[] = listItemsFunc(text);
+    (text: string) => {
+      const listItems = listItemsFunc(text);
       setVal(text);
       dispatch(setListItems(listItems));
     },
     [dispatch, listItemsFunc]
   );
 
+  const clearIcon = useMemo(
+    () => (
+      <EvilIcons
+        name="close"
+        color="rgba(255,255,255,.5)"
+        onPress={clickHandler}
+        size={24}
+      />
+    ),
+    [clickHandler]
+  );
+
   return (
     <Header
-      containerStyle={styles.headerContainerStyle}
+      containerStyle={styles.headerContainer}
       backgroundColor={mainColor}
       leftContainerStyle={displayNone}
       rightContainerStyle={displayNone}
       centerComponent={
-        <Animatable.View
-          ref={view}
-          transition="width"
-          style={width100}>
+        <Animatable.View ref={view} transition="width" style={width100}>
           <SearchBar
             returnKeyType="search"
             ref={inputRef}
@@ -134,30 +144,17 @@ const InputField: FC = (): JSX.Element => {
             autoFocus
             onFocus={focusHandler}
             onBlur={blurHandler}
-            containerStyle={styles.containerStyle}
+            containerStyle={styles.searchBarContainer}
             placeholder="Search..."
             round
-            inputContainerStyle={styles.inputContainerStyle}
+            inputContainerStyle={styles.inputContainer}
             onClear={clickHandler}
             onChangeText={changeVal}
             value={val}
             inputStyle={colorWhite}
             placeholderTextColor="rgba(255,255,255,.5)"
-            searchIcon={
-              <FontAwesome
-                name="search"
-                color="rgba(255,255,255,.5)"
-                size={24}
-              />
-            }
-            clearIcon={
-              <EvilIcons
-                name="close"
-                color="rgba(255,255,255,.5)"
-                onPress={clickHandler}
-                size={24}
-              />
-            }
+            searchIcon={searchIcon}
+            clearIcon={clearIcon}
           />
         </Animatable.View>
       }
@@ -166,15 +163,15 @@ const InputField: FC = (): JSX.Element => {
 };
 
 const styles = StyleSheet.create({
-  containerStyle: {
+  searchBarContainer: {
     backgroundColor: "transparent",
     borderBottomWidth: 0,
     borderTopWidth: 0,
   },
-  headerContainerStyle: {
+  headerContainer: {
     // height: 105,
   },
-  inputContainerStyle: {
+  inputContainer: {
     borderRadius: 9999,
     backgroundColor: "rgba(0, 0, 0, 0.3)",
   },

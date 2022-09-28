@@ -1,15 +1,15 @@
 import { FC, memo } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text } from "react-native";
 import { ItemObjType } from "../../../../../CustomTypes/types";
 import { useAppSelector } from "../../../../redux/hooks";
-import { AI_CENTER } from "../../../../shared/sharedStyles";
+import { AI_CENTER, textCenter } from "../../../../shared/sharedStyles";
 
 type Props = {
   itemObj: ItemObjType;
 };
 
 const ItemNumberCart: FC<Props> = ({ itemObj }): JSX.Element => {
-  const itemNumberShown: boolean = useAppSelector<boolean>(
+  const itemNumberShown = useAppSelector(
     (state): boolean => state.added.showItemNumber
   );
 
@@ -17,9 +17,7 @@ const ItemNumberCart: FC<Props> = ({ itemObj }): JSX.Element => {
     <>
       {itemNumberShown ? (
         <View style={AI_CENTER}>
-          <Text style={styles.textStyle}>
-            Item Number: {itemObj.itemNumber}
-          </Text>
+          <Text style={textCenter}>Item Number: {itemObj.itemNumber}</Text>
         </View>
       ) : (
         ""
@@ -27,11 +25,5 @@ const ItemNumberCart: FC<Props> = ({ itemObj }): JSX.Element => {
     </>
   );
 };
-
-const styles = StyleSheet.create({
-  textStyle: {
-    textAlign: "center",
-  },
-});
 
 export default memo<Props>(ItemNumberCart);

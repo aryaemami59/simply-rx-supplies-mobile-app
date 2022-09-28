@@ -4,21 +4,15 @@ import {
   selectVendorsArr,
   selectAllVendorOfficialNames,
 } from "../../../../redux/addedSlice";
-import {
-  officialVendorNameType,
-  vendorNameType,
-} from "../../../../../CustomTypes/types";
 import { Button } from "@rneui/themed";
 import { BottomSheet } from "@rneui/base";
 import { View, StyleSheet } from "react-native";
 import BottomSheetVendorCheckbox from "../SearchResults/BottomSheetVendorCheckbox";
 
-const BottomSheetComponent: FC = () => {
+const BottomSheetComponent: FC = (): JSX.Element => {
   const [visible, setVisible] = useState<boolean>(false);
-  const vendors = useAppSelector<vendorNameType[]>(selectVendorsArr);
-  const officialVendorNames = useAppSelector<officialVendorNameType[]>(
-    selectAllVendorOfficialNames
-  );
+  const vendors = useAppSelector(selectVendorsArr);
+  const officialVendorNames = useAppSelector(selectAllVendorOfficialNames);
 
   const showBottomSheet = useCallback(() => {
     setVisible(true);
@@ -36,11 +30,11 @@ const BottomSheetComponent: FC = () => {
         onBackdropPress={hideBottomSheet}
         containerStyle={styles.bottomSheetContainer}>
         <View>
-          {officialVendorNames.map((e: officialVendorNameType, i: number) => (
+          {officialVendorNames.map((officialVendorName, index) => (
             <BottomSheetVendorCheckbox
-              key={e}
-              title={e}
-              vendorName={vendors[i]}
+              key={officialVendorName}
+              title={officialVendorName}
+              vendorName={vendors[index]}
             />
           ))}
         </View>

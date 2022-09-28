@@ -22,8 +22,8 @@ const Main: FC = (): JSX.Element => {
     dispatch(fetchNavList());
   }, [dispatch]);
 
-  const isLoading: boolean = useAppSelector(checkIfLoading);
-  const errMsg: string = useAppSelector(selectErrMsg);
+  const isLoading = useAppSelector(checkIfLoading);
+  const errMsg = useAppSelector(selectErrMsg);
 
   if (isLoading) {
     return <IsLoadingComponents />;
@@ -34,7 +34,7 @@ const Main: FC = (): JSX.Element => {
   }
 
   return (
-    <View style={styles.ContainerStyle}>
+    <View style={styles.container}>
       <TabBarMain />
     </View>
   );
@@ -43,7 +43,7 @@ const Main: FC = (): JSX.Element => {
 export default memo(Main);
 
 const styles = StyleSheet.create({
-  ContainerStyle: {
+  container: {
     flex: 1,
     paddingTop: Platform.OS === "ios" ? 0 : Constants.statusBarHeight,
     backgroundColor: "white",

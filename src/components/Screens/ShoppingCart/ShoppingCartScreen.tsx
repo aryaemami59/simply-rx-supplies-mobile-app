@@ -4,20 +4,17 @@ import { selectVendorsArr } from "../../../redux/addedSlice";
 import { ScrollView } from "react-native";
 import CartVendorColumns from "./CartVendorColumns";
 import { StackScreenProps } from "@react-navigation/stack";
-import {
-  ShoppingCartStackParamList,
-  vendorNameType,
-} from "../../../../CustomTypes/types";
+import { ShoppingCartStackParamList } from "../../../../CustomTypes/types";
 
 type Props = StackScreenProps<ShoppingCartStackParamList, "ShoppingCartScreen">;
 
 const ShoppingCartScreen: FC<Props> = ({ navigation, route }): JSX.Element => {
-  const vendors = useAppSelector<vendorNameType[]>(selectVendorsArr);
+  const vendors = useAppSelector(selectVendorsArr);
 
   return (
     <ScrollView>
-      {vendors.map((e: vendorNameType) => (
-        <CartVendorColumns key={e} vendorName={e} />
+      {vendors.map(vendorName => (
+        <CartVendorColumns key={vendorName} vendorName={vendorName} />
       ))}
     </ScrollView>
   );

@@ -15,9 +15,7 @@ type Props = {
 };
 
 const CartQRCodeImage: FC<Props> = ({ vendorName }): JSX.Element => {
-  const itemNumbers: string = useAppSelector<string>(
-    selectQRCodeContent(vendorName)
-  );
+  const itemNumbers = useAppSelector(selectQRCodeContent(vendorName));
 
   const navigation =
     useNavigation<StackNavigationProp<ShoppingCartStackParamList>>();

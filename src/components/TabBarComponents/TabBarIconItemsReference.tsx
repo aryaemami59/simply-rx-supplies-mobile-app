@@ -4,7 +4,11 @@ import { MaterialIcons } from "@expo/vector-icons";
 
 type Props = tabBarIconProps;
 
-const TabBarIconItemsReference: FC<Props> = ({ color, size }): JSX.Element => {
+const TabBarIconItemsReference: FC<Props> = ({
+  color,
+  size,
+  focused,
+}): JSX.Element => {
   return <MaterialIcons name="filter-list" color={color} size={size} />;
 };
 

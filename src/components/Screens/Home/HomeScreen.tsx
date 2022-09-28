@@ -9,7 +9,11 @@ import {
   MaterialIcons,
 } from "@expo/vector-icons";
 import { HomeStackParamList } from "../../../../CustomTypes/types";
-import { fontWeight700, mainColor } from "../../../shared/sharedStyles";
+import {
+  fontWeight700,
+  mainColor,
+  backGroundMainColor,
+} from "../../../shared/sharedStyles";
 
 const searchIcon = <FontAwesome5 name="search" color="white" size={24} />;
 
@@ -64,12 +68,12 @@ const HomeScreen: FC<Props> = ({ navigation, route }): JSX.Element => {
 
   return (
     <SafeAreaView>
-      <View style={styles.containerStyle}>
+      <View style={styles.container}>
         <Chip
           raised
-          titleStyle={styles.titleStyle}
-          buttonStyle={styles.buttonStyle}
-          containerStyle={styles.buttonStyle}
+          titleStyle={fontWeight700}
+          buttonStyle={backGroundMainColor}
+          containerStyle={backGroundMainColor}
           color={mainColor}
           title="Item Lookup"
           icon={searchIcon}
@@ -78,9 +82,9 @@ const HomeScreen: FC<Props> = ({ navigation, route }): JSX.Element => {
         />
         <Chip
           raised
-          titleStyle={styles.titleStyle}
-          buttonStyle={styles.buttonStyle}
-          containerStyle={styles.buttonStyle}
+          titleStyle={fontWeight700}
+          buttonStyle={backGroundMainColor}
+          containerStyle={backGroundMainColor}
           color={mainColor}
           title="Items By Vendor"
           icon={storeSearchIcon}
@@ -90,9 +94,9 @@ const HomeScreen: FC<Props> = ({ navigation, route }): JSX.Element => {
         <Chip
           raised
           icon={categoryIcon}
-          titleStyle={styles.titleStyle}
-          buttonStyle={styles.buttonStyle}
-          containerStyle={styles.buttonStyle}
+          titleStyle={fontWeight700}
+          buttonStyle={backGroundMainColor}
+          containerStyle={backGroundMainColor}
           color={mainColor}
           title="Items By Category"
           size="lg"
@@ -100,8 +104,8 @@ const HomeScreen: FC<Props> = ({ navigation, route }): JSX.Element => {
         />
         <Chip
           raised
-          titleStyle={styles.titleStyle}
-          buttonStyle={styles.buttonStyle}
+          titleStyle={fontWeight700}
+          buttonStyle={backGroundMainColor}
           title="Shopping Cart"
           size="lg"
           icon={shoppingCartIcon}
@@ -113,17 +117,11 @@ const HomeScreen: FC<Props> = ({ navigation, route }): JSX.Element => {
 };
 
 const styles = StyleSheet.create({
-  containerStyle: {
+  container: {
     alignItems: "stretch",
     justifyContent: "space-between",
     height: "100%",
     padding: 30,
-  },
-  buttonStyle: {
-    backgroundColor: mainColor,
-  },
-  titleStyle: {
-    fontWeight: fontWeight700,
   },
 });
 

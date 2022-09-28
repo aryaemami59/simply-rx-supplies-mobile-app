@@ -13,7 +13,6 @@ import {
   vendorNameType,
 } from "../../../../CustomTypes/types";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { officialVendorNameType } from "../../../../CustomTypes/types";
 import { fontWeightBold } from "../../../shared/sharedStyles";
 
 type Props = {
@@ -21,10 +20,10 @@ type Props = {
 };
 
 const CartVendorColumns: FC<Props> = ({ vendorName }): JSX.Element => {
-  const officialVendorName = useAppSelector<officialVendorNameType>(
+  const officialVendorName = useAppSelector(
     selectVendorOfficialName(vendorName)
   );
-  const addedItemsLen = useAppSelector<number>(addedItemsLength(vendorName));
+  const addedItemsLen = useAppSelector(addedItemsLength(vendorName));
 
   const status = addedItemsLen ? "success" : "primary";
 
@@ -39,7 +38,7 @@ const CartVendorColumns: FC<Props> = ({ vendorName }): JSX.Element => {
     <ListItem
       bottomDivider
       Component={TouchableScale}
-      containerStyle={styles.accordionContainerStyle}
+      containerStyle={styles.listItemContainer}
       onPress={clickHandler}
       pad={50}>
       <ListItem.Content>
@@ -49,7 +48,7 @@ const CartVendorColumns: FC<Props> = ({ vendorName }): JSX.Element => {
             textStyle={fontWeightBold}
             status={status}
             value={addedItemsLen}
-            containerStyle={styles.badgeContainerStyle}
+            containerStyle={styles.badgeContainer}
           />
         </>
       </ListItem.Content>
@@ -58,11 +57,11 @@ const CartVendorColumns: FC<Props> = ({ vendorName }): JSX.Element => {
 };
 
 const styles = StyleSheet.create({
-  accordionContainerStyle: {
+  listItemContainer: {
     alignItems: "center",
     justifyContent: "space-between",
   },
-  badgeContainerStyle: {
+  badgeContainer: {
     position: "absolute",
     right: 60,
   },

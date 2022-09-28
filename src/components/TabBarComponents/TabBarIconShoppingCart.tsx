@@ -6,17 +6,15 @@ import { useAppSelector } from "../../redux/hooks";
 
 type Props = tabBarIconProps;
 
-const TabBarIconShoppingCart: FC<Props> = ({ color }): JSX.Element => {
+const TabBarIconShoppingCart: FC<Props> = ({
+  color,
+  size,
+  focused,
+}): JSX.Element => {
   const ifAdded = useAppSelector(checkIfAnyItemsAdded);
-  return (
-    <>
-      <Ionicons
-        name={ifAdded ? "cart" : "cart-outline"}
-        color={color}
-        size={30}
-      />
-    </>
-  );
+  const iconName = ifAdded ? "cart" : "cart-outline";
+
+  return <Ionicons name={iconName} color={color} size={30} />;
 };
 
 export default memo<Props>(TabBarIconShoppingCart);
