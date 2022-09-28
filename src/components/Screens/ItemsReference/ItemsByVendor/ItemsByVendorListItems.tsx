@@ -1,4 +1,4 @@
-import { FC, memo, useEffect } from "react";
+import { FC, memo, useEffect, useMemo } from "react";
 import { useAppSelector } from "../../../../redux/hooks";
 import {
   selectItemsByVendor,
@@ -8,11 +8,11 @@ import { shallowEqual } from "react-redux";
 import SingleListItem from "../../../../shared/SingleListItem";
 import { FlatList, ListRenderItem, ListRenderItemInfo } from "react-native";
 import { ItemsReferenceStackParamList } from "../../../../../CustomTypes/types";
-import { StackScreenProps } from "@react-navigation/stack";
 import {
-  officialVendorNameType,
-  ItemObjType,
-} from "../../../../../CustomTypes/types";
+  StackScreenProps,
+  StackNavigationOptions,
+} from "@react-navigation/stack";
+import { ItemObjType } from "../../../../../CustomTypes/types";
 
 const keyExtractor = (item: ItemObjType) => item.id.toString();
 
@@ -26,10 +26,9 @@ const ItemsByVendorListItems: FC<Props> = ({
   route,
 }): JSX.Element => {
   const { vendorName } = route.params;
-  const officialVendorName: officialVendorNameType =
-    useAppSelector<officialVendorNameType>(
-      selectVendorOfficialName(vendorName)
-    );
+  const officialVendorName = useAppSelector(
+    selectVendorOfficialName(vendorName)
+  );
 
   const renderItems: ListRenderItem<ItemObjType> = ({
     item,
@@ -37,14 +36,17 @@ const ItemsByVendorListItems: FC<Props> = ({
     return <SingleListItem itemObj={item} vendorName={vendorName} />;
   };
 
-  const items: ItemObjType[] = useAppSelector<ItemObjType[]>(
-    selectItemsByVendor(vendorName),
-    shallowEqual
-  );
+  const items = useAppSelector(selectItemsByVendor(vendorName), shallowEqual);
+
+  const options: StackNavigationOptions = useMemo(() => {
+    return {
+      headerTitle: officialVendorName,
+    };
+  }, [officialVendorName]);
 
   useEffect(() => {
-    navigation.setOptions({ headerTitle: officialVendorName });
-  }, [navigation, officialVendorName]);
+    navigation.setOptions(options);
+  }, [navigation, options]);
 
   return (
     <FlatList
@@ -53,7 +55,6 @@ const ItemsByVendorListItems: FC<Props> = ({
       renderItem={renderItems}
       keyExtractor={keyExtractor}
       keyboardShouldPersistTaps="handled"
-      extraData={vendorName}
     />
   );
 };

@@ -22,9 +22,7 @@ const BottomSheetVendorCheckbox: FC<Props> = ({
   title,
   vendorName,
 }): JSX.Element => {
-  const checked: boolean = useAppSelector<boolean>(
-    selectVendorsChecked(vendorName)
-  );
+  const checked = useAppSelector(selectVendorsChecked(vendorName));
   const dispatch = useAppDispatch();
 
   const onToggleCheck = useCallback(() => {

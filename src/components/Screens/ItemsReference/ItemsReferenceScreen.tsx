@@ -7,6 +7,10 @@ import { createMaterialTopTabNavigator } from "@react-navigation/material-top-ta
 import ItemsByVendorStackScreen from "../../StackScreenComponents/ItemsByVendorStackScreen";
 import ItemsByCategoryStackScreen from "../../StackScreenComponents/ItemsByCategoryStackScreen";
 import { StackScreenProps } from "@react-navigation/stack";
+import {
+  itemsByCategoryTabOptions,
+  itemsByVendorTabOptions,
+} from "../../../shared/sharedScreenOptions";
 
 type Props = StackScreenProps<
   ItemsReferenceStackParamList,
@@ -15,20 +19,19 @@ type Props = StackScreenProps<
 
 const Tab = createMaterialTopTabNavigator<ItemsReferenceTopTabParamList>();
 
-const ItemsReferenceScreen: FC<Props> = (): JSX.Element => {
+const ItemsReferenceScreen: FC<Props> = ({
+  navigation,
+  route,
+}): JSX.Element => {
   return (
     <Tab.Navigator>
       <Tab.Screen
-        options={{
-          tabBarLabel: "Items By Vendor",
-        }}
+        options={itemsByVendorTabOptions}
         name="ItemsByVendor"
         component={ItemsByVendorStackScreen}
       />
       <Tab.Screen
-        options={{
-          tabBarLabel: "Items By Category",
-        }}
+        options={itemsByCategoryTabOptions}
         name="ItemsByCategory"
         component={ItemsByCategoryStackScreen}
       />

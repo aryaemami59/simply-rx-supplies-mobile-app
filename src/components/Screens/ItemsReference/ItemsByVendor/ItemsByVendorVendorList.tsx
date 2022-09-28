@@ -7,19 +7,18 @@ import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import {
   ItemsReferenceStackParamList,
-  officialVendorNameType,
   vendorNameType,
 } from "../../../../../CustomTypes/types";
+import TouchableScale from "react-native-touchable-scale";
 
 type Props = {
   vendorName: vendorNameType;
 };
 
 const ItemsByVendorVendorList: FC<Props> = ({ vendorName }): JSX.Element => {
-  const officialVendorName: officialVendorNameType =
-    useAppSelector<officialVendorNameType>(
-      selectVendorOfficialName(vendorName)
-    );
+  const officialVendorName = useAppSelector(
+    selectVendorOfficialName(vendorName)
+  );
 
   const navigation =
     useNavigation<StackNavigationProp<ItemsReferenceStackParamList>>();
@@ -30,9 +29,10 @@ const ItemsByVendorVendorList: FC<Props> = ({ vendorName }): JSX.Element => {
 
   return (
     <ListItem
-      containerStyle={styles.accordionContainerStyle}
+      containerStyle={styles.listItemContainer}
       key={vendorName}
       bottomDivider
+      Component={TouchableScale}
       onPress={clickHandler}>
       <ListItem.Content>
         <ListItem.Title>{officialVendorName}</ListItem.Title>
@@ -42,7 +42,7 @@ const ItemsByVendorVendorList: FC<Props> = ({ vendorName }): JSX.Element => {
 };
 
 const styles = StyleSheet.create({
-  accordionContainerStyle: {
+  listItemContainer: {
     alignItems: "center",
     justifyContent: "space-between",
   },

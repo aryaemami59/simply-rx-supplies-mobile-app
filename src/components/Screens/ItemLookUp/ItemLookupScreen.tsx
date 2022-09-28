@@ -21,7 +21,7 @@ import BottomSheetComponent from "./Input/BottomSheetComponent";
 const renderItems: ListRenderItem<ItemObjType> = ({
   item,
 }: ListRenderItemInfo<ItemObjType>): JSX.Element => {
-  return <SingleSearchResultsListItem item={item} />;
+  return <SingleSearchResultsListItem itemObj={item} />;
 };
 
 const keyExtractor = (item: ItemObjType) => item.id.toString();

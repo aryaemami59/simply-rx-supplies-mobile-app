@@ -325,7 +325,7 @@ export const selectVendorsToAddTo =
   (state: RootState): vendorNameType[] =>
     state.item[itemObj.name]!.vendorsToAdd;
 
-export const selectSidebarNavs =
+export const selectCategories =
   (category: Category) =>
   (state: RootState): ItemObjType[] =>
     state.added.navsObj![category].map(

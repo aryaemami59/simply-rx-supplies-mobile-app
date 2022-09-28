@@ -1,4 +1,4 @@
-import { FC, memo, useEffect } from "react";
+import { FC, memo, useEffect, useMemo, useCallback } from "react";
 import {
   Image,
   View,
@@ -7,56 +7,70 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from "react-native";
-import { StackScreenProps } from "@react-navigation/stack";
+import {
+  StackScreenProps,
+  StackNavigationOptions,
+} from "@react-navigation/stack";
 import { Octicons } from "@expo/vector-icons";
 import { ShoppingCartStackParamList } from "../../../../../CustomTypes/types";
-import { height100, JC_AI_CENTER } from "../../../../shared/sharedStyles";
+import { JC_AI_CENTER_HEIGHT100 } from "../../../../shared/sharedStyles";
+
+const iconName = Platform.OS === "android" ? "share-android" : "share";
 
 type Props = StackScreenProps<ShoppingCartStackParamList, "BarcodeImage">;
 
 const BarcodeImageScreen: FC<Props> = ({ navigation, route }): JSX.Element => {
   const { src, name } = route.params;
 
-  const shareBarcode = () => {
-    Share.share({
+  const options: StackNavigationOptions = useMemo(() => {
+    return {
+      title: name,
+    };
+  }, [name]);
+
+  const shareContent = useMemo(() => {
+    return {
       title: `Barcode Image for ${name}`,
       message: `This is the barcode image for ${name}`,
       url: src,
-    });
-  };
+    };
+  }, [name, src]);
+
+  const imageSource = useMemo(() => {
+    return {
+      uri: src,
+    };
+  }, [src]);
+
+  const shareBarcode = useCallback(() => {
+    Share.share(shareContent);
+  }, [shareContent]);
 
   useEffect(() => {
-    navigation.setOptions({ title: name });
-  }, [name, navigation]);
+    navigation.setOptions(options);
+  }, [navigation, options]);
 
   return (
-    <View style={styles.containerStyle}>
+    <View style={[JC_AI_CENTER_HEIGHT100, styles.container]}>
       <TouchableOpacity onLongPress={shareBarcode}>
-        <Image source={{ uri: src }} style={styles.imageStyle} />
+        <Image source={imageSource} style={styles.image} />
       </TouchableOpacity>
       <TouchableOpacity onPress={shareBarcode}>
-        <Octicons
-          name={Platform.OS === "android" ? "share-android" : "share"}
-          size={50}
-          style={styles.iconStyle}
-          color="gray"
-        />
+        <Octicons name={iconName} size={50} style={styles.icon} color="gray" />
       </TouchableOpacity>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  containerStyle: {
-    ...JC_AI_CENTER,
-    ...height100,
+  container: {
     paddingHorizontal: 40,
   },
-  imageStyle: {
+  image: {
     aspectRatio: 33 / 28,
     width: "90%",
   },
-  iconStyle: {
+  icon: {
     alignSelf: "flex-end",
     marginTop: 20,
     marginEnd: 15,

@@ -13,11 +13,11 @@ const ItemsByCategorySingleListItem: FC<Props> = ({ itemObj }): JSX.Element => {
   return (
     <>
       <SingleListItem itemObj={itemObj} />
-      {vendors.map(e => (
+      {vendors.map(vendorName => (
         <ItemsByCategorySingleListItemCheckBox
           itemObj={itemObj}
-          vendorName={e}
-          key={`ItemsByCategorySingleListItem-${e}`}
+          vendorName={vendorName}
+          key={`ItemsByCategorySingleListItem-${vendorName}`}
         />
       ))}
     </>

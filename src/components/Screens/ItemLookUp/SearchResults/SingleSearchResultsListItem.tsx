@@ -3,23 +3,25 @@ import { FC, memo } from "react";
 import { View } from "react-native";
 import AddItemButton from "./AddItemButton";
 import SearchResultsSwitch from "./SearchResultsCheckBox";
-import { ItemObjType, vendorNameType } from "../../../../../CustomTypes/types";
+import { ItemObjType } from "../../../../../CustomTypes/types";
 import { fontWeight600 } from "../../../../shared/sharedStyles";
 
 type Props = {
-  item: ItemObjType;
+  itemObj: ItemObjType;
 };
 
-const SingleSearchResultsListItem: FC<Props> = ({
-  item: itemObj,
-}): JSX.Element => {
+const SingleSearchResultsListItem: FC<Props> = ({ itemObj }): JSX.Element => {
   return (
     <View key={itemObj.id}>
       <ListItem bottomDivider>
         <ListItem.Content>
           <ListItem.Title style={fontWeight600}>{itemObj.name}</ListItem.Title>
-          {itemObj.vendors.map((e: vendorNameType) => (
-            <SearchResultsSwitch key={e} vendorName={e} itemObj={itemObj} />
+          {itemObj.vendors.map(vendorName => (
+            <SearchResultsSwitch
+              key={vendorName}
+              vendorName={vendorName}
+              itemObj={itemObj}
+            />
           ))}
         </ListItem.Content>
         <ListItem.Content right>

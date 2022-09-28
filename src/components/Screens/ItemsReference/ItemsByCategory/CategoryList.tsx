@@ -3,10 +3,12 @@ import { FC, memo, useCallback } from "react";
 import { StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
+import TouchableScale from "react-native-touchable-scale";
 import {
   Category,
   ItemsReferenceStackParamList,
 } from "../../../../../CustomTypes/types";
+import { AI_CENTER } from "../../../../shared/sharedStyles";
 
 type Props = {
   category: Category;
@@ -22,8 +24,9 @@ const CategoryList: FC<Props> = ({ category }): JSX.Element => {
 
   return (
     <ListItem
-      containerStyle={styles.accordionContainerStyle}
+      containerStyle={[AI_CENTER, styles.accordionContainer]}
       bottomDivider
+      Component={TouchableScale}
       onPress={clickHandler}>
       <ListItem.Content>
         <ListItem.Title>{category}</ListItem.Title>
@@ -33,8 +36,7 @@ const CategoryList: FC<Props> = ({ category }): JSX.Element => {
 };
 
 const styles = StyleSheet.create({
-  accordionContainerStyle: {
-    alignItems: "center",
+  accordionContainer: {
     justifyContent: "space-between",
   },
 });

@@ -70,14 +70,12 @@ const SearchResultsCheckBox: FC<myProps> = ({
   );
 
   return (
-    <>
-      <ListItem.CheckBox
-        checked={checked}
-        disabled={disabled}
-        onPress={onToggleSwitch}
-        title={officialVendorName}
-      />
-    </>
+    <ListItem.CheckBox
+      checked={checked}
+      disabled={disabled}
+      onPress={onToggleSwitch}
+      title={officialVendorName}
+    />
   );
 };
 

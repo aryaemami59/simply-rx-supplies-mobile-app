@@ -5,7 +5,9 @@
   ],
   "rules": {
     "@typescript-eslint/no-non-null-assertion": "off",
-    "quotes": ["error", "double"],
+    "quotes": "off",
+    // "quotes": [2, "double"],
+    // "quotes": ["error", "double"],
     "react/react-in-jsx-scope": "off",
     "@typescript-eslint/no-unused-vars": [
       "warn",
@@ -19,7 +21,8 @@
       "off",
       "error",
       {
-        "endOfLine": "auto"
+        "endOfLine": "auto",
+        "singleQuote": false
       }
     ]
   }

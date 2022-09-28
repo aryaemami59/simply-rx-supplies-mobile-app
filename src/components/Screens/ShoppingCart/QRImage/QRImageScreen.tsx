@@ -1,12 +1,14 @@
-import { FC, memo, useRef } from "react";
+import { FC, memo, useRef, useCallback } from "react";
 import { StackScreenProps } from "@react-navigation/stack";
 import QRCode from "react-native-qrcode-svg";
 import { View, Platform, TouchableOpacity, StyleSheet } from "react-native";
 import { Share } from "react-native";
 import { Svg } from "react-native-svg";
 import { Octicons } from "@expo/vector-icons";
-import { height100, JC_AI_CENTER } from "../../../../shared/sharedStyles";
+import { JC_AI_CENTER_HEIGHT100 } from "../../../../shared/sharedStyles";
 import { ShoppingCartStackParamList } from "../../../../../CustomTypes/types";
+
+const iconName = Platform.OS === "android" ? "share-android" : "share";
 
 type Props = StackScreenProps<ShoppingCartStackParamList, "QRImage">;
 
@@ -25,30 +27,25 @@ const QRImageScreen: FC<Props> = ({ route }): JSX.Element => {
     });
   };
 
+  const getRef = useCallback(e => (svg = e), []);
+
   return (
-    <View style={styles.ContainerStyle}>
+    <View style={[JC_AI_CENTER_HEIGHT100, styles.container]}>
       <TouchableOpacity onLongPress={shareQR}>
-        <QRCode value={itemNumbers} size={300} getRef={e => (svg = e)} />
+        <QRCode value={itemNumbers} size={300} getRef={getRef} />
       </TouchableOpacity>
       <TouchableOpacity onPress={shareQR}>
-        <Octicons
-          name={Platform.OS === "android" ? "share-android" : "share"}
-          size={50}
-          style={styles.IconStyle}
-          color="gray"
-        />
+        <Octicons name={iconName} size={50} style={styles.icon} color="gray" />
       </TouchableOpacity>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  ContainerStyle: {
-    ...JC_AI_CENTER,
-    ...height100,
+  container: {
     paddingHorizontal: 50,
   },
-  IconStyle: {
+  icon: {
     alignSelf: "flex-end",
     marginTop: 20,
   },

@@ -13,7 +13,7 @@ import {
   vendorNameType,
 } from "../../../../CustomTypes/types";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { fontWeightBold } from "../../../shared/sharedStyles";
+import { fontWeightBold, AI_CENTER } from "../../../shared/sharedStyles";
 
 type Props = {
   vendorName: vendorNameType;
@@ -38,7 +38,7 @@ const CartVendorColumns: FC<Props> = ({ vendorName }): JSX.Element => {
     <ListItem
       bottomDivider
       Component={TouchableScale}
-      containerStyle={styles.listItemContainer}
+      containerStyle={[AI_CENTER, styles.listItemContainer]}
       onPress={clickHandler}
       pad={50}>
       <ListItem.Content>
@@ -58,7 +58,6 @@ const CartVendorColumns: FC<Props> = ({ vendorName }): JSX.Element => {
 
 const styles = StyleSheet.create({
   listItemContainer: {
-    alignItems: "center",
     justifyContent: "space-between",
   },
   badgeContainer: {

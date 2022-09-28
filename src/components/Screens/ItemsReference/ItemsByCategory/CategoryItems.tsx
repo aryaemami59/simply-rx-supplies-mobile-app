@@ -1,9 +1,12 @@
-import { FC, memo, useEffect } from "react";
-import { selectSidebarNavs } from "../../../../redux/addedSlice";
+import { FC, memo, useEffect, useMemo } from "react";
+import { selectCategories } from "../../../../redux/addedSlice";
 import { useAppSelector } from "../../../../redux/hooks";
 import { shallowEqual } from "react-redux";
 import { FlatList, ListRenderItem, ListRenderItemInfo } from "react-native";
-import { StackScreenProps } from "@react-navigation/stack";
+import {
+  StackScreenProps,
+  StackNavigationOptions,
+} from "@react-navigation/stack";
 import {
   ItemsReferenceStackParamList,
   ItemObjType,
@@ -26,14 +29,20 @@ type Props = StackScreenProps<
 const CategoryItems: FC<Props> = ({ navigation, route }): JSX.Element => {
   const { category } = route.params;
 
-  const categoryListItems: ItemObjType[] = useAppSelector<ItemObjType[]>(
-    selectSidebarNavs(category),
+  const categoryListItems = useAppSelector(
+    selectCategories(category),
     shallowEqual
   );
 
+  const options: StackNavigationOptions = useMemo(() => {
+    return {
+      headerTitle: category,
+    };
+  }, [category]);
+
   useEffect(() => {
-    navigation.setOptions({ headerTitle: category });
-  }, [navigation, category]);
+    navigation.setOptions(options);
+  }, [navigation, options]);
 
   return (
     <FlatList

@@ -1,10 +1,6 @@
 import { ListItem } from "@rneui/themed";
 import { FC, memo, useCallback } from "react";
-import {
-  ItemObjType,
-  vendorNameType,
-  officialVendorNameType,
-} from "../../../../../CustomTypes/types";
+import { ItemObjType, vendorNameType } from "../../../../../CustomTypes/types";
 import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
 import { checkIfAddedToOneVendor } from "../../../../redux/addedSlice";
 import {
@@ -23,29 +19,25 @@ const ItemsByCategorySingleListItemCheckBox: FC<Props> = ({
   vendorName,
 }): JSX.Element => {
   const dispatch = useAppDispatch();
-  const officialVendorName = useAppSelector<officialVendorNameType>(
+  const officialVendorName = useAppSelector(
     selectVendorOfficialName(vendorName)
   );
-  const ifAddedToVendor = useAppSelector<boolean>(
+  const ifAddedToVendor = useAppSelector(
     checkIfAddedToOneVendor(itemObj, vendorName)
   );
-  const checked = useAppSelector<boolean>(
-    checkVendorsToAdd(itemObj, vendorName)
-  );
+  const checked = useAppSelector(checkVendorsToAdd(itemObj, vendorName));
 
   const onToggleSwitch = useCallback(() => {
     ifAddedToVendor || dispatch(setVendors({ itemObj, vendorName }));
   }, [dispatch, ifAddedToVendor, itemObj, vendorName]);
 
   return (
-    <>
-      <ListItem.CheckBox
-        title={officialVendorName}
-        checked={checked}
-        disabled={ifAddedToVendor}
-        onPress={onToggleSwitch}
-      />
-    </>
+    <ListItem.CheckBox
+      title={officialVendorName}
+      checked={checked}
+      disabled={ifAddedToVendor}
+      onPress={onToggleSwitch}
+    />
   );
 };
 
