@@ -14,6 +14,8 @@ import {
 } from "../../shared/sharedScreenOptions";
 import { useAppSelector } from "../../redux/hooks";
 import { checkIfAnyItemsAdded } from "../../redux/addedSlice";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import { enableScreens } from "react-native-screens";
 
 const Tab = createBottomTabNavigator<RootTabParamList>();
 
@@ -28,29 +30,33 @@ const TabBarMain: FC = (): JSX.Element => {
     };
   }, [tabBarBadge]);
 
+  enableScreens(false);
+
   return (
-    <Tab.Navigator screenOptions={HEADER_SHOWN_FALSE}>
-      <Tab.Screen
-        name="Home"
-        component={HomeStackScreen}
-        options={HomeOptions}
-      />
-      <Tab.Screen
-        name="ItemLookup"
-        component={ItemLookupStackScreen}
-        options={ItemLookupOptions}
-      />
-      <Tab.Screen
-        name="ShoppingCart"
-        component={ShoppingCartStackScreen}
-        options={options}
-      />
-      <Tab.Screen
-        name="ItemsReference"
-        component={ItemsReferenceStackScreen}
-        options={ItemsReferenceOptions}
-      />
-    </Tab.Navigator>
+    <SafeAreaProvider>
+      <Tab.Navigator screenOptions={HEADER_SHOWN_FALSE}>
+        <Tab.Screen
+          name="Home"
+          component={HomeStackScreen}
+          options={HomeOptions}
+        />
+        <Tab.Screen
+          name="ItemLookup"
+          component={ItemLookupStackScreen}
+          options={ItemLookupOptions}
+        />
+        <Tab.Screen
+          name="ShoppingCart"
+          component={ShoppingCartStackScreen}
+          options={options}
+        />
+        <Tab.Screen
+          name="ItemsReference"
+          component={ItemsReferenceStackScreen}
+          options={ItemsReferenceOptions}
+        />
+      </Tab.Navigator>
+    </SafeAreaProvider>
   );
 };
 

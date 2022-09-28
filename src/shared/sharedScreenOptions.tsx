@@ -8,8 +8,9 @@ import TabBarIconHome from "../components/TabBarComponents/TabBarIconHome";
 import TabBarIconItemLookup from "../components/TabBarComponents/TabBarIconItemLookup";
 import TabBarIconShoppingCart from "../components/TabBarComponents/TabBarIconShoppingCart";
 import TabBarIconItemsReference from "../components/TabBarComponents/TabBarIconItemsReference";
+import { NativeStackNavigationOptions } from "@react-navigation/native-stack";
 
-export const screenOptions: StackNavigationOptions = {
+export const screenOptions: NativeStackNavigationOptions = {
   header: props => <HeaderHomeStackNavigator {...props} />,
 } as const;
 
@@ -17,9 +18,9 @@ export const HEADER_SHOWN_FALSE = {
   headerShown: false,
 } as const;
 
-export const refHeaderOptions: StackNavigationOptions = {
+export const refHeaderOptions: NativeStackNavigationOptions = {
   headerTitleStyle: { color: "white" },
-  headerBackTitleStyle: { color: "white" },
+  // headerBackTitleStyle: { color: "white" },
   headerBackTitleVisible: false,
   headerTintColor: "white",
   headerStyle: { backgroundColor: MAIN_COLOR },

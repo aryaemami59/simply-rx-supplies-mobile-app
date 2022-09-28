@@ -22,19 +22,20 @@ export type RootTabParamList = {
   ItemLookup: undefined;
   ShoppingCart: ShoppingCartStackParamList;
   ItemsReference: undefined;
-  // ItemsReference: {
-  //   screen: "ItemsReferenceScreen";
-  //   params: {
-  //     screen: "ItemsByVendor" | "ItemsByCategory";
-  //   };
-  // };
   ItemsByCategory: undefined;
   ItemsByVendor: undefined;
 };
 
 export type HomeStackParamList = {
   HomeScreen: undefined;
-  ItemLookup: undefined;
+  ItemLookup:
+    | {
+        screen: "ItemLookupScreen";
+        params: {
+          inputFocused: boolean;
+        };
+      }
+    | undefined;
   ShoppingCart: undefined;
   ItemsReference: {
     screen: "ItemsReferenceScreen";
@@ -47,7 +48,7 @@ export type HomeStackParamList = {
 };
 
 export type ItemLookupStackParamList = {
-  ItemLookupScreen: undefined;
+  ItemLookupScreen: { inputFocused: boolean } | undefined;
 };
 
 export type ShoppingCartStackParamList = {
@@ -137,6 +138,7 @@ export type itemState = {
   isLoading: boolean;
   vendorsChecked: VendorChecked;
   errMsg: string;
+  darkMode: boolean;
 } & {
   [key in ItemName]?: ItemObjType;
 };

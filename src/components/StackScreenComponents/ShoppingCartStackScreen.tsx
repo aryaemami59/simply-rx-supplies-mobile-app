@@ -13,8 +13,10 @@ import {
 import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
 import QRImageScreen from "../Screens/ShoppingCart/QRImage/QRImageScreen";
 import BarcodeImageScreen from "../Screens/ShoppingCart/BarcodeImage/BarcodeImageScreen";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-const Stack = createStackNavigator<ShoppingCartStackParamList>();
+const Stack = createNativeStackNavigator<ShoppingCartStackParamList>();
+// const Stack = createStackNavigator<ShoppingCartStackParamList>();
 
 type Props = BottomTabScreenProps<RootTabParamList, "ShoppingCart">;
 

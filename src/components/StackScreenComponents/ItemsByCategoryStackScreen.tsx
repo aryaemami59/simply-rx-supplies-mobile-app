@@ -7,13 +7,15 @@ import { createStackNavigator } from "@react-navigation/stack";
 import ItemsByCategoryScreen from "../Screens/ItemsReference/ItemsByCategory/ItemsByCategoryScreen";
 import { HEADER_SHOWN_FALSE } from "../../shared/sharedScreenOptions";
 import { MaterialTopTabScreenProps } from "@react-navigation/material-top-tabs";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 type Props = MaterialTopTabScreenProps<
   ItemsReferenceTopTabParamList,
   "ItemsByCategory"
 >;
 
-const Stack = createStackNavigator<ItemsByCategoryStackParamList>();
+const Stack = createNativeStackNavigator<ItemsByCategoryStackParamList>();
+// const Stack = createStackNavigator<ItemsByCategoryStackParamList>();
 
 const ItemsByCategoryStackScreen: FC<Props> = ({
   navigation,

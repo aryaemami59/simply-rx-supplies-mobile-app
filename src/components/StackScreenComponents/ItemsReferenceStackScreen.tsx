@@ -12,10 +12,12 @@ import {
 import ItemsByVendorListItems from "../Screens/ItemsReference/ItemsByVendor/ItemsByVendorListItems";
 import CategoryItems from "../Screens/ItemsReference/ItemsByCategory/CategoryItems";
 import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 type Props = BottomTabScreenProps<RootTabParamList, "ItemsReference">;
 
-const Stack = createStackNavigator<ItemsReferenceStackParamList>();
+const Stack = createNativeStackNavigator<ItemsReferenceStackParamList>();
+// const Stack = createStackNavigator<ItemsReferenceStackParamList>();
 
 const ItemsReferenceStackScreen: FC<Props> = ({
   navigation,

@@ -1,5 +1,13 @@
 import { Header, SearchBar } from "@rneui/themed";
-import { FC, memo, useState, useCallback, useRef, useMemo } from "react";
+import {
+  FC,
+  memo,
+  useState,
+  useCallback,
+  useRef,
+  useMemo,
+  useEffect,
+} from "react";
 import { StyleSheet, TextInput, View } from "react-native";
 import * as Animatable from "react-native-animatable";
 import {
@@ -8,11 +16,22 @@ import {
   setListItems,
 } from "../../../../redux/addedSlice";
 import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
-import { useFocusEffect } from "@react-navigation/native";
+import {
+  RouteProp,
+  useFocusEffect,
+  useNavigation,
+  useRoute,
+} from "@react-navigation/native";
 import { shallowEqual } from "react-redux";
 import { FontAwesome, EvilIcons } from "@expo/vector-icons";
 import { WIDTH_80 } from "../../../../shared/sharedStyles";
-import { ItemObjType, OnChangeText } from "../../../../../CustomTypes/types";
+import {
+  ItemObjType,
+  OnChangeText,
+  ItemLookupStackParamList,
+} from "../../../../../CustomTypes/types";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { useIsFocused } from "@react-navigation/native";
 import {
   MAIN_COLOR,
   DISPLAY_NONE,
@@ -52,6 +71,8 @@ const InputField: FC = (): JSX.Element => {
   const view = useRef<Animatable.View & View>(null);
   const inputRef = useRef<TextInput>(null);
   const dispatch = useAppDispatch();
+  const route = useRoute<RouteProp<ItemLookupStackParamList>>();
+  const inputFocused = route.params?.inputFocused ? true : false;
 
   const focusHandler = useCallback(() => {
     view.current?.transitionTo(WIDTH_100);
@@ -67,14 +88,30 @@ const InputField: FC = (): JSX.Element => {
     inputRef.current && inputRef.current.focus();
   }, [dispatch]);
 
+  // useEffect(() => {
+  //   inputRef?.current.focus();
+  // }, []);
+
+  const navigation =
+    useNavigation<StackNavigationProp<ItemLookupStackParamList>>();
+
   useFocusEffect(
     useCallback(() => {
-      inputRef.current?.focus();
+      inputFocused && inputRef.current?.focus();
       return () => {
-        view.current?.transitionTo(WIDTH_100);
+        navigation.setParams({ inputFocused: false });
       };
-    }, [])
+    }, [navigation, inputFocused])
   );
+
+  // useFocusEffect(
+  //   useCallback(() => {
+  //     inputRef.current?.focus();
+  //     return () => {
+  //       view.current?.transitionTo(WIDTH_100);
+  //     };
+  //   }, [route.params?.inputFocused])
+  // );
 
   const listItemsFunc = useCallback(
     (text: string) => {
@@ -135,7 +172,7 @@ const InputField: FC = (): JSX.Element => {
       leftContainerStyle={DISPLAY_NONE}
       rightContainerStyle={DISPLAY_NONE}
       centerComponent={
-        <Animatable.View ref={view} transition="width" style={WIDTH_100}>
+        <Animatable.View ref={view} transition="width" style={WIDTH_80}>
           <SearchBar
             returnKeyType="search"
             ref={inputRef}

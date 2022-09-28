@@ -80,6 +80,7 @@ const itemInitialState = {
   isLoading: true,
   errMsg: "",
   vendorsChecked: {},
+  darkMode: false,
 } as itemState;
 
 export const addedSlice = createSlice({
@@ -208,6 +209,9 @@ export const itemSlice = createSlice({
         !state[itemName]!.vendorsToAdd.includes(action.payload) &&
           state[itemName]!.vendorsToAdd.push(action.payload);
       });
+    },
+    ToggleDarkMode: state => {
+      state.darkMode = !current(state.darkMode);
     },
   },
   extraReducers: builder => {
@@ -399,6 +403,9 @@ export const checkIfLoading = (state: RootState): boolean =>
 
 export const selectErrMsg = (state: RootState): string =>
   state.item.errMsg || state.added.errMsg;
+
+export const selectDarkMode = (state: RootState): boolean =>
+  state.item.darkMode;
 
 export const {
   addItems,

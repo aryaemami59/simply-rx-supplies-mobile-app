@@ -12,6 +12,7 @@ import {
 import IsLoadingComponents from "../shared/IsLoadingComponents";
 import ErrMsgComponent from "../shared/ErrMsgComponent";
 import TabBarMain from "./TabBarComponents/TabBarMain";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
 const Main: FC = (): JSX.Element => {
   const dispatch = useAppDispatch();
@@ -34,9 +35,13 @@ const Main: FC = (): JSX.Element => {
   }
 
   return (
-    <View style={styles.container}>
-      <TabBarMain />
-    </View>
+    <TabBarMain />
+    // <View style={styles.container}>
+    //   <TabBarMain />
+    // </View>
+    // <SafeAreaProvider>
+    //   <TabBarMain />
+    // </SafeAreaProvider>
   );
 };
 
@@ -45,8 +50,11 @@ export default memo(Main);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: Platform.OS === "ios" ? 0 : Constants.statusBarHeight,
+    // paddingTop: statusBarHeight,
+    // paddingTop: Constants.statusBarHeight,
+    // paddingTop: Platform.OS === "ios" ? 0 : Constants.statusBarHeight,
     backgroundColor: "white",
+    height: "100%",
   },
   DarkModeStyle: {
     color: "white",

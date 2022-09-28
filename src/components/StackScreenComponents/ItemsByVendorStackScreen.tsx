@@ -7,13 +7,15 @@ import {
 import ItemsByVendorScreen from "../Screens/ItemsReference/ItemsByVendor/ItemsByVendorScreen";
 import { HEADER_SHOWN_FALSE } from "../../shared/sharedScreenOptions";
 import { MaterialTopTabScreenProps } from "@react-navigation/material-top-tabs";
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 type Props = MaterialTopTabScreenProps<
   ItemsReferenceTopTabParamList,
   "ItemsByVendor"
 >;
 
-const Stack = createStackNavigator<ItemsByVendorStackParamList>();
+const Stack = createNativeStackNavigator<ItemsByVendorStackParamList>();
+// const Stack = createStackNavigator<ItemsByVendorStackParamList>();
 
 const ItemsByVendorStackScreen: FC<Props> = ({
   navigation,

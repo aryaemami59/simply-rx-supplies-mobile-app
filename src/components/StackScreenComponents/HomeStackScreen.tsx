@@ -7,8 +7,12 @@ import {
 import HomeScreen from "../Screens/Home/HomeScreen";
 import { screenOptions } from "../../shared/sharedScreenOptions";
 import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { View } from "react-native";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
-const Stack = createStackNavigator<HomeStackParamList>();
+const Stack = createNativeStackNavigator<HomeStackParamList>();
+// const Stack = createStackNavigator<HomeStackParamList>();
 
 type Props = BottomTabScreenProps<RootTabParamList, "Home">;
 

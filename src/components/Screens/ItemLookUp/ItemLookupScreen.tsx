@@ -17,6 +17,7 @@ import { selectAllListItems } from "../../../redux/addedSlice";
 import { shallowEqual } from "react-redux";
 import InputField from "./Input/InputField";
 import BottomSheetComponent from "./Input/BottomSheetComponent";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
 const renderItems: ListRenderItem<ItemObjType> = ({
   item,
@@ -28,11 +29,9 @@ const keyExtractor = (item: ItemObjType) => item.id.toString();
 
 type Props = StackScreenProps<ItemLookupStackParamList, "ItemLookupScreen">;
 
-const ItemLookupScreen: FC<Props> = (): JSX.Element => {
-  const listItems = useAppSelector<ItemObjType[]>(
-    selectAllListItems,
-    shallowEqual
-  );
+const ItemLookupScreen: FC<Props> = ({ navigation, route }): JSX.Element => {
+  const listItems = useAppSelector(selectAllListItems, shallowEqual);
+  console.log(route.params);
 
   return (
     <View style={styles.containerStyle}>
