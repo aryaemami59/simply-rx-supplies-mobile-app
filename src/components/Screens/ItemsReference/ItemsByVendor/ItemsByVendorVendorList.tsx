@@ -26,15 +26,18 @@ const ItemsByVendorVendorList: FC<Props> = ({ vendorName }): JSX.Element => {
 
   const clickHandler = useCallback(() => {
     navigation.push("ItemsByVendorListItems", { vendorName });
-  }, []);
+  }, [navigation, vendorName]);
 
   return (
-    <ListItem.Accordion
+    <ListItem
       containerStyle={styles.accordionContainerStyle}
       key={vendorName}
-      content={<ListItem.Title>{officialVendorName}</ListItem.Title>}
       bottomDivider
-      onPress={clickHandler}></ListItem.Accordion>
+      onPress={clickHandler}>
+      <ListItem.Content>
+        <ListItem.Title>{officialVendorName}</ListItem.Title>
+      </ListItem.Content>
+    </ListItem>
   );
 };
 

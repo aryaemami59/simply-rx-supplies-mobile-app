@@ -5,7 +5,6 @@ import {
   Reducer,
   AnyAction,
   PayloadAction,
-  ActionReducerMapBuilder,
 } from "@reduxjs/toolkit";
 import { createSelector } from "reselect";
 import { RootState } from "./store";
@@ -87,13 +86,10 @@ export const addedSlice = createSlice({
   name: "added",
   initialState,
   reducers: {
-    addItems: (
-      state: addedState,
-      action: PayloadAction<addItemsInterface>
-    ): void => {
-      action.payload.vendors.forEach((e: vendorNameType): void => {
-        if (!current(state[e])!.includes(action.payload.itemObj)) {
-          state[e]!.push(action.payload.itemObj);
+    addItems: (state, action: PayloadAction<addItemsInterface>) => {
+      action.payload.vendors.forEach((vendorName: vendorNameType) => {
+        if (!current(state[vendorName])!.includes(action.payload.itemObj)) {
+          state[vendorName]!.push(action.payload.itemObj);
           state.listItems = state.listItems.filter(
             ({ name }) => name !== action.payload.itemObj.name
           );
@@ -101,53 +97,47 @@ export const addedSlice = createSlice({
       });
     },
     addItemsByVendor: (
-      state: addedState,
-      action: PayloadAction<addItemsByVendorInterface>
-    ): void => {
-      state[action.payload.vendorName]!.push(action.payload.itemObj);
-    },
-    removeItems: (
-      state: addedState,
+      state,
       action: PayloadAction<addItemsByVendorInterface>
     ) => {
+      state[action.payload.vendorName]!.push(action.payload.itemObj);
+    },
+    removeItems: (state, action: PayloadAction<addItemsByVendorInterface>) => {
       state[action.payload.vendorName] = state[
         action.payload.vendorName
       ]!.filter(
         ({ name }: ItemObjType) => name !== action.payload.itemObj.name
       );
     },
-    setListItems: (
-      state: addedState,
-      action: PayloadAction<ItemObjType[]>
-    ): void => {
+    setListItems: (state, action: PayloadAction<ItemObjType[]>) => {
       state.listItems = action.payload;
     },
-    clearListItems: (state: addedState): void => {
+    clearListItems: state => {
       state.listItems = empty;
     },
-    compactSearchResults: (state: addedState): void => {
+    compactSearchResults: state => {
       state.compact = !state.compact;
     },
-    ToggleItemNumber: (state: addedState): void => {
+    ToggleItemNumber: state => {
       state.showItemNumber = !state.showItemNumber;
     },
-    ToggleItemBarcode: (state: addedState): void => {
+    ToggleItemBarcode: state => {
       state.showItemBarcode = !state.showItemBarcode;
     },
-    ToggleItemName: (state: addedState): void => {
+    ToggleItemName: state => {
       state.showItemName = !state.showItemName;
     },
   },
   extraReducers: builder => {
-    builder.addCase(fetchVendors.pending, (state: addedState): void => {
+    builder.addCase(fetchVendors.pending, state => {
       state.vendorsIsLoading = true;
     });
-    builder.addCase(fetchNavList.pending, (state: addedState): void => {
+    builder.addCase(fetchNavList.pending, state => {
       state.navListIsLoading = true;
     });
     builder.addCase(
       fetchNavList.fulfilled,
-      (state: addedState, action: PayloadAction<navsObjInterface>): void => {
+      (state, action: PayloadAction<navsObjInterface>) => {
         state.navsObj = action.payload;
         const keys = Object.keys(action.payload) as Category[];
         state.navsArr = keys;
@@ -157,7 +147,7 @@ export const addedSlice = createSlice({
     );
     builder.addCase(
       fetchVendors.fulfilled,
-      (state: addedState, action: PayloadAction<vendorsObjInterface>): void => {
+      (state, action: PayloadAction<vendorsObjInterface>) => {
         const payload: vendorsObjInterface = action.payload;
         const keys = Object.keys(payload) as vendorNameType[];
         state.vendorsArr = keys;
@@ -170,11 +160,11 @@ export const addedSlice = createSlice({
         state.errMsg = "";
       }
     );
-    builder.addCase(fetchVendors.rejected, (state: addedState, action) => {
+    builder.addCase(fetchVendors.rejected, (state, action) => {
       state.vendorsIsLoading = false;
       state.errMsg = action.error.message || "Fetch failed";
     });
-    builder.addCase(fetchNavList.rejected, (state: addedState, action) => {
+    builder.addCase(fetchNavList.rejected, (state, action) => {
       state.navListIsLoading = false;
       state.errMsg = action.error.message || "Fetch failed";
     });
@@ -185,55 +175,48 @@ export const itemSlice = createSlice({
   name: "item",
   initialState: itemInitialState,
   reducers: {
-    setVendors: (
-      state: itemState,
-      action: PayloadAction<addItemsByVendorInterface>
-    ): void => {
+    setVendors: (state, action: PayloadAction<addItemsByVendorInterface>) => {
       state[action.payload.itemObj.name]!.vendorsToAdd = state[
         action.payload.itemObj.name
       ]!.vendorsToAdd!.includes(action.payload.vendorName)
         ? state[action.payload.itemObj.name]!.vendorsToAdd!.filter(
-            (e: vendorNameType) => e !== action.payload.vendorName
+            vendorName => vendorName !== action.payload.vendorName
           )
         : state[action.payload.itemObj.name]!.vendorsToAdd!.concat(
             action.payload.vendorName
           );
     },
-    setVendorsForAllUncheck: (
-      state: itemState,
-      action: PayloadAction<vendorNameType>
-    ) => {
+    setVendorsForAllUncheck: (state, action: PayloadAction<vendorNameType>) => {
       state.vendorsChecked[action.payload] = false;
       const affectedItems = state.itemsArr
-        .filter((e: ItemObjType) => e.vendors!.includes(action.payload))
-        .map(({ name }: ItemObjType) => name);
-      affectedItems.forEach(e => {
-        state[e]!.vendorsToAdd = state[e]!.vendorsToAdd!.filter(
-          (e: vendorNameType) => e !== action.payload
+        .filter(itemObj => itemObj.vendors!.includes(action.payload))
+        .map(({ name }) => name);
+      affectedItems.forEach(itemName => {
+        state[itemName]!.vendorsToAdd = state[itemName]!.vendorsToAdd!.filter(
+          (vendorName: vendorNameType) => vendorName !== action.payload
         );
       });
     },
-    setVendorsForAllCheck: (
-      state: itemState,
-      action: PayloadAction<vendorNameType>
-    ) => {
+    setVendorsForAllCheck: (state, action: PayloadAction<vendorNameType>) => {
       state.vendorsChecked[action.payload] = true;
       const affectedItems = state.itemsArr
-        .filter((e: ItemObjType) => e.vendors!.includes(action.payload))
-        .map(({ name }: ItemObjType) => name);
-      affectedItems.forEach(e => {
-        !state[e]!.vendorsToAdd.includes(action.payload) &&
-          state[e]!.vendorsToAdd.push(action.payload);
+        .filter((itemObj: ItemObjType) =>
+          itemObj.vendors!.includes(action.payload)
+        )
+        .map(({ name }) => name);
+      affectedItems.forEach(itemName => {
+        !state[itemName]!.vendorsToAdd.includes(action.payload) &&
+          state[itemName]!.vendorsToAdd.push(action.payload);
       });
     },
   },
-  extraReducers: (builder: ActionReducerMapBuilder<itemState>) => {
-    builder.addCase(fetchItems.pending, (state: itemState) => {
+  extraReducers: builder => {
+    builder.addCase(fetchItems.pending, state => {
       state.isLoading = true;
     });
     builder.addCase(
       fetchItems.fulfilled,
-      (state: itemState, action: PayloadAction<ItemObjType[]>): void => {
+      (state, action: PayloadAction<ItemObjType[]>) => {
         for (const itemObj of action.payload) {
           state[itemObj.name] = {
             ...itemObj,
@@ -248,7 +231,7 @@ export const itemSlice = createSlice({
     );
     builder.addCase(
       fetchVendors.fulfilled,
-      (state: itemState, action: PayloadAction<vendorsObjInterface>) => {
+      (state, action: PayloadAction<vendorsObjInterface>) => {
         const payload: vendorsObjInterface = action.payload;
         const keys: vendorNameType[] = Object.keys(payload) as vendorNameType[];
         for (const vendorObj of keys) {
@@ -256,11 +239,11 @@ export const itemSlice = createSlice({
         }
       }
     );
-    builder.addCase(fetchItems.rejected, (state: itemState, action): void => {
+    builder.addCase(fetchItems.rejected, (state, action) => {
       state.isLoading = false;
       state.errMsg = action.error.message || "Fetch failed";
     });
-    builder.addCase(addItems, (state: itemState, action): void => {
+    builder.addCase(addItems, (state, action) => {
       state[action.payload.itemObj.name]!.vendorsAdded = [
         ...state[action.payload.itemObj.name]!.vendorsAdded,
         ...state[action.payload.itemObj.name]!.vendorsToAdd,
@@ -276,7 +259,7 @@ export const itemSlice = createSlice({
     });
     builder.addCase(
       addItemsByVendor,
-      (state: itemState, action: PayloadAction<addItemsByVendorInterface>) => {
+      (state, action: PayloadAction<addItemsByVendorInterface>) => {
         state[action.payload.itemObj.name]!.vendorsAdded = [
           ...state[action.payload.itemObj.name]!.vendorsAdded,
           action.payload.vendorName,
@@ -293,11 +276,11 @@ export const itemSlice = createSlice({
     );
     builder.addCase(
       removeItems,
-      (state: itemState, action: PayloadAction<addItemsByVendorInterface>) => {
+      (state, action: PayloadAction<addItemsByVendorInterface>) => {
         state[action.payload.itemObj.name]!.vendorsAdded = state[
           action.payload.itemObj.name
         ]!.vendorsAdded.filter(
-          (e: vendorNameType) => e !== action.payload.vendorName
+          vendorName => vendorName !== action.payload.vendorName
         );
       }
     );

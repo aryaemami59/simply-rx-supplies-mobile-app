@@ -35,7 +35,7 @@ const ItemsByCategorySingleListItemCheckBox: FC<Props> = ({
 
   const onToggleSwitch = useCallback(() => {
     ifAddedToVendor || dispatch(setVendors({ itemObj, vendorName }));
-  }, []);
+  }, [dispatch, ifAddedToVendor, itemObj, vendorName]);
 
   return (
     <>

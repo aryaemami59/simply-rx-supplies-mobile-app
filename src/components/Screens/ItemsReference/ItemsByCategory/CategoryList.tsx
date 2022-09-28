@@ -18,7 +18,7 @@ const CategoryList: FC<Props> = ({ category }): JSX.Element => {
 
   const clickHandler = useCallback(() => {
     navigation.push("ItemsByCategoryListItems", { category });
-  }, []);
+  }, [navigation, category]);
 
   return (
     <ListItem

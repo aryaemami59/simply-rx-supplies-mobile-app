@@ -9,7 +9,7 @@ import {
 import { useAppSelector, useAppDispatch } from "../../../../redux/hooks";
 import { shallowEqual } from "react-redux";
 import { StyleSheet } from "react-native";
-import { fontWeightBold, mainColor } from "../../../../shared/sharedStyles";
+import { fontWeight700, mainColor } from "../../../../shared/sharedStyles";
 import { ItemObjType, vendorNameType } from "../../../../../CustomTypes/types";
 
 type Props = {
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     backgroundColor: mainColor,
   },
   titleStyle: {
-    fontWeight: fontWeightBold,
+    fontWeight: fontWeight700,
   },
 });
 

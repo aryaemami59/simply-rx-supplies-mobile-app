@@ -20,16 +20,15 @@ const SingleListItem: FC<Props> = ({ itemObj, vendorName }): JSX.Element => {
     checkIfAddedToAllVendors(itemObj)
   );
 
-  const vendors: vendorNameType[] = vendorName
-    ? [vendorName]
-    : useAppSelector<vendorNameType[]>(
-        selectVendorsToAddTo(itemObj),
-        shallowEqual
-      );
+  const vendorsSelector = useAppSelector<vendorNameType[]>(
+    selectVendorsToAddTo(itemObj),
+    shallowEqual
+  );
 
   const clickHandler = useCallback((): void => {
+    const vendors = vendorName ? [vendorName] : vendorsSelector;
     ifAddedToAllVendors || dispatch(addItems({ itemObj, vendors }));
-  }, [dispatch, itemObj, vendors, ifAddedToAllVendors]);
+  }, [vendorName, vendorsSelector, ifAddedToAllVendors, dispatch, itemObj]);
 
   return (
     <Button

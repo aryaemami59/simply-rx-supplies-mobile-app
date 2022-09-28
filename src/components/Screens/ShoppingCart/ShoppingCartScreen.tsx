@@ -17,10 +17,7 @@ const ShoppingCartScreen: FC<Props> = ({ navigation, route }): JSX.Element => {
   return (
     <ScrollView>
       {vendors.map((e: vendorNameType) => (
-        <CartVendorColumns
-          key={e}
-          vendorName={e}
-        />
+        <CartVendorColumns key={e} vendorName={e} />
       ))}
     </ScrollView>
   );

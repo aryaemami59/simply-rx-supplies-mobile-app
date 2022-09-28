@@ -15,6 +15,7 @@ import TabBarIconItemsReference from "./TabBarIconItemsReference";
 import { HEADER_SHOWN_FALSE } from "../../shared/sharedScreenOptions";
 import { useAppSelector } from "../../redux/hooks";
 import { checkIfAnyItemsAdded } from "../../redux/addedSlice";
+import { useMemo } from "react";
 
 const Tab = createBottomTabNavigator<RootTabParamList>();
 
@@ -32,6 +33,14 @@ const ShoppingCartOptions: BottomTabNavigationOptions = {
   tabBarIcon: (props: tabBarIconProps) => <TabBarIconShoppingCart {...props} />,
   headerTitle: "Shopping Cart",
   headerTitleAlign: "center",
+  tabBarBadgeStyle: {
+    paddingHorizontal: 0,
+    maxWidth: 10,
+    minWidth: 10,
+    minHeight: 10,
+    maxHeight: 10,
+    borderRadius: 5,
+  },
 } as const;
 
 const ItemsReferenceOptions: BottomTabNavigationOptions = {
@@ -45,6 +54,14 @@ const ItemsReferenceOptions: BottomTabNavigationOptions = {
 
 const TabBarMain: FC = (): JSX.Element => {
   const ifItemsAdded: boolean = useAppSelector<boolean>(checkIfAnyItemsAdded);
+  const tabBarBadge = ifItemsAdded ? "" : undefined;
+  const options = useMemo(() => {
+    return {
+      ...ShoppingCartOptions,
+      tabBarBadge,
+    };
+  }, [tabBarBadge]);
+
   return (
     <Tab.Navigator screenOptions={HEADER_SHOWN_FALSE}>
       <Tab.Screen
@@ -60,18 +77,7 @@ const TabBarMain: FC = (): JSX.Element => {
       <Tab.Screen
         name="ShoppingCart"
         component={ShoppingCartStackScreen}
-        options={{
-          ...ShoppingCartOptions,
-          tabBarBadge: ifItemsAdded ? "" : undefined,
-          tabBarBadgeStyle: {
-            paddingHorizontal: 0,
-            maxWidth: 10,
-            minWidth: 10,
-            minHeight: 10,
-            maxHeight: 10,
-            borderRadius: 5,
-          },
-        }}
+        options={options}
       />
       <Tab.Screen
         name="ItemsReference"

@@ -2,7 +2,11 @@ import { FlexStyle, StyleProp, TextStyle, ViewStyle } from "react-native";
 
 export const mainColor = "#0071dc" as const;
 
-export const fontWeightBold = "700" as const;
+export const fontWeight700 = "700" as const;
+
+export const fontWeightBold: TextStyle = {
+  fontWeight: "bold",
+} as const;
 
 export const displayNone: StyleProp<ViewStyle> = {
   display: "none",
@@ -31,6 +35,12 @@ export const AI_CENTER: FlexStyle = {
 export const JC_AI_CENTER: FlexStyle = {
   justifyContent: "center",
   alignItems: "center",
+} as const;
+
+export const JC_AI_CENTER_HEIGHT100: FlexStyle = {
+  justifyContent: "center",
+  alignItems: "center",
+  height: "100%",
 } as const;
 
 export const width80: FlexStyle = {

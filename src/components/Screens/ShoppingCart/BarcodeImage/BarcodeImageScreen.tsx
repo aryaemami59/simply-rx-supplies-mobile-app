@@ -27,15 +27,12 @@ const BarcodeImageScreen: FC<Props> = ({ navigation, route }): JSX.Element => {
 
   useEffect(() => {
     navigation.setOptions({ title: name });
-  }, []);
+  }, [name, navigation]);
 
   return (
     <View style={styles.containerStyle}>
       <TouchableOpacity onLongPress={shareBarcode}>
-        <Image
-          source={{ uri: src }}
-          style={styles.imageStyle}
-        />
+        <Image source={{ uri: src }} style={styles.imageStyle} />
       </TouchableOpacity>
       <TouchableOpacity onPress={shareBarcode}>
         <Octicons

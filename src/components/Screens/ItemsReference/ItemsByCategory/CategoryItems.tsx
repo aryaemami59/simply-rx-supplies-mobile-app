@@ -33,7 +33,7 @@ const CategoryItems: FC<Props> = ({ navigation, route }): JSX.Element => {
 
   useEffect(() => {
     navigation.setOptions({ headerTitle: category });
-  }, []);
+  }, [navigation, category]);
 
   return (
     <FlatList

@@ -8,19 +8,12 @@ import {
   FontAwesome5,
   MaterialIcons,
 } from "@expo/vector-icons";
-import {
-  HomeStackParamList,
-  RootTabParamList,
-} from "../../../../CustomTypes/types";
-import { fontWeightBold, mainColor } from "../../../shared/sharedStyles";
-import { useNavigation } from "@react-navigation/native";
-import { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
+import { HomeStackParamList } from "../../../../CustomTypes/types";
+import { fontWeight700, mainColor } from "../../../shared/sharedStyles";
 
 type Props = StackScreenProps<HomeStackParamList, "HomeScreen">;
 
-// const HomeScreen: FC<Props> = (): JSX.Element => {
 const HomeScreen: FC<Props> = ({ navigation }): JSX.Element => {
-  // const navigation = useNavigation<BottomTabNavigationProp<RootTabParamList>>();
   return (
     <SafeAreaView>
       <View style={styles.containerStyle}>
@@ -109,7 +102,7 @@ const styles = StyleSheet.create({
     backgroundColor: mainColor,
   },
   titleStyle: {
-    fontWeight: fontWeightBold,
+    fontWeight: fontWeight700,
   },
 });
 

@@ -22,7 +22,8 @@ const HideItemName: FC = (): JSX.Element => {
         radius="xl"
         title={`${title} Item Names`}
         onPress={toggleItemName}
-        buttonStyle={styles.buttonStyle}></Chip>
+        buttonStyle={styles.buttonStyle}
+      />
     </>
   );
 };

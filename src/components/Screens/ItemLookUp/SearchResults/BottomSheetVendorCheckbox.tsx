@@ -31,7 +31,7 @@ const BottomSheetVendorCheckbox: FC<Props> = ({
     checked
       ? dispatch(setVendorsForAllUncheck(vendorName))
       : dispatch(setVendorsForAllCheck(vendorName));
-  }, [checked]);
+  }, [checked, dispatch, vendorName]);
 
   return (
     <TouchableHighlight

@@ -32,4 +32,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default memo(ItemNameCart);
+export default memo<Props>(ItemNameCart);

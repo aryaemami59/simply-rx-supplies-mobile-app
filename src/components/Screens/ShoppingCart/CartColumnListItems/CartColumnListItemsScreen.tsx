@@ -24,7 +24,7 @@ import SingleCartListItems from "./SingleCartListItems";
 import { officialVendorNameType } from "../../../../../CustomTypes/types";
 import { Chip } from "@rneui/themed";
 import { MaterialIcons } from "@expo/vector-icons";
-import { mainColor, fontWeightBold } from "../../../../shared/sharedStyles";
+import { mainColor, fontWeight700 } from "../../../../shared/sharedStyles";
 import { TouchableOpacity } from "react-native";
 import CartQRCodeImage from "../QRImage/CartQRCodeImage";
 
@@ -54,7 +54,7 @@ const CartColumnListItemsScreen: FC<Props> = ({
 
   const openLink = useCallback(() => {
     Linking.openURL(vendorLink);
-  }, []);
+  }, [vendorLink]);
 
   const officialVendorName = useAppSelector<officialVendorNameType>(
     selectVendorOfficialName(vendorName)
@@ -64,11 +64,11 @@ const CartColumnListItemsScreen: FC<Props> = ({
     navigation.setOptions({
       headerTitle: officialVendorName,
     });
-  }, []);
+  }, [navigation, officialVendorName]);
 
   const clickHandler = useCallback(() => {
     navigation.navigate("ItemLookup");
-  }, []);
+  }, [navigation]);
 
   return (
     <>
@@ -169,7 +169,7 @@ const styles = StyleSheet.create({
     backgroundColor: mainColor,
   },
   titleStyle: {
-    fontWeight: fontWeightBold,
+    fontWeight: fontWeight700,
   },
   emptyContainer: {
     alignItems: "stretch",

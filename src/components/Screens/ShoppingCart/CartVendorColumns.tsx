@@ -14,6 +14,7 @@ import {
 } from "../../../../CustomTypes/types";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { officialVendorNameType } from "../../../../CustomTypes/types";
+import { fontWeightBold } from "../../../shared/sharedStyles";
 
 type Props = {
   vendorName: vendorNameType;
@@ -25,12 +26,14 @@ const CartVendorColumns: FC<Props> = ({ vendorName }): JSX.Element => {
   );
   const addedItemsLen = useAppSelector<number>(addedItemsLength(vendorName));
 
+  const status = addedItemsLen ? "success" : "primary";
+
   const navigation =
     useNavigation<StackNavigationProp<ShoppingCartStackParamList>>();
 
   const clickHandler = useCallback(() => {
     navigation.push("CartColumnListItems", { vendorName });
-  }, []);
+  }, [navigation, vendorName]);
 
   return (
     <ListItem
@@ -43,8 +46,8 @@ const CartVendorColumns: FC<Props> = ({ vendorName }): JSX.Element => {
         <>
           <ListItem.Title>{officialVendorName}</ListItem.Title>
           <Badge
-            textStyle={{ fontWeight: "bold" }}
-            status={addedItemsLen ? "success" : "primary"}
+            textStyle={fontWeightBold}
+            status={status}
             value={addedItemsLen}
             containerStyle={styles.badgeContainerStyle}
           />
@@ -62,14 +65,6 @@ const styles = StyleSheet.create({
   badgeContainerStyle: {
     position: "absolute",
     right: 60,
-  },
-  scrollViewContentContainerStyle: {
-    alignItems: "center",
-  },
-  accordionChildrenViewStyle: {
-    alignItems: "center",
-    padding: 10,
-    height: "100%",
   },
 });
 

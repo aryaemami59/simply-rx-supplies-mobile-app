@@ -10,10 +10,10 @@ import {
 } from "../../../../../CustomTypes/types";
 import { Button } from "@rneui/themed";
 import { BottomSheet } from "@rneui/base";
-import { View } from "react-native";
+import { View, StyleSheet } from "react-native";
 import BottomSheetVendorCheckbox from "../SearchResults/BottomSheetVendorCheckbox";
 
-const BottomSheetComponent: FC = (): JSX.Element => {
+const BottomSheetComponent: FC = () => {
   const [visible, setVisible] = useState<boolean>(false);
   const vendors = useAppSelector<vendorNameType[]>(selectVendorsArr);
   const officialVendorNames = useAppSelector<officialVendorNameType[]>(
@@ -30,14 +30,11 @@ const BottomSheetComponent: FC = (): JSX.Element => {
 
   return (
     <>
-      <Button
-        onPress={showBottomSheet}
-        title="Exclude Vendors"
-      />
+      <Button onPress={showBottomSheet} title="Exclude Vendors" />
       <BottomSheet
         isVisible={visible}
         onBackdropPress={hideBottomSheet}
-        containerStyle={{ paddingBottom: 50 }}>
+        containerStyle={styles.bottomSheetContainer}>
         <View>
           {officialVendorNames.map((e: officialVendorNameType, i: number) => (
             <BottomSheetVendorCheckbox
@@ -51,5 +48,11 @@ const BottomSheetComponent: FC = (): JSX.Element => {
     </>
   );
 };
+
+const styles = StyleSheet.create({
+  bottomSheetContainer: {
+    paddingBottom: 50,
+  },
+});
 
 export default memo(BottomSheetComponent);

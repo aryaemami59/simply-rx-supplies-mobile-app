@@ -24,7 +24,7 @@ const CartQRCodeImage: FC<Props> = ({ vendorName }): JSX.Element => {
 
   const clickHandler = useCallback(() => {
     navigation.navigate("QRImage", { itemNumbers });
-  }, []);
+  }, [itemNumbers, navigation]);
 
   return (
     <>

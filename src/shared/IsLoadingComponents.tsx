@@ -1,20 +1,13 @@
 import { FC, memo } from "react";
-import { ActivityIndicator, View, StyleSheet } from "react-native";
+import { ActivityIndicator, View } from "react-native";
+import { JC_AI_CENTER_HEIGHT100 } from "./sharedStyles";
 
 const IsLoadingComponents: FC = (): JSX.Element => {
   return (
-    <View style={styles.isLoadingStyle}>
+    <View style={JC_AI_CENTER_HEIGHT100}>
       <ActivityIndicator size="large" color="aqua" />
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  isLoadingStyle: {
-    justifyContent: "center",
-    alignItems: "center",
-    height: "100%",
-  },
-});
 
 export default memo(IsLoadingComponents);

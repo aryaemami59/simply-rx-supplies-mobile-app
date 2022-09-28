@@ -24,16 +24,13 @@ const BarcodeImageCart: FC<Props> = ({ itemObj }): JSX.Element => {
 
   const clickHandler = useCallback(() => {
     navigation.push("BarcodeImage", { src, name });
-  }, []);
+  }, [name, navigation, src]);
 
   return (
     <>
       {itemBarcodeShown ? (
         <TouchableOpacity onPress={clickHandler}>
-          <Image
-            source={{ uri: src }}
-            style={styles.ImageStyle}
-          />
+          <Image source={{ uri: src }} style={styles.ImageStyle} />
         </TouchableOpacity>
       ) : (
         ""
@@ -49,4 +46,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default memo(BarcodeImageCart);
+export default memo<Props>(BarcodeImageCart);

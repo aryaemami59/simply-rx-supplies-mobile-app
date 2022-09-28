@@ -1,4 +1,3 @@
-import { ListItem } from "@rneui/themed";
 import { FC, memo, useEffect } from "react";
 import { useAppSelector } from "../../../../redux/hooks";
 import {
@@ -7,12 +6,7 @@ import {
 } from "../../../../redux/addedSlice";
 import { shallowEqual } from "react-redux";
 import SingleListItem from "../../../../shared/SingleListItem";
-import {
-  FlatList,
-  ListRenderItem,
-  ListRenderItemInfo,
-  ScrollView,
-} from "react-native";
+import { FlatList, ListRenderItem, ListRenderItemInfo } from "react-native";
 import { ItemsReferenceStackParamList } from "../../../../../CustomTypes/types";
 import { StackScreenProps } from "@react-navigation/stack";
 import {
@@ -40,12 +34,7 @@ const ItemsByVendorListItems: FC<Props> = ({
   const renderItems: ListRenderItem<ItemObjType> = ({
     item,
   }: ListRenderItemInfo<ItemObjType>): JSX.Element => {
-    return (
-      <SingleListItem
-        itemObj={item}
-        vendorName={vendorName}
-      />
-    );
+    return <SingleListItem itemObj={item} vendorName={vendorName} />;
   };
 
   const items: ItemObjType[] = useAppSelector<ItemObjType[]>(
@@ -55,7 +44,7 @@ const ItemsByVendorListItems: FC<Props> = ({
 
   useEffect(() => {
     navigation.setOptions({ headerTitle: officialVendorName });
-  }, []);
+  }, [navigation, officialVendorName]);
 
   return (
     <FlatList
@@ -66,14 +55,6 @@ const ItemsByVendorListItems: FC<Props> = ({
       keyboardShouldPersistTaps="handled"
       extraData={vendorName}
     />
-    // <ScrollView>
-    //   {items.map(e => (
-    //     <SingleListItem
-    //       key={`ItemsByVendorListItems${e.id}`}
-    //       itemObj={e}
-    //     />
-    //   ))}
-    // </ScrollView>
   );
 };
 
