@@ -4,7 +4,7 @@ import { View } from "react-native";
 import AddItemButton from "./AddItemButton";
 import SearchResultsSwitch from "./SearchResultsCheckBox";
 import { ItemObjType } from "../../../../../CustomTypes/types";
-import { fontWeight600 } from "../../../../shared/sharedStyles";
+import { FONT_WEIGHT_600 } from "../../../../shared/sharedStyles";
 
 type Props = {
   itemObj: ItemObjType;
@@ -15,7 +15,9 @@ const SingleSearchResultsListItem: FC<Props> = ({ itemObj }): JSX.Element => {
     <View key={itemObj.id}>
       <ListItem bottomDivider>
         <ListItem.Content>
-          <ListItem.Title style={fontWeight600}>{itemObj.name}</ListItem.Title>
+          <ListItem.Title style={FONT_WEIGHT_600}>
+            {itemObj.name}
+          </ListItem.Title>
           {itemObj.vendors.map(vendorName => (
             <SearchResultsSwitch
               key={vendorName}

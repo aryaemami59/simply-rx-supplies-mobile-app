@@ -12,7 +12,7 @@ const Stack = createStackNavigator<HomeStackParamList>();
 
 type Props = BottomTabScreenProps<RootTabParamList, "Home">;
 
-const HomeStackScreen: FC<Props> = (): JSX.Element => {
+const HomeStackScreen: FC<Props> = ({ navigation, route }): JSX.Element => {
   return (
     <Stack.Navigator screenOptions={screenOptions}>
       <Stack.Screen name="HomeScreen" component={HomeScreen} />

@@ -12,7 +12,10 @@ const Stack = createStackNavigator<ItemLookupStackParamList>();
 
 type Props = BottomTabScreenProps<RootTabParamList, "ItemLookup">;
 
-const ItemLookupStackScreen: FC<Props> = (): JSX.Element => {
+const ItemLookupStackScreen: FC<Props> = ({
+  navigation,
+  route,
+}): JSX.Element => {
   return (
     <>
       <Stack.Navigator screenOptions={HEADER_SHOWN_FALSE}>

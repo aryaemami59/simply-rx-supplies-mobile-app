@@ -10,9 +10,9 @@ import {
 } from "@expo/vector-icons";
 import { HomeStackParamList } from "../../../../CustomTypes/types";
 import {
-  fontWeight700,
-  mainColor,
-  backGroundMainColor,
+  FONT_WEIGHT_700,
+  MAIN_COLOR,
+  BACKGROUND_MAIN_COLOR,
 } from "../../../shared/sharedStyles";
 
 const searchIcon = <FontAwesome5 name="search" color="white" size={24} />;
@@ -71,10 +71,10 @@ const HomeScreen: FC<Props> = ({ navigation, route }): JSX.Element => {
       <View style={styles.container}>
         <Chip
           raised
-          titleStyle={fontWeight700}
-          buttonStyle={backGroundMainColor}
-          containerStyle={backGroundMainColor}
-          color={mainColor}
+          titleStyle={FONT_WEIGHT_700}
+          buttonStyle={BACKGROUND_MAIN_COLOR}
+          containerStyle={BACKGROUND_MAIN_COLOR}
+          color={MAIN_COLOR}
           title="Item Lookup"
           icon={searchIcon}
           size="lg"
@@ -82,10 +82,10 @@ const HomeScreen: FC<Props> = ({ navigation, route }): JSX.Element => {
         />
         <Chip
           raised
-          titleStyle={fontWeight700}
-          buttonStyle={backGroundMainColor}
-          containerStyle={backGroundMainColor}
-          color={mainColor}
+          titleStyle={FONT_WEIGHT_700}
+          buttonStyle={BACKGROUND_MAIN_COLOR}
+          containerStyle={BACKGROUND_MAIN_COLOR}
+          color={MAIN_COLOR}
           title="Items By Vendor"
           icon={storeSearchIcon}
           size="lg"
@@ -94,18 +94,18 @@ const HomeScreen: FC<Props> = ({ navigation, route }): JSX.Element => {
         <Chip
           raised
           icon={categoryIcon}
-          titleStyle={fontWeight700}
-          buttonStyle={backGroundMainColor}
-          containerStyle={backGroundMainColor}
-          color={mainColor}
+          titleStyle={FONT_WEIGHT_700}
+          buttonStyle={BACKGROUND_MAIN_COLOR}
+          containerStyle={BACKGROUND_MAIN_COLOR}
+          color={MAIN_COLOR}
           title="Items By Category"
           size="lg"
           onPress={navigateToItemsByCategory}
         />
         <Chip
           raised
-          titleStyle={fontWeight700}
-          buttonStyle={backGroundMainColor}
+          titleStyle={FONT_WEIGHT_700}
+          buttonStyle={BACKGROUND_MAIN_COLOR}
           title="Shopping Cart"
           size="lg"
           icon={shoppingCartIcon}

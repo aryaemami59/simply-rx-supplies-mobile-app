@@ -11,7 +11,7 @@ import {
   selectVendorsChecked,
 } from "../../../../redux/addedSlice";
 import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
-import { width100 } from "../../../../shared/sharedStyles";
+import { WIDTH_100 } from "../../../../shared/sharedStyles";
 
 type Props = {
   title: officialVendorNameType;
@@ -37,7 +37,7 @@ const BottomSheetVendorCheckbox: FC<Props> = ({
       onPress={onToggleCheck}
       activeOpacity={0.6}>
       <ListItem bottomDivider>
-        <ListItem.Content style={width100}>
+        <ListItem.Content style={WIDTH_100}>
           <ListItem.CheckBox
             checked={checked}
             title={title}

@@ -13,7 +13,7 @@ import {
   vendorNameType,
 } from "../../../../CustomTypes/types";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { fontWeightBold, AI_CENTER } from "../../../shared/sharedStyles";
+import { FONT_WEIGHT_BOLD, AI_CENTER } from "../../../shared/sharedStyles";
 
 type Props = {
   vendorName: vendorNameType;
@@ -45,7 +45,7 @@ const CartVendorColumns: FC<Props> = ({ vendorName }): JSX.Element => {
         <>
           <ListItem.Title>{officialVendorName}</ListItem.Title>
           <Badge
-            textStyle={fontWeightBold}
+            textStyle={FONT_WEIGHT_BOLD}
             status={status}
             value={addedItemsLen}
             containerStyle={styles.badgeContainer}

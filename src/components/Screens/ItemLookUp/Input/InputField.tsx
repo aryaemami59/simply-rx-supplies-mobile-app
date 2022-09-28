@@ -11,13 +11,13 @@ import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
 import { useFocusEffect } from "@react-navigation/native";
 import { shallowEqual } from "react-redux";
 import { FontAwesome, EvilIcons } from "@expo/vector-icons";
-import { width80 } from "../../../../shared/sharedStyles";
+import { WIDTH_80 } from "../../../../shared/sharedStyles";
 import { ItemObjType, OnChangeText } from "../../../../../CustomTypes/types";
 import {
-  mainColor,
-  displayNone,
-  width100,
-  colorWhite,
+  MAIN_COLOR,
+  DISPLAY_NONE,
+  WIDTH_100,
+  COLOR_WHITE,
 } from "../../../../shared/sharedStyles";
 
 const searchIcon = (
@@ -54,11 +54,11 @@ const InputField: FC = (): JSX.Element => {
   const dispatch = useAppDispatch();
 
   const focusHandler = useCallback(() => {
-    view.current?.transitionTo(width100);
+    view.current?.transitionTo(WIDTH_100);
   }, []);
 
   const blurHandler = useCallback(() => {
-    view.current?.transitionTo(width80);
+    view.current?.transitionTo(WIDTH_80);
   }, []);
 
   const clickHandler = useCallback((): void => {
@@ -71,7 +71,7 @@ const InputField: FC = (): JSX.Element => {
     useCallback(() => {
       inputRef.current?.focus();
       return () => {
-        view.current?.transitionTo(width100);
+        view.current?.transitionTo(WIDTH_100);
       };
     }, [])
   );
@@ -131,11 +131,11 @@ const InputField: FC = (): JSX.Element => {
   return (
     <Header
       containerStyle={styles.headerContainer}
-      backgroundColor={mainColor}
-      leftContainerStyle={displayNone}
-      rightContainerStyle={displayNone}
+      backgroundColor={MAIN_COLOR}
+      leftContainerStyle={DISPLAY_NONE}
+      rightContainerStyle={DISPLAY_NONE}
       centerComponent={
-        <Animatable.View ref={view} transition="width" style={width100}>
+        <Animatable.View ref={view} transition="width" style={WIDTH_100}>
           <SearchBar
             returnKeyType="search"
             ref={inputRef}
@@ -151,7 +151,7 @@ const InputField: FC = (): JSX.Element => {
             onClear={clickHandler}
             onChangeText={changeVal}
             value={val}
-            inputStyle={colorWhite}
+            inputStyle={COLOR_WHITE}
             placeholderTextColor="rgba(255,255,255,.5)"
             searchIcon={searchIcon}
             clearIcon={clearIcon}

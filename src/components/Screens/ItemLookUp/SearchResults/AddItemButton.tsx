@@ -8,8 +8,8 @@ import {
 import { useAppSelector, useAppDispatch } from "../../../../redux/hooks";
 import { shallowEqual } from "react-redux";
 import {
-  fontWeight700,
-  backGroundMainColor,
+  FONT_WEIGHT_700,
+  BACKGROUND_MAIN_COLOR,
 } from "../../../../shared/sharedStyles";
 import { ItemObjType } from "../../../../../CustomTypes/types";
 import { MaterialIcons } from "@expo/vector-icons";
@@ -37,8 +37,8 @@ const AddItemButton: FC<Props> = ({ itemObj }): JSX.Element => {
       size="lg"
       onPress={clickHandler}
       title="Add"
-      titleStyle={fontWeight700}
-      buttonStyle={backGroundMainColor}
+      titleStyle={FONT_WEIGHT_700}
+      buttonStyle={BACKGROUND_MAIN_COLOR}
       icon={icon}
     />
   );

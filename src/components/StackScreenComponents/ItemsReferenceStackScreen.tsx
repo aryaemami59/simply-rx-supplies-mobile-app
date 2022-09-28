@@ -17,7 +17,10 @@ type Props = BottomTabScreenProps<RootTabParamList, "ItemsReference">;
 
 const Stack = createStackNavigator<ItemsReferenceStackParamList>();
 
-const ItemsReferenceStackScreen: FC<Props> = (): JSX.Element => {
+const ItemsReferenceStackScreen: FC<Props> = ({
+  navigation,
+  route,
+}): JSX.Element => {
   return (
     <Stack.Navigator>
       <Stack.Screen

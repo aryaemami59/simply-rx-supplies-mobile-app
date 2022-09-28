@@ -3,7 +3,7 @@ import { Chip } from "@rneui/themed";
 import { StyleSheet } from "react-native";
 import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
 import { ToggleItemBarcode } from "../../../../redux/addedSlice";
-import { mainColor } from "../../../../shared/sharedStyles";
+import { MAIN_COLOR } from "../../../../shared/sharedStyles";
 
 const HideItemBarcode: FC = (): JSX.Element => {
   const dispatch = useAppDispatch();
@@ -27,7 +27,7 @@ const HideItemBarcode: FC = (): JSX.Element => {
 
 const styles = StyleSheet.create({
   buttonStyle: {
-    backgroundColor: mainColor,
+    backgroundColor: MAIN_COLOR,
   },
 });
 

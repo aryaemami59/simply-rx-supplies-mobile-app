@@ -1,4 +1,4 @@
-import { FC, memo, useCallback, useEffect } from "react";
+import { FC, memo, useCallback, useEffect, useMemo } from "react";
 import { useAppSelector } from "../../../../redux/hooks";
 import {
   selectByVendor,
@@ -24,11 +24,14 @@ import SingleCartListItems from "./SingleCartListItems";
 import { Chip } from "@rneui/themed";
 import { MaterialIcons } from "@expo/vector-icons";
 import {
-  fontWeight700,
-  backGroundMainColor,
+  FONT_WEIGHT_700,
+  BACKGROUND_MAIN_COLOR,
+  HEIGHT_100,
+  TEXT_UNDERLINE,
 } from "../../../../shared/sharedStyles";
 import { TouchableOpacity } from "react-native";
 import CartQRCodeImage from "../QRImage/CartQRCodeImage";
+import { TEXT_CENTER, AI_CENTER } from "../../../../shared/sharedStyles";
 
 const shoppingCartIcon = (
   <MaterialIcons name="shopping-cart" color="white" size={24} />
@@ -36,7 +39,7 @@ const shoppingCartIcon = (
 const renderItems: ListRenderItem<ItemObjType> = ({
   item,
 }: ListRenderItemInfo<ItemObjType>): JSX.Element => {
-  return <SingleCartListItems item={item} />;
+  return <SingleCartListItems itemObj={item} />;
 };
 
 const keyExtractor = (item: ItemObjType) => item.id.toString();
@@ -65,11 +68,15 @@ const CartColumnListItemsScreen: FC<Props> = ({
     selectVendorOfficialName(vendorName)
   );
 
-  useEffect(() => {
-    navigation.setOptions({
+  const options = useMemo(() => {
+    return {
       headerTitle: officialVendorName,
-    });
-  }, [navigation, officialVendorName]);
+    };
+  }, [officialVendorName]);
+
+  useEffect(() => {
+    navigation.setOptions(options);
+  }, [navigation, options]);
 
   const clickHandler = useCallback(() => {
     navigation.navigate("ItemLookup");
@@ -99,12 +106,14 @@ const CartColumnListItemsScreen: FC<Props> = ({
           <View style={styles.bigContainer}>
             {ifAnyItemsAdded && (
               <>
-                <View style={styles.CartQRCodeImageContainer}>
+                <View style={[AI_CENTER, styles.CartQRCodeImageContainer]}>
                   <CartQRCodeImage vendorName={vendorName} />
                 </View>
-                <View style={styles.vendorLinkContainer}>
+                <View style={[AI_CENTER, styles.vendorLinkContainer]}>
                   <TouchableOpacity onPress={openLink}>
-                    <Text>{officialVendorName} Website</Text>
+                    <Text style={TEXT_UNDERLINE}>
+                      {officialVendorName} Website
+                    </Text>
                   </TouchableOpacity>
                 </View>
               </>
@@ -112,12 +121,14 @@ const CartColumnListItemsScreen: FC<Props> = ({
           </View>
         }
         ListEmptyComponent={
-          <View style={styles.emptyContainer}>
-            <Text style={styles.textStyle}>No Item Has Been Added Yet!</Text>
+          <View style={[HEIGHT_100, styles.emptyContainer]}>
+            <Text style={[TEXT_CENTER, styles.textStyle]}>
+              No Item Has Been Added Yet!
+            </Text>
             <Chip
               raised
-              titleStyle={fontWeight700}
-              buttonStyle={backGroundMainColor}
+              titleStyle={FONT_WEIGHT_700}
+              buttonStyle={BACKGROUND_MAIN_COLOR}
               title="Shopping Cart"
               size="lg"
               icon={shoppingCartIcon}
@@ -139,24 +150,16 @@ const CartColumnListItemsScreen: FC<Props> = ({
 
 const styles = StyleSheet.create({
   textStyle: {
-    textAlign: "center",
     paddingVertical: 20,
-  },
-  viewStyle: {
-    alignItems: "center",
-    justifyContent: "space-between",
-    width: "100%",
   },
   bigContainer: {
     paddingVertical: 10,
   },
   CartQRCodeImageContainer: {
     paddingVertical: 10,
-    alignItems: "center",
   },
   vendorLinkContainer: {
     paddingVertical: 10,
-    alignItems: "center",
   },
   hideButtonsContainer: {
     justifyContent: "space-between",
@@ -166,7 +169,6 @@ const styles = StyleSheet.create({
   emptyContainer: {
     alignItems: "stretch",
     justifyContent: "space-between",
-    height: "100%",
     padding: 30,
   },
 });

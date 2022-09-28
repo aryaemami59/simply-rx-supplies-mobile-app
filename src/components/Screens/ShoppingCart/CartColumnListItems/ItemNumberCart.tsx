@@ -2,7 +2,7 @@ import { FC, memo } from "react";
 import { View, Text } from "react-native";
 import { ItemObjType } from "../../../../../CustomTypes/types";
 import { useAppSelector } from "../../../../redux/hooks";
-import { AI_CENTER, textCenter } from "../../../../shared/sharedStyles";
+import { AI_CENTER, TEXT_CENTER } from "../../../../shared/sharedStyles";
 
 type Props = {
   itemObj: ItemObjType;
@@ -17,7 +17,7 @@ const ItemNumberCart: FC<Props> = ({ itemObj }): JSX.Element => {
     <>
       {itemNumberShown ? (
         <View style={AI_CENTER}>
-          <Text style={textCenter}>Item Number: {itemObj.itemNumber}</Text>
+          <Text style={TEXT_CENTER}>Item Number: {itemObj.itemNumber}</Text>
         </View>
       ) : (
         ""

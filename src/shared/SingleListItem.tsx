@@ -16,16 +16,14 @@ type Props = {
 
 const SingleListItem: FC<Props> = ({ itemObj, vendorName }): JSX.Element => {
   const dispatch = useAppDispatch();
-  const ifAddedToAllVendors: boolean = useAppSelector<boolean>(
-    checkIfAddedToAllVendors(itemObj)
-  );
+  const ifAddedToAllVendors = useAppSelector(checkIfAddedToAllVendors(itemObj));
 
-  const vendorsSelector = useAppSelector<vendorNameType[]>(
+  const vendorsSelector = useAppSelector(
     selectVendorsToAddTo(itemObj),
     shallowEqual
   );
 
-  const clickHandler = useCallback((): void => {
+  const clickHandler = useCallback(() => {
     const vendors = vendorName ? [vendorName] : vendorsSelector;
     ifAddedToAllVendors || dispatch(addItems({ itemObj, vendors }));
   }, [vendorName, vendorsSelector, ifAddedToAllVendors, dispatch, itemObj]);
