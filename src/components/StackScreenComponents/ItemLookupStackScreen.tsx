@@ -22,12 +22,14 @@ const ItemLookupStackScreen: FC<Props> = ({
 }): JSX.Element => {
   return (
     <>
-      <Stack.Navigator
-        screenOptions={{
-          ...HEADER_SHOWN_FALSE,
-        }}>
-        <Stack.Screen name="ItemLookupScreen" component={ItemLookupScreen} />
-      </Stack.Navigator>
+      <SafeAreaProvider>
+        <Stack.Navigator
+          screenOptions={{
+            ...HEADER_SHOWN_FALSE,
+          }}>
+          <Stack.Screen name="ItemLookupScreen" component={ItemLookupScreen} />
+        </Stack.Navigator>
+      </SafeAreaProvider>
     </>
   );
 };

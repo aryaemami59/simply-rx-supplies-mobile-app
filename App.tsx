@@ -24,7 +24,9 @@ const App: FC = (): JSX.Element => {
     <SafeAreaProvider>
       <Provider store={store}>
         <PaperProvider>
-          <NavigationContainer>
+          <NavigationContainer
+          // theme={{ colors: { background: "white" } }}
+          >
             <Main />
           </NavigationContainer>
         </PaperProvider>

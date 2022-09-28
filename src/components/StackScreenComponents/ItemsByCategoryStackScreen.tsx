@@ -8,6 +8,7 @@ import ItemsByCategoryScreen from "../Screens/ItemsReference/ItemsByCategory/Ite
 import { HEADER_SHOWN_FALSE } from "../../shared/sharedScreenOptions";
 import { MaterialTopTabScreenProps } from "@react-navigation/material-top-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
 type Props = MaterialTopTabScreenProps<
   ItemsReferenceTopTabParamList,

@@ -18,9 +18,11 @@ type Props = BottomTabScreenProps<RootTabParamList, "Home">;
 
 const HomeStackScreen: FC<Props> = ({ navigation, route }): JSX.Element => {
   return (
-    <Stack.Navigator screenOptions={screenOptions}>
-      <Stack.Screen name="HomeScreen" component={HomeScreen} />
-    </Stack.Navigator>
+    <SafeAreaProvider>
+      <Stack.Navigator screenOptions={screenOptions}>
+        <Stack.Screen name="HomeScreen" component={HomeScreen} />
+      </Stack.Navigator>
+    </SafeAreaProvider>
   );
 };
 

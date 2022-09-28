@@ -31,7 +31,6 @@ type Props = StackScreenProps<ItemLookupStackParamList, "ItemLookupScreen">;
 
 const ItemLookupScreen: FC<Props> = ({ navigation, route }): JSX.Element => {
   const listItems = useAppSelector(selectAllListItems, shallowEqual);
-  console.log(route.params);
 
   return (
     <View style={styles.containerStyle}>
