@@ -2,13 +2,13 @@ import { ListItem, useTheme } from "@rneui/themed";
 import { FC, memo, useCallback } from "react";
 import { StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { StackNavigationProp } from "@react-navigation/stack";
 import TouchableScale from "react-native-touchable-scale";
 import {
   Category,
   ItemsReferenceStackParamList,
 } from "../../../../../CustomTypes/types";
 import { AI_CENTER } from "../../../../shared/sharedStyles";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 type Props = {
   category: Category;
@@ -16,7 +16,7 @@ type Props = {
 
 const CategoryList: FC<Props> = ({ category }): JSX.Element => {
   const navigation =
-    useNavigation<StackNavigationProp<ItemsReferenceStackParamList>>();
+    useNavigation<NativeStackNavigationProp<ItemsReferenceStackParamList>>();
   const { theme } = useTheme();
 
   const clickHandler = useCallback(() => {

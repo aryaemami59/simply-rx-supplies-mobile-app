@@ -6,15 +6,14 @@ import {
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import ItemsByVendorStackScreen from "../../StackScreenComponents/ItemsByVendorStackScreen";
 import ItemsByCategoryStackScreen from "../../StackScreenComponents/ItemsByCategoryStackScreen";
-import { StackScreenProps } from "@react-navigation/stack";
 import { useTheme } from "@rneui/themed";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import {
   itemsByCategoryTabOptions,
   itemsByVendorTabOptions,
 } from "../../../shared/sharedScreenOptions";
 
-type Props = StackScreenProps<
+type Props = NativeStackScreenProps<
   ItemsReferenceStackParamList,
   "ItemsReferenceScreen"
 >;
@@ -28,8 +27,6 @@ const ItemsReferenceScreen: FC<Props> = ({
   const { theme } = useTheme();
 
   return (
-    // <SafeAreaView
-    //   style={{ backgroundColor: theme.colors.background, height: "100%" }}>
     <Tab.Navigator
       screenOptions={{
         tabBarStyle: { backgroundColor: theme.colors.background },
@@ -51,7 +48,6 @@ const ItemsReferenceScreen: FC<Props> = ({
         component={ItemsByCategoryStackScreen}
       />
     </Tab.Navigator>
-    // </SafeAreaView>
   );
 };
 

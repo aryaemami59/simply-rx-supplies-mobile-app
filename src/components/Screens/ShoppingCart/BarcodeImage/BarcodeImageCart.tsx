@@ -2,11 +2,11 @@ import { FC, memo, useCallback } from "react";
 import { Image, StyleSheet, TouchableOpacity } from "react-native";
 import { useAppSelector } from "../../../../redux/hooks";
 import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import {
   ItemObjType,
   ShoppingCartStackParamList,
 } from "../../../../../CustomTypes/types";
-import { StackNavigationProp } from "@react-navigation/stack";
 
 type Props = {
   itemObj: ItemObjType;
@@ -20,7 +20,7 @@ const BarcodeImageCart: FC<Props> = ({ itemObj }): JSX.Element => {
   const { src, name } = itemObj;
 
   const navigation =
-    useNavigation<StackNavigationProp<ShoppingCartStackParamList>>();
+    useNavigation<NativeStackNavigationProp<ShoppingCartStackParamList>>();
 
   const clickHandler = useCallback(() => {
     navigation.push("BarcodeImage", { src, name });

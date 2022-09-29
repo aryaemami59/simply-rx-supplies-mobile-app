@@ -13,17 +13,17 @@ import {
   View,
 } from "react-native";
 import { ItemsReferenceStackParamList } from "../../../../../CustomTypes/types";
-import {
-  StackScreenProps,
-  StackNavigationOptions,
-} from "@react-navigation/stack";
 import { ItemObjType } from "../../../../../CustomTypes/types";
 import { useTheme } from "@rneui/themed";
 import { HEIGHT_100 } from "../../../../shared/sharedStyles";
+import {
+  NativeStackNavigationOptions,
+  NativeStackScreenProps,
+} from "@react-navigation/native-stack";
 
 const keyExtractor = (item: ItemObjType) => item.id.toString();
 
-type Props = StackScreenProps<
+type Props = NativeStackScreenProps<
   ItemsReferenceStackParamList,
   "ItemsByVendorListItems"
 >;
@@ -47,9 +47,29 @@ const ItemsByVendorListItems: FC<Props> = ({
 
   const items = useAppSelector(selectItemsByVendor(vendorName), shallowEqual);
 
-  const options: StackNavigationOptions = useMemo(() => {
+  const options: NativeStackNavigationOptions = useMemo(() => {
     return {
       headerTitle: officialVendorName,
+      // headerStyle: { alignItems: "center" },
+      // headerRight: HeaderRightFC,
+      // headerTitleContainerStyle: {
+      //   display: "flex",
+      //   flex: 5,
+      //   backgroundColor: "red",
+      //   alignItems: "center",
+      // },
+      // headerRightContainerStyle: {
+      //   display: "flex",
+      //   flex: 1,
+      //   backgroundColor: "red",
+      //   width: "100%",
+      // },
+      // headerLeftContainerStyle: {
+      //   display: "flex",
+      //   flex: 10,
+      //   backgroundColor: "red",
+      // },
+      // headerRight: () => <DarkModeIcon />,
     };
   }, [officialVendorName]);
 
@@ -60,13 +80,7 @@ const ItemsByVendorListItems: FC<Props> = ({
   const { theme } = useTheme();
 
   return (
-    <View
-      style={[
-        {
-          backgroundColor: theme.colors.background,
-        },
-        HEIGHT_100,
-      ]}>
+    <View style={[{ backgroundColor: theme.colors.background }, HEIGHT_100]}>
       <FlatList
         removeClippedSubviews
         data={items}

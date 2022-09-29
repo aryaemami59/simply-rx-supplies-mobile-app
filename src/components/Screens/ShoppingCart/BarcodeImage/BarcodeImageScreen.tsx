@@ -7,22 +7,23 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from "react-native";
-import {
-  StackScreenProps,
-  StackNavigationOptions,
-} from "@react-navigation/stack";
 import { Octicons } from "@expo/vector-icons";
 import { ShoppingCartStackParamList } from "../../../../../CustomTypes/types";
 import { JC_AI_CENTER_HEIGHT100 } from "../../../../shared/sharedStyles";
+import { useTheme } from "@rneui/themed";
+import {
+  NativeStackScreenProps,
+  NativeStackNavigationOptions,
+} from "@react-navigation/native-stack";
 
 const iconName = Platform.OS === "android" ? "share-android" : "share";
 
-type Props = StackScreenProps<ShoppingCartStackParamList, "BarcodeImage">;
+type Props = NativeStackScreenProps<ShoppingCartStackParamList, "BarcodeImage">;
 
 const BarcodeImageScreen: FC<Props> = ({ navigation, route }): JSX.Element => {
   const { src, name } = route.params;
 
-  const options: StackNavigationOptions = useMemo(() => {
+  const options: NativeStackNavigationOptions = useMemo(() => {
     return {
       title: name,
     };
@@ -50,8 +51,15 @@ const BarcodeImageScreen: FC<Props> = ({ navigation, route }): JSX.Element => {
     navigation.setOptions(options);
   }, [navigation, options]);
 
+  const { theme } = useTheme();
+
   return (
-    <View style={[JC_AI_CENTER_HEIGHT100, styles.container]}>
+    <View
+      style={[
+        JC_AI_CENTER_HEIGHT100,
+        styles.container,
+        { backgroundColor: theme.colors.background },
+      ]}>
       <TouchableOpacity onLongPress={shareBarcode}>
         <Image source={imageSource} style={styles.image} />
       </TouchableOpacity>

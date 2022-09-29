@@ -7,6 +7,8 @@ import ItemsByVendorScreen from "../Screens/ItemsReference/ItemsByVendor/ItemsBy
 import { HEADER_SHOWN_FALSE } from "../../shared/sharedScreenOptions";
 import { MaterialTopTabScreenProps } from "@react-navigation/material-top-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import DarkModeIcon from "../HeaderComponents/DarkModeIcon";
+import { HeaderRightFC } from "../HeaderComponents/HeaderRightComponent";
 
 type Props = MaterialTopTabScreenProps<
   ItemsReferenceTopTabParamList,
@@ -24,6 +26,8 @@ const ItemsByVendorStackScreen: FC<Props> = ({
       <Stack.Screen
         name="ItemsByVendorScreen"
         component={ItemsByVendorScreen}
+        // options={{ headerRight: HeaderRightFC }}
+        // options={{ headerRight: props => <DarkModeIcon {...props} /> }}
       />
     </Stack.Navigator>
   );

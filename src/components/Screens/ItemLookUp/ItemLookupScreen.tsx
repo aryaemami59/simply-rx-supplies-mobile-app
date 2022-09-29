@@ -6,7 +6,6 @@ import {
   ListRenderItem,
   ListRenderItemInfo,
 } from "react-native";
-import { StackScreenProps } from "@react-navigation/stack";
 import {
   ItemLookupStackParamList,
   ItemObjType,
@@ -18,6 +17,7 @@ import { shallowEqual } from "react-redux";
 import InputField from "./Input/InputField";
 import BottomSheetComponent from "./Input/BottomSheetComponent";
 import { useTheme } from "@rneui/themed";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
 const renderItems: ListRenderItem<ItemObjType> = ({
   item,
@@ -27,7 +27,10 @@ const renderItems: ListRenderItem<ItemObjType> = ({
 
 const keyExtractor = (item: ItemObjType) => item.id.toString();
 
-type Props = StackScreenProps<ItemLookupStackParamList, "ItemLookupScreen">;
+type Props = NativeStackScreenProps<
+  ItemLookupStackParamList,
+  "ItemLookupScreen"
+>;
 
 const ItemLookupScreen: FC<Props> = ({ navigation, route }): JSX.Element => {
   const listItems = useAppSelector(selectAllListItems, shallowEqual);

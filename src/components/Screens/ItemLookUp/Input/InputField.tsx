@@ -26,7 +26,6 @@ import {
   OnChangeText,
   ItemLookupStackParamList,
 } from "../../../../../CustomTypes/types";
-import { StackNavigationProp } from "@react-navigation/stack";
 import {
   MAIN_COLOR,
   DISPLAY_NONE,
@@ -37,6 +36,7 @@ import { SearchBar as SearchBarType } from "@rneui/base";
 import HeaderRightComponent from "../../../HeaderComponents/HeaderRightComponent";
 import SearchIcon from "../../../HeaderComponents/SearchIcon";
 import empty from "../../../../shared/empty";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 const sortResults = (
   searchTerm: ItemObjType,
@@ -82,7 +82,7 @@ const InputField: FC = (): JSX.Element => {
   }, [dispatch]);
 
   const navigation =
-    useNavigation<StackNavigationProp<ItemLookupStackParamList>>();
+    useNavigation<NativeStackNavigationProp<ItemLookupStackParamList>>();
 
   useFocusEffect(
     useCallback(() => {

@@ -13,7 +13,6 @@ import {
   ListRenderItemInfo,
   FlatList,
 } from "react-native";
-import { StackScreenProps } from "@react-navigation/stack";
 import {
   ShoppingCartStackParamList,
   ItemObjType,
@@ -32,6 +31,7 @@ import {
 import { TouchableOpacity } from "react-native";
 import CartQRCodeImage from "../QRImage/CartQRCodeImage";
 import { TEXT_CENTER, AI_CENTER } from "../../../../shared/sharedStyles";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
 const shoppingCartIcon = (
   <MaterialIcons name="shopping-cart" color="white" size={24} />
@@ -44,7 +44,7 @@ const renderItems: ListRenderItem<ItemObjType> = ({
 
 const keyExtractor = (item: ItemObjType) => item.id.toString();
 
-type Props = StackScreenProps<
+type Props = NativeStackScreenProps<
   ShoppingCartStackParamList,
   "CartColumnListItems"
 >;
@@ -127,7 +127,8 @@ const CartColumnListItemsScreen: FC<Props> = ({
                     { backgroundColor: theme.colors.background },
                   ]}>
                   <TouchableOpacity onPress={openLink}>
-                    <Text style={[TEXT_UNDERLINE]}>
+                    <Text
+                      style={[TEXT_UNDERLINE, { color: theme.colors.black }]}>
                       {officialVendorName} Website
                     </Text>
                   </TouchableOpacity>

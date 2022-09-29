@@ -8,12 +8,11 @@ import {
   View,
 } from "react-native";
 import CartVendorColumns from "./CartVendorColumns";
-import { StackScreenProps } from "@react-navigation/stack";
 import { vendorNameType } from "../../../../CustomTypes/types";
 import { ShoppingCartStackParamList } from "../../../../CustomTypes/types";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { useTheme } from "@rneui/themed";
 import { HEIGHT_100 } from "../../../shared/sharedStyles";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
 const renderItem: ListRenderItem<vendorNameType> = ({
   item,
@@ -23,7 +22,10 @@ const renderItem: ListRenderItem<vendorNameType> = ({
 
 const keyExtractor = (item: vendorNameType) => item.toString();
 
-type Props = StackScreenProps<ShoppingCartStackParamList, "ShoppingCartScreen">;
+type Props = NativeStackScreenProps<
+  ShoppingCartStackParamList,
+  "ShoppingCartScreen"
+>;
 
 const ShoppingCartScreen: FC<Props> = ({ navigation, route }): JSX.Element => {
   const vendors = useAppSelector(selectVendorsArr);

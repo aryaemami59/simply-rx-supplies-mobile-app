@@ -9,9 +9,9 @@ import {
   View,
 } from "react-native";
 import CategoryList from "./CategoryList";
-import { StackScreenProps } from "@react-navigation/stack";
 import { HEIGHT_100 } from "../../../../shared/sharedStyles";
 import { useTheme } from "@rneui/themed";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import {
   ItemsByCategoryStackParamList,
   Category,
@@ -25,7 +25,7 @@ const renderItem: ListRenderItem<Category> = ({
 
 const keyExtractor = (item: Category) => item.toString();
 
-type Props = StackScreenProps<ItemsByCategoryStackParamList>;
+type Props = NativeStackScreenProps<ItemsByCategoryStackParamList>;
 
 const ItemsByCategoryScreen: FC<Props> = (): JSX.Element => {
   const categories = useAppSelector(selectNavsArr, shallowEqual);

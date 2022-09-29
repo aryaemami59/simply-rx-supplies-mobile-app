@@ -1,6 +1,5 @@
 import { BottomTabNavigationOptions } from "@react-navigation/bottom-tabs";
 import { MaterialTopTabNavigationOptions } from "@react-navigation/material-top-tabs";
-import { StackNavigationOptions } from "@react-navigation/stack";
 import HeaderHomeStackNavigator from "../components/HeaderComponents/HeaderHomeStackNavigator";
 import { MAIN_COLOR } from "./sharedStyles";
 import { tabBarIconProps } from "../../CustomTypes/types";
@@ -9,7 +8,7 @@ import TabBarIconItemLookup from "../components/TabBarComponents/TabBarIconItemL
 import TabBarIconShoppingCart from "../components/TabBarComponents/TabBarIconShoppingCart";
 import TabBarIconItemsReference from "../components/TabBarComponents/TabBarIconItemsReference";
 import { NativeStackNavigationOptions } from "@react-navigation/native-stack";
-import { Ionicons } from "@expo/vector-icons";
+import { HeaderRightFC } from "../components/HeaderComponents/HeaderRightComponent";
 
 export const screenOptions: NativeStackNavigationOptions = {
   header: props => <HeaderHomeStackNavigator {...props} />,
@@ -21,10 +20,10 @@ export const HEADER_SHOWN_FALSE = {
 
 export const refHeaderOptions: NativeStackNavigationOptions = {
   headerTitleStyle: { color: "white" },
-  // headerBackTitleStyle: { color: "white" },
   headerBackTitleVisible: false,
   headerTintColor: "white",
   headerStyle: { backgroundColor: MAIN_COLOR },
+  headerRight: HeaderRightFC,
 } as const;
 
 export const itemsByVendorTabOptions: MaterialTopTabNavigationOptions = {
@@ -37,9 +36,6 @@ export const itemsByCategoryTabOptions: MaterialTopTabNavigationOptions = {
 
 export const HomeOptions: BottomTabNavigationOptions = {
   tabBarIcon: (props: tabBarIconProps) => <TabBarIconHome {...props} />,
-  // headerRight: props => (
-  //   <Ionicons {...props} name="contrast" color="white" size={30} />
-  // ),
 };
 
 export const ItemLookupOptions: BottomTabNavigationOptions = {

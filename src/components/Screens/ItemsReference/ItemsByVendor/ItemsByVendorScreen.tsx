@@ -2,7 +2,6 @@ import { FC, memo } from "react";
 import ItemsByVendorVendorList from "./ItemsByVendorVendorList";
 import { useAppSelector } from "../../../../redux/hooks";
 import { selectVendorsArr } from "../../../../redux/addedSlice";
-import { StackScreenProps } from "@react-navigation/stack";
 import {
   ItemsByVendorStackParamList,
   vendorNameType,
@@ -15,6 +14,7 @@ import {
 } from "react-native";
 import { HEIGHT_100 } from "../../../../shared/sharedStyles";
 import { useTheme } from "@rneui/themed";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
 const renderItem: ListRenderItem<vendorNameType> = ({
   item,
@@ -24,7 +24,7 @@ const renderItem: ListRenderItem<vendorNameType> = ({
 
 const keyExtractor = (item: vendorNameType) => item.toString();
 
-type Props = StackScreenProps<
+type Props = NativeStackScreenProps<
   ItemsByVendorStackParamList,
   "ItemsByVendorScreen"
 >;

@@ -4,12 +4,12 @@ import { useAppSelector } from "../../../../redux/hooks";
 import { selectVendorOfficialName } from "../../../../redux/addedSlice";
 import { StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { StackNavigationProp } from "@react-navigation/stack";
 import {
   ItemsReferenceStackParamList,
   vendorNameType,
 } from "../../../../../CustomTypes/types";
 import TouchableScale from "react-native-touchable-scale";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 type Props = {
   vendorName: vendorNameType;
@@ -22,7 +22,7 @@ const ItemsByVendorVendorList: FC<Props> = ({ vendorName }): JSX.Element => {
   const { theme } = useTheme();
 
   const navigation =
-    useNavigation<StackNavigationProp<ItemsReferenceStackParamList>>();
+    useNavigation<NativeStackNavigationProp<ItemsReferenceStackParamList>>();
 
   const clickHandler = useCallback(() => {
     navigation.push("ItemsByVendorListItems", { vendorName });

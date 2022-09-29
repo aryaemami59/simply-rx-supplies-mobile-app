@@ -1,4 +1,4 @@
-import { ListItem } from "@rneui/themed";
+import { ListItem, useTheme } from "@rneui/themed";
 import { FC, memo } from "react";
 import { View, StyleSheet } from "react-native";
 import BarcodeImageCart from "../BarcodeImage/BarcodeImageCart";
@@ -12,9 +12,15 @@ type Props = {
 };
 
 const SingleCartListItems: FC<Props> = ({ itemObj }): JSX.Element => {
+  const { theme } = useTheme();
+
   return (
     <>
-      <ListItem bottomDivider topDivider key={itemObj.name}>
+      <ListItem
+        containerStyle={[{ backgroundColor: theme.colors.background }]}
+        bottomDivider
+        topDivider
+        key={itemObj.name}>
         <View style={[AI_CENTER, WIDTH_100, styles.viewStyle]}>
           <ItemNameCart itemObj={itemObj} />
           <ItemNumberCart itemObj={itemObj} />

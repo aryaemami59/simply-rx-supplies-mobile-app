@@ -13,6 +13,7 @@ import CategoryItems from "../Screens/ItemsReference/ItemsByCategory/CategoryIte
 import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import { HeaderRightFC } from "../HeaderComponents/HeaderRightComponent";
 
 type Props = BottomTabScreenProps<RootTabParamList, "ItemsReference">;
 
@@ -32,7 +33,7 @@ const ItemsReferenceStackScreen: FC<Props> = ({
             component={ItemsReferenceScreen}
           />
           <Stack.Screen
-            options={refHeaderOptions}
+            options={{ ...refHeaderOptions }}
             name="ItemsByVendorListItems"
             component={ItemsByVendorListItems}
           />

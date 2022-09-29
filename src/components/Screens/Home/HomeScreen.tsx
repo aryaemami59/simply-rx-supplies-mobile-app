@@ -1,4 +1,3 @@
-import { StackScreenProps } from "@react-navigation/stack";
 import { FC, memo, useCallback } from "react";
 import { Chip, useTheme } from "@rneui/themed";
 import { View, StyleSheet } from "react-native";
@@ -14,6 +13,7 @@ import {
   MAIN_COLOR,
   BACKGROUND_MAIN_COLOR,
 } from "../../../shared/sharedStyles";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
 const searchIcon = <FontAwesome5 name="search" color="white" size={24} />;
 
@@ -31,7 +31,7 @@ const shoppingCartIcon = (
     size={24}
   />
 );
-type Props = StackScreenProps<HomeStackParamList, "HomeScreen">;
+type Props = NativeStackScreenProps<HomeStackParamList, "HomeScreen">;
 
 const HomeScreen: FC<Props> = ({ navigation, route }): JSX.Element => {
   const { theme } = useTheme();

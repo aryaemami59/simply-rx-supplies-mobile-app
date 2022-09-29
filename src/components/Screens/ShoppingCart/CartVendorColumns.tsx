@@ -12,8 +12,8 @@ import {
   ShoppingCartStackParamList,
   vendorNameType,
 } from "../../../../CustomTypes/types";
-import { StackNavigationProp } from "@react-navigation/stack";
 import { FONT_WEIGHT_BOLD, AI_CENTER } from "../../../shared/sharedStyles";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 type Props = {
   vendorName: vendorNameType;
@@ -29,7 +29,7 @@ const CartVendorColumns: FC<Props> = ({ vendorName }): JSX.Element => {
   const status = addedItemsLen ? "success" : "primary";
 
   const navigation =
-    useNavigation<StackNavigationProp<ShoppingCartStackParamList>>();
+    useNavigation<NativeStackNavigationProp<ShoppingCartStackParamList>>();
 
   const clickHandler = useCallback(() => {
     navigation.push("CartColumnListItems", { vendorName });

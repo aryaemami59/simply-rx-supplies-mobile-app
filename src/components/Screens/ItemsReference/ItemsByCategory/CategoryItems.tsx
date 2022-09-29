@@ -9,16 +9,16 @@ import {
   View,
 } from "react-native";
 import {
-  StackScreenProps,
-  StackNavigationOptions,
-} from "@react-navigation/stack";
-import {
   ItemsReferenceStackParamList,
   ItemObjType,
 } from "../../../../../CustomTypes/types";
 import ItemsByCategorySingleListItem from "./ItemsByCategorySingleListItem";
 import { useTheme } from "@rneui/themed";
 import { HEIGHT_100 } from "../../../../shared/sharedStyles";
+import {
+  NativeStackScreenProps,
+  NativeStackNavigationOptions,
+} from "@react-navigation/native-stack";
 
 const renderItems: ListRenderItem<ItemObjType> = ({
   item,
@@ -28,7 +28,7 @@ const renderItems: ListRenderItem<ItemObjType> = ({
 
 const keyExtractor = (item: ItemObjType) => item.id.toString();
 
-type Props = StackScreenProps<
+type Props = NativeStackScreenProps<
   ItemsReferenceStackParamList,
   "ItemsByCategoryListItems"
 >;
@@ -41,7 +41,7 @@ const CategoryItems: FC<Props> = ({ navigation, route }): JSX.Element => {
     shallowEqual
   );
 
-  const options: StackNavigationOptions = useMemo(() => {
+  const options: NativeStackNavigationOptions = useMemo(() => {
     return {
       headerTitle: category,
     };
