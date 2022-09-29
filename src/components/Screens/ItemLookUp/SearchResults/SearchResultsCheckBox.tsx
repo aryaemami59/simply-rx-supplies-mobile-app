@@ -75,6 +75,8 @@ const SearchResultsCheckBox: FC<myProps> = ({
       disabled={disabled}
       onPress={onToggleSwitch}
       title={officialVendorName}
+      style={{ backgroundColor: "transparent" }}
+      textStyle={{ backgroundColor: "transparent" }}
     />
   );
 };
