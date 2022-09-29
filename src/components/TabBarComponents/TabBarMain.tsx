@@ -16,11 +16,13 @@ import { useAppSelector } from "../../redux/hooks";
 import { checkIfAnyItemsAdded } from "../../redux/addedSlice";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { enableScreens } from "react-native-screens";
+import { useTheme } from "@rneui/themed";
 
 const Tab = createBottomTabNavigator<RootTabParamList>();
 
 const TabBarMain: FC = (): JSX.Element => {
   const ifItemsAdded = useAppSelector(checkIfAnyItemsAdded);
+  const { theme } = useTheme();
   const tabBarBadge = ifItemsAdded ? "" : undefined;
 
   const options = useMemo(() => {
@@ -33,8 +35,12 @@ const TabBarMain: FC = (): JSX.Element => {
   enableScreens(false);
 
   return (
-    <SafeAreaProvider>
-      <Tab.Navigator screenOptions={HEADER_SHOWN_FALSE}>
+    <SafeAreaProvider >
+      <Tab.Navigator
+        screenOptions={{
+          ...HEADER_SHOWN_FALSE,
+          tabBarStyle: { backgroundColor: theme.colors.background },
+        }}>
         <Tab.Screen
           name="Home"
           component={HomeStackScreen}

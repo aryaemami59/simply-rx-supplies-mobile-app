@@ -1,6 +1,6 @@
 import { StackScreenProps } from "@react-navigation/stack";
 import { FC, memo, useCallback } from "react";
-import { Chip } from "@rneui/themed";
+import { Chip, useTheme } from "@rneui/themed";
 import { View, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import {
@@ -34,6 +34,8 @@ const shoppingCartIcon = (
 type Props = StackScreenProps<HomeStackParamList, "HomeScreen">;
 
 const HomeScreen: FC<Props> = ({ navigation, route }): JSX.Element => {
+  const { theme } = useTheme();
+
   const navigateToItemLookup = useCallback(
     () => navigation.navigate("ItemLookup"),
     [navigation]
@@ -67,8 +69,8 @@ const HomeScreen: FC<Props> = ({ navigation, route }): JSX.Element => {
   );
 
   return (
-    <SafeAreaView>
-      <View style={styles.container}>
+    <SafeAreaView style={[{ backgroundColor: theme.colors.background }]}>
+      <View style={[styles.container]}>
         <Chip
           raised
           titleStyle={FONT_WEIGHT_700}

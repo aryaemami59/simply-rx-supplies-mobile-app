@@ -64,3 +64,7 @@ export const FONT_WEIGHT_700: TextStyle = {
 export const FONT_WEIGHT_BOLD: TextStyle = {
   fontWeight: "bold",
 } as const;
+
+export const ICON_GRAY_COLOR = "rgba(255,255,255,.5)" as const;
+
+export const SEARCH_BAR_COLOR = "rgba(0, 0, 0, 0.3)" as const;

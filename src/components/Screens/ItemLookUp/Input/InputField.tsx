@@ -1,5 +1,13 @@
-import { Header, SearchBar } from "@rneui/themed";
-import { FC, memo, useState, useCallback, useRef, useMemo } from "react";
+import { Header, SearchBar, useTheme } from "@rneui/themed";
+import {
+  FC,
+  memo,
+  useState,
+  useCallback,
+  useRef,
+  useMemo,
+  useEffect,
+} from "react";
 import { StyleSheet, TextInput, View } from "react-native";
 import * as Animatable from "react-native-animatable";
 import {
@@ -15,14 +23,12 @@ import {
   useRoute,
 } from "@react-navigation/native";
 import { shallowEqual } from "react-redux";
+import { EvilIcons } from "@expo/vector-icons";
 import {
-  FontAwesome,
-  EvilIcons,
-  MaterialIcons,
-  Ionicons,
-  MaterialCommunityIcons,
-} from "@expo/vector-icons";
-import { WIDTH_80, JC_AI_CENTER } from "../../../../shared/sharedStyles";
+  WIDTH_80,
+  JC_AI_CENTER,
+  ICON_GRAY_COLOR,
+} from "../../../../shared/sharedStyles";
 import {
   ItemObjType,
   OnChangeText,
@@ -36,12 +42,15 @@ import {
   COLOR_WHITE,
 } from "../../../../shared/sharedStyles";
 import { SearchBar as SearchBarType } from "@rneui/base";
+import HeaderRightComponent from "../../../HeaderComponents/HeaderRightComponent";
+import SearchIcon from "../../../HeaderComponents/SearchIcon";
+import empty from "../../../../shared/empty";
+import ClearIcon from "../../../HeaderComponents/ClearIcon";
 
-const searchIcon = (
-  <FontAwesome name="search" color="rgba(255,255,255,.5)" size={24} />
-);
-
-const empty: [] = [];
+const animation = {
+  from: WIDTH_80,
+  to: WIDTH_100,
+};
 
 const sortResults = (
   searchTerm: ItemObjType,
@@ -68,7 +77,7 @@ const InputField: FC = (): JSX.Element => {
   const items = useAppSelector(selectItemsArr, shallowEqual);
   const view = useRef<Animatable.View & View>(null);
   const inputRef = useRef<SearchBarType & TextInput>(null);
-
+  const { theme } = useTheme();
   const dispatch = useAppDispatch();
   const route = useRoute<RouteProp<ItemLookupStackParamList>>();
   const inputFocused = route.params?.inputFocused ? true : false;
@@ -81,11 +90,12 @@ const InputField: FC = (): JSX.Element => {
     view.current?.transitionTo(WIDTH_80);
   }, []);
 
-  const clickHandler = useCallback((): void => {
-    dispatch(clearListItems());
+  const clearHandler = useCallback((): void => {
     setVal("");
-    inputRef.current && inputRef.current.focus();
-  }, [dispatch]);
+    // inputRef.current && inputRef?.current.clear();
+    // dispatch(clearListItems());
+    // inputRef.current && inputRef.current.focus();
+  }, []);
 
   const navigation =
     useNavigation<StackNavigationProp<ItemLookupStackParamList>>();
@@ -100,6 +110,16 @@ const InputField: FC = (): JSX.Element => {
       };
     }, [inputFocused, navigation])
   );
+
+  // useEffect(() => {
+  //   const isFocused = inputRef?.current?.searchBar?.input.isFocused();
+  //   return () => {
+  //     isFocused
+  //       ? navigation.setParams({ inputFocused: true })
+  //       : navigation.setParams({ inputFocused: false });
+  //     console.log("unmounts");
+  //   };
+  // }, [navigation]);
 
   const listItemsFunc = useCallback(
     (text: string) => {
@@ -145,12 +165,12 @@ const InputField: FC = (): JSX.Element => {
     () => (
       <EvilIcons
         name="close"
-        color="rgba(255,255,255,.5)"
-        onPress={clickHandler}
+        color={ICON_GRAY_COLOR}
+        onPress={clearHandler}
         size={24}
       />
     ),
-    [clickHandler]
+    [clearHandler]
   );
 
   return (
@@ -159,33 +179,35 @@ const InputField: FC = (): JSX.Element => {
       containerStyle={styles.headerContainer}
       rightContainerStyle={[JC_AI_CENTER, styles.headerRightContainer]}
       leftContainerStyle={DISPLAY_NONE}
-      rightComponent={<Ionicons name="contrast" color="white" size={30} />}
+      rightComponent={HeaderRightComponent}
       centerContainerStyle={styles.headerCenterContainer}
-      // rightContainerStyle={JC_AI_CENTER}
-      // rightContainerStyle={<MaterialCommunityIcons name="theme-light-dark" />}
-      // rightContainerStyle={DISPLAY_NONE}
       centerComponent={
-        <Animatable.View ref={view} transition="width" style={WIDTH_80}>
+        <Animatable.View ref={view} style={WIDTH_80}>
           <SearchBar
             returnKeyType="search"
             ref={inputRef}
             lightTheme
-            keyboardAppearance="dark"
+            keyboardAppearance={theme.mode}
             autoFocus
             focusable
             onFocus={focusHandler}
             onBlur={blurHandler}
-            containerStyle={styles.searchBarContainer}
+            containerStyle={[styles.searchBarContainer]}
             placeholder="Search..."
             round
-            inputContainerStyle={styles.inputContainer}
-            onClear={clickHandler}
+            inputContainerStyle={[styles.inputContainer]}
+            onClear={clearHandler}
             onChangeText={changeVal}
             value={val}
             inputStyle={COLOR_WHITE}
-            placeholderTextColor="rgba(255,255,255,.5)"
-            searchIcon={searchIcon}
-            clearIcon={clearIcon}
+            placeholderTextColor={ICON_GRAY_COLOR}
+            searchIcon={SearchIcon}
+            // clearIcon={clearIcon}
+            // showCancel
+            // cancelButtonTitle="cancel"
+            // cancelButtonProps={{ color: "white" }}
+            // cancelIcon={clearIcon}
+            // clearIcon={clearIcon}
           />
         </Animatable.View>
       }

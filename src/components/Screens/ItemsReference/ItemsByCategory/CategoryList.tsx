@@ -1,4 +1,4 @@
-import { ListItem } from "@rneui/themed";
+import { ListItem, useTheme } from "@rneui/themed";
 import { FC, memo, useCallback } from "react";
 import { StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
@@ -17,6 +17,7 @@ type Props = {
 const CategoryList: FC<Props> = ({ category }): JSX.Element => {
   const navigation =
     useNavigation<StackNavigationProp<ItemsReferenceStackParamList>>();
+  const { theme } = useTheme();
 
   const clickHandler = useCallback(() => {
     navigation.push("ItemsByCategoryListItems", { category });
@@ -24,7 +25,11 @@ const CategoryList: FC<Props> = ({ category }): JSX.Element => {
 
   return (
     <ListItem
-      containerStyle={[AI_CENTER, styles.accordionContainer]}
+      containerStyle={[
+        AI_CENTER,
+        styles.accordionContainer,
+        { backgroundColor: theme.colors.background },
+      ]}
       bottomDivider
       Component={TouchableScale}
       onPress={clickHandler}>

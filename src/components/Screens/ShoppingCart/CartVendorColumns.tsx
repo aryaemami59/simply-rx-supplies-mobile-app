@@ -1,4 +1,4 @@
-import { Badge, ListItem } from "@rneui/themed";
+import { Badge, ListItem, useTheme } from "@rneui/themed";
 import { FC, memo, useCallback } from "react";
 import { useAppSelector } from "../../../redux/hooks";
 import {
@@ -24,6 +24,7 @@ const CartVendorColumns: FC<Props> = ({ vendorName }): JSX.Element => {
     selectVendorOfficialName(vendorName)
   );
   const addedItemsLen = useAppSelector(addedItemsLength(vendorName));
+  const { theme } = useTheme();
 
   const status = addedItemsLen ? "success" : "primary";
 
@@ -38,7 +39,11 @@ const CartVendorColumns: FC<Props> = ({ vendorName }): JSX.Element => {
     <ListItem
       bottomDivider
       Component={TouchableScale}
-      containerStyle={[AI_CENTER, styles.listItemContainer]}
+      containerStyle={[
+        AI_CENTER,
+        styles.listItemContainer,
+        { backgroundColor: theme.colors.background },
+      ]}
       onPress={clickHandler}
       pad={50}>
       <ListItem.Content>

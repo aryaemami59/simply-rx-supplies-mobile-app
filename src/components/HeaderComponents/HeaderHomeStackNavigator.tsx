@@ -1,21 +1,22 @@
 import { Header, SearchBar } from "@rneui/themed";
 import { FC, memo, useEffect, useRef, useCallback } from "react";
 import { TextInput, StyleSheet, Keyboard } from "react-native";
-import { useFocusEffect, useIsFocused } from "@react-navigation/native";
-import { FontAwesome, EvilIcons, Ionicons } from "@expo/vector-icons";
-import { WIDTH_80, WIDTH_100, JC_AI_CENTER } from "../../shared/sharedStyles";
+import { useFocusEffect } from "@react-navigation/native";
+import {
+  WIDTH_80,
+  JC_AI_CENTER,
+  ICON_GRAY_COLOR,
+} from "../../shared/sharedStyles";
 import {
   MAIN_COLOR,
   DISPLAY_NONE,
   COLOR_WHITE,
 } from "../../shared/sharedStyles";
 import { NativeStackHeaderProps } from "@react-navigation/native-stack";
-
-const searchIcon = (
-  <FontAwesome name="search" color="rgba(255,255,255,.5)" size={24} />
-);
-
-const clearIcon = <EvilIcons name="close" color="rgba(255,255,255,.5)" />;
+import HeaderRightComponent from "./HeaderRightComponent";
+import { SEARCH_BAR_COLOR } from "../../shared/sharedStyles";
+import SearchIcon from "./SearchIcon";
+import SearchClearIcon from "./SearchClearIcon";
 
 type Props = NativeStackHeaderProps;
 
@@ -26,15 +27,10 @@ const HeaderHomeStackNavigator: FC<Props> = ({
   back,
 }): JSX.Element => {
   const inputRef = useRef<TextInput>(null);
-  // const isFocused = useIsFocused();
-  // !isFocused && inputRef.current?.blur();
+  // const { theme } = useTheme();
   useFocusEffect(() => {
     inputRef.current?.blur();
     Keyboard.dismiss();
-    return () => {
-      // inputRef.current?.blur();
-      // Keyboard.dismiss();
-    };
   });
 
   useEffect(() => {
@@ -58,7 +54,7 @@ const HeaderHomeStackNavigator: FC<Props> = ({
     <Header
       backgroundColor={MAIN_COLOR}
       rightContainerStyle={[JC_AI_CENTER, styles.headerRightContainer]}
-      rightComponent={<Ionicons name="contrast" color="white" size={30} />}
+      rightComponent={HeaderRightComponent}
       leftContainerStyle={DISPLAY_NONE}
       centerContainerStyle={styles.headerCenterContainer}
       centerComponent={
@@ -69,12 +65,11 @@ const HeaderHomeStackNavigator: FC<Props> = ({
           placeholder="Search..."
           round
           showSoftInputOnFocus={false}
-          focusable={false}
           inputContainerStyle={styles.searchBarInputContainer}
           inputStyle={COLOR_WHITE}
-          placeholderTextColor="rgba(255,255,255,.5)"
-          searchIcon={searchIcon}
-          clearIcon={clearIcon}
+          placeholderTextColor={ICON_GRAY_COLOR}
+          searchIcon={SearchIcon}
+          clearIcon={SearchClearIcon}
         />
       }
     />
@@ -89,7 +84,7 @@ const styles = StyleSheet.create({
   },
   searchBarInputContainer: {
     borderRadius: 9999,
-    backgroundColor: "rgba(0, 0, 0, 0.3)",
+    backgroundColor: SEARCH_BAR_COLOR,
   },
   headerCenterContainer: {
     flex: 5,

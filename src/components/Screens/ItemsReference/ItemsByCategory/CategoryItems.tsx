@@ -2,7 +2,12 @@ import { FC, memo, useEffect, useMemo } from "react";
 import { selectCategories } from "../../../../redux/addedSlice";
 import { useAppSelector } from "../../../../redux/hooks";
 import { shallowEqual } from "react-redux";
-import { FlatList, ListRenderItem, ListRenderItemInfo } from "react-native";
+import {
+  FlatList,
+  ListRenderItem,
+  ListRenderItemInfo,
+  View,
+} from "react-native";
 import {
   StackScreenProps,
   StackNavigationOptions,
@@ -12,6 +17,8 @@ import {
   ItemObjType,
 } from "../../../../../CustomTypes/types";
 import ItemsByCategorySingleListItem from "./ItemsByCategorySingleListItem";
+import { useTheme } from "@rneui/themed";
+import { HEIGHT_100 } from "../../../../shared/sharedStyles";
 
 const renderItems: ListRenderItem<ItemObjType> = ({
   item,
@@ -43,15 +50,18 @@ const CategoryItems: FC<Props> = ({ navigation, route }): JSX.Element => {
   useEffect(() => {
     navigation.setOptions(options);
   }, [navigation, options]);
+  const { theme } = useTheme();
 
   return (
-    <FlatList
-      removeClippedSubviews
-      data={categoryListItems}
-      renderItem={renderItems}
-      keyExtractor={keyExtractor}
-      keyboardShouldPersistTaps="handled"
-    />
+    <View style={[HEIGHT_100, { backgroundColor: theme.colors.background }]}>
+      <FlatList
+        removeClippedSubviews
+        data={categoryListItems}
+        renderItem={renderItems}
+        keyExtractor={keyExtractor}
+        keyboardShouldPersistTaps="handled"
+      />
+    </View>
   );
 };
 

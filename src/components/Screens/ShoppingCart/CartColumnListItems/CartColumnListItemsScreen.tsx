@@ -21,7 +21,7 @@ import {
 import { selectVendorsLinks } from "../../../../redux/addedSlice";
 import { selectVendorOfficialName } from "../../../../redux/addedSlice";
 import SingleCartListItems from "./SingleCartListItems";
-import { Chip } from "@rneui/themed";
+import { Chip, useTheme } from "@rneui/themed";
 import { MaterialIcons } from "@expo/vector-icons";
 import {
   FONT_WEIGHT_700,
@@ -82,8 +82,10 @@ const CartColumnListItemsScreen: FC<Props> = ({
     navigation.navigate("ItemLookup");
   }, [navigation]);
 
+  const { theme } = useTheme();
+
   return (
-    <>
+    <View style={[HEIGHT_100, { backgroundColor: theme.colors.background }]}>
       {/* <View style={styles.bigContainer}>
         {ifAnyItemsAdded && (
           <>
@@ -103,15 +105,29 @@ const CartColumnListItemsScreen: FC<Props> = ({
         </View> */}
       <FlatList
         ListHeaderComponent={
-          <View style={styles.bigContainer}>
+          <View
+            style={[
+              styles.bigContainer,
+              { backgroundColor: theme.colors.background },
+            ]}>
             {ifAnyItemsAdded && (
               <>
-                <View style={[AI_CENTER, styles.CartQRCodeImageContainer]}>
+                <View
+                  style={[
+                    AI_CENTER,
+                    styles.CartQRCodeImageContainer,
+                    { backgroundColor: theme.colors.background },
+                  ]}>
                   <CartQRCodeImage vendorName={vendorName} />
                 </View>
-                <View style={[AI_CENTER, styles.vendorLinkContainer]}>
+                <View
+                  style={[
+                    AI_CENTER,
+                    styles.vendorLinkContainer,
+                    { backgroundColor: theme.colors.background },
+                  ]}>
                   <TouchableOpacity onPress={openLink}>
-                    <Text style={TEXT_UNDERLINE}>
+                    <Text style={[TEXT_UNDERLINE]}>
                       {officialVendorName} Website
                     </Text>
                   </TouchableOpacity>
@@ -121,8 +137,18 @@ const CartColumnListItemsScreen: FC<Props> = ({
           </View>
         }
         ListEmptyComponent={
-          <View style={[HEIGHT_100, styles.emptyContainer]}>
-            <Text style={[TEXT_CENTER, styles.textStyle]}>
+          <View
+            style={[
+              HEIGHT_100,
+              styles.emptyContainer,
+              { backgroundColor: theme.colors.background },
+            ]}>
+            <Text
+              style={[
+                TEXT_CENTER,
+                styles.textStyle,
+                { color: theme.colors.black },
+              ]}>
               No Item Has Been Added Yet!
             </Text>
             <Chip
@@ -144,7 +170,7 @@ const CartColumnListItemsScreen: FC<Props> = ({
         keyboardShouldPersistTaps="handled"
         initialNumToRender={7}
       />
-    </>
+    </View>
   );
 };
 

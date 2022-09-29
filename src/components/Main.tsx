@@ -12,10 +12,13 @@ import {
 import IsLoadingComponents from "../shared/IsLoadingComponents";
 import ErrMsgComponent from "../shared/ErrMsgComponent";
 import TabBarMain from "./TabBarComponents/TabBarMain";
-import { SafeAreaProvider } from "react-native-safe-area-context";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import { useTheme } from "@rneui/themed";
+import { HEIGHT_100 } from "../shared/sharedStyles";
 
 const Main: FC = (): JSX.Element => {
   const dispatch = useAppDispatch();
+  const { theme } = useTheme();
 
   useEffect(() => {
     dispatch(fetchItems());
@@ -35,7 +38,10 @@ const Main: FC = (): JSX.Element => {
   }
 
   return (
+    // <SafeAreaView
+    //   style={[HEIGHT_100, { backgroundColor: theme.colors.background }]}>
     <TabBarMain />
+    // </SafeAreaView>
     // <View style={styles.container}>
     //   <TabBarMain />
     // </View>

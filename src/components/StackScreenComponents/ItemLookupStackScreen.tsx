@@ -7,7 +7,8 @@ import ItemLookupScreen from "../Screens/ItemLookUp/ItemLookupScreen";
 import { HEADER_SHOWN_FALSE } from "../../shared/sharedScreenOptions";
 import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { SafeAreaProvider } from "react-native-safe-area-context";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import { useTheme } from "@rneui/themed";
 
 const Stack = createNativeStackNavigator<ItemLookupStackParamList>();
 
@@ -17,8 +18,10 @@ const ItemLookupStackScreen: FC<Props> = ({
   navigation,
   route,
 }): JSX.Element => {
+  const { theme } = useTheme();
+
   return (
-    <SafeAreaProvider>
+    <SafeAreaProvider style={{ backgroundColor: theme.colors.background }}>
       <Stack.Navigator screenOptions={HEADER_SHOWN_FALSE}>
         <Stack.Screen name="ItemLookupScreen" component={ItemLookupScreen} />
       </Stack.Navigator>

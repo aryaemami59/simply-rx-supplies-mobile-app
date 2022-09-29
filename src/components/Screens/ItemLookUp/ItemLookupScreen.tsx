@@ -17,6 +17,7 @@ import { selectAllListItems } from "../../../redux/addedSlice";
 import { shallowEqual } from "react-redux";
 import InputField from "./Input/InputField";
 import BottomSheetComponent from "./Input/BottomSheetComponent";
+import { useTheme } from "@rneui/themed";
 
 const renderItems: ListRenderItem<ItemObjType> = ({
   item,
@@ -30,9 +31,14 @@ type Props = StackScreenProps<ItemLookupStackParamList, "ItemLookupScreen">;
 
 const ItemLookupScreen: FC<Props> = ({ navigation, route }): JSX.Element => {
   const listItems = useAppSelector(selectAllListItems, shallowEqual);
+  const { theme } = useTheme();
 
   return (
-    <View style={styles.containerStyle}>
+    <View
+      style={[
+        styles.containerStyle,
+        { backgroundColor: theme.colors.background },
+      ]}>
       <InputField />
       <BottomSheetComponent />
       <FlatList
