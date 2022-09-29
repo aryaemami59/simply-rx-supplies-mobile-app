@@ -1,13 +1,5 @@
 import { Header, SearchBar, useTheme } from "@rneui/themed";
-import {
-  FC,
-  memo,
-  useState,
-  useCallback,
-  useRef,
-  useMemo,
-  useEffect,
-} from "react";
+import { FC, memo, useState, useCallback, useRef, useMemo } from "react";
 import { StyleSheet, TextInput, View } from "react-native";
 import * as Animatable from "react-native-animatable";
 import {
@@ -45,12 +37,6 @@ import { SearchBar as SearchBarType } from "@rneui/base";
 import HeaderRightComponent from "../../../HeaderComponents/HeaderRightComponent";
 import SearchIcon from "../../../HeaderComponents/SearchIcon";
 import empty from "../../../../shared/empty";
-import ClearIcon from "../../../HeaderComponents/ClearIcon";
-
-const animation = {
-  from: WIDTH_80,
-  to: WIDTH_100,
-};
 
 const sortResults = (
   searchTerm: ItemObjType,
@@ -92,10 +78,8 @@ const InputField: FC = (): JSX.Element => {
 
   const clearHandler = useCallback((): void => {
     setVal("");
-    // inputRef.current && inputRef?.current.clear();
-    // dispatch(clearListItems());
-    // inputRef.current && inputRef.current.focus();
-  }, []);
+    dispatch(clearListItems());
+  }, [dispatch]);
 
   const navigation =
     useNavigation<StackNavigationProp<ItemLookupStackParamList>>();
@@ -110,16 +94,6 @@ const InputField: FC = (): JSX.Element => {
       };
     }, [inputFocused, navigation])
   );
-
-  // useEffect(() => {
-  //   const isFocused = inputRef?.current?.searchBar?.input.isFocused();
-  //   return () => {
-  //     isFocused
-  //       ? navigation.setParams({ inputFocused: true })
-  //       : navigation.setParams({ inputFocused: false });
-  //     console.log("unmounts");
-  //   };
-  // }, [navigation]);
 
   const listItemsFunc = useCallback(
     (text: string) => {
@@ -202,12 +176,7 @@ const InputField: FC = (): JSX.Element => {
             inputStyle={COLOR_WHITE}
             placeholderTextColor={ICON_GRAY_COLOR}
             searchIcon={SearchIcon}
-            // clearIcon={clearIcon}
-            // showCancel
-            // cancelButtonTitle="cancel"
-            // cancelButtonProps={{ color: "white" }}
-            // cancelIcon={clearIcon}
-            // clearIcon={clearIcon}
+            clearIcon={clearIcon}
           />
         </Animatable.View>
       }
