@@ -34,13 +34,7 @@ const ItemsByVendorScreen: FC<Props> = ({ navigation, route }): JSX.Element => {
   const { theme } = useTheme();
 
   return (
-    <View
-      style={[
-        {
-          backgroundColor: theme.colors.background,
-        },
-        HEIGHT_100,
-      ]}>
+    <View style={[{ backgroundColor: theme.colors.background }, HEIGHT_100]}>
       <FlatList
         keyExtractor={keyExtractor}
         removeClippedSubviews

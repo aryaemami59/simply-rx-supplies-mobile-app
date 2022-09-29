@@ -2,16 +2,20 @@ import { FC, memo } from "react";
 import { ItemObjType } from "../../../../../CustomTypes/types";
 import ItemsByCategorySingleListItemCheckBox from "./ItemsByCategorySingleListItemCheckBox";
 import SingleCategoryListItemAddButton from "./SingleCategoryListItemAddButton";
-import { ListItem } from "@rneui/themed";
+import { ListItem, useTheme } from "@rneui/themed";
 
 type Props = {
   itemObj: ItemObjType;
 };
 
 const ItemsByCategorySingleListItem: FC<Props> = ({ itemObj }): JSX.Element => {
+  const { theme } = useTheme();
+
   return (
     <>
-      <ListItem bottomDivider>
+      <ListItem
+        bottomDivider
+        containerStyle={[{ backgroundColor: theme.colors.background }]}>
         <ListItem.Content>
           <ListItem.Title>{itemObj.name}</ListItem.Title>
           {itemObj.vendors.map(vendorName => (

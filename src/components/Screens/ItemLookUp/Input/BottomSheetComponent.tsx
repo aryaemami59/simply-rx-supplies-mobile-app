@@ -6,7 +6,7 @@ import {
 } from "../../../../redux/addedSlice";
 import { Button } from "@rneui/themed";
 import { BottomSheet } from "@rneui/base";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Keyboard } from "react-native";
 import BottomSheetVendorCheckbox from "../SearchResults/BottomSheetVendorCheckbox";
 
 const BottomSheetComponent: FC = (): JSX.Element => {
@@ -15,6 +15,7 @@ const BottomSheetComponent: FC = (): JSX.Element => {
   const officialVendorNames = useAppSelector(selectAllVendorOfficialNames);
 
   const showBottomSheet = useCallback(() => {
+    Keyboard.dismiss();
     setVisible(true);
   }, []);
 
@@ -28,7 +29,7 @@ const BottomSheetComponent: FC = (): JSX.Element => {
       <BottomSheet
         isVisible={visible}
         onBackdropPress={hideBottomSheet}
-        containerStyle={styles.bottomSheetContainer}>
+        containerStyle={[styles.bottomSheetContainer]}>
         <View>
           {officialVendorNames.map((officialVendorName, index) => (
             <BottomSheetVendorCheckbox

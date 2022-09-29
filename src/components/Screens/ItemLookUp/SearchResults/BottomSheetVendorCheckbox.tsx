@@ -1,4 +1,4 @@
-import { ListItem } from "@rneui/themed";
+import { ListItem, useTheme } from "@rneui/themed";
 import { FC, memo, useCallback } from "react";
 import { TouchableHighlight } from "react-native";
 import {
@@ -24,6 +24,7 @@ const BottomSheetVendorCheckbox: FC<Props> = ({
 }): JSX.Element => {
   const checked = useAppSelector(selectVendorsChecked(vendorName));
   const dispatch = useAppDispatch();
+  const { theme } = useTheme();
 
   const onToggleCheck = useCallback(() => {
     checked
@@ -36,7 +37,9 @@ const BottomSheetVendorCheckbox: FC<Props> = ({
       underlayColor="gray"
       onPress={onToggleCheck}
       activeOpacity={0.6}>
-      <ListItem bottomDivider>
+      <ListItem
+        bottomDivider
+        containerStyle={[{ backgroundColor: theme.colors.background }]}>
         <ListItem.Content style={WIDTH_100}>
           <ListItem.CheckBox
             checked={checked}

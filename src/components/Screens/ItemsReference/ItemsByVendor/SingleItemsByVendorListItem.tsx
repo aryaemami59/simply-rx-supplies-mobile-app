@@ -1,4 +1,4 @@
-import { ListItem, Chip } from "@rneui/themed";
+import { ListItem, Chip, useTheme } from "@rneui/themed";
 import { FC, memo, useCallback } from "react";
 import {
   checkIfAddedToAllVendors,
@@ -35,8 +35,12 @@ const SingleItemsByVendorListItem: FC<Props> = ({
     checkIfItemAddedToOneVendor(vendorName, itemObj)
   );
 
+  const { theme } = useTheme();
+
   return (
-    <ListItem bottomDivider>
+    <ListItem
+      bottomDivider
+      containerStyle={[{ backgroundColor: theme.colors.background }]}>
       <ListItem.Content>
         <ListItem.Title>{itemObj.name}</ListItem.Title>
       </ListItem.Content>

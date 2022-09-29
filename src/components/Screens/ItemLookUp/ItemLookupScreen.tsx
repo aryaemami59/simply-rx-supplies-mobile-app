@@ -47,6 +47,7 @@ const ItemLookupScreen: FC<Props> = ({ navigation, route }): JSX.Element => {
         data={listItems}
         renderItem={renderItems}
         keyExtractor={keyExtractor}
+        // keyboardShouldPersistTaps="always"
         keyboardShouldPersistTaps="handled"
         initialNumToRender={7}
       />
