@@ -23,25 +23,27 @@ const ItemsReferenceStackScreen: FC<Props> = ({
   route,
 }): JSX.Element => {
   return (
-    <SafeAreaProvider>
-      <Stack.Navigator>
-        <Stack.Screen
-          options={screenOptions}
-          name="ItemsReferenceScreen"
-          component={ItemsReferenceScreen}
-        />
-        <Stack.Screen
-          options={refHeaderOptions}
-          name="ItemsByVendorListItems"
-          component={ItemsByVendorListItems}
-        />
-        <Stack.Screen
-          options={refHeaderOptions}
-          name="ItemsByCategoryListItems"
-          component={CategoryItems}
-        />
-      </Stack.Navigator>
-    </SafeAreaProvider>
+    <>
+      <SafeAreaProvider>
+        <Stack.Navigator>
+          <Stack.Screen
+            options={screenOptions}
+            name="ItemsReferenceScreen"
+            component={ItemsReferenceScreen}
+          />
+          <Stack.Screen
+            options={refHeaderOptions}
+            name="ItemsByVendorListItems"
+            component={ItemsByVendorListItems}
+          />
+          <Stack.Screen
+            options={refHeaderOptions}
+            name="ItemsByCategoryListItems"
+            component={CategoryItems}
+          />
+        </Stack.Navigator>
+      </SafeAreaProvider>
+    </>
   );
 };
 

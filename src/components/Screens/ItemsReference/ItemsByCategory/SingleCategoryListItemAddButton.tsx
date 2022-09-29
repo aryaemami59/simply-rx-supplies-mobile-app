@@ -1,26 +1,26 @@
 import { Chip } from "@rneui/themed";
 import { FC, memo, useCallback } from "react";
+import { ItemObjType } from "../../../../../CustomTypes/types";
+import { useAppSelector, useAppDispatch } from "../../../../redux/hooks";
 import {
+  addItems,
   checkIfAddedToAllVendors,
   selectVendorsToAddTo,
-  addItems,
 } from "../../../../redux/addedSlice";
-import { useAppSelector, useAppDispatch } from "../../../../redux/hooks";
 import { shallowEqual } from "react-redux";
 import {
   FONT_WEIGHT_700,
   BACKGROUND_MAIN_COLOR,
 } from "../../../../shared/sharedStyles";
-import { ItemObjType } from "../../../../../CustomTypes/types";
-import { MaterialIcons } from "@expo/vector-icons";
-
-const icon = <MaterialIcons name="add" color="white" size={24} />;
+import AddIcon from "./AddIcon";
 
 type Props = {
   itemObj: ItemObjType;
 };
 
-const AddItemButton: FC<Props> = ({ itemObj }): JSX.Element => {
+const SingleCategoryListItemAddButton: FC<Props> = ({
+  itemObj,
+}): JSX.Element => {
   const IfAddedToAllVendors = useAppSelector(checkIfAddedToAllVendors(itemObj));
 
   const vendors = useAppSelector(selectVendorsToAddTo(itemObj), shallowEqual);
@@ -32,17 +32,19 @@ const AddItemButton: FC<Props> = ({ itemObj }): JSX.Element => {
   }, [IfAddedToAllVendors, dispatch, itemObj, vendors]);
 
   return (
-    <Chip
-      raised
-      size="lg"
-      onPress={clickHandler}
-      disabled={IfAddedToAllVendors}
-      title="Add"
-      titleStyle={FONT_WEIGHT_700}
-      buttonStyle={BACKGROUND_MAIN_COLOR}
-      icon={icon}
-    />
+    <>
+      <Chip
+        raised
+        size="lg"
+        onPress={clickHandler}
+        title="Add"
+        disabled={IfAddedToAllVendors}
+        titleStyle={FONT_WEIGHT_700}
+        buttonStyle={BACKGROUND_MAIN_COLOR}
+        icon={AddIcon}
+      />
+    </>
   );
 };
 
-export default memo<Props>(AddItemButton);
+export default memo<Props>(SingleCategoryListItemAddButton);

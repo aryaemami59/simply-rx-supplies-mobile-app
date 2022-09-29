@@ -5,14 +5,21 @@ import {
   selectVendorOfficialName,
 } from "../../../../redux/addedSlice";
 import { shallowEqual } from "react-redux";
-import SingleListItem from "../../../../shared/SingleListItem";
-import { FlatList, ListRenderItem, ListRenderItemInfo } from "react-native";
+import SingleItemsByVendorListItem from "./SingleItemsByVendorListItem";
+import {
+  FlatList,
+  ListRenderItem,
+  ListRenderItemInfo,
+  View,
+} from "react-native";
 import { ItemsReferenceStackParamList } from "../../../../../CustomTypes/types";
 import {
   StackScreenProps,
   StackNavigationOptions,
 } from "@react-navigation/stack";
 import { ItemObjType } from "../../../../../CustomTypes/types";
+import { useTheme } from "@rneui/themed";
+import { HEIGHT_100 } from "../../../../shared/sharedStyles";
 
 const keyExtractor = (item: ItemObjType) => item.id.toString();
 
@@ -33,7 +40,9 @@ const ItemsByVendorListItems: FC<Props> = ({
   const renderItems: ListRenderItem<ItemObjType> = ({
     item,
   }: ListRenderItemInfo<ItemObjType>): JSX.Element => {
-    return <SingleListItem itemObj={item} vendorName={vendorName} />;
+    return (
+      <SingleItemsByVendorListItem itemObj={item} vendorName={vendorName} />
+    );
   };
 
   const items = useAppSelector(selectItemsByVendor(vendorName), shallowEqual);
@@ -48,14 +57,24 @@ const ItemsByVendorListItems: FC<Props> = ({
     navigation.setOptions(options);
   }, [navigation, options]);
 
+  const { theme } = useTheme();
+
   return (
-    <FlatList
-      removeClippedSubviews
-      data={items}
-      renderItem={renderItems}
-      keyExtractor={keyExtractor}
-      keyboardShouldPersistTaps="handled"
-    />
+    <View
+      style={[
+        {
+          backgroundColor: theme.colors.background,
+        },
+        HEIGHT_100,
+      ]}>
+      <FlatList
+        removeClippedSubviews
+        data={items}
+        renderItem={renderItems}
+        keyExtractor={keyExtractor}
+        keyboardShouldPersistTaps="handled"
+      />
+    </View>
   );
 };
 

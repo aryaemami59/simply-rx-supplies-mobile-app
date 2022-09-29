@@ -1,7 +1,12 @@
 import { FC, memo } from "react";
 import { useAppSelector } from "../../../redux/hooks";
 import { selectVendorsArr } from "../../../redux/addedSlice";
-import { ListRenderItem, ListRenderItemInfo, FlatList } from "react-native";
+import {
+  ListRenderItem,
+  ListRenderItemInfo,
+  FlatList,
+  View,
+} from "react-native";
 import CartVendorColumns from "./CartVendorColumns";
 import { StackScreenProps } from "@react-navigation/stack";
 import { vendorNameType } from "../../../../CustomTypes/types";
@@ -25,15 +30,16 @@ const ShoppingCartScreen: FC<Props> = ({ navigation, route }): JSX.Element => {
   const { theme } = useTheme();
 
   return (
-    <SafeAreaView
-      style={[{ backgroundColor: theme.colors.background }, HEIGHT_100]}>
-      <FlatList
-        data={vendors}
-        keyExtractor={keyExtractor}
-        renderItem={renderItem}
-        removeClippedSubviews
-      />
-    </SafeAreaView>
+    <>
+      <View style={[{ backgroundColor: theme.colors.background }, HEIGHT_100]}>
+        <FlatList
+          data={vendors}
+          keyExtractor={keyExtractor}
+          renderItem={renderItem}
+          removeClippedSubviews
+        />
+      </View>
+    </>
   );
 };
 

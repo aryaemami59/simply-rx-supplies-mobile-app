@@ -34,7 +34,7 @@ const ItemsByVendorVendorList: FC<Props> = ({ vendorName }): JSX.Element => {
         styles.listItemContainer,
         { backgroundColor: theme.colors.background },
       ]}
-      key={vendorName}
+      // key={vendorName}
       bottomDivider
       Component={TouchableScale}
       onPress={clickHandler}>
