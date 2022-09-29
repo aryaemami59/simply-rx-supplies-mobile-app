@@ -9,6 +9,7 @@ import TabBarIconItemLookup from "../components/TabBarComponents/TabBarIconItemL
 import TabBarIconShoppingCart from "../components/TabBarComponents/TabBarIconShoppingCart";
 import TabBarIconItemsReference from "../components/TabBarComponents/TabBarIconItemsReference";
 import { NativeStackNavigationOptions } from "@react-navigation/native-stack";
+import { Ionicons } from "@expo/vector-icons";
 
 export const screenOptions: NativeStackNavigationOptions = {
   header: props => <HeaderHomeStackNavigator {...props} />,
@@ -36,6 +37,9 @@ export const itemsByCategoryTabOptions: MaterialTopTabNavigationOptions = {
 
 export const HomeOptions: BottomTabNavigationOptions = {
   tabBarIcon: (props: tabBarIconProps) => <TabBarIconHome {...props} />,
+  // headerRight: props => (
+  //   <Ionicons {...props} name="contrast" color="white" size={30} />
+  // ),
 };
 
 export const ItemLookupOptions: BottomTabNavigationOptions = {

@@ -15,8 +15,14 @@ import {
   useRoute,
 } from "@react-navigation/native";
 import { shallowEqual } from "react-redux";
-import { FontAwesome, EvilIcons } from "@expo/vector-icons";
-import { WIDTH_80 } from "../../../../shared/sharedStyles";
+import {
+  FontAwesome,
+  EvilIcons,
+  MaterialIcons,
+  Ionicons,
+  MaterialCommunityIcons,
+} from "@expo/vector-icons";
+import { WIDTH_80, JC_AI_CENTER } from "../../../../shared/sharedStyles";
 import {
   ItemObjType,
   OnChangeText,
@@ -149,10 +155,15 @@ const InputField: FC = (): JSX.Element => {
 
   return (
     <Header
-      containerStyle={styles.headerContainer}
       backgroundColor={MAIN_COLOR}
+      containerStyle={styles.headerContainer}
+      rightContainerStyle={[JC_AI_CENTER, styles.headerRightContainer]}
       leftContainerStyle={DISPLAY_NONE}
-      rightContainerStyle={DISPLAY_NONE}
+      rightComponent={<Ionicons name="contrast" color="white" size={30} />}
+      centerContainerStyle={styles.headerCenterContainer}
+      // rightContainerStyle={JC_AI_CENTER}
+      // rightContainerStyle={<MaterialCommunityIcons name="theme-light-dark" />}
+      // rightContainerStyle={DISPLAY_NONE}
       centerComponent={
         <Animatable.View ref={view} transition="width" style={WIDTH_80}>
           <SearchBar
@@ -194,6 +205,12 @@ const styles = StyleSheet.create({
   inputContainer: {
     borderRadius: 9999,
     backgroundColor: "rgba(0, 0, 0, 0.3)",
+  },
+  headerCenterContainer: {
+    flex: 5,
+  },
+  headerRightContainer: {
+    flex: 1,
   },
 });
 

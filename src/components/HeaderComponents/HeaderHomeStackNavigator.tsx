@@ -2,8 +2,8 @@ import { Header, SearchBar } from "@rneui/themed";
 import { FC, memo, useEffect, useRef, useCallback } from "react";
 import { TextInput, StyleSheet, Keyboard } from "react-native";
 import { useFocusEffect, useIsFocused } from "@react-navigation/native";
-import { FontAwesome, EvilIcons } from "@expo/vector-icons";
-import { WIDTH_80 } from "../../shared/sharedStyles";
+import { FontAwesome, EvilIcons, Ionicons } from "@expo/vector-icons";
+import { WIDTH_80, WIDTH_100, JC_AI_CENTER } from "../../shared/sharedStyles";
 import {
   MAIN_COLOR,
   DISPLAY_NONE,
@@ -57,11 +57,12 @@ const HeaderHomeStackNavigator: FC<Props> = ({
   return (
     <Header
       backgroundColor={MAIN_COLOR}
+      rightContainerStyle={[JC_AI_CENTER, styles.headerRightContainer]}
+      rightComponent={<Ionicons name="contrast" color="white" size={30} />}
       leftContainerStyle={DISPLAY_NONE}
-      rightContainerStyle={DISPLAY_NONE}
+      centerContainerStyle={styles.headerCenterContainer}
       centerComponent={
         <SearchBar
-          // editable={false}
           ref={inputRef}
           onFocus={focusHandler}
           containerStyle={[WIDTH_80, styles.searchBarContainer]}
@@ -89,6 +90,12 @@ const styles = StyleSheet.create({
   searchBarInputContainer: {
     borderRadius: 9999,
     backgroundColor: "rgba(0, 0, 0, 0.3)",
+  },
+  headerCenterContainer: {
+    flex: 5,
+  },
+  headerRightContainer: {
+    flex: 1,
   },
 });
 
