@@ -1,17 +1,14 @@
-import { StackHeaderProps, StackNavigationProp } from "@react-navigation/stack";
 import { Header, SearchBar } from "@rneui/themed";
 import { FC, memo, useEffect, useRef, useCallback } from "react";
-import { TextInput, StyleSheet } from "react-native";
-import { useIsFocused, useNavigation } from "@react-navigation/native";
-import { RootStackParamList } from "../../../CustomTypes/types";
+import { TextInput, StyleSheet, Keyboard } from "react-native";
+import { useFocusEffect, useIsFocused } from "@react-navigation/native";
 import { FontAwesome, EvilIcons } from "@expo/vector-icons";
-import { WIDTH_100, WIDTH_80 } from "../../shared/sharedStyles";
+import { WIDTH_80 } from "../../shared/sharedStyles";
 import {
   MAIN_COLOR,
   DISPLAY_NONE,
   COLOR_WHITE,
 } from "../../shared/sharedStyles";
-import { Keyboard } from "react-native";
 import { NativeStackHeaderProps } from "@react-navigation/native-stack";
 
 const searchIcon = (
@@ -21,7 +18,6 @@ const searchIcon = (
 const clearIcon = <EvilIcons name="close" color="rgba(255,255,255,.5)" />;
 
 type Props = NativeStackHeaderProps;
-// type Props = StackHeaderProps;
 
 const HeaderHomeStackNavigator: FC<Props> = ({
   navigation,
@@ -29,10 +25,18 @@ const HeaderHomeStackNavigator: FC<Props> = ({
   options,
   back,
 }): JSX.Element => {
-  // const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
   const inputRef = useRef<TextInput>(null);
-  const isFocused = useIsFocused();
-  !isFocused && inputRef.current?.blur();
+  // const isFocused = useIsFocused();
+  // !isFocused && inputRef.current?.blur();
+  useFocusEffect(() => {
+    inputRef.current?.blur();
+    Keyboard.dismiss();
+    return () => {
+      // inputRef.current?.blur();
+      // Keyboard.dismiss();
+    };
+  });
+
   useEffect(() => {
     const unsubscribe = navigation.addListener("focus", () => {
       inputRef.current?.blur();
@@ -52,12 +56,12 @@ const HeaderHomeStackNavigator: FC<Props> = ({
 
   return (
     <Header
-      // containerStyle={{ height: 105 }}
       backgroundColor={MAIN_COLOR}
       leftContainerStyle={DISPLAY_NONE}
       rightContainerStyle={DISPLAY_NONE}
       centerComponent={
         <SearchBar
+          // editable={false}
           ref={inputRef}
           onFocus={focusHandler}
           containerStyle={[WIDTH_80, styles.searchBarContainer]}

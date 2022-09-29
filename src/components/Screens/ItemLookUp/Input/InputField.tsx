@@ -1,13 +1,5 @@
 import { Header, SearchBar } from "@rneui/themed";
-import {
-  FC,
-  memo,
-  useState,
-  useCallback,
-  useRef,
-  useMemo,
-  useEffect,
-} from "react";
+import { FC, memo, useState, useCallback, useRef, useMemo } from "react";
 import { StyleSheet, TextInput, View } from "react-native";
 import * as Animatable from "react-native-animatable";
 import {
@@ -31,13 +23,13 @@ import {
   ItemLookupStackParamList,
 } from "../../../../../CustomTypes/types";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { useIsFocused } from "@react-navigation/native";
 import {
   MAIN_COLOR,
   DISPLAY_NONE,
   WIDTH_100,
   COLOR_WHITE,
 } from "../../../../shared/sharedStyles";
+import { SearchBar as SearchBarType } from "@rneui/base";
 
 const searchIcon = (
   <FontAwesome name="search" color="rgba(255,255,255,.5)" size={24} />
@@ -69,7 +61,8 @@ const InputField: FC = (): JSX.Element => {
   const [val, setVal] = useState<string>("");
   const items = useAppSelector(selectItemsArr, shallowEqual);
   const view = useRef<Animatable.View & View>(null);
-  const inputRef = useRef<TextInput>(null);
+  const inputRef = useRef<SearchBarType & TextInput>(null);
+
   const dispatch = useAppDispatch();
   const route = useRoute<RouteProp<ItemLookupStackParamList>>();
   const inputFocused = route.params?.inputFocused ? true : false;
@@ -88,10 +81,6 @@ const InputField: FC = (): JSX.Element => {
     inputRef.current && inputRef.current.focus();
   }, [dispatch]);
 
-  // useEffect(() => {
-  //   inputRef?.current.focus();
-  // }, []);
-
   const navigation =
     useNavigation<StackNavigationProp<ItemLookupStackParamList>>();
 
@@ -99,19 +88,12 @@ const InputField: FC = (): JSX.Element => {
     useCallback(() => {
       inputFocused && inputRef.current?.focus();
       return () => {
-        navigation.setParams({ inputFocused: false });
+        inputRef?.current?.searchBar?.input.isFocused()
+          ? navigation.setParams({ inputFocused: true })
+          : navigation.setParams({ inputFocused: false });
       };
-    }, [navigation, inputFocused])
+    }, [inputFocused, navigation])
   );
-
-  // useFocusEffect(
-  //   useCallback(() => {
-  //     inputRef.current?.focus();
-  //     return () => {
-  //       view.current?.transitionTo(WIDTH_100);
-  //     };
-  //   }, [route.params?.inputFocused])
-  // );
 
   const listItemsFunc = useCallback(
     (text: string) => {
@@ -179,6 +161,7 @@ const InputField: FC = (): JSX.Element => {
             lightTheme
             keyboardAppearance="dark"
             autoFocus
+            focusable
             onFocus={focusHandler}
             onBlur={blurHandler}
             containerStyle={styles.searchBarContainer}

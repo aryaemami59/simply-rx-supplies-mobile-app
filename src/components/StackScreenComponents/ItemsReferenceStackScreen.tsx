@@ -1,5 +1,4 @@
 import { FC, memo } from "react";
-import { createStackNavigator } from "@react-navigation/stack";
 import ItemsReferenceScreen from "../Screens/ItemsReference/ItemsReferenceScreen";
 import {
   ItemsReferenceStackParamList,
@@ -18,7 +17,6 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 type Props = BottomTabScreenProps<RootTabParamList, "ItemsReference">;
 
 const Stack = createNativeStackNavigator<ItemsReferenceStackParamList>();
-// const Stack = createStackNavigator<ItemsReferenceStackParamList>();
 
 const ItemsReferenceStackScreen: FC<Props> = ({
   navigation,

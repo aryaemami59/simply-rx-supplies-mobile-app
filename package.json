@@ -63,7 +63,7 @@
     "@types/npm": "^7.19.0",
     "@types/react": "^18.0.18",
     "@types/react-dom": "^18.0.6",
-    "@types/react-native": "^0.69.6",
+    "@types/react-native": "^0.69.13",
     "@types/react-navigation": "^3.4.0",
     "@types/react-test-renderer": "^18.0.0",
     "@types/reselect": "^2.2.0",

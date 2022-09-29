@@ -1,5 +1,4 @@
 import { FC, memo } from "react";
-import { createStackNavigator } from "@react-navigation/stack";
 import {
   ShoppingCartStackParamList,
   RootTabParamList,
@@ -17,7 +16,6 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
 const Stack = createNativeStackNavigator<ShoppingCartStackParamList>();
-// const Stack = createStackNavigator<ShoppingCartStackParamList>();
 
 type Props = BottomTabScreenProps<RootTabParamList, "ShoppingCart">;
 

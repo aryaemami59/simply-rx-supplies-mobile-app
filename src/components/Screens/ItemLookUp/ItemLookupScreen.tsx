@@ -17,7 +17,6 @@ import { selectAllListItems } from "../../../redux/addedSlice";
 import { shallowEqual } from "react-redux";
 import InputField from "./Input/InputField";
 import BottomSheetComponent from "./Input/BottomSheetComponent";
-import { SafeAreaProvider } from "react-native-safe-area-context";
 
 const renderItems: ListRenderItem<ItemObjType> = ({
   item,
