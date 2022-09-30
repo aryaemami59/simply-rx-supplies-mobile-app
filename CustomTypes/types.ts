@@ -1,15 +1,5 @@
 import { AsyncThunk } from "@reduxjs/toolkit";
-// import { Dispatch, SetStateAction } from "react";
 import { AppDispatch } from "../src/redux/store";
-
-// export type RootStackParamList = {
-//   Home: HomeStackParamList;
-//   ItemLookup: undefined;
-//   ItemsByCategory: undefined;
-//   ItemsByVendor: undefined;
-//   ShoppingCart: undefined;
-//   ItemsReference: ItemsReferenceTopTabParamList;
-// };
 
 export type tabBarIconProps = {
   focused: boolean;
@@ -79,11 +69,6 @@ export type ItemsReferenceTopTabParamList = {
   ItemsByCategory: ItemsByCategoryStackParamList;
 };
 
-// export type myContextInterface = {
-//   darkTheme: boolean;
-//   setDarkTheme: Dispatch<SetStateAction<boolean>>;
-// };
-
 export type ItemObjType = {
   readonly id: number;
   readonly name: ItemName;
@@ -104,18 +89,6 @@ type singleVendorObjType = {
   joinChars: JoinChars;
   items: number[];
 };
-
-// export type vendorsObjType = {
-//   [key in vendorNameType]: singleVendorObjType;
-// };
-
-// export type categoriesObjType = {
-//   [key in Category]: { id: number; items: number[] };
-// };
-
-// type VendorChecked = {
-//   [key in vendorNameType]?: boolean;
-// };
 
 export type vendorsObjType = Record<vendorNameType, singleVendorObjType>;
 
@@ -142,10 +115,6 @@ export type addedState = VendorsInAddedState & {
   categoriesArr?: Category[];
   categoriesObj?: categoriesObjType;
 };
-// &
-// {
-//   [key in vendorNameType]?: ItemObjType[];
-// };
 
 export type itemState = {
   itemsArr: ItemObjType[];

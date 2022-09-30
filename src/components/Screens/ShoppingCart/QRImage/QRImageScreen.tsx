@@ -19,15 +19,16 @@ import {
   JC_SPACE_BETWEEN,
   JC_SPACE_EVENLY,
 } from "../../../../shared/sharedStyles";
+// import QRCode from "react-native-qrcode-generator";
 
 const iconName = Platform.OS === "android" ? "share-android" : "share";
 
 type Props = NativeStackScreenProps<ShoppingCartStackParamList, "QRImage">;
 
-const QRImageScreen: FC<Props> = ({ route }): JSX.Element => {
+const QRImageScreen: FC<Props> = ({ navigation, route }): JSX.Element => {
   const { itemNumbers, itemsAdded } = route.params;
 
-  let svg = useRef<Svg>(null);
+  let svg = useRef(null) as unknown as Svg;
   const shareQR = () => {
     svg.toDataURL((data: string) => {
       const shareImageBase64 = {
@@ -39,7 +40,7 @@ const QRImageScreen: FC<Props> = ({ route }): JSX.Element => {
     });
   };
 
-  const getRef = useCallback(e => (svg = e), []);
+  // const getRef = useCallback(e => (svg = e), []);
 
   const { theme } = useTheme();
 
@@ -53,7 +54,14 @@ const QRImageScreen: FC<Props> = ({ route }): JSX.Element => {
       <ScrollView
         contentContainerStyle={[JC_SPACE_EVENLY, AI_CENTER, styles.container]}>
         <TouchableOpacity onPress={shareQR}>
-          <QRCode value={itemNumbers} size={300} getRef={getRef} />
+          {/* <QRCode value={itemNumbers} /> */}
+          <QRCode
+            value={itemNumbers}
+            size={300}
+            getRef={e => (svg = e)}
+            // getRef={getRef}
+            // ref={svg}
+          />
         </TouchableOpacity>
         <TouchableOpacity onPress={shareQR}>
           <Octicons

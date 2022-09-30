@@ -411,9 +411,6 @@ export const checkIfLoading = (state: RootState): boolean =>
 export const selectErrMsg = (state: RootState): string =>
   state.item.errMsg || state.added.errMsg;
 
-// export const selectDarkMode = (state: RootState): boolean =>
-//   state.item.darkMode;
-
 export const {
   addItems,
   removeItems,
