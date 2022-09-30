@@ -127,6 +127,9 @@ export const addedSlice = createSlice({
     ToggleItemName: state => {
       state.showItemName = !state.showItemName;
     },
+    // ToggleMinimize: (state) => {
+    //   state.
+    // }
   },
   extraReducers: builder => {
     builder.addCase(fetchVendors.pending, state => {

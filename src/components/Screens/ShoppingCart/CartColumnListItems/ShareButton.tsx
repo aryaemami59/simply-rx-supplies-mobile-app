@@ -3,14 +3,19 @@ import { FC, memo, useMemo, useCallback } from "react";
 import ShareIconNode from "./ShareIconNode";
 import { ItemObjType, vendorNameType } from "../../../../../CustomTypes/types";
 import { Share } from "react-native";
-import { JC_SPACE_EVENLY } from '../../../../shared/sharedStyles';
+import { JC_SPACE_EVENLY } from "../../../../shared/sharedStyles";
 
 type Props = {
   itemObj: ItemObjType;
   vendorName: vendorNameType;
+  reset: () => void;
 };
 
-const ShareButton: FC<Props> = ({ itemObj, vendorName }): JSX.Element => {
+const ShareButton: FC<Props> = ({
+  itemObj,
+  vendorName,
+  reset,
+}): JSX.Element => {
   const shareContent = useMemo(() => {
     return {
       title: `${itemObj.itemNumber}`,
@@ -27,7 +32,7 @@ const ShareButton: FC<Props> = ({ itemObj, vendorName }): JSX.Element => {
     <>
       <Button
         icon={ShareIconNode}
-        size="lg"
+        size="md"
         title="Share"
         color="success"
         onPress={shareInfo}

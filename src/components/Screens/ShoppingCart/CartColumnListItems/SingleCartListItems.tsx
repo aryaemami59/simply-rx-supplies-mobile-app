@@ -1,5 +1,5 @@
 import { ListItem, useTheme } from "@rneui/themed";
-import { FC, memo } from "react";
+import { FC, memo, useState, useCallback } from "react";
 import { View } from "react-native";
 import BarcodeImageCart from "../BarcodeImage/BarcodeImageCart";
 import { ItemObjType, vendorNameType } from "../../../../../CustomTypes/types";
@@ -13,6 +13,8 @@ import {
 import DeleteButton from "./DeleteButton";
 import ShareButton from "./ShareButton";
 import DetailsButton from "./DetailsButton";
+import MinimizeButton from "./MinimizeButton";
+import Collapsible from "react-native-collapsible";
 
 type Props = {
   itemObj: ItemObjType;
@@ -24,6 +26,11 @@ const SingleCartListItems: FC<Props> = ({
   vendorName,
 }): JSX.Element => {
   const { theme } = useTheme();
+  const [open, setOpen] = useState(true);
+
+  const clickHandler = useCallback(() => {
+    setOpen(prev => !prev);
+  }, []);
 
   return (
     <>
@@ -31,17 +38,46 @@ const SingleCartListItems: FC<Props> = ({
         containerStyle={[{ backgroundColor: theme.colors.background }]}
         bottomDivider
         topDivider
-        rightContent={
+        rightContent={reset => (
           <>
-            <DeleteButton itemObj={itemObj} vendorName={vendorName} />
-            <ShareButton itemObj={itemObj} vendorName={vendorName} />
-            <DetailsButton itemObj={itemObj} vendorName={vendorName} />
+            {open && (
+              <>
+                <DeleteButton
+                  reset={reset}
+                  itemObj={itemObj}
+                  vendorName={vendorName}
+                />
+                <ShareButton
+                  reset={reset}
+                  itemObj={itemObj}
+                  vendorName={vendorName}
+                />
+                <DetailsButton
+                  reset={reset}
+                  itemObj={itemObj}
+                  vendorName={vendorName}
+                />
+              </>
+            )}
+            <MinimizeButton
+              open={open}
+              itemObj={itemObj}
+              vendorName={vendorName}
+              reset={reset}
+              onPress={clickHandler}
+            />
           </>
-        }>
+        )}>
         <View style={[AI_CENTER, WIDTH_100, JC_SPACE_BETWEEN]}>
           <ItemNameCart itemObj={itemObj} />
-          <ItemNumberCart itemObj={itemObj} />
-          <BarcodeImageCart itemObj={itemObj} />
+          <Collapsible collapsed={!open} easing="easeInQuad">
+            {open && (
+              <>
+                <ItemNumberCart itemObj={itemObj} />
+                <BarcodeImageCart itemObj={itemObj} />
+              </>
+            )}
+          </Collapsible>
         </View>
       </ListItem.Swipeable>
     </>

@@ -34,6 +34,10 @@ export const HEIGHT_100: FlexStyle = {
   height: "100%",
 } as const;
 
+export const PADDING_VERTICAL_0: FlexStyle = {
+  paddingVertical: 0,
+} as const;
+
 export const BARCODE_ASPECT_RATIO: ImageStyle = {
   aspectRatio: 33 / 28,
 } as const;

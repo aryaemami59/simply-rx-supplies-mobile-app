@@ -13,9 +13,14 @@ import { JC_SPACE_EVENLY } from "../../../../shared/sharedStyles";
 type Props = {
   itemObj: ItemObjType;
   vendorName: vendorNameType;
+  reset: () => void;
 };
 
-const DetailsButton: FC<Props> = ({ itemObj, vendorName }): JSX.Element => {
+const DetailsButton: FC<Props> = ({
+  itemObj,
+  vendorName,
+  reset,
+}): JSX.Element => {
   const navigation =
     useNavigation<NativeStackNavigationProp<ShoppingCartStackParamList>>();
 
@@ -28,7 +33,7 @@ const DetailsButton: FC<Props> = ({ itemObj, vendorName }): JSX.Element => {
       <Button
         onPress={clickHandler}
         icon={DetailsIconNode}
-        size="lg"
+        size="md"
         title="Details"
         color="primary"
         buttonStyle={[JC_SPACE_EVENLY]}

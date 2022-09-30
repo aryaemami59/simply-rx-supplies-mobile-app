@@ -9,9 +9,10 @@ import { JC_SPACE_EVENLY } from "../../../../shared/sharedStyles";
 type Props = {
   itemObj: ItemObjType;
   vendorName: vendorNameType;
+  reset: () => void
 };
 
-const DeleteButton: FC<Props> = ({ itemObj, vendorName }): JSX.Element => {
+const DeleteButton: FC<Props> = ({ itemObj, vendorName, reset }): JSX.Element => {
   const dispatch = useAppDispatch();
 
   const clickHandler = useCallback(() => {
@@ -22,7 +23,7 @@ const DeleteButton: FC<Props> = ({ itemObj, vendorName }): JSX.Element => {
     <>
       <Button
         icon={DeleteIconNode}
-        size="lg"
+        size="md"
         title="Delete"
         color="error"
         onPress={clickHandler}
