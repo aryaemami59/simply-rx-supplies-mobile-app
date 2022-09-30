@@ -1,5 +1,5 @@
 import { AsyncThunk } from "@reduxjs/toolkit";
-import { Dispatch, SetStateAction } from "react";
+// import { Dispatch, SetStateAction } from "react";
 import { AppDispatch } from "../src/redux/store";
 
 // export type RootStackParamList = {
@@ -53,10 +53,11 @@ export type ItemLookupStackParamList = {
 
 export type ShoppingCartStackParamList = {
   ShoppingCartScreen: undefined;
-  QRImage: { itemNumbers: ItemNumber };
+  QRImage: { itemNumbers: ItemNumber; itemsAdded: ItemObjType[] };
   BarcodeImage: { src: Src; name: ItemName };
   CartColumnListItems: { vendorName: vendorNameType };
   ItemLookup: undefined;
+  ItemDetails: { itemObj: ItemObjType; vendorName: vendorNameType };
 };
 
 export type ItemsByCategoryStackParamList = {
@@ -95,7 +96,7 @@ export type ItemObjType = {
   vendorsAdded: vendorNameType[];
 };
 
-type singleVendorType = {
+type singleVendorObjType = {
   id: number;
   officialName: officialVendorNameType;
   abbrName: vendorNameType;
@@ -104,19 +105,30 @@ type singleVendorType = {
   items: number[];
 };
 
-export type vendorsObjType = {
-  [key in vendorNameType]: singleVendorType;
-};
+// export type vendorsObjType = {
+//   [key in vendorNameType]: singleVendorObjType;
+// };
 
-export type categoriesObjType = {
-  [key in Category]: { id: number; items: number[] };
-};
+// export type categoriesObjType = {
+//   [key in Category]: { id: number; items: number[] };
+// };
 
-type VendorChecked = {
-  [key in vendorNameType]?: boolean;
-};
+// type VendorChecked = {
+//   [key in vendorNameType]?: boolean;
+// };
 
-export type addedState = {
+export type vendorsObjType = Record<vendorNameType, singleVendorObjType>;
+
+export type categoriesObjType = Record<
+  Category,
+  { id: number; items: number[] }
+>;
+
+type VendorChecked = Partial<Record<vendorNameType, boolean>>;
+
+type VendorsInAddedState = Partial<Record<vendorNameType, ItemObjType[]>>;
+
+export type addedState = VendorsInAddedState & {
   listItems: ItemObjType[];
   compact: boolean;
   showItemNumber: boolean;
@@ -129,9 +141,11 @@ export type addedState = {
   vendorsObj?: vendorsObjType;
   categoriesArr?: Category[];
   categoriesObj?: categoriesObjType;
-} & {
-  [key in vendorNameType]?: ItemObjType[];
 };
+// &
+// {
+//   [key in vendorNameType]?: ItemObjType[];
+// };
 
 export type itemState = {
   itemsArr: ItemObjType[];

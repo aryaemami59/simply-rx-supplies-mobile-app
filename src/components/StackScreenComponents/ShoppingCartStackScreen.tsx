@@ -14,6 +14,7 @@ import QRImageScreen from "../Screens/ShoppingCart/QRImage/QRImageScreen";
 import BarcodeImageScreen from "../Screens/ShoppingCart/BarcodeImage/BarcodeImageScreen";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import ItemDetailsScreen from "../Screens/ShoppingCart/CartColumnListItems/ItemDetails/ItemDetailsScreen";
 
 const Stack = createNativeStackNavigator<ShoppingCartStackParamList>();
 
@@ -36,16 +37,23 @@ const ShoppingCartStackScreen: FC<Props> = ({
           component={CartColumnListItemsScreen}
           options={refHeaderOptions}
         />
-        <Stack.Screen
-          name="QRImage"
-          component={QRImageScreen}
-          options={refHeaderOptions}
-        />
-        <Stack.Screen
-          name="BarcodeImage"
-          component={BarcodeImageScreen}
-          options={refHeaderOptions}
-        />
+        <Stack.Group>
+          <Stack.Screen
+            name="QRImage"
+            component={QRImageScreen}
+            options={refHeaderOptions}
+          />
+          <Stack.Screen
+            name="BarcodeImage"
+            component={BarcodeImageScreen}
+            options={refHeaderOptions}
+          />
+          <Stack.Screen
+            name="ItemDetails"
+            component={ItemDetailsScreen}
+            options={{ ...refHeaderOptions, title: "Item Details" }}
+          />
+        </Stack.Group>
       </Stack.Navigator>
     </SafeAreaProvider>
   );

@@ -366,9 +366,17 @@ export const selectAllVendorOfficialNames = (
   state: RootState
 ): officialVendorNameType[] =>
   state.added.vendorsArr!.map(
-    (e: vendorNameType): officialVendorNameType =>
-      state.added.vendorsObj![e].officialName
+    (vendorName: vendorNameType): officialVendorNameType =>
+      state.added.vendorsObj![vendorName].officialName
   );
+
+export const selectVendorsOfficialNames =
+  (vendors: vendorNameType[]) => (state: RootState) =>
+    vendors.map(vendorName => state.added.vendorsObj![vendorName].officialName);
+
+export const selectItemsAddedByVendor =
+  (vendorName: vendorNameType) => (state: RootState) =>
+    state.added[vendorName]!;
 
 export const checkIfAnyItemsAdded = (state: RootState): boolean =>
   state.added.vendorsArr!.reduce(

@@ -4,17 +4,28 @@ import { View, Platform, TouchableOpacity, StyleSheet } from "react-native";
 import { Share } from "react-native";
 import { Svg } from "react-native-svg";
 import { Octicons } from "@expo/vector-icons";
-import { JC_AI_CENTER_HEIGHT100 } from "../../../../shared/sharedStyles";
+import {
+  JC_AI_CENTER_HEIGHT100,
+  HEIGHT_100,
+  JC_CENTER,
+} from "../../../../shared/sharedStyles";
 import { ShoppingCartStackParamList } from "../../../../../CustomTypes/types";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { useTheme } from "@rneui/themed";
+import { Text, useTheme } from "@rneui/themed";
+import { JC_SPACE_AROUND, TEXT_CENTER } from "../../../../shared/sharedStyles";
+import { ScrollView } from "react-native-gesture-handler";
+import {
+  AI_CENTER,
+  JC_SPACE_BETWEEN,
+  JC_SPACE_EVENLY,
+} from "../../../../shared/sharedStyles";
 
 const iconName = Platform.OS === "android" ? "share-android" : "share";
 
 type Props = NativeStackScreenProps<ShoppingCartStackParamList, "QRImage">;
 
 const QRImageScreen: FC<Props> = ({ route }): JSX.Element => {
-  const { itemNumbers } = route.params;
+  const { itemNumbers, itemsAdded } = route.params;
 
   let svg = useRef<Svg>(null);
   const shareQR = () => {
@@ -35,16 +46,30 @@ const QRImageScreen: FC<Props> = ({ route }): JSX.Element => {
   return (
     <View
       style={[
-        JC_AI_CENTER_HEIGHT100,
-        styles.container,
+        HEIGHT_100,
+        JC_SPACE_AROUND,
         { backgroundColor: theme.colors.background },
       ]}>
-      <TouchableOpacity onLongPress={shareQR}>
-        <QRCode value={itemNumbers} size={300} getRef={getRef} />
-      </TouchableOpacity>
-      <TouchableOpacity onPress={shareQR}>
-        <Octicons name={iconName} size={50} style={styles.icon} color="gray" />
-      </TouchableOpacity>
+      <ScrollView
+        contentContainerStyle={[JC_SPACE_EVENLY, AI_CENTER, styles.container]}>
+        <TouchableOpacity onPress={shareQR}>
+          <QRCode value={itemNumbers} size={300} getRef={getRef} />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={shareQR}>
+          <Octicons
+            name={iconName}
+            size={50}
+            style={styles.icon}
+            color="gray"
+          />
+        </TouchableOpacity>
+        <Text h4>Items Included:</Text>
+        {itemsAdded.map(itemObj => (
+          <Text key={itemObj.id} style={[TEXT_CENTER]}>
+            {itemObj.name}
+          </Text>
+        ))}
+      </ScrollView>
     </View>
   );
 };
@@ -52,6 +77,7 @@ const QRImageScreen: FC<Props> = ({ route }): JSX.Element => {
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 50,
+    paddingVertical: 20,
   },
   icon: {
     alignSelf: "flex-end",

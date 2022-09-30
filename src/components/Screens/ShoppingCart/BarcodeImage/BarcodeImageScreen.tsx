@@ -9,8 +9,12 @@ import {
 } from "react-native";
 import { Octicons } from "@expo/vector-icons";
 import { ShoppingCartStackParamList } from "../../../../../CustomTypes/types";
-import { JC_AI_CENTER_HEIGHT100 } from "../../../../shared/sharedStyles";
+import {
+  JC_AI_CENTER_HEIGHT100,
+  BARCODE_ASPECT_RATIO,
+} from "../../../../shared/sharedStyles";
 import { useTheme } from "@rneui/themed";
+import { WIDTH_90 } from "../../../../shared/sharedStyles";
 import {
   NativeStackScreenProps,
   NativeStackNavigationOptions,
@@ -61,7 +65,7 @@ const BarcodeImageScreen: FC<Props> = ({ navigation, route }): JSX.Element => {
         { backgroundColor: theme.colors.background },
       ]}>
       <TouchableOpacity onLongPress={shareBarcode}>
-        <Image source={imageSource} style={styles.image} />
+        <Image source={imageSource} style={[BARCODE_ASPECT_RATIO, WIDTH_90]} />
       </TouchableOpacity>
       <TouchableOpacity onPress={shareBarcode}>
         <Octicons name={iconName} size={50} style={styles.icon} color="gray" />
@@ -73,10 +77,6 @@ const BarcodeImageScreen: FC<Props> = ({ navigation, route }): JSX.Element => {
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 40,
-  },
-  image: {
-    aspectRatio: 33 / 28,
-    width: "90%",
   },
   icon: {
     alignSelf: "flex-end",

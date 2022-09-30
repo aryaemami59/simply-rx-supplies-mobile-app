@@ -7,7 +7,10 @@ import {
   ShoppingCartStackParamList,
 } from "../../../../../CustomTypes/types";
 import { useAppSelector } from "../../../../redux/hooks";
-import { selectQRCodeContent } from "../../../../redux/addedSlice";
+import {
+  selectQRCodeContent,
+  selectItemsAddedByVendor,
+} from "../../../../redux/addedSlice";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 type Props = {
@@ -16,13 +19,14 @@ type Props = {
 
 const CartQRCodeImage: FC<Props> = ({ vendorName }): JSX.Element => {
   const itemNumbers = useAppSelector(selectQRCodeContent(vendorName));
+  const itemsAdded = useAppSelector(selectItemsAddedByVendor(vendorName));
 
   const navigation =
     useNavigation<NativeStackNavigationProp<ShoppingCartStackParamList>>();
 
   const clickHandler = useCallback(() => {
-    navigation.navigate("QRImage", { itemNumbers });
-  }, [itemNumbers, navigation]);
+    navigation.navigate("QRImage", { itemNumbers, itemsAdded });
+  }, [itemNumbers, itemsAdded, navigation]);
 
   return (
     <>

@@ -20,7 +20,7 @@ import {
 import { selectVendorsLinks } from "../../../../redux/addedSlice";
 import { selectVendorOfficialName } from "../../../../redux/addedSlice";
 import SingleCartListItems from "./SingleCartListItems";
-import { Chip, useTheme } from "@rneui/themed";
+import { Chip, ListItem, useTheme } from "@rneui/themed";
 import { MaterialIcons } from "@expo/vector-icons";
 import {
   FONT_WEIGHT_700,
@@ -30,17 +30,18 @@ import {
 } from "../../../../shared/sharedStyles";
 import { TouchableOpacity } from "react-native";
 import CartQRCodeImage from "../QRImage/CartQRCodeImage";
-import { TEXT_CENTER, AI_CENTER } from "../../../../shared/sharedStyles";
+import {
+  TEXT_CENTER,
+  AI_CENTER,
+  JC_AI_CENTER,
+} from "../../../../shared/sharedStyles";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { Button } from "@rneui/themed";
+import { WIDTH_100, JC_SPACE_BETWEEN } from "../../../../shared/sharedStyles";
 
 const shoppingCartIcon = (
   <MaterialIcons name="shopping-cart" color="white" size={24} />
 );
-const renderItems: ListRenderItem<ItemObjType> = ({
-  item,
-}: ListRenderItemInfo<ItemObjType>): JSX.Element => {
-  return <SingleCartListItems itemObj={item} />;
-};
 
 const keyExtractor = (item: ItemObjType) => item.id.toString();
 
@@ -54,6 +55,11 @@ const CartColumnListItemsScreen: FC<Props> = ({
   route,
 }): JSX.Element => {
   const { vendorName } = route.params;
+  const renderItems: ListRenderItem<ItemObjType> = ({
+    item,
+  }: ListRenderItemInfo<ItemObjType>): JSX.Element => {
+    return <SingleCartListItems itemObj={item} vendorName={vendorName} />;
+  };
   const addedItems = useAppSelector(selectByVendor(vendorName));
   const vendorLink = useAppSelector(selectVendorsLinks(vendorName));
   const ifAnyItemsAdded = useAppSelector(
@@ -105,37 +111,32 @@ const CartColumnListItemsScreen: FC<Props> = ({
         </View> */}
       <FlatList
         ListHeaderComponent={
-          <View
-            style={[
-              styles.bigContainer,
-              { backgroundColor: theme.colors.background },
-            ]}>
+          <>
             {ifAnyItemsAdded && (
               <>
-                <View
-                  style={[
-                    AI_CENTER,
-                    styles.CartQRCodeImageContainer,
+                <ListItem.Swipeable
+                  containerStyle={[
                     { backgroundColor: theme.colors.background },
-                  ]}>
-                  <CartQRCodeImage vendorName={vendorName} />
-                </View>
-                <View
-                  style={[
-                    AI_CENTER,
-                    styles.vendorLinkContainer,
-                    { backgroundColor: theme.colors.background },
-                  ]}>
-                  <TouchableOpacity onPress={openLink}>
-                    <Text
-                      style={[TEXT_UNDERLINE, { color: theme.colors.black }]}>
-                      {officialVendorName} Website
-                    </Text>
-                  </TouchableOpacity>
-                </View>
+                  ]}
+                  rightContent={<Button title="Details" />}>
+                  <View style={[AI_CENTER, WIDTH_100, JC_SPACE_BETWEEN]}>
+                    <CartQRCodeImage vendorName={vendorName} />
+                    <View style={[styles.CartQRCodeImageContainer]}>
+                      <TouchableOpacity onPress={openLink}>
+                        <Text
+                          style={[
+                            TEXT_UNDERLINE,
+                            { color: theme.colors.black },
+                          ]}>
+                          {officialVendorName} Website
+                        </Text>
+                      </TouchableOpacity>
+                    </View>
+                  </View>
+                </ListItem.Swipeable>
               </>
             )}
-          </View>
+          </>
         }
         ListEmptyComponent={
           <View

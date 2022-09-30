@@ -3,6 +3,7 @@ import { Image, StyleSheet, TouchableOpacity } from "react-native";
 import { useAppSelector } from "../../../../redux/hooks";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { BARCODE_ASPECT_RATIO } from "../../../../shared/sharedStyles";
 import {
   ItemObjType,
   ShoppingCartStackParamList,
@@ -30,7 +31,10 @@ const BarcodeImageCart: FC<Props> = ({ itemObj }): JSX.Element => {
     <>
       {itemBarcodeShown ? (
         <TouchableOpacity onPress={clickHandler}>
-          <Image source={{ uri: src }} style={styles.ImageStyle} />
+          <Image
+            source={{ uri: src }}
+            style={[styles.ImageStyle, BARCODE_ASPECT_RATIO]}
+          />
         </TouchableOpacity>
       ) : (
         ""
@@ -42,7 +46,6 @@ const BarcodeImageCart: FC<Props> = ({ itemObj }): JSX.Element => {
 const styles = StyleSheet.create({
   ImageStyle: {
     width: 132,
-    aspectRatio: 33 / 28,
   },
 });
 

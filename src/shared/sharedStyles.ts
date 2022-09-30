@@ -1,4 +1,4 @@
-import { FlexStyle, TextStyle, ViewStyle } from "react-native";
+import { FlexStyle, TextStyle, ViewStyle, ImageStyle } from "react-native";
 
 export const MAIN_COLOR = "#0071dc" as const;
 
@@ -14,12 +14,28 @@ export const WIDTH_100: FlexStyle = {
   width: "100%",
 } as const;
 
-export const WIDTH_80: FlexStyle = {
+export const WIDTH_90: ImageStyle = {
+  width: "90%",
+} as const;
+
+export const WIDTH_80: FlexStyle | ImageStyle = {
   width: "80%",
+} as const;
+
+export const WIDTH_70: FlexStyle | ImageStyle = {
+  width: "70%",
+} as const;
+
+export const WIDTH_60: FlexStyle | ImageStyle = {
+  width: "60%",
 } as const;
 
 export const HEIGHT_100: FlexStyle = {
   height: "100%",
+} as const;
+
+export const BARCODE_ASPECT_RATIO: ImageStyle = {
+  aspectRatio: 33 / 28,
 } as const;
 
 export const JC_CENTER: FlexStyle = {
@@ -30,9 +46,25 @@ export const AI_CENTER: FlexStyle = {
   alignItems: "center",
 } as const;
 
+export const JC_SPACE_BETWEEN: FlexStyle = {
+  justifyContent: "space-between",
+} as const;
+
+export const JC_SPACE_EVENLY: FlexStyle = {
+  justifyContent: "space-evenly",
+} as const;
+
+export const JC_SPACE_AROUND: FlexStyle = {
+  justifyContent: "space-around",
+} as const;
+
 export const JC_AI_CENTER: FlexStyle = {
   justifyContent: "center",
   alignItems: "center",
+} as const;
+
+export const AI_FLEX_START: FlexStyle = {
+  alignItems: "flex-start",
 } as const;
 
 export const JC_AI_CENTER_HEIGHT100: FlexStyle = {
