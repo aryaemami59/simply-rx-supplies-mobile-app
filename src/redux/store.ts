@@ -1,8 +1,6 @@
 import { Action, configureStore, ThunkAction } from "@reduxjs/toolkit";
-import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-
-// import logger from "redux-logger";
 import { addedReducer, itemReducer } from "./addedSlice";
+// import logger from "redux-logger";
 
 export const store = configureStore({
   reducer: {

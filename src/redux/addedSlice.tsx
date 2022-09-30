@@ -11,7 +11,7 @@ import { RootState } from "./store";
 import {
   GITHUB_URL_ITEMS,
   GITHUB_URL_VENDORS,
-  GITHUB_URL_NAVLIST,
+  GITHUB_URL_CATEGORIES,
 } from "./fetchInfo";
 import fetch from "react-native-fetch-polyfill";
 
@@ -20,14 +20,14 @@ import {
   addItemsByVendorInterface,
   addItemsInterface,
   FetchItems,
-  FetchNavList,
+  FetchCategories,
   FetchVendors,
   ItemObjType,
   itemState,
-  navsObjInterface,
+  categoriesObjType,
   officialVendorNameType,
   vendorNameType,
-  vendorsObjInterface,
+  vendorsObjType,
   Category,
   Link,
 } from "../../CustomTypes/types";
@@ -57,9 +57,9 @@ export const fetchVendors: FetchVendors = createAsyncThunkFunc(
   GITHUB_URL_VENDORS
 );
 
-export const fetchNavList: FetchNavList = createAsyncThunkFunc(
-  "navs",
-  GITHUB_URL_NAVLIST
+export const fetchCategories: FetchCategories = createAsyncThunkFunc(
+  "categories",
+  GITHUB_URL_CATEGORIES
 );
 
 const empty: [] = [];
@@ -71,7 +71,7 @@ const initialState: addedState = {
   showItemBarcode: true,
   showItemName: true,
   vendorsIsLoading: true,
-  navListIsLoading: true,
+  categoriesIsLoading: true,
   errMsg: "",
 };
 
@@ -80,7 +80,6 @@ const itemInitialState = {
   isLoading: true,
   errMsg: "",
   vendorsChecked: {},
-  darkMode: false,
 } as itemState;
 
 export const addedSlice = createSlice({
@@ -116,9 +115,9 @@ export const addedSlice = createSlice({
     clearListItems: state => {
       state.listItems = empty;
     },
-    compactSearchResults: state => {
-      state.compact = !state.compact;
-    },
+    // compactSearchResults: state => {
+    //   state.compact = !state.compact;
+    // },
     ToggleItemNumber: state => {
       state.showItemNumber = !state.showItemNumber;
     },
@@ -133,26 +132,26 @@ export const addedSlice = createSlice({
     builder.addCase(fetchVendors.pending, state => {
       state.vendorsIsLoading = true;
     });
-    builder.addCase(fetchNavList.pending, state => {
-      state.navListIsLoading = true;
+    builder.addCase(fetchCategories.pending, state => {
+      state.categoriesIsLoading = true;
     });
     builder.addCase(
-      fetchNavList.fulfilled,
-      (state, action: PayloadAction<navsObjInterface>) => {
-        state.navsObj = action.payload;
+      fetchCategories.fulfilled,
+      (state, action: PayloadAction<categoriesObjType>) => {
+        state.categoriesObj = action.payload;
         const keys = Object.keys(action.payload) as Category[];
-        state.navsArr = keys;
-        state.navListIsLoading = false;
+        state.categoriesArr = keys;
+        state.categoriesIsLoading = false;
         state.errMsg = "";
       }
     );
     builder.addCase(
       fetchVendors.fulfilled,
-      (state, action: PayloadAction<vendorsObjInterface>) => {
-        const payload: vendorsObjInterface = action.payload;
+      (state, action: PayloadAction<vendorsObjType>) => {
+        const payload: vendorsObjType = action.payload;
         const keys = Object.keys(payload) as vendorNameType[];
         state.vendorsArr = keys;
-        state.vendorsObj = payload as vendorsObjInterface;
+        state.vendorsObj = payload as vendorsObjType;
         let val: vendorNameType;
         for (val in payload) {
           state[val] = empty;
@@ -165,8 +164,8 @@ export const addedSlice = createSlice({
       state.vendorsIsLoading = false;
       state.errMsg = action.error.message || "Fetch failed";
     });
-    builder.addCase(fetchNavList.rejected, (state, action) => {
-      state.navListIsLoading = false;
+    builder.addCase(fetchCategories.rejected, (state, action) => {
+      state.categoriesIsLoading = false;
       state.errMsg = action.error.message || "Fetch failed";
     });
   },
@@ -210,9 +209,6 @@ export const itemSlice = createSlice({
           state[itemName]!.vendorsToAdd.push(action.payload);
       });
     },
-    ToggleDarkMode: state => {
-      state.darkMode = !current(state.darkMode);
-    },
   },
   extraReducers: builder => {
     builder.addCase(fetchItems.pending, state => {
@@ -235,8 +231,8 @@ export const itemSlice = createSlice({
     );
     builder.addCase(
       fetchVendors.fulfilled,
-      (state, action: PayloadAction<vendorsObjInterface>) => {
-        const payload: vendorsObjInterface = action.payload;
+      (state, action: PayloadAction<vendorsObjType>) => {
+        const payload: vendorsObjType = action.payload;
         const keys: vendorNameType[] = Object.keys(payload) as vendorNameType[];
         for (const vendorObj of keys) {
           state.vendorsChecked[vendorObj] = true;
@@ -304,8 +300,8 @@ export const selectVendorsLinks =
   (state: RootState): Link =>
     state.added.vendorsObj ? state.added.vendorsObj[vendorName].link : "";
 
-export const selectNavsArr = (state: RootState): Category[] =>
-  state.added.navsArr ? state.added.navsArr : empty;
+export const selectCategoriesArr = (state: RootState): Category[] =>
+  state.added.categoriesArr ? state.added.categoriesArr : empty;
 
 export const addedItemsLength =
   (vendorName: vendorNameType) =>
@@ -332,8 +328,8 @@ export const selectVendorsToAddTo =
 export const selectCategories =
   (category: Category) =>
   (state: RootState): ItemObjType[] =>
-    state.added.navsObj![category].map(
-      e => state.item.itemsArr.find(({ id }) => id === e)!
+    state.added.categoriesObj![category].items.map(
+      itemId => state.item.itemsArr.find(({ id }) => id === itemId)!
     );
 
 export const selectQRCodeContent =
@@ -399,13 +395,13 @@ export const selectAllListItems = createSelector(
 export const checkIfLoading = (state: RootState): boolean =>
   state.item.isLoading ||
   state.added.vendorsIsLoading ||
-  state.added.navListIsLoading;
+  state.added.categoriesIsLoading;
 
 export const selectErrMsg = (state: RootState): string =>
   state.item.errMsg || state.added.errMsg;
 
-export const selectDarkMode = (state: RootState): boolean =>
-  state.item.darkMode;
+// export const selectDarkMode = (state: RootState): boolean =>
+//   state.item.darkMode;
 
 export const {
   addItems,
@@ -413,7 +409,7 @@ export const {
   addItemsByVendor,
   setListItems,
   clearListItems,
-  compactSearchResults,
+  // compactSearchResults,
   ToggleItemNumber,
   ToggleItemBarcode,
   ToggleItemName,

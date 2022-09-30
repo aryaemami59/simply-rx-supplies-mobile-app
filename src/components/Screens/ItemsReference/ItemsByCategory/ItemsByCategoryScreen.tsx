@@ -1,6 +1,6 @@
 import { FC, memo } from "react";
 import { useAppSelector } from "../../../../redux/hooks";
-import { selectNavsArr } from "../../../../redux/addedSlice";
+import { selectCategoriesArr } from "../../../../redux/addedSlice";
 import { shallowEqual } from "react-redux";
 import {
   FlatList,
@@ -28,7 +28,7 @@ const keyExtractor = (item: Category) => item.toString();
 type Props = NativeStackScreenProps<ItemsByCategoryStackParamList>;
 
 const ItemsByCategoryScreen: FC<Props> = (): JSX.Element => {
-  const categories = useAppSelector(selectNavsArr, shallowEqual);
+  const categories = useAppSelector(selectCategoriesArr, shallowEqual);
   const { theme } = useTheme();
 
   return (

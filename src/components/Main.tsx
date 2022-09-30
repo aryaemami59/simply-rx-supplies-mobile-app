@@ -5,7 +5,7 @@ import Constants from "expo-constants";
 import {
   fetchItems,
   fetchVendors,
-  fetchNavList,
+  fetchCategories,
   checkIfLoading,
   selectErrMsg,
 } from "../redux/addedSlice";
@@ -23,7 +23,7 @@ const Main: FC = (): JSX.Element => {
   useEffect(() => {
     dispatch(fetchItems());
     dispatch(fetchVendors());
-    dispatch(fetchNavList());
+    dispatch(fetchCategories());
   }, [dispatch]);
 
   const isLoading = useAppSelector(checkIfLoading);

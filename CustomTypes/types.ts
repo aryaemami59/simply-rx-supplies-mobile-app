@@ -2,14 +2,14 @@ import { AsyncThunk } from "@reduxjs/toolkit";
 import { Dispatch, SetStateAction } from "react";
 import { AppDispatch } from "../src/redux/store";
 
-export type RootStackParamList = {
-  Home: HomeStackParamList;
-  ItemLookup: undefined;
-  ItemsByCategory: undefined;
-  ItemsByVendor: undefined;
-  ShoppingCart: undefined;
-  ItemsReference: ItemsReferenceTopTabParamList;
-};
+// export type RootStackParamList = {
+//   Home: HomeStackParamList;
+//   ItemLookup: undefined;
+//   ItemsByCategory: undefined;
+//   ItemsByVendor: undefined;
+//   ShoppingCart: undefined;
+//   ItemsReference: ItemsReferenceTopTabParamList;
+// };
 
 export type tabBarIconProps = {
   focused: boolean;
@@ -78,10 +78,10 @@ export type ItemsReferenceTopTabParamList = {
   ItemsByCategory: ItemsByCategoryStackParamList;
 };
 
-export type myContextInterface = {
-  darkTheme: boolean;
-  setDarkTheme: Dispatch<SetStateAction<boolean>>;
-};
+// export type myContextInterface = {
+//   darkTheme: boolean;
+//   setDarkTheme: Dispatch<SetStateAction<boolean>>;
+// };
 
 export type ItemObjType = {
   readonly id: number;
@@ -95,7 +95,7 @@ export type ItemObjType = {
   vendorsAdded: vendorNameType[];
 };
 
-type vendorInterface = {
+type singleVendorType = {
   id: number;
   officialName: officialVendorNameType;
   abbrName: vendorNameType;
@@ -104,12 +104,12 @@ type vendorInterface = {
   items: number[];
 };
 
-export type vendorsObjInterface = {
-  [key in vendorNameType]: vendorInterface;
+export type vendorsObjType = {
+  [key in vendorNameType]: singleVendorType;
 };
 
-export type navsObjInterface = {
-  [key in Category]: number[];
+export type categoriesObjType = {
+  [key in Category]: { id: number; items: number[] };
 };
 
 type VendorChecked = {
@@ -123,12 +123,12 @@ export type addedState = {
   showItemBarcode: boolean;
   showItemName: boolean;
   vendorsIsLoading: boolean;
-  navListIsLoading: boolean;
+  categoriesIsLoading: boolean;
   errMsg: string;
   vendorsArr?: vendorNameType[];
-  vendorsObj?: vendorsObjInterface;
-  navsArr?: Category[];
-  navsObj?: navsObjInterface;
+  vendorsObj?: vendorsObjType;
+  categoriesArr?: Category[];
+  categoriesObj?: categoriesObjType;
 } & {
   [key in vendorNameType]?: ItemObjType[];
 };
@@ -138,7 +138,6 @@ export type itemState = {
   isLoading: boolean;
   vendorsChecked: VendorChecked;
   errMsg: string;
-  darkMode: boolean;
 } & {
   [key in ItemName]?: ItemObjType;
 };
@@ -574,13 +573,13 @@ export type FetchItems = AsyncThunk<
 >;
 
 export type FetchVendors = AsyncThunk<
-  vendorsObjInterface,
+  vendorsObjType,
   void,
   { dispatch: AppDispatch }
 >;
 
-export type FetchNavList = AsyncThunk<
-  navsObjInterface,
+export type FetchCategories = AsyncThunk<
+  categoriesObjType,
   void,
   { dispatch: AppDispatch }
 >;
