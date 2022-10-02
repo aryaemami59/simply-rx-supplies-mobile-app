@@ -101,6 +101,10 @@ export const FONT_WEIGHT_BOLD: TextStyle = {
   fontWeight: "bold",
 } as const;
 
+export const PADDING_TOP_20: TextStyle = {
+  paddingTop: 20,
+} as const;
+
 export const ICON_GRAY_COLOR = "rgba(255,255,255,.5)" as const;
 
 export const SEARCH_BAR_COLOR = "rgba(0, 0, 0, 0.3)" as const;

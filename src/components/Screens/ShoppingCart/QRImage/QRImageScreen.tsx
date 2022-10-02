@@ -12,7 +12,11 @@ import {
 import { ShoppingCartStackParamList } from "../../../../../CustomTypes/types";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { Text, useTheme } from "@rneui/themed";
-import { JC_SPACE_AROUND, TEXT_CENTER } from "../../../../shared/sharedStyles";
+import {
+  JC_SPACE_AROUND,
+  TEXT_CENTER,
+  PADDING_TOP_20,
+} from "../../../../shared/sharedStyles";
 import { ScrollView } from "react-native-gesture-handler";
 import {
   AI_CENTER,
@@ -71,7 +75,9 @@ const QRImageScreen: FC<Props> = ({ navigation, route }): JSX.Element => {
             color="gray"
           />
         </TouchableOpacity>
-        <Text h4>Items Included:</Text>
+        <Text style={[PADDING_TOP_20]} h4>
+          Items Included:
+        </Text>
         {itemsAdded.map(itemObj => (
           <Text key={itemObj.id} style={[TEXT_CENTER]}>
             {itemObj.name}

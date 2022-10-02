@@ -74,7 +74,7 @@ export type ItemObjType = {
   readonly name: ItemName;
   readonly itemNumber: ItemNumber;
   readonly keywords: Keyword[];
-  readonly nav: Category[];
+  readonly category: Category[];
   readonly vendors: vendorNameType[];
   readonly src: Src;
   vendorsToAdd: vendorNameType[];
