@@ -1,24 +1,17 @@
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { useTheme } from "@rneui/themed";
 import { FC, memo } from "react";
-import ItemsByVendorVendorList from "./ItemsByVendorVendorList";
-import { useAppSelector } from "../../../../redux/hooks";
-import { selectVendorsArr } from "../../../../redux/addedSlice";
+import { FlatList, ListRenderItem, View } from "react-native";
 import {
   ItemsByVendorStackParamList,
   vendorNameType,
 } from "../../../../../CustomTypes/types";
-import {
-  View,
-  ListRenderItem,
-  ListRenderItemInfo,
-  FlatList,
-} from "react-native";
+import { selectVendorsArr } from "../../../../redux/addedSlice";
+import { useAppSelector } from "../../../../redux/hooks";
 import { HEIGHT_100 } from "../../../../shared/sharedStyles";
-import { useTheme } from "@rneui/themed";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import ItemsByVendorVendorList from "./ItemsByVendorVendorList";
 
-const renderItem: ListRenderItem<vendorNameType> = ({
-  item,
-}: ListRenderItemInfo<vendorNameType>) => {
+const renderItem: ListRenderItem<vendorNameType> = ({ item }) => {
   return <ItemsByVendorVendorList vendorName={item} />;
 };
 

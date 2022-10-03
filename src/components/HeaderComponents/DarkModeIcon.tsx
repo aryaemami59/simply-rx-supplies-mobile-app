@@ -1,12 +1,7 @@
-import { FC, memo, useCallback } from "react";
-import { TouchableHighlight } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useThemeMode } from "@rneui/themed";
-import { HeaderIcon } from "@rneui/base/dist/Header/components/HeaderIcon";
-
-type Props = {
-  props: string;
-};
+import { FC, memo, useCallback } from "react";
+import { TouchableHighlight } from "react-native";
 
 const DarkModeIcon: FC = (): JSX.Element => {
   const { mode, setMode } = useThemeMode();
@@ -28,4 +23,3 @@ const DarkModeIcon: FC = (): JSX.Element => {
 };
 
 export default memo(DarkModeIcon);
-

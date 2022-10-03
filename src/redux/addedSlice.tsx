@@ -1,35 +1,35 @@
 import {
+  AnyAction,
+  createAsyncThunk,
   createSlice,
   current,
-  createAsyncThunk,
-  Reducer,
-  AnyAction,
   PayloadAction,
+  Reducer,
 } from "@reduxjs/toolkit";
+import fetch from "react-native-fetch-polyfill";
 import { createSelector } from "reselect";
-import { RootState } from "./store";
 import {
+  GITHUB_URL_CATEGORIES,
   GITHUB_URL_ITEMS,
   GITHUB_URL_VENDORS,
-  GITHUB_URL_CATEGORIES,
 } from "./fetchInfo";
-import fetch from "react-native-fetch-polyfill";
+import { RootState } from "./store";
 
 import {
   addedState,
   addItemsByVendorInterface,
   addItemsInterface,
-  FetchItems,
+  categoriesObjType,
+  Category,
   FetchCategories,
+  FetchItems,
   FetchVendors,
   ItemObjType,
   itemState,
-  categoriesObjType,
+  Link,
   officialVendorNameType,
   vendorNameType,
   vendorsObjType,
-  Category,
-  Link,
 } from "../../CustomTypes/types";
 
 const intersection = (firstArray: string[], secondArray: string[]): string[] =>

@@ -1,14 +1,14 @@
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { Button } from "@rneui/themed";
 import { FC, memo, useCallback } from "react";
-import DetailsIconNode from "./DetailsIconNode";
 import {
   ItemObjType,
   ShoppingCartStackParamList,
   vendorNameType,
 } from "../../../../../CustomTypes/types";
-import { useNavigation } from "@react-navigation/native";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { JC_SPACE_EVENLY } from "../../../../shared/sharedStyles";
+import DetailsIconNode from "./DetailsIconNode";
 
 type Props = {
   itemObj: ItemObjType;
@@ -25,20 +25,19 @@ const DetailsButton: FC<Props> = ({
     useNavigation<NativeStackNavigationProp<ShoppingCartStackParamList>>();
 
   const clickHandler = useCallback(() => {
+    reset();
     navigation.push("ItemDetails", { itemObj, vendorName });
-  }, [itemObj, navigation, vendorName]);
+  }, [itemObj, navigation, reset, vendorName]);
 
   return (
-    <>
-      <Button
-        onPress={clickHandler}
-        icon={DetailsIconNode}
-        size="md"
-        title="Details"
-        color="primary"
-        buttonStyle={[JC_SPACE_EVENLY]}
-      />
-    </>
+    <Button
+      onPress={clickHandler}
+      icon={DetailsIconNode}
+      size="md"
+      title="Details"
+      color="primary"
+      buttonStyle={[JC_SPACE_EVENLY]}
+    />
   );
 };
 

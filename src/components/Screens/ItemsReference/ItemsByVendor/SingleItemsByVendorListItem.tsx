@@ -1,19 +1,25 @@
-import { ListItem, Chip, useTheme } from "@rneui/themed";
+import { MaterialIcons } from "@expo/vector-icons";
+import { Chip, ListItem, useTheme } from "@rneui/themed";
 import { FC, memo, useCallback } from "react";
+import { ItemObjType, vendorNameType } from "../../../../../CustomTypes/types";
 import {
-  checkIfAddedToAllVendors,
   addItemsByVendor,
+  checkIfAddedToAllVendors,
+  checkIfItemAddedToOneVendor,
 } from "../../../../redux/addedSlice";
 import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
-import { ItemObjType, vendorNameType } from "../../../../../CustomTypes/types";
-import { MaterialIcons } from "@expo/vector-icons";
 import {
-  FONT_WEIGHT_700,
   BACKGROUND_MAIN_COLOR,
+  FONT_WEIGHT_700,
 } from "../../../../shared/sharedStyles";
-import { checkIfItemAddedToOneVendor } from "../../../../redux/addedSlice";
 
-const icon = <MaterialIcons name="add" color="white" size={24} />;
+const icon = (
+  <MaterialIcons
+    name="add"
+    color="white"
+    size={24}
+  />
+);
 
 type Props = {
   itemObj: ItemObjType;

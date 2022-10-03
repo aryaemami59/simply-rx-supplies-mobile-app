@@ -1,42 +1,40 @@
-import { Header, SearchBar, useTheme } from "@rneui/themed";
-import { FC, memo, useState, useCallback, useRef, useMemo } from "react";
-import { StyleSheet, TextInput, View } from "react-native";
-import * as Animatable from "react-native-animatable";
-import {
-  clearListItems,
-  selectItemsArr,
-  setListItems,
-} from "../../../../redux/addedSlice";
-import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
+import { EvilIcons } from "@expo/vector-icons";
 import {
   RouteProp,
   useFocusEffect,
   useNavigation,
   useRoute,
 } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { SearchBar as SearchBarType } from "@rneui/base";
+import { Header, SearchBar, useTheme } from "@rneui/themed";
+import { FC, memo, useCallback, useMemo, useRef, useState } from "react";
+import { StyleSheet, TextInput, View } from "react-native";
+import * as Animatable from "react-native-animatable";
 import { shallowEqual } from "react-redux";
-import { EvilIcons } from "@expo/vector-icons";
 import {
-  WIDTH_80,
-  JC_AI_CENTER,
-  ICON_GRAY_COLOR,
-} from "../../../../shared/sharedStyles";
-import {
+  ItemLookupStackParamList,
   ItemObjType,
   OnChangeText,
-  ItemLookupStackParamList,
 } from "../../../../../CustomTypes/types";
 import {
-  MAIN_COLOR,
-  DISPLAY_NONE,
-  WIDTH_100,
+  clearListItems,
+  selectItemsArr,
+  setListItems,
+} from "../../../../redux/addedSlice";
+import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
+import empty from "../../../../shared/empty";
+import {
   COLOR_WHITE,
+  DISPLAY_NONE,
+  ICON_GRAY_COLOR,
+  JC_AI_CENTER,
+  MAIN_COLOR,
+  WIDTH_100,
+  WIDTH_80,
 } from "../../../../shared/sharedStyles";
-import { SearchBar as SearchBarType } from "@rneui/base";
 import HeaderRightComponent from "../../../HeaderComponents/HeaderRightComponent";
 import SearchIcon from "../../../HeaderComponents/SearchIcon";
-import empty from "../../../../shared/empty";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 const sortResults = (
   searchTerm: ItemObjType,
@@ -59,7 +57,7 @@ const sortResults = (
 };
 
 const InputField: FC = (): JSX.Element => {
-  const [val, setVal] = useState<string>("");
+  const [val, setVal] = useState("");
   const items = useAppSelector(selectItemsArr, shallowEqual);
   const view = useRef<Animatable.View & View>(null);
   const inputRef = useRef<SearchBarType & TextInput>(null);
@@ -156,7 +154,9 @@ const InputField: FC = (): JSX.Element => {
       rightComponent={HeaderRightComponent}
       centerContainerStyle={styles.headerCenterContainer}
       centerComponent={
-        <Animatable.View ref={view} style={WIDTH_80}>
+        <Animatable.View
+          ref={view}
+          style={WIDTH_80}>
           <SearchBar
             returnKeyType="search"
             ref={inputRef}

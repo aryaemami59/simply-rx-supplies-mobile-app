@@ -1,16 +1,16 @@
-import { FC, memo, useState, useCallback } from "react";
-import { useAppSelector } from "../../../../redux/hooks";
-import {
-  selectVendorsArr,
-  selectAllVendorOfficialNames,
-} from "../../../../redux/addedSlice";
-import { Button } from "@rneui/themed";
 import { BottomSheet } from "@rneui/base";
-import { View, StyleSheet, Keyboard } from "react-native";
+import { Button } from "@rneui/themed";
+import { FC, memo, useCallback, useState } from "react";
+import { Keyboard, StyleSheet, View } from "react-native";
+import {
+  selectAllVendorOfficialNames,
+  selectVendorsArr,
+} from "../../../../redux/addedSlice";
+import { useAppSelector } from "../../../../redux/hooks";
 import BottomSheetVendorCheckbox from "../SearchResults/BottomSheetVendorCheckbox";
 
 const BottomSheetComponent: FC = (): JSX.Element => {
-  const [visible, setVisible] = useState<boolean>(false);
+  const [visible, setVisible] = useState(false);
   const vendors = useAppSelector(selectVendorsArr);
   const officialVendorNames = useAppSelector(selectAllVendorOfficialNames);
 
@@ -25,7 +25,10 @@ const BottomSheetComponent: FC = (): JSX.Element => {
 
   return (
     <>
-      <Button onPress={showBottomSheet} title="Exclude Vendors" />
+      <Button
+        onPress={showBottomSheet}
+        title="Exclude Vendors"
+      />
       <BottomSheet
         isVisible={visible}
         onBackdropPress={hideBottomSheet}

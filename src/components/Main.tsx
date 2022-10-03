@@ -1,14 +1,14 @@
 import React, { FC, memo, useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import {
+  checkIfLoading,
+  fetchCategories,
   fetchItems,
   fetchVendors,
-  fetchCategories,
-  checkIfLoading,
   selectErrMsg,
 } from "../redux/addedSlice";
-import IsLoadingComponents from "../shared/IsLoadingComponents";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import ErrMsgComponent from "../shared/ErrMsgComponent";
+import IsLoadingComponents from "../shared/IsLoadingComponents";
 import TabBarMain from "./TabBarComponents/TabBarMain";
 
 const Main: FC = (): JSX.Element => {

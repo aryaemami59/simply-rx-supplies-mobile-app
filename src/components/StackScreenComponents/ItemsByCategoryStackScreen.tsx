@@ -1,12 +1,12 @@
+import { MaterialTopTabScreenProps } from "@react-navigation/material-top-tabs";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { FC, memo } from "react";
 import {
   ItemsByCategoryStackParamList,
   ItemsReferenceTopTabParamList,
 } from "../../../CustomTypes/types";
-import ItemsByCategoryScreen from "../Screens/ItemsReference/ItemsByCategory/ItemsByCategoryScreen";
 import { HEADER_SHOWN_FALSE } from "../../shared/sharedScreenOptions";
-import { MaterialTopTabScreenProps } from "@react-navigation/material-top-tabs";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import ItemsByCategoryScreen from "../Screens/ItemsReference/ItemsByCategory/ItemsByCategoryScreen";
 
 type Props = MaterialTopTabScreenProps<
   ItemsReferenceTopTabParamList,

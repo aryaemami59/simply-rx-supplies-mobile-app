@@ -1,27 +1,19 @@
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { useTheme } from "@rneui/themed";
 import { FC, memo } from "react";
-import {
-  View,
-  StyleSheet,
-  FlatList,
-  ListRenderItem,
-  ListRenderItemInfo,
-} from "react-native";
+import { FlatList, ListRenderItem, StyleSheet, View } from "react-native";
+import { shallowEqual } from "react-redux";
 import {
   ItemLookupStackParamList,
   ItemObjType,
 } from "../../../../CustomTypes/types";
-import SingleSearchResultsListItem from "./SearchResults/SingleSearchResultsListItem";
-import { useAppSelector } from "../../../redux/hooks";
 import { selectAllListItems } from "../../../redux/addedSlice";
-import { shallowEqual } from "react-redux";
-import InputField from "./Input/InputField";
+import { useAppSelector } from "../../../redux/hooks";
 import BottomSheetComponent from "./Input/BottomSheetComponent";
-import { useTheme } from "@rneui/themed";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import InputField from "./Input/InputField";
+import SingleSearchResultsListItem from "./SearchResults/SingleSearchResultsListItem";
 
-const renderItems: ListRenderItem<ItemObjType> = ({
-  item,
-}: ListRenderItemInfo<ItemObjType>): JSX.Element => {
+const renderItems: ListRenderItem<ItemObjType> = ({ item }): JSX.Element => {
   return <SingleSearchResultsListItem itemObj={item} />;
 };
 
@@ -50,7 +42,6 @@ const ItemLookupScreen: FC<Props> = ({ navigation, route }): JSX.Element => {
         data={listItems}
         renderItem={renderItems}
         keyExtractor={keyExtractor}
-        // keyboardShouldPersistTaps="always"
         keyboardShouldPersistTaps="handled"
         initialNumToRender={7}
       />

@@ -1,20 +1,26 @@
+import { MaterialIcons } from "@expo/vector-icons";
 import { Chip } from "@rneui/themed";
 import { FC, memo, useCallback } from "react";
+import { shallowEqual } from "react-redux";
+import { ItemObjType } from "../../../../../CustomTypes/types";
 import {
+  addItems,
   checkIfAddedToAllVendors,
   selectVendorsToAddTo,
-  addItems,
 } from "../../../../redux/addedSlice";
-import { useAppSelector, useAppDispatch } from "../../../../redux/hooks";
-import { shallowEqual } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
 import {
-  FONT_WEIGHT_700,
   BACKGROUND_MAIN_COLOR,
+  FONT_WEIGHT_700,
 } from "../../../../shared/sharedStyles";
-import { ItemObjType } from "../../../../../CustomTypes/types";
-import { MaterialIcons } from "@expo/vector-icons";
 
-const icon = <MaterialIcons name="add" color="white" size={24} />;
+const icon = (
+  <MaterialIcons
+    name="add"
+    color="white"
+    size={24}
+  />
+);
 
 type Props = {
   itemObj: ItemObjType;

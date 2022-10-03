@@ -1,9 +1,8 @@
-import { FC, memo, useCallback } from "react";
 import { Chip } from "@rneui/themed";
-import { StyleSheet } from "react-native";
-import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
+import { FC, memo, useCallback } from "react";
 import { ToggleItemBarcode } from "../../../../redux/addedSlice";
-import { MAIN_COLOR } from "../../../../shared/sharedStyles";
+import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
+import { BACKGROUND_MAIN_COLOR } from "../../../../shared/sharedStyles";
 
 const HideItemBarcode: FC = (): JSX.Element => {
   const dispatch = useAppDispatch();
@@ -19,16 +18,10 @@ const HideItemBarcode: FC = (): JSX.Element => {
       size="sm"
       radius="xl"
       title={`${title} Item Barcodes`}
-      buttonStyle={styles.buttonStyle}
+      buttonStyle={BACKGROUND_MAIN_COLOR}
       onPress={toggleItemBarcode}
     />
   );
 };
-
-const styles = StyleSheet.create({
-  buttonStyle: {
-    backgroundColor: MAIN_COLOR,
-  },
-});
 
 export default memo(HideItemBarcode);

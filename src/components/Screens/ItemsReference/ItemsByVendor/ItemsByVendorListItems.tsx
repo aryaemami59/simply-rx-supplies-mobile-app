@@ -1,25 +1,22 @@
-import { FC, memo, useEffect, useMemo } from "react";
-import { useAppSelector } from "../../../../redux/hooks";
-import {
-  selectItemsByVendor,
-  selectVendorOfficialName,
-} from "../../../../redux/addedSlice";
-import { shallowEqual } from "react-redux";
-import SingleItemsByVendorListItem from "./SingleItemsByVendorListItem";
-import {
-  FlatList,
-  ListRenderItem,
-  ListRenderItemInfo,
-  View,
-} from "react-native";
-import { ItemsReferenceStackParamList } from "../../../../../CustomTypes/types";
-import { ItemObjType } from "../../../../../CustomTypes/types";
-import { useTheme } from "@rneui/themed";
-import { HEIGHT_100 } from "../../../../shared/sharedStyles";
 import {
   NativeStackNavigationOptions,
   NativeStackScreenProps,
 } from "@react-navigation/native-stack";
+import { useTheme } from "@rneui/themed";
+import { FC, memo, useEffect, useMemo } from "react";
+import { FlatList, ListRenderItem, View } from "react-native";
+import { shallowEqual } from "react-redux";
+import {
+  ItemObjType,
+  ItemsReferenceStackParamList,
+} from "../../../../../CustomTypes/types";
+import {
+  selectItemsByVendor,
+  selectVendorOfficialName,
+} from "../../../../redux/addedSlice";
+import { useAppSelector } from "../../../../redux/hooks";
+import { HEIGHT_100 } from "../../../../shared/sharedStyles";
+import SingleItemsByVendorListItem from "./SingleItemsByVendorListItem";
 
 const keyExtractor = (item: ItemObjType) => item.id.toString();
 
@@ -37,11 +34,12 @@ const ItemsByVendorListItems: FC<Props> = ({
     selectVendorOfficialName(vendorName)
   );
 
-  const renderItems: ListRenderItem<ItemObjType> = ({
-    item,
-  }: ListRenderItemInfo<ItemObjType>): JSX.Element => {
+  const renderItems: ListRenderItem<ItemObjType> = ({ item }): JSX.Element => {
     return (
-      <SingleItemsByVendorListItem itemObj={item} vendorName={vendorName} />
+      <SingleItemsByVendorListItem
+        itemObj={item}
+        vendorName={vendorName}
+      />
     );
   };
 
@@ -50,26 +48,6 @@ const ItemsByVendorListItems: FC<Props> = ({
   const options: NativeStackNavigationOptions = useMemo(() => {
     return {
       headerTitle: officialVendorName,
-      // headerStyle: { alignItems: "center" },
-      // headerRight: HeaderRightFC,
-      // headerTitleContainerStyle: {
-      //   display: "flex",
-      //   flex: 5,
-      //   backgroundColor: "red",
-      //   alignItems: "center",
-      // },
-      // headerRightContainerStyle: {
-      //   display: "flex",
-      //   flex: 1,
-      //   backgroundColor: "red",
-      //   width: "100%",
-      // },
-      // headerLeftContainerStyle: {
-      //   display: "flex",
-      //   flex: 10,
-      //   backgroundColor: "red",
-      // },
-      // headerRight: () => <DarkModeIcon />,
     };
   }, [officialVendorName]);
 

@@ -1,14 +1,14 @@
 import { BottomTabNavigationOptions } from "@react-navigation/bottom-tabs";
 import { MaterialTopTabNavigationOptions } from "@react-navigation/material-top-tabs";
-import HeaderHomeStackNavigator from "../components/HeaderComponents/HeaderHomeStackNavigator";
-import { MAIN_COLOR } from "./sharedStyles";
+import { NativeStackNavigationOptions } from "@react-navigation/native-stack";
 import { tabBarIconProps } from "../../CustomTypes/types";
+import HeaderHomeStackNavigator from "../components/HeaderComponents/HeaderHomeStackNavigator";
+import { HeaderRightFC } from "../components/HeaderComponents/HeaderRightComponent";
 import TabBarIconHome from "../components/TabBarComponents/TabBarIconHome";
 import TabBarIconItemLookup from "../components/TabBarComponents/TabBarIconItemLookup";
-import TabBarIconShoppingCart from "../components/TabBarComponents/TabBarIconShoppingCart";
 import TabBarIconItemsReference from "../components/TabBarComponents/TabBarIconItemsReference";
-import { NativeStackNavigationOptions } from "@react-navigation/native-stack";
-import { HeaderRightFC } from "../components/HeaderComponents/HeaderRightComponent";
+import TabBarIconShoppingCart from "../components/TabBarComponents/TabBarIconShoppingCart";
+import { MAIN_COLOR } from "./sharedStyles";
 
 export const screenOptions: NativeStackNavigationOptions = {
   header: props => <HeaderHomeStackNavigator {...props} />,

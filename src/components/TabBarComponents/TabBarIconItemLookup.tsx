@@ -1,6 +1,6 @@
+import { FontAwesome } from "@expo/vector-icons";
 import { FC, memo } from "react";
 import { tabBarIconProps } from "../../../CustomTypes/types";
-import { FontAwesome } from "@expo/vector-icons";
 import { AI_CENTER } from "../../shared/sharedStyles";
 
 type Props = tabBarIconProps;
@@ -11,7 +11,12 @@ const TabBarIconItemLookup: FC<Props> = ({
   focused,
 }): JSX.Element => {
   return (
-    <FontAwesome name="search" color={color} size={size} style={AI_CENTER} />
+    <FontAwesome
+      name="search"
+      color={color}
+      size={size}
+      style={AI_CENTER}
+    />
   );
 };
 

@@ -1,13 +1,13 @@
 import { ListItem } from "@rneui/themed";
 import { FC, memo, useCallback } from "react";
 import { ItemObjType, vendorNameType } from "../../../../../CustomTypes/types";
-import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
-import { checkIfAddedToOneVendor } from "../../../../redux/addedSlice";
 import {
-  selectVendorOfficialName,
+  checkIfAddedToOneVendor,
   checkVendorsToAdd,
+  selectVendorOfficialName,
   setVendors,
 } from "../../../../redux/addedSlice";
+import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
 
 type Props = {
   itemObj: ItemObjType;

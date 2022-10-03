@@ -1,29 +1,26 @@
-import { FC, memo, useRef, useCallback } from "react";
-import QRCode from "react-native-qrcode-svg";
-import { View, Platform, TouchableOpacity, StyleSheet } from "react-native";
-import { Share } from "react-native";
-import { Svg } from "react-native-svg";
 import { Octicons } from "@expo/vector-icons";
-import {
-  JC_AI_CENTER_HEIGHT100,
-  HEIGHT_100,
-  JC_CENTER,
-} from "../../../../shared/sharedStyles";
-import { ShoppingCartStackParamList } from "../../../../../CustomTypes/types";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { Text, useTheme } from "@rneui/themed";
+import { FC, memo, useRef } from "react";
 import {
-  JC_SPACE_AROUND,
-  TEXT_CENTER,
-  PADDING_TOP_20,
-} from "../../../../shared/sharedStyles";
+  Platform,
+  Share,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
+import QRCode from "react-native-qrcode-svg";
+import { Svg } from "react-native-svg";
+import { ShoppingCartStackParamList } from "../../../../../CustomTypes/types";
 import {
   AI_CENTER,
-  JC_SPACE_BETWEEN,
+  HEIGHT_100,
+  JC_SPACE_AROUND,
   JC_SPACE_EVENLY,
+  PADDING_TOP_20,
+  TEXT_CENTER,
 } from "../../../../shared/sharedStyles";
-// import QRCode from "react-native-qrcode-generator";
 
 const iconName = Platform.OS === "android" ? "share-android" : "share";
 
@@ -75,11 +72,15 @@ const QRImageScreen: FC<Props> = ({ navigation, route }): JSX.Element => {
             color="gray"
           />
         </TouchableOpacity>
-        <Text style={[PADDING_TOP_20]} h4>
+        <Text
+          style={[PADDING_TOP_20]}
+          h4>
           Items Included:
         </Text>
         {itemsAdded.map(itemObj => (
-          <Text key={itemObj.id} style={[TEXT_CENTER]}>
+          <Text
+            key={itemObj.id}
+            style={[TEXT_CENTER]}>
             {itemObj.name}
           </Text>
         ))}

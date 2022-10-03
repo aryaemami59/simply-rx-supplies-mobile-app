@@ -1,24 +1,24 @@
-import { FC, memo, useEffect, useMemo, useCallback } from "react";
+import { Octicons } from "@expo/vector-icons";
+import {
+  NativeStackNavigationOptions,
+  NativeStackScreenProps,
+} from "@react-navigation/native-stack";
+import { useTheme } from "@rneui/themed";
+import { FC, memo, useCallback, useEffect, useMemo } from "react";
 import {
   Image,
-  View,
   Platform,
   Share,
-  TouchableOpacity,
   StyleSheet,
+  TouchableOpacity,
+  View,
 } from "react-native";
-import { Octicons } from "@expo/vector-icons";
 import { ShoppingCartStackParamList } from "../../../../../CustomTypes/types";
 import {
-  JC_AI_CENTER_HEIGHT100,
   BARCODE_ASPECT_RATIO,
+  JC_AI_CENTER_HEIGHT100,
+  WIDTH_90,
 } from "../../../../shared/sharedStyles";
-import { useTheme } from "@rneui/themed";
-import { WIDTH_90 } from "../../../../shared/sharedStyles";
-import {
-  NativeStackScreenProps,
-  NativeStackNavigationOptions,
-} from "@react-navigation/native-stack";
 
 const iconName = Platform.OS === "android" ? "share-android" : "share";
 
@@ -65,10 +65,18 @@ const BarcodeImageScreen: FC<Props> = ({ navigation, route }): JSX.Element => {
         { backgroundColor: theme.colors.background },
       ]}>
       <TouchableOpacity onLongPress={shareBarcode}>
-        <Image source={imageSource} style={[BARCODE_ASPECT_RATIO, WIDTH_90]} />
+        <Image
+          source={imageSource}
+          style={[BARCODE_ASPECT_RATIO, WIDTH_90]}
+        />
       </TouchableOpacity>
       <TouchableOpacity onPress={shareBarcode}>
-        <Octicons name={iconName} size={50} style={styles.icon} color="gray" />
+        <Octicons
+          name={iconName}
+          size={50}
+          style={styles.icon}
+          color="gray"
+        />
       </TouchableOpacity>
     </View>
   );

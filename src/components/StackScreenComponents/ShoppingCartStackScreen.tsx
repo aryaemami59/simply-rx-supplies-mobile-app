@@ -1,20 +1,20 @@
-import { FC, memo } from "react";
-import {
-  ShoppingCartStackParamList,
-  RootTabParamList,
-} from "../../../CustomTypes/types";
-import ShoppingCartScreen from "../Screens/ShoppingCart/ShoppingCartScreen";
-import CartColumnListItemsScreen from "../Screens/ShoppingCart/CartColumnListItems/CartColumnListItemsScreen";
-import {
-  screenOptions,
-  refHeaderOptions,
-} from "../../shared/sharedScreenOptions";
 import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
-import QRImageScreen from "../Screens/ShoppingCart/QRImage/QRImageScreen";
-import BarcodeImageScreen from "../Screens/ShoppingCart/BarcodeImage/BarcodeImageScreen";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { FC, memo } from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import {
+  RootTabParamList,
+  ShoppingCartStackParamList,
+} from "../../../CustomTypes/types";
+import {
+  refHeaderOptions,
+  screenOptions,
+} from "../../shared/sharedScreenOptions";
+import BarcodeImageScreen from "../Screens/ShoppingCart/BarcodeImage/BarcodeImageScreen";
+import CartColumnListItemsScreen from "../Screens/ShoppingCart/CartColumnListItems/CartColumnListItemsScreen";
 import ItemDetailsScreen from "../Screens/ShoppingCart/CartColumnListItems/ItemDetails/ItemDetailsScreen";
+import QRImageScreen from "../Screens/ShoppingCart/QRImage/QRImageScreen";
+import ShoppingCartScreen from "../Screens/ShoppingCart/ShoppingCartScreen";
 
 const Stack = createNativeStackNavigator<ShoppingCartStackParamList>();
 

@@ -1,22 +1,20 @@
-import { Header, SearchBar } from "@rneui/themed";
-import { FC, memo, useEffect, useRef, useCallback } from "react";
-import { TextInput, StyleSheet, Keyboard } from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
-import {
-  WIDTH_80,
-  JC_AI_CENTER,
-  ICON_GRAY_COLOR,
-} from "../../shared/sharedStyles";
-import {
-  MAIN_COLOR,
-  DISPLAY_NONE,
-  COLOR_WHITE,
-} from "../../shared/sharedStyles";
 import { NativeStackHeaderProps } from "@react-navigation/native-stack";
+import { Header, SearchBar } from "@rneui/themed";
+import { FC, memo, useCallback, useEffect, useRef } from "react";
+import { Keyboard, StyleSheet, TextInput } from "react-native";
+import {
+  COLOR_WHITE,
+  DISPLAY_NONE,
+  ICON_GRAY_COLOR,
+  JC_AI_CENTER,
+  MAIN_COLOR,
+  SEARCH_BAR_COLOR,
+  WIDTH_80,
+} from "../../shared/sharedStyles";
 import HeaderRightComponent from "./HeaderRightComponent";
-import { SEARCH_BAR_COLOR } from "../../shared/sharedStyles";
-import SearchIcon from "./SearchIcon";
 import SearchClearIcon from "./SearchClearIcon";
+import SearchIcon from "./SearchIcon";
 
 type Props = NativeStackHeaderProps;
 
@@ -27,7 +25,6 @@ const HeaderHomeStackNavigator: FC<Props> = ({
   back,
 }): JSX.Element => {
   const inputRef = useRef<TextInput>(null);
-  // const { theme } = useTheme();
   useFocusEffect(() => {
     inputRef.current?.blur();
     Keyboard.dismiss();

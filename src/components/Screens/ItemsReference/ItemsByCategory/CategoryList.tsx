@@ -1,14 +1,13 @@
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { ListItem, useTheme } from "@rneui/themed";
 import { FC, memo, useCallback } from "react";
-import { StyleSheet } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 import TouchableScale from "react-native-touchable-scale";
 import {
   Category,
   ItemsReferenceStackParamList,
 } from "../../../../../CustomTypes/types";
-import { AI_CENTER } from "../../../../shared/sharedStyles";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { AI_CENTER, JC_SPACE_BETWEEN } from "../../../../shared/sharedStyles";
 
 type Props = {
   category: Category;
@@ -27,7 +26,7 @@ const CategoryList: FC<Props> = ({ category }): JSX.Element => {
     <ListItem
       containerStyle={[
         AI_CENTER,
-        styles.accordionContainer,
+        JC_SPACE_BETWEEN,
         { backgroundColor: theme.colors.background },
       ]}
       bottomDivider
@@ -39,11 +38,5 @@ const CategoryList: FC<Props> = ({ category }): JSX.Element => {
     </ListItem>
   );
 };
-
-const styles = StyleSheet.create({
-  accordionContainer: {
-    justifyContent: "space-between",
-  },
-});
 
 export default memo<Props>(CategoryList);

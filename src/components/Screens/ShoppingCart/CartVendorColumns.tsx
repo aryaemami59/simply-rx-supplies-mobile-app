@@ -1,19 +1,23 @@
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { Badge, ListItem, useTheme } from "@rneui/themed";
 import { FC, memo, useCallback } from "react";
-import { useAppSelector } from "../../../redux/hooks";
-import {
-  selectVendorOfficialName,
-  addedItemsLength,
-} from "../../../redux/addedSlice";
 import { StyleSheet } from "react-native";
 import TouchableScale from "react-native-touchable-scale";
-import { useNavigation } from "@react-navigation/native";
 import {
   ShoppingCartStackParamList,
   vendorNameType,
 } from "../../../../CustomTypes/types";
-import { FONT_WEIGHT_BOLD, AI_CENTER } from "../../../shared/sharedStyles";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import {
+  addedItemsLength,
+  selectVendorOfficialName,
+} from "../../../redux/addedSlice";
+import { useAppSelector } from "../../../redux/hooks";
+import {
+  AI_CENTER,
+  FONT_WEIGHT_BOLD,
+  JC_SPACE_BETWEEN,
+} from "../../../shared/sharedStyles";
 
 type Props = {
   vendorName: vendorNameType;
@@ -41,7 +45,7 @@ const CartVendorColumns: FC<Props> = ({ vendorName }): JSX.Element => {
       Component={TouchableScale}
       containerStyle={[
         AI_CENTER,
-        styles.listItemContainer,
+        JC_SPACE_BETWEEN,
         { backgroundColor: theme.colors.background },
       ]}
       onPress={clickHandler}
@@ -62,9 +66,6 @@ const CartVendorColumns: FC<Props> = ({ vendorName }): JSX.Element => {
 };
 
 const styles = StyleSheet.create({
-  listItemContainer: {
-    justifyContent: "space-between",
-  },
   badgeContainer: {
     position: "absolute",
     right: 60,

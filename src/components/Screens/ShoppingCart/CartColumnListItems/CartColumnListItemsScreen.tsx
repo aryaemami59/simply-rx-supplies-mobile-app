@@ -1,46 +1,46 @@
+import { MaterialIcons } from "@expo/vector-icons";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { Button, Chip, ListItem, useTheme } from "@rneui/themed";
 import { FC, memo, useCallback, useEffect, useMemo } from "react";
-import { useAppSelector } from "../../../../redux/hooks";
 import {
-  selectByVendor,
-  checkIfAnyItemsAddedToOneVendor,
-} from "../../../../redux/addedSlice";
-import {
-  View,
-  Text,
-  StyleSheet,
+  FlatList,
   Linking,
   ListRenderItem,
-  ListRenderItemInfo,
-  FlatList,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from "react-native";
 import {
-  ShoppingCartStackParamList,
   ItemObjType,
+  ShoppingCartStackParamList,
 } from "../../../../../CustomTypes/types";
-import { selectVendorsLinks } from "../../../../redux/addedSlice";
-import { selectVendorOfficialName } from "../../../../redux/addedSlice";
-import SingleCartListItems from "./SingleCartListItems";
-import { Chip, ListItem, useTheme } from "@rneui/themed";
-import { MaterialIcons } from "@expo/vector-icons";
 import {
-  FONT_WEIGHT_700,
-  BACKGROUND_MAIN_COLOR,
-  HEIGHT_100,
-  TEXT_UNDERLINE,
-} from "../../../../shared/sharedStyles";
-import { TouchableOpacity } from "react-native";
-import CartQRCodeImage from "../QRImage/CartQRCodeImage";
+  checkIfAnyItemsAddedToOneVendor,
+  selectByVendor,
+  selectVendorOfficialName,
+  selectVendorsLinks,
+} from "../../../../redux/addedSlice";
+import { useAppSelector } from "../../../../redux/hooks";
 import {
-  TEXT_CENTER,
   AI_CENTER,
-  JC_AI_CENTER,
+  BACKGROUND_MAIN_COLOR,
+  FONT_WEIGHT_700,
+  HEIGHT_100,
+  JC_SPACE_BETWEEN,
+  TEXT_CENTER,
+  TEXT_UNDERLINE,
+  WIDTH_100,
 } from "../../../../shared/sharedStyles";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { Button } from "@rneui/themed";
-import { WIDTH_100, JC_SPACE_BETWEEN } from "../../../../shared/sharedStyles";
+import CartQRCodeImage from "../QRImage/CartQRCodeImage";
+import SingleCartListItems from "./SingleCartListItems";
 
 const shoppingCartIcon = (
-  <MaterialIcons name="shopping-cart" color="white" size={24} />
+  <MaterialIcons
+    name="shopping-cart"
+    color="white"
+    size={24}
+  />
 );
 
 const keyExtractor = (item: ItemObjType) => item.id.toString();
@@ -55,10 +55,13 @@ const CartColumnListItemsScreen: FC<Props> = ({
   route,
 }): JSX.Element => {
   const { vendorName } = route.params;
-  const renderItems: ListRenderItem<ItemObjType> = ({
-    item,
-  }: ListRenderItemInfo<ItemObjType>): JSX.Element => {
-    return <SingleCartListItems itemObj={item} vendorName={vendorName} />;
+  const renderItems: ListRenderItem<ItemObjType> = ({ item }): JSX.Element => {
+    return (
+      <SingleCartListItems
+        itemObj={item}
+        vendorName={vendorName}
+      />
+    );
   };
   const addedItems = useAppSelector(selectByVendor(vendorName));
   const vendorLink = useAppSelector(selectVendorsLinks(vendorName));

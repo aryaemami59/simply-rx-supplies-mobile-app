@@ -1,9 +1,8 @@
-import { FC, memo, useCallback } from "react";
 import { Chip } from "@rneui/themed";
-import { StyleSheet } from "react-native";
-import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
+import { FC, memo, useCallback } from "react";
 import { ToggleItemName } from "../../../../redux/addedSlice";
-import { MAIN_COLOR } from "../../../../shared/sharedStyles";
+import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
+import { BACKGROUND_MAIN_COLOR } from "../../../../shared/sharedStyles";
 
 const HideItemName: FC = (): JSX.Element => {
   const dispatch = useAppDispatch();
@@ -16,22 +15,14 @@ const HideItemName: FC = (): JSX.Element => {
   const title = itemNameShown ? "Hide" : "Show";
 
   return (
-    <>
-      <Chip
-        size="sm"
-        radius="xl"
-        title={`${title} Item Names`}
-        onPress={toggleItemName}
-        buttonStyle={styles.buttonStyle}
-      />
-    </>
+    <Chip
+      size="sm"
+      radius="xl"
+      title={`${title} Item Names`}
+      onPress={toggleItemName}
+      buttonStyle={BACKGROUND_MAIN_COLOR}
+    />
   );
 };
-
-const styles = StyleSheet.create({
-  buttonStyle: {
-    backgroundColor: MAIN_COLOR,
-  },
-});
 
 export default memo(HideItemName);

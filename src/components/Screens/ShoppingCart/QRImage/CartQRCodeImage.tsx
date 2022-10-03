@@ -1,17 +1,17 @@
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { FC, memo, useCallback } from "react";
 import { TouchableOpacity } from "react-native";
 import QRCode from "react-native-qrcode-svg";
-import { useNavigation } from "@react-navigation/native";
 import {
-  vendorNameType,
   ShoppingCartStackParamList,
+  vendorNameType,
 } from "../../../../../CustomTypes/types";
-import { useAppSelector } from "../../../../redux/hooks";
 import {
-  selectQRCodeContent,
   selectItemsAddedByVendor,
+  selectQRCodeContent,
 } from "../../../../redux/addedSlice";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { useAppSelector } from "../../../../redux/hooks";
 
 type Props = {
   vendorName: vendorNameType;
@@ -29,11 +29,9 @@ const CartQRCodeImage: FC<Props> = ({ vendorName }): JSX.Element => {
   }, [itemNumbers, itemsAdded, navigation]);
 
   return (
-    <>
-      <TouchableOpacity onPress={clickHandler}>
-        <QRCode value={itemNumbers} />
-      </TouchableOpacity>
-    </>
+    <TouchableOpacity onPress={clickHandler}>
+      <QRCode value={itemNumbers} />
+    </TouchableOpacity>
   );
 };
 

@@ -1,27 +1,43 @@
-import { FC, memo, useCallback } from "react";
-import { Chip, useTheme } from "@rneui/themed";
-import { View, StyleSheet } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 import {
-  MaterialCommunityIcons,
   FontAwesome5,
+  MaterialCommunityIcons,
   MaterialIcons,
 } from "@expo/vector-icons";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { Chip, useTheme } from "@rneui/themed";
+import { FC, memo, useCallback } from "react";
+import { StyleSheet, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { HomeStackParamList } from "../../../../CustomTypes/types";
 import {
+  BACKGROUND_MAIN_COLOR,
   FONT_WEIGHT_700,
   MAIN_COLOR,
-  BACKGROUND_MAIN_COLOR,
 } from "../../../shared/sharedStyles";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
-const searchIcon = <FontAwesome5 name="search" color="white" size={24} />;
-
-const storeSearchIcon = (
-  <MaterialCommunityIcons name="store-search-outline" color="white" size={24} />
+const searchIcon = (
+  <FontAwesome5
+    name="search"
+    color="white"
+    size={24}
+  />
 );
 
-const categoryIcon = <MaterialIcons name="category" color="white" size={24} />;
+const storeSearchIcon = (
+  <MaterialCommunityIcons
+    name="store-search-outline"
+    color="white"
+    size={24}
+  />
+);
+
+const categoryIcon = (
+  <MaterialIcons
+    name="category"
+    color="white"
+    size={24}
+  />
+);
 
 const shoppingCartIcon = (
   <MaterialIcons

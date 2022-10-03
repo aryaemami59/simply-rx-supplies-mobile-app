@@ -1,9 +1,13 @@
-import { FlexStyle, TextStyle, ViewStyle, ImageStyle } from "react-native";
+import { FlexStyle, ImageStyle, TextStyle, ViewStyle } from "react-native";
 
 export const MAIN_COLOR = "#0071dc" as const;
 
 export const BACKGROUND_MAIN_COLOR: ViewStyle = {
   backgroundColor: MAIN_COLOR,
+} as const;
+
+export const BACKGROUND_TRANSPARENT: ViewStyle = {
+  backgroundColor: "transparent",
 } as const;
 
 export const DISPLAY_NONE: ViewStyle = {

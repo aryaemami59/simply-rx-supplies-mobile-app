@@ -1,17 +1,17 @@
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { useTheme } from "@rneui/themed";
 import { FC, memo } from "react";
 import {
-  ItemsReferenceTopTabParamList,
   ItemsReferenceStackParamList,
+  ItemsReferenceTopTabParamList,
 } from "../../../../CustomTypes/types";
-import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-import ItemsByVendorStackScreen from "../../StackScreenComponents/ItemsByVendorStackScreen";
-import ItemsByCategoryStackScreen from "../../StackScreenComponents/ItemsByCategoryStackScreen";
-import { useTheme } from "@rneui/themed";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import {
   itemsByCategoryTabOptions,
   itemsByVendorTabOptions,
 } from "../../../shared/sharedScreenOptions";
+import ItemsByCategoryStackScreen from "../../StackScreenComponents/ItemsByCategoryStackScreen";
+import ItemsByVendorStackScreen from "../../StackScreenComponents/ItemsByVendorStackScreen";
 
 type Props = NativeStackScreenProps<
   ItemsReferenceStackParamList,

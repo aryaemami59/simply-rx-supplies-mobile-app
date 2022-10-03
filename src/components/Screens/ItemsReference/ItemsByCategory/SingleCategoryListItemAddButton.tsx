@@ -1,16 +1,16 @@
 import { Chip } from "@rneui/themed";
 import { FC, memo, useCallback } from "react";
+import { shallowEqual } from "react-redux";
 import { ItemObjType } from "../../../../../CustomTypes/types";
-import { useAppSelector, useAppDispatch } from "../../../../redux/hooks";
 import {
   addItems,
   checkIfAddedToAllVendors,
   selectVendorsToAddTo,
 } from "../../../../redux/addedSlice";
-import { shallowEqual } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
 import {
-  FONT_WEIGHT_700,
   BACKGROUND_MAIN_COLOR,
+  FONT_WEIGHT_700,
 } from "../../../../shared/sharedStyles";
 import AddIcon from "./AddIcon";
 

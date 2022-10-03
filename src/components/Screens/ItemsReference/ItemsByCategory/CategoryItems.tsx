@@ -1,28 +1,21 @@
+import {
+  NativeStackNavigationOptions,
+  NativeStackScreenProps,
+} from "@react-navigation/native-stack";
+import { useTheme } from "@rneui/themed";
 import { FC, memo, useEffect, useMemo } from "react";
-import { selectCategories } from "../../../../redux/addedSlice";
-import { useAppSelector } from "../../../../redux/hooks";
+import { FlatList, ListRenderItem, View } from "react-native";
 import { shallowEqual } from "react-redux";
 import {
-  FlatList,
-  ListRenderItem,
-  ListRenderItemInfo,
-  View,
-} from "react-native";
-import {
-  ItemsReferenceStackParamList,
   ItemObjType,
+  ItemsReferenceStackParamList,
 } from "../../../../../CustomTypes/types";
-import ItemsByCategorySingleListItem from "./ItemsByCategorySingleListItem";
-import { useTheme } from "@rneui/themed";
+import { selectCategories } from "../../../../redux/addedSlice";
+import { useAppSelector } from "../../../../redux/hooks";
 import { HEIGHT_100 } from "../../../../shared/sharedStyles";
-import {
-  NativeStackScreenProps,
-  NativeStackNavigationOptions,
-} from "@react-navigation/native-stack";
+import ItemsByCategorySingleListItem from "./ItemsByCategorySingleListItem";
 
-const renderItems: ListRenderItem<ItemObjType> = ({
-  item,
-}: ListRenderItemInfo<ItemObjType>): JSX.Element => {
+const renderItems: ListRenderItem<ItemObjType> = ({ item }): JSX.Element => {
   return <ItemsByCategorySingleListItem itemObj={item} />;
 };
 

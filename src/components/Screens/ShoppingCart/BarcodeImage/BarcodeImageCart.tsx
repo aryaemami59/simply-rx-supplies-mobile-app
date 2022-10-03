@@ -1,13 +1,15 @@
-import { FC, memo, useCallback } from "react";
-import { Image, StyleSheet, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { AI_CENTER } from "../../../../shared/sharedStyles";
-import { BARCODE_ASPECT_RATIO } from "../../../../shared/sharedStyles";
+import { FC, memo, useCallback } from "react";
+import { Image, StyleSheet, TouchableOpacity } from "react-native";
 import {
   ItemObjType,
   ShoppingCartStackParamList,
 } from "../../../../../CustomTypes/types";
+import {
+  AI_CENTER,
+  BARCODE_ASPECT_RATIO,
+} from "../../../../shared/sharedStyles";
 
 type Props = {
   itemObj: ItemObjType;
@@ -25,7 +27,9 @@ const BarcodeImageCart: FC<Props> = ({ itemObj }): JSX.Element => {
 
   return (
     <>
-      <TouchableOpacity onPress={clickHandler} style={[AI_CENTER]}>
+      <TouchableOpacity
+        onPress={clickHandler}
+        style={[AI_CENTER]}>
         <Image
           source={{ uri: src }}
           style={[styles.ImageStyle, BARCODE_ASPECT_RATIO]}

@@ -1,15 +1,15 @@
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { ListItem, useTheme } from "@rneui/themed";
 import { FC, memo, useCallback } from "react";
-import { useAppSelector } from "../../../../redux/hooks";
-import { selectVendorOfficialName } from "../../../../redux/addedSlice";
-import { StyleSheet } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import TouchableScale from "react-native-touchable-scale";
 import {
   ItemsReferenceStackParamList,
   vendorNameType,
 } from "../../../../../CustomTypes/types";
-import TouchableScale from "react-native-touchable-scale";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { selectVendorOfficialName } from "../../../../redux/addedSlice";
+import { useAppSelector } from "../../../../redux/hooks";
+import { AI_CENTER, JC_SPACE_BETWEEN } from "../../../../shared/sharedStyles";
 
 type Props = {
   vendorName: vendorNameType;
@@ -31,10 +31,10 @@ const ItemsByVendorVendorList: FC<Props> = ({ vendorName }): JSX.Element => {
   return (
     <ListItem
       containerStyle={[
-        styles.listItemContainer,
+        AI_CENTER,
+        JC_SPACE_BETWEEN,
         { backgroundColor: theme.colors.background },
       ]}
-      // key={vendorName}
       bottomDivider
       Component={TouchableScale}
       onPress={clickHandler}>
@@ -44,12 +44,5 @@ const ItemsByVendorVendorList: FC<Props> = ({ vendorName }): JSX.Element => {
     </ListItem>
   );
 };
-
-const styles = StyleSheet.create({
-  listItemContainer: {
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
-});
 
 export default memo<Props>(ItemsByVendorVendorList);

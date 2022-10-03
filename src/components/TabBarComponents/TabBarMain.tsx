@@ -1,22 +1,22 @@
-import { FC, memo, useMemo } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { useTheme } from "@rneui/themed";
+import { FC, memo, useMemo } from "react";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import { enableScreens } from "react-native-screens";
 import { RootTabParamList } from "../../../CustomTypes/types";
-import HomeStackScreen from "../StackScreenComponents/HomeStackScreen";
-import ItemLookupStackScreen from "../StackScreenComponents/ItemLookupStackScreen";
-import ShoppingCartStackScreen from "../StackScreenComponents/ShoppingCartStackScreen";
-import ItemsReferenceStackScreen from "../StackScreenComponents/ItemsReferenceStackScreen";
+import { checkIfAnyItemsAdded } from "../../redux/addedSlice";
+import { useAppSelector } from "../../redux/hooks";
 import {
   HEADER_SHOWN_FALSE,
   HomeOptions,
+  ItemLookupOptions,
   ItemsReferenceOptions,
   ShoppingCartOptions,
-  ItemLookupOptions,
 } from "../../shared/sharedScreenOptions";
-import { useAppSelector } from "../../redux/hooks";
-import { checkIfAnyItemsAdded } from "../../redux/addedSlice";
-import { SafeAreaProvider } from "react-native-safe-area-context";
-import { enableScreens } from "react-native-screens";
-import { useTheme } from "@rneui/themed";
+import HomeStackScreen from "../StackScreenComponents/HomeStackScreen";
+import ItemLookupStackScreen from "../StackScreenComponents/ItemLookupStackScreen";
+import ItemsReferenceStackScreen from "../StackScreenComponents/ItemsReferenceStackScreen";
+import ShoppingCartStackScreen from "../StackScreenComponents/ShoppingCartStackScreen";
 
 const Tab = createBottomTabNavigator<RootTabParamList>();
 
@@ -35,7 +35,7 @@ const TabBarMain: FC = (): JSX.Element => {
   enableScreens(false);
 
   return (
-    <SafeAreaProvider >
+    <SafeAreaProvider>
       <Tab.Navigator
         screenOptions={{
           ...HEADER_SHOWN_FALSE,

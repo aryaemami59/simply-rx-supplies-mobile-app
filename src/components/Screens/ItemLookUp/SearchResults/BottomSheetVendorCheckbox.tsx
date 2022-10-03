@@ -6,9 +6,9 @@ import {
   vendorNameType,
 } from "../../../../../CustomTypes/types";
 import {
+  selectVendorsChecked,
   setVendorsForAllCheck,
   setVendorsForAllUncheck,
-  selectVendorsChecked,
 } from "../../../../redux/addedSlice";
 import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
 import { WIDTH_100 } from "../../../../shared/sharedStyles";

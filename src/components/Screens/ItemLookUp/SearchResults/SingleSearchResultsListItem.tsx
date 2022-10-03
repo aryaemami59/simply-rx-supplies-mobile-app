@@ -1,9 +1,9 @@
 import { ListItem, useTheme } from "@rneui/themed";
 import { FC, memo } from "react";
 import { View } from "react-native";
-import AddItemButton from "./AddItemButton";
 import { ItemObjType } from "../../../../../CustomTypes/types";
 import { FONT_WEIGHT_600 } from "../../../../shared/sharedStyles";
+import AddItemButton from "./AddItemButton";
 import SearchResultsCheckBox from "./SearchResultsCheckBox";
 
 type Props = {

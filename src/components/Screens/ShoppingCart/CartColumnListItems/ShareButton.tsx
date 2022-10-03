@@ -1,9 +1,9 @@
 import { Button } from "@rneui/themed";
-import { FC, memo, useMemo, useCallback } from "react";
-import ShareIconNode from "./ShareIconNode";
-import { ItemObjType, vendorNameType } from "../../../../../CustomTypes/types";
+import { FC, memo, useCallback, useMemo } from "react";
 import { Share } from "react-native";
+import { ItemObjType, vendorNameType } from "../../../../../CustomTypes/types";
 import { JC_SPACE_EVENLY } from "../../../../shared/sharedStyles";
+import ShareIconNode from "./ShareIconNode";
 
 type Props = {
   itemObj: ItemObjType;
@@ -25,20 +25,19 @@ const ShareButton: FC<Props> = ({
   }, [itemObj.itemNumber, itemObj.name, itemObj.src]);
 
   const shareInfo = useCallback(() => {
+    reset();
     Share.share(shareContent);
-  }, [shareContent]);
+  }, [reset, shareContent]);
 
   return (
-    <>
-      <Button
-        icon={ShareIconNode}
-        size="md"
-        title="Share"
-        color="success"
-        onPress={shareInfo}
-        buttonStyle={[JC_SPACE_EVENLY]}
-      />
-    </>
+    <Button
+      icon={ShareIconNode}
+      size="md"
+      title="Share"
+      color="success"
+      onPress={shareInfo}
+      buttonStyle={[JC_SPACE_EVENLY]}
+    />
   );
 };
 

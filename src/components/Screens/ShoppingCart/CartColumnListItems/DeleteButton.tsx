@@ -1,23 +1,28 @@
 import { Button } from "@rneui/themed";
 import { FC, memo, useCallback } from "react";
-import DeleteIconNode from "./DeleteIconNode";
 import { ItemObjType, vendorNameType } from "../../../../../CustomTypes/types";
-import { useAppDispatch } from "../../../../redux/hooks";
 import { removeItems } from "../../../../redux/addedSlice";
+import { useAppDispatch } from "../../../../redux/hooks";
 import { JC_SPACE_EVENLY } from "../../../../shared/sharedStyles";
+import DeleteIconNode from "./DeleteIconNode";
 
 type Props = {
   itemObj: ItemObjType;
   vendorName: vendorNameType;
-  reset: () => void
+  reset: () => void;
 };
 
-const DeleteButton: FC<Props> = ({ itemObj, vendorName, reset }): JSX.Element => {
+const DeleteButton: FC<Props> = ({
+  itemObj,
+  vendorName,
+  reset,
+}): JSX.Element => {
   const dispatch = useAppDispatch();
 
   const clickHandler = useCallback(() => {
+    reset();
     dispatch(removeItems({ itemObj, vendorName }));
-  }, [dispatch, itemObj, vendorName]);
+  }, [dispatch, itemObj, reset, vendorName]);
 
   return (
     <>

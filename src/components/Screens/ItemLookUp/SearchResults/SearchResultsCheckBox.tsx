@@ -1,17 +1,18 @@
+import { ListItem } from "@rneui/themed";
 import { FC, memo } from "react";
-import { RootState, AppDispatch } from "../../../../redux/store";
+import { connect, ConnectedProps } from "react-redux";
+import {
+  ItemObjType,
+  officialVendorNameType,
+  vendorNameType,
+} from "../../../../../CustomTypes/types";
 import {
   selectVendorOfficialName,
   setVendors,
 } from "../../../../redux/addedSlice";
-import { ListItem } from "@rneui/themed";
-import { connect, ConnectedProps } from "react-redux";
 import { useAppSelector } from "../../../../redux/hooks";
-import {
-  ItemObjType,
-  vendorNameType,
-  officialVendorNameType,
-} from "../../../../../CustomTypes/types";
+import { AppDispatch, RootState } from "../../../../redux/store";
+import { BACKGROUND_TRANSPARENT } from "../../../../shared/sharedStyles";
 
 type stateToPropsReturnType = {
   checked: boolean;
@@ -75,8 +76,8 @@ const SearchResultsCheckBox: FC<myProps> = ({
       disabled={disabled}
       onPress={onToggleSwitch}
       title={officialVendorName}
-      style={{ backgroundColor: "transparent" }}
-      textStyle={{ backgroundColor: "transparent" }}
+      style={BACKGROUND_TRANSPARENT}
+      textStyle={BACKGROUND_TRANSPARENT}
     />
   );
 };

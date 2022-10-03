@@ -1,25 +1,18 @@
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { useTheme } from "@rneui/themed";
 import { FC, memo } from "react";
-import { useAppSelector } from "../../../../redux/hooks";
-import { selectCategoriesArr } from "../../../../redux/addedSlice";
+import { FlatList, ListRenderItem, View } from "react-native";
 import { shallowEqual } from "react-redux";
 import {
-  FlatList,
-  ListRenderItem,
-  ListRenderItemInfo,
-  View,
-} from "react-native";
-import CategoryList from "./CategoryList";
-import { HEIGHT_100 } from "../../../../shared/sharedStyles";
-import { useTheme } from "@rneui/themed";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import {
-  ItemsByCategoryStackParamList,
   Category,
+  ItemsByCategoryStackParamList,
 } from "../../../../../CustomTypes/types";
+import { selectCategoriesArr } from "../../../../redux/addedSlice";
+import { useAppSelector } from "../../../../redux/hooks";
+import { HEIGHT_100 } from "../../../../shared/sharedStyles";
+import CategoryList from "./CategoryList";
 
-const renderItem: ListRenderItem<Category> = ({
-  item,
-}: ListRenderItemInfo<Category>) => {
+const renderItem: ListRenderItem<Category> = ({ item }) => {
   return <CategoryList category={item} />;
 };
 
