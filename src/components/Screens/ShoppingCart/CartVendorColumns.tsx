@@ -6,7 +6,7 @@ import { StyleSheet } from "react-native";
 import TouchableScale from "react-native-touchable-scale";
 import {
   ShoppingCartStackParamList,
-  vendorNameType,
+  VendorNameType,
 } from "../../../../CustomTypes/types";
 import {
   addedItemsLength,
@@ -20,7 +20,7 @@ import {
 } from "../../../shared/sharedStyles";
 
 type Props = {
-  vendorName: vendorNameType;
+  vendorName: VendorNameType;
 };
 
 const CartVendorColumns: FC<Props> = ({ vendorName }) => {

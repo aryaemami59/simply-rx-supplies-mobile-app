@@ -14,7 +14,7 @@ import * as Animatable from "react-native-animatable";
 import { shallowEqual } from "react-redux";
 import {
   ItemLookupStackParamList,
-  ItemObjType,
+  ItemName,
   OnChangeText,
 } from "../../../../../CustomTypes/types";
 import {
@@ -37,21 +37,21 @@ import HeaderRightComponent from "../../../HeaderComponents/HeaderRightComponent
 import SearchIcon from "../../../HeaderComponents/SearchIcon";
 
 const sortResults = (
-  searchTerm: ItemObjType,
+  searchTerm: ItemName,
   re: RegExp,
   trimmedValue: string
 ): number => {
-  if (searchTerm.name.toLowerCase() === trimmedValue) {
+  if (searchTerm.toLowerCase() === trimmedValue) {
     return 100;
   }
-  if (searchTerm.name.toLowerCase().startsWith(trimmedValue)) {
+  if (searchTerm.toLowerCase().startsWith(trimmedValue)) {
     return 75;
   }
-  if (searchTerm.name.toLowerCase().includes(trimmedValue)) {
+  if (searchTerm.toLowerCase().includes(trimmedValue)) {
     return 50;
   }
-  if (searchTerm.name.toLowerCase().match(re)) {
-    return searchTerm.name.toLowerCase().match(re)!.length;
+  if (searchTerm.toLowerCase().match(re)) {
+    return searchTerm.toLowerCase().match(re)!.length;
   }
   return 0;
 };
@@ -112,13 +112,13 @@ const InputField: FC = () => {
       const re = new RegExp(`${reg}|${looseReg}`, "gi");
       return trimmedValue
         ? items
-            .filter(({ name }) => name.toLowerCase().trim().match(re))
-            .slice(0, 50)
+            .filter(itemName => itemName.toLowerCase().trim().match(re))
             .sort(
               (a, b) =>
                 sortResults(b, re, trimmedValue) -
                 sortResults(a, re, trimmedValue)
             )
+            .slice(0, 50)
         : empty;
     },
     [items]

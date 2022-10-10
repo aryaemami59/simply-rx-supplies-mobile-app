@@ -4,18 +4,18 @@ import { FC, memo } from "react";
 import { FlatList, ListRenderItem, View } from "react-native";
 import {
   ShoppingCartStackParamList,
-  vendorNameType,
+  VendorNameType,
 } from "../../../../CustomTypes/types";
 import { selectVendorsArr } from "../../../redux/addedSlice";
 import { useAppSelector } from "../../../redux/hooks";
 import { HEIGHT_100 } from "../../../shared/sharedStyles";
 import CartVendorColumns from "./CartVendorColumns";
 
-const renderItem: ListRenderItem<vendorNameType> = ({ item }) => (
+const renderItem: ListRenderItem<VendorNameType> = ({ item }) => (
   <CartVendorColumns vendorName={item} />
 );
 
-const keyExtractor = (item: vendorNameType) => item.toString();
+const keyExtractor = (item: VendorNameType) => item.toString();
 
 type Props = NativeStackScreenProps<
   ShoppingCartStackParamList,

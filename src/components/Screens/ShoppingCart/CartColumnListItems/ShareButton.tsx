@@ -1,24 +1,27 @@
 import { Button } from "@rneui/themed";
 import { FC, memo, useCallback, useMemo } from "react";
 import { Share } from "react-native";
-import { ItemObjType, vendorNameType } from "../../../../../CustomTypes/types";
+import { VendorAndItemName } from "../../../../../CustomTypes/types";
+import { selectItemNumber, selectItemSrc } from "../../../../redux/addedSlice";
+import { useAppSelector } from "../../../../redux/hooks";
 import { JC_SPACE_EVENLY } from "../../../../shared/sharedStyles";
 import ShareIconNode from "./ShareIconNode";
 
-type Props = {
-  itemObj: ItemObjType;
-  vendorName: vendorNameType;
+type Props = VendorAndItemName & {
   reset: () => void;
 };
 
-const ShareButton: FC<Props> = ({ itemObj, vendorName, reset }) => {
+const ShareButton: FC<Props> = ({ itemName, vendorName, reset }) => {
+  const itemNumber = useAppSelector(selectItemNumber(itemName));
+  const src = useAppSelector(selectItemSrc(itemName));
+
   const shareContent = useMemo(
     () => ({
-      title: `${itemObj.itemNumber}`,
-      message: `${itemObj.name}`,
-      url: itemObj.src,
+      title: `${itemNumber}`,
+      message: `${itemName}`,
+      url: src,
     }),
-    [itemObj.itemNumber, itemObj.name, itemObj.src]
+    [itemNumber, itemName, src]
   );
 
   const shareInfo = useCallback(() => {

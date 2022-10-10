@@ -1,6 +1,7 @@
+// @ts-nocheck
 import { Chip } from "@rneui/themed";
 import { FC, memo, useCallback } from "react";
-import { ToggleItemBarcode } from "../../../../redux/addedSlice";
+// import { ToggleItemBarcode } from "../../../../redux/addedSlice";
 import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
 import { BACKGROUND_MAIN_COLOR } from "../../../../shared/sharedStyles";
 

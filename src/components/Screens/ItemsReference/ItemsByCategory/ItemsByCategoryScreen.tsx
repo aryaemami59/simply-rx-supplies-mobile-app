@@ -12,9 +12,9 @@ import { useAppSelector } from "../../../../redux/hooks";
 import { HEIGHT_100 } from "../../../../shared/sharedStyles";
 import CategoryList from "./CategoryList";
 
-const renderItem: ListRenderItem<Category> = ({ item }) => {
-  return <CategoryList category={item} />;
-};
+const renderItem: ListRenderItem<Category> = ({ item }) => (
+  <CategoryList category={item} />
+);
 
 const keyExtractor = (item: Category) => item.toString();
 

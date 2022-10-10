@@ -7,18 +7,18 @@ import { FC, memo, useEffect, useMemo } from "react";
 import { FlatList, ListRenderItem, View } from "react-native";
 import { shallowEqual } from "react-redux";
 import {
-  ItemObjType,
+  ItemName,
   ItemsReferenceStackParamList,
 } from "../../../../../CustomTypes/types";
 import {
-  selectItemsByVendor,
+  selectItemNamesByVendor,
   selectVendorOfficialName,
 } from "../../../../redux/addedSlice";
 import { useAppSelector } from "../../../../redux/hooks";
 import { HEIGHT_100 } from "../../../../shared/sharedStyles";
 import SingleItemsByVendorListItem from "./SingleItemsByVendorListItem";
 
-const keyExtractor = (item: ItemObjType) => item.id.toString();
+const keyExtractor = (item: ItemName) => item;
 
 type Props = NativeStackScreenProps<
   ItemsReferenceStackParamList,
@@ -31,14 +31,17 @@ const ItemsByVendorListItems: FC<Props> = ({ navigation, route }) => {
     selectVendorOfficialName(vendorName)
   );
 
-  const renderItems: ListRenderItem<ItemObjType> = ({ item }) => (
+  const renderItems: ListRenderItem<ItemName> = ({ item }) => (
     <SingleItemsByVendorListItem
-      itemObj={item}
+      itemName={item}
       vendorName={vendorName}
     />
   );
 
-  const items = useAppSelector(selectItemsByVendor(vendorName), shallowEqual);
+  const items = useAppSelector(
+    selectItemNamesByVendor(vendorName),
+    shallowEqual
+  );
 
   const options: NativeStackNavigationOptions = useMemo(
     () => ({

@@ -1,7 +1,7 @@
 import { MaterialIcons } from "@expo/vector-icons";
 import { Chip, ListItem, useTheme } from "@rneui/themed";
 import { FC, memo, useCallback } from "react";
-import { ItemObjType, vendorNameType } from "../../../../../CustomTypes/types";
+import { VendorAndItemName } from "../../../../../CustomTypes/types";
 import {
   addItemsByVendor,
   checkIfAddedToAllVendors,
@@ -21,21 +21,20 @@ const icon = (
   />
 );
 
-type Props = {
-  itemObj: ItemObjType;
-  vendorName: vendorNameType;
-};
+type Props = VendorAndItemName;
 
-const SingleItemsByVendorListItem: FC<Props> = ({ itemObj, vendorName }) => {
+const SingleItemsByVendorListItem: FC<Props> = ({ itemName, vendorName }) => {
   const dispatch = useAppDispatch();
-  const ifAddedToAllVendors = useAppSelector(checkIfAddedToAllVendors(itemObj));
+  const ifAddedToAllVendors = useAppSelector(
+    checkIfAddedToAllVendors(itemName)
+  );
 
   const clickHandler = useCallback(() => {
-    ifAddedToAllVendors || dispatch(addItemsByVendor({ itemObj, vendorName }));
-  }, [vendorName, ifAddedToAllVendors, dispatch, itemObj]);
+    ifAddedToAllVendors || dispatch(addItemsByVendor({ itemName, vendorName }));
+  }, [vendorName, ifAddedToAllVendors, dispatch, itemName]);
 
   const ifAdded = useAppSelector(
-    checkIfItemAddedToOneVendor(vendorName, itemObj)
+    checkIfItemAddedToOneVendor(vendorName, itemName)
   );
 
   const { theme } = useTheme();
@@ -45,7 +44,7 @@ const SingleItemsByVendorListItem: FC<Props> = ({ itemObj, vendorName }) => {
       bottomDivider
       containerStyle={[{ backgroundColor: theme.colors.background }]}>
       <ListItem.Content>
-        <ListItem.Title>{itemObj.name}</ListItem.Title>
+        <ListItem.Title>{itemName}</ListItem.Title>
       </ListItem.Content>
       <ListItem.Content right>
         <Chip

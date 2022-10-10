@@ -1,11 +1,5 @@
 import React, { FC, memo, useEffect } from "react";
-import {
-  checkIfLoading,
-  fetchCategories,
-  fetchItems,
-  fetchVendors,
-  selectErrMsg,
-} from "../redux/addedSlice";
+import { checkIfLoading, fetchItems, selectErrMsg } from "../redux/addedSlice";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import ErrMsgComponent from "../shared/ErrMsgComponent";
 import IsLoadingComponents from "../shared/IsLoadingComponents";
@@ -16,8 +10,8 @@ const Main: FC = () => {
 
   useEffect(() => {
     dispatch(fetchItems());
-    dispatch(fetchVendors());
-    dispatch(fetchCategories());
+    // dispatch(fetchVendors());
+    // dispatch(fetchCategories());
   }, [dispatch]);
 
   const isLoading = useAppSelector(checkIfLoading);

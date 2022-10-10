@@ -3,27 +3,30 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { FC, memo, useCallback } from "react";
 import { Image, StyleSheet, TouchableOpacity } from "react-native";
 import {
-  ItemObjType,
+  ItemName,
   ShoppingCartStackParamList,
 } from "../../../../../CustomTypes/types";
+import { selectItemSrc } from "../../../../redux/addedSlice";
+import { useAppSelector } from "../../../../redux/hooks";
 import {
   AI_CENTER,
   BARCODE_ASPECT_RATIO,
 } from "../../../../shared/sharedStyles";
 
 type Props = {
-  itemObj: ItemObjType;
+  itemName: ItemName;
 };
 
-const BarcodeImageCart: FC<Props> = ({ itemObj }) => {
-  const { src, name } = itemObj;
+const BarcodeImageCart: FC<Props> = ({ itemName }) => {
+  // const { src, name } = itemName;
+  const src = useAppSelector(selectItemSrc(itemName));
 
   const navigation =
     useNavigation<NativeStackNavigationProp<ShoppingCartStackParamList>>();
 
   const clickHandler = useCallback(() => {
-    navigation.push("BarcodeImage", { src, name });
-  }, [name, navigation, src]);
+    navigation.push("BarcodeImage", { src, itemName });
+  }, [itemName, navigation, src]);
 
   return (
     <TouchableOpacity

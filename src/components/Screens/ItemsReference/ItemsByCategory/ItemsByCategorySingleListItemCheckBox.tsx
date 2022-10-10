@@ -1,21 +1,18 @@
 import { ListItem } from "@rneui/themed";
 import { FC, memo, useCallback } from "react";
-import { ItemObjType, vendorNameType } from "../../../../../CustomTypes/types";
+import { VendorAndItemName } from "../../../../../CustomTypes/types";
 import {
-  checkIfAddedToOneVendor,
+  checkIfItemAddedToOneVendor,
   checkVendorsToAdd,
   selectVendorOfficialName,
   setVendors,
 } from "../../../../redux/addedSlice";
 import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
 
-type Props = {
-  itemObj: ItemObjType;
-  vendorName: vendorNameType;
-};
+type Props = VendorAndItemName;
 
 const ItemsByCategorySingleListItemCheckBox: FC<Props> = ({
-  itemObj,
+  itemName,
   vendorName,
 }) => {
   const dispatch = useAppDispatch();
@@ -23,13 +20,13 @@ const ItemsByCategorySingleListItemCheckBox: FC<Props> = ({
     selectVendorOfficialName(vendorName)
   );
   const ifAddedToVendor = useAppSelector(
-    checkIfAddedToOneVendor(itemObj, vendorName)
+    checkIfItemAddedToOneVendor(vendorName, itemName)
   );
-  const checked = useAppSelector(checkVendorsToAdd(itemObj, vendorName));
+  const checked = useAppSelector(checkVendorsToAdd(vendorName, itemName));
 
   const onToggleSwitch = useCallback(() => {
-    ifAddedToVendor || dispatch(setVendors({ itemObj, vendorName }));
-  }, [dispatch, ifAddedToVendor, itemObj, vendorName]);
+    ifAddedToVendor || dispatch(setVendors({ itemName, vendorName }));
+  }, [dispatch, ifAddedToVendor, itemName, vendorName]);
 
   return (
     <ListItem.CheckBox

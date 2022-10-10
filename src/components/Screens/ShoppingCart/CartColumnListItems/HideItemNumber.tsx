@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Chip } from "@rneui/themed";
 import { FC, memo, useCallback } from "react";
 import { ToggleItemNumber } from "../../../../redux/addedSlice";

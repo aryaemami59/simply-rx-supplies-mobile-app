@@ -25,22 +25,22 @@ const iconName = Platform.OS === "android" ? "share-android" : "share";
 type Props = NativeStackScreenProps<ShoppingCartStackParamList, "BarcodeImage">;
 
 const BarcodeImageScreen: FC<Props> = ({ navigation, route }) => {
-  const { src, name } = route.params;
+  const { src, itemName } = route.params;
 
   const options: NativeStackNavigationOptions = useMemo(
     () => ({
-      title: name,
+      title: itemName,
     }),
-    [name]
+    [itemName]
   );
 
   const shareContent = useMemo(
     () => ({
-      title: `Barcode Image for ${name}`,
-      message: `This is the barcode image for ${name}`,
+      title: `Barcode Image for ${itemName}`,
+      message: `This is the barcode image for ${itemName}`,
       url: src,
     }),
-    [name, src]
+    [itemName, src]
   );
 
   const imageSource = useMemo(
@@ -75,7 +75,7 @@ const BarcodeImageScreen: FC<Props> = ({ navigation, route }) => {
       </TouchableOpacity>
       <TouchableOpacity onPress={shareBarcode}>
         <Octicons
-          name={iconName}
+          itemName={iconName}
           size={50}
           style={styles.icon}
           color="gray"

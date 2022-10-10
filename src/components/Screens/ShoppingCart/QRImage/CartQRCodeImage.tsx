@@ -5,7 +5,7 @@ import { TouchableOpacity } from "react-native";
 import QRCode from "react-native-qrcode-svg";
 import {
   ShoppingCartStackParamList,
-  vendorNameType,
+  VendorNameType,
 } from "../../../../../CustomTypes/types";
 import {
   selectItemsAddedByVendor,
@@ -14,7 +14,7 @@ import {
 import { useAppSelector } from "../../../../redux/hooks";
 
 type Props = {
-  vendorName: vendorNameType;
+  vendorName: VendorNameType;
 };
 
 const CartQRCodeImage: FC<Props> = ({ vendorName }) => {

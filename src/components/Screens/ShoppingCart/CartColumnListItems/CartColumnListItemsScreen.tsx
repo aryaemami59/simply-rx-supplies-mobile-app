@@ -12,12 +12,11 @@ import {
   View,
 } from "react-native";
 import {
-  ItemObjType,
+  ItemName,
   ShoppingCartStackParamList,
 } from "../../../../../CustomTypes/types";
 import {
   checkIfAnyItemsAddedToOneVendor,
-  selectByVendor,
   selectVendorOfficialName,
   selectVendorsLinks,
 } from "../../../../redux/addedSlice";
@@ -34,6 +33,7 @@ import {
 } from "../../../../shared/sharedStyles";
 import CartQRCodeImage from "../QRImage/CartQRCodeImage";
 import SingleCartListItems from "./SingleCartListItems";
+import { selectAddedItemsByVendor } from "../../../../redux/addedSlice";
 
 const shoppingCartIcon = (
   <MaterialIcons
@@ -43,7 +43,7 @@ const shoppingCartIcon = (
   />
 );
 
-const keyExtractor = (item: ItemObjType) => item.id.toString();
+const keyExtractor = (item: ItemName) => item;
 
 type Props = NativeStackScreenProps<
   ShoppingCartStackParamList,
@@ -52,13 +52,13 @@ type Props = NativeStackScreenProps<
 
 const CartColumnListItemsScreen: FC<Props> = ({ navigation, route }) => {
   const { vendorName } = route.params;
-  const renderItems: ListRenderItem<ItemObjType> = ({ item }) => (
+  const renderItems: ListRenderItem<ItemName> = ({ item }) => (
     <SingleCartListItems
-      itemObj={item}
+      itemName={item}
       vendorName={vendorName}
     />
   );
-  const addedItems = useAppSelector(selectByVendor(vendorName));
+  const addedItems = useAppSelector(selectAddedItemsByVendor(vendorName));
   const vendorLink = useAppSelector(selectVendorsLinks(vendorName));
   const ifAnyItemsAdded = useAppSelector(
     checkIfAnyItemsAddedToOneVendor(vendorName)

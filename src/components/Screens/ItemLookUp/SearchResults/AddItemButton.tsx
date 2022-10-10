@@ -2,7 +2,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { Chip } from "@rneui/themed";
 import { FC, memo, useCallback } from "react";
 import { shallowEqual } from "react-redux";
-import { ItemObjType } from "../../../../../CustomTypes/types";
+import { ItemName } from "../../../../../CustomTypes/types";
 import {
   addItems,
   checkIfAddedToAllVendors,
@@ -23,19 +23,26 @@ const icon = (
 );
 
 type Props = {
-  itemObj: ItemObjType;
+  itemName: ItemName;
 };
 
-const AddItemButton: FC<Props> = ({ itemObj }) => {
-  const IfAddedToAllVendors = useAppSelector(checkIfAddedToAllVendors(itemObj));
+const AddItemButton: FC<Props> = ({ itemName }) => {
+  const IfAddedToAllVendors = useAppSelector(
+    checkIfAddedToAllVendors(itemName)
+  );
 
-  const vendors = useAppSelector(selectVendorsToAddTo(itemObj), shallowEqual);
+  const vendorsToAddTo = useAppSelector(
+    selectVendorsToAddTo(itemName),
+    shallowEqual
+  );
 
   const dispatch = useAppDispatch();
 
   const clickHandler = useCallback(() => {
-    !IfAddedToAllVendors && dispatch(addItems({ itemObj, vendors }));
-  }, [IfAddedToAllVendors, dispatch, itemObj, vendors]);
+    IfAddedToAllVendors ||
+      !vendorsToAddTo.length ||
+      dispatch(addItems({ itemName, vendorsToAddTo }));
+  }, [IfAddedToAllVendors, dispatch, itemName, vendorsToAddTo]);
 
   return (
     <Chip

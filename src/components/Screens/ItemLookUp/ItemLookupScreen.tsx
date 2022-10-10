@@ -5,7 +5,7 @@ import { FlatList, ListRenderItem, StyleSheet, View } from "react-native";
 import { shallowEqual } from "react-redux";
 import {
   ItemLookupStackParamList,
-  ItemObjType,
+  ItemName,
 } from "../../../../CustomTypes/types";
 import { selectAllListItems } from "../../../redux/addedSlice";
 import { useAppSelector } from "../../../redux/hooks";
@@ -13,11 +13,11 @@ import BottomSheetComponent from "./Input/BottomSheetComponent";
 import InputField from "./Input/InputField";
 import SingleSearchResultsListItem from "./SearchResults/SingleSearchResultsListItem";
 
-const renderItems: ListRenderItem<ItemObjType> = ({ item }) => (
-  <SingleSearchResultsListItem itemObj={item} />
+const renderItems: ListRenderItem<ItemName> = ({ item }) => (
+  <SingleSearchResultsListItem itemName={item} />
 );
 
-const keyExtractor = (item: ItemObjType) => item.id.toString();
+const keyExtractor = (item: ItemName) => item;
 
 type Props = NativeStackScreenProps<
   ItemLookupStackParamList,

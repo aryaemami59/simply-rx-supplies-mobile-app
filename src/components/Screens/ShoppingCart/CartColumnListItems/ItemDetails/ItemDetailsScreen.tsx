@@ -3,7 +3,11 @@ import { Image, ListItem, Text, useTheme } from "@rneui/themed";
 import { FC, memo, useCallback } from "react";
 import { TouchableOpacity } from "react-native";
 import { ShoppingCartStackParamList } from "../../../../../../CustomTypes/types";
-import { selectVendorsOfficialNames } from "../../../../../redux/addedSlice";
+import {
+  selectVendorsByItemName,
+  selectVendorsOfficialNames,
+  selectItemSrc,
+} from "../../../../../redux/addedSlice";
 import { useAppSelector } from "../../../../../redux/hooks";
 import {
   AI_CENTER,
@@ -18,8 +22,10 @@ import {
 type Props = NativeStackScreenProps<ShoppingCartStackParamList, "ItemDetails">;
 
 const ItemDetailsScreen: FC<Props> = ({ navigation, route }) => {
-  const { itemObj } = route.params;
-  const { src, name, vendors } = itemObj;
+  const { itemName } = route.params;
+  const vendors = useAppSelector(selectVendorsByItemName(itemName));
+  const src = useAppSelector(selectItemSrc(itemName));
+  // const { src, vendors } = itemObj;
   const { theme } = useTheme();
 
   const officialVendorNames = useAppSelector(
@@ -29,9 +35,9 @@ const ItemDetailsScreen: FC<Props> = ({ navigation, route }) => {
   const clickHandler = useCallback(() => {
     navigation.navigate("BarcodeImage", {
       src,
-      name,
+      itemName,
     });
-  }, [name, navigation, src]);
+  }, [itemName, navigation, src]);
 
   return (
     <ListItem
@@ -45,7 +51,7 @@ const ItemDetailsScreen: FC<Props> = ({ navigation, route }) => {
         <Text
           h2
           style={[TEXT_CENTER]}>
-          {name}
+          {itemName}
         </Text>
         {/* <Text h3 style={[TEXT_CENTER]}>
           {itemObj.itemNumber}

@@ -1,32 +1,36 @@
 import { ListItem, useTheme } from "@rneui/themed";
 import { FC, memo } from "react";
-import { ItemObjType } from "../../../../../CustomTypes/types";
+import { ItemName } from "../../../../../CustomTypes/types";
 import ItemsByCategorySingleListItemCheckBox from "./ItemsByCategorySingleListItemCheckBox";
 import SingleCategoryListItemAddButton from "./SingleCategoryListItemAddButton";
+import { useAppSelector } from "../../../../redux/hooks";
+import { selectVendorsByItemName } from "../../../../redux/addedSlice";
 
 type Props = {
-  itemObj: ItemObjType;
+  itemName: ItemName;
 };
 
-const ItemsByCategorySingleListItem: FC<Props> = ({ itemObj }) => {
+const ItemsByCategorySingleListItem: FC<Props> = ({ itemName }) => {
   const { theme } = useTheme();
+
+  const vendors = useAppSelector(selectVendorsByItemName(itemName));
 
   return (
     <ListItem
       bottomDivider
       containerStyle={[{ backgroundColor: theme.colors.background }]}>
       <ListItem.Content>
-        <ListItem.Title>{itemObj.name}</ListItem.Title>
-        {itemObj.vendors.map(vendorName => (
+        <ListItem.Title>{itemName}</ListItem.Title>
+        {vendors.map(vendorName => (
           <ItemsByCategorySingleListItemCheckBox
             key={vendorName}
             vendorName={vendorName}
-            itemObj={itemObj}
+            itemName={itemName}
           />
         ))}
       </ListItem.Content>
       <ListItem.Content right>
-        <SingleCategoryListItemAddButton itemObj={itemObj} />
+        <SingleCategoryListItemAddButton itemName={itemName} />
       </ListItem.Content>
     </ListItem>
   );

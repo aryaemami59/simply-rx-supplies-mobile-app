@@ -6,6 +6,7 @@
   "rules": {
     "@typescript-eslint/no-non-null-assertion": "off",
     "quotes": "off",
+    "@typescript-eslint/ban-ts-comment": "off",
     // "quotes": [2, "double"],
     // "quotes": ["error", "double"],
     "react/react-in-jsx-scope": "off",

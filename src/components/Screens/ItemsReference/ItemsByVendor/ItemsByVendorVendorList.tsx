@@ -5,14 +5,14 @@ import { FC, memo, useCallback } from "react";
 import TouchableScale from "react-native-touchable-scale";
 import {
   ItemsReferenceStackParamList,
-  vendorNameType,
+  VendorNameType,
 } from "../../../../../CustomTypes/types";
 import { selectVendorOfficialName } from "../../../../redux/addedSlice";
 import { useAppSelector } from "../../../../redux/hooks";
 import { AI_CENTER, JC_SPACE_BETWEEN } from "../../../../shared/sharedStyles";
 
 type Props = {
-  vendorName: vendorNameType;
+  vendorName: VendorNameType;
 };
 
 const ItemsByVendorVendorList: FC<Props> = ({ vendorName }) => {

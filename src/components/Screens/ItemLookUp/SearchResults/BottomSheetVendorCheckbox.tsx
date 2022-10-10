@@ -1,32 +1,33 @@
 import { ListItem, useTheme } from "@rneui/themed";
-import { FC, memo, useCallback } from "react";
+import { FC, memo, useCallback, useState } from "react";
 import { TouchableHighlight } from "react-native";
 import {
   officialVendorNameType,
-  vendorNameType,
+  VendorNameType,
 } from "../../../../../CustomTypes/types";
 import {
-  selectVendorsChecked,
   setVendorsForAllCheck,
   setVendorsForAllUncheck,
 } from "../../../../redux/addedSlice";
-import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
+import { useAppDispatch } from "../../../../redux/hooks";
 import { WIDTH_100 } from "../../../../shared/sharedStyles";
 
 type Props = {
   title: officialVendorNameType;
-  vendorName: vendorNameType;
+  vendorName: VendorNameType;
 };
 
 const BottomSheetVendorCheckbox: FC<Props> = ({ title, vendorName }) => {
-  const checked = useAppSelector(selectVendorsChecked(vendorName));
+  // const checked = useAppSelector(selectVendorsChecked(vendorName));
+  const [checked, setChecked] = useState(false);
   const dispatch = useAppDispatch();
   const { theme } = useTheme();
 
   const onToggleCheck = useCallback(() => {
     checked
-      ? dispatch(setVendorsForAllUncheck(vendorName))
-      : dispatch(setVendorsForAllCheck(vendorName));
+      ? dispatch(setVendorsForAllUncheck({ vendorName }))
+      : dispatch(setVendorsForAllCheck({ vendorName }));
+    setChecked(prev => !prev);
   }, [checked, dispatch, vendorName]);
 
   return (

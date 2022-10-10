@@ -2,7 +2,7 @@ import { ListItem, useTheme } from "@rneui/themed";
 import { FC, memo, useCallback, useState } from "react";
 import { View } from "react-native";
 import Collapsible from "react-native-collapsible";
-import { ItemObjType, vendorNameType } from "../../../../../CustomTypes/types";
+import { VendorAndItemName } from "../../../../../CustomTypes/types";
 import {
   AI_CENTER,
   JC_SPACE_BETWEEN,
@@ -16,12 +16,9 @@ import ItemNumberCart from "./ItemNumberCart";
 import MinimizeButton from "./MinimizeButton";
 import ShareButton from "./ShareButton";
 
-type Props = {
-  itemObj: ItemObjType;
-  vendorName: vendorNameType;
-};
+type Props = VendorAndItemName;
 
-const SingleCartListItems: FC<Props> = ({ itemObj, vendorName }) => {
+const SingleCartListItems: FC<Props> = ({ itemName, vendorName }) => {
   const { theme } = useTheme();
   const [open, setOpen] = useState(true);
 
@@ -40,24 +37,24 @@ const SingleCartListItems: FC<Props> = ({ itemObj, vendorName }) => {
             <>
               <DeleteButton
                 reset={reset}
-                itemObj={itemObj}
+                itemName={itemName}
                 vendorName={vendorName}
               />
               <ShareButton
                 reset={reset}
-                itemObj={itemObj}
+                itemName={itemName}
                 vendorName={vendorName}
               />
               <DetailsButton
                 reset={reset}
-                itemObj={itemObj}
+                itemName={itemName}
                 vendorName={vendorName}
               />
             </>
           )}
           <MinimizeButton
             open={open}
-            itemObj={itemObj}
+            itemName={itemName}
             vendorName={vendorName}
             reset={reset}
             onPress={clickHandler}
@@ -65,14 +62,14 @@ const SingleCartListItems: FC<Props> = ({ itemObj, vendorName }) => {
         </>
       )}>
       <View style={[AI_CENTER, WIDTH_100, JC_SPACE_BETWEEN]}>
-        <ItemNameCart itemObj={itemObj} />
+        <ItemNameCart itemName={itemName} />
         <Collapsible
           collapsed={!open}
           easing="easeInQuad">
           {open && (
             <>
-              <ItemNumberCart itemObj={itemObj} />
-              <BarcodeImageCart itemObj={itemObj} />
+              <ItemNumberCart itemName={itemName} />
+              <BarcodeImageCart itemName={itemName} />
             </>
           )}
         </Collapsible>

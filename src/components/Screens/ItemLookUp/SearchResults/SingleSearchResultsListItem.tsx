@@ -1,39 +1,44 @@
 import { ListItem, useTheme } from "@rneui/themed";
 import { FC, memo } from "react";
 import { View } from "react-native";
-import { ItemObjType } from "../../../../../CustomTypes/types";
+import { shallowEqual } from "react-redux";
+import { ItemName } from "../../../../../CustomTypes/types";
+import { selectVendorsByItemName } from "../../../../redux/addedSlice";
+import { useAppSelector } from "../../../../redux/hooks";
 import { FONT_WEIGHT_600 } from "../../../../shared/sharedStyles";
 import AddItemButton from "./AddItemButton";
 import SearchResultsCheckBox from "./SearchResultsCheckBox";
 
 type Props = {
-  itemObj: ItemObjType;
+  itemName: ItemName;
 };
 
-const SingleSearchResultsListItem: FC<Props> = ({ itemObj }) => {
+const SingleSearchResultsListItem: FC<Props> = ({ itemName }) => {
   const { theme } = useTheme();
+  const vendors = useAppSelector(
+    selectVendorsByItemName(itemName),
+    shallowEqual
+  );
 
   return (
     <View
       style={[{ backgroundColor: theme.colors.background }]}
-      key={itemObj.id}>
+      key={itemName}>
       <ListItem
         containerStyle={[{ backgroundColor: theme.colors.background }]}
         bottomDivider>
         <ListItem.Content>
-          <ListItem.Title style={FONT_WEIGHT_600}>
-            {itemObj.name}
-          </ListItem.Title>
-          {itemObj.vendors.map(vendorName => (
+          <ListItem.Title style={FONT_WEIGHT_600}>{itemName}</ListItem.Title>
+          {vendors.map(vendorName => (
             <SearchResultsCheckBox
               key={vendorName}
               vendorName={vendorName}
-              itemObj={itemObj}
+              itemName={itemName}
             />
           ))}
         </ListItem.Content>
         <ListItem.Content right>
-          <AddItemButton itemObj={itemObj} />
+          <AddItemButton itemName={itemName} />
         </ListItem.Content>
       </ListItem>
     </View>

@@ -7,19 +7,19 @@ import { FC, memo, useEffect, useMemo } from "react";
 import { FlatList, ListRenderItem, View } from "react-native";
 import { shallowEqual } from "react-redux";
 import {
-  ItemObjType,
+  ItemName,
   ItemsReferenceStackParamList,
 } from "../../../../../CustomTypes/types";
-import { selectCategories } from "../../../../redux/addedSlice";
+import { selectCategoriesItemNames } from "../../../../redux/addedSlice";
 import { useAppSelector } from "../../../../redux/hooks";
 import { HEIGHT_100 } from "../../../../shared/sharedStyles";
 import ItemsByCategorySingleListItem from "./ItemsByCategorySingleListItem";
 
-const renderItems: ListRenderItem<ItemObjType> = ({ item }) => {
-  return <ItemsByCategorySingleListItem itemObj={item} />;
-};
+const renderItems: ListRenderItem<ItemName> = ({ item }) => (
+  <ItemsByCategorySingleListItem itemName={item} />
+);
 
-const keyExtractor = (item: ItemObjType) => item.id.toString();
+const keyExtractor = (item: ItemName) => item;
 
 type Props = NativeStackScreenProps<
   ItemsReferenceStackParamList,
@@ -30,15 +30,16 @@ const CategoryItems: FC<Props> = ({ navigation, route }) => {
   const { category } = route.params;
 
   const categoryListItems = useAppSelector(
-    selectCategories(category),
+    selectCategoriesItemNames(category),
     shallowEqual
   );
 
-  const options: NativeStackNavigationOptions = useMemo(() => {
-    return {
+  const options: NativeStackNavigationOptions = useMemo(
+    () => ({
       headerTitle: category,
-    };
-  }, [category]);
+    }),
+    [category]
+  );
 
   useEffect(() => {
     navigation.setOptions(options);

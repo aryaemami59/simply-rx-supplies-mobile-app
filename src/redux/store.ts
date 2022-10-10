@@ -1,11 +1,10 @@
 import { Action, configureStore, ThunkAction } from "@reduxjs/toolkit";
-import { addedReducer, itemReducer } from "./addedSlice";
+import { addedReducer } from "./addedSlice";
 // import logger from "redux-logger";
 
 export const store = configureStore({
   reducer: {
     added: addedReducer,
-    item: itemReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

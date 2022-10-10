@@ -3,27 +3,24 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { Button } from "@rneui/themed";
 import { FC, memo, useCallback } from "react";
 import {
-  ItemObjType,
   ShoppingCartStackParamList,
-  vendorNameType,
+  VendorAndItemName,
 } from "../../../../../CustomTypes/types";
 import { JC_SPACE_EVENLY } from "../../../../shared/sharedStyles";
 import DetailsIconNode from "./DetailsIconNode";
 
-type Props = {
-  itemObj: ItemObjType;
-  vendorName: vendorNameType;
+type Props = VendorAndItemName & {
   reset: () => void;
 };
 
-const DetailsButton: FC<Props> = ({ itemObj, vendorName, reset }) => {
+const DetailsButton: FC<Props> = ({ itemName, vendorName, reset }) => {
   const navigation =
     useNavigation<NativeStackNavigationProp<ShoppingCartStackParamList>>();
 
   const clickHandler = useCallback(() => {
     reset();
-    navigation.push("ItemDetails", { itemObj, vendorName });
-  }, [itemObj, navigation, reset, vendorName]);
+    navigation.push("ItemDetails", { itemName, vendorName });
+  }, [itemName, navigation, reset, vendorName]);
 
   return (
     <Button

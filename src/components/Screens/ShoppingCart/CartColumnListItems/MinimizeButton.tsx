@@ -1,20 +1,18 @@
 import { Button } from "@rneui/themed";
 import { FC, memo, useCallback } from "react";
-import { ItemObjType, vendorNameType } from "../../../../../CustomTypes/types";
+import { VendorAndItemName } from "../../../../../CustomTypes/types";
 import { JC_SPACE_EVENLY } from "../../../../shared/sharedStyles";
 import ExpandIconNode from "./ExpandIconNode";
 import MinimizeIconNode from "./MinimizeIconNode";
 
-type Props = {
-  itemObj: ItemObjType;
-  vendorName: vendorNameType;
+type Props = VendorAndItemName & {
   onPress: () => void;
   open: boolean;
   reset: () => void;
 };
 
 const MinimizeButton: FC<Props> = ({
-  itemObj,
+  itemName,
   vendorName,
   onPress,
   open,

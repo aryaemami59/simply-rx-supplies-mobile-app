@@ -77,11 +77,11 @@ const QRImageScreen: FC<Props> = ({ navigation, route }) => {
           h4>
           Items Included:
         </Text>
-        {itemsAdded.map(itemObj => (
+        {itemsAdded.map(itemName => (
           <Text
-            key={itemObj.id}
+            key={itemName}
             style={[TEXT_CENTER]}>
-            {itemObj.name}
+            {itemName}
           </Text>
         ))}
       </ScrollView>
