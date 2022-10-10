@@ -13,17 +13,15 @@ const Stack = createNativeStackNavigator<HomeStackParamList>();
 
 type Props = BottomTabScreenProps<RootTabParamList, "Home">;
 
-const HomeStackScreen: FC<Props> = ({ navigation, route }): JSX.Element => {
-  return (
-    <SafeAreaProvider>
-      <Stack.Navigator screenOptions={screenOptions}>
-        <Stack.Screen
-          name="HomeScreen"
-          component={HomeScreen}
-        />
-      </Stack.Navigator>
-    </SafeAreaProvider>
-  );
-};
+const HomeStackScreen: FC<Props> = ({ navigation, route }) => (
+  <SafeAreaProvider>
+    <Stack.Navigator screenOptions={screenOptions}>
+      <Stack.Screen
+        name="HomeScreen"
+        component={HomeScreen}
+      />
+    </Stack.Navigator>
+  </SafeAreaProvider>
+);
 
 export default memo<Props>(HomeStackScreen);

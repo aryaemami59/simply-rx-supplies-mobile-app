@@ -17,8 +17,8 @@ import {
 
 type Props = NativeStackScreenProps<ShoppingCartStackParamList, "ItemDetails">;
 
-const ItemDetailsScreen: FC<Props> = ({ navigation, route }): JSX.Element => {
-  const { itemObj, vendorName } = route.params;
+const ItemDetailsScreen: FC<Props> = ({ navigation, route }) => {
+  const { itemObj } = route.params;
   const { src, name, vendors } = itemObj;
   const { theme } = useTheme();
 
@@ -34,44 +34,42 @@ const ItemDetailsScreen: FC<Props> = ({ navigation, route }): JSX.Element => {
   }, [name, navigation, src]);
 
   return (
-    <>
-      <ListItem
-        containerStyle={[
-          HEIGHT_100,
-          AI_FLEX_START,
-          JC_SPACE_BETWEEN,
-          { backgroundColor: theme.colors.background },
-        ]}>
-        <ListItem.Content style={[AI_CENTER]}>
+    <ListItem
+      containerStyle={[
+        HEIGHT_100,
+        AI_FLEX_START,
+        JC_SPACE_BETWEEN,
+        { backgroundColor: theme.colors.background },
+      ]}>
+      <ListItem.Content style={[AI_CENTER]}>
+        <Text
+          h2
+          style={[TEXT_CENTER]}>
+          {name}
+        </Text>
+        {/* <Text h3 style={[TEXT_CENTER]}>
+          {itemObj.itemNumber}
+        </Text> */}
+        <TouchableOpacity onPress={clickHandler}>
+          <Image
+            source={{ uri: src }}
+            containerStyle={[BARCODE_ASPECT_RATIO, WIDTH_60]}
+          />
+        </TouchableOpacity>
+        <Text
+          h3
+          style={[TEXT_CENTER]}>
+          Available on:
+        </Text>
+        {officialVendorNames.map(officialName => (
           <Text
-            h2
-            style={[TEXT_CENTER]}>
-            {name}
+            key={officialName}
+            h4>
+            {officialName}
           </Text>
-          {/* <Text h3 style={[TEXT_CENTER]}>
-            {itemObj.itemNumber}
-          </Text> */}
-          <TouchableOpacity onPress={clickHandler}>
-            <Image
-              source={{ uri: src }}
-              containerStyle={[BARCODE_ASPECT_RATIO, WIDTH_60]}
-            />
-          </TouchableOpacity>
-          <Text
-            h3
-            style={[TEXT_CENTER]}>
-            Available on:
-          </Text>
-          {officialVendorNames.map(officialName => (
-            <Text
-              key={officialName}
-              h4>
-              {officialName}
-            </Text>
-          ))}
-        </ListItem.Content>
-      </ListItem>
-    </>
+        ))}
+      </ListItem.Content>
+    </ListItem>
   );
 };
 

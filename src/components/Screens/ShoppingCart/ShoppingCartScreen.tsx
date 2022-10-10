@@ -11,9 +11,9 @@ import { useAppSelector } from "../../../redux/hooks";
 import { HEIGHT_100 } from "../../../shared/sharedStyles";
 import CartVendorColumns from "./CartVendorColumns";
 
-const renderItem: ListRenderItem<vendorNameType> = ({ item }) => {
-  return <CartVendorColumns vendorName={item} />;
-};
+const renderItem: ListRenderItem<vendorNameType> = ({ item }) => (
+  <CartVendorColumns vendorName={item} />
+);
 
 const keyExtractor = (item: vendorNameType) => item.toString();
 
@@ -22,7 +22,7 @@ type Props = NativeStackScreenProps<
   "ShoppingCartScreen"
 >;
 
-const ShoppingCartScreen: FC<Props> = ({ navigation, route }): JSX.Element => {
+const ShoppingCartScreen: FC<Props> = ({ navigation, route }) => {
   const vendors = useAppSelector(selectVendorsArr);
   const { theme } = useTheme();
 

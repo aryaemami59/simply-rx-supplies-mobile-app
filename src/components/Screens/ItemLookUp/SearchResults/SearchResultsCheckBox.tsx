@@ -22,32 +22,28 @@ type stateToPropsReturnType = {
 const mapStateToProps = (
   state: RootState,
   ownProps: ParentProps
-): stateToPropsReturnType => {
-  return {
-    checked: state.item[ownProps.itemObj.name]!.vendorsToAdd.includes(
-      ownProps.vendorName
-    ),
-    disabled: state.item[ownProps.itemObj.name]!.vendorsAdded.includes(
-      ownProps.vendorName
-    ),
-  };
-};
+): stateToPropsReturnType => ({
+  checked: state.item[ownProps.itemObj.name]!.vendorsToAdd.includes(
+    ownProps.vendorName
+  ),
+  disabled: state.item[ownProps.itemObj.name]!.vendorsAdded.includes(
+    ownProps.vendorName
+  ),
+});
 
 const mapDispatchToProps = (
   dispatch: AppDispatch,
   ownProps: ParentProps
-): { onToggleSwitch: () => void } => {
-  return {
-    onToggleSwitch: () => {
-      dispatch(
-        setVendors({
-          itemObj: ownProps.itemObj,
-          vendorName: ownProps.vendorName,
-        })
-      );
-    },
-  };
-};
+): { onToggleSwitch: () => void } => ({
+  onToggleSwitch: () => {
+    dispatch(
+      setVendors({
+        itemObj: ownProps.itemObj,
+        vendorName: ownProps.vendorName,
+      })
+    );
+  },
+});
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
@@ -65,7 +61,7 @@ const SearchResultsCheckBox: FC<myProps> = ({
   vendorName,
   disabled,
   onToggleSwitch,
-}): JSX.Element => {
+}) => {
   const officialVendorName = useAppSelector<officialVendorNameType>(
     selectVendorOfficialName(vendorName)
   );

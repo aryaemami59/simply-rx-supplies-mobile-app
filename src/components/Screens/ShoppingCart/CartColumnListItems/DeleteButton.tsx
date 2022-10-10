@@ -12,11 +12,7 @@ type Props = {
   reset: () => void;
 };
 
-const DeleteButton: FC<Props> = ({
-  itemObj,
-  vendorName,
-  reset,
-}): JSX.Element => {
+const DeleteButton: FC<Props> = ({ itemObj, vendorName, reset }) => {
   const dispatch = useAppDispatch();
 
   const clickHandler = useCallback(() => {
@@ -25,16 +21,14 @@ const DeleteButton: FC<Props> = ({
   }, [dispatch, itemObj, reset, vendorName]);
 
   return (
-    <>
-      <Button
-        icon={DeleteIconNode}
-        size="md"
-        title="Delete"
-        color="error"
-        onPress={clickHandler}
-        buttonStyle={[JC_SPACE_EVENLY]}
-      />
-    </>
+    <Button
+      icon={DeleteIconNode}
+      size="md"
+      title="Delete"
+      color="error"
+      onPress={clickHandler}
+      buttonStyle={[JC_SPACE_EVENLY]}
+    />
   );
 };
 

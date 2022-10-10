@@ -10,7 +10,7 @@ type Props = {
   itemObj: ItemObjType;
 };
 
-const SingleSearchResultsListItem: FC<Props> = ({ itemObj }): JSX.Element => {
+const SingleSearchResultsListItem: FC<Props> = ({ itemObj }) => {
   const { theme } = useTheme();
 
   return (

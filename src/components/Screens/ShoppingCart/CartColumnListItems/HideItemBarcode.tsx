@@ -4,7 +4,7 @@ import { ToggleItemBarcode } from "../../../../redux/addedSlice";
 import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
 import { BACKGROUND_MAIN_COLOR } from "../../../../shared/sharedStyles";
 
-const HideItemBarcode: FC = (): JSX.Element => {
+const HideItemBarcode: FC = () => {
   const dispatch = useAppDispatch();
   const itemBarcodeShown = useAppSelector(state => state.added.showItemBarcode);
 

@@ -26,7 +26,7 @@ const iconName = Platform.OS === "android" ? "share-android" : "share";
 
 type Props = NativeStackScreenProps<ShoppingCartStackParamList, "QRImage">;
 
-const QRImageScreen: FC<Props> = ({ navigation, route }): JSX.Element => {
+const QRImageScreen: FC<Props> = ({ navigation, route }) => {
   const { itemNumbers, itemsAdded } = route.params;
 
   let svg = useRef(null) as unknown as Svg;

@@ -3,7 +3,7 @@ import { useThemeMode } from "@rneui/themed";
 import { FC, memo, useCallback } from "react";
 import { TouchableHighlight } from "react-native";
 
-const DarkModeIcon: FC = (): JSX.Element => {
+const DarkModeIcon: FC = () => {
   const { mode, setMode } = useThemeMode();
 
   const toggleTheme = useCallback(() => {

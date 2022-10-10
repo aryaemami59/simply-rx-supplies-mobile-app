@@ -4,7 +4,7 @@ import { ToggleItemNumber } from "../../../../redux/addedSlice";
 import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
 import { BACKGROUND_MAIN_COLOR } from "../../../../shared/sharedStyles";
 
-const HideItemNumber: FC = (): JSX.Element => {
+const HideItemNumber: FC = () => {
   const dispatch = useAppDispatch();
   const itemNumberShown = useAppSelector(state => state.added.showItemNumber);
 

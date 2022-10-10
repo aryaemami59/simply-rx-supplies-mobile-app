@@ -15,7 +15,7 @@ type Props = {
   itemObj: ItemObjType;
 };
 
-const BarcodeImageCart: FC<Props> = ({ itemObj }): JSX.Element => {
+const BarcodeImageCart: FC<Props> = ({ itemObj }) => {
   const { src, name } = itemObj;
 
   const navigation =
@@ -26,16 +26,14 @@ const BarcodeImageCart: FC<Props> = ({ itemObj }): JSX.Element => {
   }, [name, navigation, src]);
 
   return (
-    <>
-      <TouchableOpacity
-        onPress={clickHandler}
-        style={[AI_CENTER]}>
-        <Image
-          source={{ uri: src }}
-          style={[styles.ImageStyle, BARCODE_ASPECT_RATIO]}
-        />
-      </TouchableOpacity>
-    </>
+    <TouchableOpacity
+      onPress={clickHandler}
+      style={[AI_CENTER]}>
+      <Image
+        source={{ uri: src }}
+        style={[styles.ImageStyle, BARCODE_ASPECT_RATIO]}
+      />
+    </TouchableOpacity>
   );
 };
 

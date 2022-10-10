@@ -20,17 +20,18 @@ import ShoppingCartStackScreen from "../StackScreenComponents/ShoppingCartStackS
 
 const Tab = createBottomTabNavigator<RootTabParamList>();
 
-const TabBarMain: FC = (): JSX.Element => {
+const TabBarMain: FC = () => {
   const ifItemsAdded = useAppSelector(checkIfAnyItemsAdded);
   const { theme } = useTheme();
   const tabBarBadge = ifItemsAdded ? "" : undefined;
 
-  const options = useMemo(() => {
-    return {
+  const options = useMemo(
+    () => ({
       ...ShoppingCartOptions,
       tabBarBadge,
-    };
-  }, [tabBarBadge]);
+    }),
+    [tabBarBadge]
+  );
 
   enableScreens(false);
 

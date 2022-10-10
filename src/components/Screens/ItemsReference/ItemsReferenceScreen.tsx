@@ -20,10 +20,7 @@ type Props = NativeStackScreenProps<
 
 const Tab = createMaterialTopTabNavigator<ItemsReferenceTopTabParamList>();
 
-const ItemsReferenceScreen: FC<Props> = ({
-  navigation,
-  route,
-}): JSX.Element => {
+const ItemsReferenceScreen: FC<Props> = ({ navigation, route }) => {
   const { theme } = useTheme();
 
   return (

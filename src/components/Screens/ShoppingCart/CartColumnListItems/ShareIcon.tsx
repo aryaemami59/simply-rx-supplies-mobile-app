@@ -4,14 +4,12 @@ import { Platform } from "react-native";
 
 const name = Platform.OS === "ios" ? "share-apple" : "share-google";
 
-const ShareIcon: FC = (): JSX.Element => {
-  return (
-    <EvilIcons
-      name={name}
-      color="white"
-      size={24}
-    />
-  );
-};
+const ShareIcon: FC = () => (
+  <EvilIcons
+    name={name}
+    color="white"
+    size={24}
+  />
+);
 
 export default memo(ShareIcon);

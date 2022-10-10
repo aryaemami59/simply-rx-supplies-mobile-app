@@ -13,7 +13,7 @@ type Props = {
   category: Category;
 };
 
-const CategoryList: FC<Props> = ({ category }): JSX.Element => {
+const CategoryList: FC<Props> = ({ category }) => {
   const navigation =
     useNavigation<NativeStackNavigationProp<ItemsReferenceStackParamList>>();
   const { theme } = useTheme();

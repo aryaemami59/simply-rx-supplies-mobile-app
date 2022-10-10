@@ -56,7 +56,7 @@ const sortResults = (
   return 0;
 };
 
-const InputField: FC = (): JSX.Element => {
+const InputField: FC = () => {
   const [val, setVal] = useState("");
   const items = useAppSelector(selectItemsArr, shallowEqual);
   const view = useRef<Animatable.View & View>(null);

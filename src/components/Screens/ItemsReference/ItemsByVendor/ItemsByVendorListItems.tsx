@@ -25,31 +25,27 @@ type Props = NativeStackScreenProps<
   "ItemsByVendorListItems"
 >;
 
-const ItemsByVendorListItems: FC<Props> = ({
-  navigation,
-  route,
-}): JSX.Element => {
+const ItemsByVendorListItems: FC<Props> = ({ navigation, route }) => {
   const { vendorName } = route.params;
   const officialVendorName = useAppSelector(
     selectVendorOfficialName(vendorName)
   );
 
-  const renderItems: ListRenderItem<ItemObjType> = ({ item }): JSX.Element => {
-    return (
-      <SingleItemsByVendorListItem
-        itemObj={item}
-        vendorName={vendorName}
-      />
-    );
-  };
+  const renderItems: ListRenderItem<ItemObjType> = ({ item }) => (
+    <SingleItemsByVendorListItem
+      itemObj={item}
+      vendorName={vendorName}
+    />
+  );
 
   const items = useAppSelector(selectItemsByVendor(vendorName), shallowEqual);
 
-  const options: NativeStackNavigationOptions = useMemo(() => {
-    return {
+  const options: NativeStackNavigationOptions = useMemo(
+    () => ({
       headerTitle: officialVendorName,
-    };
-  }, [officialVendorName]);
+    }),
+    [officialVendorName]
+  );
 
   useEffect(() => {
     navigation.setOptions(options);

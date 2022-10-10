@@ -15,7 +15,7 @@ type Props = {
   vendorName: vendorNameType;
 };
 
-const ItemsByVendorVendorList: FC<Props> = ({ vendorName }): JSX.Element => {
+const ItemsByVendorVendorList: FC<Props> = ({ vendorName }) => {
   const officialVendorName = useAppSelector(
     selectVendorOfficialName(vendorName)
   );

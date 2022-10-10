@@ -23,7 +23,7 @@ type Props = {
   vendorName: vendorNameType;
 };
 
-const CartVendorColumns: FC<Props> = ({ vendorName }): JSX.Element => {
+const CartVendorColumns: FC<Props> = ({ vendorName }) => {
   const officialVendorName = useAppSelector(
     selectVendorOfficialName(vendorName)
   );

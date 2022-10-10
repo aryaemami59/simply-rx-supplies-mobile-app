@@ -17,7 +17,7 @@ type Props = {
   vendorName: vendorNameType;
 };
 
-const CartQRCodeImage: FC<Props> = ({ vendorName }): JSX.Element => {
+const CartQRCodeImage: FC<Props> = ({ vendorName }) => {
   const itemNumbers = useAppSelector(selectQRCodeContent(vendorName));
   const itemsAdded = useAppSelector(selectItemsAddedByVendor(vendorName));
 

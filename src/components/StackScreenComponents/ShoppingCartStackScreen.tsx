@@ -20,43 +20,38 @@ const Stack = createNativeStackNavigator<ShoppingCartStackParamList>();
 
 type Props = BottomTabScreenProps<RootTabParamList, "ShoppingCart">;
 
-const ShoppingCartStackScreen: FC<Props> = ({
-  navigation,
-  route,
-}): JSX.Element => {
-  return (
-    <SafeAreaProvider>
-      <Stack.Navigator>
+const ShoppingCartStackScreen: FC<Props> = ({ navigation, route }) => (
+  <SafeAreaProvider>
+    <Stack.Navigator>
+      <Stack.Screen
+        name="ShoppingCartScreen"
+        component={ShoppingCartScreen}
+        options={screenOptions}
+      />
+      <Stack.Screen
+        name="CartColumnListItems"
+        component={CartColumnListItemsScreen}
+        options={refHeaderOptions}
+      />
+      <Stack.Group>
         <Stack.Screen
-          name="ShoppingCartScreen"
-          component={ShoppingCartScreen}
-          options={screenOptions}
-        />
-        <Stack.Screen
-          name="CartColumnListItems"
-          component={CartColumnListItemsScreen}
+          name="QRImage"
+          component={QRImageScreen}
           options={refHeaderOptions}
         />
-        <Stack.Group>
-          <Stack.Screen
-            name="QRImage"
-            component={QRImageScreen}
-            options={refHeaderOptions}
-          />
-          <Stack.Screen
-            name="BarcodeImage"
-            component={BarcodeImageScreen}
-            options={refHeaderOptions}
-          />
-          <Stack.Screen
-            name="ItemDetails"
-            component={ItemDetailsScreen}
-            options={{ ...refHeaderOptions, title: "Item Details" }}
-          />
-        </Stack.Group>
-      </Stack.Navigator>
-    </SafeAreaProvider>
-  );
-};
+        <Stack.Screen
+          name="BarcodeImage"
+          component={BarcodeImageScreen}
+          options={refHeaderOptions}
+        />
+        <Stack.Screen
+          name="ItemDetails"
+          component={ItemDetailsScreen}
+          options={{ ...refHeaderOptions, title: "Item Details" }}
+        />
+      </Stack.Group>
+    </Stack.Navigator>
+  </SafeAreaProvider>
+);
 
 export default memo<Props>(ShoppingCartStackScreen);

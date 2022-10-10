@@ -6,11 +6,7 @@ import { useAppSelector } from "../../redux/hooks";
 
 type Props = tabBarIconProps;
 
-const TabBarIconShoppingCart: FC<Props> = ({
-  color,
-  size,
-  focused,
-}): JSX.Element => {
+const TabBarIconShoppingCart: FC<Props> = ({ color, size, focused }) => {
   const ifAdded = useAppSelector(checkIfAnyItemsAdded);
   const iconName = ifAdded ? "cart" : "cart-outline";
 

@@ -8,6 +8,7 @@ import {
 } from "@reduxjs/toolkit";
 import fetch from "react-native-fetch-polyfill";
 import { createSelector } from "reselect";
+import empty from "../shared/empty";
 import {
   GITHUB_URL_CATEGORIES,
   GITHUB_URL_ITEMS,
@@ -35,17 +36,16 @@ import {
 const intersection = (firstArray: string[], secondArray: string[]): string[] =>
   firstArray.filter(e => !secondArray.includes(e));
 
-const createAsyncThunkFunc = (strVal: string, githubUrl: string) => {
-  return createAsyncThunk(`${strVal}/fetch${strVal}`, async () => {
+const createAsyncThunkFunc = (strVal: string, githubUrl: string) =>
+  createAsyncThunk(`${strVal}/fetch${strVal}`, async () => {
     const response: Response = await fetch(githubUrl, { timeout: 1000 });
     if (!response.ok) {
-      return Promise.reject("Unable to fetch, status: " + response.status);
+      return Promise.reject(`Unable to fetch, status: ${response.status}`);
     }
     const data = await response.json();
     const myItems = await data[strVal];
     return myItems;
   });
-};
 
 export const fetchItems: FetchItems = createAsyncThunkFunc(
   "items",
@@ -61,8 +61,6 @@ export const fetchCategories: FetchCategories = createAsyncThunkFunc(
   "categories",
   GITHUB_URL_CATEGORIES
 );
-
-const empty: [] = [];
 
 const initialState: addedState = {
   listItems: empty,

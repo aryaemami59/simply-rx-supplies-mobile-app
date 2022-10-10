@@ -14,10 +14,7 @@ const Stack = createNativeStackNavigator<ItemLookupStackParamList>();
 
 type Props = BottomTabScreenProps<RootTabParamList, "ItemLookup">;
 
-const ItemLookupStackScreen: FC<Props> = ({
-  navigation,
-  route,
-}): JSX.Element => {
+const ItemLookupStackScreen: FC<Props> = ({ navigation, route }) => {
   const { theme } = useTheme();
 
   return (

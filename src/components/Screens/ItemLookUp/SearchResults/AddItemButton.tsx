@@ -26,7 +26,7 @@ type Props = {
   itemObj: ItemObjType;
 };
 
-const AddItemButton: FC<Props> = ({ itemObj }): JSX.Element => {
+const AddItemButton: FC<Props> = ({ itemObj }) => {
   const IfAddedToAllVendors = useAppSelector(checkIfAddedToAllVendors(itemObj));
 
   const vendors = useAppSelector(selectVendorsToAddTo(itemObj), shallowEqual);

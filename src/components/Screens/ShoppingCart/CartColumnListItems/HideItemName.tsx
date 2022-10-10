@@ -4,7 +4,7 @@ import { ToggleItemName } from "../../../../redux/addedSlice";
 import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
 import { BACKGROUND_MAIN_COLOR } from "../../../../shared/sharedStyles";
 
-const HideItemName: FC = (): JSX.Element => {
+const HideItemName: FC = () => {
   const dispatch = useAppDispatch();
   const itemNameShown = useAppSelector(state => state.added.showItemName);
 

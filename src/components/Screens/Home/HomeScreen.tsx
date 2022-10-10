@@ -49,7 +49,7 @@ const shoppingCartIcon = (
 );
 type Props = NativeStackScreenProps<HomeStackParamList, "HomeScreen">;
 
-const HomeScreen: FC<Props> = ({ navigation, route }): JSX.Element => {
+const HomeScreen: FC<Props> = ({ navigation, route }) => {
   const { theme } = useTheme();
 
   const navigateToItemLookup = useCallback(

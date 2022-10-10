@@ -26,10 +26,7 @@ type Props = {
   vendorName: vendorNameType;
 };
 
-const SingleItemsByVendorListItem: FC<Props> = ({
-  itemObj,
-  vendorName,
-}): JSX.Element => {
+const SingleItemsByVendorListItem: FC<Props> = ({ itemObj, vendorName }) => {
   const dispatch = useAppDispatch();
   const ifAddedToAllVendors = useAppSelector(checkIfAddedToAllVendors(itemObj));
 

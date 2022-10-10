@@ -18,10 +18,7 @@ type Props = {
   vendorName: vendorNameType;
 };
 
-const BottomSheetVendorCheckbox: FC<Props> = ({
-  title,
-  vendorName,
-}): JSX.Element => {
+const BottomSheetVendorCheckbox: FC<Props> = ({ title, vendorName }) => {
   const checked = useAppSelector(selectVendorsChecked(vendorName));
   const dispatch = useAppDispatch();
   const { theme } = useTheme();

@@ -17,7 +17,7 @@ type Props = {
 const ItemsByCategorySingleListItemCheckBox: FC<Props> = ({
   itemObj,
   vendorName,
-}): JSX.Element => {
+}) => {
   const dispatch = useAppDispatch();
   const officialVendorName = useAppSelector(
     selectVendorOfficialName(vendorName)

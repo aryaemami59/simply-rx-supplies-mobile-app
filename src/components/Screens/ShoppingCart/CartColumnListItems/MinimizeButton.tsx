@@ -19,7 +19,7 @@ const MinimizeButton: FC<Props> = ({
   onPress,
   open,
   reset,
-}): JSX.Element => {
+}) => {
   const clickHandler = useCallback(() => {
     onPress();
     reset();

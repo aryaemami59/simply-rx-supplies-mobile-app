@@ -11,18 +11,15 @@ type Props = {
   reset: () => void;
 };
 
-const ShareButton: FC<Props> = ({
-  itemObj,
-  vendorName,
-  reset,
-}): JSX.Element => {
-  const shareContent = useMemo(() => {
-    return {
+const ShareButton: FC<Props> = ({ itemObj, vendorName, reset }) => {
+  const shareContent = useMemo(
+    () => ({
       title: `${itemObj.itemNumber}`,
       message: `${itemObj.name}`,
       url: itemObj.src,
-    };
-  }, [itemObj.itemNumber, itemObj.name, itemObj.src]);
+    }),
+    [itemObj.itemNumber, itemObj.name, itemObj.src]
+  );
 
   const shareInfo = useCallback(() => {
     reset();

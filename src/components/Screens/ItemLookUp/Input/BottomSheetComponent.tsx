@@ -9,7 +9,7 @@ import {
 import { useAppSelector } from "../../../../redux/hooks";
 import BottomSheetVendorCheckbox from "../SearchResults/BottomSheetVendorCheckbox";
 
-const BottomSheetComponent: FC = (): JSX.Element => {
+const BottomSheetComponent: FC = () => {
   const [visible, setVisible] = useState(false);
   const vendors = useAppSelector(selectVendorsArr);
   const officialVendorNames = useAppSelector(selectAllVendorOfficialNames);

@@ -15,7 +15,7 @@ import { useAppSelector } from "../../../../redux/hooks";
 import { HEIGHT_100 } from "../../../../shared/sharedStyles";
 import ItemsByCategorySingleListItem from "./ItemsByCategorySingleListItem";
 
-const renderItems: ListRenderItem<ItemObjType> = ({ item }): JSX.Element => {
+const renderItems: ListRenderItem<ItemObjType> = ({ item }) => {
   return <ItemsByCategorySingleListItem itemObj={item} />;
 };
 
@@ -26,7 +26,7 @@ type Props = NativeStackScreenProps<
   "ItemsByCategoryListItems"
 >;
 
-const CategoryItems: FC<Props> = ({ navigation, route }): JSX.Element => {
+const CategoryItems: FC<Props> = ({ navigation, route }) => {
   const { category } = route.params;
 
   const categoryListItems = useAppSelector(

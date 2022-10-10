@@ -11,9 +11,9 @@ import { useAppSelector } from "../../../../redux/hooks";
 import { HEIGHT_100 } from "../../../../shared/sharedStyles";
 import ItemsByVendorVendorList from "./ItemsByVendorVendorList";
 
-const renderItem: ListRenderItem<vendorNameType> = ({ item }) => {
-  return <ItemsByVendorVendorList vendorName={item} />;
-};
+const renderItem: ListRenderItem<vendorNameType> = ({ item }) => (
+  <ItemsByVendorVendorList vendorName={item} />
+);
 
 const keyExtractor = (item: vendorNameType) => item.toString();
 
@@ -22,7 +22,7 @@ type Props = NativeStackScreenProps<
   "ItemsByVendorScreen"
 >;
 
-const ItemsByVendorScreen: FC<Props> = ({ navigation, route }): JSX.Element => {
+const ItemsByVendorScreen: FC<Props> = ({ navigation, route }) => {
   const allVendors = useAppSelector(selectVendorsArr);
   const { theme } = useTheme();
 

@@ -19,20 +19,18 @@ const myTheme = createTheme({
   mode: "light",
 });
 
-const App: FC = (): JSX.Element => {
-  return (
-    <SafeAreaProvider>
-      <Provider store={store}>
-        <PaperProvider>
-          <ThemeProvider theme={myTheme}>
-            <NavigationContainer>
-              <Main />
-            </NavigationContainer>
-          </ThemeProvider>
-        </PaperProvider>
-      </Provider>
-    </SafeAreaProvider>
-  );
-};
+const App: FC = () => (
+  <SafeAreaProvider>
+    <Provider store={store}>
+      <PaperProvider>
+        <ThemeProvider theme={myTheme}>
+          <NavigationContainer>
+            <Main />
+          </NavigationContainer>
+        </ThemeProvider>
+      </PaperProvider>
+    </Provider>
+  </SafeAreaProvider>
+);
 
 export default memo(App);

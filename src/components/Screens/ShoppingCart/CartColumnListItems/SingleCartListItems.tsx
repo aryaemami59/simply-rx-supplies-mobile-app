@@ -21,10 +21,7 @@ type Props = {
   vendorName: vendorNameType;
 };
 
-const SingleCartListItems: FC<Props> = ({
-  itemObj,
-  vendorName,
-}): JSX.Element => {
+const SingleCartListItems: FC<Props> = ({ itemObj, vendorName }) => {
   const { theme } = useTheme();
   const [open, setOpen] = useState(true);
 

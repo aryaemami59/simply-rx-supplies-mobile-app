@@ -50,19 +50,14 @@ type Props = NativeStackScreenProps<
   "CartColumnListItems"
 >;
 
-const CartColumnListItemsScreen: FC<Props> = ({
-  navigation,
-  route,
-}): JSX.Element => {
+const CartColumnListItemsScreen: FC<Props> = ({ navigation, route }) => {
   const { vendorName } = route.params;
-  const renderItems: ListRenderItem<ItemObjType> = ({ item }): JSX.Element => {
-    return (
-      <SingleCartListItems
-        itemObj={item}
-        vendorName={vendorName}
-      />
-    );
-  };
+  const renderItems: ListRenderItem<ItemObjType> = ({ item }) => (
+    <SingleCartListItems
+      itemObj={item}
+      vendorName={vendorName}
+    />
+  );
   const addedItems = useAppSelector(selectByVendor(vendorName));
   const vendorLink = useAppSelector(selectVendorsLinks(vendorName));
   const ifAnyItemsAdded = useAppSelector(
@@ -77,11 +72,12 @@ const CartColumnListItemsScreen: FC<Props> = ({
     selectVendorOfficialName(vendorName)
   );
 
-  const options = useMemo(() => {
-    return {
+  const options = useMemo(
+    () => ({
       headerTitle: officialVendorName,
-    };
-  }, [officialVendorName]);
+    }),
+    [officialVendorName]
+  );
 
   useEffect(() => {
     navigation.setOptions(options);
@@ -116,28 +112,21 @@ const CartColumnListItemsScreen: FC<Props> = ({
         ListHeaderComponent={
           <>
             {ifAnyItemsAdded && (
-              <>
-                <ListItem.Swipeable
-                  containerStyle={[
-                    { backgroundColor: theme.colors.background },
-                  ]}
-                  rightContent={<Button title="Details" />}>
-                  <View style={[AI_CENTER, WIDTH_100, JC_SPACE_BETWEEN]}>
-                    <CartQRCodeImage vendorName={vendorName} />
-                    <View style={[styles.CartQRCodeImageContainer]}>
-                      <TouchableOpacity onPress={openLink}>
-                        <Text
-                          style={[
-                            TEXT_UNDERLINE,
-                            { color: theme.colors.black },
-                          ]}>
-                          {officialVendorName} Website
-                        </Text>
-                      </TouchableOpacity>
-                    </View>
+              <ListItem.Swipeable
+                containerStyle={[{ backgroundColor: theme.colors.background }]}
+                rightContent={<Button title="Details" />}>
+                <View style={[AI_CENTER, WIDTH_100, JC_SPACE_BETWEEN]}>
+                  <CartQRCodeImage vendorName={vendorName} />
+                  <View style={[styles.CartQRCodeImageContainer]}>
+                    <TouchableOpacity onPress={openLink}>
+                      <Text
+                        style={[TEXT_UNDERLINE, { color: theme.colors.black }]}>
+                        {officialVendorName} Website
+                      </Text>
+                    </TouchableOpacity>
                   </View>
-                </ListItem.Swipeable>
-              </>
+                </View>
+              </ListItem.Swipeable>
             )}
           </>
         }

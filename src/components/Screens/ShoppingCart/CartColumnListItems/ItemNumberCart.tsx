@@ -9,7 +9,7 @@ type Props = {
   itemObj: ItemObjType;
 };
 
-const ItemNumberCart: FC<Props> = ({ itemObj }): JSX.Element => {
+const ItemNumberCart: FC<Props> = ({ itemObj }) => {
   const itemNumberShown = useAppSelector(state => state.added.showItemNumber);
   const { theme } = useTheme();
 

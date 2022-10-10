@@ -4,7 +4,7 @@ import { tabBarIconProps } from "../../../CustomTypes/types";
 
 type Props = tabBarIconProps;
 
-const TabBarIconHome: FC<Props> = ({ focused, color, size }): JSX.Element => {
+const TabBarIconHome: FC<Props> = ({ focused, color, size }) => {
   const iconName = focused ? "home" : "home-outline";
 
   return (

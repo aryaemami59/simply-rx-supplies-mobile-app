@@ -1,5 +1,5 @@
-import CardContainer from "react-native-imaged-card-view";
 import { FC } from "react";
+import CardContainer from "react-native-imaged-card-view";
 
 export interface CardContainer extends FC<CardContainerProps> {}
 

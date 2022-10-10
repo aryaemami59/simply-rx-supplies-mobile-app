@@ -11,7 +11,7 @@ import ErrMsgComponent from "../shared/ErrMsgComponent";
 import IsLoadingComponents from "../shared/IsLoadingComponents";
 import TabBarMain from "./TabBarComponents/TabBarMain";
 
-const Main: FC = (): JSX.Element => {
+const Main: FC = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {

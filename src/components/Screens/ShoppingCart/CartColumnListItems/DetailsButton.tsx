@@ -16,11 +16,7 @@ type Props = {
   reset: () => void;
 };
 
-const DetailsButton: FC<Props> = ({
-  itemObj,
-  vendorName,
-  reset,
-}): JSX.Element => {
+const DetailsButton: FC<Props> = ({ itemObj, vendorName, reset }) => {
   const navigation =
     useNavigation<NativeStackNavigationProp<ShoppingCartStackParamList>>();
 

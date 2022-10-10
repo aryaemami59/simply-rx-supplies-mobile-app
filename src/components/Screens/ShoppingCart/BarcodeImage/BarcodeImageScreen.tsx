@@ -24,28 +24,31 @@ const iconName = Platform.OS === "android" ? "share-android" : "share";
 
 type Props = NativeStackScreenProps<ShoppingCartStackParamList, "BarcodeImage">;
 
-const BarcodeImageScreen: FC<Props> = ({ navigation, route }): JSX.Element => {
+const BarcodeImageScreen: FC<Props> = ({ navigation, route }) => {
   const { src, name } = route.params;
 
-  const options: NativeStackNavigationOptions = useMemo(() => {
-    return {
+  const options: NativeStackNavigationOptions = useMemo(
+    () => ({
       title: name,
-    };
-  }, [name]);
+    }),
+    [name]
+  );
 
-  const shareContent = useMemo(() => {
-    return {
+  const shareContent = useMemo(
+    () => ({
       title: `Barcode Image for ${name}`,
       message: `This is the barcode image for ${name}`,
       url: src,
-    };
-  }, [name, src]);
+    }),
+    [name, src]
+  );
 
-  const imageSource = useMemo(() => {
-    return {
+  const imageSource = useMemo(
+    () => ({
       uri: src,
-    };
-  }, [src]);
+    }),
+    [src]
+  );
 
   const shareBarcode = useCallback(() => {
     Share.share(shareContent);

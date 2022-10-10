@@ -116,14 +116,15 @@ export type addedState = VendorsInAddedState & {
   categoriesObj?: categoriesObjType;
 };
 
-export type itemState = {
+export type itemState = Partial<Record<ItemName, ItemObjType>> & {
   itemsArr: ItemObjType[];
   isLoading: boolean;
   vendorsChecked: VendorChecked;
   errMsg: string;
-} & {
-  [key in ItemName]?: ItemObjType;
 };
+// & {
+//   [key in ItemName]?: ItemObjType;
+// };
 
 type ItemName = ItemNamesType;
 type ItemNumber = string;

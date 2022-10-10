@@ -18,9 +18,7 @@ type Props = {
   itemObj: ItemObjType;
 };
 
-const SingleCategoryListItemAddButton: FC<Props> = ({
-  itemObj,
-}): JSX.Element => {
+const SingleCategoryListItemAddButton: FC<Props> = ({ itemObj }) => {
   const IfAddedToAllVendors = useAppSelector(checkIfAddedToAllVendors(itemObj));
 
   const vendors = useAppSelector(selectVendorsToAddTo(itemObj), shallowEqual);
@@ -32,18 +30,16 @@ const SingleCategoryListItemAddButton: FC<Props> = ({
   }, [IfAddedToAllVendors, dispatch, itemObj, vendors]);
 
   return (
-    <>
-      <Chip
-        raised
-        size="lg"
-        onPress={clickHandler}
-        title="Add"
-        disabled={IfAddedToAllVendors}
-        titleStyle={FONT_WEIGHT_700}
-        buttonStyle={BACKGROUND_MAIN_COLOR}
-        icon={AddIcon}
-      />
-    </>
+    <Chip
+      raised
+      size="lg"
+      onPress={clickHandler}
+      title="Add"
+      disabled={IfAddedToAllVendors}
+      titleStyle={FONT_WEIGHT_700}
+      buttonStyle={BACKGROUND_MAIN_COLOR}
+      icon={AddIcon}
+    />
   );
 };
 

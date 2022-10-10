@@ -8,7 +8,7 @@ type Props = {
   itemObj: ItemObjType;
 };
 
-const ItemsByCategorySingleListItem: FC<Props> = ({ itemObj }): JSX.Element => {
+const ItemsByCategorySingleListItem: FC<Props> = ({ itemObj }) => {
   const { theme } = useTheme();
 
   return (

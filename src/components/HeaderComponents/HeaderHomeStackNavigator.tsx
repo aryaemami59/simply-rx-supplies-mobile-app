@@ -23,7 +23,7 @@ const HeaderHomeStackNavigator: FC<Props> = ({
   route,
   options,
   back,
-}): JSX.Element => {
+}) => {
   const inputRef = useRef<TextInput>(null);
   useFocusEffect(() => {
     inputRef.current?.blur();

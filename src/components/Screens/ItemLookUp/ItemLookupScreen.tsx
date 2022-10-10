@@ -13,9 +13,9 @@ import BottomSheetComponent from "./Input/BottomSheetComponent";
 import InputField from "./Input/InputField";
 import SingleSearchResultsListItem from "./SearchResults/SingleSearchResultsListItem";
 
-const renderItems: ListRenderItem<ItemObjType> = ({ item }): JSX.Element => {
-  return <SingleSearchResultsListItem itemObj={item} />;
-};
+const renderItems: ListRenderItem<ItemObjType> = ({ item }) => (
+  <SingleSearchResultsListItem itemObj={item} />
+);
 
 const keyExtractor = (item: ItemObjType) => item.id.toString();
 
@@ -24,7 +24,7 @@ type Props = NativeStackScreenProps<
   "ItemLookupScreen"
 >;
 
-const ItemLookupScreen: FC<Props> = ({ navigation, route }): JSX.Element => {
+const ItemLookupScreen: FC<Props> = ({ navigation, route }) => {
   const listItems = useAppSelector(selectAllListItems, shallowEqual);
   const { theme } = useTheme();
 
