@@ -83,7 +83,7 @@ export type ItemObjType = {
 
 export type singleVendorObjType = {
   readonly id: number;
-  readonly officialName: officialVendorNameType;
+  readonly officialName: OfficialVendorNameType;
   readonly abbrName: VendorNameType;
   readonly link: Link;
   readonly joinChars: JoinChars;
@@ -152,7 +152,7 @@ export type VendorNameType =
   | "COV"
   | "FORS";
 
-export type officialVendorNameType =
+export type OfficialVendorNameType =
   | "McKesson"
   | "OrderInsite"
   | "GNFR"

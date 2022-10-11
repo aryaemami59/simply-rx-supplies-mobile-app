@@ -2,7 +2,7 @@ import { ListItem, useTheme } from "@rneui/themed";
 import { FC, memo, useCallback, useState } from "react";
 import { TouchableHighlight } from "react-native";
 import {
-  officialVendorNameType,
+  OfficialVendorNameType,
   VendorNameType,
 } from "../../../../../CustomTypes/types";
 import {
@@ -13,13 +13,13 @@ import { useAppDispatch } from "../../../../redux/hooks";
 import { WIDTH_100 } from "../../../../shared/sharedStyles";
 
 type Props = {
-  title: officialVendorNameType;
+  title: OfficialVendorNameType;
   vendorName: VendorNameType;
 };
 
 const BottomSheetVendorCheckbox: FC<Props> = ({ title, vendorName }) => {
   // const checked = useAppSelector(selectVendorsChecked(vendorName));
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState(true);
   const dispatch = useAppDispatch();
   const { theme } = useTheme();
 

@@ -19,10 +19,10 @@ import {
 } from "../../../../../CustomTypes/types";
 import {
   clearListItems,
-  selectItemsArr,
   setListItems,
 } from "../../../../redux/addedSlice";
 import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
+import { selectItemsArr } from "../../../../redux/selectors";
 import empty from "../../../../shared/empty";
 import {
   COLOR_WHITE,

@@ -2,11 +2,8 @@ import { BottomSheet } from "@rneui/base";
 import { Button } from "@rneui/themed";
 import { FC, memo, useCallback, useState } from "react";
 import { Keyboard, StyleSheet, View } from "react-native";
-import {
-  selectAllVendorOfficialNames,
-  selectVendorsArr,
-} from "../../../../redux/addedSlice";
 import { useAppSelector } from "../../../../redux/hooks";
+import { selectVendorsArr, selectAllVendorOfficialNames } from "../../../../redux/selectors";
 import BottomSheetVendorCheckbox from "../SearchResults/BottomSheetVendorCheckbox";
 
 const BottomSheetComponent: FC = () => {

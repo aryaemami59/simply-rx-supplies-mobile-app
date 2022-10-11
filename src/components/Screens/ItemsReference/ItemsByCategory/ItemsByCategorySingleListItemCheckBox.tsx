@@ -2,12 +2,10 @@ import { ListItem } from "@rneui/themed";
 import { FC, memo, useCallback } from "react";
 import { VendorAndItemName } from "../../../../../CustomTypes/types";
 import {
-  checkIfItemAddedToOneVendor,
-  checkVendorsToAdd,
-  selectVendorOfficialName,
   setVendors,
 } from "../../../../redux/addedSlice";
 import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
+import { selectVendorOfficialName, checkIfItemAddedToOneVendor, checkVendorsToAdd } from "../../../../redux/selectors";
 
 type Props = VendorAndItemName;
 

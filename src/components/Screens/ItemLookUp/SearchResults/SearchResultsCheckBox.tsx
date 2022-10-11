@@ -1,16 +1,14 @@
 import { ListItem } from "@rneui/themed";
 import { FC, memo, useCallback } from "react";
 import {
-  officialVendorNameType,
+  OfficialVendorNameType,
   VendorAndItemName,
 } from "../../../../../CustomTypes/types";
 import {
-  checkVendorsAdded,
-  checkVendorsToAdd,
-  selectVendorOfficialName,
   setVendors,
 } from "../../../../redux/addedSlice";
 import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
+import { selectVendorOfficialName, checkVendorsToAdd, checkVendorsAdded } from "../../../../redux/selectors";
 import { BACKGROUND_TRANSPARENT } from "../../../../shared/sharedStyles";
 
 // type stateToPropsReturnType = {
@@ -57,7 +55,7 @@ import { BACKGROUND_TRANSPARENT } from "../../../../shared/sharedStyles";
 type Props = VendorAndItemName;
 
 const SearchResultsCheckBox: FC<Props> = ({ vendorName, itemName }) => {
-  const officialVendorName = useAppSelector<officialVendorNameType>(
+  const officialVendorName = useAppSelector<OfficialVendorNameType>(
     selectVendorOfficialName(vendorName)
   );
 

@@ -10,8 +10,8 @@ import {
   ItemName,
   ItemsReferenceStackParamList,
 } from "../../../../../CustomTypes/types";
-import { selectCategoriesItemNames } from "../../../../redux/addedSlice";
 import { useAppSelector } from "../../../../redux/hooks";
+import { selectCategoriesItemNames } from "../../../../redux/selectors";
 import { HEIGHT_100 } from "../../../../shared/sharedStyles";
 import ItemsByCategorySingleListItem from "./ItemsByCategorySingleListItem";
 

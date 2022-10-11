@@ -1,6 +1,7 @@
 import React, { FC, memo, useEffect } from "react";
-import { checkIfLoading, fetchItems, selectErrMsg } from "../redux/addedSlice";
+import { fetchItems } from "../redux/addedSlice";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { checkIfLoading, selectErrMsg } from "../redux/selectors";
 import ErrMsgComponent from "../shared/ErrMsgComponent";
 import IsLoadingComponents from "../shared/IsLoadingComponents";
 import TabBarMain from "./TabBarComponents/TabBarMain";
@@ -10,8 +11,6 @@ const Main: FC = () => {
 
   useEffect(() => {
     dispatch(fetchItems());
-    // dispatch(fetchVendors());
-    // dispatch(fetchCategories());
   }, [dispatch]);
 
   const isLoading = useAppSelector(checkIfLoading);

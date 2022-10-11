@@ -2,12 +2,12 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { Chip, ListItem, useTheme } from "@rneui/themed";
 import { FC, memo, useCallback } from "react";
 import { VendorAndItemName } from "../../../../../CustomTypes/types";
+import { addItemsByVendor } from "../../../../redux/addedSlice";
+import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
 import {
-  addItemsByVendor,
   checkIfAddedToAllVendors,
   checkIfItemAddedToOneVendor,
-} from "../../../../redux/addedSlice";
-import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
+} from "../../../../redux/selectors";
 import {
   BACKGROUND_MAIN_COLOR,
   FONT_WEIGHT_700,

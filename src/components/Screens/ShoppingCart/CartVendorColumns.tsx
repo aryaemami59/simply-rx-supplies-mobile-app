@@ -8,11 +8,11 @@ import {
   ShoppingCartStackParamList,
   VendorNameType,
 } from "../../../../CustomTypes/types";
-import {
-  addedItemsLength,
-  selectVendorOfficialName,
-} from "../../../redux/addedSlice";
 import { useAppSelector } from "../../../redux/hooks";
+import {
+  selectVendorOfficialName,
+  addedItemsLength,
+} from "../../../redux/selectors";
 import {
   AI_CENTER,
   FONT_WEIGHT_BOLD,

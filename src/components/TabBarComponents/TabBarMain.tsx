@@ -4,8 +4,8 @@ import { FC, memo, useMemo } from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { enableScreens } from "react-native-screens";
 import { RootTabParamList } from "../../../CustomTypes/types";
-import { checkIfAnyItemsAdded } from "../../redux/addedSlice";
 import { useAppSelector } from "../../redux/hooks";
+import { checkIfAnyItemsAdded } from "../../redux/selectors";
 import {
   HEADER_SHOWN_FALSE,
   HomeOptions,

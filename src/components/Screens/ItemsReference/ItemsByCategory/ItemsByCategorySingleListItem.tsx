@@ -4,7 +4,7 @@ import { ItemName } from "../../../../../CustomTypes/types";
 import ItemsByCategorySingleListItemCheckBox from "./ItemsByCategorySingleListItemCheckBox";
 import SingleCategoryListItemAddButton from "./SingleCategoryListItemAddButton";
 import { useAppSelector } from "../../../../redux/hooks";
-import { selectVendorsByItemName } from "../../../../redux/addedSlice";
+import { selectVendorsByItemName } from "../../../../redux/selectors";
 
 type Props = {
   itemName: ItemName;

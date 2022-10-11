@@ -6,8 +6,8 @@ import {
   ItemsByVendorStackParamList,
   VendorNameType,
 } from "../../../../../CustomTypes/types";
-import { selectVendorsArr } from "../../../../redux/addedSlice";
 import { useAppSelector } from "../../../../redux/hooks";
+import { selectVendorsArr } from "../../../../redux/selectors";
 import { HEIGHT_100 } from "../../../../shared/sharedStyles";
 import ItemsByVendorVendorList from "./ItemsByVendorVendorList";
 

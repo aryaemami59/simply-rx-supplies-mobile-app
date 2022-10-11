@@ -5,10 +5,9 @@ import { shallowEqual } from "react-redux";
 import { ItemName } from "../../../../../CustomTypes/types";
 import {
   addItems,
-  checkIfAddedToAllVendors,
-  selectVendorsToAddTo,
 } from "../../../../redux/addedSlice";
 import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
+import { checkIfAddedToAllVendors, selectVendorsToAddTo } from "../../../../redux/selectors";
 import {
   BACKGROUND_MAIN_COLOR,
   FONT_WEIGHT_700,

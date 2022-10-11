@@ -2,8 +2,8 @@ import { Button } from "@rneui/themed";
 import { FC, memo, useCallback, useMemo } from "react";
 import { Share } from "react-native";
 import { VendorAndItemName } from "../../../../../CustomTypes/types";
-import { selectItemNumber, selectItemSrc } from "../../../../redux/addedSlice";
 import { useAppSelector } from "../../../../redux/hooks";
+import { selectItemNumber, selectItemSrc } from "../../../../redux/selectors";
 import { JC_SPACE_EVENLY } from "../../../../shared/sharedStyles";
 import ShareIconNode from "./ShareIconNode";
 

@@ -7,8 +7,8 @@ import {
   ItemLookupStackParamList,
   ItemName,
 } from "../../../../CustomTypes/types";
-import { selectAllListItems } from "../../../redux/addedSlice";
 import { useAppSelector } from "../../../redux/hooks";
+import { selectAllListItems } from "../../../redux/selectors";
 import BottomSheetComponent from "./Input/BottomSheetComponent";
 import InputField from "./Input/InputField";
 import SingleSearchResultsListItem from "./SearchResults/SingleSearchResultsListItem";

@@ -6,8 +6,8 @@ import {
   ItemName,
   ShoppingCartStackParamList,
 } from "../../../../../CustomTypes/types";
-import { selectItemSrc } from "../../../../redux/addedSlice";
 import { useAppSelector } from "../../../../redux/hooks";
+import { selectItemSrc } from "../../../../redux/selectors";
 import {
   AI_CENTER,
   BARCODE_ASPECT_RATIO,

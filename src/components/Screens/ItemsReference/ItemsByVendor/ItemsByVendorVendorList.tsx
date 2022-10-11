@@ -7,8 +7,8 @@ import {
   ItemsReferenceStackParamList,
   VendorNameType,
 } from "../../../../../CustomTypes/types";
-import { selectVendorOfficialName } from "../../../../redux/addedSlice";
 import { useAppSelector } from "../../../../redux/hooks";
+import { selectVendorOfficialName } from "../../../../redux/selectors";
 import { AI_CENTER, JC_SPACE_BETWEEN } from "../../../../shared/sharedStyles";
 
 type Props = {

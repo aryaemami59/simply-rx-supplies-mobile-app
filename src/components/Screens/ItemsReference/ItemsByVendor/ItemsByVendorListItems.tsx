@@ -10,11 +10,11 @@ import {
   ItemName,
   ItemsReferenceStackParamList,
 } from "../../../../../CustomTypes/types";
-import {
-  selectItemNamesByVendor,
-  selectVendorOfficialName,
-} from "../../../../redux/addedSlice";
 import { useAppSelector } from "../../../../redux/hooks";
+import {
+  selectVendorOfficialName,
+  selectItemNamesByVendor,
+} from "../../../../redux/selectors";
 import { HEIGHT_100 } from "../../../../shared/sharedStyles";
 import SingleItemsByVendorListItem from "./SingleItemsByVendorListItem";
 

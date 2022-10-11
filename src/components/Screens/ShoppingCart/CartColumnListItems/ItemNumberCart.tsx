@@ -2,8 +2,8 @@ import { useTheme } from "@rneui/themed";
 import { FC, memo } from "react";
 import { Text, View } from "react-native";
 import { ItemName } from "../../../../../CustomTypes/types";
-import { selectItemNumber } from "../../../../redux/addedSlice";
 import { useAppSelector } from "../../../../redux/hooks";
+import { selectItemNumber } from "../../../../redux/selectors";
 import { AI_CENTER, TEXT_CENTER } from "../../../../shared/sharedStyles";
 
 type Props = {

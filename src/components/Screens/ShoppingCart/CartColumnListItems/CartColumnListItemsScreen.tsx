@@ -15,11 +15,6 @@ import {
   ItemName,
   ShoppingCartStackParamList,
 } from "../../../../../CustomTypes/types";
-import {
-  checkIfAnyItemsAddedToOneVendor,
-  selectVendorOfficialName,
-  selectVendorsLinks,
-} from "../../../../redux/addedSlice";
 import { useAppSelector } from "../../../../redux/hooks";
 import {
   AI_CENTER,
@@ -33,7 +28,12 @@ import {
 } from "../../../../shared/sharedStyles";
 import CartQRCodeImage from "../QRImage/CartQRCodeImage";
 import SingleCartListItems from "./SingleCartListItems";
-import { selectAddedItemsByVendor } from "../../../../redux/addedSlice";
+import {
+  selectVendorsLinks,
+  checkIfAnyItemsAddedToOneVendor,
+  selectVendorOfficialName,
+  selectAddedItemsByVendor,
+} from "../../../../redux/selectors";
 
 const shoppingCartIcon = (
   <MaterialIcons

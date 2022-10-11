@@ -7,8 +7,8 @@ import {
   Category,
   ItemsByCategoryStackParamList,
 } from "../../../../../CustomTypes/types";
-import { selectCategoriesArr } from "../../../../redux/addedSlice";
 import { useAppSelector } from "../../../../redux/hooks";
+import { selectCategoriesArr } from "../../../../redux/selectors";
 import { HEIGHT_100 } from "../../../../shared/sharedStyles";
 import CategoryList from "./CategoryList";
 

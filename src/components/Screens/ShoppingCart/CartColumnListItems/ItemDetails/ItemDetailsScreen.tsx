@@ -3,12 +3,12 @@ import { Image, ListItem, Text, useTheme } from "@rneui/themed";
 import { FC, memo, useCallback } from "react";
 import { TouchableOpacity } from "react-native";
 import { ShoppingCartStackParamList } from "../../../../../../CustomTypes/types";
+import { useAppSelector } from "../../../../../redux/hooks";
 import {
   selectVendorsByItemName,
-  selectVendorsOfficialNames,
   selectItemSrc,
-} from "../../../../../redux/addedSlice";
-import { useAppSelector } from "../../../../../redux/hooks";
+  selectVendorsOfficialNames,
+} from "../../../../../redux/selectors";
 import {
   AI_CENTER,
   AI_FLEX_START,
