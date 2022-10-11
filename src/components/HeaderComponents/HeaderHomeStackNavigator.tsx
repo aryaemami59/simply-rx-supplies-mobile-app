@@ -15,6 +15,7 @@ import {
 import HeaderRightComponent from "./HeaderRightComponent";
 import SearchClearIcon from "./SearchClearIcon";
 import SearchIcon from "./SearchIcon";
+import { BACKGROUND_TRANSPARENT } from "../../shared/sharedStyles";
 
 type Props = NativeStackHeaderProps;
 
@@ -58,7 +59,11 @@ const HeaderHomeStackNavigator: FC<Props> = ({
         <SearchBar
           ref={inputRef}
           onFocus={focusHandler}
-          containerStyle={[WIDTH_80, styles.searchBarContainer]}
+          containerStyle={[
+            WIDTH_80,
+            styles.searchBarContainer,
+            BACKGROUND_TRANSPARENT,
+          ]}
           placeholder="Search..."
           round
           showSoftInputOnFocus={false}
@@ -74,20 +79,19 @@ const HeaderHomeStackNavigator: FC<Props> = ({
 };
 
 const styles = StyleSheet.create({
-  searchBarContainer: {
-    backgroundColor: "transparent",
-    borderBottomWidth: 0,
-    borderTopWidth: 0,
-  },
-  searchBarInputContainer: {
-    borderRadius: 9999,
-    backgroundColor: SEARCH_BAR_COLOR,
-  },
   headerCenterContainer: {
     flex: 5,
   },
   headerRightContainer: {
     flex: 1,
+  },
+  searchBarContainer: {
+    borderBottomWidth: 0,
+    borderTopWidth: 0,
+  },
+  searchBarInputContainer: {
+    backgroundColor: SEARCH_BAR_COLOR,
+    borderRadius: 9999,
   },
 });
 

@@ -1,6 +1,6 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { useTheme } from "@rneui/themed";
-import { FC, memo } from "react";
+import { FC, memo, useMemo } from "react";
 import { FlatList, ListRenderItem, StyleSheet, View } from "react-native";
 import { shallowEqual } from "react-redux";
 import {
@@ -27,13 +27,15 @@ type Props = NativeStackScreenProps<
 const ItemLookupScreen: FC<Props> = ({ navigation, route }) => {
   const listItems = useAppSelector(selectAllListItems, shallowEqual);
   const { theme } = useTheme();
+  const { background } = theme.colors;
+
+  const style = useMemo(
+    () => [styles.containerStyle, { backgroundColor: background }],
+    [background]
+  );
 
   return (
-    <View
-      style={[
-        styles.containerStyle,
-        { backgroundColor: theme.colors.background },
-      ]}>
+    <View style={style}>
       <InputField />
       <BottomSheetComponent />
       <FlatList
@@ -52,8 +54,8 @@ const ItemLookupScreen: FC<Props> = ({ navigation, route }) => {
 const styles = StyleSheet.create({
   containerStyle: {
     alignItems: "stretch",
-    justifyContent: "space-between",
     height: "100%",
+    justifyContent: "space-between",
     paddingBottom: 10,
   },
 });

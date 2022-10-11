@@ -18,7 +18,6 @@ type Props = {
 };
 
 const BarcodeImageCart: FC<Props> = ({ itemName }) => {
-  // const { src, name } = itemName;
   const src = useAppSelector(selectItemSrc(itemName));
 
   const navigation =
@@ -31,7 +30,7 @@ const BarcodeImageCart: FC<Props> = ({ itemName }) => {
   return (
     <TouchableOpacity
       onPress={clickHandler}
-      style={[AI_CENTER]}>
+      style={AI_CENTER}>
       <Image
         source={{ uri: src }}
         style={[styles.ImageStyle, BARCODE_ASPECT_RATIO]}

@@ -4,53 +4,14 @@ import {
   OfficialVendorNameType,
   VendorAndItemName,
 } from "../../../../../CustomTypes/types";
-import {
-  setVendors,
-} from "../../../../redux/addedSlice";
+import { setVendors } from "../../../../redux/addedSlice";
 import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
-import { selectVendorOfficialName, checkVendorsToAdd, checkVendorsAdded } from "../../../../redux/selectors";
+import {
+  checkVendorsAdded,
+  checkVendorsToAdd,
+  selectVendorOfficialName,
+} from "../../../../redux/selectors";
 import { BACKGROUND_TRANSPARENT } from "../../../../shared/sharedStyles";
-
-// type stateToPropsReturnType = {
-//   checked: boolean;
-//   disabled: boolean;
-// };
-
-// const mapStateToProps = (
-//   state: RootState,
-//   ownProps: ParentProps
-// ): stateToPropsReturnType => ({
-//   checked: state.item[ownProps.itemObj.name]!.vendorsToAdd.includes(
-//     ownProps.vendorName
-//   ),
-//   disabled: state.item[ownProps.itemObj.name]!.vendorsAdded.includes(
-//     ownProps.vendorName
-//   ),
-// });
-
-// const mapDispatchToProps = (
-//   dispatch: AppDispatch,
-//   ownProps: ParentProps
-// ): { onToggleSwitch: () => void } => ({
-//   onToggleSwitch: () => {
-//     dispatch(
-//       setVendors({
-//         itemObj: ownProps.itemObj,
-//         vendorName: ownProps.vendorName,
-//       })
-//     );
-//   },
-// });
-
-// const connector = connect(mapStateToProps, mapDispatchToProps);
-
-// type PropsFromRedux = ConnectedProps<typeof connector>;
-
-// interface ParentProps {
-//   vendorName: VendorNameType;
-// }
-
-// type myProps = ParentProps & PropsFromRedux;
 
 type Props = VendorAndItemName;
 

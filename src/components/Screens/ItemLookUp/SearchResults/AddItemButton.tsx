@@ -1,13 +1,10 @@
 import { MaterialIcons } from "@expo/vector-icons";
 import { Chip } from "@rneui/themed";
 import { FC, memo, useCallback } from "react";
-import { shallowEqual } from "react-redux";
 import { ItemName } from "../../../../../CustomTypes/types";
-import {
-  addItems,
-} from "../../../../redux/addedSlice";
+import { addItems } from "../../../../redux/addedSlice";
 import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
-import { checkIfAddedToAllVendors, selectVendorsToAddTo } from "../../../../redux/selectors";
+import { checkIfAddedToAllVendors } from "../../../../redux/selectors";
 import {
   BACKGROUND_MAIN_COLOR,
   FONT_WEIGHT_700,
@@ -30,18 +27,11 @@ const AddItemButton: FC<Props> = ({ itemName }) => {
     checkIfAddedToAllVendors(itemName)
   );
 
-  const vendorsToAddTo = useAppSelector(
-    selectVendorsToAddTo(itemName),
-    shallowEqual
-  );
-
   const dispatch = useAppDispatch();
 
   const clickHandler = useCallback(() => {
-    IfAddedToAllVendors ||
-      !vendorsToAddTo.length ||
-      dispatch(addItems({ itemName, vendorsToAddTo }));
-  }, [IfAddedToAllVendors, dispatch, itemName, vendorsToAddTo]);
+    dispatch(addItems({ itemName }));
+  }, [dispatch, itemName]);
 
   return (
     <Chip

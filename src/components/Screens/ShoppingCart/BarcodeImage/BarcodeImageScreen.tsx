@@ -59,13 +59,14 @@ const BarcodeImageScreen: FC<Props> = ({ navigation, route }) => {
   }, [navigation, options]);
 
   const { theme } = useTheme();
+  const { background } = theme.colors;
 
   return (
     <View
       style={[
         JC_AI_CENTER_HEIGHT100,
         styles.container,
-        { backgroundColor: theme.colors.background },
+        { backgroundColor: background },
       ]}>
       <TouchableOpacity onLongPress={shareBarcode}>
         <Image
@@ -91,8 +92,8 @@ const styles = StyleSheet.create({
   },
   icon: {
     alignSelf: "flex-end",
-    marginTop: 20,
     marginEnd: 15,
+    marginTop: 20,
   },
 });
 

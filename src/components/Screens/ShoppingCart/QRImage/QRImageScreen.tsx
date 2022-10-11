@@ -73,14 +73,14 @@ const QRImageScreen: FC<Props> = ({ navigation, route }) => {
           />
         </TouchableOpacity>
         <Text
-          style={[PADDING_TOP_20]}
+          style={PADDING_TOP_20}
           h4>
           Items Included:
         </Text>
         {itemsAdded.map(itemName => (
           <Text
             key={itemName}
-            style={[TEXT_CENTER]}>
+            style={TEXT_CENTER}>
             {itemName}
           </Text>
         ))}

@@ -17,6 +17,12 @@ import {
 } from "../../../../../CustomTypes/types";
 import { useAppSelector } from "../../../../redux/hooks";
 import {
+  checkIfAnyItemsAddedToOneVendor,
+  selectAddedItemsByVendor,
+  selectVendorOfficialName,
+  selectVendorsLinks,
+} from "../../../../redux/selectors";
+import {
   AI_CENTER,
   BACKGROUND_MAIN_COLOR,
   FONT_WEIGHT_700,
@@ -28,12 +34,6 @@ import {
 } from "../../../../shared/sharedStyles";
 import CartQRCodeImage from "../QRImage/CartQRCodeImage";
 import SingleCartListItems from "./SingleCartListItems";
-import {
-  selectVendorsLinks,
-  checkIfAnyItemsAddedToOneVendor,
-  selectVendorOfficialName,
-  selectAddedItemsByVendor,
-} from "../../../../redux/selectors";
 
 const shoppingCartIcon = (
   <MaterialIcons
@@ -52,11 +52,14 @@ type Props = NativeStackScreenProps<
 
 const CartColumnListItemsScreen: FC<Props> = ({ navigation, route }) => {
   const { vendorName } = route.params;
-  const renderItems: ListRenderItem<ItemName> = ({ item }) => (
-    <SingleCartListItems
-      itemName={item}
-      vendorName={vendorName}
-    />
+  const renderItems: ListRenderItem<ItemName> = useCallback(
+    ({ item }) => (
+      <SingleCartListItems
+        itemName={item}
+        vendorName={vendorName}
+      />
+    ),
+    [vendorName]
   );
   const addedItems = useAppSelector(selectAddedItemsByVendor(vendorName));
   const vendorLink = useAppSelector(selectVendorsLinks(vendorName));
@@ -88,9 +91,10 @@ const CartColumnListItemsScreen: FC<Props> = ({ navigation, route }) => {
   }, [navigation]);
 
   const { theme } = useTheme();
+  const { background, black } = theme.colors;
 
   return (
-    <View style={[HEIGHT_100, { backgroundColor: theme.colors.background }]}>
+    <View style={[HEIGHT_100, { backgroundColor: background }]}>
       {/* <View style={styles.bigContainer}>
         {ifAnyItemsAdded && (
           <>
@@ -113,14 +117,13 @@ const CartColumnListItemsScreen: FC<Props> = ({ navigation, route }) => {
           <>
             {ifAnyItemsAdded && (
               <ListItem.Swipeable
-                containerStyle={[{ backgroundColor: theme.colors.background }]}
+                containerStyle={[{ backgroundColor: background }]}
                 rightContent={<Button title="Details" />}>
                 <View style={[AI_CENTER, WIDTH_100, JC_SPACE_BETWEEN]}>
                   <CartQRCodeImage vendorName={vendorName} />
-                  <View style={[styles.CartQRCodeImageContainer]}>
+                  <View style={styles.CartQRCodeImageContainer}>
                     <TouchableOpacity onPress={openLink}>
-                      <Text
-                        style={[TEXT_UNDERLINE, { color: theme.colors.black }]}>
+                      <Text style={[TEXT_UNDERLINE, { color: black }]}>
                         {officialVendorName} Website
                       </Text>
                     </TouchableOpacity>
@@ -135,14 +138,9 @@ const CartColumnListItemsScreen: FC<Props> = ({ navigation, route }) => {
             style={[
               HEIGHT_100,
               styles.emptyContainer,
-              { backgroundColor: theme.colors.background },
+              { backgroundColor: background },
             ]}>
-            <Text
-              style={[
-                TEXT_CENTER,
-                styles.textStyle,
-                { color: theme.colors.black },
-              ]}>
+            <Text style={[TEXT_CENTER, styles.textStyle, { color: black }]}>
               No Item Has Been Added Yet!
             </Text>
             <Chip
@@ -169,27 +167,16 @@ const CartColumnListItemsScreen: FC<Props> = ({ navigation, route }) => {
 };
 
 const styles = StyleSheet.create({
-  textStyle: {
-    paddingVertical: 20,
-  },
-  bigContainer: {
-    paddingVertical: 10,
-  },
   CartQRCodeImageContainer: {
     paddingVertical: 10,
-  },
-  vendorLinkContainer: {
-    paddingVertical: 10,
-  },
-  hideButtonsContainer: {
-    justifyContent: "space-between",
-    alignItems: "center",
-    height: 100,
   },
   emptyContainer: {
     alignItems: "stretch",
     justifyContent: "space-between",
     padding: 30,
+  },
+  textStyle: {
+    paddingVertical: 20,
   },
 });
 

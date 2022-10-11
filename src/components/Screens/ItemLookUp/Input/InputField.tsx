@@ -17,19 +17,18 @@ import {
   ItemName,
   OnChangeText,
 } from "../../../../../CustomTypes/types";
-import {
-  clearListItems,
-  setListItems,
-} from "../../../../redux/addedSlice";
+import { clearListItems, setListItems } from "../../../../redux/addedSlice";
 import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
 import { selectItemsArr } from "../../../../redux/selectors";
 import empty from "../../../../shared/empty";
 import {
+  BACKGROUND_TRANSPARENT,
   COLOR_WHITE,
   DISPLAY_NONE,
   ICON_GRAY_COLOR,
   JC_AI_CENTER,
   MAIN_COLOR,
+  SEARCH_BAR_COLOR,
   WIDTH_100,
   WIDTH_80,
 } from "../../../../shared/sharedStyles";
@@ -166,10 +165,10 @@ const InputField: FC = () => {
             focusable
             onFocus={focusHandler}
             onBlur={blurHandler}
-            containerStyle={[styles.searchBarContainer]}
+            containerStyle={[styles.searchBarContainer, BACKGROUND_TRANSPARENT]}
             placeholder="Search..."
             round
-            inputContainerStyle={[styles.inputContainer]}
+            inputContainerStyle={styles.inputContainer}
             onClear={clearHandler}
             onChangeText={changeVal}
             value={val}
@@ -185,23 +184,22 @@ const InputField: FC = () => {
 };
 
 const styles = StyleSheet.create({
-  searchBarContainer: {
-    backgroundColor: "transparent",
-    borderBottomWidth: 0,
-    borderTopWidth: 0,
+  headerCenterContainer: {
+    flex: 5,
   },
   headerContainer: {
     // height: 105,
   },
-  inputContainer: {
-    borderRadius: 9999,
-    backgroundColor: "rgba(0, 0, 0, 0.3)",
-  },
-  headerCenterContainer: {
-    flex: 5,
-  },
   headerRightContainer: {
     flex: 1,
+  },
+  inputContainer: {
+    backgroundColor: SEARCH_BAR_COLOR,
+    borderRadius: 9999,
+  },
+  searchBarContainer: {
+    borderBottomWidth: 0,
+    borderTopWidth: 0,
   },
 });
 

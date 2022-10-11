@@ -3,7 +3,7 @@ import {
   NativeStackScreenProps,
 } from "@react-navigation/native-stack";
 import { useTheme } from "@rneui/themed";
-import { FC, memo, useEffect, useMemo } from "react";
+import { FC, memo, useCallback, useEffect, useMemo } from "react";
 import { FlatList, ListRenderItem, View } from "react-native";
 import { shallowEqual } from "react-redux";
 import {
@@ -12,8 +12,8 @@ import {
 } from "../../../../../CustomTypes/types";
 import { useAppSelector } from "../../../../redux/hooks";
 import {
-  selectVendorOfficialName,
   selectItemNamesByVendor,
+  selectVendorOfficialName,
 } from "../../../../redux/selectors";
 import { HEIGHT_100 } from "../../../../shared/sharedStyles";
 import SingleItemsByVendorListItem from "./SingleItemsByVendorListItem";
@@ -31,11 +31,14 @@ const ItemsByVendorListItems: FC<Props> = ({ navigation, route }) => {
     selectVendorOfficialName(vendorName)
   );
 
-  const renderItems: ListRenderItem<ItemName> = ({ item }) => (
-    <SingleItemsByVendorListItem
-      itemName={item}
-      vendorName={vendorName}
-    />
+  const renderItems: ListRenderItem<ItemName> = useCallback(
+    ({ item }) => (
+      <SingleItemsByVendorListItem
+        itemName={item}
+        vendorName={vendorName}
+      />
+    ),
+    [vendorName]
   );
 
   const items = useAppSelector(
@@ -55,9 +58,10 @@ const ItemsByVendorListItems: FC<Props> = ({ navigation, route }) => {
   }, [navigation, options]);
 
   const { theme } = useTheme();
+  const { background } = theme.colors;
 
   return (
-    <View style={[{ backgroundColor: theme.colors.background }, HEIGHT_100]}>
+    <View style={[{ backgroundColor: background }, HEIGHT_100]}>
       <FlatList
         removeClippedSubviews
         data={items}

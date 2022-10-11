@@ -25,8 +25,8 @@ const ItemDetailsScreen: FC<Props> = ({ navigation, route }) => {
   const { itemName } = route.params;
   const vendors = useAppSelector(selectVendorsByItemName(itemName));
   const src = useAppSelector(selectItemSrc(itemName));
-  // const { src, vendors } = itemObj;
   const { theme } = useTheme();
+  const { background } = theme.colors;
 
   const officialVendorNames = useAppSelector(
     selectVendorsOfficialNames(vendors)
@@ -45,17 +45,14 @@ const ItemDetailsScreen: FC<Props> = ({ navigation, route }) => {
         HEIGHT_100,
         AI_FLEX_START,
         JC_SPACE_BETWEEN,
-        { backgroundColor: theme.colors.background },
+        { backgroundColor: background },
       ]}>
-      <ListItem.Content style={[AI_CENTER]}>
+      <ListItem.Content style={AI_CENTER}>
         <Text
           h2
-          style={[TEXT_CENTER]}>
+          style={TEXT_CENTER}>
           {itemName}
         </Text>
-        {/* <Text h3 style={[TEXT_CENTER]}>
-          {itemObj.itemNumber}
-        </Text> */}
         <TouchableOpacity onPress={clickHandler}>
           <Image
             source={{ uri: src }}
@@ -64,7 +61,7 @@ const ItemDetailsScreen: FC<Props> = ({ navigation, route }) => {
         </TouchableOpacity>
         <Text
           h3
-          style={[TEXT_CENTER]}>
+          style={TEXT_CENTER}>
           Available on:
         </Text>
         {officialVendorNames.map(officialName => (

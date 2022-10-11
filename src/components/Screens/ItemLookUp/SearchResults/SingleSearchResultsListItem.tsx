@@ -1,5 +1,5 @@
 import { ListItem, useTheme } from "@rneui/themed";
-import { FC, memo } from "react";
+import { FC, memo, useMemo } from "react";
 import { View } from "react-native";
 import { shallowEqual } from "react-redux";
 import { ItemName } from "../../../../../CustomTypes/types";
@@ -15,17 +15,20 @@ type Props = {
 
 const SingleSearchResultsListItem: FC<Props> = ({ itemName }) => {
   const { theme } = useTheme();
+  const { background } = theme.colors;
   const vendors = useAppSelector(
     selectVendorsByItemName(itemName),
     shallowEqual
   );
 
+  const style = useMemo(() => ({ backgroundColor: background }), [background]);
+
   return (
     <View
-      style={[{ backgroundColor: theme.colors.background }]}
+      style={style}
       key={itemName}>
       <ListItem
-        containerStyle={[{ backgroundColor: theme.colors.background }]}
+        containerStyle={style}
         bottomDivider>
         <ListItem.Content>
           <ListItem.Title style={FONT_WEIGHT_600}>{itemName}</ListItem.Title>

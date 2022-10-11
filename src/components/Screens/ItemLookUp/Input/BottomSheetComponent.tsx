@@ -3,7 +3,10 @@ import { Button } from "@rneui/themed";
 import { FC, memo, useCallback, useState } from "react";
 import { Keyboard, StyleSheet, View } from "react-native";
 import { useAppSelector } from "../../../../redux/hooks";
-import { selectVendorsArr, selectAllVendorOfficialNames } from "../../../../redux/selectors";
+import {
+  selectVendorsArr,
+  selectAllVendorOfficialNames,
+} from "../../../../redux/selectors";
 import BottomSheetVendorCheckbox from "../SearchResults/BottomSheetVendorCheckbox";
 
 const BottomSheetComponent: FC = () => {
@@ -29,7 +32,7 @@ const BottomSheetComponent: FC = () => {
       <BottomSheet
         isVisible={visible}
         onBackdropPress={hideBottomSheet}
-        containerStyle={[styles.bottomSheetContainer]}>
+        containerStyle={styles.bottomSheetContainer}>
         <View>
           {officialVendorNames.map((officialVendorName, index) => (
             <BottomSheetVendorCheckbox

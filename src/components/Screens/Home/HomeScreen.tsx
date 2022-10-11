@@ -51,6 +51,7 @@ type Props = NativeStackScreenProps<HomeStackParamList, "HomeScreen">;
 
 const HomeScreen: FC<Props> = ({ navigation, route }) => {
   const { theme } = useTheme();
+  const { background } = theme.colors;
 
   const navigateToItemLookup = useCallback(
     () => navigation.navigate("ItemLookup"),
@@ -85,8 +86,8 @@ const HomeScreen: FC<Props> = ({ navigation, route }) => {
   );
 
   return (
-    <SafeAreaView style={[{ backgroundColor: theme.colors.background }]}>
-      <View style={[styles.container]}>
+    <SafeAreaView style={{ backgroundColor: background }}>
+      <View style={styles.container}>
         <Chip
           raised
           titleStyle={FONT_WEIGHT_700}
@@ -137,8 +138,8 @@ const HomeScreen: FC<Props> = ({ navigation, route }) => {
 const styles = StyleSheet.create({
   container: {
     alignItems: "stretch",
-    justifyContent: "space-between",
     height: "100%",
+    justifyContent: "space-between",
     padding: 30,
   },
 });

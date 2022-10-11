@@ -18,10 +18,10 @@ type Props = {
 };
 
 const BottomSheetVendorCheckbox: FC<Props> = ({ title, vendorName }) => {
-  // const checked = useAppSelector(selectVendorsChecked(vendorName));
   const [checked, setChecked] = useState(true);
   const dispatch = useAppDispatch();
   const { theme } = useTheme();
+  const { background } = theme.colors;
 
   const onToggleCheck = useCallback(() => {
     checked
@@ -37,7 +37,7 @@ const BottomSheetVendorCheckbox: FC<Props> = ({ title, vendorName }) => {
       activeOpacity={0.6}>
       <ListItem
         bottomDivider
-        containerStyle={[{ backgroundColor: theme.colors.background }]}>
+        containerStyle={{ backgroundColor: background }}>
         <ListItem.Content style={WIDTH_100}>
           <ListItem.CheckBox
             checked={checked}

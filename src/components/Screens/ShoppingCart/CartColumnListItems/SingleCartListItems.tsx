@@ -19,48 +19,54 @@ import ShareButton from "./ShareButton";
 type Props = VendorAndItemName;
 
 const SingleCartListItems: FC<Props> = ({ itemName, vendorName }) => {
-  const { theme } = useTheme();
   const [open, setOpen] = useState(true);
+  const { theme } = useTheme();
+  const { background } = theme.colors;
 
   const clickHandler = useCallback(() => {
     setOpen(prev => !prev);
   }, []);
 
+  const rightContent = useCallback(
+    (reset: () => void) => (
+      <>
+        {open && (
+          <>
+            <DeleteButton
+              reset={reset}
+              itemName={itemName}
+              vendorName={vendorName}
+            />
+            <ShareButton
+              reset={reset}
+              itemName={itemName}
+              vendorName={vendorName}
+            />
+            <DetailsButton
+              reset={reset}
+              itemName={itemName}
+              vendorName={vendorName}
+            />
+          </>
+        )}
+        <MinimizeButton
+          open={open}
+          itemName={itemName}
+          vendorName={vendorName}
+          reset={reset}
+          onPress={clickHandler}
+        />
+      </>
+    ),
+    [clickHandler, itemName, open, vendorName]
+  );
+
   return (
     <ListItem.Swipeable
-      containerStyle={[{ backgroundColor: theme.colors.background }]}
+      containerStyle={[{ backgroundColor: background }]}
       bottomDivider
       topDivider
-      rightContent={reset => (
-        <>
-          {open && (
-            <>
-              <DeleteButton
-                reset={reset}
-                itemName={itemName}
-                vendorName={vendorName}
-              />
-              <ShareButton
-                reset={reset}
-                itemName={itemName}
-                vendorName={vendorName}
-              />
-              <DetailsButton
-                reset={reset}
-                itemName={itemName}
-                vendorName={vendorName}
-              />
-            </>
-          )}
-          <MinimizeButton
-            open={open}
-            itemName={itemName}
-            vendorName={vendorName}
-            reset={reset}
-            onPress={clickHandler}
-          />
-        </>
-      )}>
+      rightContent={rightContent}>
       <View style={[AI_CENTER, WIDTH_100, JC_SPACE_BETWEEN]}>
         <ItemNameCart itemName={itemName} />
         <Collapsible
