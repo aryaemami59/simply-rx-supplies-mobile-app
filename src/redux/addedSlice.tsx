@@ -17,27 +17,19 @@ import {
   ItemName,
   VendorNameType,
 } from "../../CustomTypes/types";
+import { emptyArr, emptyObj, intersection } from "../shared/utilityFunctions";
 import { GITHUB_URL_ITEMS } from "./fetchInfo";
 
-const intersection = (firstArray: string[], secondArray: string[]): string[] =>
-  firstArray.filter(e => !secondArray.includes(e));
-
-const createAsyncThunkFunc = (strVal: string, githubUrl: string) =>
-  createAsyncThunk(`${strVal}/fetch${strVal}`, async () => {
-    const response: Response = await fetch(githubUrl, { timeout: 1000 });
+export const fetchItems: FetchItems = createAsyncThunk(
+  `items/fetchitems`,
+  async () => {
+    const response: Response = await fetch(GITHUB_URL_ITEMS, { timeout: 1000 });
     if (!response.ok) {
       return Promise.reject(`Unable to fetch, status: ${response.status}`);
     }
     return await response.json();
-  });
-
-export const fetchItems: FetchItems = createAsyncThunkFunc(
-  "items",
-  GITHUB_URL_ITEMS
+  }
 );
-
-const emptyObj = {};
-const emptyArr: [] = [];
 
 const initialState = {
   listItems: emptyArr,

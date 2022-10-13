@@ -4,7 +4,6 @@
     "plugin:react-native/all",
     "plugin:@typescript-eslint/recommended"
   ],
-  // "plugins": ["react", "react-native"],
   "rules": {
     "@typescript-eslint/no-non-null-assertion": "off",
     "quotes": "off",

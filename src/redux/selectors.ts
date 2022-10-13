@@ -100,7 +100,7 @@ export const checkVendorsAdded =
   (state: RootState): boolean =>
     state.added.itemsObj[itemName].vendorsAdded.includes(vendorName);
 
-export const selectItemsArr = (state: RootState): ItemName[] =>
+export const selectItemNamesArr = (state: RootState): ItemName[] =>
   state.added.itemsArr;
 
 export const selectVendorOfficialName =

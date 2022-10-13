@@ -100,11 +100,7 @@ export type CategoriesObjType = Record<
   { id: number; itemIds: number[] }
 >;
 
-// type VendorChecked = Partial<Record<VendorNameType, boolean>>;
-
 export type ItemsObj = Record<ItemNamesType, ItemObjType>;
-
-// type VendorsInAddedState = Partial<Record<vendorNameType, ItemObjType[]>>;
 
 export type EmptyObj = Record<string, never>;
 
@@ -112,12 +108,6 @@ export type EmptyArr = [];
 
 export type AddedState = {
   listItems: ItemName[];
-  // compact: boolean;
-  // showItemNumber: boolean;
-  // showItemBarcode: boolean;
-  // showItemName: boolean;
-  // vendorsIsLoading: boolean;
-  // categoriesIsLoading: boolean;
   errMsg: string;
   isLoading: boolean;
   itemsArr: ItemNamesType[];
@@ -127,13 +117,6 @@ export type AddedState = {
   categoriesArr: Category[];
   categoriesObj: CategoriesObjType;
 };
-
-// export type itemState = Partial<Record<ItemName, ItemObjType>> & {
-//   itemsArr: ItemObjType[];
-//   isLoading: boolean;
-//   vendorsChecked: VendorChecked;
-//   errMsg: string;
-// };
 
 export type ItemName = ItemNamesType;
 export type ItemNumber = string;
@@ -574,15 +557,3 @@ export type FetchItems = AsyncThunk<
   void,
   { dispatch: AppDispatch }
 >;
-
-// export type FetchVendors = AsyncThunk<
-//   VendorsObjType,
-//   void,
-//   { dispatch: AppDispatch }
-// >;
-
-// export type FetchCategories = AsyncThunk<
-//   CategoriesObjType,
-//   void,
-//   { dispatch: AppDispatch }
-// >;
