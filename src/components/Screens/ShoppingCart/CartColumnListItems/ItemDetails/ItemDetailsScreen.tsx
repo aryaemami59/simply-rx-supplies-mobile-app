@@ -4,6 +4,7 @@ import { FC, memo, useCallback } from "react";
 import { TouchableOpacity } from "react-native";
 import { ShoppingCartStackParamList } from "../../../../../../CustomTypes/types";
 import { useAppSelector } from "../../../../../redux/hooks";
+import { shallowEqual } from "react-redux";
 import {
   selectVendorsByItemName,
   selectItemSrc,
@@ -23,13 +24,17 @@ type Props = NativeStackScreenProps<ShoppingCartStackParamList, "ItemDetails">;
 
 const ItemDetailsScreen: FC<Props> = ({ navigation, route }) => {
   const { itemName } = route.params;
-  const vendors = useAppSelector(selectVendorsByItemName(itemName));
+  const vendors = useAppSelector(
+    selectVendorsByItemName(itemName),
+    shallowEqual
+  );
   const src = useAppSelector(selectItemSrc(itemName));
   const { theme } = useTheme();
   const { background } = theme.colors;
 
   const officialVendorNames = useAppSelector(
-    selectVendorsOfficialNames(vendors)
+    selectVendorsOfficialNames(vendors),
+    shallowEqual
   );
 
   const clickHandler = useCallback(() => {

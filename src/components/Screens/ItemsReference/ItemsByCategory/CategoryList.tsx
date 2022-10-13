@@ -17,6 +17,7 @@ const CategoryList: FC<Props> = ({ category }) => {
   const navigation =
     useNavigation<NativeStackNavigationProp<ItemsReferenceStackParamList>>();
   const { theme } = useTheme();
+  const { background } = theme.colors;
 
   const clickHandler = useCallback(() => {
     navigation.push("ItemsByCategoryListItems", { category });
@@ -27,7 +28,7 @@ const CategoryList: FC<Props> = ({ category }) => {
       containerStyle={[
         AI_CENTER,
         JC_SPACE_BETWEEN,
-        { backgroundColor: theme.colors.background },
+        { backgroundColor: background },
       ]}
       bottomDivider
       Component={TouchableScale}

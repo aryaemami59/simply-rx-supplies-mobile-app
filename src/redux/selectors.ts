@@ -1,13 +1,12 @@
-import { createSelector } from "reselect";
 import {
-  VendorNameType,
-  ItemName,
   Category,
-  ItemObjType,
+  ItemName,
   ItemNumber,
-  Src,
-  OfficialVendorNameType,
+  ItemObjType,
   Link,
+  OfficialVendorNameType,
+  Src,
+  VendorNameType,
 } from "../../CustomTypes/types";
 import { RootState } from "./store";
 
@@ -135,10 +134,7 @@ export const checkIfAnyItemsAddedToOneVendor =
   (state: RootState): boolean =>
     !!state.added.vendorsObj[vendorName].itemsAdded.length;
 
-export const selectAllListItems = createSelector(
-  (state: RootState): ItemName[] => state.added.listItems,
-  (listItems: ItemName[]): ItemName[] => listItems
-);
+export const selectAllListItems = (state: RootState) => state.added.listItems;
 
 export const checkIfLoading = (state: RootState): boolean =>
   state.added.isLoading;

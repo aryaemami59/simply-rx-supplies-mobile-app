@@ -8,11 +8,15 @@ import {
   selectAllVendorOfficialNames,
 } from "../../../../redux/selectors";
 import BottomSheetVendorCheckbox from "../SearchResults/BottomSheetVendorCheckbox";
+import { shallowEqual } from "react-redux";
 
 const BottomSheetComponent: FC = () => {
   const [visible, setVisible] = useState(false);
-  const vendors = useAppSelector(selectVendorsArr);
-  const officialVendorNames = useAppSelector(selectAllVendorOfficialNames);
+  const vendors = useAppSelector(selectVendorsArr, shallowEqual);
+  const officialVendorNames = useAppSelector(
+    selectAllVendorOfficialNames,
+    shallowEqual
+  );
 
   const showBottomSheet = useCallback(() => {
     Keyboard.dismiss();

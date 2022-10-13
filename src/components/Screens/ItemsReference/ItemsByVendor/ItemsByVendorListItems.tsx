@@ -41,7 +41,7 @@ const ItemsByVendorListItems: FC<Props> = ({ navigation, route }) => {
     [vendorName]
   );
 
-  const items = useAppSelector(
+  const itemNames = useAppSelector(
     selectItemNamesByVendor(vendorName),
     shallowEqual
   );
@@ -64,7 +64,7 @@ const ItemsByVendorListItems: FC<Props> = ({ navigation, route }) => {
     <View style={[{ backgroundColor: background }, HEIGHT_100]}>
       <FlatList
         removeClippedSubviews
-        data={items}
+        data={itemNames}
         renderItem={renderItems}
         keyExtractor={keyExtractor}
         keyboardShouldPersistTaps="handled"

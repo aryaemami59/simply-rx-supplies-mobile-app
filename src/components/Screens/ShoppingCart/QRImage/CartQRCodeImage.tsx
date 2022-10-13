@@ -8,6 +8,7 @@ import {
   VendorNameType,
 } from "../../../../../CustomTypes/types";
 import { useAppSelector } from "../../../../redux/hooks";
+import { shallowEqual } from "react-redux";
 import {
   selectQRCodeContent,
   selectItemsAddedByVendor,
@@ -19,7 +20,10 @@ type Props = {
 
 const CartQRCodeImage: FC<Props> = ({ vendorName }) => {
   const itemNumbers = useAppSelector(selectQRCodeContent(vendorName));
-  const itemsAdded = useAppSelector(selectItemsAddedByVendor(vendorName));
+  const itemsAdded = useAppSelector(
+    selectItemsAddedByVendor(vendorName),
+    shallowEqual
+  );
 
   const navigation =
     useNavigation<NativeStackNavigationProp<ShoppingCartStackParamList>>();

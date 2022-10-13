@@ -10,6 +10,7 @@ import { useAppSelector } from "../../../../redux/hooks";
 import { selectVendorsArr } from "../../../../redux/selectors";
 import { HEIGHT_100 } from "../../../../shared/sharedStyles";
 import ItemsByVendorVendorList from "./ItemsByVendorVendorList";
+import { shallowEqual } from "react-redux";
 
 const renderItem: ListRenderItem<VendorNameType> = ({ item }) => (
   <ItemsByVendorVendorList vendorName={item} />
@@ -23,11 +24,12 @@ type Props = NativeStackScreenProps<
 >;
 
 const ItemsByVendorScreen: FC<Props> = ({ navigation, route }) => {
-  const allVendors = useAppSelector(selectVendorsArr);
+  const allVendors = useAppSelector(selectVendorsArr, shallowEqual);
   const { theme } = useTheme();
+  const { background } = theme.colors;
 
   return (
-    <View style={[{ backgroundColor: theme.colors.background }, HEIGHT_100]}>
+    <View style={[{ backgroundColor: background }, HEIGHT_100]}>
       <FlatList
         keyExtractor={keyExtractor}
         removeClippedSubviews

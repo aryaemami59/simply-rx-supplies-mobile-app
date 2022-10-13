@@ -10,6 +10,7 @@ import { useAppSelector } from "../../../redux/hooks";
 import { selectVendorsArr } from "../../../redux/selectors";
 import { HEIGHT_100 } from "../../../shared/sharedStyles";
 import CartVendorColumns from "./CartVendorColumns";
+import { shallowEqual } from "react-redux";
 
 const renderItem: ListRenderItem<VendorNameType> = ({ item }) => (
   <CartVendorColumns vendorName={item} />
@@ -23,11 +24,12 @@ type Props = NativeStackScreenProps<
 >;
 
 const ShoppingCartScreen: FC<Props> = ({ navigation, route }) => {
-  const vendors = useAppSelector(selectVendorsArr);
+  const vendors = useAppSelector(selectVendorsArr, shallowEqual);
   const { theme } = useTheme();
+  const { background } = theme.colors;
 
   return (
-    <View style={[{ backgroundColor: theme.colors.background }, HEIGHT_100]}>
+    <View style={[{ backgroundColor: background }, HEIGHT_100]}>
       <FlatList
         data={vendors}
         keyExtractor={keyExtractor}

@@ -23,9 +23,10 @@ type Props = NativeStackScreenProps<ItemsByCategoryStackParamList>;
 const ItemsByCategoryScreen: FC<Props> = () => {
   const categories = useAppSelector(selectCategoriesArr, shallowEqual);
   const { theme } = useTheme();
+  const { background } = theme.colors;
 
   return (
-    <View style={[HEIGHT_100, { backgroundColor: theme.colors.background }]}>
+    <View style={[HEIGHT_100, { backgroundColor: background }]}>
       <FlatList
         keyExtractor={keyExtractor}
         removeClippedSubviews

@@ -95,7 +95,6 @@ const InputField: FC = () => {
   return (
     <Header
       backgroundColor={MAIN_COLOR}
-      containerStyle={styles.headerContainer}
       rightContainerStyle={[JC_AI_CENTER, styles.headerRightContainer]}
       leftContainerStyle={DISPLAY_NONE}
       rightComponent={HeaderRightComponent}
@@ -134,9 +133,6 @@ const InputField: FC = () => {
 const styles = StyleSheet.create({
   headerCenterContainer: {
     flex: 5,
-  },
-  headerContainer: {
-    // height: 105,
   },
   headerRightContainer: {
     flex: 1,

@@ -5,6 +5,7 @@ import ItemsByCategorySingleListItemCheckBox from "./ItemsByCategorySingleListIt
 import SingleCategoryListItemAddButton from "./SingleCategoryListItemAddButton";
 import { useAppSelector } from "../../../../redux/hooks";
 import { selectVendorsByItemName } from "../../../../redux/selectors";
+import { shallowEqual } from "react-redux";
 
 type Props = {
   itemName: ItemName;
@@ -12,13 +13,17 @@ type Props = {
 
 const ItemsByCategorySingleListItem: FC<Props> = ({ itemName }) => {
   const { theme } = useTheme();
+  const { background } = theme.colors;
 
-  const vendors = useAppSelector(selectVendorsByItemName(itemName));
+  const vendors = useAppSelector(
+    selectVendorsByItemName(itemName),
+    shallowEqual
+  );
 
   return (
     <ListItem
       bottomDivider
-      containerStyle={[{ backgroundColor: theme.colors.background }]}>
+      containerStyle={{ backgroundColor: background }}>
       <ListItem.Content>
         <ListItem.Title>{itemName}</ListItem.Title>
         {vendors.map(vendorName => (
