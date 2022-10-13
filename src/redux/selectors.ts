@@ -2,7 +2,6 @@ import {
   Category,
   ItemName,
   ItemNumber,
-  ItemObjType,
   Link,
   OfficialVendorNameType,
   Src,
@@ -37,16 +36,6 @@ export const selectItemNamesByVendor =
       .filter(({ vendors }) => vendors.includes(vendorName))
       .map(({ name }) => name);
 
-export const selectVendorsToAddTo =
-  (itemName: ItemName) =>
-  (state: RootState): VendorNameType[] =>
-    state.added.itemsObj[itemName].vendorsToAdd;
-
-export const selectItemObjByName =
-  (itemName: ItemName) =>
-  (state: RootState): ItemObjType =>
-    state.added.itemsObj[itemName];
-
 export const selectCategoriesItemNames =
   (categoryParam: Category) =>
   (state: RootState): ItemName[] =>
@@ -58,10 +47,6 @@ export const selectQRCodeContent =
   (vendorName: VendorNameType) =>
   (state: RootState): string =>
     state.added.vendorsObj[vendorName].qrContent;
-
-export const selectQRText =
-  (vendorName: VendorNameType) => (state: RootState) =>
-    state.added.vendorsObj[vendorName].qrText;
 
 export const checkIfAddedToAllVendors =
   (itemName: ItemName) =>

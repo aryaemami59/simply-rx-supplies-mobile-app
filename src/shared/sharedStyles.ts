@@ -26,20 +26,12 @@ export const WIDTH_80: FlexStyle | ImageStyle = {
   width: "80%",
 } as const;
 
-export const WIDTH_70: FlexStyle | ImageStyle = {
-  width: "70%",
-} as const;
-
 export const WIDTH_60: FlexStyle | ImageStyle = {
   width: "60%",
 } as const;
 
 export const HEIGHT_100: FlexStyle = {
   height: "100%",
-} as const;
-
-export const PADDING_VERTICAL_0: FlexStyle = {
-  paddingVertical: 0,
 } as const;
 
 export const BARCODE_ASPECT_RATIO: ImageStyle = {
