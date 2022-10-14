@@ -119,6 +119,8 @@ export const checkIfAnyItemsAddedToOneVendor =
   (state: RootState): boolean =>
     !!state.added.vendorsObj[vendorName].itemsAdded.length;
 
+// export const selectItemNumbersByVendor = (state: RootState) => (vendorName: VendorNameType) => state.added.vendorsObj[vendorName].itemsAdded.map(({}) => );
+
 export const selectAllListItems = (state: RootState) => state.added.listItems;
 
 export const checkIfLoading = (state: RootState): boolean =>

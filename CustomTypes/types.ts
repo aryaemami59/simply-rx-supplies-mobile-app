@@ -43,7 +43,11 @@ export type ItemLookupStackParamList = {
 
 export type ShoppingCartStackParamList = {
   ShoppingCartScreen: undefined;
-  QRImage: { itemNumbers: ItemNumber; itemsAdded: ItemName[] };
+  QRImage: {
+    itemNumbers: ItemNumber;
+    itemsAdded: ItemName[];
+    vendorName: VendorNameType;
+  };
   BarcodeImage: { src: Src; itemName: ItemName };
   CartColumnListItems: { vendorName: VendorNameType };
   ItemLookup: undefined;

@@ -29,8 +29,8 @@ const CartQRCodeImage: FC<Props> = ({ vendorName }) => {
     useNavigation<NativeStackNavigationProp<ShoppingCartStackParamList>>();
 
   const clickHandler = useCallback(() => {
-    navigation.navigate("QRImage", { itemNumbers, itemsAdded });
-  }, [itemNumbers, itemsAdded, navigation]);
+    navigation.navigate("QRImage", { itemNumbers, itemsAdded, vendorName });
+  }, [itemNumbers, itemsAdded, navigation, vendorName]);
 
   return (
     <TouchableOpacity onPress={clickHandler}>

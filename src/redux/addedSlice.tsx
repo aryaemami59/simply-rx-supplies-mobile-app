@@ -68,6 +68,7 @@ export const addedSlice = createSlice({
             QRCode.toDataURL(qr, (_err, url) => {
               state.vendorsObj[vendorName].qrContent = url;
             });
+            state.vendorsObj[vendorName].qrContent = qr;
             state.vendorsObj[vendorName].qrText = qr;
             state.listItems = state.listItems.filter(
               listItemName => listItemName !== itemName
@@ -137,7 +138,6 @@ export const addedSlice = createSlice({
       const { vendorName } = action.payload;
       let itemName: ItemName;
       for (itemName in state.itemsObj) {
-        // state.itemsObj[itemName].vendorsToAdd.includes(vendorName) &&
         state.itemsObj[itemName].vendorsToAdd = state.itemsObj[
           itemName
         ].vendorsToAdd.includes(vendorName)

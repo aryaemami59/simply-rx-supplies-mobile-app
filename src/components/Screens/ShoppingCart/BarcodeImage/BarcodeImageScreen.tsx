@@ -76,7 +76,7 @@ const BarcodeImageScreen: FC<Props> = ({ navigation, route }) => {
       </TouchableOpacity>
       <TouchableOpacity onPress={shareBarcode}>
         <Octicons
-          itemName={iconName}
+          name={iconName}
           size={50}
           style={styles.icon}
           color="gray"
