@@ -46,7 +46,6 @@ export type ShoppingCartStackParamList = {
   QRImage: {
     itemNumbers: ItemNumber;
     itemsAdded: ItemName[];
-    vendorName: VendorNameType;
   };
   BarcodeImage: { src: Src; itemName: ItemName };
   CartColumnListItems: { vendorName: VendorNameType };

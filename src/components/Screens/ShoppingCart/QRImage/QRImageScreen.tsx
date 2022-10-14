@@ -27,20 +27,25 @@ const iconName = Platform.OS === "android" ? "share-android" : "share";
 type Props = NativeStackScreenProps<ShoppingCartStackParamList, "QRImage">;
 
 const QRImageScreen: FC<Props> = ({ navigation, route }) => {
-  const { itemNumbers, itemsAdded, vendorName } = route.params;
+  const { itemNumbers, itemsAdded } = route.params;
 
   const svg = useRef<Svg>(null!);
 
   const shareQR = useCallback(() => {
+    // @ts-ignore
     svg.current.toDataURL((data: string) => {
       const shareImageBase64 = {
         title: "QRCode",
-        message: "this is the QR code image",
+        message: `this is the QR code image for the following items: \n${itemsAdded.join(
+          ", "
+        )}`,
         url: `data:image/png;base64,${data}`,
       };
       Share.share(shareImageBase64);
     });
-  }, []);
+  }, [itemsAdded]);
+
+  const getRef = useCallback((e: Svg) => (svg.current = e), []);
 
   const { theme } = useTheme();
   const { background } = theme.colors;
@@ -51,13 +56,10 @@ const QRImageScreen: FC<Props> = ({ navigation, route }) => {
       <ScrollView
         contentContainerStyle={[JC_SPACE_EVENLY, AI_CENTER, styles.container]}>
         <TouchableOpacity onPress={shareQR}>
-          {/* <Image source={{}} /> */}
           <QRCode
             value={itemNumbers}
             size={300}
-            getRef={e => {
-              svg.current = e;
-            }}
+            getRef={getRef}
           />
         </TouchableOpacity>
         <TouchableOpacity onPress={shareQR}>

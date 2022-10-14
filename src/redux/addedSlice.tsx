@@ -6,7 +6,6 @@ import {
   PayloadAction,
   Reducer,
 } from "@reduxjs/toolkit";
-import QRCode from "qrcode";
 import fetch from "react-native-fetch-polyfill";
 import {
   AddedState,
@@ -65,9 +64,6 @@ export const addedSlice = createSlice({
             const qr = state.vendorsObj[vendorName].itemsAdded
               .map(itemAddedName => state.itemsObj[itemAddedName].itemNumber)
               .join(state.vendorsObj[vendorName].joinChars);
-            QRCode.toDataURL(qr, (_err, url) => {
-              state.vendorsObj[vendorName].qrContent = url;
-            });
             state.vendorsObj[vendorName].qrContent = qr;
             state.vendorsObj[vendorName].qrText = qr;
             state.listItems = state.listItems.filter(
