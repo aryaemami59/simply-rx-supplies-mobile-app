@@ -25,7 +25,7 @@ const DeleteButton: FC<Props> = ({ itemName, vendorName, reset }) => {
       title="Delete"
       color="error"
       onPress={clickHandler}
-      buttonStyle={[JC_SPACE_EVENLY]}
+      buttonStyle={JC_SPACE_EVENLY}
     />
   );
 };

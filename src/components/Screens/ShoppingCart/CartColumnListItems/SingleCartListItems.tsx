@@ -1,5 +1,5 @@
 import { ListItem, useTheme } from "@rneui/themed";
-import { FC, memo, useCallback, useState } from "react";
+import { FC, memo, useCallback, useMemo, useState } from "react";
 import { View } from "react-native";
 import Collapsible from "react-native-collapsible";
 import { VendorAndItemName } from "../../../../../CustomTypes/types";
@@ -18,10 +18,11 @@ import ShareButton from "./ShareButton";
 
 type Props = VendorAndItemName;
 
+const style = [AI_CENTER, WIDTH_100, JC_SPACE_BETWEEN];
+
 const SingleCartListItems: FC<Props> = ({ itemName, vendorName }) => {
   const [open, setOpen] = useState(true);
-  const { theme } = useTheme();
-  const { background } = theme.colors;
+  const { background } = useTheme().theme.colors;
 
   const clickHandler = useCallback(() => {
     setOpen(prev => !prev);
@@ -61,13 +62,18 @@ const SingleCartListItems: FC<Props> = ({ itemName, vendorName }) => {
     [clickHandler, itemName, open, vendorName]
   );
 
+  const containerStyle = useMemo(
+    () => ({ backgroundColor: background }),
+    [background]
+  );
+
   return (
     <ListItem.Swipeable
-      containerStyle={[{ backgroundColor: background }]}
+      containerStyle={containerStyle}
       bottomDivider
       topDivider
       rightContent={rightContent}>
-      <View style={[AI_CENTER, WIDTH_100, JC_SPACE_BETWEEN]}>
+      <View style={style}>
         <ItemNameCart itemName={itemName} />
         <Collapsible
           collapsed={!open}

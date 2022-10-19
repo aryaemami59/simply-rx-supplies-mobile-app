@@ -33,7 +33,7 @@ const MinimizeButton: FC<Props> = ({
       title={title}
       color="warning"
       onPress={clickHandler}
-      buttonStyle={[JC_SPACE_EVENLY]}
+      buttonStyle={JC_SPACE_EVENLY}
     />
   );
 };

@@ -1,6 +1,6 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { Image, ListItem, Text, useTheme } from "@rneui/themed";
-import { FC, memo, useCallback } from "react";
+import { FC, memo, useCallback, useMemo } from "react";
 import { TouchableOpacity } from "react-native";
 import { ShoppingCartStackParamList } from "../../../../../../CustomTypes/types";
 import { useAppSelector } from "../../../../../redux/hooks";
@@ -22,6 +22,8 @@ import {
 
 type Props = NativeStackScreenProps<ShoppingCartStackParamList, "ItemDetails">;
 
+const imageContainerStyle = [BARCODE_ASPECT_RATIO, WIDTH_60];
+
 const ItemDetailsScreen: FC<Props> = ({ navigation, route }) => {
   const { itemName } = route.params;
   const vendors = useAppSelector(
@@ -29,8 +31,7 @@ const ItemDetailsScreen: FC<Props> = ({ navigation, route }) => {
     shallowEqual
   );
   const src = useAppSelector(selectItemSrc(itemName));
-  const { theme } = useTheme();
-  const { background } = theme.colors;
+  const { background } = useTheme().theme.colors;
 
   const officialVendorNames = useAppSelector(
     selectVendorsOfficialNames(vendors),
@@ -44,14 +45,20 @@ const ItemDetailsScreen: FC<Props> = ({ navigation, route }) => {
     });
   }, [itemName, navigation, src]);
 
+  const containerStyle = useMemo(
+    () => [
+      HEIGHT_100,
+      AI_FLEX_START,
+      JC_SPACE_BETWEEN,
+      { backgroundColor: background },
+    ],
+    [background]
+  );
+
+  const source = useMemo(() => ({ uri: src }), [src]);
+
   return (
-    <ListItem
-      containerStyle={[
-        HEIGHT_100,
-        AI_FLEX_START,
-        JC_SPACE_BETWEEN,
-        { backgroundColor: background },
-      ]}>
+    <ListItem containerStyle={containerStyle}>
       <ListItem.Content style={AI_CENTER}>
         <Text
           h2
@@ -60,8 +67,8 @@ const ItemDetailsScreen: FC<Props> = ({ navigation, route }) => {
         </Text>
         <TouchableOpacity onPress={clickHandler}>
           <Image
-            source={{ uri: src }}
-            containerStyle={[BARCODE_ASPECT_RATIO, WIDTH_60]}
+            source={source}
+            containerStyle={imageContainerStyle}
           />
         </TouchableOpacity>
         <Text

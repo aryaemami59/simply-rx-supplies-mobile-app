@@ -34,6 +34,7 @@ import {
 } from "../../../../shared/sharedStyles";
 import CartQRCodeImage from "../QRImage/CartQRCodeImage";
 import SingleCartListItems from "./SingleCartListItems";
+import { shallowEqual } from "react-redux";
 
 const shoppingCartIcon = (
   <MaterialIcons
@@ -50,6 +51,8 @@ type Props = NativeStackScreenProps<
   "CartColumnListItems"
 >;
 
+const viewStyle = [AI_CENTER, WIDTH_100, JC_SPACE_BETWEEN];
+
 const CartColumnListItemsScreen: FC<Props> = ({ navigation, route }) => {
   const { vendorName } = route.params;
   const renderItems: ListRenderItem<ItemName> = useCallback(
@@ -61,7 +64,10 @@ const CartColumnListItemsScreen: FC<Props> = ({ navigation, route }) => {
     ),
     [vendorName]
   );
-  const addedItems = useAppSelector(selectAddedItemsByVendor(vendorName));
+  const addedItems = useAppSelector(
+    selectAddedItemsByVendor(vendorName),
+    shallowEqual
+  );
   const vendorLink = useAppSelector(selectVendorsLinks(vendorName));
   const ifAnyItemsAdded = useAppSelector(
     checkIfAnyItemsAddedToOneVendor(vendorName)
@@ -90,11 +96,32 @@ const CartColumnListItemsScreen: FC<Props> = ({ navigation, route }) => {
     navigation.navigate("ItemLookup");
   }, [navigation]);
 
-  const { theme } = useTheme();
-  const { background, black } = theme.colors;
+  const { background, black } = useTheme().theme.colors;
+
+  const style = useMemo(
+    () => [HEIGHT_100, { backgroundColor: background }],
+    [background]
+  );
+
+  const containerStyle = useMemo(
+    () => ({ backgroundColor: background }),
+    [background]
+  );
+
+  const textStyle = useMemo(() => [TEXT_UNDERLINE, { color: black }], [black]);
+
+  const emptyContainerStyle = useMemo(
+    () => [HEIGHT_100, styles.emptyContainer, { backgroundColor: background }],
+    [background]
+  );
+
+  const emptyTextStyle = useMemo(
+    () => [TEXT_CENTER, styles.textStyle, { color: black }],
+    [black]
+  );
 
   return (
-    <View style={[HEIGHT_100, { backgroundColor: background }]}>
+    <View style={style}>
       {/* <View style={styles.bigContainer}>
         {ifAnyItemsAdded && (
           <>
@@ -117,13 +144,13 @@ const CartColumnListItemsScreen: FC<Props> = ({ navigation, route }) => {
           <>
             {ifAnyItemsAdded && (
               <ListItem.Swipeable
-                containerStyle={[{ backgroundColor: background }]}
+                containerStyle={containerStyle}
                 rightContent={<Button title="Details" />}>
-                <View style={[AI_CENTER, WIDTH_100, JC_SPACE_BETWEEN]}>
+                <View style={viewStyle}>
                   <CartQRCodeImage vendorName={vendorName} />
                   <View style={styles.CartQRCodeImageContainer}>
                     <TouchableOpacity onPress={openLink}>
-                      <Text style={[TEXT_UNDERLINE, { color: black }]}>
+                      <Text style={textStyle}>
                         {officialVendorName} Website
                       </Text>
                     </TouchableOpacity>
@@ -134,15 +161,8 @@ const CartColumnListItemsScreen: FC<Props> = ({ navigation, route }) => {
           </>
         }
         ListEmptyComponent={
-          <View
-            style={[
-              HEIGHT_100,
-              styles.emptyContainer,
-              { backgroundColor: background },
-            ]}>
-            <Text style={[TEXT_CENTER, styles.textStyle, { color: black }]}>
-              No Item Has Been Added Yet!
-            </Text>
+          <View style={emptyContainerStyle}>
+            <Text style={emptyTextStyle}>No Item Has Been Added Yet!</Text>
             <Chip
               raised
               titleStyle={FONT_WEIGHT_700}

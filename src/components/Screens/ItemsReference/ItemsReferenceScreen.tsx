@@ -1,7 +1,7 @@
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { useTheme } from "@rneui/themed";
-import { FC, memo } from "react";
+import { FC, memo, useMemo } from "react";
 import {
   ItemsReferenceStackParamList,
   ItemsReferenceTopTabParamList,
@@ -21,26 +21,41 @@ type Props = NativeStackScreenProps<
 const Tab = createMaterialTopTabNavigator<ItemsReferenceTopTabParamList>();
 
 const ItemsReferenceScreen: FC<Props> = ({ navigation, route }) => {
-  const { theme } = useTheme();
+  const { background, grey0 } = useTheme().theme.colors;
+  // const background = useContext(backgroundContext);
+
+  const screenOptions = useMemo(
+    () => ({
+      tabBarStyle: { backgroundColor: background },
+    }),
+    [background]
+  );
+
+  const itemsByVendorTabScreenOptions = useMemo(
+    () => ({
+      ...itemsByVendorTabOptions,
+      tabBarLabelStyle: { color: grey0 },
+    }),
+    [grey0]
+  );
+
+  const itemsByCategoryTabScreenOptions = useMemo(
+    () => ({
+      ...itemsByCategoryTabOptions,
+      tabBarLabelStyle: { color: grey0 },
+    }),
+    [grey0]
+  );
 
   return (
-    <Tab.Navigator
-      screenOptions={{
-        tabBarStyle: { backgroundColor: theme.colors.background },
-      }}>
+    <Tab.Navigator screenOptions={screenOptions}>
       <Tab.Screen
-        options={{
-          ...itemsByVendorTabOptions,
-          tabBarLabelStyle: { color: theme.colors.grey0 },
-        }}
+        options={itemsByVendorTabScreenOptions}
         name="ItemsByVendor"
         component={ItemsByVendorStackScreen}
       />
       <Tab.Screen
-        options={{
-          ...itemsByCategoryTabOptions,
-          tabBarLabelStyle: { color: theme.colors.grey0 },
-        }}
+        options={itemsByCategoryTabScreenOptions}
         name="ItemsByCategory"
         component={ItemsByCategoryStackScreen}
       />

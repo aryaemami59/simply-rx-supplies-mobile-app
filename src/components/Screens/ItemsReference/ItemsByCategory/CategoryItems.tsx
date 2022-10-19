@@ -28,6 +28,7 @@ type Props = NativeStackScreenProps<
 
 const CategoryItems: FC<Props> = ({ navigation, route }) => {
   const { category } = route.params;
+  const { background } = useTheme().theme.colors;
 
   const categoryListItems = useAppSelector(
     selectCategoriesItemNames(category),
@@ -44,10 +45,14 @@ const CategoryItems: FC<Props> = ({ navigation, route }) => {
   useEffect(() => {
     navigation.setOptions(options);
   }, [navigation, options]);
-  const { theme } = useTheme();
+
+  const style = useMemo(
+    () => [HEIGHT_100, { backgroundColor: background }],
+    [background]
+  );
 
   return (
-    <View style={[HEIGHT_100, { backgroundColor: theme.colors.background }]}>
+    <View style={style}>
       <FlatList
         removeClippedSubviews
         data={categoryListItems}

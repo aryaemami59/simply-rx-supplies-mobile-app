@@ -22,7 +22,7 @@ const Tab = createBottomTabNavigator<RootTabParamList>();
 
 const TabBarMain: FC = () => {
   const ifItemsAdded = useAppSelector(checkIfAnyItemsAdded);
-  const { theme } = useTheme();
+  const { background } = useTheme().theme.colors;
   const tabBarBadge = ifItemsAdded ? "" : undefined;
 
   const options = useMemo(
@@ -35,13 +35,17 @@ const TabBarMain: FC = () => {
 
   enableScreens(false);
 
+  const screenOptions = useMemo(
+    () => ({
+      ...HEADER_SHOWN_FALSE,
+      tabBarStyle: { backgroundColor: background },
+    }),
+    [background]
+  );
+
   return (
     <SafeAreaProvider>
-      <Tab.Navigator
-        screenOptions={{
-          ...HEADER_SHOWN_FALSE,
-          tabBarStyle: { backgroundColor: theme.colors.background },
-        }}>
+      <Tab.Navigator screenOptions={screenOptions}>
         <Tab.Screen
           name="Home"
           component={HomeStackScreen}

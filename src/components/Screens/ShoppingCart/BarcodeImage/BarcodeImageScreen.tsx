@@ -24,7 +24,10 @@ const iconName = Platform.OS === "android" ? "share-android" : "share";
 
 type Props = NativeStackScreenProps<ShoppingCartStackParamList, "BarcodeImage">;
 
+const style = [BARCODE_ASPECT_RATIO, WIDTH_90];
+
 const BarcodeImageScreen: FC<Props> = ({ navigation, route }) => {
+  const { background } = useTheme().theme.colors;
   const { src, itemName } = route.params;
 
   const options: NativeStackNavigationOptions = useMemo(
@@ -58,20 +61,21 @@ const BarcodeImageScreen: FC<Props> = ({ navigation, route }) => {
     navigation.setOptions(options);
   }, [navigation, options]);
 
-  const { theme } = useTheme();
-  const { background } = theme.colors;
+  const viewStyle = useMemo(
+    () => [
+      JC_AI_CENTER_HEIGHT100,
+      styles.container,
+      { backgroundColor: background },
+    ],
+    [background]
+  );
 
   return (
-    <View
-      style={[
-        JC_AI_CENTER_HEIGHT100,
-        styles.container,
-        { backgroundColor: background },
-      ]}>
+    <View style={viewStyle}>
       <TouchableOpacity onLongPress={shareBarcode}>
         <Image
           source={imageSource}
-          style={[BARCODE_ASPECT_RATIO, WIDTH_90]}
+          style={style}
         />
       </TouchableOpacity>
       <TouchableOpacity onPress={shareBarcode}>

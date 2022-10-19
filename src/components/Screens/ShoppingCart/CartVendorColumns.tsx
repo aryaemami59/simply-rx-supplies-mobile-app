@@ -1,7 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { Badge, ListItem, useTheme } from "@rneui/themed";
-import { FC, memo, useCallback } from "react";
+import { FC, memo, useCallback, useMemo } from "react";
 import { StyleSheet } from "react-native";
 import TouchableScale from "react-native-touchable-scale";
 import {
@@ -28,7 +28,7 @@ const CartVendorColumns: FC<Props> = ({ vendorName }) => {
     selectVendorOfficialName(vendorName)
   );
   const addedItemsLen = useAppSelector(addedItemsLength(vendorName));
-  const { theme } = useTheme();
+  const { background } = useTheme().theme.colors;
 
   const status = addedItemsLen ? "success" : "primary";
 
@@ -39,15 +39,16 @@ const CartVendorColumns: FC<Props> = ({ vendorName }) => {
     navigation.push("CartColumnListItems", { vendorName });
   }, [navigation, vendorName]);
 
+  const containerStyle = useMemo(
+    () => [AI_CENTER, JC_SPACE_BETWEEN, { backgroundColor: background }],
+    [background]
+  );
+
   return (
     <ListItem
       bottomDivider
       Component={TouchableScale}
-      containerStyle={[
-        AI_CENTER,
-        JC_SPACE_BETWEEN,
-        { backgroundColor: theme.colors.background },
-      ]}
+      containerStyle={containerStyle}
       onPress={clickHandler}
       pad={50}>
       <ListItem.Content>

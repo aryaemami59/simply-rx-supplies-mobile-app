@@ -27,7 +27,7 @@ const ItemsReferenceStackScreen: FC<Props> = ({ navigation, route }) => (
         component={ItemsReferenceScreen}
       />
       <Stack.Screen
-        options={{ ...refHeaderOptions }}
+        options={refHeaderOptions}
         name="ItemsByVendorListItems"
         component={ItemsByVendorListItems}
       />

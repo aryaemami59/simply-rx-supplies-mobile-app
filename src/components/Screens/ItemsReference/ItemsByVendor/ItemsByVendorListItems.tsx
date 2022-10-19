@@ -57,11 +57,15 @@ const ItemsByVendorListItems: FC<Props> = ({ navigation, route }) => {
     navigation.setOptions(options);
   }, [navigation, options]);
 
-  const { theme } = useTheme();
-  const { background } = theme.colors;
+  const { background } = useTheme().theme.colors;
+
+  const style = useMemo(
+    () => [{ backgroundColor: background }, HEIGHT_100],
+    [background]
+  );
 
   return (
-    <View style={[{ backgroundColor: background }, HEIGHT_100]}>
+    <View style={style}>
       <FlatList
         removeClippedSubviews
         data={itemNames}

@@ -5,7 +5,7 @@ import {
 } from "@expo/vector-icons";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { Chip, useTheme } from "@rneui/themed";
-import { FC, memo, useCallback } from "react";
+import { FC, memo, useCallback, useMemo } from "react";
 import { StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { HomeStackParamList } from "../../../../CustomTypes/types";
@@ -50,8 +50,7 @@ const shoppingCartIcon = (
 type Props = NativeStackScreenProps<HomeStackParamList, "HomeScreen">;
 
 const HomeScreen: FC<Props> = ({ navigation, route }) => {
-  const { theme } = useTheme();
-  const { background } = theme.colors;
+  const { background } = useTheme().theme.colors;
 
   const navigateToItemLookup = useCallback(
     () => navigation.navigate("ItemLookup"),
@@ -85,8 +84,10 @@ const HomeScreen: FC<Props> = ({ navigation, route }) => {
     [navigation]
   );
 
+  const style = useMemo(() => ({ backgroundColor: background }), [background]);
+
   return (
-    <SafeAreaView style={{ backgroundColor: background }}>
+    <SafeAreaView style={style}>
       <View style={styles.container}>
         <Chip
           raised

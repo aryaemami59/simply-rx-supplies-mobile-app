@@ -36,7 +36,7 @@ const ShareButton: FC<Props> = ({ itemName, vendorName, reset }) => {
       title="Share"
       color="success"
       onPress={shareInfo}
-      buttonStyle={[JC_SPACE_EVENLY]}
+      buttonStyle={JC_SPACE_EVENLY}
     />
   );
 };

@@ -19,6 +19,31 @@ import { BACKGROUND_TRANSPARENT } from "../../shared/sharedStyles";
 
 type Props = NativeStackHeaderProps;
 
+const styles = StyleSheet.create({
+  headerCenterContainer: {
+    flex: 5,
+  },
+  headerRightContainer: {
+    flex: 1,
+  },
+  searchBarContainer: {
+    borderBottomWidth: 0,
+    borderTopWidth: 0,
+  },
+  searchBarInputContainer: {
+    backgroundColor: SEARCH_BAR_COLOR,
+    borderRadius: 9999,
+  },
+});
+
+const rightContainerStyle = [JC_AI_CENTER, styles.headerRightContainer];
+
+const containerStyle = [
+  WIDTH_80,
+  styles.searchBarContainer,
+  BACKGROUND_TRANSPARENT,
+];
+
 const HeaderHomeStackNavigator: FC<Props> = ({
   navigation,
   route,
@@ -51,7 +76,7 @@ const HeaderHomeStackNavigator: FC<Props> = ({
   return (
     <Header
       backgroundColor={MAIN_COLOR}
-      rightContainerStyle={[JC_AI_CENTER, styles.headerRightContainer]}
+      rightContainerStyle={rightContainerStyle}
       rightComponent={HeaderRightComponent}
       leftContainerStyle={DISPLAY_NONE}
       centerContainerStyle={styles.headerCenterContainer}
@@ -59,11 +84,7 @@ const HeaderHomeStackNavigator: FC<Props> = ({
         <SearchBar
           ref={inputRef}
           onFocus={focusHandler}
-          containerStyle={[
-            WIDTH_80,
-            styles.searchBarContainer,
-            BACKGROUND_TRANSPARENT,
-          ]}
+          containerStyle={containerStyle}
           placeholder="Search..."
           round
           showSoftInputOnFocus={false}
@@ -77,22 +98,5 @@ const HeaderHomeStackNavigator: FC<Props> = ({
     />
   );
 };
-
-const styles = StyleSheet.create({
-  headerCenterContainer: {
-    flex: 5,
-  },
-  headerRightContainer: {
-    flex: 1,
-  },
-  searchBarContainer: {
-    borderBottomWidth: 0,
-    borderTopWidth: 0,
-  },
-  searchBarInputContainer: {
-    backgroundColor: SEARCH_BAR_COLOR,
-    borderRadius: 9999,
-  },
-});
 
 export default memo<Props>(HeaderHomeStackNavigator);

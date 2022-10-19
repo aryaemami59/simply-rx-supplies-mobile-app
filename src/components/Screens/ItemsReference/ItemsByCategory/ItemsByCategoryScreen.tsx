@@ -1,6 +1,6 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { useTheme } from "@rneui/themed";
-import { FC, memo } from "react";
+import { FC, memo, useMemo } from "react";
 import { FlatList, ListRenderItem, View } from "react-native";
 import { shallowEqual } from "react-redux";
 import {
@@ -24,9 +24,13 @@ const ItemsByCategoryScreen: FC<Props> = () => {
   const categories = useAppSelector(selectCategoriesArr, shallowEqual);
   const { theme } = useTheme();
   const { background } = theme.colors;
+  const style = useMemo(
+    () => [HEIGHT_100, { backgroundColor: background }],
+    [background]
+  );
 
   return (
-    <View style={[HEIGHT_100, { backgroundColor: background }]}>
+    <View style={style}>
       <FlatList
         keyExtractor={keyExtractor}
         removeClippedSubviews

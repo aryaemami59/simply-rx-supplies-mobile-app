@@ -20,6 +20,8 @@ const Stack = createNativeStackNavigator<ShoppingCartStackParamList>();
 
 type Props = BottomTabScreenProps<RootTabParamList, "ShoppingCart">;
 
+const options = { ...refHeaderOptions, title: "Item Details" };
+
 const ShoppingCartStackScreen: FC<Props> = ({ navigation, route }) => (
   <SafeAreaProvider>
     <Stack.Navigator>
@@ -47,7 +49,7 @@ const ShoppingCartStackScreen: FC<Props> = ({ navigation, route }) => (
         <Stack.Screen
           name="ItemDetails"
           component={ItemDetailsScreen}
-          options={{ ...refHeaderOptions, title: "Item Details" }}
+          options={options}
         />
       </Stack.Group>
     </Stack.Navigator>

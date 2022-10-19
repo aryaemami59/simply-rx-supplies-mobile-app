@@ -1,6 +1,6 @@
 import { MaterialIcons } from "@expo/vector-icons";
 import { Chip, ListItem, useTheme } from "@rneui/themed";
-import { FC, memo, useCallback } from "react";
+import { FC, memo, useCallback, useMemo } from "react";
 import { VendorAndItemName } from "../../../../../CustomTypes/types";
 import { addItemsByVendor } from "../../../../redux/addedSlice";
 import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
@@ -24,6 +24,7 @@ const icon = (
 type Props = VendorAndItemName;
 
 const SingleItemsByVendorListItem: FC<Props> = ({ itemName, vendorName }) => {
+  const { background } = useTheme().theme.colors;
   const dispatch = useAppDispatch();
   const ifAddedToAllVendors = useAppSelector(
     checkIfAddedToAllVendors(itemName)
@@ -37,12 +38,15 @@ const SingleItemsByVendorListItem: FC<Props> = ({ itemName, vendorName }) => {
     checkIfItemAddedToOneVendor(vendorName, itemName)
   );
 
-  const { theme } = useTheme();
+  const containerStyle = useMemo(
+    () => ({ backgroundColor: background }),
+    [background]
+  );
 
   return (
     <ListItem
       bottomDivider
-      containerStyle={[{ backgroundColor: theme.colors.background }]}>
+      containerStyle={containerStyle}>
       <ListItem.Content>
         <ListItem.Title>{itemName}</ListItem.Title>
       </ListItem.Content>

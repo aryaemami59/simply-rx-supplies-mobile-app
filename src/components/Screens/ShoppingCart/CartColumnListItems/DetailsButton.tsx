@@ -29,7 +29,7 @@ const DetailsButton: FC<Props> = ({ itemName, vendorName, reset }) => {
       size="md"
       title="Details"
       color="primary"
-      buttonStyle={[JC_SPACE_EVENLY]}
+      buttonStyle={JC_SPACE_EVENLY}
     />
   );
 };

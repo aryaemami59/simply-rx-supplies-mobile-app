@@ -1,5 +1,5 @@
 import { useTheme } from "@rneui/themed";
-import { FC, memo } from "react";
+import { FC, memo, useMemo } from "react";
 import { Text, View } from "react-native";
 import { ItemName } from "../../../../../CustomTypes/types";
 import { AI_CENTER, TEXT_CENTER } from "../../../../shared/sharedStyles";
@@ -9,19 +9,14 @@ type Props = {
 };
 
 const ItemNameCart: FC<Props> = ({ itemName }) => {
-  // const itemNameShown = useAppSelector(state => state.added.showItemName);
-  const { theme } = useTheme();
+  const { black } = useTheme().theme.colors;
+
+  const style = useMemo(() => [TEXT_CENTER, { color: black }], [black]);
 
   return (
-    <>
-      {/* {itemNameShown && ( */}
-      <View style={AI_CENTER}>
-        <Text style={[TEXT_CENTER, { color: theme.colors.black }]}>
-          Item Name: {itemName}
-        </Text>
-      </View>
-      {/* )} */}
-    </>
+    <View style={AI_CENTER}>
+      <Text style={style}>Item Name: {itemName}</Text>
+    </View>
   );
 };
 

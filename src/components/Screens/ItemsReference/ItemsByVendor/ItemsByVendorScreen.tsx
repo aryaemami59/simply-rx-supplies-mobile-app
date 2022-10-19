@@ -1,6 +1,6 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { useTheme } from "@rneui/themed";
-import { FC, memo } from "react";
+import { FC, memo, useMemo } from "react";
 import { FlatList, ListRenderItem, View } from "react-native";
 import {
   ItemsByVendorStackParamList,
@@ -28,8 +28,13 @@ const ItemsByVendorScreen: FC<Props> = ({ navigation, route }) => {
   const { theme } = useTheme();
   const { background } = theme.colors;
 
+  const style = useMemo(
+    () => [HEIGHT_100, { backgroundColor: background }],
+    [background]
+  );
+
   return (
-    <View style={[{ backgroundColor: background }, HEIGHT_100]}>
+    <View style={style}>
       <FlatList
         keyExtractor={keyExtractor}
         removeClippedSubviews

@@ -20,10 +20,15 @@ const ItemsByCategorySingleListItem: FC<Props> = ({ itemName }) => {
     shallowEqual
   );
 
+  const containerStyle = useMemo(
+    () => ({ backgroundColor: background }),
+    [background]
+  );
+
   return (
     <ListItem
       bottomDivider
-      containerStyle={{ backgroundColor: background }}>
+      containerStyle={containerStyle}>
       <ListItem.Content>
         <ListItem.Title>{itemName}</ListItem.Title>
         {vendors.map(vendorName => (

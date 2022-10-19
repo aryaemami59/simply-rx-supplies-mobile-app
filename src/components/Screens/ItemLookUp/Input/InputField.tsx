@@ -34,6 +34,27 @@ import { search } from "../../../../shared/utilityFunctions";
 import HeaderRightComponent from "../../../HeaderComponents/HeaderRightComponent";
 import SearchIcon from "../../../HeaderComponents/SearchIcon";
 
+const styles = StyleSheet.create({
+  headerCenterContainer: {
+    flex: 5,
+  },
+  headerRightContainer: {
+    flex: 1,
+  },
+  inputContainer: {
+    backgroundColor: SEARCH_BAR_COLOR,
+    borderRadius: 9999,
+  },
+  searchBarContainer: {
+    borderBottomWidth: 0,
+    borderTopWidth: 0,
+  },
+});
+
+const rightContainerStyle = [JC_AI_CENTER, styles.headerRightContainer];
+
+const containerStyle = [styles.searchBarContainer, BACKGROUND_TRANSPARENT];
+
 const InputField: FC = () => {
   const [val, setVal] = useState("");
   const itemNames = useAppSelector(selectItemNamesArr, shallowEqual);
@@ -41,8 +62,9 @@ const InputField: FC = () => {
   const inputRef = useRef<SearchBarType & TextInput>(null);
   const { theme } = useTheme();
   const dispatch = useAppDispatch();
-  const route = useRoute<RouteProp<ItemLookupStackParamList>>();
-  const inputFocused = route.params?.inputFocused ? true : false;
+  const { params } = useRoute<RouteProp<ItemLookupStackParamList>>();
+
+  const inputFocused = params?.inputFocused ? true : false;
 
   const focusHandler = useCallback(() => {
     view.current?.transitionTo(WIDTH_100);
@@ -95,7 +117,7 @@ const InputField: FC = () => {
   return (
     <Header
       backgroundColor={MAIN_COLOR}
-      rightContainerStyle={[JC_AI_CENTER, styles.headerRightContainer]}
+      rightContainerStyle={rightContainerStyle}
       leftContainerStyle={DISPLAY_NONE}
       rightComponent={HeaderRightComponent}
       centerContainerStyle={styles.headerCenterContainer}
@@ -112,7 +134,7 @@ const InputField: FC = () => {
             focusable
             onFocus={focusHandler}
             onBlur={blurHandler}
-            containerStyle={[styles.searchBarContainer, BACKGROUND_TRANSPARENT]}
+            containerStyle={containerStyle}
             placeholder="Search..."
             round
             inputContainerStyle={styles.inputContainer}
@@ -129,22 +151,5 @@ const InputField: FC = () => {
     />
   );
 };
-
-const styles = StyleSheet.create({
-  headerCenterContainer: {
-    flex: 5,
-  },
-  headerRightContainer: {
-    flex: 1,
-  },
-  inputContainer: {
-    backgroundColor: SEARCH_BAR_COLOR,
-    borderRadius: 9999,
-  },
-  searchBarContainer: {
-    borderBottomWidth: 0,
-    borderTopWidth: 0,
-  },
-});
 
 export default memo(InputField);

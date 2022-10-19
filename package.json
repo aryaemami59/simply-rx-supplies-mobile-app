@@ -72,14 +72,17 @@
     "@types/why-did-you-update": "^0.0.12",
     "@typescript-eslint/eslint-plugin": "^5.38.0",
     "@typescript-eslint/parser": "^5.38.0",
+    "@welldone-software/why-did-you-render": "^7.0.1",
     "eslint": "^7.32.0",
     "eslint-plugin-no-inline-styles": "^1.0.5",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.31.8",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-native": "^4.0.0",
+    "eslint-plugin-react-perf": "^3.3.1",
     "find-unused-exports": "^4.0.0",
     "prettier": "^2.7.1",
+    "react-perf": "^1.0.1",
     "typescript": "^4.8.4"
   },
   "eslintConfig": {

@@ -2,6 +2,7 @@
   "extends": [
     "@react-native-community",
     "plugin:react-native/all",
+    "plugin:react-perf/recommended",
     "plugin:@typescript-eslint/recommended"
   ],
   "rules": {
@@ -19,6 +20,7 @@
     "react-native/no-color-literals": 2,
     "react-native/no-raw-text": 2,
     "react-native/no-single-element-style-arrays": 2,
+    "react-perf/jsx-no-new-object-as-prop": 2,
     "@typescript-eslint/no-unused-vars": [
       "warn",
       {

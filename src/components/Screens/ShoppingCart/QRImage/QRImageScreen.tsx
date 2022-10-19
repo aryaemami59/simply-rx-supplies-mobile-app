@@ -1,7 +1,7 @@
 import { Octicons } from "@expo/vector-icons";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { Text, useTheme } from "@rneui/themed";
-import { FC, memo, useCallback, useRef } from "react";
+import { FC, memo, useCallback, useMemo, useRef } from "react";
 import {
   Platform,
   Share,
@@ -22,7 +22,20 @@ import {
   TEXT_CENTER,
 } from "../../../../shared/sharedStyles";
 
+const styles = StyleSheet.create({
+  container: {
+    paddingHorizontal: 50,
+    paddingVertical: 20,
+  },
+  icon: {
+    alignSelf: "flex-end",
+    marginTop: 20,
+  },
+});
+
 const iconName = Platform.OS === "android" ? "share-android" : "share";
+
+const contentContainerStyle = [JC_SPACE_EVENLY, AI_CENTER, styles.container];
 
 type Props = NativeStackScreenProps<ShoppingCartStackParamList, "QRImage">;
 
@@ -47,14 +60,16 @@ const QRImageScreen: FC<Props> = ({ navigation, route }) => {
 
   const getRef = useCallback((e: Svg) => (svg.current = e), []);
 
-  const { theme } = useTheme();
-  const { background } = theme.colors;
+  const { background } = useTheme().theme.colors;
+
+  const style = useMemo(
+    () => [HEIGHT_100, JC_SPACE_AROUND, { backgroundColor: background }],
+    [background]
+  );
 
   return (
-    <View
-      style={[HEIGHT_100, JC_SPACE_AROUND, { backgroundColor: background }]}>
-      <ScrollView
-        contentContainerStyle={[JC_SPACE_EVENLY, AI_CENTER, styles.container]}>
+    <View style={style}>
+      <ScrollView contentContainerStyle={contentContainerStyle}>
         <TouchableOpacity onPress={shareQR}>
           <QRCode
             value={itemNumbers}
@@ -86,16 +101,5 @@ const QRImageScreen: FC<Props> = ({ navigation, route }) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: 50,
-    paddingVertical: 20,
-  },
-  icon: {
-    alignSelf: "flex-end",
-    marginTop: 20,
-  },
-});
 
 export default memo<Props>(QRImageScreen);

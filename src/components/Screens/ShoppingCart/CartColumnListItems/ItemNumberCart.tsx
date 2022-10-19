@@ -1,5 +1,5 @@
 import { useTheme } from "@rneui/themed";
-import { FC, memo } from "react";
+import { FC, memo, useMemo } from "react";
 import { Text, View } from "react-native";
 import { ItemName } from "../../../../../CustomTypes/types";
 import { useAppSelector } from "../../../../redux/hooks";
@@ -12,19 +12,14 @@ type Props = {
 
 const ItemNumberCart: FC<Props> = ({ itemName }) => {
   const itemNumber = useAppSelector(selectItemNumber(itemName));
-  // const itemNumberShown = useAppSelector(state => state.added.showItemNumber);
-  const { theme } = useTheme();
+  const { black } = useTheme().theme.colors;
+
+  const style = useMemo(() => [TEXT_CENTER, { color: black }], [black]);
 
   return (
-    <>
-      {/* {itemNumberShown && ( */}
-      <View style={AI_CENTER}>
-        <Text style={[TEXT_CENTER, { color: theme.colors.black }]}>
-          Item Number: {itemNumber}
-        </Text>
-      </View>
-      {/* )} */}
-    </>
+    <View style={AI_CENTER}>
+      <Text style={style}>Item Number: {itemNumber}</Text>
+    </View>
   );
 };
 
