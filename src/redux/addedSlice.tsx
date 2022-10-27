@@ -101,6 +101,11 @@ export const addedSlice = createSlice({
             state.itemsObj[itemName].vendorsAdded
           ) as VendorNameType[])
         : emptyArr;
+      const qr = state.vendorsObj[vendorName].itemsAdded
+        .map(itemAddedName => state.itemsObj[itemAddedName].itemNumber)
+        .join(state.vendorsObj[vendorName].joinChars);
+      state.vendorsObj[vendorName].qrContent = qr;
+      state.vendorsObj[vendorName].qrText = qr;
     },
     removeItems: (state, action: PayloadAction<AddItemsByVendorInterface>) => {
       const { itemName, vendorName } = action.payload;
@@ -110,6 +115,11 @@ export const addedSlice = createSlice({
       state.itemsObj[itemName].vendorsAdded = state.itemsObj[
         itemName
       ].vendorsAdded.filter(vendor => vendor !== vendorName);
+      const qr = state.vendorsObj[vendorName].itemsAdded
+        .map(itemAddedName => state.itemsObj[itemAddedName].itemNumber)
+        .join(state.vendorsObj[vendorName].joinChars);
+      state.vendorsObj[vendorName].qrContent = qr;
+      state.vendorsObj[vendorName].qrText = qr;
     },
     setListItems: (state, action: PayloadAction<ItemName[]>) => {
       state.listItems = action.payload;
