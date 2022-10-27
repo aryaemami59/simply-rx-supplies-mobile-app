@@ -12,11 +12,14 @@ import {
 } from "../../../../../CustomTypes/types";
 import { useAppSelector } from "../../../../redux/hooks";
 import { selectCategoriesItemNames } from "../../../../redux/selectors";
+import ItemNameProvider from "../../../../shared/contexts/ItemNameProvider";
 import { HEIGHT_100 } from "../../../../shared/sharedStyles";
 import ItemsByCategorySingleListItem from "./ItemsByCategorySingleListItem";
 
 const renderItems: ListRenderItem<ItemName> = ({ item }) => (
-  <ItemsByCategorySingleListItem itemName={item} />
+  <ItemNameProvider itemName={item}>
+    <ItemsByCategorySingleListItem />
+  </ItemNameProvider>
 );
 
 const keyExtractor = (item: ItemName) => item;

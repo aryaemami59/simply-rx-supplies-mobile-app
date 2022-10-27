@@ -6,14 +6,15 @@ import {
   ShoppingCartStackParamList,
   VendorNameType,
 } from "../../../../CustomTypes/types";
-import { useAppSelector } from "../../../redux/hooks";
-import { selectVendorsArr } from "../../../redux/selectors";
+import VendorNameProvider from "../../../shared/contexts/VendorNameProvider";
+import useVendorNamesList from "../../../shared/customHooks/useVendorNamesList";
 import { HEIGHT_100 } from "../../../shared/sharedStyles";
 import CartVendorColumns from "./CartVendorColumns";
-import { shallowEqual } from "react-redux";
 
 const renderItem: ListRenderItem<VendorNameType> = ({ item }) => (
-  <CartVendorColumns vendorName={item} />
+  <VendorNameProvider vendorName={item}>
+    <CartVendorColumns />
+  </VendorNameProvider>
 );
 
 const keyExtractor = (item: VendorNameType) => item.toString();
@@ -24,7 +25,7 @@ type Props = NativeStackScreenProps<
 >;
 
 const ShoppingCartScreen: FC<Props> = ({ navigation, route }) => {
-  const vendors = useAppSelector(selectVendorsArr, shallowEqual);
+  const vendors = useVendorNamesList();
   const { background } = useTheme().theme.colors;
 
   const style = useMemo(

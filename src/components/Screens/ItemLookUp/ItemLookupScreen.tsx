@@ -9,12 +9,15 @@ import {
 } from "../../../../CustomTypes/types";
 import { useAppSelector } from "../../../redux/hooks";
 import { selectAllListItems } from "../../../redux/selectors";
+import ItemNameProvider from "../../../shared/contexts/ItemNameProvider";
 import BottomSheetComponent from "./Input/BottomSheetComponent";
 import InputField from "./Input/InputField";
 import SingleSearchResultsListItem from "./SearchResults/SingleSearchResultsListItem";
 
 const renderItems: ListRenderItem<ItemName> = ({ item }) => (
-  <SingleSearchResultsListItem itemName={item} />
+  <ItemNameProvider itemName={item}>
+    <SingleSearchResultsListItem />
+  </ItemNameProvider>
 );
 
 const keyExtractor = (item: ItemName) => item;
@@ -26,12 +29,11 @@ type Props = NativeStackScreenProps<
 
 const ItemLookupScreen: FC<Props> = ({ navigation, route }) => {
   const listItems = useAppSelector(selectAllListItems, shallowEqual);
-  const { theme } = useTheme();
-  const { background } = theme.colors;
+  const { background: backgroundColor } = useTheme().theme.colors;
 
   const style = useMemo(
-    () => [styles.containerStyle, { backgroundColor: background }],
-    [background]
+    () => [styles.containerStyle, { backgroundColor }],
+    [backgroundColor]
   );
 
   return (

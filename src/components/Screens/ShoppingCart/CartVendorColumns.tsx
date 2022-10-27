@@ -4,29 +4,20 @@ import { Badge, ListItem, useTheme } from "@rneui/themed";
 import { FC, memo, useCallback, useMemo } from "react";
 import { StyleSheet } from "react-native";
 import TouchableScale from "react-native-touchable-scale";
-import {
-  ShoppingCartStackParamList,
-  VendorNameType,
-} from "../../../../CustomTypes/types";
+import { ShoppingCartStackParamList } from "../../../../CustomTypes/types";
 import { useAppSelector } from "../../../redux/hooks";
-import {
-  selectVendorOfficialName,
-  addedItemsLength,
-} from "../../../redux/selectors";
+import { addedItemsLength } from "../../../redux/selectors";
+import useOfficialVendorName from "../../../shared/customHooks/useOfficialVendorName";
+import useVendorName from "../../../shared/customHooks/useVendorName";
 import {
   AI_CENTER,
   FONT_WEIGHT_BOLD,
   JC_SPACE_BETWEEN,
 } from "../../../shared/sharedStyles";
 
-type Props = {
-  vendorName: VendorNameType;
-};
-
-const CartVendorColumns: FC<Props> = ({ vendorName }) => {
-  const officialVendorName = useAppSelector(
-    selectVendorOfficialName(vendorName)
-  );
+const CartVendorColumns: FC = () => {
+  const vendorName = useVendorName();
+  const officialVendorName = useOfficialVendorName(vendorName);
   const addedItemsLen = useAppSelector(addedItemsLength(vendorName));
   const { background } = useTheme().theme.colors;
 
@@ -73,4 +64,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default memo<Props>(CartVendorColumns);
+export default memo(CartVendorColumns);

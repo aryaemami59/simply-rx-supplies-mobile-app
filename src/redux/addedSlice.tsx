@@ -139,25 +139,34 @@ export const addedSlice = createSlice({
     },
     setVendorsForAllUncheck: (
       state,
-      action: PayloadAction<{ vendorName: VendorNameType }>
+      { payload: vendorName }: PayloadAction<VendorNameType>
     ) => {
-      const { vendorName } = action.payload;
       let itemName: ItemName;
       for (itemName in state.itemsObj) {
-        state.itemsObj[itemName].vendorsToAdd = state.itemsObj[
-          itemName
-        ].vendorsToAdd.includes(vendorName)
-          ? state.itemsObj[itemName].vendorsToAdd.filter(
-              vendor => vendor !== vendorName
-            )
-          : state.itemsObj[itemName].vendorsToAdd;
+        if (
+          state.itemsObj[itemName].vendorsToAdd.indexOf(vendorName) ===
+          state.itemsObj[itemName].vendorsToAdd.length - 1
+        ) {
+          state.itemsObj[itemName].vendorsToAdd.pop();
+        } else if (
+          state.itemsObj[itemName].vendorsToAdd.indexOf(vendorName) === 0
+        ) {
+          state.itemsObj[itemName].vendorsToAdd.shift();
+        } else {
+          state.itemsObj[itemName].vendorsToAdd = state.itemsObj[
+            itemName
+          ].vendorsToAdd.includes(vendorName)
+            ? state.itemsObj[itemName].vendorsToAdd.filter(
+                vendor => vendor !== vendorName
+              )
+            : state.itemsObj[itemName].vendorsToAdd;
+        }
       }
     },
     setVendorsForAllCheck: (
       state,
-      action: PayloadAction<{ vendorName: VendorNameType }>
+      { payload: vendorName }: PayloadAction<VendorNameType>
     ) => {
-      const { vendorName } = action.payload;
       let itemName: ItemName;
       for (itemName in state.itemsObj) {
         state.itemsObj[itemName].vendorsToAdd.includes(vendorName) ||

@@ -1,17 +1,18 @@
 import { Button } from "@rneui/themed";
 import { FC, memo, useCallback, useMemo } from "react";
 import { Share } from "react-native";
-import { VendorAndItemName } from "../../../../../CustomTypes/types";
 import { useAppSelector } from "../../../../redux/hooks";
 import { selectItemNumber, selectItemSrc } from "../../../../redux/selectors";
+import useItemName from "../../../../shared/customHooks/useItemName";
 import { JC_SPACE_EVENLY } from "../../../../shared/sharedStyles";
 import ShareIconNode from "./ShareIconNode";
 
-type Props = VendorAndItemName & {
+type Props = {
   reset: () => void;
 };
 
-const ShareButton: FC<Props> = ({ itemName, vendorName, reset }) => {
+const ShareButton: FC<Props> = ({ reset }) => {
+  const itemName = useItemName();
   const itemNumber = useAppSelector(selectItemNumber(itemName));
   const src = useAppSelector(selectItemSrc(itemName));
 

@@ -1,16 +1,13 @@
 import { useTheme } from "@rneui/themed";
 import { FC, memo, useMemo } from "react";
 import { Text, View } from "react-native";
-import { ItemName } from "../../../../../CustomTypes/types";
 import { useAppSelector } from "../../../../redux/hooks";
 import { selectItemNumber } from "../../../../redux/selectors";
+import useItemName from "../../../../shared/customHooks/useItemName";
 import { AI_CENTER, TEXT_CENTER } from "../../../../shared/sharedStyles";
 
-type Props = {
-  itemName: ItemName;
-};
-
-const ItemNumberCart: FC<Props> = ({ itemName }) => {
+const ItemNumberCart: FC = () => {
+  const itemName = useItemName();
   const itemNumber = useAppSelector(selectItemNumber(itemName));
   const { black } = useTheme().theme.colors;
 
@@ -23,4 +20,4 @@ const ItemNumberCart: FC<Props> = ({ itemName }) => {
   );
 };
 
-export default memo<Props>(ItemNumberCart);
+export default memo(ItemNumberCart);

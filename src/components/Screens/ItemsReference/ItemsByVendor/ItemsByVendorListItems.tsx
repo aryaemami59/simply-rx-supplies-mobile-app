@@ -5,16 +5,14 @@ import {
 import { useTheme } from "@rneui/themed";
 import { FC, memo, useCallback, useEffect, useMemo } from "react";
 import { FlatList, ListRenderItem, View } from "react-native";
-import { shallowEqual } from "react-redux";
 import {
   ItemName,
   ItemsReferenceStackParamList,
 } from "../../../../../CustomTypes/types";
-import { useAppSelector } from "../../../../redux/hooks";
-import {
-  selectItemNamesByVendor,
-  selectVendorOfficialName,
-} from "../../../../redux/selectors";
+import ItemNameProvider from "../../../../shared/contexts/ItemNameProvider";
+import VendorNameProvider from "../../../../shared/contexts/VendorNameProvider";
+import useItemNames from "../../../../shared/customHooks/useItemNames";
+import useOfficialVendorName from "../../../../shared/customHooks/useOfficialVendorName";
 import { HEIGHT_100 } from "../../../../shared/sharedStyles";
 import SingleItemsByVendorListItem from "./SingleItemsByVendorListItem";
 
@@ -27,24 +25,20 @@ type Props = NativeStackScreenProps<
 
 const ItemsByVendorListItems: FC<Props> = ({ navigation, route }) => {
   const { vendorName } = route.params;
-  const officialVendorName = useAppSelector(
-    selectVendorOfficialName(vendorName)
-  );
+  const officialVendorName = useOfficialVendorName(vendorName);
 
   const renderItems: ListRenderItem<ItemName> = useCallback(
     ({ item }) => (
-      <SingleItemsByVendorListItem
-        itemName={item}
-        vendorName={vendorName}
-      />
+      <ItemNameProvider itemName={item}>
+        <VendorNameProvider vendorName={vendorName}>
+          <SingleItemsByVendorListItem />
+        </VendorNameProvider>
+      </ItemNameProvider>
     ),
     [vendorName]
   );
 
-  const itemNames = useAppSelector(
-    selectItemNamesByVendor(vendorName),
-    shallowEqual
-  );
+  const itemNames = useItemNames(vendorName);
 
   const options: NativeStackNavigationOptions = useMemo(
     () => ({

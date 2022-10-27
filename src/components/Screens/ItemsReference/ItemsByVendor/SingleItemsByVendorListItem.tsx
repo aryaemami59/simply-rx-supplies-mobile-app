@@ -1,13 +1,14 @@
 import { MaterialIcons } from "@expo/vector-icons";
 import { Chip, ListItem, useTheme } from "@rneui/themed";
 import { FC, memo, useCallback, useMemo } from "react";
-import { VendorAndItemName } from "../../../../../CustomTypes/types";
 import { addItemsByVendor } from "../../../../redux/addedSlice";
 import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
 import {
   checkIfAddedToAllVendors,
   checkIfItemAddedToOneVendor,
 } from "../../../../redux/selectors";
+import useItemName from "../../../../shared/customHooks/useItemName";
+import useVendorName from "../../../../shared/customHooks/useVendorName";
 import {
   BACKGROUND_MAIN_COLOR,
   FONT_WEIGHT_700,
@@ -21,9 +22,9 @@ const icon = (
   />
 );
 
-type Props = VendorAndItemName;
-
-const SingleItemsByVendorListItem: FC<Props> = ({ itemName, vendorName }) => {
+const SingleItemsByVendorListItem: FC = () => {
+  const itemName = useItemName();
+  const vendorName = useVendorName();
   const { background } = useTheme().theme.colors;
   const dispatch = useAppDispatch();
   const ifAddedToAllVendors = useAppSelector(
@@ -66,4 +67,4 @@ const SingleItemsByVendorListItem: FC<Props> = ({ itemName, vendorName }) => {
   );
 };
 
-export default memo<Props>(SingleItemsByVendorListItem);
+export default memo(SingleItemsByVendorListItem);

@@ -1,10 +1,10 @@
 import { MaterialIcons } from "@expo/vector-icons";
 import { Chip } from "@rneui/themed";
 import { FC, memo, useCallback } from "react";
-import { ItemName } from "../../../../../CustomTypes/types";
 import { addItems } from "../../../../redux/addedSlice";
 import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
 import { checkIfAddedToAllVendors } from "../../../../redux/selectors";
+import useItemName from "../../../../shared/customHooks/useItemName";
 import {
   BACKGROUND_MAIN_COLOR,
   FONT_WEIGHT_700,
@@ -18,11 +18,8 @@ const icon = (
   />
 );
 
-type Props = {
-  itemName: ItemName;
-};
-
-const AddItemButton: FC<Props> = ({ itemName }) => {
+const AddItemButton: FC = () => {
+  const itemName = useItemName();
   const IfAddedToAllVendors = useAppSelector(
     checkIfAddedToAllVendors(itemName)
   );
@@ -47,4 +44,4 @@ const AddItemButton: FC<Props> = ({ itemName }) => {
   );
 };
 
-export default memo<Props>(AddItemButton);
+export default memo(AddItemButton);

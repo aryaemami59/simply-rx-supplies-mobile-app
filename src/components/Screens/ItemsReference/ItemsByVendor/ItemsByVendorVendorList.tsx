@@ -3,22 +3,14 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { ListItem, useTheme } from "@rneui/themed";
 import { FC, memo, useCallback, useMemo } from "react";
 import TouchableScale from "react-native-touchable-scale";
-import {
-  ItemsReferenceStackParamList,
-  VendorNameType,
-} from "../../../../../CustomTypes/types";
-import { useAppSelector } from "../../../../redux/hooks";
-import { selectVendorOfficialName } from "../../../../redux/selectors";
+import { ItemsReferenceStackParamList } from "../../../../../CustomTypes/types";
+import useOfficialVendorName from "../../../../shared/customHooks/useOfficialVendorName";
+import useVendorName from "../../../../shared/customHooks/useVendorName";
 import { AI_CENTER, JC_SPACE_BETWEEN } from "../../../../shared/sharedStyles";
 
-type Props = {
-  vendorName: VendorNameType;
-};
-
-const ItemsByVendorVendorList: FC<Props> = ({ vendorName }) => {
-  const officialVendorName = useAppSelector(
-    selectVendorOfficialName(vendorName)
-  );
+const ItemsByVendorVendorList: FC = () => {
+  const vendorName = useVendorName();
+  const officialVendorName = useOfficialVendorName(vendorName);
   const { background } = useTheme().theme.colors;
 
   const navigation =
@@ -46,4 +38,4 @@ const ItemsByVendorVendorList: FC<Props> = ({ vendorName }) => {
   );
 };
 
-export default memo<Props>(ItemsByVendorVendorList);
+export default memo(ItemsByVendorVendorList);

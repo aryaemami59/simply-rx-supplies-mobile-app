@@ -2,17 +2,15 @@ import { BottomSheet } from "@rneui/base";
 import { Button } from "@rneui/themed";
 import { FC, memo, useCallback, useState } from "react";
 import { Keyboard, StyleSheet, View } from "react-native";
-import { useAppSelector } from "../../../../redux/hooks";
-import {
-  selectVendorsArr,
-  selectAllVendorOfficialNames,
-} from "../../../../redux/selectors";
-import BottomSheetVendorCheckbox from "../SearchResults/BottomSheetVendorCheckbox";
 import { shallowEqual } from "react-redux";
+import { useAppSelector } from "../../../../redux/hooks";
+import { selectAllVendorOfficialNames } from "../../../../redux/selectors";
+import useVendorNamesList from "../../../../shared/customHooks/useVendorNamesList";
+import BottomSheetVendorCheckbox from "../SearchResults/BottomSheetVendorCheckbox";
 
 const BottomSheetComponent: FC = () => {
   const [visible, setVisible] = useState(false);
-  const vendors = useAppSelector(selectVendorsArr, shallowEqual);
+  const vendors = useVendorNamesList();
   const officialVendorNames = useAppSelector(
     selectAllVendorOfficialNames,
     shallowEqual

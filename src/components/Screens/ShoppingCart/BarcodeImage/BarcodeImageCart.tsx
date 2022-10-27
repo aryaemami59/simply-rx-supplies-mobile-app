@@ -2,20 +2,14 @@ import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { FC, memo, useCallback, useMemo } from "react";
 import { Image, StyleSheet, TouchableOpacity } from "react-native";
-import {
-  ItemName,
-  ShoppingCartStackParamList,
-} from "../../../../../CustomTypes/types";
+import { ShoppingCartStackParamList } from "../../../../../CustomTypes/types";
 import { useAppSelector } from "../../../../redux/hooks";
 import { selectItemSrc } from "../../../../redux/selectors";
+import useItemName from "../../../../shared/customHooks/useItemName";
 import {
   AI_CENTER,
   BARCODE_ASPECT_RATIO,
 } from "../../../../shared/sharedStyles";
-
-type Props = {
-  itemName: ItemName;
-};
 
 const styles = StyleSheet.create({
   ImageStyle: {
@@ -25,7 +19,8 @@ const styles = StyleSheet.create({
 
 const style = [styles.ImageStyle, BARCODE_ASPECT_RATIO];
 
-const BarcodeImageCart: FC<Props> = ({ itemName }) => {
+const BarcodeImageCart: FC = () => {
+  const itemName = useItemName();
   const src = useAppSelector(selectItemSrc(itemName));
 
   const navigation =
@@ -49,4 +44,4 @@ const BarcodeImageCart: FC<Props> = ({ itemName }) => {
   );
 };
 
-export default memo<Props>(BarcodeImageCart);
+export default memo(BarcodeImageCart);

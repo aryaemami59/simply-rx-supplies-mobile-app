@@ -1,22 +1,20 @@
 import { ListItem } from "@rneui/themed";
 import { FC, memo, useCallback } from "react";
-import { VendorAndItemName } from "../../../../../CustomTypes/types";
-import {
-  setVendors,
-} from "../../../../redux/addedSlice";
+import { setVendors } from "../../../../redux/addedSlice";
 import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
-import { selectVendorOfficialName, checkIfItemAddedToOneVendor, checkVendorsToAdd } from "../../../../redux/selectors";
+import {
+  checkIfItemAddedToOneVendor,
+  checkVendorsToAdd,
+} from "../../../../redux/selectors";
+import useItemName from "../../../../shared/customHooks/useItemName";
+import useOfficialVendorName from "../../../../shared/customHooks/useOfficialVendorName";
+import useVendorName from "../../../../shared/customHooks/useVendorName";
 
-type Props = VendorAndItemName;
-
-const ItemsByCategorySingleListItemCheckBox: FC<Props> = ({
-  itemName,
-  vendorName,
-}) => {
+const ItemsByCategorySingleListItemCheckBox: FC = () => {
+  const vendorName = useVendorName();
+  const itemName = useItemName();
   const dispatch = useAppDispatch();
-  const officialVendorName = useAppSelector(
-    selectVendorOfficialName(vendorName)
-  );
+  const officialVendorName = useOfficialVendorName(vendorName);
   const ifAddedToVendor = useAppSelector(
     checkIfItemAddedToOneVendor(vendorName, itemName)
   );
@@ -36,4 +34,4 @@ const ItemsByCategorySingleListItemCheckBox: FC<Props> = ({
   );
 };
 
-export default memo<Props>(ItemsByCategorySingleListItemCheckBox);
+export default memo(ItemsByCategorySingleListItemCheckBox);

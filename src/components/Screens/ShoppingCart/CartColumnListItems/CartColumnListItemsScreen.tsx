@@ -11,6 +11,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { shallowEqual } from "react-redux";
 import {
   ItemName,
   ShoppingCartStackParamList,
@@ -19,9 +20,11 @@ import { useAppSelector } from "../../../../redux/hooks";
 import {
   checkIfAnyItemsAddedToOneVendor,
   selectAddedItemsByVendor,
-  selectVendorOfficialName,
   selectVendorsLinks,
 } from "../../../../redux/selectors";
+import ItemNameProvider from "../../../../shared/contexts/ItemNameProvider";
+import VendorNameProvider from "../../../../shared/contexts/VendorNameProvider";
+import useOfficialVendorName from "../../../../shared/customHooks/useOfficialVendorName";
 import {
   AI_CENTER,
   BACKGROUND_MAIN_COLOR,
@@ -34,7 +37,6 @@ import {
 } from "../../../../shared/sharedStyles";
 import CartQRCodeImage from "../QRImage/CartQRCodeImage";
 import SingleCartListItems from "./SingleCartListItems";
-import { shallowEqual } from "react-redux";
 
 const shoppingCartIcon = (
   <MaterialIcons
@@ -57,10 +59,11 @@ const CartColumnListItemsScreen: FC<Props> = ({ navigation, route }) => {
   const { vendorName } = route.params;
   const renderItems: ListRenderItem<ItemName> = useCallback(
     ({ item }) => (
-      <SingleCartListItems
-        itemName={item}
-        vendorName={vendorName}
-      />
+      <ItemNameProvider itemName={item}>
+        <VendorNameProvider vendorName={vendorName}>
+          <SingleCartListItems />
+        </VendorNameProvider>
+      </ItemNameProvider>
     ),
     [vendorName]
   );
@@ -77,9 +80,7 @@ const CartColumnListItemsScreen: FC<Props> = ({ navigation, route }) => {
     Linking.openURL(vendorLink);
   }, [vendorLink]);
 
-  const officialVendorName = useAppSelector(
-    selectVendorOfficialName(vendorName)
-  );
+  const officialVendorName = useOfficialVendorName(vendorName);
 
   const options = useMemo(
     () => ({

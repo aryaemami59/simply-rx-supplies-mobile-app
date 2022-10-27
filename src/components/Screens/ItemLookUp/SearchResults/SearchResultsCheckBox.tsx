@@ -1,21 +1,20 @@
 import { ListItem } from "@rneui/themed";
 import { FC, memo, useCallback } from "react";
-import { VendorAndItemName } from "../../../../../CustomTypes/types";
 import { setVendors } from "../../../../redux/addedSlice";
 import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
 import {
   checkVendorsAdded,
   checkVendorsToAdd,
-  selectVendorOfficialName,
 } from "../../../../redux/selectors";
+import useItemName from "../../../../shared/customHooks/useItemName";
+import useOfficialVendorName from "../../../../shared/customHooks/useOfficialVendorName";
+import useVendorName from "../../../../shared/customHooks/useVendorName";
 import { BACKGROUND_TRANSPARENT } from "../../../../shared/sharedStyles";
 
-type Props = VendorAndItemName;
-
-const SearchResultsCheckBox: FC<Props> = ({ vendorName, itemName }) => {
-  const officialVendorName = useAppSelector(
-    selectVendorOfficialName(vendorName)
-  );
+const SearchResultsCheckBox: FC = () => {
+  const vendorName = useVendorName();
+  const itemName = useItemName();
+  const officialVendorName = useOfficialVendorName(vendorName);
 
   const dispatch = useAppDispatch();
 
@@ -39,4 +38,4 @@ const SearchResultsCheckBox: FC<Props> = ({ vendorName, itemName }) => {
   );
 };
 
-export default memo<Props>(SearchResultsCheckBox);
+export default memo(SearchResultsCheckBox);

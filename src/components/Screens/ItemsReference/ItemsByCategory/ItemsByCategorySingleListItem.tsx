@@ -1,19 +1,16 @@
 import { ListItem, useTheme } from "@rneui/themed";
-import { FC, memo } from "react";
-import { ItemName } from "../../../../../CustomTypes/types";
-import ItemsByCategorySingleListItemCheckBox from "./ItemsByCategorySingleListItemCheckBox";
-import SingleCategoryListItemAddButton from "./SingleCategoryListItemAddButton";
+import { FC, memo, useMemo } from "react";
+import { shallowEqual } from "react-redux";
 import { useAppSelector } from "../../../../redux/hooks";
 import { selectVendorsByItemName } from "../../../../redux/selectors";
-import { shallowEqual } from "react-redux";
+import VendorNameProvider from "../../../../shared/contexts/VendorNameProvider";
+import useItemName from "../../../../shared/customHooks/useItemName";
+import ItemsByCategorySingleListItemCheckBox from "./ItemsByCategorySingleListItemCheckBox";
+import SingleCategoryListItemAddButton from "./SingleCategoryListItemAddButton";
 
-type Props = {
-  itemName: ItemName;
-};
-
-const ItemsByCategorySingleListItem: FC<Props> = ({ itemName }) => {
-  const { theme } = useTheme();
-  const { background } = theme.colors;
+const ItemsByCategorySingleListItem: FC = () => {
+  const itemName = useItemName();
+  const { background } = useTheme().theme.colors;
 
   const vendors = useAppSelector(
     selectVendorsByItemName(itemName),
@@ -32,18 +29,18 @@ const ItemsByCategorySingleListItem: FC<Props> = ({ itemName }) => {
       <ListItem.Content>
         <ListItem.Title>{itemName}</ListItem.Title>
         {vendors.map(vendorName => (
-          <ItemsByCategorySingleListItemCheckBox
-            key={vendorName}
+          <VendorNameProvider
             vendorName={vendorName}
-            itemName={itemName}
-          />
+            key={vendorName}>
+            <ItemsByCategorySingleListItemCheckBox />
+          </VendorNameProvider>
         ))}
       </ListItem.Content>
       <ListItem.Content right>
-        <SingleCategoryListItemAddButton itemName={itemName} />
+        <SingleCategoryListItemAddButton />
       </ListItem.Content>
     </ListItem>
   );
 };
 
-export default memo<Props>(ItemsByCategorySingleListItem);
+export default memo(ItemsByCategorySingleListItem);

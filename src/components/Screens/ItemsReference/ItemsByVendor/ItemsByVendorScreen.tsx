@@ -6,14 +6,15 @@ import {
   ItemsByVendorStackParamList,
   VendorNameType,
 } from "../../../../../CustomTypes/types";
-import { useAppSelector } from "../../../../redux/hooks";
-import { selectVendorsArr } from "../../../../redux/selectors";
+import VendorNameProvider from "../../../../shared/contexts/VendorNameProvider";
+import useVendorNamesList from "../../../../shared/customHooks/useVendorNamesList";
 import { HEIGHT_100 } from "../../../../shared/sharedStyles";
 import ItemsByVendorVendorList from "./ItemsByVendorVendorList";
-import { shallowEqual } from "react-redux";
 
 const renderItem: ListRenderItem<VendorNameType> = ({ item }) => (
-  <ItemsByVendorVendorList vendorName={item} />
+  <VendorNameProvider vendorName={item}>
+    <ItemsByVendorVendorList />
+  </VendorNameProvider>
 );
 
 const keyExtractor = (item: VendorNameType) => item.toString();
@@ -24,7 +25,7 @@ type Props = NativeStackScreenProps<
 >;
 
 const ItemsByVendorScreen: FC<Props> = ({ navigation, route }) => {
-  const allVendors = useAppSelector(selectVendorsArr, shallowEqual);
+  const allVendors = useVendorNamesList();
   const { theme } = useTheme();
   const { background } = theme.colors;
 

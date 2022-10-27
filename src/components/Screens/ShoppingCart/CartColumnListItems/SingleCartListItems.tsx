@@ -2,7 +2,6 @@ import { ListItem, useTheme } from "@rneui/themed";
 import { FC, memo, useCallback, useMemo, useState } from "react";
 import { View } from "react-native";
 import Collapsible from "react-native-collapsible";
-import { VendorAndItemName } from "../../../../../CustomTypes/types";
 import {
   AI_CENTER,
   JC_SPACE_BETWEEN,
@@ -16,11 +15,9 @@ import ItemNumberCart from "./ItemNumberCart";
 import MinimizeButton from "./MinimizeButton";
 import ShareButton from "./ShareButton";
 
-type Props = VendorAndItemName;
-
 const style = [AI_CENTER, WIDTH_100, JC_SPACE_BETWEEN];
 
-const SingleCartListItems: FC<Props> = ({ itemName, vendorName }) => {
+const SingleCartListItems: FC = () => {
   const [open, setOpen] = useState(true);
   const { background } = useTheme().theme.colors;
 
@@ -33,33 +30,19 @@ const SingleCartListItems: FC<Props> = ({ itemName, vendorName }) => {
       <>
         {open && (
           <>
-            <DeleteButton
-              reset={reset}
-              itemName={itemName}
-              vendorName={vendorName}
-            />
-            <ShareButton
-              reset={reset}
-              itemName={itemName}
-              vendorName={vendorName}
-            />
-            <DetailsButton
-              reset={reset}
-              itemName={itemName}
-              vendorName={vendorName}
-            />
+            <DeleteButton reset={reset} />
+            <ShareButton reset={reset} />
+            <DetailsButton reset={reset} />
           </>
         )}
         <MinimizeButton
           open={open}
-          itemName={itemName}
-          vendorName={vendorName}
           reset={reset}
           onPress={clickHandler}
         />
       </>
     ),
-    [clickHandler, itemName, open, vendorName]
+    [clickHandler, open]
   );
 
   const containerStyle = useMemo(
@@ -74,14 +57,14 @@ const SingleCartListItems: FC<Props> = ({ itemName, vendorName }) => {
       topDivider
       rightContent={rightContent}>
       <View style={style}>
-        <ItemNameCart itemName={itemName} />
+        <ItemNameCart />
         <Collapsible
           collapsed={!open}
           easing="easeInQuad">
           {open && (
             <>
-              <ItemNumberCart itemName={itemName} />
-              <BarcodeImageCart itemName={itemName} />
+              <ItemNumberCart />
+              <BarcodeImageCart />
             </>
           )}
         </Collapsible>
@@ -90,4 +73,4 @@ const SingleCartListItems: FC<Props> = ({ itemName, vendorName }) => {
   );
 };
 
-export default memo<Props>(SingleCartListItems);
+export default memo(SingleCartListItems);
