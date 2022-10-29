@@ -7,6 +7,7 @@ import {
 } from "../../../CustomTypes/types";
 import { HEADER_SHOWN_FALSE } from "../../shared/sharedScreenOptions";
 import ItemsByVendorScreen from "../Screens/ItemsReference/ItemsByVendor/ItemsByVendorScreen";
+import useUpdateLogger from "../../shared/customHooks/useUpdateLogger";
 
 type Props = MaterialTopTabScreenProps<
   ItemsReferenceTopTabParamList,
@@ -15,13 +16,16 @@ type Props = MaterialTopTabScreenProps<
 
 const Stack = createNativeStackNavigator<ItemsByVendorStackParamList>();
 
-const ItemsByVendorStackScreen: FC<Props> = ({ navigation, route }) => (
-  <Stack.Navigator screenOptions={HEADER_SHOWN_FALSE}>
-    <Stack.Screen
-      name="ItemsByVendorScreen"
-      component={ItemsByVendorScreen}
-    />
-  </Stack.Navigator>
-);
+const ItemsByVendorStackScreen: FC<Props> = ({ navigation, route }) => {
+  useUpdateLogger(route);
+  return (
+    <Stack.Navigator screenOptions={HEADER_SHOWN_FALSE}>
+      <Stack.Screen
+        name="ItemsByVendorScreen"
+        component={ItemsByVendorScreen}
+      />
+    </Stack.Navigator>
+  );
+};
 
 export default memo<Props>(ItemsByVendorStackScreen);

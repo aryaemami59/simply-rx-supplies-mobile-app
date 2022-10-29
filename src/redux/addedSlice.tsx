@@ -152,14 +152,10 @@ export const addedSlice = createSlice({
           state.itemsObj[itemName].vendorsToAdd.indexOf(vendorName) === 0
         ) {
           state.itemsObj[itemName].vendorsToAdd.shift();
-        } else {
+        } else if (state.itemsObj[itemName].vendorsToAdd.includes(vendorName)) {
           state.itemsObj[itemName].vendorsToAdd = state.itemsObj[
             itemName
-          ].vendorsToAdd.includes(vendorName)
-            ? state.itemsObj[itemName].vendorsToAdd.filter(
-                vendor => vendor !== vendorName
-              )
-            : state.itemsObj[itemName].vendorsToAdd;
+          ].vendorsToAdd.filter(vendor => vendor !== vendorName);
         }
       }
     },
@@ -167,11 +163,9 @@ export const addedSlice = createSlice({
       state,
       { payload: vendorName }: PayloadAction<VendorNameType>
     ) => {
-      let itemName: ItemName;
-      for (itemName in state.itemsObj) {
-        state.itemsObj[itemName].vendorsToAdd.includes(vendorName) ||
-          state.itemsObj[itemName].vendorsToAdd.push(vendorName);
-      }
+      Object.values(state.itemsObj).forEach(({ vendorsToAdd }) => {
+        vendorsToAdd.includes(vendorName) || vendorsToAdd.push(vendorName);
+      });
     },
   },
   extraReducers: builder => {

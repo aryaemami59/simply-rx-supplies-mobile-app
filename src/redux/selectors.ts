@@ -110,9 +110,10 @@ export const selectItemsAddedByVendor =
     state.added.vendorsObj[vendorName].itemsAdded;
 
 export const checkIfAnyItemsAdded = (state: RootState): boolean =>
-  Object.values(state.added.vendorsObj)
-    .map(({ itemsAdded }) => !!itemsAdded.length)
-    .reduce((acc, curr) => curr || acc, false);
+  Object.values(state.added.vendorsObj).reduce(
+    (acc, { itemsAdded }) => !!itemsAdded.length || acc,
+    false
+  );
 
 export const checkIfAnyItemsAddedToOneVendor =
   (vendorName: VendorNameType) =>

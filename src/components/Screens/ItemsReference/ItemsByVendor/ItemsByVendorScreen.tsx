@@ -17,7 +17,7 @@ const renderItem: ListRenderItem<VendorNameType> = ({ item }) => (
   </VendorNameProvider>
 );
 
-const keyExtractor = (item: VendorNameType) => item.toString();
+const keyExtractor = (item: VendorNameType) => item;
 
 type Props = NativeStackScreenProps<
   ItemsByVendorStackParamList,
@@ -26,8 +26,7 @@ type Props = NativeStackScreenProps<
 
 const ItemsByVendorScreen: FC<Props> = ({ navigation, route }) => {
   const allVendors = useVendorNamesList();
-  const { theme } = useTheme();
-  const { background } = theme.colors;
+  const { background } = useTheme().theme.colors;
 
   const style = useMemo(
     () => [HEIGHT_100, { backgroundColor: background }],
