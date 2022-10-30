@@ -17,6 +17,9 @@ import ItemDetailsScreen from "../Screens/ShoppingCart/CartColumnListItems/ItemD
 import QRImageScreen from "../Screens/ShoppingCart/QRImage/QRImageScreen";
 import ShoppingCartScreen from "../Screens/ShoppingCart/ShoppingCartScreen";
 import useStatus from "../../shared/customHooks/useStatus";
+import useIsLoading from "../../shared/customHooks/useIsLoading";
+import ErrMsgComponent from "../../shared/ErrMsgComponent";
+import IsLoadingComponents from "../../shared/IsLoadingComponents";
 
 const Stack = createNativeStackNavigator<ShoppingCartStackParamList>();
 
@@ -24,6 +27,17 @@ type Props = BottomTabScreenProps<RootTabParamList, "ShoppingCart">;
 
 const ShoppingCartStackScreen: FC<Props> = ({ navigation, route }) => {
   useStatus("ShoppingCartStackScreen");
+
+  const [isLoading, errMsg] = useIsLoading();
+
+  if (isLoading) {
+    return <IsLoadingComponents />;
+  }
+
+  if (errMsg) {
+    return <ErrMsgComponent />;
+  }
+
   return (
     <SafeAreaProvider>
       <Stack.Navigator>

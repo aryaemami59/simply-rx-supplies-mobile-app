@@ -1,28 +1,23 @@
-import React, { FC, memo, useEffect } from "react";
-import { fetchItems } from "../redux/addedSlice";
-import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { checkIfLoading, selectErrMsg } from "../redux/selectors";
-import ErrMsgComponent from "../shared/ErrMsgComponent";
-import IsLoadingComponents from "../shared/IsLoadingComponents";
+import React, { FC, memo } from "react";
 import TabBarMain from "./TabBarComponents/TabBarMain";
 
 const Main: FC = () => {
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    dispatch(fetchItems());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(fetchItems());
+  // }, [dispatch]);
 
-  const isLoading = useAppSelector(checkIfLoading);
-  const errMsg = useAppSelector(selectErrMsg);
+  // const isLoading = useAppSelector(checkIfLoading);
+  // const errMsg = useAppSelector(selectErrMsg);
 
-  if (isLoading) {
-    return <IsLoadingComponents />;
-  }
+  // if (isLoading) {
+  //   return <IsLoadingComponents />;
+  // }
 
-  if (errMsg) {
-    return <ErrMsgComponent />;
-  }
+  // if (errMsg) {
+  //   return <ErrMsgComponent />;
+  // }
 
   return <TabBarMain />;
 };

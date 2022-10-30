@@ -8,6 +8,9 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import { Provider } from "react-redux";
 import Main from "./src/components/Main";
 import { store } from "./src/redux/store";
+import { fetchItems } from "./src/redux/addedSlice";
+
+store.dispatch(fetchItems());
 
 const myTheme = createTheme({
   // components

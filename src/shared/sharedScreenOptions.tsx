@@ -53,7 +53,7 @@ export const shoppingCartOptions: BottomTabNavigationOptions = {
   tabBarIcon: (props: tabBarIconProps) => <TabBarIconShoppingCart {...props} />,
   headerTitle: "Shopping Cart",
   headerTitleAlign: "center",
-  lazy: false,
+  // lazy: false,
   tabBarBadgeStyle: {
     paddingHorizontal: 0,
     maxWidth: 10,
@@ -66,7 +66,7 @@ export const shoppingCartOptions: BottomTabNavigationOptions = {
 
 export const itemsReferenceOptions: BottomTabNavigationOptions = {
   tabBarLabel: "Items Reference",
-  lazy: false,
+  // lazy: false,
   tabBarIcon: (props: tabBarIconProps) => (
     <TabBarIconItemsReference {...props} />
   ),
