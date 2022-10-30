@@ -1,32 +1,25 @@
 import {
-  AnyAction,
   createAsyncThunk,
   createSlice,
   current,
   PayloadAction,
-  Reducer,
 } from "@reduxjs/toolkit";
-import axios, { AxiosResponse } from "axios";
+import axios from "axios";
 import {
   AddedState,
-  AddItemsByVendorInterface,
-  AddItemsInterface,
   Category,
   FetchedData,
-  FetchItems,
   ItemName,
+  VendorAndItemName,
   VendorNameType,
 } from "../../CustomTypes/types";
 import { emptyArr, emptyObj, intersection } from "../shared/utilityFunctions";
 import { GITHUB_URL_ITEMS } from "./fetchInfo";
-import { AppDispatch } from "./store";
 
 export const fetchItems = createAsyncThunk<FetchedData, void>(
   `items/fetchitems`,
   async () => {
     try {
-      // const response = await axios.get("aa");
-      // const response = await axios.get(GITHUB_URL_ITEMS);
       const response = await axios.get<FetchedData>(GITHUB_URL_ITEMS, {
         timeout: 1000,
       });
@@ -53,8 +46,7 @@ export const addedSlice = createSlice({
   name: "added",
   initialState,
   reducers: {
-    addItems: (state, action: PayloadAction<AddItemsInterface>) => {
-      const { itemName } = action.payload;
+    addItems: (state, { payload: itemName }: PayloadAction<ItemName>) => {
       if (
         !state.itemsObj[itemName].vendorsToAdd.length ||
         state.itemsObj[itemName].vendorsAdded.length ===
@@ -91,10 +83,7 @@ export const addedSlice = createSlice({
         }
       );
     },
-    addItemsByVendor: (
-      state,
-      action: PayloadAction<AddItemsByVendorInterface>
-    ) => {
+    addItemsByVendor: (state, action: PayloadAction<VendorAndItemName>) => {
       const { itemName, vendorName } = action.payload;
       state.vendorsObj[vendorName].itemsAdded.push(itemName);
       state.itemsObj[itemName].vendorsAdded = [
@@ -114,7 +103,7 @@ export const addedSlice = createSlice({
       state.vendorsObj[vendorName].qrContent = qr;
       state.vendorsObj[vendorName].qrText = qr;
     },
-    removeItems: (state, action: PayloadAction<AddItemsByVendorInterface>) => {
+    removeItems: (state, action: PayloadAction<VendorAndItemName>) => {
       const { itemName, vendorName } = action.payload;
       state.vendorsObj[vendorName].itemsAdded = state.vendorsObj[
         vendorName
@@ -134,7 +123,7 @@ export const addedSlice = createSlice({
     clearListItems: state => {
       state.listItems = emptyArr;
     },
-    setVendors: (state, action: PayloadAction<AddItemsByVendorInterface>) => {
+    setVendors: (state, action: PayloadAction<VendorAndItemName>) => {
       const { itemName, vendorName } = action.payload;
       state.itemsObj[itemName].vendorsToAdd = state.itemsObj[
         itemName
@@ -221,4 +210,4 @@ export const {
   setVendorsForAllCheck,
 } = addedSlice.actions;
 
-export const addedReducer: Reducer<AddedState, AnyAction> = addedSlice.reducer;
+export const addedReducer = addedSlice.reducer;

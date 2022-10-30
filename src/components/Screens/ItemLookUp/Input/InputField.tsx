@@ -7,8 +7,17 @@ import {
 } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { SearchBar as SearchBarType } from "@rneui/base";
-import { Header, SearchBar, useTheme } from "@rneui/themed";
-import { FC, memo, useCallback, useMemo, useRef, useState } from "react";
+import { SearchBar } from "@rneui/themed";
+import { Header, SearchBarProps, useTheme } from "@rneui/themed";
+import {
+  FC,
+  memo,
+  PropsWithChildren,
+  useCallback,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { StyleSheet, TextInput, View } from "react-native";
 import * as Animatable from "react-native-animatable";
 import { shallowEqual } from "react-redux";
@@ -59,7 +68,9 @@ const InputField: FC = () => {
   const [val, setVal] = useState("");
   const itemNames = useAppSelector(selectItemNamesArr, shallowEqual);
   const view = useRef<Animatable.View & View>(null);
-  const inputRef = useRef<SearchBarType & TextInput>(null);
+  const inputRef = useRef<
+    PropsWithChildren<SearchBarProps> & TextInput & SearchBarType
+  >(null);
   const { theme } = useTheme();
   const dispatch = useAppDispatch();
   const { params } = useRoute<RouteProp<ItemLookupStackParamList>>();
@@ -126,6 +137,7 @@ const InputField: FC = () => {
           ref={view}
           style={WIDTH_80}>
           <SearchBar
+            // onKeyboardHide={}
             returnKeyType="search"
             ref={inputRef}
             lightTheme

@@ -27,7 +27,7 @@ const AddItemButton: FC = () => {
   const dispatch = useAppDispatch();
 
   const clickHandler = useCallback(() => {
-    dispatch(addItems({ itemName }));
+    dispatch(addItems(itemName));
   }, [dispatch, itemName]);
 
   return (
