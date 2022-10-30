@@ -26,6 +26,11 @@ export const refHeaderOptions: NativeStackNavigationOptions = {
   headerRight: HeaderRightFC,
 } as const;
 
+export const itemDetailsOptions = {
+  ...refHeaderOptions,
+  title: "Item Details",
+} as const;
+
 export const itemsByVendorTabOptions: MaterialTopTabNavigationOptions = {
   tabBarLabel: "Items By Vendor",
 } as const;
@@ -34,20 +39,21 @@ export const itemsByCategoryTabOptions: MaterialTopTabNavigationOptions = {
   tabBarLabel: "Items By Category",
 } as const;
 
-export const HomeOptions: BottomTabNavigationOptions = {
+export const homeOptions: BottomTabNavigationOptions = {
   tabBarIcon: (props: tabBarIconProps) => <TabBarIconHome {...props} />,
 };
 
-export const ItemLookupOptions: BottomTabNavigationOptions = {
+export const itemLookupOptions: BottomTabNavigationOptions = {
   tabBarLabel: "Item Lookup",
   tabBarIcon: (props: tabBarIconProps) => <TabBarIconItemLookup {...props} />,
 } as const;
 
-export const ShoppingCartOptions: BottomTabNavigationOptions = {
+export const shoppingCartOptions: BottomTabNavigationOptions = {
   tabBarLabel: "Shopping Cart",
   tabBarIcon: (props: tabBarIconProps) => <TabBarIconShoppingCart {...props} />,
   headerTitle: "Shopping Cart",
   headerTitleAlign: "center",
+  lazy: false,
   tabBarBadgeStyle: {
     paddingHorizontal: 0,
     maxWidth: 10,
@@ -58,8 +64,9 @@ export const ShoppingCartOptions: BottomTabNavigationOptions = {
   },
 } as const;
 
-export const ItemsReferenceOptions: BottomTabNavigationOptions = {
+export const itemsReferenceOptions: BottomTabNavigationOptions = {
   tabBarLabel: "Items Reference",
+  lazy: false,
   tabBarIcon: (props: tabBarIconProps) => (
     <TabBarIconItemsReference {...props} />
   ),

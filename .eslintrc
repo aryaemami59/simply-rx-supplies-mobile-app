@@ -22,7 +22,7 @@
     "react-native/no-single-element-style-arrays": 2,
     "react-perf/jsx-no-new-object-as-prop": 2,
     "@typescript-eslint/no-unused-vars": [
-      "warn",
+      2,
       {
         "argsIgnorePattern": "^",
         "varsIgnorePattern": "^_"

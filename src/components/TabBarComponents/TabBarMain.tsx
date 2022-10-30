@@ -2,16 +2,15 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useTheme } from "@rneui/themed";
 import { FC, memo, useMemo } from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import { enableScreens } from "react-native-screens";
 import { RootTabParamList } from "../../../CustomTypes/types";
 import { useAppSelector } from "../../redux/hooks";
 import { checkIfAnyItemsAdded } from "../../redux/selectors";
 import {
   HEADER_SHOWN_FALSE,
-  HomeOptions,
-  ItemLookupOptions,
-  ItemsReferenceOptions,
-  ShoppingCartOptions,
+  homeOptions,
+  itemLookupOptions,
+  itemsReferenceOptions,
+  shoppingCartOptions,
 } from "../../shared/sharedScreenOptions";
 import HomeStackScreen from "../StackScreenComponents/HomeStackScreen";
 import ItemLookupStackScreen from "../StackScreenComponents/ItemLookupStackScreen";
@@ -27,13 +26,11 @@ const TabBarMain: FC = () => {
 
   const options = useMemo(
     () => ({
-      ...ShoppingCartOptions,
+      ...shoppingCartOptions,
       tabBarBadge,
     }),
     [tabBarBadge]
   );
-
-  enableScreens(false);
 
   const screenOptions = useMemo(
     () => ({
@@ -49,12 +46,12 @@ const TabBarMain: FC = () => {
         <Tab.Screen
           name="Home"
           component={HomeStackScreen}
-          options={HomeOptions}
+          options={homeOptions}
         />
         <Tab.Screen
           name="ItemLookup"
           component={ItemLookupStackScreen}
-          options={ItemLookupOptions}
+          options={itemLookupOptions}
         />
         <Tab.Screen
           name="ShoppingCart"
@@ -64,7 +61,7 @@ const TabBarMain: FC = () => {
         <Tab.Screen
           name="ItemsReference"
           component={ItemsReferenceStackScreen}
-          options={ItemsReferenceOptions}
+          options={itemsReferenceOptions}
         />
       </Tab.Navigator>
     </SafeAreaProvider>

@@ -6,27 +6,34 @@ import {
   PayloadAction,
   Reducer,
 } from "@reduxjs/toolkit";
-import fetch from "react-native-fetch-polyfill";
+import axios, { AxiosResponse } from "axios";
 import {
   AddedState,
   AddItemsByVendorInterface,
   AddItemsInterface,
   Category,
+  FetchedData,
   FetchItems,
   ItemName,
   VendorNameType,
 } from "../../CustomTypes/types";
 import { emptyArr, emptyObj, intersection } from "../shared/utilityFunctions";
 import { GITHUB_URL_ITEMS } from "./fetchInfo";
+import { AppDispatch } from "./store";
 
-export const fetchItems: FetchItems = createAsyncThunk(
+export const fetchItems = createAsyncThunk<FetchedData, void>(
   `items/fetchitems`,
   async () => {
-    const response: Response = await fetch(GITHUB_URL_ITEMS, { timeout: 1000 });
-    if (!response.ok) {
-      return Promise.reject(`Unable to fetch, status: ${response.status}`);
+    try {
+      // const response = await axios.get("aa");
+      // const response = await axios.get(GITHUB_URL_ITEMS);
+      const response = await axios.get<FetchedData>(GITHUB_URL_ITEMS, {
+        timeout: 1000,
+      });
+      return response.data;
+    } catch (err) {
+      throw axios.isAxiosError(err) ? err.message : "Unable to fetch";
     }
-    return await response.json();
   }
 );
 

@@ -19,12 +19,13 @@ export type RootTabParamList = {
 export type HomeStackParamList = {
   HomeScreen: undefined;
   ItemLookup:
-    | {
-        screen: "ItemLookupScreen";
-        params: {
-          inputFocused: boolean;
-        };
-      }
+    | ItemLookupStackParamList
+    // {
+    //     screen: "ItemLookupScreen";
+    //     params: {
+    //       inputFocused: boolean;
+    //     };
+    //   }
     | undefined;
   ShoppingCart: undefined;
   ItemsReference: {
@@ -550,7 +551,7 @@ export type AddItemsByVendorInterface = {
 
 export type OnChangeText = (text: string) => void;
 
-type FetchedData = {
+export type FetchedData = {
   items: ItemObjType[];
   vendors: VendorsObjType;
   categories: CategoriesObjType;

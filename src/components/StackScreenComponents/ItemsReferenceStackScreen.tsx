@@ -13,31 +13,48 @@ import {
 import CategoryItems from "../Screens/ItemsReference/ItemsByCategory/CategoryItems";
 import ItemsByVendorListItems from "../Screens/ItemsReference/ItemsByVendor/ItemsByVendorListItems";
 import ItemsReferenceScreen from "../Screens/ItemsReference/ItemsReferenceScreen";
+import useStatus from "../../shared/customHooks/useStatus";
+import useIsLoading from "../../shared/customHooks/useIsLoading";
+import ErrMsgComponent from "../../shared/ErrMsgComponent";
+import IsLoadingComponents from "../../shared/IsLoadingComponents";
 
 type Props = BottomTabScreenProps<RootTabParamList, "ItemsReference">;
 
 const Stack = createNativeStackNavigator<ItemsReferenceStackParamList>();
 
-const ItemsReferenceStackScreen: FC<Props> = ({ navigation, route }) => (
-  <SafeAreaProvider>
-    <Stack.Navigator>
-      <Stack.Screen
-        options={screenOptions}
-        name="ItemsReferenceScreen"
-        component={ItemsReferenceScreen}
-      />
-      <Stack.Screen
-        options={refHeaderOptions}
-        name="ItemsByVendorListItems"
-        component={ItemsByVendorListItems}
-      />
-      <Stack.Screen
-        options={refHeaderOptions}
-        name="ItemsByCategoryListItems"
-        component={CategoryItems}
-      />
-    </Stack.Navigator>
-  </SafeAreaProvider>
-);
+const ItemsReferenceStackScreen: FC<Props> = ({ navigation, route }) => {
+  useStatus("ItemsReferenceStackScreen");
+  const [isLoading, errMsg] = useIsLoading();
+
+  if (isLoading) {
+    return <IsLoadingComponents />;
+  }
+
+  if (errMsg) {
+    return <ErrMsgComponent />;
+  }
+
+  return (
+    <SafeAreaProvider>
+      <Stack.Navigator>
+        <Stack.Screen
+          options={screenOptions}
+          name="ItemsReferenceScreen"
+          component={ItemsReferenceScreen}
+        />
+        <Stack.Screen
+          options={refHeaderOptions}
+          name="ItemsByVendorListItems"
+          component={ItemsByVendorListItems}
+        />
+        <Stack.Screen
+          options={refHeaderOptions}
+          name="ItemsByCategoryListItems"
+          component={CategoryItems}
+        />
+      </Stack.Navigator>
+    </SafeAreaProvider>
+  );
+};
 
 export default memo<Props>(ItemsReferenceStackScreen);

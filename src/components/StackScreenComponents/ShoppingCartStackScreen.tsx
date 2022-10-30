@@ -7,6 +7,7 @@ import {
   ShoppingCartStackParamList,
 } from "../../../CustomTypes/types";
 import {
+  itemDetailsOptions,
   refHeaderOptions,
   screenOptions,
 } from "../../shared/sharedScreenOptions";
@@ -15,45 +16,47 @@ import CartColumnListItemsScreen from "../Screens/ShoppingCart/CartColumnListIte
 import ItemDetailsScreen from "../Screens/ShoppingCart/CartColumnListItems/ItemDetails/ItemDetailsScreen";
 import QRImageScreen from "../Screens/ShoppingCart/QRImage/QRImageScreen";
 import ShoppingCartScreen from "../Screens/ShoppingCart/ShoppingCartScreen";
+import useStatus from "../../shared/customHooks/useStatus";
 
 const Stack = createNativeStackNavigator<ShoppingCartStackParamList>();
 
 type Props = BottomTabScreenProps<RootTabParamList, "ShoppingCart">;
 
-const options = { ...refHeaderOptions, title: "Item Details" };
-
-const ShoppingCartStackScreen: FC<Props> = ({ navigation, route }) => (
-  <SafeAreaProvider>
-    <Stack.Navigator>
-      <Stack.Screen
-        name="ShoppingCartScreen"
-        component={ShoppingCartScreen}
-        options={screenOptions}
-      />
-      <Stack.Screen
-        name="CartColumnListItems"
-        component={CartColumnListItemsScreen}
-        options={refHeaderOptions}
-      />
-      <Stack.Group>
+const ShoppingCartStackScreen: FC<Props> = ({ navigation, route }) => {
+  useStatus("ShoppingCartStackScreen");
+  return (
+    <SafeAreaProvider>
+      <Stack.Navigator>
         <Stack.Screen
-          name="QRImage"
-          component={QRImageScreen}
+          name="ShoppingCartScreen"
+          component={ShoppingCartScreen}
+          options={screenOptions}
+        />
+        <Stack.Screen
+          name="CartColumnListItems"
+          component={CartColumnListItemsScreen}
           options={refHeaderOptions}
         />
-        <Stack.Screen
-          name="BarcodeImage"
-          component={BarcodeImageScreen}
-          options={refHeaderOptions}
-        />
-        <Stack.Screen
-          name="ItemDetails"
-          component={ItemDetailsScreen}
-          options={options}
-        />
-      </Stack.Group>
-    </Stack.Navigator>
-  </SafeAreaProvider>
-);
+        <Stack.Group>
+          <Stack.Screen
+            name="QRImage"
+            component={QRImageScreen}
+            options={refHeaderOptions}
+          />
+          <Stack.Screen
+            name="BarcodeImage"
+            component={BarcodeImageScreen}
+            options={refHeaderOptions}
+          />
+          <Stack.Screen
+            name="ItemDetails"
+            component={ItemDetailsScreen}
+            options={itemDetailsOptions}
+          />
+        </Stack.Group>
+      </Stack.Navigator>
+    </SafeAreaProvider>
+  );
+};
 
 export default memo<Props>(ShoppingCartStackScreen);

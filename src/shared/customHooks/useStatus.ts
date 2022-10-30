@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 
-const useStatus = (component: string) => {
+const useStatus = (componentName: string) => {
   useEffect(() => {
-    console.log(`${component} Mounted`);
+    console.log(`%c${componentName} Mounted`, "font-size: 20px");
     return () => {
-      console.log(`${component} Unmounted`);
+      console.log(`%c${componentName} Unmounted`, "font-size: 20px");
     };
   });
 };
