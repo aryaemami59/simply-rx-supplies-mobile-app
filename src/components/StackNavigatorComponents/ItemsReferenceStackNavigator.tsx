@@ -2,10 +2,7 @@ import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { FC, memo } from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import {
-  ItemsReferenceStackParamList,
-  RootTabParamList,
-} from "../../../CustomTypes/types";
+import { RootTabParamList, ItemsReferenceStackParamList } from "../../../CustomTypes/navigation";
 import useIsLoading from "../../shared/customHooks/useIsLoading";
 import useStatus from "../../shared/customHooks/useStatus";
 import ErrMsgComponent from "../../shared/ErrMsgComponent";
@@ -42,16 +39,16 @@ const ItemsReferenceStackNavigator: FC<Props> = ({ navigation, route }) => {
           name="ItemsReferenceScreen"
           component={ItemsReferenceScreen}
         />
-        <Stack.Screen
-          options={refHeaderOptions}
-          name="ItemsByVendorListItems"
-          component={ItemsByVendorListItems}
-        />
-        <Stack.Screen
-          options={refHeaderOptions}
-          name="ItemsByCategoryListItems"
-          component={CategoryItems}
-        />
+        <Stack.Group screenOptions={refHeaderOptions}>
+          <Stack.Screen
+            name="ItemsByVendorListItems"
+            component={ItemsByVendorListItems}
+          />
+          <Stack.Screen
+            name="ItemsByCategoryListItems"
+            component={CategoryItems}
+          />
+        </Stack.Group>
       </Stack.Navigator>
     </SafeAreaProvider>
   );

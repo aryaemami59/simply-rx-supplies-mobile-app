@@ -2,10 +2,7 @@ import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { FC, memo } from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import {
-  HomeStackParamList,
-  RootTabParamList,
-} from "../../../CustomTypes/types";
+import { HomeStackParamList, RootTabParamList } from "../../../CustomTypes/navigation";
 import { screenOptions } from "../../shared/sharedScreenOptions";
 import HomeScreen from "../Screens/Home/HomeScreen";
 
@@ -15,12 +12,13 @@ type Props = BottomTabScreenProps<RootTabParamList, "Home">;
 
 const HomeStackNavigator: FC<Props> = ({ navigation, route }) => (
   <SafeAreaProvider>
-    <Stack.Navigator screenOptions={screenOptions}>
+    <HomeScreen />
+    {/* <Stack.Navigator screenOptions={screenOptions}>
       <Stack.Screen
         name="HomeScreen"
         component={HomeScreen}
       />
-    </Stack.Navigator>
+    </Stack.Navigator> */}
   </SafeAreaProvider>
 );
 

@@ -8,12 +8,14 @@ import { Chip, useTheme } from "@rneui/themed";
 import { FC, memo, useCallback, useMemo } from "react";
 import { StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { HomeStackParamList } from "../../../../CustomTypes/types";
+import { useNavigation } from "@react-navigation/native";
+import { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
 import {
   BACKGROUND_MAIN_COLOR,
   FONT_WEIGHT_700,
   MAIN_COLOR,
 } from "../../../shared/sharedStyles";
+import { HomeStackParamList, RootTabParamList } from "../../../../CustomTypes/navigation";
 
 const searchIcon = (
   <FontAwesome5
@@ -49,8 +51,11 @@ const shoppingCartIcon = (
 );
 type Props = NativeStackScreenProps<HomeStackParamList, "HomeScreen">;
 
-const HomeScreen: FC<Props> = ({ navigation, route }) => {
+const HomeScreen: FC = () => {
+  // const HomeScreen: FC<Props> = ({ navigation, route }) => {
   const { background } = useTheme().theme.colors;
+  const navigation =
+    useNavigation<BottomTabNavigationProp<RootTabParamList, "Home">>();
 
   const navigateToItemLookup = useCallback(
     () => navigation.navigate("ItemLookup"),
@@ -145,4 +150,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default memo<Props>(HomeScreen);
+export default memo(HomeScreen);
