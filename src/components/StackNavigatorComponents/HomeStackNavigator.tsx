@@ -13,7 +13,7 @@ const Stack = createNativeStackNavigator<HomeStackParamList>();
 
 type Props = BottomTabScreenProps<RootTabParamList, "Home">;
 
-const HomeStackScreen: FC<Props> = ({ navigation, route }) => (
+const HomeStackNavigator: FC<Props> = ({ navigation, route }) => (
   <SafeAreaProvider>
     <Stack.Navigator screenOptions={screenOptions}>
       <Stack.Screen
@@ -24,4 +24,4 @@ const HomeStackScreen: FC<Props> = ({ navigation, route }) => (
   </SafeAreaProvider>
 );
 
-export default memo<Props>(HomeStackScreen);
+export default memo<Props>(HomeStackNavigator);

@@ -25,7 +25,7 @@ const Stack = createNativeStackNavigator<ShoppingCartStackParamList>();
 
 type Props = BottomTabScreenProps<RootTabParamList, "ShoppingCart">;
 
-const ShoppingCartStackScreen: FC<Props> = ({ navigation, route }) => {
+const ShoppingCartStackNavigator: FC<Props> = ({ navigation, route }) => {
   useStatus("ShoppingCartStackScreen");
 
   const [isLoading, errMsg] = useIsLoading();
@@ -73,4 +73,4 @@ const ShoppingCartStackScreen: FC<Props> = ({ navigation, route }) => {
   );
 };
 
-export default memo<Props>(ShoppingCartStackScreen);
+export default memo<Props>(ShoppingCartStackNavigator);

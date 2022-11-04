@@ -15,7 +15,7 @@ type Props = MaterialTopTabScreenProps<
 
 const Stack = createNativeStackNavigator<ItemsByCategoryStackParamList>();
 
-const ItemsByCategoryStackScreen: FC<Props> = ({ navigation, route }) => (
+const ItemsByCategoryStackNavigator: FC<Props> = ({ navigation, route }) => (
   <Stack.Navigator screenOptions={HEADER_SHOWN_FALSE}>
     <Stack.Screen
       name="ItemsByCategoryScreen"
@@ -24,4 +24,4 @@ const ItemsByCategoryStackScreen: FC<Props> = ({ navigation, route }) => (
   </Stack.Navigator>
 );
 
-export default memo<Props>(ItemsByCategoryStackScreen);
+export default memo<Props>(ItemsByCategoryStackNavigator);

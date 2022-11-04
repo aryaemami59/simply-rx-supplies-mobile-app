@@ -10,8 +10,8 @@ import {
   itemsByCategoryTabOptions,
   itemsByVendorTabOptions,
 } from "../../../shared/sharedScreenOptions";
-import ItemsByCategoryStackScreen from "../../StackScreenComponents/ItemsByCategoryStackScreen";
-import ItemsByVendorStackScreen from "../../StackScreenComponents/ItemsByVendorStackScreen";
+import ItemsByCategoryStackNavigator from "../../StackNavigatorComponents/ItemsByCategoryStackNavigator";
+import ItemsByVendorStackNavigator from "../../StackNavigatorComponents/ItemsByVendorStackNavigator";
 
 type Props = NativeStackScreenProps<
   ItemsReferenceStackParamList,
@@ -52,12 +52,12 @@ const ItemsReferenceScreen: FC<Props> = ({ navigation, route }) => {
       <Tab.Screen
         options={itemsByVendorTabScreenOptions}
         name="ItemsByVendor"
-        component={ItemsByVendorStackScreen}
+        component={ItemsByVendorStackNavigator}
       />
       <Tab.Screen
         options={itemsByCategoryTabScreenOptions}
         name="ItemsByCategory"
-        component={ItemsByCategoryStackScreen}
+        component={ItemsByCategoryStackNavigator}
       />
     </Tab.Navigator>
   );

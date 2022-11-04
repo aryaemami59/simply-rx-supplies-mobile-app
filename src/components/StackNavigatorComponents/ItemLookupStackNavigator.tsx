@@ -5,7 +5,7 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import { backgroundContext } from "../../../App";
 import {
   ItemLookupStackParamList,
-  RootTabParamList
+  RootTabParamList,
 } from "../../../CustomTypes/types";
 import { HEADER_SHOWN_FALSE } from "../../shared/sharedScreenOptions";
 import ItemLookupScreen from "../Screens/ItemLookUp/ItemLookupScreen";
@@ -14,7 +14,7 @@ const Stack = createNativeStackNavigator<ItemLookupStackParamList>();
 
 type Props = BottomTabScreenProps<RootTabParamList, "ItemLookup">;
 
-const ItemLookupStackScreen: FC<Props> = ({ navigation, route }) => {
+const ItemLookupStackNavigator: FC<Props> = ({ navigation, route }) => {
   // const { background } = useTheme().theme.colors;
   const background = useContext(backgroundContext);
 
@@ -32,4 +32,4 @@ const ItemLookupStackScreen: FC<Props> = ({ navigation, route }) => {
   );
 };
 
-export default memo<Props>(ItemLookupStackScreen);
+export default memo<Props>(ItemLookupStackNavigator);

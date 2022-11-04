@@ -12,10 +12,10 @@ import {
   itemsReferenceOptions,
   shoppingCartOptions,
 } from "../../shared/sharedScreenOptions";
-import HomeStackScreen from "../StackScreenComponents/HomeStackScreen";
-import ItemLookupStackScreen from "../StackScreenComponents/ItemLookupStackScreen";
-import ItemsReferenceStackScreen from "../StackScreenComponents/ItemsReferenceStackScreen";
-import ShoppingCartStackScreen from "../StackScreenComponents/ShoppingCartStackScreen";
+import HomeStackNavigator from "../StackNavigatorComponents/HomeStackNavigator";
+import ItemLookupStackNavigator from "../StackNavigatorComponents/ItemLookupStackNavigator";
+import ItemsReferenceStackNavigator from "../StackNavigatorComponents/ItemsReferenceStackNavigator";
+import ShoppingCartStackNavigator from "../StackNavigatorComponents/ShoppingCartStackNavigator";
 
 const Tab = createBottomTabNavigator<RootTabParamList>();
 
@@ -45,22 +45,22 @@ const TabBarMain: FC = () => {
       <Tab.Navigator screenOptions={screenOptions}>
         <Tab.Screen
           name="Home"
-          component={HomeStackScreen}
+          component={HomeStackNavigator}
           options={homeOptions}
         />
         <Tab.Screen
           name="ItemLookup"
-          component={ItemLookupStackScreen}
+          component={ItemLookupStackNavigator}
           options={itemLookupOptions}
         />
         <Tab.Screen
           name="ShoppingCart"
-          component={ShoppingCartStackScreen}
+          component={ShoppingCartStackNavigator}
           options={options}
         />
         <Tab.Screen
           name="ItemsReference"
-          component={ItemsReferenceStackScreen}
+          component={ItemsReferenceStackNavigator}
           options={itemsReferenceOptions}
         />
       </Tab.Navigator>

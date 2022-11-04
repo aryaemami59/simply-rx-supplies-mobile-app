@@ -22,7 +22,7 @@ type Props = BottomTabScreenProps<RootTabParamList, "ItemsReference">;
 
 const Stack = createNativeStackNavigator<ItemsReferenceStackParamList>();
 
-const ItemsReferenceStackScreen: FC<Props> = ({ navigation, route }) => {
+const ItemsReferenceStackNavigator: FC<Props> = ({ navigation, route }) => {
   useStatus("ItemsReferenceStackScreen");
   const [isLoading, errMsg] = useIsLoading();
 
@@ -57,4 +57,4 @@ const ItemsReferenceStackScreen: FC<Props> = ({ navigation, route }) => {
   );
 };
 
-export default memo<Props>(ItemsReferenceStackScreen);
+export default memo<Props>(ItemsReferenceStackNavigator);
