@@ -2,10 +2,7 @@ import { createMaterialTopTabNavigator } from "@react-navigation/material-top-ta
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { useTheme } from "@rneui/themed";
 import { FC, memo, useMemo } from "react";
-import {
-  ItemsReferenceStackParamList,
-  ItemsReferenceTopTabParamList,
-} from "../../../../CustomTypes/types";
+import { ItemsReferenceStackParamList, ItemsReferenceTopTabParamList } from "../../../../CustomTypes/navigation";
 import {
   itemsByCategoryTabOptions,
   itemsByVendorTabOptions,
@@ -22,7 +19,6 @@ const Tab = createMaterialTopTabNavigator<ItemsReferenceTopTabParamList>();
 
 const ItemsReferenceTabNavigator: FC<Props> = ({ navigation, route }) => {
   const { background, grey0 } = useTheme().theme.colors;
-  // const background = useContext(backgroundContext);
 
   const screenOptions = useMemo(
     () => ({

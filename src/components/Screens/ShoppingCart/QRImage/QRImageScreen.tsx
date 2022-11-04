@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import QRCode from "react-native-qrcode-svg";
-import { ShoppingCartStackParamList } from "../../../../../CustomTypes/types";
+import { ShoppingCartStackParamList } from "../../../../../CustomTypes/navigation";
 import Svg from "../../../../../node_modules/react-native-svg/lib/typescript/elements/Svg";
 import {
   AI_CENTER,

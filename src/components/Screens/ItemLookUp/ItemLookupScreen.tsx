@@ -3,10 +3,8 @@ import { useTheme } from "@rneui/themed";
 import { FC, memo, useMemo } from "react";
 import { FlatList, ListRenderItem, StyleSheet, View } from "react-native";
 import { shallowEqual } from "react-redux";
-import {
-  ItemLookupStackParamList,
-  ItemName,
-} from "../../../../CustomTypes/types";
+import { ItemLookupStackParamList } from "../../../../CustomTypes/navigation";
+import { ItemName } from "../../../../CustomTypes/types";
 import { useAppSelector } from "../../../redux/hooks";
 import { selectAllListItems } from "../../../redux/selectors";
 import ItemNameProvider from "../../../shared/contexts/ItemNameProvider";
@@ -27,17 +25,18 @@ type Props = NativeStackScreenProps<
   "ItemLookupScreen"
 >;
 
-const ItemLookupScreen: FC<Props> = ({ navigation, route }) => {
+const ItemLookupScreen: FC = () => {
+  // const ItemLookupScreen: FC<Props> = ({ navigation, route }) => {
   const listItems = useAppSelector(selectAllListItems, shallowEqual);
   const { background: backgroundColor } = useTheme().theme.colors;
 
-  const style = useMemo(
+  const viewStyle = useMemo(
     () => [styles.containerStyle, { backgroundColor }],
     [backgroundColor]
   );
 
   return (
-    <View style={style}>
+    <View style={viewStyle}>
       <InputField />
       <BottomSheetComponent />
       <FlatList
@@ -62,4 +61,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default memo<Props>(ItemLookupScreen);
+export default memo(ItemLookupScreen);

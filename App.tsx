@@ -1,7 +1,7 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createTheme, ThemeProvider } from "@rneui/themed";
 import * as themed from "@rneui/themed";
-import whyDidYouRender from "@welldone-software/why-did-you-render";
+// import whyDidYouRender from "@welldone-software/why-did-you-render";
 import React, { createContext, FC, memo } from "react";
 import { Provider as PaperProvider } from "react-native-paper";
 import { SafeAreaProvider } from "react-native-safe-area-context";
@@ -28,12 +28,11 @@ const myTheme = createTheme({
   mode: "light",
 });
 
-export const backgroundContext = createContext(myTheme.lightColors?.background);
+// export const backgroundContext = createContext(myTheme.lightColors?.background);
 
-whyDidYouRender(React, {
-  trackAllPureComponents: true,
-  // trackExtraHooks: [[themed, "useTheme"]],
-});
+// whyDidYouRender(React, {
+//   trackAllPureComponents: true,
+// });
 
 const App: FC = () => {
   const bg =
@@ -44,13 +43,13 @@ const App: FC = () => {
     <SafeAreaProvider>
       <Provider store={store}>
         <PaperProvider>
-          <backgroundContext.Provider value={bg}>
-            <ThemeProvider theme={myTheme}>
-              <NavigationContainer>
-                <Main />
-              </NavigationContainer>
-            </ThemeProvider>
-          </backgroundContext.Provider>
+          {/* <backgroundContext.Provider value={bg}> */}
+          <ThemeProvider theme={myTheme}>
+            <NavigationContainer>
+              <Main />
+            </NavigationContainer>
+          </ThemeProvider>
+          {/* </backgroundContext.Provider> */}
         </PaperProvider>
       </Provider>
     </SafeAreaProvider>

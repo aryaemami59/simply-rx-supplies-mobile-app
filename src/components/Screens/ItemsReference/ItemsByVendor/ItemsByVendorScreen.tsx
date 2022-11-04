@@ -2,10 +2,7 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { useTheme } from "@rneui/themed";
 import { FC, memo, useMemo } from "react";
 import { FlatList, ListRenderItem, View } from "react-native";
-import {
-  ItemsByVendorStackParamList,
-  VendorNameType,
-} from "../../../../../CustomTypes/types";
+import { VendorNameType } from "../../../../../CustomTypes/types";
 import VendorNameProvider from "../../../../shared/contexts/VendorNameProvider";
 import useVendorNamesList from "../../../../shared/customHooks/useVendorNamesList";
 import { HEIGHT_100 } from "../../../../shared/sharedStyles";

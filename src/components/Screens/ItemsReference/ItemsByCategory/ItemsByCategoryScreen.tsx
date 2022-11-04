@@ -3,9 +3,9 @@ import { useTheme } from "@rneui/themed";
 import { FC, memo, useMemo } from "react";
 import { FlatList, ListRenderItem, View } from "react-native";
 import { shallowEqual } from "react-redux";
+import { ItemsByCategoryStackParamList } from "../../../../../CustomTypes/navigation";
 import {
   Category,
-  ItemsByCategoryStackParamList,
 } from "../../../../../CustomTypes/types";
 import { useAppSelector } from "../../../../redux/hooks";
 import { selectCategoriesArr } from "../../../../redux/selectors";

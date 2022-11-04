@@ -15,7 +15,10 @@ import {
   FONT_WEIGHT_700,
   MAIN_COLOR,
 } from "../../../shared/sharedStyles";
-import { HomeStackParamList, RootTabParamList } from "../../../../CustomTypes/navigation";
+import {
+  HomeStackParamList,
+  RootTabParamList,
+} from "../../../../CustomTypes/navigation";
 
 const searchIcon = (
   <FontAwesome5
@@ -85,14 +88,14 @@ const HomeScreen: FC = () => {
   );
 
   const navigateToShoppingCart = useCallback(
-    () => navigation.navigate("ShoppingCart"),
+    () => navigation.navigate("ShoppingCartStack"),
     [navigation]
   );
 
-  const style = useMemo(() => ({ backgroundColor: background }), [background]);
+  const viewStyle = useMemo(() => ({ backgroundColor: background }), [background]);
 
   return (
-    <SafeAreaView style={style}>
+    <SafeAreaView style={viewStyle}>
       <View style={styles.container}>
         <Chip
           raised

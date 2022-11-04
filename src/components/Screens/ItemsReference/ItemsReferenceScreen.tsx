@@ -19,7 +19,6 @@ const Tab = createMaterialTopTabNavigator<ItemsReferenceTopTabParamList>();
 
 const ItemsReferenceScreen: FC<Props> = ({ navigation, route }) => {
   const { background, grey0 } = useTheme().theme.colors;
-  // const background = useContext(backgroundContext);
 
   const screenOptions = useMemo(
     () => ({

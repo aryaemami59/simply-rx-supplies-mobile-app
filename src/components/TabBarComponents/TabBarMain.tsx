@@ -13,7 +13,7 @@ import {
   shoppingCartOptions,
 } from "../../shared/sharedScreenOptions";
 import HomeStackNavigator from "../StackNavigatorComponents/HomeStackNavigator";
-import ItemLookupStackNavigator from "../StackNavigatorComponents/ItemLookupStackNavigator";
+import ItemLookup from "../StackNavigatorComponents/ItemLookup";
 import ItemsReferenceStackNavigator from "../StackNavigatorComponents/ItemsReferenceStackNavigator";
 import ShoppingCartStackNavigator from "../StackNavigatorComponents/ShoppingCartStackNavigator";
 
@@ -50,11 +50,11 @@ const TabBarMain: FC = () => {
         />
         <Tab.Screen
           name="ItemLookup"
-          component={ItemLookupStackNavigator}
+          component={ItemLookup}
           options={itemLookupOptions}
         />
         <Tab.Screen
-          name="ShoppingCart"
+          name="ShoppingCartStack"
           component={ShoppingCartStackNavigator}
           options={options}
         />

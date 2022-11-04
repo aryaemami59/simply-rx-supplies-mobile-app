@@ -12,9 +12,9 @@ import {
   View,
 } from "react-native";
 import { shallowEqual } from "react-redux";
+import { ShoppingCartStackParamList } from "../../../../../CustomTypes/navigation";
 import {
   ItemName,
-  ShoppingCartStackParamList,
 } from "../../../../../CustomTypes/types";
 import { useAppSelector } from "../../../../redux/hooks";
 import {

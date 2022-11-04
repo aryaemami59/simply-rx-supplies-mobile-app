@@ -3,10 +3,6 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { FC, memo } from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import {
-  RootTabParamList,
-  ShoppingCartStackParamList,
-} from "../../../CustomTypes/types";
-import {
   itemDetailsOptions,
   refHeaderOptions,
   screenOptions,
@@ -20,10 +16,11 @@ import useStatus from "../../shared/customHooks/useStatus";
 import useIsLoading from "../../shared/customHooks/useIsLoading";
 import ErrMsgComponent from "../../shared/ErrMsgComponent";
 import IsLoadingComponents from "../../shared/IsLoadingComponents";
+import { ShoppingCartStackParamList, RootTabParamList } from "../../../CustomTypes/navigation";
 
 const Stack = createNativeStackNavigator<ShoppingCartStackParamList>();
 
-type Props = BottomTabScreenProps<RootTabParamList, "ShoppingCart">;
+type Props = BottomTabScreenProps<RootTabParamList, "ShoppingCartStack">;
 
 const ShoppingCartStackNavigator: FC<Props> = ({ navigation, route }) => {
   useStatus("ShoppingCartStackScreen");
