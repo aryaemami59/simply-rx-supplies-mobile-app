@@ -3,12 +3,11 @@ import {
   MaterialCommunityIcons,
   MaterialIcons,
 } from "@expo/vector-icons";
-import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
 import { Chip, useTheme } from "@rneui/themed";
 import { FC, memo, useCallback, useMemo } from "react";
 import { StyleSheet, View } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
-import { RootTabParamList } from "../../../CustomTypes/navigation";
+import { HomeStackNavigatorProps } from "../../../CustomTypes/navigation";
 import {
   BACKGROUND_MAIN_COLOR,
   FONT_WEIGHT_700,
@@ -48,13 +47,13 @@ const shoppingCartIcon = (
   />
 );
 
-type Props = BottomTabScreenProps<RootTabParamList, "Home">;
+type Props = HomeStackNavigatorProps;
 
 const HomeStackNavigator: FC<Props> = ({ navigation, route }) => {
   const { background } = useTheme().theme.colors;
 
   const navigateToItemLookup = useCallback(
-    () => navigation.navigate("ItemLookup"),
+    () => navigation.navigate("ItemLookup", { inputFocused: false }),
     [navigation]
   );
 

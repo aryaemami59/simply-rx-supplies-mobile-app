@@ -1,5 +1,4 @@
 import { MaterialIcons } from "@expo/vector-icons";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { Button, Chip, ListItem, useTheme } from "@rneui/themed";
 import { FC, memo, useCallback, useEffect, useMemo } from "react";
 import {
@@ -12,10 +11,8 @@ import {
   View,
 } from "react-native";
 import { shallowEqual } from "react-redux";
-import { ShoppingCartStackParamList } from "../../../../../CustomTypes/navigation";
-import {
-  ItemName,
-} from "../../../../../CustomTypes/types";
+import { CartColumnListItemsScreenProps } from "../../../../../CustomTypes/navigation";
+import { ItemName } from "../../../../../CustomTypes/types";
 import { useAppSelector } from "../../../../redux/hooks";
 import {
   checkIfAnyItemsAddedToOneVendor,
@@ -48,10 +45,7 @@ const shoppingCartIcon = (
 
 const keyExtractor = (item: ItemName) => item;
 
-type Props = NativeStackScreenProps<
-  ShoppingCartStackParamList,
-  "CartColumnListItems"
->;
+type Props = CartColumnListItemsScreenProps;
 
 const viewStyle = [AI_CENTER, WIDTH_100, JC_SPACE_BETWEEN];
 

@@ -10,6 +10,7 @@ import {
   homeOptions,
   itemLookupOptions,
   itemsReferenceOptions,
+  screenTabOptions,
   shoppingCartOptions,
 } from "../../shared/sharedScreenOptions";
 import HomeStackNavigator from "../StackNavigatorComponents/HomeStackNavigator";
@@ -33,7 +34,7 @@ const TabBarMain: FC = () => {
     [tabBarBadge]
   );
 
-  const screenOptions = useMemo(
+  const navigatorScreenOptions = useMemo(
     () => ({
       ...HEADER_SHOWN_FALSE,
       tabBarStyle: { backgroundColor: background },
@@ -43,28 +44,32 @@ const TabBarMain: FC = () => {
 
   return (
     <SafeAreaProvider>
-      <Tab.Navigator screenOptions={screenOptions}>
-        <Tab.Screen
-          name="Home"
-          component={HomeStackNavigator}
-          options={homeOptions}
-        />
+      <Tab.Navigator>
+        <Tab.Group screenOptions={screenTabOptions}>
+          <Tab.Screen
+            name="Home"
+            component={HomeStackNavigator}
+            options={homeOptions}
+          />
+        </Tab.Group>
         <Tab.Screen
           name="ItemLookup"
           initialParams={initialParams}
           component={ItemLookup}
           options={itemLookupOptions}
         />
-        <Tab.Screen
-          name="ShoppingCartStack"
-          component={ShoppingCartStackNavigator}
-          options={options}
-        />
-        <Tab.Screen
-          name="ItemsReference"
-          component={ItemsReferenceStackNavigator}
-          options={itemsReferenceOptions}
-        />
+        <Tab.Group screenOptions={navigatorScreenOptions}>
+          <Tab.Screen
+            name="ShoppingCartStack"
+            component={ShoppingCartStackNavigator}
+            options={options}
+          />
+          <Tab.Screen
+            name="ItemsReference"
+            component={ItemsReferenceStackNavigator}
+            options={itemsReferenceOptions}
+          />
+        </Tab.Group>
       </Tab.Navigator>
     </SafeAreaProvider>
   );

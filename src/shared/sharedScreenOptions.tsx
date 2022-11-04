@@ -22,19 +22,21 @@ const headerShown = false as const;
 //   <HeaderHomeStackNavigator {...props} />
 // );
 
-const stackHeader = (props: NativeStackHeaderProps) => (
-  <HeaderHomeStackNavigator {...props} />
-);
-// const tabHeader = (props: BottomTabHeaderProps) => (
-//   <HeaderHomeStackNavigator {...props} />
-// );
+const stackHeader = (
+  props: Pick<NativeStackHeaderProps, "navigation" | "route" | "options">
+) => <HeaderHomeStackNavigator {...props} />;
+const tabHeader = (
+  props: Pick<BottomTabHeaderProps, "navigation" | "route" | "options">
+) => <HeaderHomeStackNavigator {...props} />;
 
-export const screenOptions: NativeStackNavigationOptions = {
-  // header: tabHeader,
+// export const screenOptions: NativeStackNavigationOptions = {
+//   header: stackHeader,
+// } as const;
+export const screenTabOptions = {
+  header: tabHeader,
+} as const;
+export const screenStackOptions = {
   header: stackHeader,
-  // header: (props: NativeStackHeaderProps) => (
-  //   <HeaderHomeStackNavigator {...props} />
-  // ),
 } as const;
 
 export const HEADER_SHOWN_FALSE = { headerShown } as const;
@@ -72,11 +74,13 @@ export const homeOptions: BottomTabNavigationOptions = {
 };
 
 export const itemLookupOptions: BottomTabNavigationOptions = {
+  headerShown,
   tabBarLabel: "Item Lookup",
   tabBarIcon: (props: tabBarIconProps) => <TabBarIconItemLookup {...props} />,
 } as const;
 
 export const shoppingCartOptions: BottomTabNavigationOptions = {
+  // headerShown,
   tabBarLabel: "Shopping Cart",
   tabBarIcon: (props: tabBarIconProps) => <TabBarIconShoppingCart {...props} />,
   headerTitle: "Shopping Cart",

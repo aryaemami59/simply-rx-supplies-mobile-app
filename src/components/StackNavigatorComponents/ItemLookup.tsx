@@ -1,10 +1,9 @@
-import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
 import { useTheme } from "@rneui/themed";
 import { FC, memo, useMemo } from "react";
 import { FlatList, ListRenderItem, StyleSheet, View } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { shallowEqual } from "react-redux";
-import { RootTabParamList } from "../../../CustomTypes/navigation";
+import { ItemLookupProps } from "../../../CustomTypes/navigation";
 import { ItemName } from "../../../CustomTypes/types";
 import { useAppSelector } from "../../redux/hooks";
 import { selectAllListItems } from "../../redux/selectors";
@@ -21,7 +20,7 @@ const renderItems: ListRenderItem<ItemName> = ({ item }) => (
 
 const keyExtractor = (item: ItemName) => item;
 
-type Props = BottomTabScreenProps<RootTabParamList, "ItemLookup">;
+type Props = ItemLookupProps;
 
 const ItemLookup: FC<Props> = ({ navigation, route }) => {
   const { background: backgroundColor } = useTheme().theme.colors;

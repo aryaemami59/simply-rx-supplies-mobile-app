@@ -14,6 +14,7 @@ import {
   memo,
   PropsWithChildren,
   useCallback,
+  useEffect,
   useMemo,
   useRef,
   useState,
@@ -73,7 +74,7 @@ const InputField: FC = () => {
   const dispatch = useAppDispatch();
   const { params } = useRoute<RouteProp<RootTabParamList, "ItemLookup">>();
 
-  const inputFocused = params?.inputFocused ? true : false;
+  // const inputFocused = params?.inputFocused ? true : false;
 
   const focusHandler = useCallback(() => {
     view.current?.transitionTo(WIDTH_100);
@@ -88,19 +89,31 @@ const InputField: FC = () => {
     dispatch(clearListItems());
   }, [dispatch]);
 
+  // useEffect(() => {
+  //   inputRef.current?.focus();
+  // }, []);
+
   const navigation =
     useNavigation<NativeStackNavigationProp<RootTabParamList, "ItemLookup">>();
 
   useFocusEffect(
     useCallback(() => {
-      console.log(inputRef?.current?.searchBar?.input.isFocused());
-      inputFocused && inputRef.current?.focus();
+      // focusHandler();
+      console.log("focus");
+      // console.log(params);
+      // const inputFocused = params?.inputFocused ? true : false;
+      // console.log(inputRef?.current?.searchBar?.input.isFocused());
+      // params?.inputFocused && inputRef.current?.focus();
+      // inputFocused && inputRef.current?.focus();
+      inputRef.current?.focus();
       return () => {
-        inputRef?.current?.searchBar?.input.isFocused()
-          ? navigation.setParams({ inputFocused: true })
-          : navigation.setParams({ inputFocused: false });
+        console.log("losing focus");
+        inputRef.current?.blur();
+        // inputRef?.current?.searchBar?.input.isFocused()
+        //   ? navigation.setParams({ inputFocused: true })
+        //   : navigation.setParams({ inputFocused: false });
       };
-    }, [inputFocused, navigation])
+    }, [])
   );
 
   const changeVal: OnChangeText = useCallback(
@@ -139,7 +152,7 @@ const InputField: FC = () => {
             // onKeyboardHide={}
             returnKeyType="search"
             ref={inputRef}
-            lightTheme
+            // lightTheme
             keyboardAppearance={theme.mode}
             autoFocus
             focusable

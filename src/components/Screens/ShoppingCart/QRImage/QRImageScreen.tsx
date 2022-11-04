@@ -1,5 +1,4 @@
 import { Octicons } from "@expo/vector-icons";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { Text, useTheme } from "@rneui/themed";
 import { FC, memo, useCallback, useMemo, useRef } from "react";
 import {
@@ -11,7 +10,7 @@ import {
 } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import QRCode from "react-native-qrcode-svg";
-import { ShoppingCartStackParamList } from "../../../../../CustomTypes/navigation";
+import { QRImageScreenProps } from "../../../../../CustomTypes/navigation";
 import Svg from "../../../../../node_modules/react-native-svg/lib/typescript/elements/Svg";
 import {
   AI_CENTER,
@@ -37,7 +36,7 @@ const iconName = Platform.OS === "android" ? "share-android" : "share";
 
 const contentContainerStyle = [JC_SPACE_EVENLY, AI_CENTER, styles.container];
 
-type Props = NativeStackScreenProps<ShoppingCartStackParamList, "QRImage">;
+type Props = QRImageScreenProps;
 
 const QRImageScreen: FC<Props> = ({ navigation, route }) => {
   const { itemNumbers, itemsAdded } = route.params;

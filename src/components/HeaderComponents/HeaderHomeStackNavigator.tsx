@@ -1,8 +1,6 @@
+import { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
 import { useFocusEffect } from "@react-navigation/native";
-import {
-  NativeStackHeaderProps,
-  NativeStackNavigationProp,
-} from "@react-navigation/native-stack";
+import { SearchBar as SearchBarType } from "@rneui/base";
 import { Header, SearchBar, SearchBarProps } from "@rneui/themed";
 import {
   FC,
@@ -14,6 +12,11 @@ import {
 } from "react";
 import { Keyboard, StyleSheet, TextInput } from "react-native";
 import {
+  HeaderHomeStackNavigatorProps,
+  RootTabParamList,
+} from "../../../CustomTypes/navigation";
+import {
+  BACKGROUND_TRANSPARENT,
   COLOR_WHITE,
   DISPLAY_NONE,
   ICON_GRAY_COLOR,
@@ -25,13 +28,8 @@ import {
 import HeaderRightComponent from "./HeaderRightComponent";
 import SearchClearIcon from "./SearchClearIcon";
 import SearchIcon from "./SearchIcon";
-import { BACKGROUND_TRANSPARENT } from "../../shared/sharedStyles";
-import { SearchBar as SearchBarType } from "@rneui/base";
-import { RootTabParamList } from "../../../CustomTypes/navigation";
-import { BottomTabHeaderProps } from "@react-navigation/bottom-tabs";
-type Props = NativeStackHeaderProps;
-// type Props = BottomTabHeaderProps;
-// type Props = NativeStackHeaderProps | BottomTabHeaderProps;
+
+type Props = HeaderHomeStackNavigatorProps;
 
 const styles = StyleSheet.create({
   headerCenterContainer: {
@@ -62,7 +60,7 @@ const HeaderHomeStackNavigator: FC<Props> = ({
   navigation,
   route,
   options,
-  back,
+  // back,
   // layout,
 }) => {
   const inputRef = useRef<
@@ -74,8 +72,9 @@ const HeaderHomeStackNavigator: FC<Props> = ({
     Keyboard.dismiss();
   });
 
-  const myNavigation =
-    navigation as NativeStackNavigationProp<RootTabParamList>;
+  const myNavigation = navigation as BottomTabNavigationProp<RootTabParamList>;
+  // const myNavigation =
+  //   navigation as NativeStackNavigationProp<RootTabParamList>;
 
   useEffect(() => {
     const unsubscribe = myNavigation.addListener("focus", () => {
@@ -92,7 +91,7 @@ const HeaderHomeStackNavigator: FC<Props> = ({
       //   inputFocused: true,
       // },
     });
-    inputRef.current?.blur();
+    // inputRef.current?.blur();
   }, [myNavigation]);
   return (
     <Header

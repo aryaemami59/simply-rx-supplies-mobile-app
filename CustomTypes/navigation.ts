@@ -1,8 +1,16 @@
-import { NavigatorScreenParams } from "@react-navigation/native";
-import { ItemNumber, ItemName, Src, VendorNameType, Category } from "./types";
-import type { CompositeScreenProps } from "@react-navigation/native";
-import type { StackScreenProps } from "@react-navigation/stack";
-import type { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
+import type {
+  BottomTabHeaderProps,
+  BottomTabScreenProps,
+} from "@react-navigation/bottom-tabs";
+import {
+  CompositeScreenProps,
+  NavigatorScreenParams,
+} from "@react-navigation/native";
+import {
+  NativeStackHeaderProps,
+  NativeStackScreenProps,
+} from "@react-navigation/native-stack";
+import { Category, ItemName, ItemNumber, Src, VendorNameType } from "./types";
 
 export const Home = "Home" as const;
 export const ItemLookup = "ItemLookup" as const;
@@ -22,8 +30,6 @@ export type RootTabParamList = {
   ItemsReference:
     | NavigatorScreenParams<ItemsReferenceStackParamList>
     | undefined;
-  // ItemsByCategory: undefined;
-  // ItemsByVendor: undefined;
 };
 
 export type ShoppingCartStackParamList = {
@@ -50,6 +56,52 @@ export type ItemsReferenceTopTabParamList = {
   ItemsByVendor: undefined;
   ItemsByCategory: undefined;
 };
+
+export type ShoppingCartStackNavigatorProps = BottomTabScreenProps<
+  RootTabParamList,
+  "ShoppingCartStack"
+>;
+
+export type CartColumnListItemsScreenProps = CompositeScreenProps<
+  NativeStackScreenProps<ShoppingCartStackParamList, "CartColumnListItems">,
+  BottomTabScreenProps<RootTabParamList, "ShoppingCartStack">
+>;
+
+export type HomeStackNavigatorProps = BottomTabScreenProps<
+  RootTabParamList,
+  "Home"
+>;
+
+export type BarcodeImageScreenProps = CompositeScreenProps<
+  NativeStackScreenProps<ShoppingCartStackParamList, "BarcodeImage">,
+  BottomTabScreenProps<RootTabParamList, "ShoppingCartStack">
+>;
+
+export type HeaderHomeStackNavigatorProps =
+  | Pick<BottomTabHeaderProps, "navigation" | "route" | "options">
+  | Pick<NativeStackHeaderProps, "navigation" | "route" | "options">;
+
+export type ItemsReferenceStackNavigatorProps = BottomTabScreenProps<
+  RootTabParamList,
+  "ItemsReference"
+>;
+
+export type ShoppingCartScreenProps = CompositeScreenProps<
+  NativeStackScreenProps<ShoppingCartStackParamList, "ShoppingCartScreen">,
+  BottomTabScreenProps<RootTabParamList, "ShoppingCartStack">
+>;
+
+export type QRImageScreenProps = CompositeScreenProps<
+  NativeStackScreenProps<ShoppingCartStackParamList, "QRImage">,
+  BottomTabScreenProps<RootTabParamList, "ShoppingCartStack">
+>;
+
+export type ItemsReferenceScreenProps = NativeStackScreenProps<
+  ItemsReferenceStackParamList,
+  "ItemsReferenceScreen"
+>;
+
+export type ItemLookupProps = BottomTabScreenProps<RootTabParamList, "ItemLookup">
 
 // export type RootStackParamList = {
 //   Home: NavigatorScreenParams<HomeTabParamList>;

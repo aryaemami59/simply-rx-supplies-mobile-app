@@ -1,11 +1,8 @@
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { useTheme } from "@rneui/themed";
 import { FC, memo, useMemo } from "react";
 import { FlatList, ListRenderItem, View } from "react-native";
-import { ShoppingCartStackParamList } from "../../../../CustomTypes/navigation";
-import {
-  VendorNameType,
-} from "../../../../CustomTypes/types";
+import { ShoppingCartScreenProps } from "../../../../CustomTypes/navigation";
+import { VendorNameType } from "../../../../CustomTypes/types";
 import VendorNameProvider from "../../../shared/contexts/VendorNameProvider";
 import useVendorNamesList from "../../../shared/customHooks/useVendorNamesList";
 import { HEIGHT_100 } from "../../../shared/sharedStyles";
@@ -19,10 +16,7 @@ const renderItem: ListRenderItem<VendorNameType> = ({ item }) => (
 
 const keyExtractor = (item: VendorNameType) => item.toString();
 
-type Props = NativeStackScreenProps<
-  ShoppingCartStackParamList,
-  "ShoppingCartScreen"
->;
+type Props = ShoppingCartScreenProps;
 
 const ShoppingCartScreen: FC<Props> = ({ navigation, route }) => {
   const vendors = useVendorNamesList();

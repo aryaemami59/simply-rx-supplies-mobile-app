@@ -1,21 +1,23 @@
-import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { FC, memo } from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import { RootTabParamList, ItemsReferenceStackParamList } from "../../../CustomTypes/navigation";
+import {
+  ItemsReferenceStackNavigatorProps,
+  ItemsReferenceStackParamList,
+} from "../../../CustomTypes/navigation";
 import useIsLoading from "../../shared/customHooks/useIsLoading";
 import useStatus from "../../shared/customHooks/useStatus";
 import ErrMsgComponent from "../../shared/ErrMsgComponent";
 import IsLoadingComponents from "../../shared/IsLoadingComponents";
 import {
   refHeaderOptions,
-  screenOptions,
+  screenStackOptions,
 } from "../../shared/sharedScreenOptions";
 import CategoryItems from "../Screens/ItemsReference/ItemsByCategory/CategoryItems";
 import ItemsByVendorListItems from "../Screens/ItemsReference/ItemsByVendor/ItemsByVendorListItems";
 import ItemsReferenceScreen from "../Screens/ItemsReference/ItemsReferenceScreen";
 
-type Props = BottomTabScreenProps<RootTabParamList, "ItemsReference">;
+type Props = ItemsReferenceStackNavigatorProps;
 
 const Stack = createNativeStackNavigator<ItemsReferenceStackParamList>();
 
@@ -35,7 +37,7 @@ const ItemsReferenceStackNavigator: FC<Props> = ({ navigation, route }) => {
     <SafeAreaProvider>
       <Stack.Navigator>
         <Stack.Screen
-          options={screenOptions}
+          options={screenStackOptions}
           name="ItemsReferenceScreen"
           component={ItemsReferenceScreen}
         />

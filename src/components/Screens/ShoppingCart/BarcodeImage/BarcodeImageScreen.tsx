@@ -1,8 +1,5 @@
 import { Octicons } from "@expo/vector-icons";
-import {
-  NativeStackNavigationOptions,
-  NativeStackScreenProps,
-} from "@react-navigation/native-stack";
+import { NativeStackNavigationOptions } from "@react-navigation/native-stack";
 import { useTheme } from "@rneui/themed";
 import { FC, memo, useCallback, useEffect, useMemo } from "react";
 import {
@@ -13,7 +10,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { ShoppingCartStackParamList } from "../../../../../CustomTypes/types";
+import { BarcodeImageScreenProps } from "../../../../../CustomTypes/navigation";
 import {
   BARCODE_ASPECT_RATIO,
   JC_AI_CENTER_HEIGHT100,
@@ -22,7 +19,7 @@ import {
 
 const iconName = Platform.OS === "android" ? "share-android" : "share";
 
-type Props = NativeStackScreenProps<ShoppingCartStackParamList, "BarcodeImage">;
+type Props = BarcodeImageScreenProps;
 
 const style = [BARCODE_ASPECT_RATIO, WIDTH_90];
 
@@ -30,7 +27,7 @@ const BarcodeImageScreen: FC<Props> = ({ navigation, route }) => {
   const { background } = useTheme().theme.colors;
   const { src, itemName } = route.params;
 
-  const options: NativeStackNavigationOptions = useMemo(
+  const options: Pick<NativeStackNavigationOptions, "title"> = useMemo(
     () => ({
       title: itemName,
     }),
