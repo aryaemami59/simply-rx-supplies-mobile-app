@@ -1,6 +1,12 @@
-import { BottomTabNavigationOptions } from "@react-navigation/bottom-tabs";
+import {
+  BottomTabNavigationOptions,
+  BottomTabHeaderProps,
+} from "@react-navigation/bottom-tabs";
 import { MaterialTopTabNavigationOptions } from "@react-navigation/material-top-tabs";
-import { NativeStackNavigationOptions } from "@react-navigation/native-stack";
+import {
+  NativeStackHeaderProps,
+  NativeStackNavigationOptions,
+} from "@react-navigation/native-stack";
 import { tabBarIconProps } from "../../CustomTypes/types";
 import HeaderHomeStackNavigator from "../components/HeaderComponents/HeaderHomeStackNavigator";
 import { HeaderRightFC } from "../components/HeaderComponents/HeaderRightComponent";
@@ -10,25 +16,47 @@ import TabBarIconItemsReference from "../components/TabBarComponents/TabBarIconI
 import TabBarIconShoppingCart from "../components/TabBarComponents/TabBarIconShoppingCart";
 import { MAIN_COLOR } from "./sharedStyles";
 
+const headerShown = false as const;
+
+// const header = (props: NativeStackHeaderProps | BottomTabHeaderProps) => (
+//   <HeaderHomeStackNavigator {...props} />
+// );
+
+const stackHeader = (props: NativeStackHeaderProps) => (
+  <HeaderHomeStackNavigator {...props} />
+);
+// const tabHeader = (props: BottomTabHeaderProps) => (
+//   <HeaderHomeStackNavigator {...props} />
+// );
+
 export const screenOptions: NativeStackNavigationOptions = {
-  header: props => <HeaderHomeStackNavigator {...props} />,
+  // header: tabHeader,
+  header: stackHeader,
+  // header: (props: NativeStackHeaderProps) => (
+  //   <HeaderHomeStackNavigator {...props} />
+  // ),
 } as const;
 
-export const HEADER_SHOWN_FALSE = {
-  headerShown: false,
-} as const;
+export const HEADER_SHOWN_FALSE = { headerShown } as const;
+const headerTitleStyle = { color: "white" } as const;
+const headerBackTitleVisible = false as const;
+const headerTintColor = "white" as const;
+const headerStyle = { backgroundColor: MAIN_COLOR } as const;
+const headerRight = HeaderRightFC;
 
 export const refHeaderOptions: NativeStackNavigationOptions = {
-  headerTitleStyle: { color: "white" },
-  headerBackTitleVisible: false,
-  headerTintColor: "white",
-  headerStyle: { backgroundColor: MAIN_COLOR },
-  headerRight: HeaderRightFC,
+  headerTitleStyle,
+  headerBackTitleVisible,
+  headerTintColor,
+  headerStyle,
+  headerRight,
 } as const;
+
+const title = "Item Details" as const;
 
 export const itemDetailsOptions = {
   ...refHeaderOptions,
-  title: "Item Details",
+  title,
 } as const;
 
 export const itemsByVendorTabOptions: MaterialTopTabNavigationOptions = {

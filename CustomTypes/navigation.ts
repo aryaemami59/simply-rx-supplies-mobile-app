@@ -1,49 +1,30 @@
 import { NavigatorScreenParams } from "@react-navigation/native";
 import { ItemNumber, ItemName, Src, VendorNameType, Category } from "./types";
+import type { CompositeScreenProps } from "@react-navigation/native";
+import type { StackScreenProps } from "@react-navigation/stack";
+import type { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
 
-const Home = "Home" as const;
-const ItemLookup = "ItemLookup" as const;
-const ShoppingCartStack = "ShoppingCartStack" as const;
-const ShoppingCartScreen = "ShoppingCartScreen" as const;
-const QRImage = "QRImage" as const;
-const BarcodeImage = "BarcodeImage" as const;
-const CartColumnListItems = "CartColumnListItems" as const;
+export const Home = "Home" as const;
+export const ItemLookup = "ItemLookup" as const;
+export const ShoppingCartStack = "ShoppingCartStack" as const;
+export const ShoppingCartScreen = "ShoppingCartScreen" as const;
+export const QRImage = "QRImage" as const;
+export const BarcodeImage = "BarcodeImage" as const;
+export const CartColumnListItems = "CartColumnListItems" as const;
 
 export type RootTabParamList = {
   [Home]: undefined;
   // Home: undefined;
-  ItemLookup: undefined;
+  ItemLookup: { inputFocused: boolean } | undefined;
   ShoppingCartStack:
     | NavigatorScreenParams<ShoppingCartStackParamList>
     | undefined;
   ItemsReference:
     | NavigatorScreenParams<ItemsReferenceStackParamList>
     | undefined;
-  // ItemsReference: {
-  //   screen: "ItemsReferenceScreen";
-  //   params: { screen: "ItemsByVendor" | "ItemsByCategory" } | undefined;
-  // };
-  ItemsByCategory: undefined;
-  ItemsByVendor: undefined;
+  // ItemsByCategory: undefined;
+  // ItemsByVendor: undefined;
 };
-
-// export type HomeStackParamList = {
-//   HomeScreen: undefined;
-//   ItemLookup: ItemLookupStackParamList;
-//   ShoppingCart: undefined;
-//   ItemsReference: {
-//     screen: "ItemsReferenceScreen";
-//     params: {
-//       screen: "ItemsByVendor" | "ItemsByCategory";
-//     };
-//   };
-//   ItemsByCategory: undefined;
-//   ItemsByVendor: undefined;
-// };
-
-// export type ItemLookupStackParamList = {
-//   ItemLookupScreen: { inputFocused: boolean } | undefined;
-// };
 
 export type ShoppingCartStackParamList = {
   ShoppingCartScreen: undefined;
@@ -53,17 +34,9 @@ export type ShoppingCartStackParamList = {
   };
   BarcodeImage: { src: Src; itemName: ItemName };
   CartColumnListItems: { vendorName: VendorNameType };
-  ItemLookup: undefined;
+  ItemLookup: { inputFocused: boolean } | undefined;
   ItemDetails: { itemName: ItemName; vendorName: VendorNameType };
 };
-
-// export type ItemsByCategoryStackParamList = {
-//   ItemsByCategoryScreen: { category: Category };
-// };
-
-// export type ItemsByVendorStackParamList = {
-//   ItemsByVendorScreen: { vendorName: VendorNameType };
-// };
 
 export type ItemsReferenceStackParamList = {
   ItemsReferenceScreen:
@@ -73,13 +46,33 @@ export type ItemsReferenceStackParamList = {
   ItemsByCategoryListItems: { category: Category };
 };
 
-// export type ItemsReferenceTabParamList = {
-
-// }
-
 export type ItemsReferenceTopTabParamList = {
   ItemsByVendor: undefined;
   ItemsByCategory: undefined;
-  // ItemsByVendor: ItemsByVendorStackParamList;
-  // ItemsByCategory: ItemsByCategoryStackParamList;
 };
+
+// export type RootStackParamList = {
+//   Home: NavigatorScreenParams<HomeTabParamList>;
+//   PostDetails: { id: string };
+//   NotFound: undefined;
+// };
+
+// export type RootStackScreenProps<T extends keyof RootStackParamList> =
+//   StackScreenProps<RootStackParamList, T>;
+
+// export type HomeTabParamList = {
+//   Popular: undefined;
+//   Latest: undefined;
+// };
+
+// export type HomeTabScreenProps<T extends keyof HomeTabParamList> =
+//   CompositeScreenProps<
+//     BottomTabScreenProps<HomeTabParamList, T>,
+//     RootStackScreenProps<keyof RootStackParamList>
+//   >;
+
+// declare global {
+//   namespace ReactNavigation {
+//     type RootParamList = RootTabParamList;
+//   }
+// }

@@ -16,7 +16,10 @@ import useStatus from "../../shared/customHooks/useStatus";
 import useIsLoading from "../../shared/customHooks/useIsLoading";
 import ErrMsgComponent from "../../shared/ErrMsgComponent";
 import IsLoadingComponents from "../../shared/IsLoadingComponents";
-import { ShoppingCartStackParamList, RootTabParamList } from "../../../CustomTypes/navigation";
+import {
+  ShoppingCartStackParamList,
+  RootTabParamList,
+} from "../../../CustomTypes/navigation";
 
 const Stack = createNativeStackNavigator<ShoppingCartStackParamList>();
 
@@ -41,6 +44,7 @@ const ShoppingCartStackNavigator: FC<Props> = ({ navigation, route }) => {
         <Stack.Screen
           name="ShoppingCartScreen"
           component={ShoppingCartScreen}
+          // options={{ header: ({ navigation,options, route, back }) =>  }}
           options={screenOptions}
         />
         <Stack.Screen

@@ -21,10 +21,8 @@ import {
 import { StyleSheet, TextInput, View } from "react-native";
 import * as Animatable from "react-native-animatable";
 import { shallowEqual } from "react-redux";
-import {
-  ItemLookupStackParamList,
-  OnChangeText,
-} from "../../../../../CustomTypes/types";
+import { RootTabParamList } from "../../../../../CustomTypes/navigation";
+import { OnChangeText } from "../../../../../CustomTypes/types";
 import { clearListItems, setListItems } from "../../../../redux/addedSlice";
 import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
 import { selectItemNamesArr } from "../../../../redux/selectors";
@@ -73,7 +71,7 @@ const InputField: FC = () => {
   >(null);
   const { theme } = useTheme();
   const dispatch = useAppDispatch();
-  const { params } = useRoute<RouteProp<ItemLookupStackParamList>>();
+  const { params } = useRoute<RouteProp<RootTabParamList, "ItemLookup">>();
 
   const inputFocused = params?.inputFocused ? true : false;
 
@@ -91,10 +89,11 @@ const InputField: FC = () => {
   }, [dispatch]);
 
   const navigation =
-    useNavigation<NativeStackNavigationProp<ItemLookupStackParamList>>();
+    useNavigation<NativeStackNavigationProp<RootTabParamList, "ItemLookup">>();
 
   useFocusEffect(
     useCallback(() => {
+      console.log(inputRef?.current?.searchBar?.input.isFocused());
       inputFocused && inputRef.current?.focus();
       return () => {
         inputRef?.current?.searchBar?.input.isFocused()

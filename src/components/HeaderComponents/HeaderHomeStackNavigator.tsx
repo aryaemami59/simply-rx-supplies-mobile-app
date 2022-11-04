@@ -1,7 +1,17 @@
 import { useFocusEffect } from "@react-navigation/native";
-import { NativeStackHeaderProps } from "@react-navigation/native-stack";
-import { Header, SearchBar } from "@rneui/themed";
-import { FC, memo, useCallback, useEffect, useRef } from "react";
+import {
+  NativeStackHeaderProps,
+  NativeStackNavigationProp,
+} from "@react-navigation/native-stack";
+import { Header, SearchBar, SearchBarProps } from "@rneui/themed";
+import {
+  FC,
+  memo,
+  PropsWithChildren,
+  useCallback,
+  useEffect,
+  useRef,
+} from "react";
 import { Keyboard, StyleSheet, TextInput } from "react-native";
 import {
   COLOR_WHITE,
@@ -16,8 +26,12 @@ import HeaderRightComponent from "./HeaderRightComponent";
 import SearchClearIcon from "./SearchClearIcon";
 import SearchIcon from "./SearchIcon";
 import { BACKGROUND_TRANSPARENT } from "../../shared/sharedStyles";
-
+import { SearchBar as SearchBarType } from "@rneui/base";
+import { RootTabParamList } from "../../../CustomTypes/navigation";
+import { BottomTabHeaderProps } from "@react-navigation/bottom-tabs";
 type Props = NativeStackHeaderProps;
+// type Props = BottomTabHeaderProps;
+// type Props = NativeStackHeaderProps | BottomTabHeaderProps;
 
 const styles = StyleSheet.create({
   headerCenterContainer: {
@@ -49,30 +63,37 @@ const HeaderHomeStackNavigator: FC<Props> = ({
   route,
   options,
   back,
+  // layout,
 }) => {
-  const inputRef = useRef<TextInput>(null);
+  const inputRef = useRef<
+    PropsWithChildren<SearchBarProps> & TextInput & SearchBarType
+  >(null);
+
   useFocusEffect(() => {
     inputRef.current?.blur();
     Keyboard.dismiss();
   });
 
+  const myNavigation =
+    navigation as NativeStackNavigationProp<RootTabParamList>;
+
   useEffect(() => {
-    const unsubscribe = navigation.addListener("focus", () => {
+    const unsubscribe = myNavigation.addListener("focus", () => {
       inputRef.current?.blur();
     });
     return unsubscribe;
-  }, [navigation]);
+  }, [myNavigation]);
 
   const focusHandler = useCallback(() => {
-    navigation.navigate("ItemLookup", {
-      screen: "ItemLookupScreen",
-      params: {
-        inputFocused: true,
-      },
+    myNavigation.navigate("ItemLookup", {
+      inputFocused: true,
+      // screen: "ItemLookupScreen",
+      // params: {
+      //   inputFocused: true,
+      // },
     });
     inputRef.current?.blur();
-  }, [navigation]);
-
+  }, [myNavigation]);
   return (
     <Header
       backgroundColor={MAIN_COLOR}

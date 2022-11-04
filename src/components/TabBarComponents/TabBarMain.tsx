@@ -18,6 +18,7 @@ import ItemsReferenceStackNavigator from "../StackNavigatorComponents/ItemsRefer
 import ShoppingCartStackNavigator from "../StackNavigatorComponents/ShoppingCartStackNavigator";
 
 const Tab = createBottomTabNavigator<RootTabParamList>();
+const initialParams = { inputFocused: true };
 
 const TabBarMain: FC = () => {
   const ifItemsAdded = useAppSelector(checkIfAnyItemsAdded);
@@ -50,6 +51,7 @@ const TabBarMain: FC = () => {
         />
         <Tab.Screen
           name="ItemLookup"
+          initialParams={initialParams}
           component={ItemLookup}
           options={itemLookupOptions}
         />

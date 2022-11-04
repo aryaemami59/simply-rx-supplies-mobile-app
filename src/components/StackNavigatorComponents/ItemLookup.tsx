@@ -24,12 +24,11 @@ const keyExtractor = (item: ItemName) => item;
 type Props = BottomTabScreenProps<RootTabParamList, "ItemLookup">;
 
 const ItemLookup: FC<Props> = ({ navigation, route }) => {
-  const { background } = useTheme().theme.colors;
+  const { background: backgroundColor } = useTheme().theme.colors;
 
-  const style = useMemo(() => ({ backgroundColor: background }), [background]);
+  const style = useMemo(() => ({ backgroundColor }), [backgroundColor]);
 
   const listItems = useAppSelector(selectAllListItems, shallowEqual);
-  const { background: backgroundColor } = useTheme().theme.colors;
 
   const viewStyle = useMemo(
     () => [styles.containerStyle, { backgroundColor }],
