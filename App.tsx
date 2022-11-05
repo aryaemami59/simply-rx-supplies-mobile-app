@@ -9,6 +9,9 @@ import { Provider } from "react-redux";
 import Main from "./src/components/Main";
 import { store } from "./src/redux/store";
 import { fetchItems } from "./src/redux/addedSlice";
+import { enableScreens } from "react-native-screens";
+
+// enableScreens();
 
 store.dispatch(fetchItems());
 

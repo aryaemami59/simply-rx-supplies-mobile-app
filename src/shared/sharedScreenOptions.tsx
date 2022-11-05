@@ -75,6 +75,9 @@ export const homeOptions: BottomTabNavigationOptions = {
 };
 
 export const itemLookupOptions: BottomTabNavigationOptions = {
+  // freezeOnBlur: true,
+  // lazy: false,
+  // unmountOnBlur: true,
   headerShown,
   tabBarLabel: "Item Lookup",
   tabBarIcon: (props: tabBarIconProps) => <TabBarIconItemLookup {...props} />,

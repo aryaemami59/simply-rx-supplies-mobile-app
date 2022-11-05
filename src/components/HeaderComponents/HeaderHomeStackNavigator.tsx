@@ -1,5 +1,5 @@
 import { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
-import { useFocusEffect } from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { SearchBar as SearchBarType } from "@rneui/base";
 import { Header, SearchBar, SearchBarProps } from "@rneui/themed";
 import {
@@ -13,8 +13,10 @@ import {
 import { Keyboard, StyleSheet, TextInput } from "react-native";
 import {
   HeaderHomeStackNavigatorProps,
+  RootTabNavigationProps,
   RootTabParamList,
 } from "../../../CustomTypes/navigation";
+import { SearchBarRef } from "../../../CustomTypes/types";
 import {
   BACKGROUND_TRANSPARENT,
   COLOR_WHITE,
@@ -63,36 +65,36 @@ const HeaderHomeStackNavigator: FC<Props> = ({
   // back,
   // layout,
 }) => {
-  const inputRef = useRef<
-    PropsWithChildren<SearchBarProps> & TextInput & SearchBarType
-  >(null);
+  const searchRef = useRef<SearchBarRef>(null);
+  const myNavigation = useNavigation<RootTabNavigationProps>();
+  // const myNavigation = navigation as BottomTabNavigationProp<RootTabParamList>;
 
-  useFocusEffect(() => {
-    inputRef.current?.blur();
-    Keyboard.dismiss();
-  });
+  // useFocusEffect(
+  //   useCallback(() => {
+  //     const unsubscribe = myNavigation.addListener("focus", () => {
+  //       searchRef.current?.blur();
+  //     });
+  //     return unsubscribe;
+  //   }, [myNavigation])
+  // );
 
-  const myNavigation = navigation as BottomTabNavigationProp<RootTabParamList>;
   // const myNavigation =
   //   navigation as NativeStackNavigationProp<RootTabParamList>;
 
-  useEffect(() => {
-    const unsubscribe = myNavigation.addListener("focus", () => {
-      inputRef.current?.blur();
-    });
-    return unsubscribe;
-  }, [myNavigation]);
+  // useEffect(() => {
+  //   const unsubscribe = myNavigation.addListener("focus", () => {
+  //     searchRef.current?.blur();
+  //   });
+  //   return unsubscribe;
+  // }, [myNavigation]);
 
   const focusHandler = useCallback(() => {
     myNavigation.navigate("ItemLookup", {
       inputFocused: true,
-      // screen: "ItemLookupScreen",
-      // params: {
-      //   inputFocused: true,
-      // },
     });
-    // inputRef.current?.blur();
+    // searchRef.current?.blur();
   }, [myNavigation]);
+
   return (
     <Header
       backgroundColor={MAIN_COLOR}
@@ -102,7 +104,7 @@ const HeaderHomeStackNavigator: FC<Props> = ({
       centerContainerStyle={styles.headerCenterContainer}
       centerComponent={
         <SearchBar
-          ref={inputRef}
+          ref={searchRef}
           onFocus={focusHandler}
           containerStyle={containerStyle}
           placeholder="Search..."

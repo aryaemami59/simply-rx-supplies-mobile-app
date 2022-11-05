@@ -11,6 +11,7 @@ import ItemNameProvider from "../../shared/contexts/ItemNameProvider";
 import BottomSheetComponent from "../Screens/ItemLookUp/Input/BottomSheetComponent";
 import InputField from "../Screens/ItemLookUp/Input/InputField";
 import SingleSearchResultsListItem from "../Screens/ItemLookUp/SearchResults/SingleSearchResultsListItem";
+import useStatus from "../../shared/customHooks/useStatus";
 
 const renderItems: ListRenderItem<ItemName> = ({ item }) => (
   <ItemNameProvider itemName={item}>
@@ -24,7 +25,7 @@ type Props = ItemLookupProps;
 
 const ItemLookup: FC<Props> = ({ navigation, route }) => {
   const { background: backgroundColor } = useTheme().theme.colors;
-
+  useStatus("ItemLookup");
   const style = useMemo(() => ({ backgroundColor }), [backgroundColor]);
 
   const listItems = useAppSelector(selectAllListItems, shallowEqual);

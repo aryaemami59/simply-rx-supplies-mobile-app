@@ -19,11 +19,25 @@ import {
   useRef,
   useState,
 } from "react";
-import { StyleSheet, TextInput, View } from "react-native";
+import {
+  InteractionManager,
+  Keyboard,
+  StyleSheet,
+  TextInput,
+  View,
+} from "react-native";
 import * as Animatable from "react-native-animatable";
 import { shallowEqual } from "react-redux";
-import { RootTabParamList } from "../../../../../CustomTypes/navigation";
-import { OnChangeText } from "../../../../../CustomTypes/types";
+import {
+  ItemLookupNavigationProps,
+  ItemLookupRouteProps,
+  RootTabParamList,
+} from "../../../../../CustomTypes/navigation";
+import {
+  AnimatableViewRef,
+  OnChangeText,
+  SearchBarRef,
+} from "../../../../../CustomTypes/types";
 import { clearListItems, setListItems } from "../../../../redux/addedSlice";
 import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
 import { selectItemNamesArr } from "../../../../redux/selectors";
@@ -41,6 +55,8 @@ import {
 import { search } from "../../../../shared/utilityFunctions";
 import HeaderRightComponent from "../../../HeaderComponents/HeaderRightComponent";
 import SearchIcon from "../../../HeaderComponents/SearchIcon";
+import useUpdateLogger from "../../../../shared/customHooks/useUpdateLogger";
+import useStatus from "../../../../shared/customHooks/useStatus";
 
 const styles = StyleSheet.create({
   headerCenterContainer: {
@@ -64,24 +80,28 @@ const rightContainerStyle = [JC_AI_CENTER, styles.headerRightContainer];
 const containerStyle = [styles.searchBarContainer, BACKGROUND_TRANSPARENT];
 
 const InputField: FC = () => {
+  const { params } = useRoute<ItemLookupRouteProps>();
+  const inputRef = useRef<SearchBarRef>(null);
+  const view = useRef<AnimatableViewRef>(null);
   const [val, setVal] = useState("");
   const itemNames = useAppSelector(selectItemNamesArr, shallowEqual);
-  const view = useRef<Animatable.View & View>(null);
-  const inputRef = useRef<
-    PropsWithChildren<SearchBarProps> & TextInput & SearchBarType
-  >(null);
   const { theme } = useTheme();
   const dispatch = useAppDispatch();
-  const { params } = useRoute<RouteProp<RootTabParamList, "ItemLookup">>();
 
-  // const inputFocused = params?.inputFocused ? true : false;
+  const inputFocused = params?.inputFocused ? true : false;
 
   const focusHandler = useCallback(() => {
+    // view.current?.transitionTo({ flexGrow: 1 });
+    // view.current?.transitionTo({ transform: [{ scaleX: 1.5 }] });
     view.current?.transitionTo(WIDTH_100);
+    console.log("focused");
   }, []);
 
   const blurHandler = useCallback(() => {
+    // view.current?.transitionTo({ flexGrow: 0.8 });
+    // view.current?.transitionTo({ transform: [{ scaleX: 1 }] });
     view.current?.transitionTo(WIDTH_80);
+    console.log("blurred");
   }, []);
 
   const clearHandler = useCallback((): void => {
@@ -89,32 +109,40 @@ const InputField: FC = () => {
     dispatch(clearListItems());
   }, [dispatch]);
 
+  useStatus("InputField");
+
+  // useUpdateLogger(inputFocused);
+
   // useEffect(() => {
   //   inputRef.current?.focus();
   // }, []);
 
-  const navigation =
-    useNavigation<NativeStackNavigationProp<RootTabParamList, "ItemLookup">>();
+  const navigation = useNavigation<ItemLookupNavigationProps>();
 
   useFocusEffect(
     useCallback(() => {
-      // focusHandler();
-      console.log("focus");
-      // console.log(params);
-      // const inputFocused = params?.inputFocused ? true : false;
-      // console.log(inputRef?.current?.searchBar?.input.isFocused());
-      // params?.inputFocused && inputRef.current?.focus();
-      // inputFocused && inputRef.current?.focus();
-      inputRef.current?.focus();
-      return () => {
-        console.log("losing focus");
-        inputRef.current?.blur();
-        // inputRef?.current?.searchBar?.input.isFocused()
-        //   ? navigation.setParams({ inputFocused: true })
-        //   : navigation.setParams({ inputFocused: false });
-      };
-    }, [])
+      const ref = inputRef.current;
+      const task = InteractionManager.runAfterInteractions(() => {
+        inputFocused && ref?.focus();
+      });
+      // return () => {
+      //   ref?.searchBar?.input.isFocused()
+      //     ? navigation.setParams({ inputFocused: true })
+      //     : navigation.setParams({ inputFocused: false });
+      //   task.cancel();
+      // };
+    }, [inputFocused])
   );
+
+  // useEffect(() => {
+  //   const ref = inputRef.current;
+  //   return () => {
+  //     ref?.blur();
+  //     ref?.searchBar?.input.isFocused()
+  //       ? navigation.setParams({ inputFocused: true })
+  //       : navigation.setParams({ inputFocused: false });
+  //   };
+  // }, [navigation]);
 
   const changeVal: OnChangeText = useCallback(
     (text: string) => {
@@ -146,6 +174,9 @@ const InputField: FC = () => {
       centerContainerStyle={styles.headerCenterContainer}
       centerComponent={
         <Animatable.View
+          easing="ease-in-out"
+          // animation="ease-in-out"
+          // useNativeDriver
           ref={view}
           style={WIDTH_80}>
           <SearchBar
@@ -153,10 +184,9 @@ const InputField: FC = () => {
             returnKeyType="search"
             ref={inputRef}
             // lightTheme
-            // keyboardAppearance={}
             keyboardAppearance={theme.mode}
             autoFocus
-            focusable
+            // focusable
             onFocus={focusHandler}
             onBlur={blurHandler}
             containerStyle={containerStyle}

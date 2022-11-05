@@ -12,6 +12,7 @@ import {
   NativeStackScreenProps,
 } from "@react-navigation/native-stack";
 import { Category, ItemName, ItemNumber, Src, VendorNameType } from "./types";
+import { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
 
 export const Home = "Home" as const;
 export type Home = typeof Home;
@@ -93,6 +94,8 @@ export type HomeStackNavigatorProps = BottomTabScreenProps<
   Home
 >;
 
+export type RootTabNavigationProps = BottomTabNavigationProp<RootTabParamList>;
+
 export type BarcodeImageScreenProps = CompositeScreenProps<
   NativeStackScreenProps<ShoppingCartStackParamList, BarcodeImage>,
   BottomTabScreenProps<RootTabParamList, ShoppingCartStack>
@@ -162,6 +165,10 @@ export type ItemsByCategoryStackNavigatorNavigationProps =
 
 export type ItemsByVendorStackNavigatorNavigationProps =
   ItemsByVendorStackNavigatorProps["navigation"];
+
+export type ItemLookupNavigationProps = ItemLookupProps["navigation"];
+
+export type ItemLookupRouteProps = ItemLookupProps["route"];
 
 // export type RootStackParamList = {
 //   Home: NavigatorScreenParams<HomeTabParamList>;

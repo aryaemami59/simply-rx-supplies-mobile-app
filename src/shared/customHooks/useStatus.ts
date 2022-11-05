@@ -6,7 +6,7 @@ const useStatus = (componentName: string) => {
     return () => {
       console.log(`%c${componentName} Unmounted`, "font-size: 20px");
     };
-  });
+  }, [componentName]);
 };
 
 export default useStatus;
