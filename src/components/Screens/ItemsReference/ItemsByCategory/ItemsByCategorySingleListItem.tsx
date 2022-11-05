@@ -10,7 +10,7 @@ import SingleCategoryListItemAddButton from "./SingleCategoryListItemAddButton";
 
 const ItemsByCategorySingleListItem: FC = () => {
   const itemName = useItemName();
-  const { background } = useTheme().theme.colors;
+  const { background: backgroundColor } = useTheme().theme.colors;
 
   const vendors = useAppSelector(
     selectVendorsByItemName(itemName),
@@ -18,8 +18,8 @@ const ItemsByCategorySingleListItem: FC = () => {
   );
 
   const containerStyle = useMemo(
-    () => ({ backgroundColor: background }),
-    [background]
+    () => ({ backgroundColor }),
+    [backgroundColor]
   );
 
   return (

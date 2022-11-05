@@ -6,11 +6,11 @@ import { VendorNameType } from "../../../../../CustomTypes/types";
 import VendorNameProvider from "../../../../shared/contexts/VendorNameProvider";
 import useVendorNamesList from "../../../../shared/customHooks/useVendorNamesList";
 import { HEIGHT_100 } from "../../../../shared/sharedStyles";
-import ItemsByVendorVendorList from "./ItemsByVendorVendorList";
+import ItemsByVendorList from "./ItemsByVendorList";
 
 const renderItem: ListRenderItem<VendorNameType> = ({ item }) => (
   <VendorNameProvider vendorName={item}>
-    <ItemsByVendorVendorList />
+    <ItemsByVendorList />
   </VendorNameProvider>
 );
 

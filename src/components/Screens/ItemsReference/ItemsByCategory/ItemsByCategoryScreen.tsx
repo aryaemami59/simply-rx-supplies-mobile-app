@@ -4,16 +4,14 @@ import { FC, memo, useMemo } from "react";
 import { FlatList, ListRenderItem, View } from "react-native";
 import { shallowEqual } from "react-redux";
 import { ItemsByCategoryStackParamList } from "../../../../../CustomTypes/navigation";
-import {
-  Category,
-} from "../../../../../CustomTypes/types";
+import { Category } from "../../../../../CustomTypes/types";
 import { useAppSelector } from "../../../../redux/hooks";
 import { selectCategoriesArr } from "../../../../redux/selectors";
 import { HEIGHT_100 } from "../../../../shared/sharedStyles";
-import CategoryList from "./CategoryList";
+import ItemsByCategoryList from "./CategoryList";
 
 const renderItem: ListRenderItem<Category> = ({ item }) => (
-  <CategoryList category={item} />
+  <ItemsByCategoryList category={item} />
 );
 
 const keyExtractor = (item: Category) => item.toString();

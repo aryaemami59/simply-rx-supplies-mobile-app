@@ -10,7 +10,6 @@ import {
   homeOptions,
   itemLookupOptions,
   itemsReferenceOptions,
-  screenTabOptions,
   shoppingCartOptions,
 } from "../../shared/sharedScreenOptions";
 import HomeStackNavigator from "../StackNavigatorComponents/HomeStackNavigator";
@@ -23,7 +22,7 @@ const initialParams = { inputFocused: true };
 
 const TabBarMain: FC = () => {
   const ifItemsAdded = useAppSelector(checkIfAnyItemsAdded);
-  const { background } = useTheme().theme.colors;
+  const { background: backgroundColor } = useTheme().theme.colors;
   const tabBarBadge = ifItemsAdded ? "" : undefined;
 
   const options = useMemo(
@@ -34,30 +33,37 @@ const TabBarMain: FC = () => {
     [tabBarBadge]
   );
 
+  const homeGroupOptions = useMemo(
+    () => ({
+      tabBarStyle: { backgroundColor },
+    }),
+    [backgroundColor]
+  );
+
   const navigatorScreenOptions = useMemo(
     () => ({
       ...HEADER_SHOWN_FALSE,
-      tabBarStyle: { backgroundColor: background },
+      ...homeGroupOptions,
     }),
-    [background]
+    [homeGroupOptions]
   );
 
   return (
     <SafeAreaProvider>
       <Tab.Navigator>
-        <Tab.Group screenOptions={screenTabOptions}>
+        <Tab.Group screenOptions={homeGroupOptions}>
           <Tab.Screen
             name="Home"
             component={HomeStackNavigator}
             options={homeOptions}
           />
+          <Tab.Screen
+            name="ItemLookup"
+            initialParams={initialParams}
+            component={ItemLookup}
+            options={itemLookupOptions}
+          />
         </Tab.Group>
-        <Tab.Screen
-          name="ItemLookup"
-          initialParams={initialParams}
-          component={ItemLookup}
-          options={itemLookupOptions}
-        />
         <Tab.Group screenOptions={navigatorScreenOptions}>
           <Tab.Screen
             name="ShoppingCartStack"

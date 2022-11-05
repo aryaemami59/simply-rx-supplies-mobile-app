@@ -1,28 +1,27 @@
 import { useNavigation } from "@react-navigation/native";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { ListItem, useTheme } from "@rneui/themed";
 import { FC, memo, useCallback, useMemo } from "react";
 import TouchableScale from "react-native-touchable-scale";
-import { ItemsReferenceStackParamList } from "../../../../../CustomTypes/types";
+import { ItemsByVendorStackNavigatorNavigationProps } from "../../../../../CustomTypes/navigation";
 import useOfficialVendorName from "../../../../shared/customHooks/useOfficialVendorName";
 import useVendorName from "../../../../shared/customHooks/useVendorName";
 import { AI_CENTER, JC_SPACE_BETWEEN } from "../../../../shared/sharedStyles";
 
-const ItemsByVendorVendorList: FC = () => {
+const ItemsByVendorList: FC = () => {
   const vendorName = useVendorName();
   const officialVendorName = useOfficialVendorName(vendorName);
-  const { background } = useTheme().theme.colors;
+  const { background: backgroundColor } = useTheme().theme.colors;
 
   const navigation =
-    useNavigation<NativeStackNavigationProp<ItemsReferenceStackParamList>>();
+    useNavigation<ItemsByVendorStackNavigatorNavigationProps>();
 
   const clickHandler = useCallback(() => {
     navigation.push("ItemsByVendorListItems", { vendorName });
   }, [navigation, vendorName]);
 
   const containerStyle = useMemo(
-    () => [AI_CENTER, JC_SPACE_BETWEEN, { backgroundColor: background }],
-    [background]
+    () => [AI_CENTER, JC_SPACE_BETWEEN, { backgroundColor }],
+    [backgroundColor]
   );
 
   return (
@@ -38,4 +37,4 @@ const ItemsByVendorVendorList: FC = () => {
   );
 };
 
-export default memo(ItemsByVendorVendorList);
+export default memo(ItemsByVendorList);

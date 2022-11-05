@@ -1,15 +1,9 @@
-import {
-  NativeStackNavigationOptions,
-  NativeStackScreenProps,
-} from "@react-navigation/native-stack";
 import { useTheme } from "@rneui/themed";
 import { FC, memo, useEffect, useMemo } from "react";
 import { FlatList, ListRenderItem, View } from "react-native";
 import { shallowEqual } from "react-redux";
-import {
-  ItemName,
-  ItemsReferenceStackParamList,
-} from "../../../../../CustomTypes/types";
+import { CategoryItemsProps } from "../../../../../CustomTypes/navigation";
+import { ItemName } from "../../../../../CustomTypes/types";
 import { useAppSelector } from "../../../../redux/hooks";
 import { selectCategoriesItemNames } from "../../../../redux/selectors";
 import ItemNameProvider from "../../../../shared/contexts/ItemNameProvider";
@@ -24,21 +18,18 @@ const renderItems: ListRenderItem<ItemName> = ({ item }) => (
 
 const keyExtractor = (item: ItemName) => item;
 
-type Props = NativeStackScreenProps<
-  ItemsReferenceStackParamList,
-  "ItemsByCategoryListItems"
->;
+type Props = CategoryItemsProps;
 
-const CategoryItems: FC<Props> = ({ navigation, route }) => {
+const ItemsByCategoryListItems: FC<Props> = ({ navigation, route }) => {
   const { category } = route.params;
-  const { background } = useTheme().theme.colors;
+  const { background: backgroundColor } = useTheme().theme.colors;
 
   const categoryListItems = useAppSelector(
     selectCategoriesItemNames(category),
     shallowEqual
   );
 
-  const options: NativeStackNavigationOptions = useMemo(
+  const options = useMemo(
     () => ({
       headerTitle: category,
     }),
@@ -50,8 +41,8 @@ const CategoryItems: FC<Props> = ({ navigation, route }) => {
   }, [navigation, options]);
 
   const style = useMemo(
-    () => [HEIGHT_100, { backgroundColor: background }],
-    [background]
+    () => [HEIGHT_100, { backgroundColor }],
+    [backgroundColor]
   );
 
   return (
@@ -67,4 +58,4 @@ const CategoryItems: FC<Props> = ({ navigation, route }) => {
   );
 };
 
-export default memo<Props>(CategoryItems);
+export default memo<Props>(ItemsByCategoryListItems);

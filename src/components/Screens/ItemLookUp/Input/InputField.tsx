@@ -153,6 +153,7 @@ const InputField: FC = () => {
             returnKeyType="search"
             ref={inputRef}
             // lightTheme
+            // keyboardAppearance={}
             keyboardAppearance={theme.mode}
             autoFocus
             focusable

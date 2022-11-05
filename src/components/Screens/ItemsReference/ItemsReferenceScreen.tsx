@@ -17,29 +17,29 @@ type Props = ItemsReferenceScreenProps;
 const Tab = createMaterialTopTabNavigator<ItemsReferenceTopTabParamList>();
 
 const ItemsReferenceScreen: FC<Props> = ({ navigation, route }) => {
-  const { background, grey0 } = useTheme().theme.colors;
+  const { background: backgroundColor, grey0: color } = useTheme().theme.colors;
 
   const screenOptions = useMemo(
     () => ({
-      tabBarStyle: { backgroundColor: background },
+      tabBarStyle: { backgroundColor },
     }),
-    [background]
+    [backgroundColor]
   );
 
   const itemsByVendorTabScreenOptions = useMemo(
     () => ({
       ...itemsByVendorTabOptions,
-      tabBarLabelStyle: { color: grey0 },
+      tabBarLabelStyle: { color },
     }),
-    [grey0]
+    [color]
   );
 
   const itemsByCategoryTabScreenOptions = useMemo(
     () => ({
       ...itemsByCategoryTabOptions,
-      tabBarLabelStyle: { color: grey0 },
+      tabBarLabelStyle: { color },
     }),
-    [grey0]
+    [color]
   );
 
   return (

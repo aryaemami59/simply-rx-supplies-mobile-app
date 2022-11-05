@@ -91,23 +91,23 @@ const CartColumnListItemsScreen: FC<Props> = ({ navigation, route }) => {
     navigation.navigate("ItemLookup");
   }, [navigation]);
 
-  const { background, black } = useTheme().theme.colors;
+  const { background: backgroundColor, black } = useTheme().theme.colors;
 
   const style = useMemo(
-    () => [HEIGHT_100, { backgroundColor: background }],
-    [background]
+    () => [HEIGHT_100, { backgroundColor }],
+    [backgroundColor]
   );
 
   const containerStyle = useMemo(
-    () => ({ backgroundColor: background }),
-    [background]
+    () => ({ backgroundColor }),
+    [backgroundColor]
   );
 
   const textStyle = useMemo(() => [TEXT_UNDERLINE, { color: black }], [black]);
 
   const emptyContainerStyle = useMemo(
-    () => [HEIGHT_100, styles.emptyContainer, { backgroundColor: background }],
-    [background]
+    () => [HEIGHT_100, styles.emptyContainer, { backgroundColor }],
+    [backgroundColor]
   );
 
   const emptyTextStyle = useMemo(

@@ -2,6 +2,7 @@ import type {
   BottomTabHeaderProps,
   BottomTabScreenProps,
 } from "@react-navigation/bottom-tabs";
+import { MaterialTopTabScreenProps } from "@react-navigation/material-top-tabs";
 import {
   CompositeScreenProps,
   NavigatorScreenParams,
@@ -96,12 +97,54 @@ export type QRImageScreenProps = CompositeScreenProps<
   BottomTabScreenProps<RootTabParamList, "ShoppingCartStack">
 >;
 
-export type ItemsReferenceScreenProps = NativeStackScreenProps<
-  ItemsReferenceStackParamList,
-  "ItemsReferenceScreen"
+export type ItemsReferenceScreenProps = CompositeScreenProps<
+  NativeStackScreenProps<ItemsReferenceStackParamList, "ItemsReferenceScreen">,
+  BottomTabScreenProps<RootTabParamList, "ItemsReference">
 >;
 
-export type ItemLookupProps = BottomTabScreenProps<RootTabParamList, "ItemLookup">
+export type ItemsByVendorListItemsProps = CompositeScreenProps<
+  NativeStackScreenProps<
+    ItemsReferenceStackParamList,
+    "ItemsByVendorListItems"
+  >,
+  BottomTabScreenProps<RootTabParamList, "ItemsReference">
+>;
+
+export type CategoryItemsProps = CompositeScreenProps<
+  NativeStackScreenProps<
+    ItemsReferenceStackParamList,
+    "ItemsByCategoryListItems"
+  >,
+  BottomTabScreenProps<RootTabParamList, "ItemsReference">
+>;
+
+export type ItemLookupProps = BottomTabScreenProps<
+  RootTabParamList,
+  "ItemLookup"
+>;
+
+export type ShoppingCartNavigationProps = ShoppingCartScreenProps["navigation"];
+
+export type ItemDetailsScreenProps = NativeStackScreenProps<
+  ShoppingCartStackParamList,
+  "ItemDetails"
+>;
+
+export type ItemsByVendorStackNavigatorProps = CompositeScreenProps<
+  MaterialTopTabScreenProps<ItemsReferenceTopTabParamList, "ItemsByVendor">,
+  ItemsReferenceScreenProps
+>;
+
+export type ItemsByCategoryStackNavigatorProps = CompositeScreenProps<
+  MaterialTopTabScreenProps<ItemsReferenceTopTabParamList, "ItemsByCategory">,
+  ItemsReferenceScreenProps
+>;
+
+export type ItemsByCategoryStackNavigatorNavigationProps =
+  ItemsByCategoryStackNavigatorProps["navigation"];
+
+export type ItemsByVendorStackNavigatorNavigationProps =
+  ItemsByVendorStackNavigatorProps["navigation"];
 
 // export type RootStackParamList = {
 //   Home: NavigatorScreenParams<HomeTabParamList>;

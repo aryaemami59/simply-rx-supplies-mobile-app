@@ -6,14 +6,13 @@ import {
   ItemsReferenceStackParamList,
 } from "../../../CustomTypes/navigation";
 import useIsLoading from "../../shared/customHooks/useIsLoading";
-import useStatus from "../../shared/customHooks/useStatus";
 import ErrMsgComponent from "../../shared/ErrMsgComponent";
 import IsLoadingComponents from "../../shared/IsLoadingComponents";
 import {
   refHeaderOptions,
   screenStackOptions,
 } from "../../shared/sharedScreenOptions";
-import CategoryItems from "../Screens/ItemsReference/ItemsByCategory/CategoryItems";
+import ItemsByCategoryListItems from "../Screens/ItemsReference/ItemsByCategory/CategoryItems";
 import ItemsByVendorListItems from "../Screens/ItemsReference/ItemsByVendor/ItemsByVendorListItems";
 import ItemsReferenceScreen from "../Screens/ItemsReference/ItemsReferenceScreen";
 
@@ -22,7 +21,6 @@ type Props = ItemsReferenceStackNavigatorProps;
 const Stack = createNativeStackNavigator<ItemsReferenceStackParamList>();
 
 const ItemsReferenceStackNavigator: FC<Props> = ({ navigation, route }) => {
-  useStatus("ItemsReferenceStackScreen");
   const [isLoading, errMsg] = useIsLoading();
 
   if (isLoading) {
@@ -48,7 +46,7 @@ const ItemsReferenceStackNavigator: FC<Props> = ({ navigation, route }) => {
           />
           <Stack.Screen
             name="ItemsByCategoryListItems"
-            component={CategoryItems}
+            component={ItemsByCategoryListItems}
           />
         </Stack.Group>
       </Stack.Navigator>

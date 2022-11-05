@@ -70,6 +70,7 @@ export const itemsByCategoryTabOptions: MaterialTopTabNavigationOptions = {
 } as const;
 
 export const homeOptions: BottomTabNavigationOptions = {
+  ...screenTabOptions,
   tabBarIcon: (props: tabBarIconProps) => <TabBarIconHome {...props} />,
 };
 

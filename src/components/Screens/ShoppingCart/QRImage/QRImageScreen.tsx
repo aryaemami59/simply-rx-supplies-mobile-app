@@ -59,11 +59,11 @@ const QRImageScreen: FC<Props> = ({ navigation, route }) => {
 
   const getRef = useCallback((e: Svg) => (svg.current = e), []);
 
-  const { background } = useTheme().theme.colors;
+  const { background: backgroundColor } = useTheme().theme.colors;
 
   const style = useMemo(
-    () => [HEIGHT_100, JC_SPACE_AROUND, { backgroundColor: background }],
-    [background]
+    () => [HEIGHT_100, JC_SPACE_AROUND, { backgroundColor }],
+    [backgroundColor]
   );
 
   return (

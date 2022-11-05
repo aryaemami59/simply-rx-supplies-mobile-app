@@ -1,13 +1,12 @@
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { Image, ListItem, Text, useTheme } from "@rneui/themed";
 import { FC, memo, useCallback, useMemo } from "react";
 import { TouchableOpacity } from "react-native";
-import { ShoppingCartStackParamList } from "../../../../../../CustomTypes/types";
-import { useAppSelector } from "../../../../../redux/hooks";
 import { shallowEqual } from "react-redux";
+import { ItemDetailsScreenProps } from "../../../../../../CustomTypes/navigation";
+import { useAppSelector } from "../../../../../redux/hooks";
 import {
-  selectVendorsByItemName,
   selectItemSrc,
+  selectVendorsByItemName,
   selectVendorsOfficialNames,
 } from "../../../../../redux/selectors";
 import {
@@ -20,7 +19,7 @@ import {
   WIDTH_60,
 } from "../../../../../shared/sharedStyles";
 
-type Props = NativeStackScreenProps<ShoppingCartStackParamList, "ItemDetails">;
+type Props = ItemDetailsScreenProps;
 
 const imageContainerStyle = [BARCODE_ASPECT_RATIO, WIDTH_60];
 
@@ -31,7 +30,7 @@ const ItemDetailsScreen: FC<Props> = ({ navigation, route }) => {
     shallowEqual
   );
   const src = useAppSelector(selectItemSrc(itemName));
-  const { background } = useTheme().theme.colors;
+  const { background: backgroundColor } = useTheme().theme.colors;
 
   const officialVendorNames = useAppSelector(
     selectVendorsOfficialNames(vendors),
@@ -46,13 +45,8 @@ const ItemDetailsScreen: FC<Props> = ({ navigation, route }) => {
   }, [itemName, navigation, src]);
 
   const containerStyle = useMemo(
-    () => [
-      HEIGHT_100,
-      AI_FLEX_START,
-      JC_SPACE_BETWEEN,
-      { backgroundColor: background },
-    ],
-    [background]
+    () => [HEIGHT_100, AI_FLEX_START, JC_SPACE_BETWEEN, { backgroundColor }],
+    [backgroundColor]
   );
 
   const source = useMemo(() => ({ uri: src }), [src]);

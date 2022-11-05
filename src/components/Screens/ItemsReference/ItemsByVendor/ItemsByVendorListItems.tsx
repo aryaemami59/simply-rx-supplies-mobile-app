@@ -1,14 +1,8 @@
-import {
-  NativeStackNavigationOptions,
-  NativeStackScreenProps,
-} from "@react-navigation/native-stack";
 import { useTheme } from "@rneui/themed";
 import { FC, memo, useCallback, useEffect, useMemo } from "react";
 import { FlatList, ListRenderItem, View } from "react-native";
-import {
-  ItemName,
-  ItemsReferenceStackParamList,
-} from "../../../../../CustomTypes/types";
+import { ItemsByVendorListItemsProps } from "../../../../../CustomTypes/navigation";
+import { ItemName } from "../../../../../CustomTypes/types";
 import ItemNameProvider from "../../../../shared/contexts/ItemNameProvider";
 import VendorNameProvider from "../../../../shared/contexts/VendorNameProvider";
 import useItemNames from "../../../../shared/customHooks/useItemNames";
@@ -18,10 +12,7 @@ import SingleItemsByVendorListItem from "./SingleItemsByVendorListItem";
 
 const keyExtractor = (item: ItemName) => item;
 
-type Props = NativeStackScreenProps<
-  ItemsReferenceStackParamList,
-  "ItemsByVendorListItems"
->;
+type Props = ItemsByVendorListItemsProps;
 
 const ItemsByVendorListItems: FC<Props> = ({ navigation, route }) => {
   const { vendorName } = route.params;
@@ -40,7 +31,7 @@ const ItemsByVendorListItems: FC<Props> = ({ navigation, route }) => {
 
   const itemNames = useItemNames(vendorName);
 
-  const options: NativeStackNavigationOptions = useMemo(
+  const options = useMemo(
     () => ({
       headerTitle: officialVendorName,
     }),

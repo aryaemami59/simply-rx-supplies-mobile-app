@@ -24,7 +24,7 @@ type Props = BarcodeImageScreenProps;
 const style = [BARCODE_ASPECT_RATIO, WIDTH_90];
 
 const BarcodeImageScreen: FC<Props> = ({ navigation, route }) => {
-  const { background } = useTheme().theme.colors;
+  const { background: backgroundColor } = useTheme().theme.colors;
   const { src, itemName } = route.params;
 
   const options: Pick<NativeStackNavigationOptions, "title"> = useMemo(
@@ -59,12 +59,8 @@ const BarcodeImageScreen: FC<Props> = ({ navigation, route }) => {
   }, [navigation, options]);
 
   const viewStyle = useMemo(
-    () => [
-      JC_AI_CENTER_HEIGHT100,
-      styles.container,
-      { backgroundColor: background },
-    ],
-    [background]
+    () => [JC_AI_CENTER_HEIGHT100, styles.container, { backgroundColor }],
+    [backgroundColor]
   );
 
   return (

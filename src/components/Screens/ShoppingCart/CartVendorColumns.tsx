@@ -1,10 +1,9 @@
 import { useNavigation } from "@react-navigation/native";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { Badge, ListItem, useTheme } from "@rneui/themed";
 import { FC, memo, useCallback, useMemo } from "react";
 import { StyleSheet } from "react-native";
 import TouchableScale from "react-native-touchable-scale";
-import { ShoppingCartStackParamList } from "../../../../CustomTypes/navigation";
+import { ShoppingCartNavigationProps } from "../../../../CustomTypes/navigation";
 import { useAppSelector } from "../../../redux/hooks";
 import { addedItemsLength } from "../../../redux/selectors";
 import useOfficialVendorName from "../../../shared/customHooks/useOfficialVendorName";
@@ -23,8 +22,7 @@ const CartVendorColumns: FC = () => {
 
   const status = addedItemsLen ? "success" : "primary";
 
-  const navigation =
-    useNavigation<NativeStackNavigationProp<ShoppingCartStackParamList>>();
+  const navigation = useNavigation<ShoppingCartNavigationProps>();
 
   const clickHandler = useCallback(() => {
     navigation.push("CartColumnListItems", { vendorName });

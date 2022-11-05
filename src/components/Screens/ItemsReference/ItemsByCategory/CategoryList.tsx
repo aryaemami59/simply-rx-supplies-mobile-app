@@ -3,9 +3,9 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { ListItem, useTheme } from "@rneui/themed";
 import { FC, memo, useCallback, useMemo } from "react";
 import TouchableScale from "react-native-touchable-scale";
+import { ItemsReferenceStackParamList } from "../../../../../CustomTypes/navigation";
 import {
   Category,
-  ItemsReferenceStackParamList,
 } from "../../../../../CustomTypes/types";
 import { AI_CENTER, JC_SPACE_BETWEEN } from "../../../../shared/sharedStyles";
 
