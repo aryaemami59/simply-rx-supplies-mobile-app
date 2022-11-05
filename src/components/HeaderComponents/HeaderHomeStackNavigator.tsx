@@ -89,10 +89,11 @@ const HeaderHomeStackNavigator: FC<Props> = ({
   // }, [myNavigation]);
 
   const focusHandler = useCallback(() => {
+    const ref = searchRef.current;
     myNavigation.navigate("ItemLookup", {
       inputFocused: true,
     });
-    // searchRef.current?.blur();
+    ref?.blur();
   }, [myNavigation]);
 
   return (

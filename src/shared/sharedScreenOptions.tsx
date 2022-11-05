@@ -25,6 +25,7 @@ const headerShown = false as const;
 const stackHeader = (
   props: Pick<NativeStackHeaderProps, "navigation" | "route" | "options">
 ) => <HeaderHomeStackNavigator {...props} />;
+
 const tabHeader = (
   props: Pick<BottomTabHeaderProps, "navigation" | "route" | "options">
 ) => <HeaderHomeStackNavigator {...props} />;
@@ -35,6 +36,7 @@ const tabHeader = (
 export const screenTabOptions = {
   header: tabHeader,
 } as const;
+
 export const screenStackOptions = {
   header: stackHeader,
 } as const;
@@ -76,8 +78,12 @@ export const homeOptions: BottomTabNavigationOptions = {
 
 export const itemLookupOptions: BottomTabNavigationOptions = {
   // freezeOnBlur: true,
-  // lazy: false,
+  // headerForceInset: { top: "never", bottom: "never" },
+  lazy: false,
   // unmountOnBlur: true,
+  // safeAreaInsets: { top: 0 },
+  // headerStatusBarHeight: 0,
+  // header
   headerShown,
   tabBarLabel: "Item Lookup",
   tabBarIcon: (props: tabBarIconProps) => <TabBarIconItemLookup {...props} />,

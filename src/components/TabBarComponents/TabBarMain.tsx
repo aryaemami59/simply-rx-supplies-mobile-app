@@ -50,7 +50,9 @@ const TabBarMain: FC = () => {
 
   return (
     <SafeAreaProvider>
-      <Tab.Navigator>
+      <Tab.Navigator
+      // screenOptions={{ headerStatusBarHeight: 0 }}
+      >
         <Tab.Group screenOptions={homeGroupOptions}>
           <Tab.Screen
             name="Home"

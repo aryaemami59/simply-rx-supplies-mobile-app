@@ -1,7 +1,7 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createTheme, ThemeProvider } from "@rneui/themed";
 import * as themed from "@rneui/themed";
-// import whyDidYouRender from "@welldone-software/why-did-you-render";
+import whyDidYouRender from "@welldone-software/why-did-you-render";
 import React, { createContext, FC, memo } from "react";
 import { Provider as PaperProvider } from "react-native-paper";
 import { SafeAreaProvider } from "react-native-safe-area-context";
@@ -9,9 +9,13 @@ import { Provider } from "react-redux";
 import Main from "./src/components/Main";
 import { store } from "./src/redux/store";
 import { fetchItems } from "./src/redux/addedSlice";
-import { enableScreens } from "react-native-screens";
+import { enableFreeze, enableScreens } from "react-native-screens";
+import { enableLayoutAnimations } from "react-native-reanimated";
 
+// enableLayoutAnimations(false);
+enableScreens(false);
 // enableScreens();
+// enableFreeze();
 
 store.dispatch(fetchItems());
 
@@ -33,9 +37,9 @@ const myTheme = createTheme({
 
 // export const backgroundContext = createContext(myTheme.lightColors?.background);
 
-// whyDidYouRender(React, {
-//   trackAllPureComponents: true,
-// });
+whyDidYouRender(React, {
+  trackAllPureComponents: true,
+});
 
 const App: FC = () => {
   const bg =

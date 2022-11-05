@@ -1,37 +1,17 @@
 import { EvilIcons } from "@expo/vector-icons";
 import {
-  RouteProp,
   useFocusEffect,
   useNavigation,
   useRoute,
 } from "@react-navigation/native";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { SearchBar as SearchBarType } from "@rneui/base";
-import { SearchBar } from "@rneui/themed";
-import { Header, SearchBarProps, useTheme } from "@rneui/themed";
-import {
-  FC,
-  memo,
-  PropsWithChildren,
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
-import {
-  InteractionManager,
-  Keyboard,
-  StyleSheet,
-  TextInput,
-  View,
-} from "react-native";
+import { Header, SearchBar, useTheme } from "@rneui/themed";
+import { FC, memo, useCallback, useMemo, useRef, useState } from "react";
+import { StyleSheet } from "react-native";
 import * as Animatable from "react-native-animatable";
 import { shallowEqual } from "react-redux";
 import {
   ItemLookupNavigationProps,
   ItemLookupRouteProps,
-  RootTabParamList,
 } from "../../../../../CustomTypes/navigation";
 import {
   AnimatableViewRef,
@@ -55,8 +35,6 @@ import {
 import { search } from "../../../../shared/utilityFunctions";
 import HeaderRightComponent from "../../../HeaderComponents/HeaderRightComponent";
 import SearchIcon from "../../../HeaderComponents/SearchIcon";
-import useUpdateLogger from "../../../../shared/customHooks/useUpdateLogger";
-import useStatus from "../../../../shared/customHooks/useStatus";
 
 const styles = StyleSheet.create({
   headerCenterContainer: {
@@ -87,31 +65,23 @@ const InputField: FC = () => {
   const itemNames = useAppSelector(selectItemNamesArr, shallowEqual);
   const { theme } = useTheme();
   const dispatch = useAppDispatch();
-
   const inputFocused = params?.inputFocused ? true : false;
+  // const [focused, setFocused] = useState(inputFocused);
 
   const focusHandler = useCallback(() => {
-    // view.current?.transitionTo({ flexGrow: 1 });
-    // view.current?.transitionTo({ transform: [{ scaleX: 1.5 }] });
     view.current?.transitionTo(WIDTH_100);
-    console.log("focused");
+    // setFocused(true);
   }, []);
 
   const blurHandler = useCallback(() => {
-    // view.current?.transitionTo({ flexGrow: 0.8 });
-    // view.current?.transitionTo({ transform: [{ scaleX: 1 }] });
     view.current?.transitionTo(WIDTH_80);
-    console.log("blurred");
+    // setFocused(false);
   }, []);
 
   const clearHandler = useCallback((): void => {
     setVal("");
     dispatch(clearListItems());
   }, [dispatch]);
-
-  useStatus("InputField");
-
-  // useUpdateLogger(inputFocused);
 
   // useEffect(() => {
   //   inputRef.current?.focus();
@@ -122,27 +92,29 @@ const InputField: FC = () => {
   useFocusEffect(
     useCallback(() => {
       const ref = inputRef.current;
-      const task = InteractionManager.runAfterInteractions(() => {
-        inputFocused && ref?.focus();
-      });
-      // return () => {
-      //   ref?.searchBar?.input.isFocused()
-      //     ? navigation.setParams({ inputFocused: true })
-      //     : navigation.setParams({ inputFocused: false });
-      //   task.cancel();
-      // };
-    }, [inputFocused])
+      //   const task = InteractionManager.runAfterInteractions(() => {
+      inputFocused ? ref?.focus() : ref?.blur();
+      // });
+      return () => {
+        // inputFocused ? ref?.focus() : ref?.blur();
+        // inputFocused && ref?.focus();
+        inputFocused
+          ? navigation.setParams({ inputFocused: true })
+          : navigation.setParams({ inputFocused: false });
+      };
+    }, [inputFocused, navigation])
   );
 
   // useEffect(() => {
   //   const ref = inputRef.current;
+  //   focused && ref?.focus();
   //   return () => {
   //     ref?.blur();
   //     ref?.searchBar?.input.isFocused()
   //       ? navigation.setParams({ inputFocused: true })
   //       : navigation.setParams({ inputFocused: false });
   //   };
-  // }, [navigation]);
+  // }, [focused]);
 
   const changeVal: OnChangeText = useCallback(
     (text: string) => {
@@ -174,7 +146,7 @@ const InputField: FC = () => {
       centerContainerStyle={styles.headerCenterContainer}
       centerComponent={
         <Animatable.View
-          easing="ease-in-out"
+          // easing="ease-in-out"
           // animation="ease-in-out"
           // useNativeDriver
           ref={view}
@@ -185,7 +157,7 @@ const InputField: FC = () => {
             ref={inputRef}
             // lightTheme
             keyboardAppearance={theme.mode}
-            autoFocus
+            // autoFocus
             // focusable
             onFocus={focusHandler}
             onBlur={blurHandler}
