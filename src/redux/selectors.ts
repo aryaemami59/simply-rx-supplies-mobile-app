@@ -6,7 +6,7 @@ import {
   OfficialVendorNameType,
   Src,
   VendorNameType,
-} from "../../CustomTypes/types";
+} from "../../custom_types/api";
 import { RootState } from "./store";
 
 export const selectAddedItemsByVendor =

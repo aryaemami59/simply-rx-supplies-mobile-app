@@ -6,9 +6,9 @@ import {
   checkIfItemAddedToOneVendor,
   checkVendorsToAdd,
 } from "../../../../redux/selectors";
-import useItemName from "../../../../shared/customHooks/useItemName";
-import useOfficialVendorName from "../../../../shared/customHooks/useOfficialVendorName";
-import useVendorName from "../../../../shared/customHooks/useVendorName";
+import useItemName from "../../../../shared/hooks/useItemName";
+import useOfficialVendorName from "../../../../shared/hooks/useOfficialVendorName";
+import useVendorName from "../../../../shared/hooks/useVendorName";
 
 const ItemsByCategorySingleListItemCheckBox: FC = () => {
   const vendorName = useVendorName();

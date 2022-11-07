@@ -3,8 +3,8 @@ import { FC, memo, useCallback, useMemo } from "react";
 import { Share } from "react-native";
 import { useAppSelector } from "../../../../redux/hooks";
 import { selectItemNumber, selectItemSrc } from "../../../../redux/selectors";
-import useItemName from "../../../../shared/customHooks/useItemName";
-import { JC_SPACE_EVENLY } from "../../../../shared/sharedStyles";
+import useItemName from "../../../../shared/hooks/useItemName";
+import { JC_SPACE_EVENLY } from "../../../../shared/styles/sharedStyles";
 import ShareIconNode from "./ShareIconNode";
 
 type Props = {

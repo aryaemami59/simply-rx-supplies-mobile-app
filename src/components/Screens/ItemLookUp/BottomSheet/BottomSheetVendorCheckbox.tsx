@@ -4,13 +4,13 @@ import { TouchableHighlight } from "react-native";
 import {
   OfficialVendorNameType,
   VendorNameType,
-} from "../../../../../CustomTypes/types";
+} from "../../../../../custom_types/api";
 import {
   setVendorsForAllCheck,
   setVendorsForAllUncheck,
 } from "../../../../redux/addedSlice";
 import { useAppDispatch } from "../../../../redux/hooks";
-import { WIDTH_100 } from "../../../../shared/sharedStyles";
+import { WIDTH_100 } from "../../../../shared/styles/sharedStyles";
 
 type Props = {
   title: OfficialVendorNameType;

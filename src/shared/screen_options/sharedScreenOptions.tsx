@@ -7,14 +7,14 @@ import {
   NativeStackHeaderProps,
   NativeStackNavigationOptions,
 } from "@react-navigation/native-stack";
-import { tabBarIconProps } from "../../CustomTypes/types";
-import HeaderHomeStackNavigator from "../components/HeaderComponents/HeaderHomeStackNavigator";
-import { HeaderRightFC } from "../components/HeaderComponents/HeaderRightComponent";
-import TabBarIconHome from "../components/TabBarComponents/TabBarIconHome";
-import TabBarIconItemLookup from "../components/TabBarComponents/TabBarIconItemLookup";
-import TabBarIconItemsReference from "../components/TabBarComponents/TabBarIconItemsReference";
-import TabBarIconShoppingCart from "../components/TabBarComponents/TabBarIconShoppingCart";
-import { MAIN_COLOR } from "./sharedStyles";
+import { tabBarIconProps } from "../../../custom_types/missingTypes";
+import HeaderHomeStackNavigator from "../../components/HeaderComponents/HeaderHomeStackNavigator";
+import { HeaderRightFC } from "../../components/HeaderComponents/HeaderRightComponent";
+import TabBarIconHome from "../../components/TabBarComponents/TabBarIconHome";
+import TabBarIconItemLookup from "../../components/TabBarComponents/TabBarIconItemLookup";
+import TabBarIconItemsReference from "../../components/TabBarComponents/TabBarIconItemsReference";
+import TabBarIconShoppingCart from "../../components/TabBarComponents/TabBarIconShoppingCart";
+import { MAIN_COLOR } from "../styles/sharedStyles";
 
 const headerShown = false as const;
 

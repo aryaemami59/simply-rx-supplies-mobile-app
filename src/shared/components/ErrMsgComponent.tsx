@@ -1,6 +1,6 @@
 import { FC, memo } from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { COLOR_RED } from "./sharedStyles";
+import { COLOR_RED } from "../styles/sharedStyles";
 
 const styles = StyleSheet.create({
   colorRed: {

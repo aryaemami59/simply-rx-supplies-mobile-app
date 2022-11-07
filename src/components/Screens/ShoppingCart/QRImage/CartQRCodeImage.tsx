@@ -4,10 +4,8 @@ import { FC, memo, useCallback } from "react";
 import { TouchableOpacity } from "react-native";
 import QRCode from "react-native-qrcode-svg";
 import { shallowEqual } from "react-redux";
-import {
-  ShoppingCartStackParamList,
-  VendorNameType,
-} from "../../../../../CustomTypes/types";
+import { VendorNameType } from "../../../../../custom_types/api";
+import { ShoppingCartStackParamList } from "../../../../../custom_types/navigation";
 import { useAppSelector } from "../../../../redux/hooks";
 import {
   selectItemsAddedByVendor,

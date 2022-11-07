@@ -1,5 +1,5 @@
 import { createContext, FC, memo, ReactNode } from "react";
-import { ItemName } from "../../../CustomTypes/types";
+import { ItemName } from "../../../custom_types/api";
 
 type Props = {
   children: ReactNode;

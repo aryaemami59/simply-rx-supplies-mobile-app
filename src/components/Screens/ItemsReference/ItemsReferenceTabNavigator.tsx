@@ -5,13 +5,13 @@ import { FC, memo, useMemo } from "react";
 import {
   ItemsReferenceStackParamList,
   ItemsReferenceTopTabParamList,
-} from "../../../../CustomTypes/navigation";
+} from "../../../../custom_types/navigation";
 import {
   itemsByCategoryTabOptions,
   itemsByVendorTabOptions,
-} from "../../../shared/sharedScreenOptions";
-import ItemsByCategoryStackNavigator from "../../StackNavigatorComponents/ItemsByCategoryStackNavigator";
-import ItemsByVendorStackNavigator from "../../StackNavigatorComponents/ItemsByVendorStackNavigator";
+} from "../../../shared/screen_options/sharedScreenOptions";
+import ItemsByCategoryScreen from "./ItemsByCategory/ItemsByCategoryScreen";
+import ItemsByVendorScreen from "./ItemsByVendor/ItemsByVendorScreen";
 
 type Props = NativeStackScreenProps<
   ItemsReferenceStackParamList,
@@ -51,12 +51,12 @@ const ItemsReferenceTabNavigator: FC<Props> = ({ navigation, route }) => {
       <Tab.Screen
         options={itemsByVendorTabScreenOptions}
         name="ItemsByVendor"
-        component={ItemsByVendorStackNavigator}
+        component={ItemsByVendorScreen}
       />
       <Tab.Screen
         options={itemsByCategoryTabScreenOptions}
         name="ItemsByCategory"
-        component={ItemsByCategoryStackNavigator}
+        component={ItemsByCategoryScreen}
       />
     </Tab.Navigator>
   );

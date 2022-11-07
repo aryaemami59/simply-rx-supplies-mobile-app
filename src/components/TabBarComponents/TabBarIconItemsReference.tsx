@@ -1,6 +1,6 @@
 import { MaterialIcons } from "@expo/vector-icons";
 import { FC, memo } from "react";
-import { tabBarIconProps } from "../../../CustomTypes/types";
+import { tabBarIconProps } from "../../../custom_types/missingTypes";
 
 type Props = tabBarIconProps;
 

@@ -5,8 +5,8 @@ import { Keyboard, StyleSheet, View } from "react-native";
 import { shallowEqual } from "react-redux";
 import { useAppSelector } from "../../../../redux/hooks";
 import { selectAllVendorOfficialNames } from "../../../../redux/selectors";
-import useVendorNamesList from "../../../../shared/customHooks/useVendorNamesList";
-import BottomSheetVendorCheckbox from "../SearchResults/BottomSheetVendorCheckbox";
+import useVendorNamesList from "../../../../shared/hooks/useVendorNamesList";
+import BottomSheetVendorCheckbox from "./BottomSheetVendorCheckbox";
 
 const BottomSheetComponent: FC = () => {
   const [visible, setVisible] = useState(false);

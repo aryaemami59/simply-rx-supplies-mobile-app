@@ -11,8 +11,8 @@ import {
   View,
 } from "react-native";
 import { shallowEqual } from "react-redux";
-import { CartColumnListItemsScreenProps } from "../../../../../CustomTypes/navigation";
-import { ItemName } from "../../../../../CustomTypes/types";
+import { CartColumnListItemsScreenProps } from "../../../../../custom_types/navigation";
+import { ItemName } from "../../../../../custom_types/api";
 import { useAppSelector } from "../../../../redux/hooks";
 import {
   checkIfAnyItemsAddedToOneVendor,
@@ -21,7 +21,7 @@ import {
 } from "../../../../redux/selectors";
 import ItemNameProvider from "../../../../shared/contexts/ItemNameProvider";
 import VendorNameProvider from "../../../../shared/contexts/VendorNameProvider";
-import useOfficialVendorName from "../../../../shared/customHooks/useOfficialVendorName";
+import useOfficialVendorName from "../../../../shared/hooks/useOfficialVendorName";
 import {
   AI_CENTER,
   BACKGROUND_MAIN_COLOR,
@@ -31,7 +31,7 @@ import {
   TEXT_CENTER,
   TEXT_UNDERLINE,
   WIDTH_100,
-} from "../../../../shared/sharedStyles";
+} from "../../../../shared/styles/sharedStyles";
 import CartQRCodeImage from "../QRImage/CartQRCodeImage";
 import SingleCartListItems from "./SingleCartListItems";
 
@@ -115,6 +115,53 @@ const CartColumnListItemsScreen: FC<Props> = ({ navigation, route }) => {
     [black]
   );
 
+  const rightContent = useMemo(() => <Button title="Details" />, []);
+
+  const ListHeaderComponent = useMemo(
+    () =>
+      ifAnyItemsAdded ? (
+        <ListItem.Swipeable
+          containerStyle={containerStyle}
+          rightContent={rightContent}>
+          <View style={viewStyle}>
+            <CartQRCodeImage vendorName={vendorName} />
+            <View style={styles.CartQRCodeImageContainer}>
+              <TouchableOpacity onPress={openLink}>
+                <Text style={textStyle}>{officialVendorName} Website</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </ListItem.Swipeable>
+      ) : null,
+    [
+      containerStyle,
+      ifAnyItemsAdded,
+      officialVendorName,
+      openLink,
+      rightContent,
+      textStyle,
+      vendorName,
+    ]
+  );
+
+  const ListEmptyComponent = useMemo(
+    () => (
+      <View style={emptyContainerStyle}>
+        <Text style={emptyTextStyle}>No Item Has Been Added Yet!</Text>
+        <Chip
+          raised
+          titleStyle={FONT_WEIGHT_700}
+          buttonStyle={BACKGROUND_MAIN_COLOR}
+          title="Shopping Cart"
+          size="lg"
+          icon={shoppingCartIcon}
+          onPress={clickHandler}
+        />
+      </View>
+    ),
+    [clickHandler, emptyContainerStyle, emptyTextStyle]
+  );
+
   return (
     <View style={style}>
       {/* <View style={styles.bigContainer}>
@@ -135,40 +182,8 @@ const CartColumnListItemsScreen: FC<Props> = ({ navigation, route }) => {
           <HideItemBarcode />
         </View> */}
       <FlatList
-        ListHeaderComponent={
-          <>
-            {ifAnyItemsAdded && (
-              <ListItem.Swipeable
-                containerStyle={containerStyle}
-                rightContent={<Button title="Details" />}>
-                <View style={viewStyle}>
-                  <CartQRCodeImage vendorName={vendorName} />
-                  <View style={styles.CartQRCodeImageContainer}>
-                    <TouchableOpacity onPress={openLink}>
-                      <Text style={textStyle}>
-                        {officialVendorName} Website
-                      </Text>
-                    </TouchableOpacity>
-                  </View>
-                </View>
-              </ListItem.Swipeable>
-            )}
-          </>
-        }
-        ListEmptyComponent={
-          <View style={emptyContainerStyle}>
-            <Text style={emptyTextStyle}>No Item Has Been Added Yet!</Text>
-            <Chip
-              raised
-              titleStyle={FONT_WEIGHT_700}
-              buttonStyle={BACKGROUND_MAIN_COLOR}
-              title="Shopping Cart"
-              size="lg"
-              icon={shoppingCartIcon}
-              onPress={clickHandler}
-            />
-          </View>
-        }
+        ListHeaderComponent={ListHeaderComponent}
+        ListEmptyComponent={ListEmptyComponent}
         removeClippedSubviews
         maxToRenderPerBatch={5}
         data={addedItems}

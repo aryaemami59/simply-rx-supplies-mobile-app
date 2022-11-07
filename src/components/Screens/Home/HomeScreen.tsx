@@ -3,22 +3,16 @@ import {
   MaterialCommunityIcons,
   MaterialIcons,
 } from "@expo/vector-icons";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { Chip, useTheme } from "@rneui/themed";
 import { FC, memo, useCallback, useMemo } from "react";
 import { StyleSheet, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { useNavigation } from "@react-navigation/native";
-import { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import { HomeScreenProps } from "../../../../custom_types/navigation";
 import {
   BACKGROUND_MAIN_COLOR,
   FONT_WEIGHT_700,
   MAIN_COLOR,
-} from "../../../shared/sharedStyles";
-import {
-  HomeStackParamList,
-  RootTabParamList,
-} from "../../../../CustomTypes/navigation";
+} from "../../../shared/styles/sharedStyles";
 
 const searchIcon = (
   <FontAwesome5
@@ -52,16 +46,14 @@ const shoppingCartIcon = (
     size={24}
   />
 );
-type Props = NativeStackScreenProps<HomeStackParamList, "HomeScreen">;
 
-const HomeScreen: FC = () => {
-  // const HomeScreen: FC<Props> = ({ navigation, route }) => {
+type Props = HomeScreenProps;
+
+const HomeScreen: FC<Props> = ({ navigation, route }) => {
   const { background } = useTheme().theme.colors;
-  const navigation =
-    useNavigation<BottomTabNavigationProp<RootTabParamList, "Home">>();
 
   const navigateToItemLookup = useCallback(
-    () => navigation.navigate("ItemLookup"),
+    () => navigation.navigate("ItemLookup", { inputFocused: false }),
     [navigation]
   );
 
@@ -98,52 +90,54 @@ const HomeScreen: FC = () => {
   );
 
   return (
-    <SafeAreaView style={viewStyle}>
-      <View style={styles.container}>
-        <Chip
-          raised
-          titleStyle={FONT_WEIGHT_700}
-          buttonStyle={BACKGROUND_MAIN_COLOR}
-          containerStyle={BACKGROUND_MAIN_COLOR}
-          color={MAIN_COLOR}
-          title="Item Lookup"
-          icon={searchIcon}
-          size="lg"
-          onPress={navigateToItemLookup}
-        />
-        <Chip
-          raised
-          titleStyle={FONT_WEIGHT_700}
-          buttonStyle={BACKGROUND_MAIN_COLOR}
-          containerStyle={BACKGROUND_MAIN_COLOR}
-          color={MAIN_COLOR}
-          title="Items By Vendor"
-          icon={storeSearchIcon}
-          size="lg"
-          onPress={navigateToItemsByVendor}
-        />
-        <Chip
-          raised
-          icon={categoryIcon}
-          titleStyle={FONT_WEIGHT_700}
-          buttonStyle={BACKGROUND_MAIN_COLOR}
-          containerStyle={BACKGROUND_MAIN_COLOR}
-          color={MAIN_COLOR}
-          title="Items By Category"
-          size="lg"
-          onPress={navigateToItemsByCategory}
-        />
-        <Chip
-          raised
-          titleStyle={FONT_WEIGHT_700}
-          buttonStyle={BACKGROUND_MAIN_COLOR}
-          title="Shopping Cart"
-          size="lg"
-          icon={shoppingCartIcon}
-          onPress={navigateToShoppingCart}
-        />
-      </View>
-    </SafeAreaView>
+    <SafeAreaProvider>
+      <SafeAreaView style={viewStyle}>
+        <View style={styles.container}>
+          <Chip
+            raised
+            titleStyle={FONT_WEIGHT_700}
+            buttonStyle={BACKGROUND_MAIN_COLOR}
+            containerStyle={BACKGROUND_MAIN_COLOR}
+            color={MAIN_COLOR}
+            title="Item Lookup"
+            icon={searchIcon}
+            size="lg"
+            onPress={navigateToItemLookup}
+          />
+          <Chip
+            raised
+            titleStyle={FONT_WEIGHT_700}
+            buttonStyle={BACKGROUND_MAIN_COLOR}
+            containerStyle={BACKGROUND_MAIN_COLOR}
+            color={MAIN_COLOR}
+            title="Items By Vendor"
+            icon={storeSearchIcon}
+            size="lg"
+            onPress={navigateToItemsByVendor}
+          />
+          <Chip
+            raised
+            icon={categoryIcon}
+            titleStyle={FONT_WEIGHT_700}
+            buttonStyle={BACKGROUND_MAIN_COLOR}
+            containerStyle={BACKGROUND_MAIN_COLOR}
+            color={MAIN_COLOR}
+            title="Items By Category"
+            size="lg"
+            onPress={navigateToItemsByCategory}
+          />
+          <Chip
+            raised
+            titleStyle={FONT_WEIGHT_700}
+            buttonStyle={BACKGROUND_MAIN_COLOR}
+            title="Shopping Cart"
+            size="lg"
+            icon={shoppingCartIcon}
+            onPress={navigateToShoppingCart}
+          />
+        </View>
+      </SafeAreaView>
+    </SafeAreaProvider>
   );
 };
 
@@ -156,4 +150,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default memo(HomeScreen);
+export default memo<Props>(HomeScreen);

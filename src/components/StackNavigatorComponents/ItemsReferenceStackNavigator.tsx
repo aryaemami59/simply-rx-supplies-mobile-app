@@ -4,17 +4,17 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import {
   ItemsReferenceStackNavigatorProps,
   ItemsReferenceStackParamList,
-} from "../../../CustomTypes/navigation";
-import useIsLoading from "../../shared/customHooks/useIsLoading";
-import ErrMsgComponent from "../../shared/ErrMsgComponent";
-import IsLoadingComponents from "../../shared/IsLoadingComponents";
+} from "../../../custom_types/navigation";
+import useIsLoading from "../../shared/hooks/useIsLoading";
+import ErrMsgComponent from "../../shared/components/ErrMsgComponent";
 import {
   refHeaderOptions,
   screenStackOptions,
-} from "../../shared/sharedScreenOptions";
+} from "../../shared/screen_options/sharedScreenOptions";
 import ItemsByCategoryListItems from "../Screens/ItemsReference/ItemsByCategory/CategoryItems";
 import ItemsByVendorListItems from "../Screens/ItemsReference/ItemsByVendor/ItemsByVendorListItems";
 import ItemsReferenceScreen from "../Screens/ItemsReference/ItemsReferenceScreen";
+import IsLoadingComponents from "../../shared/components/IsLoadingComponents";
 
 type Props = ItemsReferenceStackNavigatorProps;
 

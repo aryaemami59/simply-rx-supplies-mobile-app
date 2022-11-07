@@ -1,11 +1,11 @@
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { useTheme } from "@rneui/themed";
 import { FC, memo, useMemo } from "react";
 import { FlatList, ListRenderItem, View } from "react-native";
-import { VendorNameType } from "../../../../../CustomTypes/types";
+import { VendorNameType } from "../../../../../custom_types/api";
+import { ItemsByVendorScreenProps } from "../../../../../custom_types/navigation";
 import VendorNameProvider from "../../../../shared/contexts/VendorNameProvider";
-import useVendorNamesList from "../../../../shared/customHooks/useVendorNamesList";
-import { HEIGHT_100 } from "../../../../shared/sharedStyles";
+import useVendorNamesList from "../../../../shared/hooks/useVendorNamesList";
+import { HEIGHT_100 } from "../../../../shared/styles/sharedStyles";
 import ItemsByVendorList from "./ItemsByVendorList";
 
 const renderItem: ListRenderItem<VendorNameType> = ({ item }) => (
@@ -16,18 +16,15 @@ const renderItem: ListRenderItem<VendorNameType> = ({ item }) => (
 
 const keyExtractor = (item: VendorNameType) => item;
 
-type Props = NativeStackScreenProps<
-  ItemsByVendorStackParamList,
-  "ItemsByVendorScreen"
->;
+type Props = ItemsByVendorScreenProps;
 
 const ItemsByVendorScreen: FC<Props> = ({ navigation, route }) => {
   const allVendors = useVendorNamesList();
-  const { background } = useTheme().theme.colors;
+  const { background: backgroundColor } = useTheme().theme.colors;
 
   const style = useMemo(
-    () => [HEIGHT_100, { backgroundColor: background }],
-    [background]
+    () => [HEIGHT_100, { backgroundColor }],
+    [backgroundColor]
   );
 
   return (

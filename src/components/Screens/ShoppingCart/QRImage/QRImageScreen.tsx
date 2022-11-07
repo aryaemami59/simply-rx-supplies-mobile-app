@@ -10,8 +10,8 @@ import {
 } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import QRCode from "react-native-qrcode-svg";
-import { QRImageScreenProps } from "../../../../../CustomTypes/navigation";
-import Svg from "../../../../../node_modules/react-native-svg/lib/typescript/elements/Svg";
+import Svg from "react-native-svg/lib/typescript/elements/Svg";
+import { QRImageScreenProps } from "../../../../../custom_types/navigation";
 import {
   AI_CENTER,
   HEIGHT_100,
@@ -19,7 +19,7 @@ import {
   JC_SPACE_EVENLY,
   PADDING_TOP_20,
   TEXT_CENTER,
-} from "../../../../shared/sharedStyles";
+} from "../../../../shared/styles/sharedStyles";
 
 const styles = StyleSheet.create({
   container: {
@@ -57,7 +57,9 @@ const QRImageScreen: FC<Props> = ({ navigation, route }) => {
     });
   }, [itemsAdded]);
 
-  const getRef = useCallback((e: Svg) => (svg.current = e), []);
+  const getRef = useCallback((e: Svg) => {
+    svg.current = e;
+  }, []);
 
   const { background: backgroundColor } = useTheme().theme.colors;
 

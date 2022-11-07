@@ -3,8 +3,8 @@ import { FC, memo, useMemo } from "react";
 import { Text, View } from "react-native";
 import { useAppSelector } from "../../../../redux/hooks";
 import { selectItemNumber } from "../../../../redux/selectors";
-import useItemName from "../../../../shared/customHooks/useItemName";
-import { AI_CENTER, TEXT_CENTER } from "../../../../shared/sharedStyles";
+import useItemName from "../../../../shared/hooks/useItemName";
+import { AI_CENTER, TEXT_CENTER } from "../../../../shared/styles/sharedStyles";
 
 const ItemNumberCart: FC = () => {
   const itemName = useItemName();

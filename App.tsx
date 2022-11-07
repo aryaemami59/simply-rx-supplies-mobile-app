@@ -1,16 +1,14 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createTheme, ThemeProvider } from "@rneui/themed";
-import * as themed from "@rneui/themed";
-import whyDidYouRender from "@welldone-software/why-did-you-render";
-import React, { createContext, FC, memo } from "react";
+// import whyDidYouRender from "@welldone-software/why-did-you-render";
+import React, { FC, memo } from "react";
 import { Provider as PaperProvider } from "react-native-paper";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import { enableScreens } from "react-native-screens";
 import { Provider } from "react-redux";
 import Main from "./src/components/Main";
-import { store } from "./src/redux/store";
 import { fetchItems } from "./src/redux/addedSlice";
-import { enableFreeze, enableScreens } from "react-native-screens";
-import { enableLayoutAnimations } from "react-native-reanimated";
+import { store } from "./src/redux/store";
 
 // enableLayoutAnimations(false);
 enableScreens(false);
@@ -37,15 +35,15 @@ const myTheme = createTheme({
 
 // export const backgroundContext = createContext(myTheme.lightColors?.background);
 
-whyDidYouRender(React, {
-  trackAllPureComponents: true,
-});
+// whyDidYouRender(React, {
+//   trackAllPureComponents: true,
+// });
 
 const App: FC = () => {
-  const bg =
-    myTheme.mode === "light"
-      ? myTheme.lightColors?.background
-      : myTheme.darkColors?.background;
+  // const bg =
+  //   myTheme.mode === "light"
+  //     ? myTheme.lightColors?.background
+  //     : myTheme.darkColors?.background;
   return (
     <SafeAreaProvider>
       <Provider store={store}>

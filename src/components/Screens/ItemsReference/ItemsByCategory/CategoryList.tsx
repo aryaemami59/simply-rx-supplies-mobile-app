@@ -3,9 +3,12 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { ListItem, useTheme } from "@rneui/themed";
 import { FC, memo, useCallback, useMemo } from "react";
 import TouchableScale from "react-native-touchable-scale";
-import { ItemsReferenceStackParamList } from "../../../../../CustomTypes/navigation";
-import { Category } from "../../../../../CustomTypes/types";
-import { AI_CENTER, JC_SPACE_BETWEEN } from "../../../../shared/sharedStyles";
+import { ItemsReferenceStackParamList } from "../../../../../custom_types/navigation";
+import { Category } from "../../../../../custom_types/api";
+import {
+  AI_CENTER,
+  JC_SPACE_BETWEEN,
+} from "../../../../shared/styles/sharedStyles";
 
 type Props = {
   category: Category;

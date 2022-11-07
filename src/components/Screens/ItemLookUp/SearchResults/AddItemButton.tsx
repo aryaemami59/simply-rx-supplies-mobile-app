@@ -4,11 +4,11 @@ import { FC, memo, useCallback } from "react";
 import { addItems } from "../../../../redux/addedSlice";
 import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
 import { checkIfAddedToAllVendors } from "../../../../redux/selectors";
-import useItemName from "../../../../shared/customHooks/useItemName";
+import useItemName from "../../../../shared/hooks/useItemName";
 import {
   BACKGROUND_MAIN_COLOR,
   FONT_WEIGHT_700,
-} from "../../../../shared/sharedStyles";
+} from "../../../../shared/styles/sharedStyles";
 
 const icon = (
   <MaterialIcons

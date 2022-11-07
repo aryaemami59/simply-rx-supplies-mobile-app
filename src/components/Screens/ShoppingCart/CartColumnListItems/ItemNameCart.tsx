@@ -1,8 +1,8 @@
 import { useTheme } from "@rneui/themed";
 import { FC, memo, useMemo } from "react";
 import { Text, View } from "react-native";
-import useItemName from "../../../../shared/customHooks/useItemName";
-import { AI_CENTER, TEXT_CENTER } from "../../../../shared/sharedStyles";
+import useItemName from "../../../../shared/hooks/useItemName";
+import { AI_CENTER, TEXT_CENTER } from "../../../../shared/styles/sharedStyles";
 
 const ItemNameCart: FC = () => {
   const itemName = useItemName();

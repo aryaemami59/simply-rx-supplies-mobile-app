@@ -2,10 +2,13 @@ import { useNavigation } from "@react-navigation/native";
 import { ListItem, useTheme } from "@rneui/themed";
 import { FC, memo, useCallback, useMemo } from "react";
 import TouchableScale from "react-native-touchable-scale";
-import { ItemsByVendorStackNavigatorNavigationProps } from "../../../../../CustomTypes/navigation";
-import useOfficialVendorName from "../../../../shared/customHooks/useOfficialVendorName";
-import useVendorName from "../../../../shared/customHooks/useVendorName";
-import { AI_CENTER, JC_SPACE_BETWEEN } from "../../../../shared/sharedStyles";
+import { ItemsByVendorStackNavigatorNavigationProps } from "../../../../../custom_types/navigation";
+import useOfficialVendorName from "../../../../shared/hooks/useOfficialVendorName";
+import useVendorName from "../../../../shared/hooks/useVendorName";
+import {
+  AI_CENTER,
+  JC_SPACE_BETWEEN,
+} from "../../../../shared/styles/sharedStyles";
 
 const ItemsByVendorList: FC = () => {
   const vendorName = useVendorName();

@@ -1,41 +1,46 @@
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { useTheme } from "@rneui/themed";
 import { FC, memo, useMemo } from "react";
-import { FlatList, ListRenderItem, StyleSheet, View } from "react-native";
+import { FlatList, ListRenderItem } from "react-native";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 import { shallowEqual } from "react-redux";
-import { ItemName } from "../../../../CustomTypes/types";
+import { ItemName } from "../../../../custom_types/api";
+import { ItemLookupScreenProps } from "../../../../custom_types/navigation";
 import { useAppSelector } from "../../../redux/hooks";
 import { selectAllListItems } from "../../../redux/selectors";
 import ItemNameProvider from "../../../shared/contexts/ItemNameProvider";
-import BottomSheetComponent from "./Input/BottomSheetComponent";
-import InputField from "./Input/InputField";
+import useStatus from "../../../shared/hooks/useStatus";
+import BottomSheetComponent from "./BottomSheet/BottomSheetComponent";
+import InputField from "./SearchBar/InputField";
 import SingleSearchResultsListItem from "./SearchResults/SingleSearchResultsListItem";
 
 const renderItems: ListRenderItem<ItemName> = ({ item }) => (
-  <ItemNameProvider itemName={item}>
+  <ItemNameProvider
+    key={item}
+    itemName={item}>
     <SingleSearchResultsListItem />
   </ItemNameProvider>
 );
 
 const keyExtractor = (item: ItemName) => item;
 
-type Props = NativeStackScreenProps<
-  ItemLookupStackParamList,
-  "ItemLookupScreen"
->;
+type Props = ItemLookupScreenProps;
 
-const ItemLookupScreen: FC = () => {
-  // const ItemLookupScreen: FC<Props> = ({ navigation, route }) => {
-  const listItems = useAppSelector(selectAllListItems, shallowEqual);
+const ItemLookupScreen: FC<Props> = ({ navigation, route }) => {
   const { background: backgroundColor } = useTheme().theme.colors;
+  const style = useMemo(() => ({ backgroundColor }), [backgroundColor]);
 
-  const viewStyle = useMemo(
-    () => [styles.containerStyle, { backgroundColor }],
-    [backgroundColor]
-  );
+  const listItems = useAppSelector(selectAllListItems, shallowEqual);
+
+  // const viewStyle = useMemo(
+  //   () => [styles.containerStyle, { backgroundColor }],
+  //   [backgroundColor]
+  // );
+
+  useStatus("ItemLookup");
 
   return (
-    <View style={viewStyle}>
+    <SafeAreaProvider style={style}>
+      {/* <View style={viewStyle}> */}
       <InputField />
       <BottomSheetComponent />
       <FlatList
@@ -47,17 +52,18 @@ const ItemLookupScreen: FC = () => {
         keyboardShouldPersistTaps="handled"
         initialNumToRender={7}
       />
-    </View>
+      {/* </View> */}
+    </SafeAreaProvider>
   );
 };
 
-const styles = StyleSheet.create({
-  containerStyle: {
-    alignItems: "stretch",
-    height: "100%",
-    justifyContent: "space-between",
-    paddingBottom: 10,
-  },
-});
+// const styles = StyleSheet.create({
+//   containerStyle: {
+//     alignItems: "stretch",
+//     height: "100%",
+//     justifyContent: "space-between",
+//     paddingBottom: 10,
+//   },
+// });
 
-export default memo(ItemLookupScreen);
+export default memo<Props>(ItemLookupScreen);

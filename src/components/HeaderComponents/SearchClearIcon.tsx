@@ -1,5 +1,5 @@
 import { EvilIcons } from "@expo/vector-icons";
-import { ICON_GRAY_COLOR } from "../../shared/sharedStyles";
+import { ICON_GRAY_COLOR } from "../../shared/styles/sharedStyles";
 
 const SearchClearIcon = (
   <EvilIcons

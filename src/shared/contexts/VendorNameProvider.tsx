@@ -1,5 +1,5 @@
 import { createContext, FC, memo, ReactNode } from "react";
-import { VendorNameType } from "../../../CustomTypes/types";
+import { VendorNameType } from "../../../custom_types/api";
 
 type Props = {
   children: ReactNode;

@@ -1,6 +1,6 @@
 import { FC, memo } from "react";
 import { ActivityIndicator, View } from "react-native";
-import { JC_AI_CENTER_HEIGHT100 } from "./sharedStyles";
+import { JC_AI_CENTER_HEIGHT100 } from "../styles/sharedStyles";
 
 const IsLoadingComponents: FC = () => (
   <View style={JC_AI_CENTER_HEIGHT100}>

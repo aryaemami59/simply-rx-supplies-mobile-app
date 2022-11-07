@@ -2,7 +2,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useTheme } from "@rneui/themed";
 import { FC, memo, useMemo } from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import { RootTabParamList } from "../../../CustomTypes/navigation";
+import { RootTabParamList } from "../../../custom_types/navigation";
 import { useAppSelector } from "../../redux/hooks";
 import { checkIfAnyItemsAdded } from "../../redux/selectors";
 import {
@@ -11,9 +11,9 @@ import {
   itemLookupOptions,
   itemsReferenceOptions,
   shoppingCartOptions,
-} from "../../shared/sharedScreenOptions";
-import HomeStackNavigator from "../StackNavigatorComponents/HomeStackNavigator";
-import ItemLookup from "../StackNavigatorComponents/ItemLookup";
+} from "../../shared/screen_options/sharedScreenOptions";
+import HomeScreen from "../Screens/Home/HomeScreen";
+import ItemLookupScreen from "../Screens/ItemLookUp/ItemLookupScreen";
 import ItemsReferenceStackNavigator from "../StackNavigatorComponents/ItemsReferenceStackNavigator";
 import ShoppingCartStackNavigator from "../StackNavigatorComponents/ShoppingCartStackNavigator";
 
@@ -56,13 +56,13 @@ const TabBarMain: FC = () => {
         <Tab.Group screenOptions={homeGroupOptions}>
           <Tab.Screen
             name="Home"
-            component={HomeStackNavigator}
+            component={HomeScreen}
             options={homeOptions}
           />
           <Tab.Screen
             name="ItemLookup"
             initialParams={initialParams}
-            component={ItemLookup}
+            component={ItemLookupScreen}
             options={itemLookupOptions}
           />
         </Tab.Group>

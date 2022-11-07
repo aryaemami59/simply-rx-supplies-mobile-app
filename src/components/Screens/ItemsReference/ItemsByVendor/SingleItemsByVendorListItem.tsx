@@ -7,12 +7,12 @@ import {
   checkIfAddedToAllVendors,
   checkIfItemAddedToOneVendor,
 } from "../../../../redux/selectors";
-import useItemName from "../../../../shared/customHooks/useItemName";
-import useVendorName from "../../../../shared/customHooks/useVendorName";
+import useItemName from "../../../../shared/hooks/useItemName";
+import useVendorName from "../../../../shared/hooks/useVendorName";
 import {
   BACKGROUND_MAIN_COLOR,
   FONT_WEIGHT_700,
-} from "../../../../shared/sharedStyles";
+} from "../../../../shared/styles/sharedStyles";
 
 const icon = (
   <MaterialIcons

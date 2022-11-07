@@ -2,9 +2,9 @@ import { Button } from "@rneui/themed";
 import { FC, memo, useCallback } from "react";
 import { removeItems } from "../../../../redux/addedSlice";
 import { useAppDispatch } from "../../../../redux/hooks";
-import useItemName from "../../../../shared/customHooks/useItemName";
-import useVendorName from "../../../../shared/customHooks/useVendorName";
-import { JC_SPACE_EVENLY } from "../../../../shared/sharedStyles";
+import useItemName from "../../../../shared/hooks/useItemName";
+import useVendorName from "../../../../shared/hooks/useVendorName";
+import { JC_SPACE_EVENLY } from "../../../../shared/styles/sharedStyles";
 import DeleteIconNode from "./DeleteIconNode";
 
 type Props = {

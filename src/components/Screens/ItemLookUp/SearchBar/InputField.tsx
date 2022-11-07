@@ -10,14 +10,14 @@ import { StyleSheet } from "react-native";
 import * as Animatable from "react-native-animatable";
 import { shallowEqual } from "react-redux";
 import {
-  ItemLookupNavigationProps,
-  ItemLookupRouteProps,
-} from "../../../../../CustomTypes/navigation";
-import {
+  SearchBarRef,
   AnimatableViewRef,
   OnChangeText,
-  SearchBarRef,
-} from "../../../../../CustomTypes/types";
+} from "../../../../../custom_types/missingTypes";
+import {
+  ItemLookupNavigationProps,
+  ItemLookupRouteProps,
+} from "../../../../../custom_types/navigation";
 import { clearListItems, setListItems } from "../../../../redux/addedSlice";
 import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
 import { selectItemNamesArr } from "../../../../redux/selectors";
@@ -31,8 +31,8 @@ import {
   SEARCH_BAR_COLOR,
   WIDTH_100,
   WIDTH_80,
-} from "../../../../shared/sharedStyles";
-import { search } from "../../../../shared/utilityFunctions";
+} from "../../../../shared/styles/sharedStyles";
+import search from "../../../../utils/search";
 import HeaderRightComponent from "../../../HeaderComponents/HeaderRightComponent";
 import SearchIcon from "../../../HeaderComponents/SearchIcon";
 
@@ -65,7 +65,7 @@ const InputField: FC = () => {
   const itemNames = useAppSelector(selectItemNamesArr, shallowEqual);
   const { theme } = useTheme();
   const dispatch = useAppDispatch();
-  const inputFocused = params?.inputFocused ? true : false;
+  const inputFocused = !!params?.inputFocused;
   // const [focused, setFocused] = useState(inputFocused);
 
   const focusHandler = useCallback(() => {
@@ -137,6 +137,49 @@ const InputField: FC = () => {
     [clearHandler]
   );
 
+  const centerComponent = useMemo(
+    () => (
+      <Animatable.View
+        // easing="ease-in-out"
+        // animation="ease-in-out"
+        // useNativeDriver
+        ref={view}
+        style={WIDTH_80}>
+        <SearchBar
+          // onKeyboardHide={}
+          returnKeyType="search"
+          ref={inputRef}
+          // lightTheme
+          keyboardAppearance={theme.mode}
+          // autoFocus
+          // focusable
+          onFocus={focusHandler}
+          onBlur={blurHandler}
+          containerStyle={containerStyle}
+          placeholder="Search..."
+          round
+          inputContainerStyle={styles.inputContainer}
+          onClear={clearHandler}
+          onChangeText={changeVal}
+          value={val}
+          inputStyle={COLOR_WHITE}
+          placeholderTextColor={ICON_GRAY_COLOR}
+          searchIcon={SearchIcon}
+          clearIcon={clearIcon}
+        />
+      </Animatable.View>
+    ),
+    [
+      blurHandler,
+      changeVal,
+      clearHandler,
+      clearIcon,
+      focusHandler,
+      theme.mode,
+      val,
+    ]
+  );
+
   return (
     <Header
       backgroundColor={MAIN_COLOR}
@@ -144,37 +187,7 @@ const InputField: FC = () => {
       leftContainerStyle={DISPLAY_NONE}
       rightComponent={HeaderRightComponent}
       centerContainerStyle={styles.headerCenterContainer}
-      centerComponent={
-        <Animatable.View
-          // easing="ease-in-out"
-          // animation="ease-in-out"
-          // useNativeDriver
-          ref={view}
-          style={WIDTH_80}>
-          <SearchBar
-            // onKeyboardHide={}
-            returnKeyType="search"
-            ref={inputRef}
-            // lightTheme
-            keyboardAppearance={theme.mode}
-            // autoFocus
-            // focusable
-            onFocus={focusHandler}
-            onBlur={blurHandler}
-            containerStyle={containerStyle}
-            placeholder="Search..."
-            round
-            inputContainerStyle={styles.inputContainer}
-            onClear={clearHandler}
-            onChangeText={changeVal}
-            value={val}
-            inputStyle={COLOR_WHITE}
-            placeholderTextColor={ICON_GRAY_COLOR}
-            searchIcon={SearchIcon}
-            clearIcon={clearIcon}
-          />
-        </Animatable.View>
-      }
+      centerComponent={centerComponent}
     />
   );
 };

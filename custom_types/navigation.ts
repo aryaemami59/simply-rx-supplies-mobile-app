@@ -2,6 +2,7 @@ import type {
   BottomTabHeaderProps,
   BottomTabScreenProps,
 } from "@react-navigation/bottom-tabs";
+import { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
 import { MaterialTopTabScreenProps } from "@react-navigation/material-top-tabs";
 import {
   CompositeScreenProps,
@@ -11,37 +12,36 @@ import {
   NativeStackHeaderProps,
   NativeStackScreenProps,
 } from "@react-navigation/native-stack";
-import { Category, ItemName, ItemNumber, Src, VendorNameType } from "./types";
-import { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
+import { Category, ItemName, ItemNumber, Src, VendorNameType } from "./api";
 
-export const Home = "Home" as const;
-export type Home = typeof Home;
-export const ItemLookup = "ItemLookup" as const;
-export type ItemLookup = typeof ItemLookup;
-export const ShoppingCartStack = "ShoppingCartStack" as const;
-export type ShoppingCartStack = typeof ShoppingCartStack;
-export const ShoppingCartScreen = "ShoppingCartScreen" as const;
-export type ShoppingCartScreen = typeof ShoppingCartScreen;
-export const QRImage = "QRImage" as const;
-export type QRImage = typeof QRImage;
-export const BarcodeImage = "BarcodeImage" as const;
-export type BarcodeImage = typeof BarcodeImage;
-export const CartColumnListItems = "CartColumnListItems" as const;
-export type CartColumnListItems = typeof CartColumnListItems;
-export const ItemsReference = "ItemsReference" as const;
-export type ItemsReference = typeof ItemsReference;
-export const ItemsReferenceScreen = "ItemsReferenceScreen" as const;
-export type ItemsReferenceScreen = typeof ItemsReferenceScreen;
-export const ItemsByVendorListItems = "ItemsByVendorListItems" as const;
-export type ItemsByVendorListItems = typeof ItemsByVendorListItems;
-export const ItemsByCategoryListItems = "ItemsByCategoryListItems" as const;
-export type ItemsByCategoryListItems = typeof ItemsByCategoryListItems;
-export const ItemsByVendor = "ItemsByVendor" as const;
-export type ItemsByVendor = typeof ItemsByVendor;
-export const ItemsByCategory = "ItemsByCategory" as const;
-export type ItemsByCategory = typeof ItemsByCategory;
-export const ItemDetails = "ItemDetails" as const;
-export type ItemDetails = typeof ItemDetails;
+export const home = "Home" as const;
+export type Home = typeof home;
+export const itemLookup = "ItemLookup" as const;
+export type ItemLookup = typeof itemLookup;
+export const shoppingCartStack = "ShoppingCartStack" as const;
+export type ShoppingCartStack = typeof shoppingCartStack;
+export const shoppingCartScreen = "ShoppingCartScreen" as const;
+export type ShoppingCartScreen = typeof shoppingCartScreen;
+export const qrImage = "QRImage" as const;
+export type QRImage = typeof qrImage;
+export const barcodeImage = "BarcodeImage" as const;
+export type BarcodeImage = typeof barcodeImage;
+export const cartColumnListItems = "CartColumnListItems" as const;
+export type CartColumnListItems = typeof cartColumnListItems;
+export const itemsReference = "ItemsReference" as const;
+export type ItemsReference = typeof itemsReference;
+export const itemsReferenceScreen = "ItemsReferenceScreen" as const;
+export type ItemsReferenceScreen = typeof itemsReferenceScreen;
+export const itemsByVendorListItems = "ItemsByVendorListItems" as const;
+export type ItemsByVendorListItems = typeof itemsByVendorListItems;
+export const itemsByCategoryListItems = "ItemsByCategoryListItems" as const;
+export type ItemsByCategoryListItems = typeof itemsByCategoryListItems;
+export const itemsByVendor = "ItemsByVendor" as const;
+export type ItemsByVendor = typeof itemsByVendor;
+export const itemsByCategory = "ItemsByCategory" as const;
+export type ItemsByCategory = typeof itemsByCategory;
+export const itemDetails = "ItemDetails" as const;
+export type ItemDetails = typeof itemDetails;
 
 export type RootTabParamList = {
   Home: undefined;
@@ -89,10 +89,7 @@ export type CartColumnListItemsScreenProps = CompositeScreenProps<
   BottomTabScreenProps<RootTabParamList, ShoppingCartStack>
 >;
 
-export type HomeStackNavigatorProps = BottomTabScreenProps<
-  RootTabParamList,
-  Home
->;
+export type HomeScreenProps = BottomTabScreenProps<RootTabParamList, Home>;
 
 export type RootTabNavigationProps = BottomTabNavigationProp<RootTabParamList>;
 
@@ -138,7 +135,7 @@ export type CategoryItemsProps = CompositeScreenProps<
   BottomTabScreenProps<RootTabParamList, ItemsReference>
 >;
 
-export type ItemLookupProps = BottomTabScreenProps<
+export type ItemLookupScreenProps = BottomTabScreenProps<
   RootTabParamList,
   ItemLookup
 >;
@@ -150,25 +147,25 @@ export type ItemDetailsScreenProps = NativeStackScreenProps<
   ItemDetails
 >;
 
-export type ItemsByVendorStackNavigatorProps = CompositeScreenProps<
+export type ItemsByVendorScreenProps = CompositeScreenProps<
   MaterialTopTabScreenProps<ItemsReferenceTopTabParamList, ItemsByVendor>,
   ItemsReferenceScreenProps
 >;
 
-export type ItemsByCategoryStackNavigatorProps = CompositeScreenProps<
+export type ItemsByCategoryScreenProps = CompositeScreenProps<
   MaterialTopTabScreenProps<ItemsReferenceTopTabParamList, ItemsByCategory>,
   ItemsReferenceScreenProps
 >;
 
 export type ItemsByCategoryStackNavigatorNavigationProps =
-  ItemsByCategoryStackNavigatorProps["navigation"];
+  ItemsByCategoryScreenProps["navigation"];
 
 export type ItemsByVendorStackNavigatorNavigationProps =
-  ItemsByVendorStackNavigatorProps["navigation"];
+  ItemsByVendorScreenProps["navigation"];
 
-export type ItemLookupNavigationProps = ItemLookupProps["navigation"];
+export type ItemLookupNavigationProps = ItemLookupScreenProps["navigation"];
 
-export type ItemLookupRouteProps = ItemLookupProps["route"];
+export type ItemLookupRouteProps = ItemLookupScreenProps["route"];
 
 // export type RootStackParamList = {
 //   Home: NavigatorScreenParams<HomeTabParamList>;

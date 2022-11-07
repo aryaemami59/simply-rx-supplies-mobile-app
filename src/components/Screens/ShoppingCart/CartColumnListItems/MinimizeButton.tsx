@@ -1,6 +1,6 @@
 import { Button } from "@rneui/themed";
 import { FC, memo, useCallback } from "react";
-import { JC_SPACE_EVENLY } from "../../../../shared/sharedStyles";
+import { JC_SPACE_EVENLY } from "../../../../shared/styles/sharedStyles";
 import ExpandIconNode from "./ExpandIconNode";
 import MinimizeIconNode from "./MinimizeIconNode";
 

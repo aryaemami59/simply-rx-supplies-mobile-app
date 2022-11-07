@@ -1,20 +1,53 @@
 {
+  "parser": "@typescript-eslint/parser",
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "react-native/react-native": true
+  },
   "extends": [
-    "react-app",
-    "react-app/jest",
+    // "plugin:react/recommended",
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "airbnb-base",
+    "airbnb",
+    // "airbnb/hooks",
+    "plugin:prettier/recommended",
+    // "react-app",
+    // "plugin:react-hooks/recommended",
+    // "plugin:import/recommended",
+    // "plugin:import/typescript",
+    "plugin:import/errors",
     "@react-native-community",
     "plugin:react-native/all",
-    "plugin:react-perf/recommended",
-    "plugin:@typescript-eslint/recommended"
+    "plugin:react-perf/all",
+    "plugin:@typescript-eslint/eslint-recommended"
   ],
   "rules": {
+    "prefer-arrow-callback": 2,
+    "react/jsx-filename-extension": [2, { "extensions": [".tsx", ".jsx"] }],
+    "react/jsx-props-no-spreading": 0,
+    "react/function-component-definition": [
+      2,
+      {
+        "namedComponents": "arrow-function",
+        "unnamedComponents": "arrow-function"
+      }
+    ],
+    "no-dupe-args": 2,
+    "react/jsx-curly-brace-presence": 2,
+    "import/extensions": 0,
+    "import/no-unresolved": 2,
+    "no-restricted-imports": 2,
+    "no-param-reassign": 0,
     "@typescript-eslint/no-non-null-assertion": "off",
+    "@typescript-eslint/no-redeclare": [2, { "ignoreDeclarationMerge": true }],
     "quotes": "off",
     "comma-dangle": [0, "always-multiline"],
     "@typescript-eslint/ban-ts-comment": "off",
     "react/button-has-type": 2,
     "react/no-array-index-key": 2,
-    "react/react-in-jsx-scope": "off",
+    "react/react-in-jsx-scope": 0,
     "react-native/no-unused-styles": 2,
     "react/jsx-no-bind": 2,
     "react-native/split-platform-components": 2,
@@ -23,6 +56,8 @@
     "react-native/no-raw-text": 2,
     "react-native/no-single-element-style-arrays": 2,
     "react-perf/jsx-no-new-object-as-prop": 2,
+    // "react-hooks/rules-of-hooks": 2,
+    // "react-hooks/exhaustive-deps": 2,
     "@typescript-eslint/no-unused-vars": [
       2,
       {
@@ -31,12 +66,32 @@
       }
     ],
     "prettier/prettier": [
-      "off",
-      "error",
+      2,
       {
-        "endOfLine": "auto",
-        "singleQuote": false
+        "bracketSameLine": true,
+        "arrowParens": "avoid",
+        "singleAttributePerLine": true,
+        "parser": "typescript"
       }
     ]
-  }
+  },
+  "parserOptions": { "project": ["./tsconfig.json"] },
+  "settings": {
+    "react": {
+      "version": "detect"
+    },
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      },
+      "typescript": {
+        "alwaysTryTypes": true,
+        "project": ["./tsconfig.json"]
+      }
+    },
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    }
+  },
+  "root": true
 }

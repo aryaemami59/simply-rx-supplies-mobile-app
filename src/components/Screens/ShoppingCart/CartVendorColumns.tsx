@@ -3,16 +3,16 @@ import { Badge, ListItem, useTheme } from "@rneui/themed";
 import { FC, memo, useCallback, useMemo } from "react";
 import { StyleSheet } from "react-native";
 import TouchableScale from "react-native-touchable-scale";
-import { ShoppingCartNavigationProps } from "../../../../CustomTypes/navigation";
+import { ShoppingCartNavigationProps } from "../../../../custom_types/navigation";
 import { useAppSelector } from "../../../redux/hooks";
 import { addedItemsLength } from "../../../redux/selectors";
-import useOfficialVendorName from "../../../shared/customHooks/useOfficialVendorName";
-import useVendorName from "../../../shared/customHooks/useVendorName";
+import useOfficialVendorName from "../../../shared/hooks/useOfficialVendorName";
+import useVendorName from "../../../shared/hooks/useVendorName";
 import {
   AI_CENTER,
   FONT_WEIGHT_BOLD,
   JC_SPACE_BETWEEN,
-} from "../../../shared/sharedStyles";
+} from "../../../shared/styles/sharedStyles";
 
 const CartVendorColumns: FC = () => {
   const vendorName = useVendorName();

@@ -10,12 +10,12 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { BarcodeImageScreenProps } from "../../../../../CustomTypes/navigation";
+import { BarcodeImageScreenProps } from "../../../../../custom_types/navigation";
 import {
   BARCODE_ASPECT_RATIO,
   JC_AI_CENTER_HEIGHT100,
   WIDTH_90,
-} from "../../../../shared/sharedStyles";
+} from "../../../../shared/styles/sharedStyles";
 
 const iconName = Platform.OS === "android" ? "share-android" : "share";
 

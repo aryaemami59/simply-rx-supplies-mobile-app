@@ -1,22 +1,12 @@
 import { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
-import { useFocusEffect, useNavigation } from "@react-navigation/native";
-import { SearchBar as SearchBarType } from "@rneui/base";
-import { Header, SearchBar, SearchBarProps } from "@rneui/themed";
-import {
-  FC,
-  memo,
-  PropsWithChildren,
-  useCallback,
-  useEffect,
-  useRef,
-} from "react";
-import { Keyboard, StyleSheet, TextInput } from "react-native";
+import { Header, SearchBar } from "@rneui/themed";
+import { FC, memo, useCallback, useMemo, useRef } from "react";
+import { StyleSheet } from "react-native";
+import { SearchBarRef } from "../../../custom_types/missingTypes";
 import {
   HeaderHomeStackNavigatorProps,
-  RootTabNavigationProps,
   RootTabParamList,
-} from "../../../CustomTypes/navigation";
-import { SearchBarRef } from "../../../CustomTypes/types";
+} from "../../../custom_types/navigation";
 import {
   BACKGROUND_TRANSPARENT,
   COLOR_WHITE,
@@ -26,7 +16,7 @@ import {
   MAIN_COLOR,
   SEARCH_BAR_COLOR,
   WIDTH_80,
-} from "../../shared/sharedStyles";
+} from "../../shared/styles/sharedStyles";
 import HeaderRightComponent from "./HeaderRightComponent";
 import SearchClearIcon from "./SearchClearIcon";
 import SearchIcon from "./SearchIcon";
@@ -74,6 +64,25 @@ const HeaderHomeStackNavigator: FC<Props> = ({
     ref?.blur();
   }, [myNavigation]);
 
+  const centerComponent = useMemo(
+    () => (
+      <SearchBar
+        ref={searchRef}
+        onFocus={focusHandler}
+        containerStyle={containerStyle}
+        placeholder="Search..."
+        round
+        showSoftInputOnFocus={false}
+        inputContainerStyle={styles.searchBarInputContainer}
+        inputStyle={COLOR_WHITE}
+        placeholderTextColor={ICON_GRAY_COLOR}
+        searchIcon={SearchIcon}
+        clearIcon={SearchClearIcon}
+      />
+    ),
+    [focusHandler]
+  );
+
   return (
     <Header
       backgroundColor={MAIN_COLOR}
@@ -81,21 +90,7 @@ const HeaderHomeStackNavigator: FC<Props> = ({
       rightComponent={HeaderRightComponent}
       leftContainerStyle={DISPLAY_NONE}
       centerContainerStyle={styles.headerCenterContainer}
-      centerComponent={
-        <SearchBar
-          ref={searchRef}
-          onFocus={focusHandler}
-          containerStyle={containerStyle}
-          placeholder="Search..."
-          round
-          showSoftInputOnFocus={false}
-          inputContainerStyle={styles.searchBarInputContainer}
-          inputStyle={COLOR_WHITE}
-          placeholderTextColor={ICON_GRAY_COLOR}
-          searchIcon={SearchIcon}
-          clearIcon={SearchClearIcon}
-        />
-      }
+      centerComponent={centerComponent}
     />
   );
 };

@@ -1,4 +1,4 @@
-import { VendorNameType } from "../../../CustomTypes/types";
+import { VendorNameType } from "../../../custom_types/api";
 import { useAppSelector } from "../../redux/hooks";
 import { selectVendorOfficialName } from "../../redux/selectors";
 

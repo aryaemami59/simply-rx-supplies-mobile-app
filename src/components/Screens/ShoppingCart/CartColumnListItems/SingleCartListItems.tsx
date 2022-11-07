@@ -6,7 +6,7 @@ import {
   AI_CENTER,
   JC_SPACE_BETWEEN,
   WIDTH_100,
-} from "../../../../shared/sharedStyles";
+} from "../../../../shared/styles/sharedStyles";
 import BarcodeImageCart from "../BarcodeImage/BarcodeImageCart";
 import DeleteButton from "./DeleteButton";
 import DetailsButton from "./DetailsButton";

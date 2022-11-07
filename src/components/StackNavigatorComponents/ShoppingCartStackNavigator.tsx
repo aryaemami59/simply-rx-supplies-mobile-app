@@ -4,20 +4,20 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import {
   ShoppingCartStackNavigatorProps,
   ShoppingCartStackParamList,
-} from "../../../CustomTypes/navigation";
-import useIsLoading from "../../shared/customHooks/useIsLoading";
-import ErrMsgComponent from "../../shared/ErrMsgComponent";
-import IsLoadingComponents from "../../shared/IsLoadingComponents";
+} from "../../../custom_types/navigation";
+import useIsLoading from "../../shared/hooks/useIsLoading";
+import ErrMsgComponent from "../../shared/components/ErrMsgComponent";
 import {
   itemDetailsOptions,
   refHeaderOptions,
   screenStackOptions,
-} from "../../shared/sharedScreenOptions";
+} from "../../shared/screen_options/sharedScreenOptions";
 import BarcodeImageScreen from "../Screens/ShoppingCart/BarcodeImage/BarcodeImageScreen";
 import CartColumnListItemsScreen from "../Screens/ShoppingCart/CartColumnListItems/CartColumnListItemsScreen";
 import ItemDetailsScreen from "../Screens/ShoppingCart/CartColumnListItems/ItemDetails/ItemDetailsScreen";
 import QRImageScreen from "../Screens/ShoppingCart/QRImage/QRImageScreen";
 import ShoppingCartScreen from "../Screens/ShoppingCart/ShoppingCartScreen";
+import IsLoadingComponents from "../../shared/components/IsLoadingComponents";
 
 const Stack = createNativeStackNavigator<ShoppingCartStackParamList>();
 

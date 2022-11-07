@@ -6,15 +6,16 @@ import {
 } from "@reduxjs/toolkit";
 import axios from "axios";
 import {
-  AddedState,
   Category,
-  FetchedData,
   ItemName,
   VendorAndItemName,
   VendorNameType,
-} from "../../CustomTypes/types";
-import { emptyArr, emptyObj, intersection } from "../shared/utilityFunctions";
-import { GITHUB_URL_ITEMS } from "./fetchInfo";
+} from "../../custom_types/api";
+import { FetchedData, AddedState } from "../../custom_types/redux";
+import emptyArr from "../utils/emptyArr";
+import emptyObj from "../utils/emptyObj";
+import intersection from "../utils/intersection";
+import GITHUB_URL_ITEMS from "../data/fetchInfo";
 
 export const fetchItems = createAsyncThunk<FetchedData, void>(
   `items/fetchitems`,
@@ -137,8 +138,7 @@ export const addedSlice = createSlice({
       state,
       { payload: vendorName }: PayloadAction<VendorNameType>
     ) => {
-      let itemName: ItemName;
-      for (itemName in state.itemsObj) {
+      state.itemsArr.forEach(itemName => {
         if (
           state.itemsObj[itemName].vendorsToAdd.indexOf(vendorName) ===
           state.itemsObj[itemName].vendorsToAdd.length - 1
@@ -153,7 +153,24 @@ export const addedSlice = createSlice({
             itemName
           ].vendorsToAdd.filter(vendor => vendor !== vendorName);
         }
-      }
+      });
+      // let itemName: ItemName;
+      // for (itemName in state.itemsObj) {
+      //   if (
+      //     state.itemsObj[itemName].vendorsToAdd.indexOf(vendorName) ===
+      //     state.itemsObj[itemName].vendorsToAdd.length - 1
+      //   ) {
+      //     state.itemsObj[itemName].vendorsToAdd.pop();
+      //   } else if (
+      //     state.itemsObj[itemName].vendorsToAdd.indexOf(vendorName) === 0
+      //   ) {
+      //     state.itemsObj[itemName].vendorsToAdd.shift();
+      //   } else if (state.itemsObj[itemName].vendorsToAdd.includes(vendorName)) {
+      //     state.itemsObj[itemName].vendorsToAdd = state.itemsObj[
+      //       itemName
+      //     ].vendorsToAdd.filter(vendor => vendor !== vendorName);
+      //   }
+      // }
     },
     setVendorsForAllCheck: (
       state,
@@ -175,22 +192,22 @@ export const addedSlice = createSlice({
     builder.addCase(fetchItems.fulfilled, (state, action) => {
       const { categories, items, vendors } = action.payload;
       state.itemsArr = items.map(({ name }) => name);
-      for (const itemObj of items) {
+      items.forEach(itemObj => {
         state.itemsObj[itemObj.name] = {
           ...itemObj,
           vendorsAdded: emptyArr,
           vendorsToAdd: itemObj.vendors,
         };
-      }
+      });
       state.vendorsArr = Object.keys(vendors) as VendorNameType[];
-      for (const vendorObj of Object.values(vendors)) {
+      Object.values(vendors).forEach(vendorObj => {
         state.vendorsObj[vendorObj.abbrName] = {
           ...vendorObj,
           itemsAdded: emptyArr as ItemName[],
           qrContent: "",
           qrText: "",
         };
-      }
+      });
       state.categoriesArr = Object.keys(categories) as Category[];
       state.categoriesObj = { ...categories };
       state.isLoading = false;
