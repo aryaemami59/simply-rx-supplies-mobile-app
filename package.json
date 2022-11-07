@@ -51,6 +51,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
+    "@babel/plugin-syntax-jsx": "^7.18.6",
     "@babel/preset-react": "^7.18.6",
     "@babel/runtime": "^7.12.5",
     "@expo/config-types": "^46.0.2",
@@ -73,6 +74,7 @@
     "@typescript-eslint/eslint-plugin": "^5.38.0",
     "@typescript-eslint/parser": "^5.38.0",
     "@welldone-software/why-did-you-render": "^7.0.1",
+    "babel-plugin-typescript-to-proptypes": "^2.0.0",
     "eslint": "^7.32.0",
     "eslint-plugin-no-inline-styles": "^1.0.5",
     "eslint-plugin-prettier": "^4.2.1",

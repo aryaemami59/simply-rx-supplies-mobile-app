@@ -62,31 +62,9 @@ const HeaderHomeStackNavigator: FC<Props> = ({
   navigation,
   route,
   options,
-  // back,
-  // layout,
 }) => {
   const searchRef = useRef<SearchBarRef>(null);
-  const myNavigation = useNavigation<RootTabNavigationProps>();
-  // const myNavigation = navigation as BottomTabNavigationProp<RootTabParamList>;
-
-  // useFocusEffect(
-  //   useCallback(() => {
-  //     const unsubscribe = myNavigation.addListener("focus", () => {
-  //       searchRef.current?.blur();
-  //     });
-  //     return unsubscribe;
-  //   }, [myNavigation])
-  // );
-
-  // const myNavigation =
-  //   navigation as NativeStackNavigationProp<RootTabParamList>;
-
-  // useEffect(() => {
-  //   const unsubscribe = myNavigation.addListener("focus", () => {
-  //     searchRef.current?.blur();
-  //   });
-  //   return unsubscribe;
-  // }, [myNavigation]);
+  const myNavigation = navigation as BottomTabNavigationProp<RootTabParamList>;
 
   const focusHandler = useCallback(() => {
     const ref = searchRef.current;
