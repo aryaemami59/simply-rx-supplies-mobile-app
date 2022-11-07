@@ -2,7 +2,7 @@ import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { Button } from "@rneui/themed";
 import { FC, memo, useCallback } from "react";
-import { ShoppingCartStackParamList } from "../../../../../CustomTypes/types";
+import { ShoppingCartStackParamList } from "../../../../../CustomTypes/navigation";
 import useItemName from "../../../../shared/customHooks/useItemName";
 import useVendorName from "../../../../shared/customHooks/useVendorName";
 import { JC_SPACE_EVENLY } from "../../../../shared/sharedStyles";

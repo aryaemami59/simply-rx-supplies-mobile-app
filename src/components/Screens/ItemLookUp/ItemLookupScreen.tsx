@@ -3,7 +3,6 @@ import { useTheme } from "@rneui/themed";
 import { FC, memo, useMemo } from "react";
 import { FlatList, ListRenderItem, StyleSheet, View } from "react-native";
 import { shallowEqual } from "react-redux";
-import { ItemLookupStackParamList } from "../../../../CustomTypes/navigation";
 import { ItemName } from "../../../../CustomTypes/types";
 import { useAppSelector } from "../../../redux/hooks";
 import { selectAllListItems } from "../../../redux/selectors";

@@ -2,7 +2,7 @@ import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { FC, memo, useCallback, useMemo } from "react";
 import { Image, StyleSheet, TouchableOpacity } from "react-native";
-import { ShoppingCartStackParamList } from "../../../../../CustomTypes/types";
+import { ShoppingCartStackParamList } from "../../../../../CustomTypes/navigation";
 import { useAppSelector } from "../../../../redux/hooks";
 import { selectItemSrc } from "../../../../redux/selectors";
 import useItemName from "../../../../shared/customHooks/useItemName";
