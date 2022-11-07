@@ -91,7 +91,7 @@ const HomeStackNavigator: FC<Props> = ({ navigation, route }) => {
 
   return (
     <SafeAreaProvider>
-      <SafeAreaView  style={viewStyle}>
+      <SafeAreaView style={viewStyle}>
         <View style={styles.container}>
           <Chip
             raised

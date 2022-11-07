@@ -92,7 +92,10 @@ const HomeScreen: FC = () => {
     [navigation]
   );
 
-  const viewStyle = useMemo(() => ({ backgroundColor: background }), [background]);
+  const viewStyle = useMemo(
+    () => ({ backgroundColor: background }),
+    [background]
+  );
 
   return (
     <SafeAreaView style={viewStyle}>

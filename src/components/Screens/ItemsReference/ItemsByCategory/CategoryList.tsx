@@ -4,9 +4,7 @@ import { ListItem, useTheme } from "@rneui/themed";
 import { FC, memo, useCallback, useMemo } from "react";
 import TouchableScale from "react-native-touchable-scale";
 import { ItemsReferenceStackParamList } from "../../../../../CustomTypes/navigation";
-import {
-  Category,
-} from "../../../../../CustomTypes/types";
+import { Category } from "../../../../../CustomTypes/types";
 import { AI_CENTER, JC_SPACE_BETWEEN } from "../../../../shared/sharedStyles";
 
 type Props = {
