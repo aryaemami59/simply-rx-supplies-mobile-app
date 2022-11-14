@@ -71,7 +71,7 @@ const CartColumnListItemsScreen: FC<Props> = ({ navigation, route }) => {
   );
 
   const openLink = useCallback(() => {
-    Linking.openURL(vendorLink);
+    Linking.openURL(vendorLink).catch(e => console.log(e));
   }, [vendorLink]);
 
   const officialVendorName = useOfficialVendorName(vendorName);

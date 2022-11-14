@@ -75,10 +75,10 @@ export const addedSlice = createSlice({
             ];
             state.itemsObj[itemName].vendorsToAdd = state.itemsObj[itemName]
               .vendorsToAdd.length
-              ? (intersection(
+              ? intersection(
                   state.itemsObj[itemName].vendors,
                   state.itemsObj[itemName].vendorsAdded
-                ) as VendorNameType[])
+                )
               : emptyArr;
           }
         }
@@ -93,10 +93,10 @@ export const addedSlice = createSlice({
       ];
       state.itemsObj[itemName].vendorsToAdd = state.itemsObj[itemName]
         .vendorsToAdd.length
-        ? (intersection(
+        ? intersection(
             state.itemsObj[itemName].vendors,
             state.itemsObj[itemName].vendorsAdded
-          ) as VendorNameType[])
+          )
         : emptyArr;
       const qr = state.vendorsObj[vendorName].itemsAdded
         .map(itemAddedName => state.itemsObj[itemAddedName].itemNumber)

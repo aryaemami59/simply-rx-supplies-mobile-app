@@ -27,7 +27,7 @@ const ShareButton: FC<Props> = ({ reset }) => {
 
   const shareInfo = useCallback(() => {
     reset();
-    Share.share(shareContent);
+    Share.share(shareContent).catch(e => console.log(e));
   }, [reset, shareContent]);
 
   return (

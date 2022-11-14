@@ -11,6 +11,7 @@
     "format": "eslint --fix --ext .tsx,.ts,.js ."
   },
   "dependencies": {
+    "@expo/dev-server": "^0.1.120",
     "@expo/vector-icons": "^13.0.0",
     "@expo/webpack-config": "^0.17.2",
     "@react-navigation/bottom-tabs": "^6.4.0",
@@ -25,7 +26,7 @@
     "expo": "~46.0.9",
     "expo-clipboard": "~3.1.0",
     "expo-constants": "^13.2.4",
-    "expo-updates": "~0.14.6",
+    "expo-updates": "~0.14.7",
     "prop-types": "^15.8.1",
     "qrcode": "^1.5.1",
     "react": "18.0.0",
@@ -89,6 +90,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-native": "^4.0.0",
     "eslint-plugin-react-perf": "^3.3.1",
+    "eslint-plugin-react-redux": "^4.0.0",
     "find-unused-exports": "^5.0.0",
     "prettier": "^2.7.1",
     "react-perf": "^1.0.1",

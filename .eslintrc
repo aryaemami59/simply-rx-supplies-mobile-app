@@ -21,11 +21,14 @@
     "@react-native-community",
     "plugin:react-native/all",
     "plugin:react-perf/all",
-    "plugin:@typescript-eslint/eslint-recommended"
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "plugin:react-redux/all"
+    // "plugin:@typescript-eslint/eslint-recommended"
   ],
   "rules": {
     "prefer-arrow-callback": 2,
     "react/jsx-filename-extension": [2, { "extensions": [".tsx", ".jsx"] }],
+    "react/jsx-key": 2,
     "react/jsx-props-no-spreading": 0,
     "react/function-component-definition": [
       2,

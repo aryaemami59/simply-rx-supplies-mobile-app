@@ -53,7 +53,7 @@ const QRImageScreen: FC<Props> = ({ navigation, route }) => {
         )}`,
         url: `data:image/png;base64,${data}`,
       };
-      Share.share(shareImageBase64);
+      Share.share(shareImageBase64).catch(e => console.log(e));
     });
   }, [itemsAdded]);
 

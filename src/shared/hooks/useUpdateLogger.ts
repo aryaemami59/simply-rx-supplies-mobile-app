@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 
-const useUpdateLogger = (value: unknown) => {
+const useUpdateLogger = (value: Record<string, unknown> | []) => {
   useEffect(() => {
     console.log(
-      `%c${value} \nchanged`,
+      `%c${JSON.stringify(value, null, 2)} \nchanged`,
       "background-color: red; font-size: 20px"
     );
   }, [value]);

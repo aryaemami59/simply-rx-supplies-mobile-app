@@ -11,6 +11,7 @@ import {
   View,
 } from "react-native";
 import { BarcodeImageScreenProps } from "../../../../../custom_types/navigation";
+import useUpdateLogger from "../../../../shared/hooks/useUpdateLogger";
 import {
   BARCODE_ASPECT_RATIO,
   JC_AI_CENTER_HEIGHT100,
@@ -51,8 +52,10 @@ const BarcodeImageScreen: FC<Props> = ({ navigation, route }) => {
   );
 
   const shareBarcode = useCallback(() => {
-    Share.share(shareContent);
+    Share.share(shareContent).catch(e => console.log(e));
   }, [shareContent]);
+
+  useUpdateLogger(route);
 
   useEffect(() => {
     navigation.setOptions(options);

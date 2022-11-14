@@ -15,7 +15,7 @@ enableScreens(false);
 // enableScreens();
 // enableFreeze();
 
-store.dispatch(fetchItems());
+store.dispatch(fetchItems()).catch(e => console.log(e));
 
 const myTheme = createTheme({
   // components
