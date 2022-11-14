@@ -17,7 +17,7 @@ import emptyObj from "../utils/emptyObj";
 import intersection from "../utils/intersection";
 import GITHUB_URL_ITEMS from "../data/fetchInfo";
 
-export const fetchItems = createAsyncThunk<FetchedData, void>(
+export const fetchItems = createAsyncThunk<FetchedData>(
   `items/fetchitems`,
   async () => {
     try {
@@ -187,7 +187,7 @@ export const addedSlice = createSlice({
     });
     builder.addCase(fetchItems.rejected, (state, action) => {
       state.isLoading = false;
-      state.errMsg = action.error.message || "Fetch failed";
+      state.errMsg = action.error.message ?? "Fetch failed";
     });
     builder.addCase(fetchItems.fulfilled, (state, action) => {
       const { categories, items, vendors } = action.payload;

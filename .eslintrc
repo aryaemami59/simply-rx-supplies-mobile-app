@@ -5,69 +5,36 @@
     "es2021": true,
     "react-native/react-native": true
   },
+  "plugins": [
+    "react",
+    "react-native",
+    "@typescript-eslint",
+    "eslint-plugin-prettier",
+    "react-perf",
+    "prettier",
+    "jsx-a11y"
+  ],
   "extends": [
-    // "plugin:react/recommended",
-    "eslint:recommended",
-    "plugin:@typescript-eslint/recommended",
-    "airbnb-base",
-    "airbnb",
-    // "airbnb/hooks",
-    "plugin:prettier/recommended",
-    // "react-app",
-    // "plugin:react-hooks/recommended",
-    // "plugin:import/recommended",
-    // "plugin:import/typescript",
-    "plugin:import/errors",
     "@react-native-community",
-    "plugin:react-native/all",
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "airbnb",
+    "airbnb-typescript",
+    "airbnb/hooks",
+    "react-app",
+    "plugin:react/recommended",
+    "plugin:react/jsx-runtime",
+    "plugin:react-redux/all",
     "plugin:react-perf/all",
+    "plugin:@typescript-eslint/recommended",
     "plugin:@typescript-eslint/recommended-requiring-type-checking",
-    "plugin:react-redux/all"
-    // "plugin:@typescript-eslint/eslint-recommended"
+    "plugin:@typescript-eslint/strict",
+    "prettier/prettier",
+    "plugin:prettier/recommended",
+    "plugin:react-native/all"
   ],
   "rules": {
-    "prefer-arrow-callback": 2,
-    "react/jsx-filename-extension": [2, { "extensions": [".tsx", ".jsx"] }],
-    "react/jsx-key": 2,
-    "react/jsx-props-no-spreading": 0,
-    "react/function-component-definition": [
-      2,
-      {
-        "namedComponents": "arrow-function",
-        "unnamedComponents": "arrow-function"
-      }
-    ],
-    "no-dupe-args": 2,
-    "react/jsx-curly-brace-presence": 2,
-    "import/extensions": 0,
-    "import/no-unresolved": 2,
-    "no-restricted-imports": 2,
-    "no-param-reassign": 0,
-    "@typescript-eslint/no-non-null-assertion": "off",
-    "@typescript-eslint/no-redeclare": [2, { "ignoreDeclarationMerge": true }],
-    "quotes": "off",
-    "comma-dangle": [0, "always-multiline"],
-    "@typescript-eslint/ban-ts-comment": "off",
-    "react/button-has-type": 2,
-    "react/no-array-index-key": 2,
-    "react/react-in-jsx-scope": 0,
-    "react-native/no-unused-styles": 2,
-    "react/jsx-no-bind": 2,
-    "react-native/split-platform-components": 2,
-    "react-native/no-inline-styles": 2,
-    "react-native/no-color-literals": 2,
-    "react-native/no-raw-text": 2,
-    "react-native/no-single-element-style-arrays": 2,
-    "react-perf/jsx-no-new-object-as-prop": 2,
-    // "react-hooks/rules-of-hooks": 2,
-    // "react-hooks/exhaustive-deps": 2,
-    "@typescript-eslint/no-unused-vars": [
-      2,
-      {
-        "argsIgnorePattern": "^",
-        "varsIgnorePattern": "^_"
-      }
-    ],
     "prettier/prettier": [
       2,
       {
@@ -76,24 +43,38 @@
         "singleAttributePerLine": true,
         "parser": "typescript"
       }
-    ]
+    ],
+    "react/function-component-definition": [
+      2,
+      {
+        "namedComponents": "arrow-function",
+        "unnamedComponents": "arrow-function"
+      }
+    ],
+    "no-console": 0,
+    "no-param-reassign": [
+      2,
+      {
+        "props": false
+      }
+    ],
+    "@typescript-eslint/no-floating-promises": [0],
+    "react/require-default-props": [0],
+    "@typescript-eslint/no-throw-literal": [0],
+    "@typescript-eslint/naming-convention": [0],
+    "@typescript-eslint/consistent-type-definitions": [2, "type"],
+    "react/jsx-props-no-spreading": 0,
+    "@typescript-eslint/ban-ts-comment": [0]
   },
-  "parserOptions": { "project": ["./tsconfig.json"] },
+  "parserOptions": {
+    "project": ["./tsconfig.json"],
+    "ecmaFeatures": { "jsx": true },
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
   "settings": {
     "react": {
       "version": "detect"
-    },
-    "import/resolver": {
-      "node": {
-        "extensions": [".js", ".jsx", ".ts", ".tsx"]
-      },
-      "typescript": {
-        "alwaysTryTypes": true,
-        "project": ["./tsconfig.json"]
-      }
-    },
-    "import/parsers": {
-      "@typescript-eslint/parser": [".ts", ".tsx"]
     }
   },
   "root": true

@@ -1,7 +1,7 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createTheme, ThemeProvider } from "@rneui/themed";
 // import whyDidYouRender from "@welldone-software/why-did-you-render";
-import React, { FC, memo } from "react";
+import { FC, memo } from "react";
 import { Provider as PaperProvider } from "react-native-paper";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { enableScreens } from "react-native-screens";

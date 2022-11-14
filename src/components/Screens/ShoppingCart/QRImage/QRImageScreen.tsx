@@ -41,10 +41,10 @@ type Props = QRImageScreenProps;
 const QRImageScreen: FC<Props> = ({ navigation, route }) => {
   const { itemNumbers, itemsAdded } = route.params;
 
-  const svg = useRef<Svg>(null!);
+  const svg = useRef<Svg>(null);
 
   const shareQR = useCallback(() => {
-    // @ts-ignore
+    // @ts-expect-error
     svg.current.toDataURL((data: string) => {
       const shareImageBase64 = {
         title: "QRCode",
