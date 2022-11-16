@@ -63,7 +63,7 @@
     "@typescript-eslint/no-throw-literal": [0],
     "@typescript-eslint/naming-convention": [0],
     "@typescript-eslint/consistent-type-definitions": [2, "type"],
-    "react/jsx-props-no-spreading": 0,
+    "react/jsx-props-no-spreading": [0],
     "@typescript-eslint/ban-ts-comment": [0]
   },
   "parserOptions": {
