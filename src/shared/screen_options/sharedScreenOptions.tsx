@@ -1,12 +1,13 @@
 import type {
-  BottomTabNavigationOptions,
   BottomTabHeaderProps,
+  BottomTabNavigationOptions,
 } from "@react-navigation/bottom-tabs";
 import type { MaterialTopTabNavigationOptions } from "@react-navigation/material-top-tabs";
+import type { NativeStackHeaderProps } from "@react-navigation/native-stack";
 import type {
-  NativeStackHeaderProps,
-  NativeStackNavigationOptions,
-} from "@react-navigation/native-stack";
+  StackHeaderProps,
+  StackNavigationOptions,
+} from "@react-navigation/stack";
 import HeaderHomeStackNavigator from "../../components/HeaderComponents/HeaderHomeStackNavigator";
 import { HeaderRightFC } from "../../components/HeaderComponents/HeaderRightComponent";
 import TabBarIconHome from "../../components/TabBarComponents/TabBarIconHome";
@@ -23,7 +24,8 @@ const headerShown = false as const;
 // );
 
 const stackHeader = (
-  props: Pick<NativeStackHeaderProps, "navigation" | "route" | "options">
+  props: Pick<StackHeaderProps, "navigation" | "route" | "options">
+  // props: Pick<NativeStackHeaderProps, "navigation" | "route" | "options">
 ) => <HeaderHomeStackNavigator {...props} />;
 
 const tabHeader = (
@@ -48,7 +50,8 @@ const headerTintColor = "white" as const;
 const headerStyle = { backgroundColor: MAIN_COLOR } as const;
 const headerRight = HeaderRightFC;
 
-export const refHeaderOptions: NativeStackNavigationOptions = {
+export const refHeaderOptions: StackNavigationOptions = {
+  // export const refHeaderOptions: NativeStackNavigationOptions = {
   headerTitleStyle,
   headerBackTitleVisible,
   headerTintColor,
@@ -71,15 +74,17 @@ export const itemsByCategoryTabOptions: MaterialTopTabNavigationOptions = {
   tabBarLabel: "Items By Category",
 } as const;
 
+const tabBarIcon = (props: tabBarIconProps) => <TabBarIconHome {...props} />;
+
 export const homeOptions: BottomTabNavigationOptions = {
   ...screenTabOptions,
-  tabBarIcon: (props: tabBarIconProps) => <TabBarIconHome {...props} />,
+  tabBarIcon,
 };
 
 export const itemLookupOptions: BottomTabNavigationOptions = {
   // freezeOnBlur: true,
   // headerForceInset: { top: "never", bottom: "never" },
-  lazy: false,
+  // lazy: false,
   // unmountOnBlur: true,
   // safeAreaInsets: { top: 0 },
   // headerStatusBarHeight: 0,
@@ -91,6 +96,7 @@ export const itemLookupOptions: BottomTabNavigationOptions = {
 
 export const shoppingCartOptions: BottomTabNavigationOptions = {
   // headerShown,
+  // headerStatusBarHeight: 0,
   tabBarLabel: "Shopping Cart",
   tabBarIcon: (props: tabBarIconProps) => <TabBarIconShoppingCart {...props} />,
   headerTitle: "Shopping Cart",
@@ -107,6 +113,7 @@ export const shoppingCartOptions: BottomTabNavigationOptions = {
 } as const;
 
 export const itemsReferenceOptions: BottomTabNavigationOptions = {
+  // headerStatusBarHeight: 0,
   tabBarLabel: "Items Reference",
   // lazy: false,
   tabBarIcon: (props: tabBarIconProps) => (

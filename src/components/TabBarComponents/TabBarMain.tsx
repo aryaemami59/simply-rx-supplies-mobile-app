@@ -52,6 +52,9 @@ const TabBarMain: FC = () => {
   return (
     <SafeAreaProvider>
       <Tab.Navigator
+      // defaultScreenOptions={{ headerStatusBarHeight: 0 }}
+      // safeAreaInsets={{ top: 0 }}
+      // detachInactiveScreens
       // screenOptions={{ headerStatusBarHeight: 0 }}
       >
         <Tab.Group screenOptions={homeGroupOptions}>

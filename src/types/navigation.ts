@@ -1,17 +1,15 @@
 import type {
   BottomTabHeaderProps,
-  BottomTabScreenProps,
   BottomTabNavigationProp,
+  BottomTabScreenProps,
 } from "@react-navigation/bottom-tabs";
 import type { MaterialTopTabScreenProps } from "@react-navigation/material-top-tabs";
 import type {
   CompositeScreenProps,
   NavigatorScreenParams,
 } from "@react-navigation/native";
-import type {
-  NativeStackHeaderProps,
-  NativeStackScreenProps,
-} from "@react-navigation/native-stack";
+import type { NativeStackScreenProps } from "@react-navigation/native-stack";
+import type { StackHeaderProps } from "@react-navigation/stack";
 import type {
   Category,
   ItemName,
@@ -106,7 +104,7 @@ export type BarcodeImageScreenProps = CompositeScreenProps<
 
 export type HeaderHomeStackNavigatorProps =
   | Pick<BottomTabHeaderProps, "navigation" | "route" | "options">
-  | Pick<NativeStackHeaderProps, "navigation" | "route" | "options">;
+  | Pick<StackHeaderProps, "navigation" | "route" | "options">;
 
 export type ItemsReferenceStackNavigatorProps = BottomTabScreenProps<
   RootTabParamList,

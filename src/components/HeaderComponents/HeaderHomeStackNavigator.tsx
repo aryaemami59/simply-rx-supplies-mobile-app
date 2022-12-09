@@ -34,6 +34,7 @@ const styles = StyleSheet.create({
   searchBarContainer: {
     borderBottomWidth: 0,
     borderTopWidth: 0,
+    // height: 50,
   },
   searchBarInputContainer: {
     backgroundColor: SEARCH_BAR_COLOR,

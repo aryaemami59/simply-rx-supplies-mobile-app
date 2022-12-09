@@ -4,6 +4,7 @@ import { createTheme, ThemeProvider, useTheme } from "@rneui/themed";
 import type { FC } from "react";
 import { useMemo, memo } from "react";
 import { Provider as PaperProvider } from "react-native-paper";
+import { enableLayoutAnimations } from "react-native-reanimated";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { enableScreens } from "react-native-screens";
 import { Provider } from "react-redux";
@@ -12,8 +13,8 @@ import { fetchItems } from "./src/redux/addedSlice";
 import { store } from "./src/redux/store";
 
 // enableLayoutAnimations(false);
-enableScreens(false);
-// enableScreens();
+enableScreens(true);
+// enableScreens(false);
 // enableFreeze();
 
 store.dispatch(fetchItems()).catch(e => console.log(e));

@@ -1,26 +1,27 @@
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createStackNavigator } from "@react-navigation/stack";
 import type { FC } from "react";
 import { memo } from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import useIsLoading from "../../shared/hooks/useIsLoading";
 import ErrMsgComponent from "../../shared/components/ErrMsgComponent";
+import IsLoadingComponents from "../../shared/components/IsLoadingComponents";
+import useIsLoading from "../../shared/hooks/useIsLoading";
 import {
   itemDetailsOptions,
   refHeaderOptions,
   screenStackOptions,
 } from "../../shared/screen_options/sharedScreenOptions";
+import type {
+  ShoppingCartStackNavigatorProps,
+  ShoppingCartStackParamList,
+} from "../../types/navigation";
 import BarcodeImageScreen from "../Screens/ShoppingCart/BarcodeImage/BarcodeImageScreen";
 import CartColumnListItemsScreen from "../Screens/ShoppingCart/CartColumnListItems/CartColumnListItemsScreen";
 import ItemDetailsScreen from "../Screens/ShoppingCart/CartColumnListItems/ItemDetails/ItemDetailsScreen";
 import QRImageScreen from "../Screens/ShoppingCart/QRImage/QRImageScreen";
 import ShoppingCartScreen from "../Screens/ShoppingCart/ShoppingCartScreen";
-import IsLoadingComponents from "../../shared/components/IsLoadingComponents";
-import type {
-  ShoppingCartStackParamList,
-  ShoppingCartStackNavigatorProps,
-} from "../../types/navigation";
 
-const Stack = createNativeStackNavigator<ShoppingCartStackParamList>();
+const Stack = createStackNavigator<ShoppingCartStackParamList>();
+// const Stack = createNativeStackNavigator<ShoppingCartStackParamList>();
 
 type Props = ShoppingCartStackNavigatorProps;
 
