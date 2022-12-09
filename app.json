@@ -7,13 +7,16 @@
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
+    "privacy": "public",
+    "sdkVersion": "47.0.0",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
     "updates": {
-      "fallbackToCacheTimeout": 0
+      "fallbackToCacheTimeout": 0,
+      "url": "https://u.expo.dev/f28497ee-7028-4428-9dab-66dd58ea0afe"
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
@@ -33,6 +36,9 @@
       "eas": {
         "projectId": "f28497ee-7028-4428-9dab-66dd58ea0afe"
       }
+    },
+    "runtimeVersion": {
+      "policy": "sdkVersion"
     }
   }
 }
