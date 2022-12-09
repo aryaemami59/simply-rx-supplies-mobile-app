@@ -1,8 +1,8 @@
 import { NavigationContainer } from "@react-navigation/native";
-import { createTheme, ThemeProvider } from "@rneui/themed";
+import { createTheme, ThemeProvider, useTheme } from "@rneui/themed";
 // import whyDidYouRender from "@welldone-software/why-did-you-render";
 import type { FC } from "react";
-import { memo } from "react";
+import { useMemo, memo } from "react";
 import { Provider as PaperProvider } from "react-native-paper";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { enableScreens } from "react-native-screens";
@@ -41,6 +41,14 @@ const myTheme = createTheme({
 // });
 
 const App: FC = () => {
+  // const { background: backgroundColor } = useTheme().theme.colors;
+
+  // const style = useMemo(
+  //   () => ({
+  //     backgroundColor,
+  //   }),
+  //   [backgroundColor]
+  // );
   // const bg =
   //   myTheme.mode === "light"
   //     ? myTheme.lightColors?.background

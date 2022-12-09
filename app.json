@@ -21,6 +21,7 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
+      "backgroundColor": "#ffffff",
       "bundleIdentifier": "com.aryaemami59.rxsupplies"
     },
     "android": {
