@@ -1,5 +1,6 @@
 import { ListItem, useTheme } from "@rneui/themed";
-import { FC, memo, useMemo } from "react";
+import type { FC } from "react";
+import { memo, useMemo } from "react";
 import { shallowEqual } from "react-redux";
 import { useAppSelector } from "../../../../redux/hooks";
 import { selectVendorsByItemName } from "../../../../redux/selectors";

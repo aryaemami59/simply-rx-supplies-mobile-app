@@ -1,14 +1,15 @@
 import { useTheme } from "@rneui/themed";
-import { FC, memo, useMemo } from "react";
-import { FlatList, ListRenderItem } from "react-native";
+import type { FC } from "react";
+import { memo, useMemo } from "react";
+import type { ListRenderItem } from "react-native";
+import { FlatList } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { shallowEqual } from "react-redux";
-import { ItemName } from "../../../../custom_types/api";
-import { ItemLookupScreenProps } from "../../../../custom_types/navigation";
 import { useAppSelector } from "../../../redux/hooks";
 import { selectAllListItems } from "../../../redux/selectors";
 import ItemNameProvider from "../../../shared/contexts/ItemNameProvider";
-import useStatus from "../../../shared/hooks/useStatus";
+import type { ItemName } from "../../../types/api";
+import type { ItemLookupScreenProps } from "../../../types/navigation";
 import BottomSheetComponent from "./BottomSheet/BottomSheetComponent";
 import InputField from "./SearchBar/InputField";
 import SingleSearchResultsListItem from "./SearchResults/SingleSearchResultsListItem";
@@ -31,16 +32,8 @@ const ItemLookupScreen: FC<Props> = ({ navigation, route }) => {
 
   const listItems = useAppSelector(selectAllListItems, shallowEqual);
 
-  // const viewStyle = useMemo(
-  //   () => [styles.containerStyle, { backgroundColor }],
-  //   [backgroundColor]
-  // );
-
-  useStatus("ItemLookup");
-
   return (
     <SafeAreaProvider style={style}>
-      {/* <View style={viewStyle}> */}
       <InputField />
       <BottomSheetComponent />
       <FlatList
@@ -52,18 +45,8 @@ const ItemLookupScreen: FC<Props> = ({ navigation, route }) => {
         keyboardShouldPersistTaps="handled"
         initialNumToRender={7}
       />
-      {/* </View> */}
     </SafeAreaProvider>
   );
 };
-
-// const styles = StyleSheet.create({
-//   containerStyle: {
-//     alignItems: "stretch",
-//     height: "100%",
-//     justifyContent: "space-between",
-//     paddingBottom: 10,
-//   },
-// });
 
 export default memo<Props>(ItemLookupScreen);

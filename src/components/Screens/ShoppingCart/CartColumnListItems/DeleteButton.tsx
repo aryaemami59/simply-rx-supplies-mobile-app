@@ -1,5 +1,6 @@
 import { Button } from "@rneui/themed";
-import { FC, memo, useCallback } from "react";
+import type { FC } from "react";
+import { memo, useCallback } from "react";
 import { removeItems } from "../../../../redux/addedSlice";
 import { useAppDispatch } from "../../../../redux/hooks";
 import useItemName from "../../../../shared/hooks/useItemName";

@@ -1,0 +1,100 @@
+{
+  "env": {
+    "browser": true,
+    "es2022": true,
+    "react-native/react-native": true
+  },
+  "extends": [
+    "@react-native-community",
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "airbnb",
+    "airbnb-typescript",
+    "airbnb/hooks",
+    "react-app",
+    "plugin:react/recommended",
+    "plugin:react/jsx-runtime",
+    "plugin:jsx-a11y/strict",
+    "plugin:react-redux/all",
+    "plugin:react-perf/all",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "plugin:@typescript-eslint/strict",
+    "prettier/prettier",
+    "plugin:prettier/recommended",
+    "plugin:react-native/all"
+  ],
+  "overrides": [],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": "latest",
+    "project": ["./tsconfig.json"],
+    "sourceType": "module",
+    "tsconfigRootDir": "./"
+  },
+  "plugins": [
+    "react",
+    "react-native",
+    "@typescript-eslint",
+    "eslint-plugin-prettier",
+    "react-perf",
+    "prefer-arrow-functions",
+    "prettier",
+    "jsx-a11y"
+  ],
+  "root": true,
+  "rules": {
+    "@typescript-eslint/ban-ts-comment": [0],
+    "@typescript-eslint/consistent-type-definitions": [2, "type"],
+    "@typescript-eslint/consistent-type-imports": [2],
+    "@typescript-eslint/naming-convention": [0],
+    "@typescript-eslint/no-floating-promises": [0],
+    "@typescript-eslint/no-throw-literal": [0],
+    "no-console": 0,
+    "no-param-reassign": [
+      2,
+      {
+        "props": false
+      }
+    ],
+    "prefer-arrow-functions/prefer-arrow-functions": [
+      2,
+      {
+        "classPropertiesAllowed": false,
+        "disallowPrototype": true,
+        "returnStyle": "unchanged",
+        "singleReturnOnly": false
+      }
+    ],
+    "prettier/prettier": [
+      2,
+      {
+        "arrowParens": "avoid",
+        "bracketSameLine": true,
+        "endOfLine": "auto",
+        "parser": "typescript",
+        "singleAttributePerLine": true
+      }
+    ],
+    "react-native/no-color-literals": [0],
+    "react-native/sort-styles": [0],
+    "react/function-component-definition": [
+      2,
+      {
+        "namedComponents": "arrow-function",
+        "unnamedComponents": "arrow-function"
+      }
+    ],
+    "react/jsx-props-no-spreading": [0],
+    "react/require-default-props": [0]
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  }
+}

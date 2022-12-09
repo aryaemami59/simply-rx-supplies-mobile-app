@@ -1,16 +1,17 @@
 import { ListItem, useTheme } from "@rneui/themed";
-import { FC, memo, useCallback, useMemo, useState } from "react";
+import type { FC } from "react";
+import { memo, useCallback, useMemo, useState } from "react";
 import { TouchableHighlight } from "react-native";
-import {
-  OfficialVendorNameType,
-  VendorNameType,
-} from "../../../../../custom_types/api";
 import {
   setVendorsForAllCheck,
   setVendorsForAllUncheck,
 } from "../../../../redux/addedSlice";
 import { useAppDispatch } from "../../../../redux/hooks";
 import { WIDTH_100 } from "../../../../shared/styles/sharedStyles";
+import type {
+  OfficialVendorNameType,
+  VendorNameType,
+} from "../../../../types/api";
 
 type Props = {
   title: OfficialVendorNameType;

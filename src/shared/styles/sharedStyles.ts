@@ -1,4 +1,4 @@
-import { FlexStyle, ImageStyle, TextStyle, ViewStyle } from "react-native";
+import type { FlexStyle, ImageStyle, TextStyle, ViewStyle } from "react-native";
 
 export const MAIN_COLOR = "#0071dc" as const;
 

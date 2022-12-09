@@ -1,8 +1,8 @@
 import { useNavigation } from "@react-navigation/native";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { FC, memo, useCallback, useMemo } from "react";
+import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import type { FC } from "react";
+import { memo, useCallback, useMemo } from "react";
 import { Image, StyleSheet, TouchableOpacity } from "react-native";
-import { ShoppingCartStackParamList } from "../../../../../custom_types/navigation";
 import { useAppSelector } from "../../../../redux/hooks";
 import { selectItemSrc } from "../../../../redux/selectors";
 import useItemName from "../../../../shared/hooks/useItemName";
@@ -10,6 +10,7 @@ import {
   AI_CENTER,
   BARCODE_ASPECT_RATIO,
 } from "../../../../shared/styles/sharedStyles";
+import type { ShoppingCartStackParamList } from "../../../../types/navigation";
 
 const styles = StyleSheet.create({
   ImageStyle: {

@@ -1,18 +1,17 @@
 import { MaterialIcons } from "@expo/vector-icons";
 import { Button, Chip, ListItem, useTheme } from "@rneui/themed";
-import { FC, memo, useCallback, useEffect, useMemo } from "react";
+import type { FC } from "react";
+import { memo, useCallback, useEffect, useMemo } from "react";
+import type { ListRenderItem } from "react-native";
 import {
   FlatList,
   Linking,
-  ListRenderItem,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from "react-native";
 import { shallowEqual } from "react-redux";
-import { CartColumnListItemsScreenProps } from "../../../../../custom_types/navigation";
-import { ItemName } from "../../../../../custom_types/api";
 import { useAppSelector } from "../../../../redux/hooks";
 import {
   checkIfAnyItemsAddedToOneVendor,
@@ -32,6 +31,8 @@ import {
   TEXT_UNDERLINE,
   WIDTH_100,
 } from "../../../../shared/styles/sharedStyles";
+import type { ItemName } from "../../../../types/api";
+import type { CartColumnListItemsScreenProps } from "../../../../types/navigation";
 import CartQRCodeImage from "../QRImage/CartQRCodeImage";
 import SingleCartListItems from "./SingleCartListItems";
 

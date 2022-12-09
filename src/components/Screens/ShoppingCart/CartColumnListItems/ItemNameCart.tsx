@@ -1,5 +1,6 @@
 import { useTheme } from "@rneui/themed";
-import { FC, memo, useMemo } from "react";
+import type { FC } from "react";
+import { memo, useMemo } from "react";
 import { Text, View } from "react-native";
 import useItemName from "../../../../shared/hooks/useItemName";
 import { AI_CENTER, TEXT_CENTER } from "../../../../shared/styles/sharedStyles";

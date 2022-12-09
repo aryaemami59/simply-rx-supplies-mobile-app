@@ -1,6 +1,7 @@
 import { BottomSheet } from "@rneui/base";
 import { Button } from "@rneui/themed";
-import { FC, memo, useCallback, useState } from "react";
+import type { FC } from "react";
+import { memo, useCallback, useState } from "react";
 import { Keyboard, StyleSheet, View } from "react-native";
 import { shallowEqual } from "react-redux";
 import { useAppSelector } from "../../../../redux/hooks";

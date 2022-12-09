@@ -1,5 +1,6 @@
 import { ListItem } from "@rneui/themed";
-import { FC, memo, useCallback } from "react";
+import type { FC } from "react";
+import { memo, useCallback } from "react";
 import { setVendors } from "../../../../redux/addedSlice";
 import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
 import {

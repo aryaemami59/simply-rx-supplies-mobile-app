@@ -1,14 +1,15 @@
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { useTheme } from "@rneui/themed";
-import { FC, memo, useMemo } from "react";
-import {
-  ItemsReferenceScreenProps,
-  ItemsReferenceTopTabParamList,
-} from "../../../../custom_types/navigation";
+import type { FC } from "react";
+import { memo, useMemo } from "react";
 import {
   itemsByCategoryTabOptions,
   itemsByVendorTabOptions,
 } from "../../../shared/screen_options/sharedScreenOptions";
+import type {
+  ItemsReferenceScreenProps,
+  ItemsReferenceTopTabParamList,
+} from "../../../types/navigation";
 import ItemsByCategoryScreen from "./ItemsByCategory/ItemsByCategoryScreen";
 import ItemsByVendorScreen from "./ItemsByVendor/ItemsByVendorScreen";
 

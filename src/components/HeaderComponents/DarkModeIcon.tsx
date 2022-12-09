@@ -1,6 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
 import { useThemeMode } from "@rneui/themed";
-import { FC, memo, useCallback } from "react";
+import type { FC } from "react";
+import { memo, useCallback } from "react";
 import { TouchableHighlight } from "react-native";
 
 const DarkModeIcon: FC = () => {

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-const useUpdateLogger = (value: Record<string, unknown> | []) => {
+const useValueUpdateLogger = (value: Record<string, unknown> | []) => {
   useEffect(() => {
     console.log(
       `%c${JSON.stringify(value, null, 2)} \nchanged`,
@@ -9,4 +9,4 @@ const useUpdateLogger = (value: Record<string, unknown> | []) => {
   }, [value]);
 };
 
-export default useUpdateLogger;
+export default useValueUpdateLogger;

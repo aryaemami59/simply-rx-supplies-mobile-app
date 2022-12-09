@@ -4,15 +4,16 @@ import {
   MaterialIcons,
 } from "@expo/vector-icons";
 import { Chip, useTheme } from "@rneui/themed";
-import { FC, memo, useCallback, useMemo } from "react";
+import type { FC } from "react";
+import { memo, useCallback, useMemo } from "react";
 import { StyleSheet, View } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
-import { HomeScreenProps } from "../../../../custom_types/navigation";
 import {
   BACKGROUND_MAIN_COLOR,
   FONT_WEIGHT_700,
   MAIN_COLOR,
 } from "../../../shared/styles/sharedStyles";
+import type { HomeScreenProps } from "../../../types/navigation";
 
 const searchIcon = (
   <FontAwesome5

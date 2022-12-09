@@ -1,5 +1,6 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { FC, memo } from "react";
+import type { FC } from "react";
+import { memo } from "react";
 
 const MinimizeIcon: FC = () => (
   <MaterialCommunityIcons

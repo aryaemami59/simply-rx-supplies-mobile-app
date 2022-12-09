@@ -1,7 +1,8 @@
 import { Octicons } from "@expo/vector-icons";
-import { NativeStackNavigationOptions } from "@react-navigation/native-stack";
+import type { NativeStackNavigationOptions } from "@react-navigation/native-stack";
 import { useTheme } from "@rneui/themed";
-import { FC, memo, useCallback, useEffect, useMemo } from "react";
+import type { FC } from "react";
+import { memo, useCallback, useEffect, useMemo } from "react";
 import {
   Image,
   Platform,
@@ -10,13 +11,13 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { BarcodeImageScreenProps } from "../../../../../custom_types/navigation";
-import useUpdateLogger from "../../../../shared/hooks/useUpdateLogger";
+import useValueUpdateLogger from "../../../../shared/hooks/useValueUpdateLogger";
 import {
   BARCODE_ASPECT_RATIO,
   JC_AI_CENTER_HEIGHT100,
   WIDTH_90,
 } from "../../../../shared/styles/sharedStyles";
+import type { BarcodeImageScreenProps } from "../../../../types/navigation";
 
 const iconName = Platform.OS === "android" ? "share-android" : "share";
 
@@ -55,7 +56,7 @@ const BarcodeImageScreen: FC<Props> = ({ navigation, route }) => {
     Share.share(shareContent).catch(e => console.log(e));
   }, [shareContent]);
 
-  useUpdateLogger(route);
+  useValueUpdateLogger(route);
 
   useEffect(() => {
     navigation.setOptions(options);

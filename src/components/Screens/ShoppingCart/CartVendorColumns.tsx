@@ -1,9 +1,9 @@
 import { useNavigation } from "@react-navigation/native";
 import { Badge, ListItem, useTheme } from "@rneui/themed";
-import { FC, memo, useCallback, useMemo } from "react";
+import type { FC } from "react";
+import { memo, useCallback, useMemo } from "react";
 import { StyleSheet } from "react-native";
 import TouchableScale from "react-native-touchable-scale";
-import { ShoppingCartNavigationProps } from "../../../../custom_types/navigation";
 import { useAppSelector } from "../../../redux/hooks";
 import { addedItemsLength } from "../../../redux/selectors";
 import useOfficialVendorName from "../../../shared/hooks/useOfficialVendorName";
@@ -13,6 +13,7 @@ import {
   FONT_WEIGHT_BOLD,
   JC_SPACE_BETWEEN,
 } from "../../../shared/styles/sharedStyles";
+import type { ShoppingCartNavigationProps } from "../../../types/navigation";
 
 const CartVendorColumns: FC = () => {
   const vendorName = useVendorName();

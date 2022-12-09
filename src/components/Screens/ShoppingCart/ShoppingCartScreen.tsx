@@ -1,11 +1,13 @@
 import { useTheme } from "@rneui/themed";
-import { FC, memo, useMemo } from "react";
-import { FlatList, ListRenderItem, View } from "react-native";
-import { ShoppingCartScreenProps } from "../../../../custom_types/navigation";
-import { VendorNameType } from "../../../../custom_types/api";
+import type { FC } from "react";
+import { memo, useMemo } from "react";
+import type { ListRenderItem } from "react-native";
+import { FlatList, View } from "react-native";
 import VendorNameProvider from "../../../shared/contexts/VendorNameProvider";
 import useVendorNamesList from "../../../shared/hooks/useVendorNamesList";
 import { HEIGHT_100 } from "../../../shared/styles/sharedStyles";
+import type { VendorNameType } from "../../../types/api";
+import type { ShoppingCartScreenProps } from "../../../types/navigation";
 import CartVendorColumns from "./CartVendorColumns";
 
 const renderItem: ListRenderItem<VendorNameType> = ({ item }) => (

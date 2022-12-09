@@ -1,10 +1,7 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { FC, memo } from "react";
+import type { FC } from "react";
+import { memo } from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import {
-  ItemsReferenceStackNavigatorProps,
-  ItemsReferenceStackParamList,
-} from "../../../custom_types/navigation";
 import useIsLoading from "../../shared/hooks/useIsLoading";
 import ErrMsgComponent from "../../shared/components/ErrMsgComponent";
 import {
@@ -15,6 +12,10 @@ import ItemsByCategoryListItems from "../Screens/ItemsReference/ItemsByCategory/
 import ItemsByVendorListItems from "../Screens/ItemsReference/ItemsByVendor/ItemsByVendorListItems";
 import ItemsReferenceScreen from "../Screens/ItemsReference/ItemsReferenceScreen";
 import IsLoadingComponents from "../../shared/components/IsLoadingComponents";
+import type {
+  ItemsReferenceStackNavigatorProps,
+  ItemsReferenceStackParamList,
+} from "../../types/navigation";
 
 type Props = ItemsReferenceStackNavigatorProps;
 

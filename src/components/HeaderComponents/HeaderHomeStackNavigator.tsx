@@ -1,12 +1,8 @@
-import { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
+import type { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
 import { Header, SearchBar } from "@rneui/themed";
-import { FC, memo, useCallback, useMemo, useRef } from "react";
+import type { FC } from "react";
+import { memo, useCallback, useMemo, useRef } from "react";
 import { StyleSheet } from "react-native";
-import { SearchBarRef } from "../../../custom_types/missingTypes";
-import {
-  HeaderHomeStackNavigatorProps,
-  RootTabParamList,
-} from "../../../custom_types/navigation";
 import {
   BACKGROUND_TRANSPARENT,
   COLOR_WHITE,
@@ -17,6 +13,11 @@ import {
   SEARCH_BAR_COLOR,
   WIDTH_80,
 } from "../../shared/styles/sharedStyles";
+import type { SearchBarRef } from "../../types/missingTypes";
+import type {
+  HeaderHomeStackNavigatorProps,
+  RootTabParamList,
+} from "../../types/navigation";
 import HeaderRightComponent from "./HeaderRightComponent";
 import SearchClearIcon from "./SearchClearIcon";
 import SearchIcon from "./SearchIcon";

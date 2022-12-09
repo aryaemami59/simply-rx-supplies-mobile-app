@@ -1,8 +1,8 @@
-import { SearchBar as SearchBarType } from "@rneui/base";
-import { SearchBarProps } from "@rneui/themed";
-import { PropsWithChildren } from "react";
-import { TextInput, View } from "react-native";
-import * as Animatable from "react-native-animatable";
+import type { SearchBar as SearchBarType } from "@rneui/base";
+import type { SearchBarProps } from "@rneui/themed";
+import type { PropsWithChildren } from "react";
+import type { TextInput, View } from "react-native";
+import type * as Animatable from "react-native-animatable";
 
 export type tabBarIconProps = {
   focused: boolean;

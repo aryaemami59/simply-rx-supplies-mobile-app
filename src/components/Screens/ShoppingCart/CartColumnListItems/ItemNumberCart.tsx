@@ -1,5 +1,6 @@
 import { useTheme } from "@rneui/themed";
-import { FC, memo, useMemo } from "react";
+import type { FC } from "react";
+import { memo, useMemo } from "react";
 import { Text, View } from "react-native";
 import { useAppSelector } from "../../../../redux/hooks";
 import { selectItemNumber } from "../../../../redux/selectors";

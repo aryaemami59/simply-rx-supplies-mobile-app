@@ -1,10 +1,7 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { FC, memo } from "react";
+import type { FC } from "react";
+import { memo } from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import {
-  ShoppingCartStackNavigatorProps,
-  ShoppingCartStackParamList,
-} from "../../../custom_types/navigation";
 import useIsLoading from "../../shared/hooks/useIsLoading";
 import ErrMsgComponent from "../../shared/components/ErrMsgComponent";
 import {
@@ -18,6 +15,10 @@ import ItemDetailsScreen from "../Screens/ShoppingCart/CartColumnListItems/ItemD
 import QRImageScreen from "../Screens/ShoppingCart/QRImage/QRImageScreen";
 import ShoppingCartScreen from "../Screens/ShoppingCart/ShoppingCartScreen";
 import IsLoadingComponents from "../../shared/components/IsLoadingComponents";
+import type {
+  ShoppingCartStackParamList,
+  ShoppingCartStackNavigatorProps,
+} from "../../types/navigation";
 
 const Stack = createNativeStackNavigator<ShoppingCartStackParamList>();
 

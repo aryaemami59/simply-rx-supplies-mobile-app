@@ -1,5 +1,6 @@
 import { EvilIcons } from "@expo/vector-icons";
-import { FC, memo } from "react";
+import type { FC } from "react";
+import { memo } from "react";
 import { Platform } from "react-native";
 
 const name = Platform.OS === "ios" ? "share-apple" : "share-google";

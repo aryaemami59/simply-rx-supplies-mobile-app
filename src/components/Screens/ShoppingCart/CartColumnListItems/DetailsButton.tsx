@@ -1,11 +1,12 @@
 import { useNavigation } from "@react-navigation/native";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { Button } from "@rneui/themed";
-import { FC, memo, useCallback } from "react";
-import { ShoppingCartStackParamList } from "../../../../../custom_types/navigation";
+import type { FC } from "react";
+import { memo, useCallback } from "react";
 import useItemName from "../../../../shared/hooks/useItemName";
 import useVendorName from "../../../../shared/hooks/useVendorName";
 import { JC_SPACE_EVENLY } from "../../../../shared/styles/sharedStyles";
+import type { ShoppingCartStackParamList } from "../../../../types/navigation";
 import DetailsIconNode from "./DetailsIconNode";
 
 type Props = {

@@ -1,21 +1,17 @@
-import {
-  createAsyncThunk,
-  createSlice,
-  current,
-  PayloadAction,
-} from "@reduxjs/toolkit";
+import type { PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, current } from "@reduxjs/toolkit";
 import axios from "axios";
-import {
-  Category,
-  ItemName,
-  VendorAndItemName,
-  VendorNameType,
-} from "../../custom_types/api";
-import { FetchedData, AddedState } from "../../custom_types/redux";
 import emptyArr from "../utils/emptyArr";
 import emptyObj from "../utils/emptyObj";
 import intersection from "../utils/intersection";
 import GITHUB_URL_ITEMS from "../data/fetchInfo";
+import type {
+  ItemName,
+  VendorNameType,
+  VendorAndItemName,
+  Category,
+} from "../types/api";
+import type { FetchedData, AddedState } from "../types/redux";
 
 export const fetchItems = createAsyncThunk<FetchedData>(
   `items/fetchitems`,

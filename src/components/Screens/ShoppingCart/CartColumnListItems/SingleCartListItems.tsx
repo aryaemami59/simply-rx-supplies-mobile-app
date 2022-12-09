@@ -1,5 +1,6 @@
 import { ListItem, useTheme } from "@rneui/themed";
-import { FC, memo, useCallback, useMemo, useState } from "react";
+import type { FC } from "react";
+import { memo, useCallback, useMemo, useState } from "react";
 import { View } from "react-native";
 import Collapsible from "react-native-collapsible";
 import {

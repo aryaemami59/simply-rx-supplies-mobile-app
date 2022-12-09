@@ -1,4 +1,5 @@
-import { FC, memo } from "react";
+import type { FC } from "react";
+import { memo } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { COLOR_RED } from "../styles/sharedStyles";
 

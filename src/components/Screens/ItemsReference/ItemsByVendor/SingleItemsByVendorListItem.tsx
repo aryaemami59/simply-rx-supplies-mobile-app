@@ -1,6 +1,7 @@
 import { MaterialIcons } from "@expo/vector-icons";
 import { Chip, ListItem, useTheme } from "@rneui/themed";
-import { FC, memo, useCallback, useMemo } from "react";
+import type { FC } from "react";
+import { memo, useCallback, useMemo } from "react";
 import { addItemsByVendor } from "../../../../redux/addedSlice";
 import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
 import {

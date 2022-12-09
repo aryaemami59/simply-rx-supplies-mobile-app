@@ -1,8 +1,8 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useTheme } from "@rneui/themed";
-import { FC, memo, useMemo } from "react";
+import type { FC } from "react";
+import { memo, useMemo } from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import { RootTabParamList } from "../../../custom_types/navigation";
 import { useAppSelector } from "../../redux/hooks";
 import { checkIfAnyItemsAdded } from "../../redux/selectors";
 import {
@@ -12,6 +12,7 @@ import {
   itemsReferenceOptions,
   shoppingCartOptions,
 } from "../../shared/screen_options/sharedScreenOptions";
+import type { RootTabParamList } from "../../types/navigation";
 import HomeScreen from "../Screens/Home/HomeScreen";
 import ItemLookupScreen from "../Screens/ItemLookUp/ItemLookupScreen";
 import ItemsReferenceStackNavigator from "../StackNavigatorComponents/ItemsReferenceStackNavigator";

@@ -1,16 +1,17 @@
 import { useNavigation } from "@react-navigation/native";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { FC, memo, useCallback } from "react";
+import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import type { FC } from "react";
+import { memo, useCallback } from "react";
 import { TouchableOpacity } from "react-native";
 import QRCode from "react-native-qrcode-svg";
 import { shallowEqual } from "react-redux";
-import { VendorNameType } from "../../../../../custom_types/api";
-import { ShoppingCartStackParamList } from "../../../../../custom_types/navigation";
 import { useAppSelector } from "../../../../redux/hooks";
 import {
   selectItemsAddedByVendor,
   selectQRCodeContent,
 } from "../../../../redux/selectors";
+import type { VendorNameType } from "../../../../types/api";
+import type { ShoppingCartStackParamList } from "../../../../types/navigation";
 
 type Props = {
   vendorName: VendorNameType;

@@ -1,18 +1,24 @@
 import type {
   BottomTabHeaderProps,
   BottomTabScreenProps,
+  BottomTabNavigationProp,
 } from "@react-navigation/bottom-tabs";
-import { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
-import { MaterialTopTabScreenProps } from "@react-navigation/material-top-tabs";
-import {
+import type { MaterialTopTabScreenProps } from "@react-navigation/material-top-tabs";
+import type {
   CompositeScreenProps,
   NavigatorScreenParams,
 } from "@react-navigation/native";
-import {
+import type {
   NativeStackHeaderProps,
   NativeStackScreenProps,
 } from "@react-navigation/native-stack";
-import { Category, ItemName, ItemNumber, Src, VendorNameType } from "./api";
+import type {
+  Category,
+  ItemName,
+  ItemNumber,
+  Src,
+  VendorNameType,
+} from "./api";
 
 export const home = "Home" as const;
 export type Home = typeof home;

@@ -1,8 +1,8 @@
 import { Image, ListItem, Text, useTheme } from "@rneui/themed";
-import { FC, memo, useCallback, useMemo } from "react";
+import type { FC } from "react";
+import { memo, useCallback, useMemo } from "react";
 import { TouchableOpacity } from "react-native";
 import { shallowEqual } from "react-redux";
-import { ItemDetailsScreenProps } from "../../../../../../custom_types/navigation";
 import { useAppSelector } from "../../../../../redux/hooks";
 import {
   selectItemSrc,
@@ -18,6 +18,7 @@ import {
   TEXT_CENTER,
   WIDTH_60,
 } from "../../../../../shared/styles/sharedStyles";
+import type { ItemDetailsScreenProps } from "../../../../../types/navigation";
 
 type Props = ItemDetailsScreenProps;
 

@@ -1,13 +1,15 @@
 import { useTheme } from "@rneui/themed";
-import { FC, memo, useCallback, useEffect, useMemo } from "react";
-import { FlatList, ListRenderItem, View } from "react-native";
-import { ItemsByVendorListItemsProps } from "../../../../../custom_types/navigation";
-import { ItemName } from "../../../../../custom_types/api";
+import type { FC } from "react";
+import { memo, useCallback, useEffect, useMemo } from "react";
+import type { ListRenderItem } from "react-native";
+import { FlatList, View } from "react-native";
 import ItemNameProvider from "../../../../shared/contexts/ItemNameProvider";
 import VendorNameProvider from "../../../../shared/contexts/VendorNameProvider";
 import useItemNames from "../../../../shared/hooks/useItemNames";
 import useOfficialVendorName from "../../../../shared/hooks/useOfficialVendorName";
 import { HEIGHT_100 } from "../../../../shared/styles/sharedStyles";
+import type { ItemName } from "../../../../types/api";
+import type { ItemsByVendorListItemsProps } from "../../../../types/navigation";
 import SingleItemsByVendorListItem from "./SingleItemsByVendorListItem";
 
 const keyExtractor = (item: ItemName) => item;

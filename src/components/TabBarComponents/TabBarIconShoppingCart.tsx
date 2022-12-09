@@ -1,8 +1,9 @@
 import { Ionicons } from "@expo/vector-icons";
-import { FC, memo } from "react";
-import { tabBarIconProps } from "../../../custom_types/missingTypes";
+import type { FC } from "react";
+import { memo } from "react";
 import { useAppSelector } from "../../redux/hooks";
 import { checkIfAnyItemsAdded } from "../../redux/selectors";
+import type { tabBarIconProps } from "../../types/missingTypes";
 
 type Props = tabBarIconProps;
 

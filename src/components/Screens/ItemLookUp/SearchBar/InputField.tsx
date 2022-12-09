@@ -5,19 +5,11 @@ import {
   useRoute,
 } from "@react-navigation/native";
 import { Header, SearchBar, useTheme } from "@rneui/themed";
-import { FC, memo, useCallback, useMemo, useRef, useState } from "react";
+import type { FC } from "react";
+import { memo, useCallback, useMemo, useRef, useState } from "react";
 import { StyleSheet } from "react-native";
 import * as Animatable from "react-native-animatable";
 import { shallowEqual } from "react-redux";
-import {
-  SearchBarRef,
-  AnimatableViewRef,
-  OnChangeText,
-} from "../../../../../custom_types/missingTypes";
-import {
-  ItemLookupNavigationProps,
-  ItemLookupRouteProps,
-} from "../../../../../custom_types/navigation";
 import { clearListItems, setListItems } from "../../../../redux/addedSlice";
 import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
 import { selectItemNamesArr } from "../../../../redux/selectors";
@@ -32,6 +24,15 @@ import {
   WIDTH_100,
   WIDTH_80,
 } from "../../../../shared/styles/sharedStyles";
+import type {
+  SearchBarRef,
+  AnimatableViewRef,
+  OnChangeText,
+} from "../../../../types/missingTypes";
+import type {
+  ItemLookupRouteProps,
+  ItemLookupNavigationProps,
+} from "../../../../types/navigation";
 import search from "../../../../utils/search";
 import HeaderRightComponent from "../../../HeaderComponents/HeaderRightComponent";
 import SearchIcon from "../../../HeaderComponents/SearchIcon";

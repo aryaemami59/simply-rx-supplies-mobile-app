@@ -1,5 +1,6 @@
 import { Button } from "@rneui/themed";
-import { FC, memo, useCallback, useMemo } from "react";
+import type { FC } from "react";
+import { memo, useCallback, useMemo } from "react";
 import { Share } from "react-native";
 import { useAppSelector } from "../../../../redux/hooks";
 import { selectItemNumber, selectItemSrc } from "../../../../redux/selectors";

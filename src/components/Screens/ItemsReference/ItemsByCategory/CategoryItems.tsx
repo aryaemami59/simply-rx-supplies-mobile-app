@@ -1,13 +1,15 @@
 import { useTheme } from "@rneui/themed";
-import { FC, memo, useEffect, useMemo } from "react";
-import { FlatList, ListRenderItem, View } from "react-native";
+import type { FC } from "react";
+import { memo, useEffect, useMemo } from "react";
+import type { ListRenderItem } from "react-native";
+import { FlatList, View } from "react-native";
 import { shallowEqual } from "react-redux";
-import { CategoryItemsProps } from "../../../../../custom_types/navigation";
-import { ItemName } from "../../../../../custom_types/api";
 import { useAppSelector } from "../../../../redux/hooks";
 import { selectCategoriesItemNames } from "../../../../redux/selectors";
 import ItemNameProvider from "../../../../shared/contexts/ItemNameProvider";
 import { HEIGHT_100 } from "../../../../shared/styles/sharedStyles";
+import type { ItemName } from "../../../../types/api";
+import type { CategoryItemsProps } from "../../../../types/navigation";
 import ItemsByCategorySingleListItem from "./ItemsByCategorySingleListItem";
 
 const renderItems: ListRenderItem<ItemName> = ({ item }) => (

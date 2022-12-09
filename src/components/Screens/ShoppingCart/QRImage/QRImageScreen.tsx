@@ -1,6 +1,7 @@
 import { Octicons } from "@expo/vector-icons";
 import { Text, useTheme } from "@rneui/themed";
-import { FC, memo, useCallback, useMemo, useRef } from "react";
+import type { FC } from "react";
+import { memo, useCallback, useMemo, useRef } from "react";
 import {
   Platform,
   Share,
@@ -10,8 +11,7 @@ import {
 } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import QRCode from "react-native-qrcode-svg";
-import Svg from "react-native-svg/lib/typescript/elements/Svg";
-import { QRImageScreenProps } from "../../../../../custom_types/navigation";
+import type Svg from "react-native-svg/lib/typescript/elements/Svg";
 import {
   AI_CENTER,
   HEIGHT_100,
@@ -20,6 +20,7 @@ import {
   PADDING_TOP_20,
   TEXT_CENTER,
 } from "../../../../shared/styles/sharedStyles";
+import type { QRImageScreenProps } from "../../../../types/navigation";
 
 const styles = StyleSheet.create({
   container: {

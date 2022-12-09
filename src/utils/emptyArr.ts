@@ -1,4 +1,4 @@
-import { EmptyArr } from "../../custom_types/redux";
+import type { EmptyArr } from "../types/redux";
 
 const emptyArr: EmptyArr = [];
 
