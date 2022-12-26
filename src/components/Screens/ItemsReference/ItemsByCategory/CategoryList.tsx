@@ -10,6 +10,7 @@ import {
 } from "../../../../shared/styles/sharedStyles";
 import type { Category } from "../../../../types/api";
 import type { ItemsReferenceStackParamList } from "../../../../types/navigation";
+import { itemsByCategoryListItems } from "../../../../types/navigation";
 
 type Props = {
   category: Category;
@@ -21,7 +22,7 @@ const CategoryList: FC<Props> = ({ category }) => {
   const { background } = useTheme().theme.colors;
 
   const clickHandler = useCallback(() => {
-    navigation.push("ItemsByCategoryListItems", { category });
+    navigation.push(itemsByCategoryListItems, { category });
   }, [navigation, category]);
 
   const containerStyle = useMemo(

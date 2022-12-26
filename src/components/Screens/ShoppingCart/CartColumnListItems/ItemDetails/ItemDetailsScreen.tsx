@@ -19,6 +19,7 @@ import {
   WIDTH_60,
 } from "../../../../../shared/styles/sharedStyles";
 import type { ItemDetailsScreenProps } from "../../../../../types/navigation";
+import { barcodeImage } from "../../../../../types/navigation";
 
 type Props = ItemDetailsScreenProps;
 
@@ -39,7 +40,7 @@ const ItemDetailsScreen: FC<Props> = ({ navigation, route }) => {
   );
 
   const clickHandler = useCallback(() => {
-    navigation.navigate("BarcodeImage", {
+    navigation.navigate(barcodeImage, {
       src,
       itemName,
     });

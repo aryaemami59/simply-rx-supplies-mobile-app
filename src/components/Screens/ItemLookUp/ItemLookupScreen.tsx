@@ -1,6 +1,5 @@
-import { useTheme } from "@rneui/themed";
 import type { FC } from "react";
-import { memo, useMemo } from "react";
+import { memo } from "react";
 import type { ListRenderItem } from "react-native";
 import { FlatList } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
@@ -27,13 +26,13 @@ const keyExtractor = (item: ItemName) => item;
 type Props = ItemLookupScreenProps;
 
 const ItemLookupScreen: FC<Props> = ({ navigation, route }) => {
-  const { background: backgroundColor } = useTheme().theme.colors;
-  const style = useMemo(() => ({ backgroundColor }), [backgroundColor]);
+  // const { background: backgroundColor } = useTheme().theme.colors;
+  // const style = useMemo(() => ({ backgroundColor }), [backgroundColor]);
 
   const listItems = useAppSelector(selectAllListItems, shallowEqual);
 
   return (
-    <SafeAreaProvider style={style}>
+    <SafeAreaProvider>
       <InputField />
       <BottomSheetComponent />
       <FlatList

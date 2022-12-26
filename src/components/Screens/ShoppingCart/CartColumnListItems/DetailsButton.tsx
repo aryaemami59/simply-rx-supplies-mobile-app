@@ -7,6 +7,7 @@ import useItemName from "../../../../shared/hooks/useItemName";
 import useVendorName from "../../../../shared/hooks/useVendorName";
 import { JC_SPACE_EVENLY } from "../../../../shared/styles/sharedStyles";
 import type { ShoppingCartStackParamList } from "../../../../types/navigation";
+import { itemDetails } from "../../../../types/navigation";
 import DetailsIconNode from "./DetailsIconNode";
 
 type Props = {
@@ -21,7 +22,7 @@ const DetailsButton: FC<Props> = ({ reset }) => {
 
   const clickHandler = useCallback(() => {
     reset();
-    navigation.push("ItemDetails", { itemName, vendorName });
+    navigation.push(itemDetails, { itemName, vendorName });
   }, [itemName, navigation, reset, vendorName]);
 
   return (

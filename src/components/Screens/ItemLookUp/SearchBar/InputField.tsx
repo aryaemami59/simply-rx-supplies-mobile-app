@@ -25,13 +25,13 @@ import {
   WIDTH_80,
 } from "../../../../shared/styles/sharedStyles";
 import type {
-  SearchBarRef,
   AnimatableViewRef,
   OnChangeText,
+  SearchBarRef,
 } from "../../../../types/missingTypes";
 import type {
-  ItemLookupRouteProps,
   ItemLookupNavigationProps,
+  ItemLookupRouteProps,
 } from "../../../../types/navigation";
 import search from "../../../../utils/search";
 import HeaderRightComponent from "../../../HeaderComponents/HeaderRightComponent";

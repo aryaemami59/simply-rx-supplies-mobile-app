@@ -13,6 +13,12 @@ import {
   shoppingCartOptions,
 } from "../../shared/screen_options/sharedScreenOptions";
 import type { RootTabParamList } from "../../types/navigation";
+import {
+  home,
+  itemLookup,
+  itemsReference,
+  shoppingCartStack,
+} from "../../types/navigation";
 import HomeScreen from "../Screens/Home/HomeScreen";
 import ItemLookupScreen from "../Screens/ItemLookUp/ItemLookupScreen";
 import ItemsReferenceStackNavigator from "../StackNavigatorComponents/ItemsReferenceStackNavigator";
@@ -59,12 +65,12 @@ const TabBarMain: FC = () => {
       >
         <Tab.Group screenOptions={homeGroupOptions}>
           <Tab.Screen
-            name="Home"
+            name={home}
             component={HomeScreen}
             options={homeOptions}
           />
           <Tab.Screen
-            name="ItemLookup"
+            name={itemLookup}
             initialParams={initialParams}
             component={ItemLookupScreen}
             options={itemLookupOptions}
@@ -72,12 +78,12 @@ const TabBarMain: FC = () => {
         </Tab.Group>
         <Tab.Group screenOptions={navigatorScreenOptions}>
           <Tab.Screen
-            name="ShoppingCartStack"
+            name={shoppingCartStack}
             component={ShoppingCartStackNavigator}
             options={options}
           />
           <Tab.Screen
-            name="ItemsReference"
+            name={itemsReference}
             component={ItemsReferenceStackNavigator}
             options={itemsReferenceOptions}
           />

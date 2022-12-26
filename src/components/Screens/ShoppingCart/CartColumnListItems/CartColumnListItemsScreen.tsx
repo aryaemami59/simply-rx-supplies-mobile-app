@@ -33,6 +33,7 @@ import {
 } from "../../../../shared/styles/sharedStyles";
 import type { ItemName } from "../../../../types/api";
 import type { CartColumnListItemsScreenProps } from "../../../../types/navigation";
+import { itemLookup } from "../../../../types/navigation";
 import CartQRCodeImage from "../QRImage/CartQRCodeImage";
 import SingleCartListItems from "./SingleCartListItems";
 
@@ -89,7 +90,7 @@ const CartColumnListItemsScreen: FC<Props> = ({ navigation, route }) => {
   }, [navigation, options]);
 
   const clickHandler = useCallback(() => {
-    navigation.navigate("ItemLookup");
+    navigation.navigate(itemLookup);
   }, [navigation]);
 
   const { background: backgroundColor, black } = useTheme().theme.colors;

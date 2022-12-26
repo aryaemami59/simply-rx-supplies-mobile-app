@@ -10,6 +10,7 @@ import {
   JC_SPACE_BETWEEN,
 } from "../../../../shared/styles/sharedStyles";
 import type { ItemsByVendorStackNavigatorNavigationProps } from "../../../../types/navigation";
+import { itemsByVendorListItems } from "../../../../types/navigation";
 
 const ItemsByVendorList: FC = () => {
   const vendorName = useVendorName();
@@ -20,7 +21,7 @@ const ItemsByVendorList: FC = () => {
     useNavigation<ItemsByVendorStackNavigatorNavigationProps>();
 
   const clickHandler = useCallback(() => {
-    navigation.push("ItemsByVendorListItems", { vendorName });
+    navigation.push(itemsByVendorListItems, { vendorName });
   }, [navigation, vendorName]);
 
   const containerStyle = useMemo(

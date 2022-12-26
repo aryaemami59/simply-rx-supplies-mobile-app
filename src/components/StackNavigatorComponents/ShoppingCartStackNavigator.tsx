@@ -14,6 +14,13 @@ import type {
   ShoppingCartStackNavigatorProps,
   ShoppingCartStackParamList,
 } from "../../types/navigation";
+import {
+  barcodeImage,
+  cartColumnListItems,
+  itemDetails,
+  qrImage,
+  shoppingCartScreen,
+} from "../../types/navigation";
 import BarcodeImageScreen from "../Screens/ShoppingCart/BarcodeImage/BarcodeImageScreen";
 import CartColumnListItemsScreen from "../Screens/ShoppingCart/CartColumnListItems/CartColumnListItemsScreen";
 import ItemDetailsScreen from "../Screens/ShoppingCart/CartColumnListItems/ItemDetails/ItemDetailsScreen";
@@ -21,7 +28,6 @@ import QRImageScreen from "../Screens/ShoppingCart/QRImage/QRImageScreen";
 import ShoppingCartScreen from "../Screens/ShoppingCart/ShoppingCartScreen";
 
 const Stack = createStackNavigator<ShoppingCartStackParamList>();
-// const Stack = createNativeStackNavigator<ShoppingCartStackParamList>();
 
 type Props = ShoppingCartStackNavigatorProps;
 
@@ -41,27 +47,27 @@ const ShoppingCartStackNavigator: FC<Props> = ({ navigation, route }) => {
       <Stack.Navigator>
         <Stack.Group screenOptions={screenStackOptions}>
           <Stack.Screen
-            name="ShoppingCartScreen"
+            name={shoppingCartScreen}
             component={ShoppingCartScreen}
           />
         </Stack.Group>
         <Stack.Screen
-          name="CartColumnListItems"
+          name={cartColumnListItems}
           component={CartColumnListItemsScreen}
           options={refHeaderOptions}
         />
         <Stack.Screen
-          name="QRImage"
+          name={qrImage}
           component={QRImageScreen}
           options={refHeaderOptions}
         />
         <Stack.Screen
-          name="BarcodeImage"
+          name={barcodeImage}
           component={BarcodeImageScreen}
           options={refHeaderOptions}
         />
         <Stack.Screen
-          name="ItemDetails"
+          name={itemDetails}
           component={ItemDetailsScreen}
           options={itemDetailsOptions}
         />

@@ -1,11 +1,11 @@
 import type {
+  CategoriesObjType,
+  Category,
   ItemName,
+  ItemObjType,
   ItemsObj,
   VendorNameType,
   VendorsObjType,
-  Category,
-  CategoriesObjType,
-  ItemObjType,
 } from "./api";
 
 export type AddedState = {
@@ -25,7 +25,3 @@ export type FetchedData = {
   vendors: VendorsObjType;
   categories: CategoriesObjType;
 };
-
-export type EmptyObj = Record<string, never>;
-
-export type EmptyArr = [];

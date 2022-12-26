@@ -14,6 +14,14 @@ import {
   MAIN_COLOR,
 } from "../../../shared/styles/sharedStyles";
 import type { HomeScreenProps } from "../../../types/navigation";
+import {
+  itemLookup,
+  itemsByCategory,
+  itemsByVendor,
+  itemsReference,
+  itemsReferenceScreen,
+  shoppingCartStack,
+} from "../../../types/navigation";
 
 const searchIcon = (
   <FontAwesome5
@@ -54,16 +62,16 @@ const HomeScreen: FC<Props> = ({ navigation, route }) => {
   const { background } = useTheme().theme.colors;
 
   const navigateToItemLookup = useCallback(
-    () => navigation.navigate("ItemLookup", { inputFocused: false }),
+    () => navigation.navigate(itemLookup, { inputFocused: false }),
     [navigation]
   );
 
   const navigateToItemsByVendor = useCallback(
     () =>
-      navigation.navigate("ItemsReference", {
-        screen: "ItemsReferenceScreen",
+      navigation.navigate(itemsReference, {
+        screen: itemsReferenceScreen,
         params: {
-          screen: "ItemsByVendor",
+          screen: itemsByVendor,
         },
       }),
     [navigation]
@@ -71,17 +79,17 @@ const HomeScreen: FC<Props> = ({ navigation, route }) => {
 
   const navigateToItemsByCategory = useCallback(
     () =>
-      navigation.navigate("ItemsReference", {
-        screen: "ItemsReferenceScreen",
+      navigation.navigate(itemsReference, {
+        screen: itemsReferenceScreen,
         params: {
-          screen: "ItemsByCategory",
+          screen: itemsByCategory,
         },
       }),
     [navigation]
   );
 
   const navigateToShoppingCart = useCallback(
-    () => navigation.navigate("ShoppingCartStack"),
+    () => navigation.navigate(shoppingCartStack),
     [navigation]
   );
 

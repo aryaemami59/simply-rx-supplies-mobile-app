@@ -18,6 +18,7 @@ import type {
   HeaderHomeStackNavigatorProps,
   RootTabParamList,
 } from "../../types/navigation";
+import { itemLookup } from "../../types/navigation";
 import HeaderRightComponent from "./HeaderRightComponent";
 import SearchClearIcon from "./SearchClearIcon";
 import SearchIcon from "./SearchIcon";
@@ -60,7 +61,7 @@ const HeaderHomeStackNavigator: FC<Props> = ({
 
   const focusHandler = useCallback(() => {
     const ref = searchRef.current;
-    myNavigation.navigate("ItemLookup", {
+    myNavigation.navigate(itemLookup, {
       inputFocused: true,
     });
     ref?.blur();

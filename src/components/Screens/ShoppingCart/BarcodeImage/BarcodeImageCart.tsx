@@ -11,6 +11,7 @@ import {
   BARCODE_ASPECT_RATIO,
 } from "../../../../shared/styles/sharedStyles";
 import type { ShoppingCartStackParamList } from "../../../../types/navigation";
+import { barcodeImage } from "../../../../types/navigation";
 
 const styles = StyleSheet.create({
   ImageStyle: {
@@ -28,7 +29,7 @@ const BarcodeImageCart: FC = () => {
     useNavigation<NativeStackNavigationProp<ShoppingCartStackParamList>>();
 
   const clickHandler = useCallback(() => {
-    navigation.push("BarcodeImage", { src, itemName });
+    navigation.push(barcodeImage, { src, itemName });
   }, [itemName, navigation, src]);
 
   const source = useMemo(() => ({ uri: src }), [src]);

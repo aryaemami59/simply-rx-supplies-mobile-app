@@ -55,12 +55,7 @@
     "@typescript-eslint/no-floating-promises": [0],
     "@typescript-eslint/no-throw-literal": [0],
     "no-console": 0,
-    "no-param-reassign": [
-      2,
-      {
-        "props": false
-      }
-    ],
+    "no-param-reassign": [2, { "props": false }],
     "prefer-arrow-functions/prefer-arrow-functions": [
       2,
       {

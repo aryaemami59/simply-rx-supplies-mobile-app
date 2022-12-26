@@ -11,7 +11,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import useValueUpdateLogger from "../../../../shared/hooks/useValueUpdateLogger";
+import useDependencyChangeLogger from "../../../../shared/hooks/useDependencyChangeLogger";
 import {
   BARCODE_ASPECT_RATIO,
   JC_AI_CENTER_HEIGHT100,
@@ -56,7 +56,7 @@ const BarcodeImageScreen: FC<Props> = ({ navigation, route }) => {
     Share.share(shareContent).catch(e => console.log(e));
   }, [shareContent]);
 
-  useValueUpdateLogger(route);
+  useDependencyChangeLogger(route);
 
   useEffect(() => {
     navigation.setOptions(options);

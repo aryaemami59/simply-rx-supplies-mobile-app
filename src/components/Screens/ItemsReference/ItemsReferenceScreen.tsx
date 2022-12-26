@@ -10,6 +10,7 @@ import type {
   ItemsReferenceScreenProps,
   ItemsReferenceTopTabParamList,
 } from "../../../types/navigation";
+import { itemsByCategory, itemsByVendor } from "../../../types/navigation";
 import ItemsByCategoryScreen from "./ItemsByCategory/ItemsByCategoryScreen";
 import ItemsByVendorScreen from "./ItemsByVendor/ItemsByVendorScreen";
 
@@ -47,12 +48,12 @@ const ItemsReferenceScreen: FC<Props> = ({ navigation, route }) => {
     <Tab.Navigator screenOptions={screenOptions}>
       <Tab.Screen
         options={itemsByVendorTabScreenOptions}
-        name="ItemsByVendor"
+        name={itemsByVendor}
         component={ItemsByVendorScreen}
       />
       <Tab.Screen
         options={itemsByCategoryTabScreenOptions}
-        name="ItemsByCategory"
+        name={itemsByCategory}
         component={ItemsByCategoryScreen}
       />
     </Tab.Navigator>

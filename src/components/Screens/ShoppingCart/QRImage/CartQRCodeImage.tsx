@@ -12,6 +12,7 @@ import {
 } from "../../../../redux/selectors";
 import type { VendorNameType } from "../../../../types/api";
 import type { ShoppingCartStackParamList } from "../../../../types/navigation";
+import { qrImage } from "../../../../types/navigation";
 
 type Props = {
   vendorName: VendorNameType;
@@ -28,7 +29,7 @@ const CartQRCodeImage: FC<Props> = ({ vendorName }) => {
     useNavigation<NativeStackNavigationProp<ShoppingCartStackParamList>>();
 
   const clickHandler = useCallback(() => {
-    navigation.navigate("QRImage", { itemNumbers, itemsAdded });
+    navigation.navigate(qrImage, { itemNumbers, itemsAdded });
   }, [itemNumbers, itemsAdded, navigation]);
 
   return (

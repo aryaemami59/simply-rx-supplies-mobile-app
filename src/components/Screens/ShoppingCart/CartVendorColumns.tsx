@@ -14,6 +14,7 @@ import {
   JC_SPACE_BETWEEN,
 } from "../../../shared/styles/sharedStyles";
 import type { ShoppingCartNavigationProps } from "../../../types/navigation";
+import { cartColumnListItems } from "../../../types/navigation";
 
 const CartVendorColumns: FC = () => {
   const vendorName = useVendorName();
@@ -26,7 +27,7 @@ const CartVendorColumns: FC = () => {
   const navigation = useNavigation<ShoppingCartNavigationProps>();
 
   const clickHandler = useCallback(() => {
-    navigation.push("CartColumnListItems", { vendorName });
+    navigation.push(cartColumnListItems, { vendorName });
   }, [navigation, vendorName]);
 
   const containerStyle = useMemo(
