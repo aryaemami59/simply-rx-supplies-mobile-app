@@ -1,29 +1,46 @@
 import type { BottomTabNavigationOptions } from "@react-navigation/bottom-tabs";
 import type { StackNavigationOptions } from "@react-navigation/stack";
-import type { SearchBar as SearchBarType } from "@rneui/base";
-import type { SearchBarProps } from "@rneui/themed";
-import type { PropsWithChildren } from "react";
-import type { TextInput, View } from "react-native";
+import type { IconNode, SearchBar as SearchBarType } from "@rneui/base";
+import type { HeaderProps, SearchBarProps } from "@rneui/themed";
+import type { PropsWithChildren, ReactElement } from "react";
+import type {
+  FlatListProps,
+  ListRenderItem,
+  TextInput,
+  TouchableWithoutFeedbackProps,
+  View,
+} from "react-native";
 import type * as Animatable from "react-native-animatable";
 
-export type tabBarIconProps = {
-  focused: boolean;
-  color: string;
-  size: number;
-};
+export type TabBarIconProps = Parameters<
+  NonNullable<BottomTabNavigationOptions["tabBarIcon"]>
+>[number];
 
-export type OnChangeText = (text: string) => void;
+export type RenderItem<T> = NonNullable<ListRenderItem<T>>;
 
 export type SearchBarRef = PropsWithChildren<SearchBarProps> &
   TextInput &
   SearchBarType;
 export type AnimatableViewRef = Animatable.View & View;
-export type HeaderStyle = StackNavigationOptions["headerStyle"];
-export type HeaderTitleStyle = StackNavigationOptions["headerTitleStyle"];
-export type TabHeader = BottomTabNavigationOptions["header"];
-export type StackHeader = StackNavigationOptions["header"];
-export type HeaderRight = StackNavigationOptions["headerRight"];
-export type TabBarIcon = BottomTabNavigationOptions["tabBarIcon"];
+export type HeaderStyle = NonNullable<StackNavigationOptions["headerStyle"]>;
+export type HeaderTitleStyle = NonNullable<
+  StackNavigationOptions["headerTitleStyle"]
+>;
+export type TabHeader = NonNullable<BottomTabNavigationOptions["header"]>;
+export type StackHeader = NonNullable<StackNavigationOptions["header"]>;
+export type TabBarIcon = NonNullable<BottomTabNavigationOptions["tabBarIcon"]>;
+export type HeaderRight = NonNullable<StackNavigationOptions["headerRight"]>;
+
+export type OnPress = NonNullable<TouchableWithoutFeedbackProps["onPress"]>;
+
+export type KeyExtractor<T> = NonNullable<FlatListProps<T>["keyExtractor"]>;
+
+export type CenterComponent = Extract<
+  ReactElement,
+  NonNullable<HeaderProps["centerComponent"]>
+>;
+
+export type Icon = NonNullable<IconNode>;
 
 export type AnyObject = Record<string, unknown>;
 
@@ -31,9 +48,9 @@ export type AnyArray = unknown[];
 
 export type AnyFunction = () => unknown;
 
-export type EmptyObject = Record<string, never>;
+export type EmptyObject = Readonly<Record<string, never>>;
 
-export type EmptyArray = [];
+export type EmptyArray = never[];
 
 export type Composite = AnyFunction | AnyArray | AnyObject;
 

@@ -34,13 +34,9 @@ type Props = ShoppingCartStackNavigatorProps;
 const ShoppingCartStackNavigator: FC<Props> = ({ navigation, route }) => {
   const [isLoading, errMsg] = useIsLoading();
 
-  if (isLoading) {
-    return <IsLoadingComponents />;
-  }
+  if (isLoading) return <IsLoadingComponents />;
 
-  if (errMsg) {
-    return <ErrMsgComponent />;
-  }
+  if (errMsg) return <ErrMsgComponent />;
 
   return (
     <SafeAreaProvider>

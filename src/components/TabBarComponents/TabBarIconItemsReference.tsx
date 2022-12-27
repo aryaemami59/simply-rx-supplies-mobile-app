@@ -1,9 +1,9 @@
 import { MaterialIcons } from "@expo/vector-icons";
 import type { FC } from "react";
 import { memo } from "react";
-import type { tabBarIconProps } from "../../types/missingTypes";
+import type { TabBarIconProps } from "../../types/missingTypes";
 
-type Props = tabBarIconProps;
+type Props = TabBarIconProps;
 
 const TabBarIconItemsReference: FC<Props> = ({ color, size, focused }) => (
   <MaterialIcons

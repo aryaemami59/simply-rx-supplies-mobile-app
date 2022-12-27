@@ -1,6 +1,7 @@
 import { ListItem } from "@rneui/themed";
 import type { FC } from "react";
 import { memo, useCallback } from "react";
+import type { PressableProps } from "react-native";
 import { setVendors } from "../../../../redux/addedSlice";
 import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
 import {
@@ -23,9 +24,10 @@ const SearchResultsCheckBox: FC = () => {
 
   const disabled = useAppSelector(checkVendorsAdded(vendorName, itemName));
 
-  const clickHandler = useCallback(() => {
-    dispatch(setVendors({ itemName, vendorName }));
-  }, [dispatch, itemName, vendorName]);
+  const clickHandler: NonNullable<PressableProps["onPress"]> =
+    useCallback(() => {
+      dispatch(setVendors({ itemName, vendorName }));
+    }, [dispatch, itemName, vendorName]);
 
   return (
     <ListItem.CheckBox

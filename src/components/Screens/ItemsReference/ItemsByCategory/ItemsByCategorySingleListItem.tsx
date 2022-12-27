@@ -1,6 +1,7 @@
 import { ListItem, useTheme } from "@rneui/themed";
 import type { FC } from "react";
 import { memo, useMemo } from "react";
+import type { StyleProp, ViewStyle } from "react-native";
 import { shallowEqual } from "react-redux";
 import { useAppSelector } from "../../../../redux/hooks";
 import { selectVendorsByItemName } from "../../../../redux/selectors";
@@ -18,7 +19,7 @@ const ItemsByCategorySingleListItem: FC = () => {
     shallowEqual
   );
 
-  const containerStyle = useMemo(
+  const containerStyle: StyleProp<ViewStyle> = useMemo(
     () => ({ backgroundColor }),
     [backgroundColor]
   );

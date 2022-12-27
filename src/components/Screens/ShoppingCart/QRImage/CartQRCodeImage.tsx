@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
-import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import type { StackNavigationProp } from "@react-navigation/stack";
 import type { FC } from "react";
 import { memo, useCallback } from "react";
 import { TouchableOpacity } from "react-native";
@@ -11,6 +11,7 @@ import {
   selectQRCodeContent,
 } from "../../../../redux/selectors";
 import type { VendorNameType } from "../../../../types/api";
+import type { OnPress } from "../../../../types/missingTypes";
 import type { ShoppingCartStackParamList } from "../../../../types/navigation";
 import { qrImage } from "../../../../types/navigation";
 
@@ -26,9 +27,9 @@ const CartQRCodeImage: FC<Props> = ({ vendorName }) => {
   );
 
   const navigation =
-    useNavigation<NativeStackNavigationProp<ShoppingCartStackParamList>>();
+    useNavigation<StackNavigationProp<ShoppingCartStackParamList>>();
 
-  const clickHandler = useCallback(() => {
+  const clickHandler: OnPress = useCallback(() => {
     navigation.navigate(qrImage, { itemNumbers, itemsAdded });
   }, [itemNumbers, itemsAdded, navigation]);
 

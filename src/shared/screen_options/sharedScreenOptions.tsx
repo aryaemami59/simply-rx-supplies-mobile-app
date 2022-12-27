@@ -3,14 +3,14 @@ import type { MaterialTopTabNavigationOptions } from "@react-navigation/material
 import type { StackNavigationOptions } from "@react-navigation/stack";
 import { HeaderRightFC } from "../../components/HeaderComponents/HeaderRightComponent";
 import {
-  tabHeader,
   stackHeader,
+  tabHeader,
 } from "../../components/HeaderComponents/Headers";
 import {
   homeTabBarIcon,
   itemLookupTabBarIcon,
-  shoppingCartTabBarIcon,
   itemsReferenceTabBarIcon,
+  shoppingCartTabBarIcon,
 } from "../../components/TabBarComponents/TabBars";
 import type {
   HeaderRight,

@@ -2,6 +2,13 @@ import { Octicons } from "@expo/vector-icons";
 import { Text, useTheme } from "@rneui/themed";
 import type { FC } from "react";
 import { memo, useCallback, useMemo, useRef } from "react";
+import type {
+  ScrollViewProps,
+  ShareContent,
+  StyleProp,
+  TouchableWithoutFeedbackProps,
+  ViewStyle,
+} from "react-native";
 import {
   Platform,
   Share,
@@ -10,6 +17,7 @@ import {
   View,
 } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
+import type { QRCodeProps } from "react-native-qrcode-svg";
 import QRCode from "react-native-qrcode-svg";
 import type Svg from "react-native-svg/lib/typescript/elements/Svg";
 import {
@@ -35,36 +43,41 @@ const styles = StyleSheet.create({
 
 const iconName = Platform.OS === "android" ? "share-android" : "share";
 
-const contentContainerStyle = [JC_SPACE_EVENLY, AI_CENTER, styles.container];
+const contentContainerStyle: ScrollViewProps["contentContainerStyle"] = [
+  JC_SPACE_EVENLY,
+  AI_CENTER,
+  styles.container,
+];
 
 type Props = QRImageScreenProps;
 
 const QRImageScreen: FC<Props> = ({ navigation, route }) => {
   const { itemNumbers, itemsAdded } = route.params;
 
-  const svg = useRef<Svg>(null);
+  const svg = useRef<Svg>(null!);
 
-  const shareQR = useCallback(() => {
-    // @ts-expect-error
-    svg.current.toDataURL((data: string) => {
-      const shareImageBase64 = {
-        title: "QRCode",
-        message: `this is the QR code image for the following items: \n${itemsAdded.join(
-          ", "
-        )}`,
-        url: `data:image/png;base64,${data}`,
-      };
-      Share.share(shareImageBase64).catch(e => console.log(e));
-    });
-  }, [itemsAdded]);
+  const shareQR: NonNullable<TouchableWithoutFeedbackProps["onPress"]> =
+    useCallback(() => {
+      console.debug(svg);
+      svg.current.toDataURL((data: string) => {
+        const shareImageBase64: ShareContent = {
+          title: "QRCode",
+          message: `this is the QR code image for the following items: \n${itemsAdded.join(
+            ", "
+          )}`,
+          url: `data:image/png;base64,${data}`,
+        };
+        Share.share(shareImageBase64).catch(e => console.log(e));
+      });
+    }, [itemsAdded]);
 
-  const getRef = useCallback((e: Svg) => {
+  const getRef: NonNullable<QRCodeProps["getRef"]> = useCallback((e: Svg) => {
     svg.current = e;
   }, []);
 
   const { background: backgroundColor } = useTheme().theme.colors;
 
-  const style = useMemo(
+  const style: StyleProp<ViewStyle> = useMemo(
     () => [HEIGHT_100, JC_SPACE_AROUND, { backgroundColor }],
     [backgroundColor]
   );

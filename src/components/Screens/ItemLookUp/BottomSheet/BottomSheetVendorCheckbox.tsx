@@ -1,6 +1,7 @@
 import { ListItem, useTheme } from "@rneui/themed";
 import type { FC } from "react";
 import { memo, useCallback, useMemo, useState } from "react";
+import type { StyleProp, ViewStyle } from "react-native";
 import { TouchableHighlight } from "react-native";
 import {
   setVendorsForAllCheck,
@@ -12,6 +13,7 @@ import type {
   OfficialVendorNameType,
   VendorNameType,
 } from "../../../../types/api";
+import type { OnPress } from "../../../../types/missingTypes";
 
 type Props = {
   title: OfficialVendorNameType;
@@ -23,12 +25,12 @@ const BottomSheetVendorCheckbox: FC<Props> = ({ title, vendorName }) => {
   const dispatch = useAppDispatch();
   const { background } = useTheme().theme.colors;
 
-  const containerStyle = useMemo(
+  const containerStyle: StyleProp<ViewStyle> = useMemo(
     () => ({ backgroundColor: background }),
     [background]
   );
 
-  const onToggleCheck = useCallback(() => {
+  const onToggleCheck: OnPress = useCallback(() => {
     checked
       ? dispatch(setVendorsForAllUncheck(vendorName))
       : dispatch(setVendorsForAllCheck(vendorName));

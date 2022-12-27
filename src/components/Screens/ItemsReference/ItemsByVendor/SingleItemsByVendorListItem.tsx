@@ -2,6 +2,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { Chip, ListItem, useTheme } from "@rneui/themed";
 import type { FC } from "react";
 import { memo, useCallback, useMemo } from "react";
+import type { StyleProp, ViewStyle } from "react-native";
 import { addItemsByVendor } from "../../../../redux/addedSlice";
 import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
 import {
@@ -14,8 +15,9 @@ import {
   BACKGROUND_MAIN_COLOR,
   FONT_WEIGHT_700,
 } from "../../../../shared/styles/sharedStyles";
+import type { Icon, OnPress } from "../../../../types/missingTypes";
 
-const icon = (
+const icon: Icon = (
   <MaterialIcons
     name="add"
     color="white"
@@ -32,7 +34,7 @@ const SingleItemsByVendorListItem: FC = () => {
     checkIfAddedToAllVendors(itemName)
   );
 
-  const clickHandler = useCallback(() => {
+  const clickHandler: OnPress = useCallback(() => {
     ifAddedToAllVendors || dispatch(addItemsByVendor({ itemName, vendorName }));
   }, [vendorName, ifAddedToAllVendors, dispatch, itemName]);
 
@@ -40,7 +42,7 @@ const SingleItemsByVendorListItem: FC = () => {
     checkIfItemAddedToOneVendor(vendorName, itemName)
   );
 
-  const containerStyle = useMemo(
+  const containerStyle: StyleProp<ViewStyle> = useMemo(
     () => ({ backgroundColor: background }),
     [background]
   );

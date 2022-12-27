@@ -1,6 +1,12 @@
 import { Image, ListItem, Text, useTheme } from "@rneui/themed";
 import type { FC } from "react";
 import { memo, useCallback, useMemo } from "react";
+import type {
+  ImageURISource,
+  StyleProp,
+  TouchableWithoutFeedbackProps,
+  ViewStyle,
+} from "react-native";
 import { TouchableOpacity } from "react-native";
 import { shallowEqual } from "react-redux";
 import { useAppSelector } from "../../../../../redux/hooks";
@@ -23,7 +29,10 @@ import { barcodeImage } from "../../../../../types/navigation";
 
 type Props = ItemDetailsScreenProps;
 
-const imageContainerStyle = [BARCODE_ASPECT_RATIO, WIDTH_60];
+const imageContainerStyle: StyleProp<ViewStyle> = [
+  BARCODE_ASPECT_RATIO,
+  WIDTH_60,
+];
 
 const ItemDetailsScreen: FC<Props> = ({ navigation, route }) => {
   const { itemName } = route.params;
@@ -39,19 +48,20 @@ const ItemDetailsScreen: FC<Props> = ({ navigation, route }) => {
     shallowEqual
   );
 
-  const clickHandler = useCallback(() => {
-    navigation.navigate(barcodeImage, {
-      src,
-      itemName,
-    });
-  }, [itemName, navigation, src]);
+  const clickHandler: NonNullable<TouchableWithoutFeedbackProps["onPress"]> =
+    useCallback(() => {
+      navigation.navigate(barcodeImage, {
+        src,
+        itemName,
+      });
+    }, [itemName, navigation, src]);
 
-  const containerStyle = useMemo(
+  const containerStyle: StyleProp<ViewStyle> = useMemo(
     () => [HEIGHT_100, AI_FLEX_START, JC_SPACE_BETWEEN, { backgroundColor }],
     [backgroundColor]
   );
 
-  const source = useMemo(() => ({ uri: src }), [src]);
+  const source: ImageURISource = useMemo(() => ({ uri: src }), [src]);
 
   return (
     <ListItem containerStyle={containerStyle}>

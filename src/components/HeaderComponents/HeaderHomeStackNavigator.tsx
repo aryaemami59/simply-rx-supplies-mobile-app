@@ -2,6 +2,7 @@ import type { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
 import { Header, SearchBar } from "@rneui/themed";
 import type { FC } from "react";
 import { memo, useCallback, useMemo, useRef } from "react";
+import type { StyleProp, TextInputProps, ViewStyle } from "react-native";
 import { StyleSheet } from "react-native";
 import {
   BACKGROUND_TRANSPARENT,
@@ -13,7 +14,7 @@ import {
   SEARCH_BAR_COLOR,
   WIDTH_80,
 } from "../../shared/styles/sharedStyles";
-import type { SearchBarRef } from "../../types/missingTypes";
+import type { CenterComponent, SearchBarRef } from "../../types/missingTypes";
 import type {
   HeaderHomeStackNavigatorProps,
   RootTabParamList,
@@ -43,9 +44,12 @@ const styles = StyleSheet.create({
   },
 });
 
-const rightContainerStyle = [JC_AI_CENTER, styles.headerRightContainer];
+const rightContainerStyle: StyleProp<ViewStyle> = [
+  JC_AI_CENTER,
+  styles.headerRightContainer,
+];
 
-const containerStyle = [
+const containerStyle: StyleProp<ViewStyle> = [
   WIDTH_80,
   styles.searchBarContainer,
   BACKGROUND_TRANSPARENT,
@@ -59,15 +63,16 @@ const HeaderHomeStackNavigator: FC<Props> = ({
   const searchRef = useRef<SearchBarRef>(null);
   const myNavigation = navigation as BottomTabNavigationProp<RootTabParamList>;
 
-  const focusHandler = useCallback(() => {
-    const ref = searchRef.current;
-    myNavigation.navigate(itemLookup, {
-      inputFocused: true,
-    });
-    ref?.blur();
-  }, [myNavigation]);
+  const focusHandler: NonNullable<TextInputProps["onFocus"]> =
+    useCallback(() => {
+      const ref = searchRef.current;
+      myNavigation.navigate(itemLookup, {
+        inputFocused: true,
+      });
+      ref?.blur();
+    }, [myNavigation]);
 
-  const centerComponent = useMemo(
+  const centerComponent: CenterComponent = useMemo(
     () => (
       <SearchBar
         ref={searchRef}

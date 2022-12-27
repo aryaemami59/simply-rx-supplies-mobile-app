@@ -6,6 +6,7 @@ import {
 import { Chip, useTheme } from "@rneui/themed";
 import type { FC } from "react";
 import { memo, useCallback, useMemo } from "react";
+import type { StyleProp, ViewStyle } from "react-native";
 import { StyleSheet, View } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import {
@@ -13,6 +14,7 @@ import {
   FONT_WEIGHT_700,
   MAIN_COLOR,
 } from "../../../shared/styles/sharedStyles";
+import type { Icon, OnPress } from "../../../types/missingTypes";
 import type { HomeScreenProps } from "../../../types/navigation";
 import {
   itemLookup,
@@ -23,7 +25,7 @@ import {
   shoppingCartStack,
 } from "../../../types/navigation";
 
-const searchIcon = (
+const searchIcon: Icon = (
   <FontAwesome5
     name="search"
     color="white"
@@ -31,7 +33,7 @@ const searchIcon = (
   />
 );
 
-const storeSearchIcon = (
+const storeSearchIcon: Icon = (
   <MaterialCommunityIcons
     name="store-search-outline"
     color="white"
@@ -39,7 +41,7 @@ const storeSearchIcon = (
   />
 );
 
-const categoryIcon = (
+const categoryIcon: Icon = (
   <MaterialIcons
     name="category"
     color="white"
@@ -47,7 +49,7 @@ const categoryIcon = (
   />
 );
 
-const shoppingCartIcon = (
+const shoppingCartIcon: Icon = (
   <MaterialIcons
     name="shopping-cart"
     color="white"
@@ -61,12 +63,12 @@ type Props = HomeScreenProps;
 const HomeScreen: FC<Props> = ({ navigation, route }) => {
   const { background } = useTheme().theme.colors;
 
-  const navigateToItemLookup = useCallback(
+  const navigateToItemLookup: OnPress = useCallback(
     () => navigation.navigate(itemLookup, { inputFocused: false }),
     [navigation]
   );
 
-  const navigateToItemsByVendor = useCallback(
+  const navigateToItemsByVendor: OnPress = useCallback(
     () =>
       navigation.navigate(itemsReference, {
         screen: itemsReferenceScreen,
@@ -77,7 +79,7 @@ const HomeScreen: FC<Props> = ({ navigation, route }) => {
     [navigation]
   );
 
-  const navigateToItemsByCategory = useCallback(
+  const navigateToItemsByCategory: OnPress = useCallback(
     () =>
       navigation.navigate(itemsReference, {
         screen: itemsReferenceScreen,
@@ -88,12 +90,12 @@ const HomeScreen: FC<Props> = ({ navigation, route }) => {
     [navigation]
   );
 
-  const navigateToShoppingCart = useCallback(
+  const navigateToShoppingCart: OnPress = useCallback(
     () => navigation.navigate(shoppingCartStack),
     [navigation]
   );
 
-  const viewStyle = useMemo(
+  const viewStyle: StyleProp<ViewStyle> = useMemo(
     () => ({ backgroundColor: background }),
     [background]
   );

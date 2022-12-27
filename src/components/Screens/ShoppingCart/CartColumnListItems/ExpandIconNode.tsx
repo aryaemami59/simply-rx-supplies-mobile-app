@@ -1,5 +1,6 @@
+import type { Icon } from "../../../../types/missingTypes";
 import ExpandIcon from "./ExpandIcon";
 
-const ExpandIconNode = <ExpandIcon />;
+const ExpandIconNode: Icon = <ExpandIcon />;
 
 export default ExpandIconNode;

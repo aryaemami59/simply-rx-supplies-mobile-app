@@ -2,12 +2,13 @@ import { Ionicons } from "@expo/vector-icons";
 import { useThemeMode } from "@rneui/themed";
 import type { FC } from "react";
 import { memo, useCallback } from "react";
+import type { TextProps } from "react-native";
 import { TouchableHighlight } from "react-native";
 
 const DarkModeIcon: FC = () => {
   const { mode, setMode } = useThemeMode();
 
-  const toggleTheme = useCallback(() => {
+  const toggleTheme: NonNullable<TextProps["onPress"]> = useCallback(() => {
     setMode(mode === "dark" ? "light" : "dark");
   }, [mode, setMode]);
 

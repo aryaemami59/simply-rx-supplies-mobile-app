@@ -2,6 +2,7 @@ import { useNavigation } from "@react-navigation/native";
 import { Badge, ListItem, useTheme } from "@rneui/themed";
 import type { FC } from "react";
 import { memo, useCallback, useMemo } from "react";
+import type { StyleProp, ViewStyle } from "react-native";
 import { StyleSheet } from "react-native";
 import TouchableScale from "react-native-touchable-scale";
 import { useAppSelector } from "../../../redux/hooks";
@@ -30,7 +31,7 @@ const CartVendorColumns: FC = () => {
     navigation.push(cartColumnListItems, { vendorName });
   }, [navigation, vendorName]);
 
-  const containerStyle = useMemo(
+  const containerStyle: StyleProp<ViewStyle> = useMemo(
     () => [AI_CENTER, JC_SPACE_BETWEEN, { backgroundColor: background }],
     [background]
   );

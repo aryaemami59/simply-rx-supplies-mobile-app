@@ -1,7 +1,7 @@
 import { useTheme } from "@rneui/themed";
 import type { FC } from "react";
 import { memo, useCallback, useEffect, useMemo } from "react";
-import type { ListRenderItem } from "react-native";
+import type { StyleProp, ViewStyle } from "react-native";
 import { FlatList, View } from "react-native";
 import ItemNameProvider from "../../../../shared/contexts/ItemNameProvider";
 import VendorNameProvider from "../../../../shared/contexts/VendorNameProvider";
@@ -9,10 +9,11 @@ import useItemNames from "../../../../shared/hooks/useItemNames";
 import useOfficialVendorName from "../../../../shared/hooks/useOfficialVendorName";
 import { HEIGHT_100 } from "../../../../shared/styles/sharedStyles";
 import type { ItemName } from "../../../../types/api";
+import type { KeyExtractor, RenderItem } from "../../../../types/missingTypes";
 import type { ItemsByVendorListItemsProps } from "../../../../types/navigation";
 import SingleItemsByVendorListItem from "./SingleItemsByVendorListItem";
 
-const keyExtractor = (item: ItemName) => item;
+const keyExtractor: KeyExtractor<ItemName> = item => item;
 
 type Props = ItemsByVendorListItemsProps;
 
@@ -20,7 +21,7 @@ const ItemsByVendorListItems: FC<Props> = ({ navigation, route }) => {
   const { vendorName } = route.params;
   const officialVendorName = useOfficialVendorName(vendorName);
 
-  const renderItems: ListRenderItem<ItemName> = useCallback(
+  const renderItems: RenderItem<ItemName> = useCallback(
     ({ item }) => (
       <ItemNameProvider itemName={item}>
         <VendorNameProvider vendorName={vendorName}>
@@ -33,12 +34,13 @@ const ItemsByVendorListItems: FC<Props> = ({ navigation, route }) => {
 
   const itemNames = useItemNames(vendorName);
 
-  const options = useMemo(
-    () => ({
-      headerTitle: officialVendorName,
-    }),
-    [officialVendorName]
-  );
+  const options: NonNullable<Parameters<typeof navigation.setOptions>[number]> =
+    useMemo(
+      () => ({
+        headerTitle: officialVendorName,
+      }),
+      [officialVendorName]
+    );
 
   useEffect(() => {
     navigation.setOptions(options);
@@ -46,7 +48,7 @@ const ItemsByVendorListItems: FC<Props> = ({ navigation, route }) => {
 
   const { background } = useTheme().theme.colors;
 
-  const style = useMemo(
+  const style: StyleProp<ViewStyle> = useMemo(
     () => [{ backgroundColor: background }, HEIGHT_100],
     [background]
   );

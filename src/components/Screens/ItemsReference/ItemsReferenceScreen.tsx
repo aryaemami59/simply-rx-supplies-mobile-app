@@ -1,3 +1,4 @@
+import type { MaterialTopTabNavigationOptions } from "@react-navigation/material-top-tabs";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { useTheme } from "@rneui/themed";
 import type { FC } from "react";
@@ -21,28 +22,30 @@ const Tab = createMaterialTopTabNavigator<ItemsReferenceTopTabParamList>();
 const ItemsReferenceScreen: FC<Props> = ({ navigation, route }) => {
   const { background: backgroundColor, grey0: color } = useTheme().theme.colors;
 
-  const screenOptions = useMemo(
+  const screenOptions: NonNullable<MaterialTopTabNavigationOptions> = useMemo(
     () => ({
       tabBarStyle: { backgroundColor },
     }),
     [backgroundColor]
   );
 
-  const itemsByVendorTabScreenOptions = useMemo(
-    () => ({
-      ...itemsByVendorTabOptions,
-      tabBarLabelStyle: { color },
-    }),
-    [color]
-  );
+  const itemsByVendorTabScreenOptions: NonNullable<MaterialTopTabNavigationOptions> =
+    useMemo(
+      () => ({
+        ...itemsByVendorTabOptions,
+        tabBarLabelStyle: { color },
+      }),
+      [color]
+    );
 
-  const itemsByCategoryTabScreenOptions = useMemo(
-    () => ({
-      ...itemsByCategoryTabOptions,
-      tabBarLabelStyle: { color },
-    }),
-    [color]
-  );
+  const itemsByCategoryTabScreenOptions: NonNullable<MaterialTopTabNavigationOptions> =
+    useMemo(
+      () => ({
+        ...itemsByCategoryTabOptions,
+        tabBarLabelStyle: { color },
+      }),
+      [color]
+    );
 
   return (
     <Tab.Navigator screenOptions={screenOptions}>

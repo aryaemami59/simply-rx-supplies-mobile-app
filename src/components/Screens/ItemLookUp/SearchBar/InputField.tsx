@@ -4,9 +4,12 @@ import {
   useNavigation,
   useRoute,
 } from "@react-navigation/native";
+import type { SearchBarBaseProps } from "@rneui/base/dist/SearchBar/types";
+import type { HeaderProps } from "@rneui/themed";
 import { Header, SearchBar, useTheme } from "@rneui/themed";
 import type { FC } from "react";
 import { memo, useCallback, useMemo, useRef, useState } from "react";
+import type { TextInputProps } from "react-native";
 import { StyleSheet } from "react-native";
 import * as Animatable from "react-native-animatable";
 import { shallowEqual } from "react-redux";
@@ -26,7 +29,8 @@ import {
 } from "../../../../shared/styles/sharedStyles";
 import type {
   AnimatableViewRef,
-  OnChangeText,
+  CenterComponent,
+  Icon,
   SearchBarRef,
 } from "../../../../types/missingTypes";
 import type {
@@ -54,9 +58,15 @@ const styles = StyleSheet.create({
   },
 });
 
-const rightContainerStyle = [JC_AI_CENTER, styles.headerRightContainer];
+const rightContainerStyle: HeaderProps["rightContainerStyle"] = [
+  JC_AI_CENTER,
+  styles.headerRightContainer,
+];
 
-const containerStyle = [styles.searchBarContainer, BACKGROUND_TRANSPARENT];
+const containerStyle: SearchBarBaseProps["containerStyle"] = [
+  styles.searchBarContainer,
+  BACKGROUND_TRANSPARENT,
+];
 
 const InputField: FC = () => {
   const { params } = useRoute<ItemLookupRouteProps>();
@@ -69,20 +79,22 @@ const InputField: FC = () => {
   const inputFocused = !!params?.inputFocused;
   // const [focused, setFocused] = useState(inputFocused);
 
-  const focusHandler = useCallback(() => {
-    view.current?.transitionTo(WIDTH_100);
-    // setFocused(true);
-  }, []);
+  const focusHandler: NonNullable<TextInputProps["onFocus"]> =
+    useCallback(() => {
+      view.current?.transitionTo(WIDTH_100);
+      // setFocused(true);
+    }, []);
 
-  const blurHandler = useCallback(() => {
+  const blurHandler: NonNullable<TextInputProps["onBlur"]> = useCallback(() => {
     view.current?.transitionTo(WIDTH_80);
     // setFocused(false);
   }, []);
 
-  const clearHandler = useCallback((): void => {
-    setVal("");
-    dispatch(clearListItems());
-  }, [dispatch]);
+  const clearHandler: NonNullable<SearchBarBaseProps["onClear"]> =
+    useCallback((): void => {
+      setVal("");
+      dispatch(clearListItems());
+    }, [dispatch]);
 
   // useEffect(() => {
   //   inputRef.current?.focus();
@@ -117,7 +129,7 @@ const InputField: FC = () => {
   //   };
   // }, [focused]);
 
-  const changeVal: OnChangeText = useCallback(
+  const changeVal: NonNullable<TextInputProps["onChangeText"]> = useCallback(
     (text: string) => {
       const listItems = search(text, itemNames);
       setVal(text);
@@ -126,7 +138,7 @@ const InputField: FC = () => {
     [dispatch, itemNames]
   );
 
-  const clearIcon = useMemo(
+  const clearIcon: Icon = useMemo(
     () => (
       <EvilIcons
         name="close"
@@ -138,7 +150,7 @@ const InputField: FC = () => {
     [clearHandler]
   );
 
-  const centerComponent = useMemo(
+  const centerComponent: CenterComponent = useMemo(
     () => (
       <Animatable.View
         // easing="ease-in-out"

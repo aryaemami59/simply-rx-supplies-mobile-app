@@ -1,6 +1,5 @@
 import type { FC } from "react";
 import { memo } from "react";
-import type { ListRenderItem } from "react-native";
 import { FlatList } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { shallowEqual } from "react-redux";
@@ -8,12 +7,13 @@ import { useAppSelector } from "../../../redux/hooks";
 import { selectAllListItems } from "../../../redux/selectors";
 import ItemNameProvider from "../../../shared/contexts/ItemNameProvider";
 import type { ItemName } from "../../../types/api";
+import type { KeyExtractor, RenderItem } from "../../../types/missingTypes";
 import type { ItemLookupScreenProps } from "../../../types/navigation";
 import BottomSheetComponent from "./BottomSheet/BottomSheetComponent";
 import InputField from "./SearchBar/InputField";
 import SingleSearchResultsListItem from "./SearchResults/SingleSearchResultsListItem";
 
-const renderItems: ListRenderItem<ItemName> = ({ item }) => (
+const renderItems: RenderItem<ItemName> = ({ item }) => (
   <ItemNameProvider
     key={item}
     itemName={item}>
@@ -21,7 +21,7 @@ const renderItems: ListRenderItem<ItemName> = ({ item }) => (
   </ItemNameProvider>
 );
 
-const keyExtractor = (item: ItemName) => item;
+const keyExtractor: KeyExtractor<ItemName> = (item: ItemName) => item;
 
 type Props = ItemLookupScreenProps;
 

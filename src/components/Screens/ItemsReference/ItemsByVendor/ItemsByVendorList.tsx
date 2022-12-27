@@ -2,6 +2,7 @@ import { useNavigation } from "@react-navigation/native";
 import { ListItem, useTheme } from "@rneui/themed";
 import type { FC } from "react";
 import { memo, useCallback, useMemo } from "react";
+import type { PressableProps, StyleProp, ViewStyle } from "react-native";
 import TouchableScale from "react-native-touchable-scale";
 import useOfficialVendorName from "../../../../shared/hooks/useOfficialVendorName";
 import useVendorName from "../../../../shared/hooks/useVendorName";
@@ -20,11 +21,12 @@ const ItemsByVendorList: FC = () => {
   const navigation =
     useNavigation<ItemsByVendorStackNavigatorNavigationProps>();
 
-  const clickHandler = useCallback(() => {
-    navigation.push(itemsByVendorListItems, { vendorName });
-  }, [navigation, vendorName]);
+  const clickHandler: NonNullable<PressableProps["onPress"]> =
+    useCallback(() => {
+      navigation.push(itemsByVendorListItems, { vendorName });
+    }, [navigation, vendorName]);
 
-  const containerStyle = useMemo(
+  const containerStyle: StyleProp<ViewStyle> = useMemo(
     () => [AI_CENTER, JC_SPACE_BETWEEN, { backgroundColor }],
     [backgroundColor]
   );

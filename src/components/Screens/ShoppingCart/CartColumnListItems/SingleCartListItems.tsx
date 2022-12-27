@@ -1,7 +1,10 @@
+import type { ListItemSwipeableProps } from "@rneui/themed";
 import { ListItem, useTheme } from "@rneui/themed";
-import type { FC } from "react";
+import type { FC, ReactNode } from "react";
 import { memo, useCallback, useMemo, useState } from "react";
+import type { StyleProp, ViewStyle } from "react-native";
 import { View } from "react-native";
+// import Collapsible from "react-native-collapsible";
 import Collapsible from "react-native-collapsible";
 import {
   AI_CENTER,
@@ -16,17 +19,20 @@ import ItemNumberCart from "./ItemNumberCart";
 import MinimizeButton from "./MinimizeButton";
 import ShareButton from "./ShareButton";
 
-const style = [AI_CENTER, WIDTH_100, JC_SPACE_BETWEEN];
+const style: StyleProp<ViewStyle> = [AI_CENTER, WIDTH_100, JC_SPACE_BETWEEN];
 
 const SingleCartListItems: FC = () => {
   const [open, setOpen] = useState(true);
   const { background } = useTheme().theme.colors;
 
-  const clickHandler = useCallback(() => {
+  const clickHandler: () => void = useCallback(() => {
     setOpen(prev => !prev);
   }, []);
 
-  const rightContent = useCallback(
+  const rightContent: Exclude<
+    ListItemSwipeableProps["rightContent"],
+    ReactNode
+  > = useCallback(
     (reset: () => void) => (
       <>
         {open && (
@@ -46,7 +52,7 @@ const SingleCartListItems: FC = () => {
     [clickHandler, open]
   );
 
-  const containerStyle = useMemo(
+  const containerStyle: StyleProp<ViewStyle> = useMemo(
     () => ({ backgroundColor: background }),
     [background]
   );

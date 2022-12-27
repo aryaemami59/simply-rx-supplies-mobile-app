@@ -1,6 +1,7 @@
 import { ListItem } from "@rneui/themed";
 import type { FC } from "react";
 import { memo, useCallback } from "react";
+import type { PressableProps } from "react-native";
 import { setVendors } from "../../../../redux/addedSlice";
 import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
 import {
@@ -21,9 +22,10 @@ const ItemsByCategorySingleListItemCheckBox: FC = () => {
   );
   const checked = useAppSelector(checkVendorsToAdd(vendorName, itemName));
 
-  const onToggleSwitch = useCallback(() => {
-    ifAddedToVendor || dispatch(setVendors({ itemName, vendorName }));
-  }, [dispatch, ifAddedToVendor, itemName, vendorName]);
+  const onToggleSwitch: NonNullable<PressableProps["onPress"]> =
+    useCallback(() => {
+      ifAddedToVendor || dispatch(setVendors({ itemName, vendorName }));
+    }, [dispatch, ifAddedToVendor, itemName, vendorName]);
 
   return (
     <ListItem.CheckBox

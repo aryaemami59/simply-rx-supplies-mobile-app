@@ -1,6 +1,7 @@
 import { useTheme } from "@rneui/themed";
 import type { FC } from "react";
 import { memo, useMemo } from "react";
+import type { StyleProp, TextStyle } from "react-native";
 import { Text, View } from "react-native";
 import { useAppSelector } from "../../../../redux/hooks";
 import { selectItemNumber } from "../../../../redux/selectors";
@@ -12,7 +13,10 @@ const ItemNumberCart: FC = () => {
   const itemNumber = useAppSelector(selectItemNumber(itemName));
   const { black } = useTheme().theme.colors;
 
-  const style = useMemo(() => [TEXT_CENTER, { color: black }], [black]);
+  const style: StyleProp<TextStyle> = useMemo(
+    () => [TEXT_CENTER, { color: black, marginBottom: 20, marginTop: 10 }],
+    [black]
+  );
 
   return (
     <View style={AI_CENTER}>

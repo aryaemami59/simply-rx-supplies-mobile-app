@@ -1,6 +1,7 @@
 import { ListItem, useTheme } from "@rneui/themed";
 import type { FC } from "react";
 import { memo, useMemo } from "react";
+import type { StyleProp, ViewStyle } from "react-native";
 import { View } from "react-native";
 import { shallowEqual } from "react-redux";
 import { useAppSelector } from "../../../../redux/hooks";
@@ -20,7 +21,10 @@ const SingleSearchResultsListItem: FC = () => {
     shallowEqual
   );
 
-  const style = useMemo(() => ({ backgroundColor: background }), [background]);
+  const style: StyleProp<ViewStyle> = useMemo(
+    () => ({ backgroundColor: background }),
+    [background]
+  );
 
   return (
     <View

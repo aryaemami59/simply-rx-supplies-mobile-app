@@ -10,8 +10,9 @@ import {
   BACKGROUND_MAIN_COLOR,
   FONT_WEIGHT_700,
 } from "../../../../shared/styles/sharedStyles";
+import type { Icon, OnPress } from "../../../../types/missingTypes";
 
-const icon = (
+const icon: Icon = (
   <MaterialIcons
     name="add"
     color="white"
@@ -27,7 +28,7 @@ const AddItemButton: FC = () => {
 
   const dispatch = useAppDispatch();
 
-  const clickHandler = useCallback(() => {
+  const clickHandler: OnPress = useCallback(() => {
     dispatch(addItems(itemName));
   }, [dispatch, itemName]);
 

@@ -1,3 +1,4 @@
+import type { BottomSheetProps } from "@rneui/base";
 import { BottomSheet } from "@rneui/base";
 import { Button } from "@rneui/themed";
 import type { FC } from "react";
@@ -7,6 +8,7 @@ import { shallowEqual } from "react-redux";
 import { useAppSelector } from "../../../../redux/hooks";
 import { selectAllVendorOfficialNames } from "../../../../redux/selectors";
 import useVendorNamesList from "../../../../shared/hooks/useVendorNamesList";
+import type { OnPress } from "../../../../types/missingTypes";
 import BottomSheetVendorCheckbox from "./BottomSheetVendorCheckbox";
 
 const BottomSheetComponent: FC = () => {
@@ -17,14 +19,15 @@ const BottomSheetComponent: FC = () => {
     shallowEqual
   );
 
-  const showBottomSheet = useCallback(() => {
+  const showBottomSheet: OnPress = useCallback(() => {
     Keyboard.dismiss();
     setVisible(true);
   }, []);
 
-  const hideBottomSheet = useCallback(() => {
-    setVisible(false);
-  }, []);
+  const hideBottomSheet: NonNullable<BottomSheetProps["onBackdropPress"]> =
+    useCallback(() => {
+      setVisible(false);
+    }, []);
 
   return (
     <>

@@ -1,8 +1,15 @@
 import { Octicons } from "@expo/vector-icons";
-import type { NativeStackNavigationOptions } from "@react-navigation/native-stack";
 import { useTheme } from "@rneui/themed";
 import type { FC } from "react";
 import { memo, useCallback, useEffect, useMemo } from "react";
+import type {
+  ImageStyle,
+  ImageURISource,
+  ShareAction,
+  ShareContent,
+  StyleProp,
+  ViewStyle,
+} from "react-native";
 import {
   Image,
   Platform,
@@ -11,32 +18,44 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import useDependencyChangeLogger from "../../../../shared/hooks/useDependencyChangeLogger";
 import {
   BARCODE_ASPECT_RATIO,
   JC_AI_CENTER_HEIGHT100,
   WIDTH_90,
 } from "../../../../shared/styles/sharedStyles";
+import type { OnPress } from "../../../../types/missingTypes";
 import type { BarcodeImageScreenProps } from "../../../../types/navigation";
 
 const iconName = Platform.OS === "android" ? "share-android" : "share";
 
 type Props = BarcodeImageScreenProps;
 
-const style = [BARCODE_ASPECT_RATIO, WIDTH_90];
+const style: StyleProp<ImageStyle> = [BARCODE_ASPECT_RATIO, WIDTH_90];
+
+const shareFunc = async (content: ShareContent) => {
+  try {
+    const response: ShareAction = await Share.share(content);
+    return response;
+  } catch (err) {
+    if (err instanceof Error) return err.message;
+    console.log("Unexpected Error", err);
+  }
+  return null;
+};
 
 const BarcodeImageScreen: FC<Props> = ({ navigation, route }) => {
   const { background: backgroundColor } = useTheme().theme.colors;
   const { src, itemName } = route.params;
 
-  const options: Pick<NativeStackNavigationOptions, "title"> = useMemo(
-    () => ({
-      title: itemName,
-    }),
-    [itemName]
-  );
+  const options: NonNullable<Parameters<typeof navigation.setOptions>[number]> =
+    useMemo(
+      () => ({
+        title: itemName,
+      }),
+      [itemName]
+    );
 
-  const shareContent = useMemo(
+  const shareContent: ShareContent = useMemo(
     () => ({
       title: `Barcode Image for ${itemName}`,
       message: `This is the barcode image for ${itemName}`,
@@ -45,24 +64,49 @@ const BarcodeImageScreen: FC<Props> = ({ navigation, route }) => {
     [itemName, src]
   );
 
-  const imageSource = useMemo(
+  const imageSource: ImageURISource = useMemo(
     () => ({
       uri: src,
     }),
     [src]
   );
 
-  const shareBarcode = useCallback(() => {
-    Share.share(shareContent).catch(e => console.log(e));
-  }, [shareContent]);
+  const shareBarcode: OnPress = useCallback(() => {
+    shareFunc(shareContent);
+    // try {
+    //   const response: ShareAction = await Share.share(shareContent);
+    //   console.log(response);
+    //   // return response;
+    // } catch (err) {
+    //   if (err instanceof Error) {
+    //     return err.message;
+    //   }
+    //   console.log("Unexpected Error", err);
+    // }
+    // return null;
 
-  useDependencyChangeLogger(route);
+    // (async () => {
+    //   try {
+    //     const response: ShareAction = await Share.share(shareContent);
+    //     return response;
+    //   } catch (err) {
+    //     if (err instanceof Error) {
+    //       return err.message;
+    //     }
+    //     console.log("Unexpected Error", err);
+    //   }
+    //   return null;
+    // })();
+    // Share.share(shareContent)
+    //   .then(e => console.log(e))
+    //   .catch(e => console.log(e));
+  }, [shareContent]);
 
   useEffect(() => {
     navigation.setOptions(options);
   }, [navigation, options]);
 
-  const viewStyle = useMemo(
+  const viewStyle: StyleProp<ViewStyle> = useMemo(
     () => [JC_AI_CENTER_HEIGHT100, styles.container, { backgroundColor }],
     [backgroundColor]
   );

@@ -1,11 +1,11 @@
 import type {
-  VendorNameType,
-  ItemName,
   Category,
+  ItemName,
   ItemNumber,
-  Src,
-  OfficialVendorNameType,
   Link,
+  OfficialVendorNameType,
+  Src,
+  VendorNameType,
 } from "../types/api";
 import type { RootState } from "./store";
 
@@ -31,7 +31,8 @@ export const addedItemsLength =
     state.added.vendorsObj[vendorName].itemsAdded.length;
 
 export const selectItemNamesByVendor =
-  (vendorName: VendorNameType) => (state: RootState) =>
+  (vendorName: VendorNameType) =>
+  (state: RootState): ItemName[] =>
     Object.values(state.added.itemsObj)
       .filter(({ vendors }) => vendors.includes(vendorName))
       .map(({ name }) => name);
@@ -106,7 +107,8 @@ export const selectVendorsOfficialNames =
     vendors.map(vendorName => state.added.vendorsObj[vendorName].officialName);
 
 export const selectItemsAddedByVendor =
-  (vendorName: VendorNameType) => (state: RootState) =>
+  (vendorName: VendorNameType) =>
+  (state: RootState): ItemName[] =>
     state.added.vendorsObj[vendorName].itemsAdded;
 
 export const checkIfAnyItemsAdded = (state: RootState): boolean =>

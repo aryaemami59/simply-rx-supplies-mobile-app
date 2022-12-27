@@ -8,8 +8,10 @@ import type {
   CompositeScreenProps,
   NavigatorScreenParams,
 } from "@react-navigation/native";
-import type { NativeStackScreenProps } from "@react-navigation/native-stack";
-import type { StackHeaderProps } from "@react-navigation/stack";
+import type {
+  StackHeaderProps,
+  StackScreenProps,
+} from "@react-navigation/stack";
 import type {
   Category,
   ItemName,
@@ -89,7 +91,7 @@ export type ShoppingCartStackNavigatorProps = BottomTabScreenProps<
 >;
 
 export type CartColumnListItemsScreenProps = CompositeScreenProps<
-  NativeStackScreenProps<ShoppingCartStackParamList, CartColumnListItems>,
+  StackScreenProps<ShoppingCartStackParamList, CartColumnListItems>,
   BottomTabScreenProps<RootTabParamList, ShoppingCartStack>
 >;
 
@@ -98,7 +100,7 @@ export type HomeScreenProps = BottomTabScreenProps<RootTabParamList, Home>;
 export type RootTabNavigationProps = BottomTabNavigationProp<RootTabParamList>;
 
 export type BarcodeImageScreenProps = CompositeScreenProps<
-  NativeStackScreenProps<ShoppingCartStackParamList, BarcodeImage>,
+  StackScreenProps<ShoppingCartStackParamList, BarcodeImage>,
   BottomTabScreenProps<RootTabParamList, ShoppingCartStack>
 >;
 
@@ -112,30 +114,27 @@ export type ItemsReferenceStackNavigatorProps = BottomTabScreenProps<
 >;
 
 export type ShoppingCartScreenProps = CompositeScreenProps<
-  NativeStackScreenProps<ShoppingCartStackParamList, ShoppingCartScreen>,
+  StackScreenProps<ShoppingCartStackParamList, ShoppingCartScreen>,
   BottomTabScreenProps<RootTabParamList, ShoppingCartStack>
 >;
 
 export type QRImageScreenProps = CompositeScreenProps<
-  NativeStackScreenProps<ShoppingCartStackParamList, QRImage>,
+  StackScreenProps<ShoppingCartStackParamList, QRImage>,
   BottomTabScreenProps<RootTabParamList, ShoppingCartStack>
 >;
 
 export type ItemsReferenceScreenProps = CompositeScreenProps<
-  NativeStackScreenProps<ItemsReferenceStackParamList, ItemsReferenceScreen>,
+  StackScreenProps<ItemsReferenceStackParamList, ItemsReferenceScreen>,
   BottomTabScreenProps<RootTabParamList, ItemsReference>
 >;
 
 export type ItemsByVendorListItemsProps = CompositeScreenProps<
-  NativeStackScreenProps<ItemsReferenceStackParamList, ItemsByVendorListItems>,
+  StackScreenProps<ItemsReferenceStackParamList, ItemsByVendorListItems>,
   BottomTabScreenProps<RootTabParamList, ItemsReference>
 >;
 
 export type CategoryItemsProps = CompositeScreenProps<
-  NativeStackScreenProps<
-    ItemsReferenceStackParamList,
-    ItemsByCategoryListItems
-  >,
+  StackScreenProps<ItemsReferenceStackParamList, ItemsByCategoryListItems>,
   BottomTabScreenProps<RootTabParamList, ItemsReference>
 >;
 
@@ -146,7 +145,7 @@ export type ItemLookupScreenProps = BottomTabScreenProps<
 
 export type ShoppingCartNavigationProps = ShoppingCartScreenProps["navigation"];
 
-export type ItemDetailsScreenProps = NativeStackScreenProps<
+export type ItemDetailsScreenProps = StackScreenProps<
   ShoppingCartStackParamList,
   ItemDetails
 >;
@@ -170,29 +169,3 @@ export type ItemsByVendorStackNavigatorNavigationProps =
 export type ItemLookupNavigationProps = ItemLookupScreenProps["navigation"];
 
 export type ItemLookupRouteProps = ItemLookupScreenProps["route"];
-
-// export type RootStackParamList = {
-//   Home: NavigatorScreenParams<HomeTabParamList>;
-//   PostDetails: { id: string };
-//   NotFound: undefined;
-// };
-
-// export type RootStackScreenProps<T extends keyof RootStackParamList> =
-//   StackScreenProps<RootStackParamList, T>;
-
-// export type HomeTabParamList = {
-//   Popular: undefined;
-//   Latest: undefined;
-// };
-
-// export type HomeTabScreenProps<T extends keyof HomeTabParamList> =
-//   CompositeScreenProps<
-//     BottomTabScreenProps<HomeTabParamList, T>,
-//     RootStackScreenProps<keyof RootStackParamList>
-//   >;
-
-// declare global {
-//   namespace ReactNavigation {
-//     type RootParamList = RootTabParamList;
-//   }
-// }

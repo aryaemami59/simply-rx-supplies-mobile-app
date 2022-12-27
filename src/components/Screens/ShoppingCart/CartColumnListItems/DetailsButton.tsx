@@ -1,8 +1,9 @@
 import { useNavigation } from "@react-navigation/native";
-import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import type { StackNavigationProp } from "@react-navigation/stack";
 import { Button } from "@rneui/themed";
 import type { FC } from "react";
 import { memo, useCallback } from "react";
+import type { TouchableWithoutFeedbackProps } from "react-native";
 import useItemName from "../../../../shared/hooks/useItemName";
 import useVendorName from "../../../../shared/hooks/useVendorName";
 import { JC_SPACE_EVENLY } from "../../../../shared/styles/sharedStyles";
@@ -18,12 +19,13 @@ const DetailsButton: FC<Props> = ({ reset }) => {
   const itemName = useItemName();
   const vendorName = useVendorName();
   const navigation =
-    useNavigation<NativeStackNavigationProp<ShoppingCartStackParamList>>();
+    useNavigation<StackNavigationProp<ShoppingCartStackParamList>>();
 
-  const clickHandler = useCallback(() => {
-    reset();
-    navigation.push(itemDetails, { itemName, vendorName });
-  }, [itemName, navigation, reset, vendorName]);
+  const clickHandler: NonNullable<TouchableWithoutFeedbackProps["onPress"]> =
+    useCallback(() => {
+      reset();
+      navigation.push(itemDetails, { itemName, vendorName });
+    }, [itemName, navigation, reset, vendorName]);
 
   return (
     <Button

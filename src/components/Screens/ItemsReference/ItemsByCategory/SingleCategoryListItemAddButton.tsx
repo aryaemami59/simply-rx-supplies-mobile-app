@@ -9,6 +9,7 @@ import {
   BACKGROUND_MAIN_COLOR,
   FONT_WEIGHT_700,
 } from "../../../../shared/styles/sharedStyles";
+import type { OnPress } from "../../../../types/missingTypes";
 import AddIcon from "./AddIcon";
 
 const SingleCategoryListItemAddButton: FC = () => {
@@ -19,7 +20,7 @@ const SingleCategoryListItemAddButton: FC = () => {
 
   const dispatch = useAppDispatch();
 
-  const clickHandler = useCallback(() => {
+  const clickHandler: OnPress = useCallback(() => {
     IfAddedToAllVendors || dispatch(addItems(itemName));
   }, [IfAddedToAllVendors, dispatch, itemName]);
 

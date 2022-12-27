@@ -1,21 +1,22 @@
 import { useTheme } from "@rneui/themed";
 import type { FC } from "react";
 import { memo, useMemo } from "react";
-import type { ListRenderItem } from "react-native";
+import type { StyleProp, ViewStyle } from "react-native";
 import { FlatList, View } from "react-native";
 import { shallowEqual } from "react-redux";
 import { useAppSelector } from "../../../../redux/hooks";
 import { selectCategoriesArr } from "../../../../redux/selectors";
 import { HEIGHT_100 } from "../../../../shared/styles/sharedStyles";
 import type { Category } from "../../../../types/api";
+import type { KeyExtractor, RenderItem } from "../../../../types/missingTypes";
 import type { ItemsByCategoryScreenProps } from "../../../../types/navigation";
 import ItemsByCategoryList from "./CategoryList";
 
-const renderItem: ListRenderItem<Category> = ({ item }) => (
+const renderItem: RenderItem<Category> = ({ item }) => (
   <ItemsByCategoryList category={item} />
 );
 
-const keyExtractor = (item: Category) => item;
+const keyExtractor: KeyExtractor<Category> = item => item;
 
 type Props = ItemsByCategoryScreenProps;
 
@@ -23,7 +24,7 @@ const ItemsByCategoryScreen: FC<Props> = ({ navigation, route }) => {
   const categories = useAppSelector(selectCategoriesArr, shallowEqual);
   const { background: backgroundColor } = useTheme().theme.colors;
 
-  const style = useMemo(
+  const style: StyleProp<ViewStyle> = useMemo(
     () => [HEIGHT_100, { backgroundColor }],
     [backgroundColor]
   );

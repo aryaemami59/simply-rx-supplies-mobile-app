@@ -14,6 +14,7 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitAny": true,
+    "typeRoots": ["src/types", "src/react-app-env.d.ts"],
     "skipLibCheck": true
   }
 }

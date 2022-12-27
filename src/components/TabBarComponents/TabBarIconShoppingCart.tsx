@@ -3,9 +3,9 @@ import type { FC } from "react";
 import { memo } from "react";
 import { useAppSelector } from "../../redux/hooks";
 import { checkIfAnyItemsAdded } from "../../redux/selectors";
-import type { tabBarIconProps } from "../../types/missingTypes";
+import type { TabBarIconProps } from "../../types/missingTypes";
 
-type Props = tabBarIconProps;
+type Props = TabBarIconProps;
 
 const TabBarIconShoppingCart: FC<Props> = ({ color, size, focused }) => {
   const ifAdded = useAppSelector(checkIfAnyItemsAdded);

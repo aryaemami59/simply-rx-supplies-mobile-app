@@ -1,3 +1,4 @@
+import type { BottomTabNavigationOptions } from "@react-navigation/bottom-tabs";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useTheme } from "@rneui/themed";
 import type { FC } from "react";
@@ -32,7 +33,7 @@ const TabBarMain: FC = () => {
   const { background: backgroundColor } = useTheme().theme.colors;
   const tabBarBadge = ifItemsAdded ? "" : undefined;
 
-  const options = useMemo(
+  const options: NonNullable<BottomTabNavigationOptions> = useMemo(
     () => ({
       ...shoppingCartOptions,
       tabBarBadge,
@@ -40,20 +41,21 @@ const TabBarMain: FC = () => {
     [tabBarBadge]
   );
 
-  const homeGroupOptions = useMemo(
+  const homeGroupOptions: NonNullable<BottomTabNavigationOptions> = useMemo(
     () => ({
       tabBarStyle: { backgroundColor },
     }),
     [backgroundColor]
   );
 
-  const navigatorScreenOptions = useMemo(
-    () => ({
-      ...HEADER_SHOWN_FALSE,
-      ...homeGroupOptions,
-    }),
-    [homeGroupOptions]
-  );
+  const navigatorScreenOptions: NonNullable<BottomTabNavigationOptions> =
+    useMemo(
+      () => ({
+        ...HEADER_SHOWN_FALSE,
+        ...homeGroupOptions,
+      }),
+      [homeGroupOptions]
+    );
 
   return (
     <SafeAreaProvider>

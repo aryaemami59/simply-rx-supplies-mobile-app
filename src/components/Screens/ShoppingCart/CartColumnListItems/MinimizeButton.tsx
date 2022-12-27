@@ -1,7 +1,9 @@
 import { Button } from "@rneui/themed";
 import type { FC } from "react";
 import { memo, useCallback } from "react";
+import type { TouchableWithoutFeedbackProps } from "react-native";
 import { JC_SPACE_EVENLY } from "../../../../shared/styles/sharedStyles";
+import type { Icon } from "../../../../types/missingTypes";
 import ExpandIconNode from "./ExpandIconNode";
 import MinimizeIconNode from "./MinimizeIconNode";
 
@@ -12,12 +14,13 @@ type Props = {
 };
 
 const MinimizeButton: FC<Props> = ({ onPress, open, reset }) => {
-  const clickHandler = useCallback(() => {
-    onPress();
-    reset();
-  }, [onPress, reset]);
+  const clickHandler: NonNullable<TouchableWithoutFeedbackProps["onPress"]> =
+    useCallback(() => {
+      onPress();
+      reset();
+    }, [onPress, reset]);
 
-  const icon = open ? MinimizeIconNode : ExpandIconNode;
+  const icon: Icon = open ? MinimizeIconNode : ExpandIconNode;
   const title = open ? "Minimize" : "Expand";
 
   return (
