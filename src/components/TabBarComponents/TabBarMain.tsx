@@ -26,6 +26,7 @@ import ItemsReferenceStackNavigator from "../StackNavigatorComponents/ItemsRefer
 import ShoppingCartStackNavigator from "../StackNavigatorComponents/ShoppingCartStackNavigator";
 
 const Tab = createBottomTabNavigator<RootTabParamList>();
+// const Tab = createBottomTabNavigator();
 const initialParams = { inputFocused: true };
 
 const TabBarMain: FC = () => {

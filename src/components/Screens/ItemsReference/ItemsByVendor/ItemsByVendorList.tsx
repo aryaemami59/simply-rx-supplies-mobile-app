@@ -10,7 +10,7 @@ import {
   AI_CENTER,
   JC_SPACE_BETWEEN,
 } from "../../../../shared/styles/sharedStyles";
-import type { ItemsByVendorStackNavigatorNavigationProps } from "../../../../types/navigation";
+import type { ItemsByVendorScreenNavigationProp } from "../../../../types/navigation";
 import { itemsByVendorListItems } from "../../../../types/navigation";
 
 const ItemsByVendorList: FC = () => {
@@ -18,8 +18,7 @@ const ItemsByVendorList: FC = () => {
   const officialVendorName = useOfficialVendorName(vendorName);
   const { background: backgroundColor } = useTheme().theme.colors;
 
-  const navigation =
-    useNavigation<ItemsByVendorStackNavigatorNavigationProps>();
+  const navigation = useNavigation<ItemsByVendorScreenNavigationProp>();
 
   const clickHandler: NonNullable<PressableProps["onPress"]> =
     useCallback(() => {

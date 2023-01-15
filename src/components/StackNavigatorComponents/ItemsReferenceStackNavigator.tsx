@@ -10,8 +10,8 @@ import {
   screenStackOptions,
 } from "../../shared/screen_options/sharedScreenOptions";
 import type {
-  ItemsReferenceStackNavigatorProps,
   ItemsReferenceStackParamList,
+  RootTabScreenProps,
 } from "../../types/navigation";
 import {
   itemsByCategoryListItems,
@@ -22,7 +22,8 @@ import ItemsByCategoryListItems from "../Screens/ItemsReference/ItemsByCategory/
 import ItemsByVendorListItems from "../Screens/ItemsReference/ItemsByVendor/ItemsByVendorListItems";
 import ItemsReferenceScreen from "../Screens/ItemsReference/ItemsReferenceScreen";
 
-type Props = ItemsReferenceStackNavigatorProps;
+type Props = RootTabScreenProps<"ItemsReference">;
+// type Props = ItemsReferenceStackNavigatorProps;
 
 const Stack = createStackNavigator<ItemsReferenceStackParamList>();
 

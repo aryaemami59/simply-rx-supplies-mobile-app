@@ -10,7 +10,7 @@ import ItemNameProvider from "../../../../shared/contexts/ItemNameProvider";
 import { HEIGHT_100 } from "../../../../shared/styles/sharedStyles";
 import type { ItemName } from "../../../../types/api";
 import type { KeyExtractor, RenderItem } from "../../../../types/missingTypes";
-import type { CategoryItemsProps } from "../../../../types/navigation";
+import type { ItemsReferenceStackNavigatorProps } from "../../../../types/navigation";
 import ItemsByCategorySingleListItem from "./ItemsByCategorySingleListItem";
 
 const renderItems: RenderItem<ItemName> = ({ item }) => (
@@ -21,7 +21,8 @@ const renderItems: RenderItem<ItemName> = ({ item }) => (
 
 const keyExtractor: KeyExtractor<ItemName> = item => item;
 
-type Props = CategoryItemsProps;
+type Props = ItemsReferenceStackNavigatorProps<"ItemsByCategoryListItems">;
+// type Props = CategoryItemsProps;
 
 const ItemsByCategoryListItems: FC<Props> = ({ navigation, route }) => {
   const { category } = route.params;

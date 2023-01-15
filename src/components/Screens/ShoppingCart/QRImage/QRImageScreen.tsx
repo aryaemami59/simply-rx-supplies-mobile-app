@@ -28,7 +28,7 @@ import {
   PADDING_TOP_20,
   TEXT_CENTER,
 } from "../../../../shared/styles/sharedStyles";
-import type { QRImageScreenProps } from "../../../../types/navigation";
+import type { ShoppingCartStackScreenProps } from "../../../../types/navigation";
 
 const styles = StyleSheet.create({
   container: {
@@ -49,7 +49,8 @@ const contentContainerStyle: ScrollViewProps["contentContainerStyle"] = [
   styles.container,
 ];
 
-type Props = QRImageScreenProps;
+type Props = ShoppingCartStackScreenProps<"QRImage">;
+// type Props = QRImageScreenProps;
 
 const QRImageScreen: FC<Props> = ({ navigation, route }) => {
   const { itemNumbers, itemsAdded } = route.params;

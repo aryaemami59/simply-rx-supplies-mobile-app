@@ -24,10 +24,11 @@ import {
   TEXT_CENTER,
   WIDTH_60,
 } from "../../../../../shared/styles/sharedStyles";
-import type { ItemDetailsScreenProps } from "../../../../../types/navigation";
+import type { ShoppingCartStackScreenProps } from "../../../../../types/navigation";
 import { barcodeImage } from "../../../../../types/navigation";
 
-type Props = ItemDetailsScreenProps;
+type Props = ShoppingCartStackScreenProps<"ItemDetails">;
+// type Props = ItemDetailsScreenProps;
 
 const imageContainerStyle: StyleProp<ViewStyle> = [
   BARCODE_ASPECT_RATIO,

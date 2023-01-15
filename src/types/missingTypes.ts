@@ -26,8 +26,13 @@ export type HeaderStyle = NonNullable<StackNavigationOptions["headerStyle"]>;
 export type HeaderTitleStyle = NonNullable<
   StackNavigationOptions["headerTitleStyle"]
 >;
-export type TabHeader = NonNullable<BottomTabNavigationOptions["header"]>;
-export type StackHeader = NonNullable<StackNavigationOptions["header"]>;
+export type TabHeader = Header<BottomTabNavigationOptions>;
+export type StackHeader = Header<StackNavigationOptions>;
+// export type TabHeader = NonNullable<BottomTabNavigationOptions["header"]>;
+// export type StackHeader = NonNullable<StackNavigationOptions["header"]>;
+export type Header<
+  T extends BottomTabNavigationOptions | StackNavigationOptions
+> = NonNullable<T["header"]>;
 export type TabBarIcon = NonNullable<BottomTabNavigationOptions["tabBarIcon"]>;
 export type HeaderRight = NonNullable<StackNavigationOptions["headerRight"]>;
 

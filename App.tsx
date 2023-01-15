@@ -1,5 +1,5 @@
 import { NavigationContainer } from "@react-navigation/native";
-import { createTheme, ThemeProvider } from "@rneui/themed";
+import { ThemeProvider, createTheme } from "@rneui/themed";
 // import whyDidYouRender from "@welldone-software/why-did-you-render";
 import type { FC } from "react";
 import { memo } from "react";

@@ -44,7 +44,7 @@ import type {
   KeyExtractor,
   RenderItem,
 } from "../../../../types/missingTypes";
-import type { CartColumnListItemsScreenProps } from "../../../../types/navigation";
+import type { ShoppingCartStackScreenProps } from "../../../../types/navigation";
 import { itemLookup } from "../../../../types/navigation";
 import CartQRCodeImage from "../QRImage/CartQRCodeImage";
 import SingleCartListItems from "./SingleCartListItems";
@@ -59,7 +59,8 @@ const shoppingCartIcon: Icon = (
 
 const keyExtractor: KeyExtractor<ItemName> = item => item;
 
-type Props = CartColumnListItemsScreenProps;
+type Props = ShoppingCartStackScreenProps<"CartColumnListItems">;
+// type Props = CartColumnListItemsScreenProps;
 
 const viewStyle: StyleProp<ViewStyle> = [
   AI_CENTER,
@@ -68,6 +69,8 @@ const viewStyle: StyleProp<ViewStyle> = [
 ];
 
 const CartColumnListItemsScreen: FC<Props> = ({ navigation, route }) => {
+  console.log(navigation.getState());
+  console.log(route);
   const { vendorName } = route.params;
   const renderItems: RenderItem<ItemName> = useCallback(
     ({ item }) => (

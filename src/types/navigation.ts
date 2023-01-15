@@ -60,6 +60,9 @@ export type RootTabParamList = {
     | undefined;
 };
 
+export type RootTabScreenProps<T extends keyof RootTabParamList> =
+  BottomTabScreenProps<RootTabParamList, T>;
+
 export type ShoppingCartStackParamList = {
   ShoppingCartScreen: undefined;
   QRImage: {
@@ -71,6 +74,17 @@ export type ShoppingCartStackParamList = {
   ItemLookup: { inputFocused: boolean } | undefined;
   ItemDetails: { itemName: ItemName; vendorName: VendorNameType };
 };
+
+// export type ShoppingCartStackScreenProps<
+//   T extends keyof ShoppingCartStackParamList
+// > = BottomTabScreenProps<ShoppingCartStackParamList, T>;
+
+export type ShoppingCartStackScreenProps<
+  T extends keyof ShoppingCartStackParamList
+> = CompositeScreenProps<
+  StackScreenProps<ShoppingCartStackParamList, T>,
+  RootTabScreenProps<keyof RootTabParamList>
+>;
 
 export type ItemsReferenceStackParamList = {
   ItemsReferenceScreen:
@@ -104,14 +118,23 @@ export type BarcodeImageScreenProps = CompositeScreenProps<
   BottomTabScreenProps<RootTabParamList, ShoppingCartStack>
 >;
 
+// export type HeaderHomeStackNavigatorProps<
+//   T extends BottomTabHeaderProps | StackHeaderProps
+// > = Pick<T, "navigation" | "route" | "options">;
 export type HeaderHomeStackNavigatorProps =
   | Pick<BottomTabHeaderProps, "navigation" | "route" | "options">
   | Pick<StackHeaderProps, "navigation" | "route" | "options">;
 
-export type ItemsReferenceStackNavigatorProps = BottomTabScreenProps<
-  RootTabParamList,
-  ItemsReference
+export type ItemsReferenceStackNavigatorProps<
+  T extends keyof ItemsReferenceStackParamList
+> = CompositeScreenProps<
+  StackScreenProps<ItemsReferenceStackParamList, T>,
+  RootTabScreenProps<keyof RootTabParamList>
 >;
+// export type ItemsReferenceStackNavigatorProps = BottomTabScreenProps<
+//   RootTabParamList,
+//   ItemsReference
+// >;
 
 export type ShoppingCartScreenProps = CompositeScreenProps<
   StackScreenProps<ShoppingCartStackParamList, ShoppingCartScreen>,
@@ -160,12 +183,30 @@ export type ItemsByCategoryScreenProps = CompositeScreenProps<
   ItemsReferenceScreenProps
 >;
 
-export type ItemsByCategoryStackNavigatorNavigationProps =
+export type ItemsByCategoryScreenNavigationProp =
   ItemsByCategoryScreenProps["navigation"];
 
-export type ItemsByVendorStackNavigatorNavigationProps =
+export type ItemsByVendorScreenNavigationProp =
   ItemsByVendorScreenProps["navigation"];
 
 export type ItemLookupNavigationProps = ItemLookupScreenProps["navigation"];
 
 export type ItemLookupRouteProps = ItemLookupScreenProps["route"];
+
+// declare module "@react-navigation/core" {
+//   type RootParamList = {} & RootTabParamList;
+// }
+
+declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace ReactNavigation {
+    // eslint-disable-next-line @typescript-eslint/consistent-type-definitions, @typescript-eslint/no-empty-interface
+    interface RootParamList extends RootTabParamList {}
+  }
+}
+
+// declare global {
+//   namespace ReactNavigation {
+//     type RootParamList = RootTabParamList;
+//   }
+// }

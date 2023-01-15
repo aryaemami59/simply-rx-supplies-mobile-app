@@ -8,7 +8,7 @@ import { selectAllListItems } from "../../../redux/selectors";
 import ItemNameProvider from "../../../shared/contexts/ItemNameProvider";
 import type { ItemName } from "../../../types/api";
 import type { KeyExtractor, RenderItem } from "../../../types/missingTypes";
-import type { ItemLookupScreenProps } from "../../../types/navigation";
+import type { RootTabScreenProps } from "../../../types/navigation";
 import BottomSheetComponent from "./BottomSheet/BottomSheetComponent";
 import InputField from "./SearchBar/InputField";
 import SingleSearchResultsListItem from "./SearchResults/SingleSearchResultsListItem";
@@ -21,11 +21,14 @@ const renderItems: RenderItem<ItemName> = ({ item }) => (
   </ItemNameProvider>
 );
 
-const keyExtractor: KeyExtractor<ItemName> = (item: ItemName) => item;
+const keyExtractor: KeyExtractor<ItemName> = item => item;
 
-type Props = ItemLookupScreenProps;
+type Props = RootTabScreenProps<"ItemLookup">;
+// type Props = ItemLookupScreenProps;
 
 const ItemLookupScreen: FC<Props> = ({ navigation, route }) => {
+  console.log(route);
+  console.log(navigation.getParent());
   // const { background: backgroundColor } = useTheme().theme.colors;
   // const style = useMemo(() => ({ backgroundColor }), [backgroundColor]);
 

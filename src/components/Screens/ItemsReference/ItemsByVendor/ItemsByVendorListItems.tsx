@@ -10,12 +10,13 @@ import useOfficialVendorName from "../../../../shared/hooks/useOfficialVendorNam
 import { HEIGHT_100 } from "../../../../shared/styles/sharedStyles";
 import type { ItemName } from "../../../../types/api";
 import type { KeyExtractor, RenderItem } from "../../../../types/missingTypes";
-import type { ItemsByVendorListItemsProps } from "../../../../types/navigation";
+import type { ItemsReferenceStackNavigatorProps } from "../../../../types/navigation";
 import SingleItemsByVendorListItem from "./SingleItemsByVendorListItem";
 
 const keyExtractor: KeyExtractor<ItemName> = item => item;
 
-type Props = ItemsByVendorListItemsProps;
+type Props = ItemsReferenceStackNavigatorProps<"ItemsByVendorListItems">;
+// type Props = ItemsByVendorListItemsProps;
 
 const ItemsByVendorListItems: FC<Props> = ({ navigation, route }) => {
   const { vendorName } = route.params;

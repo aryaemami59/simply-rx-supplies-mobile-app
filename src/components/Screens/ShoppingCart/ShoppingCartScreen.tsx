@@ -8,7 +8,7 @@ import useVendorNamesList from "../../../shared/hooks/useVendorNamesList";
 import { HEIGHT_100 } from "../../../shared/styles/sharedStyles";
 import type { VendorNameType } from "../../../types/api";
 import type { KeyExtractor, RenderItem } from "../../../types/missingTypes";
-import type { ShoppingCartScreenProps } from "../../../types/navigation";
+import type { ShoppingCartStackScreenProps } from "../../../types/navigation";
 import CartVendorColumns from "./CartVendorColumns";
 
 const renderItem: RenderItem<VendorNameType> = ({ item }) => (
@@ -19,9 +19,15 @@ const renderItem: RenderItem<VendorNameType> = ({ item }) => (
 
 const keyExtractor: KeyExtractor<VendorNameType> = item => item.toString();
 
-type Props = ShoppingCartScreenProps;
+// type Props = ShoppingCartStackScreenProps<"ShoppingCartScreen">;
+type Props = ShoppingCartStackScreenProps<"ShoppingCartScreen">;
+// type Props = ShoppingCartScreenProps;
 
 const ShoppingCartScreen: FC<Props> = ({ navigation, route }) => {
+  // console.log(navigation.getParent()?.getState());
+  // console.log(navigation.getState());
+  // console.log(navigation.getParent()?.getState());
+  // console.log(route);
   const vendors = useVendorNamesList();
   const { background } = useTheme().theme.colors;
 

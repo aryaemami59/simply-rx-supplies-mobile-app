@@ -24,11 +24,12 @@ import {
   WIDTH_90,
 } from "../../../../shared/styles/sharedStyles";
 import type { OnPress } from "../../../../types/missingTypes";
-import type { BarcodeImageScreenProps } from "../../../../types/navigation";
+import type { ShoppingCartStackScreenProps } from "../../../../types/navigation";
 
 const iconName = Platform.OS === "android" ? "share-android" : "share";
 
-type Props = BarcodeImageScreenProps;
+type Props = ShoppingCartStackScreenProps<"BarcodeImage">;
+// type Props = BarcodeImageScreenProps;
 
 const style: StyleProp<ImageStyle> = [BARCODE_ASPECT_RATIO, WIDTH_90];
 

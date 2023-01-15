@@ -10,7 +10,7 @@ import { HEIGHT_100 } from "../../../../shared/styles/sharedStyles";
 import type { Category } from "../../../../types/api";
 import type { KeyExtractor, RenderItem } from "../../../../types/missingTypes";
 import type { ItemsByCategoryScreenProps } from "../../../../types/navigation";
-import ItemsByCategoryList from "./CategoryList";
+import ItemsByCategoryList from "./ItemsByCategoryList";
 
 const renderItem: RenderItem<Category> = ({ item }) => (
   <ItemsByCategoryList category={item} />

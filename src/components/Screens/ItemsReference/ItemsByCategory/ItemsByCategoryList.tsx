@@ -1,5 +1,4 @@
-import { useNavigation } from "@react-navigation/native";
-import type { StackNavigationProp } from "@react-navigation/stack";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { ListItem, useTheme } from "@rneui/themed";
 import type { FC } from "react";
 import { memo, useCallback, useMemo } from "react";
@@ -10,16 +9,21 @@ import {
   JC_SPACE_BETWEEN,
 } from "../../../../shared/styles/sharedStyles";
 import type { Category } from "../../../../types/api";
-import type { ItemsReferenceStackParamList } from "../../../../types/navigation";
+import type { ItemsByCategoryScreenNavigationProp } from "../../../../types/navigation";
 import { itemsByCategoryListItems } from "../../../../types/navigation";
 
 type Props = {
   category: Category;
 };
 
-const CategoryList: FC<Props> = ({ category }) => {
-  const navigation =
-    useNavigation<StackNavigationProp<ItemsReferenceStackParamList>>();
+const ItemsByCategoryList: FC<Props> = ({ category }) => {
+  const navigation = useNavigation<ItemsByCategoryScreenNavigationProp>();
+  const route = useRoute();
+  console.log(route.name);
+  // const navigation =
+  //   useNavigation<StackNavigationProp<ItemsReferenceStackParamList>>();
+  console.log("child", navigation.getState().type);
+  console.log("parent", navigation.getParent()?.getState().type);
   const { background } = useTheme().theme.colors;
 
   const clickHandler: NonNullable<PressableProps["onPress"]> =
@@ -45,4 +49,4 @@ const CategoryList: FC<Props> = ({ category }) => {
   );
 };
 
-export default memo<Props>(CategoryList);
+export default memo<Props>(ItemsByCategoryList);
