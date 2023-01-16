@@ -21,32 +21,33 @@ import type {
 } from "./api";
 
 export const home = "Home" as const;
-export type Home = typeof home;
 export const itemLookup = "ItemLookup" as const;
-export type ItemLookup = typeof itemLookup;
 export const shoppingCartStack = "ShoppingCartStack" as const;
-export type ShoppingCartStack = typeof shoppingCartStack;
 export const shoppingCartScreen = "ShoppingCartScreen" as const;
-export type ShoppingCartScreen = typeof shoppingCartScreen;
 export const qrImage = "QRImage" as const;
-export type QRImage = typeof qrImage;
 export const barcodeImage = "BarcodeImage" as const;
-export type BarcodeImage = typeof barcodeImage;
 export const cartColumnListItems = "CartColumnListItems" as const;
-export type CartColumnListItems = typeof cartColumnListItems;
 export const itemsReference = "ItemsReference" as const;
-export type ItemsReference = typeof itemsReference;
 export const itemsReferenceScreen = "ItemsReferenceScreen" as const;
-export type ItemsReferenceScreen = typeof itemsReferenceScreen;
 export const itemsByVendorListItems = "ItemsByVendorListItems" as const;
-export type ItemsByVendorListItems = typeof itemsByVendorListItems;
 export const itemsByCategoryListItems = "ItemsByCategoryListItems" as const;
-export type ItemsByCategoryListItems = typeof itemsByCategoryListItems;
 export const itemsByVendor = "ItemsByVendor" as const;
-export type ItemsByVendor = typeof itemsByVendor;
 export const itemsByCategory = "ItemsByCategory" as const;
-export type ItemsByCategory = typeof itemsByCategory;
 export const itemDetails = "ItemDetails" as const;
+
+export type Home = typeof home;
+export type ItemLookup = typeof itemLookup;
+export type ShoppingCartStack = typeof shoppingCartStack;
+export type ShoppingCartScreen = typeof shoppingCartScreen;
+export type QRImage = typeof qrImage;
+export type BarcodeImage = typeof barcodeImage;
+export type CartColumnListItems = typeof cartColumnListItems;
+export type ItemsReference = typeof itemsReference;
+export type ItemsReferenceScreen = typeof itemsReferenceScreen;
+export type ItemsByVendorListItems = typeof itemsByVendorListItems;
+export type ItemsByCategoryListItems = typeof itemsByCategoryListItems;
+export type ItemsByVendor = typeof itemsByVendor;
+export type ItemsByCategory = typeof itemsByCategory;
 export type ItemDetails = typeof itemDetails;
 
 export type RootTabParamList = {
@@ -166,7 +167,7 @@ export type ItemLookupScreenProps = BottomTabScreenProps<
   ItemLookup
 >;
 
-export type ShoppingCartNavigationProps = ShoppingCartScreenProps["navigation"];
+// export type ShoppingCartNavigationProps = ShoppingCartScreenProps["navigation"];
 
 export type ItemDetailsScreenProps = StackScreenProps<
   ShoppingCartStackParamList,
@@ -183,15 +184,15 @@ export type ItemsByCategoryScreenProps = CompositeScreenProps<
   ItemsReferenceScreenProps
 >;
 
-export type ItemsByCategoryScreenNavigationProp =
-  ItemsByCategoryScreenProps["navigation"];
+// export type ItemsByCategoryScreenNavigationProp =
+//   ItemsByCategoryScreenProps["navigation"];
 
-export type ItemsByVendorScreenNavigationProp =
-  ItemsByVendorScreenProps["navigation"];
+// export type ItemsByVendorScreenNavigationProp =
+//   ItemsByVendorScreenProps["navigation"];
 
-export type ItemLookupNavigationProps = ItemLookupScreenProps["navigation"];
+// export type ItemLookupNavigationProps = ItemLookupScreenProps["navigation"];
 
-export type ItemLookupRouteProps = ItemLookupScreenProps["route"];
+// export type ItemLookupRouteProps = ItemLookupScreenProps["route"];
 
 // declare module "@react-navigation/core" {
 //   type RootParamList = {} & RootTabParamList;

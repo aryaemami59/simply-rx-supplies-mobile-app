@@ -19,15 +19,9 @@ const renderItem: RenderItem<VendorNameType> = ({ item }) => (
 
 const keyExtractor: KeyExtractor<VendorNameType> = item => item.toString();
 
-// type Props = ShoppingCartStackScreenProps<"ShoppingCartScreen">;
 type Props = ShoppingCartStackScreenProps<"ShoppingCartScreen">;
-// type Props = ShoppingCartScreenProps;
 
 const ShoppingCartScreen: FC<Props> = ({ navigation, route }) => {
-  // console.log(navigation.getParent()?.getState());
-  // console.log(navigation.getState());
-  // console.log(navigation.getParent()?.getState());
-  // console.log(route);
   const vendors = useVendorNamesList();
   const { background } = useTheme().theme.colors;
 

@@ -24,14 +24,8 @@ const renderItems: RenderItem<ItemName> = ({ item }) => (
 const keyExtractor: KeyExtractor<ItemName> = item => item;
 
 type Props = RootTabScreenProps<"ItemLookup">;
-// type Props = ItemLookupScreenProps;
 
 const ItemLookupScreen: FC<Props> = ({ navigation, route }) => {
-  console.log(route);
-  console.log(navigation.getParent());
-  // const { background: backgroundColor } = useTheme().theme.colors;
-  // const style = useMemo(() => ({ backgroundColor }), [backgroundColor]);
-
   const listItems = useAppSelector(selectAllListItems, shallowEqual);
 
   return (

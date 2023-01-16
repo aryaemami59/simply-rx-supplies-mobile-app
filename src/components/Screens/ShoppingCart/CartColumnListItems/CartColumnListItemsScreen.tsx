@@ -28,6 +28,7 @@ import {
 import ItemNameProvider from "../../../../shared/contexts/ItemNameProvider";
 import VendorNameProvider from "../../../../shared/contexts/VendorNameProvider";
 import useOfficialVendorName from "../../../../shared/hooks/useOfficialVendorName";
+import useScreenInfo from "../../../../shared/hooks/useScreenInfo";
 import {
   AI_CENTER,
   BACKGROUND_MAIN_COLOR,
@@ -60,7 +61,6 @@ const shoppingCartIcon: Icon = (
 const keyExtractor: KeyExtractor<ItemName> = item => item;
 
 type Props = ShoppingCartStackScreenProps<"CartColumnListItems">;
-// type Props = CartColumnListItemsScreenProps;
 
 const viewStyle: StyleProp<ViewStyle> = [
   AI_CENTER,
@@ -69,8 +69,7 @@ const viewStyle: StyleProp<ViewStyle> = [
 ];
 
 const CartColumnListItemsScreen: FC<Props> = ({ navigation, route }) => {
-  console.log(navigation.getState());
-  console.log(route);
+  useScreenInfo();
   const { vendorName } = route.params;
   const renderItems: RenderItem<ItemName> = useCallback(
     ({ item }) => (

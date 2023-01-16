@@ -1,14 +1,19 @@
 import { useFocusEffect } from "@react-navigation/native";
+import type { FC } from "react";
 import { useCallback } from "react";
+import type { AnyObject, EmptyObject } from "../../types/missingTypes";
 
-const useIsCurrentFocused = (componentName: string) => {
+const useIsCurrentFocused = <P extends AnyObject = EmptyObject>(
+  component: FC<P>
+) => {
+  const { name } = component;
   useFocusEffect(
     useCallback(() => {
-      console.log(`%c${componentName} Focused`, "font-size: 20px");
+      console.log(`%c${name} Focused`, "font-size: 20px");
       return () => {
-        console.log(`%c${componentName} Blurred`, "font-size: 20px");
+        console.log(`%c${name} Blurred`, "font-size: 20px");
       };
-    }, [componentName])
+    }, [name])
   );
 };
 

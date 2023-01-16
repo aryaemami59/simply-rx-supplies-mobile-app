@@ -14,7 +14,7 @@ import {
   FONT_WEIGHT_BOLD,
   JC_SPACE_BETWEEN,
 } from "../../../shared/styles/sharedStyles";
-import type { ShoppingCartNavigationProps } from "../../../types/navigation";
+import type { ShoppingCartScreenProps } from "../../../types/navigation";
 import { cartColumnListItems } from "../../../types/navigation";
 
 const CartVendorColumns: FC = () => {
@@ -25,7 +25,7 @@ const CartVendorColumns: FC = () => {
 
   const status = addedItemsLen ? "success" : "primary";
 
-  const navigation = useNavigation<ShoppingCartNavigationProps>();
+  const navigation = useNavigation<ShoppingCartScreenProps["navigation"]>();
 
   const clickHandler = useCallback(() => {
     navigation.push(cartColumnListItems, { vendorName });

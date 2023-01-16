@@ -51,11 +51,11 @@ export type AnyObject = Record<string, unknown>;
 
 export type AnyArray = unknown[];
 
-export type AnyFunction = () => unknown;
+export type AnyFunction = (...args: unknown[]) => unknown;
 
-export type EmptyObject = Readonly<Record<string, never>>;
+export type EmptyObject = Readonly<Record<string, never>> & AnyObject;
 
-export type EmptyArray = never[];
+export type EmptyArray = never[] & AnyArray;
 
 export type Composite = AnyFunction | AnyArray | AnyObject;
 

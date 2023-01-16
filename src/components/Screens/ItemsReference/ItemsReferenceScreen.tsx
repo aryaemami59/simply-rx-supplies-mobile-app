@@ -16,12 +16,10 @@ import ItemsByCategoryScreen from "./ItemsByCategory/ItemsByCategoryScreen";
 import ItemsByVendorScreen from "./ItemsByVendor/ItemsByVendorScreen";
 
 type Props = ItemsReferenceStackNavigatorProps<"ItemsReferenceScreen">;
-// type Props = ItemsReferenceScreenProps;
 
 const Tab = createMaterialTopTabNavigator<ItemsReferenceTopTabParamList>();
 
 const ItemsReferenceScreen: FC<Props> = ({ navigation, route }) => {
-  console.log(navigation.getState());
   const { background: backgroundColor, grey0: color } = useTheme().theme.colors;
 
   const screenOptions: NonNullable<MaterialTopTabNavigationOptions> = useMemo(

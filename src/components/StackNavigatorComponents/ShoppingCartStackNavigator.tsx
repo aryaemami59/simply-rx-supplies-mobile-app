@@ -29,14 +29,9 @@ import ShoppingCartScreen from "../Screens/ShoppingCart/ShoppingCartScreen";
 
 const Stack = createStackNavigator<ShoppingCartStackParamList>();
 
-// type Props = ShoppingCartStackScreenProps<"ShoppingCartScreen">;
 type Props = RootTabScreenProps<"ShoppingCartStack">;
-// type Props = ShoppingCartStackNavigatorProps;
 
 const ShoppingCartStackNavigator: FC<Props> = ({ navigation, route }) => {
-  // console.log(navigation.getState());
-  // console.log(navigation.);
-  // console.log(route);
   const [isLoading, errMsg] = useIsLoading();
 
   if (isLoading) return <IsLoadingComponents />;

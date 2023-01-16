@@ -63,14 +63,16 @@ const HeaderHomeStackNavigator: FC<Props> = ({
   const searchRef = useRef<SearchBarRef>(null);
   const myNavigation = navigation as BottomTabNavigationProp<RootTabParamList>;
 
-  const focusHandler: NonNullable<TextInputProps["onFocus"]> =
-    useCallback(() => {
+  const focusHandler: NonNullable<TextInputProps["onFocus"]> = useCallback(
+    e => {
       const ref = searchRef.current;
       myNavigation.navigate(itemLookup, {
         inputFocused: true,
       });
-      ref?.blur();
-    }, [myNavigation]);
+      // ref?.blur();
+    },
+    [myNavigation]
+  );
 
   const centerComponent: CenterComponent = useMemo(
     () => (
