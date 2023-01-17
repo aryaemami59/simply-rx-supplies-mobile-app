@@ -8,7 +8,7 @@ import useVendorNamesList from "../../../../shared/hooks/useVendorNamesList";
 import { HEIGHT_100 } from "../../../../shared/styles/sharedStyles";
 import type { VendorNameType } from "../../../../types/api";
 import type { KeyExtractor, RenderItem } from "../../../../types/missingTypes";
-import type { ItemsByVendorScreenProps } from "../../../../types/navigation";
+import type { ItemsReferenceTabScreenProps } from "../../../../types/navigation";
 import ItemsByVendorList from "./ItemsByVendorList";
 
 const renderItem: RenderItem<VendorNameType> = ({ item }) => (
@@ -19,7 +19,7 @@ const renderItem: RenderItem<VendorNameType> = ({ item }) => (
 
 const keyExtractor: KeyExtractor<VendorNameType> = item => item;
 
-type Props = ItemsByVendorScreenProps;
+type Props = ItemsReferenceTabScreenProps<"ItemsByVendor">;
 
 const ItemsByVendorScreen: FC<Props> = ({ navigation, route }) => {
   const allVendors = useVendorNamesList();

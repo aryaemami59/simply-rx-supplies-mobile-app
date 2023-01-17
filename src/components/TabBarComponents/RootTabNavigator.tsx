@@ -17,8 +17,8 @@ import type { RootTabParamList } from "../../types/navigation";
 import {
   home,
   itemLookup,
-  itemsReference,
-  shoppingCartStack,
+  itemsReferenceStackNavigator,
+  shoppingCartStackNavigator,
 } from "../../types/navigation";
 import HomeScreen from "../Screens/Home/HomeScreen";
 import ItemLookupScreen from "../Screens/ItemLookUp/ItemLookupScreen";
@@ -29,7 +29,7 @@ const Tab = createBottomTabNavigator<RootTabParamList>();
 // const Tab = createBottomTabNavigator();
 const initialParams = { inputFocused: true };
 
-const TabBarMain: FC = () => {
+const RootTabNavigator: FC = () => {
   const ifItemsAdded = useAppSelector(checkIfAnyItemsAdded);
   const { background: backgroundColor } = useTheme().theme.colors;
   const tabBarBadge = ifItemsAdded ? "" : undefined;
@@ -81,12 +81,12 @@ const TabBarMain: FC = () => {
         </Tab.Group>
         <Tab.Group screenOptions={navigatorScreenOptions}>
           <Tab.Screen
-            name={shoppingCartStack}
+            name={shoppingCartStackNavigator}
             component={ShoppingCartStackNavigator}
             options={options}
           />
           <Tab.Screen
-            name={itemsReference}
+            name={itemsReferenceStackNavigator}
             component={ItemsReferenceStackNavigator}
             options={itemsReferenceOptions}
           />
@@ -96,4 +96,4 @@ const TabBarMain: FC = () => {
   );
 };
 
-export default memo(TabBarMain);
+export default memo(RootTabNavigator);

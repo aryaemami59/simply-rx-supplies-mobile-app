@@ -50,7 +50,6 @@ const contentContainerStyle: ScrollViewProps["contentContainerStyle"] = [
 ];
 
 type Props = ShoppingCartStackScreenProps<"QRImage">;
-// type Props = QRImageScreenProps;
 
 const QRImageScreen: FC<Props> = ({ navigation, route }) => {
   const { itemNumbers, itemsAdded } = route.params;

@@ -28,7 +28,6 @@ import type { ShoppingCartStackScreenProps } from "../../../../../types/navigati
 import { barcodeImage } from "../../../../../types/navigation";
 
 type Props = ShoppingCartStackScreenProps<"ItemDetails">;
-// type Props = ItemDetailsScreenProps;
 
 const imageContainerStyle: StyleProp<ViewStyle> = [
   BARCODE_ASPECT_RATIO,

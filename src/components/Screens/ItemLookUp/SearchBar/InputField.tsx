@@ -36,7 +36,7 @@ import type {
   Icon,
   SearchBarRef,
 } from "../../../../types/missingTypes";
-import type { ItemLookupScreenProps } from "../../../../types/navigation";
+import type { RootTabScreenProps } from "../../../../types/navigation";
 import search from "../../../../utils/search";
 import HeaderRightComponent from "../../../HeaderComponents/HeaderRightComponent";
 import SearchIcon from "../../../HeaderComponents/SearchIcon";
@@ -69,7 +69,7 @@ const containerStyle: SearchBarBaseProps["containerStyle"] = [
 ];
 
 const InputField: FC = () => {
-  const { params } = useRoute<ItemLookupScreenProps["route"]>();
+  const { params } = useRoute<RootTabScreenProps<"ItemLookup">["route"]>();
   const inputRef = useRef<SearchBarRef>(null);
   const view = useRef<AnimatableViewRef>(null);
   const [val, setVal] = useState("");
@@ -109,7 +109,8 @@ const InputField: FC = () => {
   //   inputRef.current?.focus();
   // }, []);
 
-  const navigation = useNavigation<ItemLookupScreenProps["navigation"]>();
+  const navigation =
+    useNavigation<RootTabScreenProps<"ItemLookup">["navigation"]>();
 
   useMounted(InputField);
   useIsCurrentFocused(InputField);

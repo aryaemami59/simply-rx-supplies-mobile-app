@@ -18,14 +18,13 @@ import {
   itemsByVendorListItems,
   itemsReferenceScreen,
 } from "../../types/navigation";
-import ItemsByCategoryListItems from "../Screens/ItemsReference/ItemsByCategory/CategoryItems";
+import ItemsByCategoryListItems from "../Screens/ItemsReference/ItemsByCategory/ItemsByCategoryListItems";
 import ItemsByVendorListItems from "../Screens/ItemsReference/ItemsByVendor/ItemsByVendorListItems";
 import ItemsReferenceScreen from "../Screens/ItemsReference/ItemsReferenceScreen";
 
-type Props = RootTabScreenProps<"ItemsReference">;
-// type Props = ItemsReferenceStackNavigatorProps;
-
 const Stack = createStackNavigator<ItemsReferenceStackParamList>();
+
+type Props = RootTabScreenProps<"ItemsReferenceStackNavigator">;
 
 const ItemsReferenceStackNavigator: FC<Props> = ({ navigation, route }) => {
   const [isLoading, errMsg] = useIsLoading();

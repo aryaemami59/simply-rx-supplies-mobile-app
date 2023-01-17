@@ -1,5 +1,4 @@
 import { useNavigation } from "@react-navigation/native";
-import type { StackNavigationProp } from "@react-navigation/stack";
 import { Button } from "@rneui/themed";
 import type { FC } from "react";
 import { memo, useCallback } from "react";
@@ -8,7 +7,7 @@ import useItemName from "../../../../shared/hooks/useItemName";
 import useScreenInfo from "../../../../shared/hooks/useScreenInfo";
 import useVendorName from "../../../../shared/hooks/useVendorName";
 import { JC_SPACE_EVENLY } from "../../../../shared/styles/sharedStyles";
-import type { ShoppingCartStackParamList } from "../../../../types/navigation";
+import type { ShoppingCartStackScreenProps } from "../../../../types/navigation";
 import { itemDetails } from "../../../../types/navigation";
 import DetailsIconNode from "./DetailsIconNode";
 
@@ -21,7 +20,7 @@ const DetailsButton: FC<Props> = ({ reset }) => {
   const itemName = useItemName();
   const vendorName = useVendorName();
   const navigation =
-    useNavigation<StackNavigationProp<ShoppingCartStackParamList>>();
+    useNavigation<ShoppingCartStackScreenProps<"ItemDetails">["navigation"]>();
 
   const clickHandler: NonNullable<TouchableWithoutFeedbackProps["onPress"]> =
     useCallback(() => {

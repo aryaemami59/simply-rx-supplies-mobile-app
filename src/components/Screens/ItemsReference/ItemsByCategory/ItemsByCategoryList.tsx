@@ -9,7 +9,7 @@ import {
   JC_SPACE_BETWEEN,
 } from "../../../../shared/styles/sharedStyles";
 import type { Category } from "../../../../types/api";
-import type { ItemsByCategoryScreenProps } from "../../../../types/navigation";
+import type { ItemsReferenceTabScreenProps } from "../../../../types/navigation";
 import { itemsByCategoryListItems } from "../../../../types/navigation";
 
 type Props = {
@@ -17,7 +17,10 @@ type Props = {
 };
 
 const ItemsByCategoryList: FC<Props> = ({ category }) => {
-  const navigation = useNavigation<ItemsByCategoryScreenProps["navigation"]>();
+  const navigation =
+    useNavigation<
+      ItemsReferenceTabScreenProps<"ItemsByCategory">["navigation"]
+    >();
   const { background } = useTheme().theme.colors;
 
   const clickHandler: NonNullable<PressableProps["onPress"]> =

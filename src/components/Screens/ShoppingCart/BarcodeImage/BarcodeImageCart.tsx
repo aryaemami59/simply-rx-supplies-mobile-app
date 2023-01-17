@@ -1,5 +1,4 @@
 import { useNavigation } from "@react-navigation/native";
-import type { StackNavigationProp } from "@react-navigation/stack";
 import type { FC } from "react";
 import { memo, useCallback, useMemo } from "react";
 import type {
@@ -16,7 +15,7 @@ import {
   AI_CENTER,
   BARCODE_ASPECT_RATIO,
 } from "../../../../shared/styles/sharedStyles";
-import type { ShoppingCartStackParamList } from "../../../../types/navigation";
+import type { ShoppingCartStackScreenProps } from "../../../../types/navigation";
 import { barcodeImage } from "../../../../types/navigation";
 
 const styles = StyleSheet.create({
@@ -32,7 +31,7 @@ const BarcodeImageCart: FC = () => {
   const src = useAppSelector(selectItemSrc(itemName));
 
   const navigation =
-    useNavigation<StackNavigationProp<ShoppingCartStackParamList>>();
+    useNavigation<ShoppingCartStackScreenProps<"BarcodeImage">["navigation"]>();
 
   const clickHandler: NonNullable<TouchableWithoutFeedbackProps["onPress"]> =
     useCallback(() => {

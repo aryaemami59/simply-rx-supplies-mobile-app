@@ -5,20 +5,25 @@ import { memo, useCallback, useMemo } from "react";
 import type { PressableProps, StyleProp, ViewStyle } from "react-native";
 import TouchableScale from "react-native-touchable-scale";
 import useOfficialVendorName from "../../../../shared/hooks/useOfficialVendorName";
+import useScreenInfo from "../../../../shared/hooks/useScreenInfo";
 import useVendorName from "../../../../shared/hooks/useVendorName";
 import {
   AI_CENTER,
   JC_SPACE_BETWEEN,
 } from "../../../../shared/styles/sharedStyles";
-import type { ItemsByVendorScreenProps } from "../../../../types/navigation";
+import type { ItemsReferenceTabScreenProps } from "../../../../types/navigation";
 import { itemsByVendorListItems } from "../../../../types/navigation";
 
 const ItemsByVendorList: FC = () => {
+  useScreenInfo();
   const vendorName = useVendorName();
   const officialVendorName = useOfficialVendorName(vendorName);
   const { background: backgroundColor } = useTheme().theme.colors;
 
-  const navigation = useNavigation<ItemsByVendorScreenProps["navigation"]>();
+  const navigation =
+    useNavigation<
+      ItemsReferenceTabScreenProps<"ItemsByVendor">["navigation"]
+    >();
 
   const clickHandler: NonNullable<PressableProps["onPress"]> =
     useCallback(() => {

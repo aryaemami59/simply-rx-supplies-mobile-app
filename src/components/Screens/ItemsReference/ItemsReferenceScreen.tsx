@@ -8,16 +8,16 @@ import {
   itemsByVendorTabOptions,
 } from "../../../shared/screen_options/sharedScreenOptions";
 import type {
-  ItemsReferenceStackNavigatorProps,
+  ItemsReferenceStackScreenProps,
   ItemsReferenceTopTabParamList,
 } from "../../../types/navigation";
 import { itemsByCategory, itemsByVendor } from "../../../types/navigation";
 import ItemsByCategoryScreen from "./ItemsByCategory/ItemsByCategoryScreen";
 import ItemsByVendorScreen from "./ItemsByVendor/ItemsByVendorScreen";
 
-type Props = ItemsReferenceStackNavigatorProps<"ItemsReferenceScreen">;
-
 const Tab = createMaterialTopTabNavigator<ItemsReferenceTopTabParamList>();
+
+type Props = ItemsReferenceStackScreenProps<"ItemsReferenceScreen">;
 
 const ItemsReferenceScreen: FC<Props> = ({ navigation, route }) => {
   const { background: backgroundColor, grey0: color } = useTheme().theme.colors;

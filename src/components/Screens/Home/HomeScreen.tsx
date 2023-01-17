@@ -15,14 +15,14 @@ import {
   MAIN_COLOR,
 } from "../../../shared/styles/sharedStyles";
 import type { Icon, OnPress } from "../../../types/missingTypes";
-import type { HomeScreenProps } from "../../../types/navigation";
+import type { RootTabScreenProps } from "../../../types/navigation";
 import {
   itemLookup,
   itemsByCategory,
   itemsByVendor,
-  itemsReference,
   itemsReferenceScreen,
-  shoppingCartStack,
+  itemsReferenceStackNavigator,
+  shoppingCartStackNavigator,
 } from "../../../types/navigation";
 
 const searchIcon: Icon = (
@@ -58,7 +58,7 @@ const shoppingCartIcon: Icon = (
   />
 );
 
-type Props = HomeScreenProps;
+type Props = RootTabScreenProps<"Home">;
 
 const HomeScreen: FC<Props> = ({ navigation, route }) => {
   const { background } = useTheme().theme.colors;
@@ -70,7 +70,7 @@ const HomeScreen: FC<Props> = ({ navigation, route }) => {
 
   const navigateToItemsByVendor: OnPress = useCallback(
     () =>
-      navigation.navigate(itemsReference, {
+      navigation.navigate(itemsReferenceStackNavigator, {
         screen: itemsReferenceScreen,
         params: {
           screen: itemsByVendor,
@@ -81,7 +81,7 @@ const HomeScreen: FC<Props> = ({ navigation, route }) => {
 
   const navigateToItemsByCategory: OnPress = useCallback(
     () =>
-      navigation.navigate(itemsReference, {
+      navigation.navigate(itemsReferenceStackNavigator, {
         screen: itemsReferenceScreen,
         params: {
           screen: itemsByCategory,
@@ -91,7 +91,7 @@ const HomeScreen: FC<Props> = ({ navigation, route }) => {
   );
 
   const navigateToShoppingCart: OnPress = useCallback(
-    () => navigation.navigate(shoppingCartStack),
+    () => navigation.navigate(shoppingCartStackNavigator),
     [navigation]
   );
 

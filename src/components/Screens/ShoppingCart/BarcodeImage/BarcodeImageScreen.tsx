@@ -29,7 +29,6 @@ import type { ShoppingCartStackScreenProps } from "../../../../types/navigation"
 const iconName = Platform.OS === "android" ? "share-android" : "share";
 
 type Props = ShoppingCartStackScreenProps<"BarcodeImage">;
-// type Props = BarcodeImageScreenProps;
 
 const style: StyleProp<ImageStyle> = [BARCODE_ASPECT_RATIO, WIDTH_90];
 

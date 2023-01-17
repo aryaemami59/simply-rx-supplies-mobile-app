@@ -60,13 +60,13 @@ const shoppingCartIcon: Icon = (
 
 const keyExtractor: KeyExtractor<ItemName> = item => item;
 
-type Props = ShoppingCartStackScreenProps<"CartColumnListItems">;
-
 const viewStyle: StyleProp<ViewStyle> = [
   AI_CENTER,
   WIDTH_100,
   JC_SPACE_BETWEEN,
 ];
+
+type Props = ShoppingCartStackScreenProps<"CartColumnListItems">;
 
 const CartColumnListItemsScreen: FC<Props> = ({ navigation, route }) => {
   useScreenInfo();
