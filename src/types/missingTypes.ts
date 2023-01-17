@@ -28,8 +28,6 @@ export type HeaderTitleStyle = NonNullable<
 >;
 export type TabHeader = Header<BottomTabNavigationOptions>;
 export type StackHeader = Header<StackNavigationOptions>;
-// export type TabHeader = NonNullable<BottomTabNavigationOptions["header"]>;
-// export type StackHeader = NonNullable<StackNavigationOptions["header"]>;
 export type Header<
   T extends BottomTabNavigationOptions | StackNavigationOptions
 > = NonNullable<T["header"]>;
@@ -58,5 +56,3 @@ export type EmptyObject = Readonly<Record<string, never>> & AnyObject;
 export type EmptyArray = never[] & AnyArray;
 
 export type Composite = AnyFunction | AnyArray | AnyObject;
-
-export type AnyNonNullishValue = string | number | boolean | object | Composite;

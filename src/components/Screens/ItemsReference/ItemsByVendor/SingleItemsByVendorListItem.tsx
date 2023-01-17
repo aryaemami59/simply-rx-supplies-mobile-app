@@ -1,8 +1,8 @@
-import { MaterialIcons } from "@expo/vector-icons";
 import { Chip, ListItem, useTheme } from "@rneui/themed";
 import type { FC } from "react";
 import { memo, useCallback, useMemo } from "react";
 import type { StyleProp, ViewStyle } from "react-native";
+import addIcon from "../../../../Icons/addIcon";
 import { addItemsByVendor } from "../../../../redux/addedSlice";
 import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
 import {
@@ -15,15 +15,7 @@ import {
   BACKGROUND_MAIN_COLOR,
   FONT_WEIGHT_700,
 } from "../../../../shared/styles/sharedStyles";
-import type { Icon, OnPress } from "../../../../types/missingTypes";
-
-const icon: Icon = (
-  <MaterialIcons
-    name="add"
-    color="white"
-    size={24}
-  />
-);
+import type { OnPress } from "../../../../types/missingTypes";
 
 const SingleItemsByVendorListItem: FC = () => {
   const itemName = useItemName();
@@ -63,7 +55,7 @@ const SingleItemsByVendorListItem: FC = () => {
           disabled={ifAdded}
           titleStyle={FONT_WEIGHT_700}
           buttonStyle={BACKGROUND_MAIN_COLOR}
-          icon={icon}
+          icon={addIcon}
         />
       </ListItem.Content>
     </ListItem>

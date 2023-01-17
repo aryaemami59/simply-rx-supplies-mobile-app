@@ -1,20 +1,19 @@
-import {
-  FontAwesome5,
-  MaterialCommunityIcons,
-  MaterialIcons,
-} from "@expo/vector-icons";
 import { Chip, useTheme } from "@rneui/themed";
 import type { FC } from "react";
 import { memo, useCallback, useMemo } from "react";
 import type { StyleProp, ViewStyle } from "react-native";
 import { StyleSheet, View } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import categoryIcon from "../../../Icons/categoryIcon";
+import searchIcon from "../../../Icons/searchIcon";
+import shoppingCartIcon from "../../../Icons/shoppingCartIcon";
+import storeSearchIcon from "../../../Icons/storeSearchIcon";
 import {
   BACKGROUND_MAIN_COLOR,
   FONT_WEIGHT_700,
   MAIN_COLOR,
 } from "../../../shared/styles/sharedStyles";
-import type { Icon, OnPress } from "../../../types/missingTypes";
+import type { OnPress } from "../../../types/missingTypes";
 import type { RootTabScreenProps } from "../../../types/navigation";
 import {
   itemLookup,
@@ -24,39 +23,6 @@ import {
   itemsReferenceStackNavigator,
   shoppingCartStackNavigator,
 } from "../../../types/navigation";
-
-const searchIcon: Icon = (
-  <FontAwesome5
-    name="search"
-    color="white"
-    size={24}
-  />
-);
-
-const storeSearchIcon: Icon = (
-  <MaterialCommunityIcons
-    name="store-search-outline"
-    color="white"
-    size={24}
-  />
-);
-
-const categoryIcon: Icon = (
-  <MaterialIcons
-    name="category"
-    color="white"
-    size={24}
-  />
-);
-
-const shoppingCartIcon: Icon = (
-  <MaterialIcons
-    name="shopping-cart"
-    color="white"
-    type="MaterialIcons"
-    size={24}
-  />
-);
 
 type Props = RootTabScreenProps<"Home">;
 

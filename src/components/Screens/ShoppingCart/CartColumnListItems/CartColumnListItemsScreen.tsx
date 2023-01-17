@@ -1,4 +1,3 @@
-import { MaterialIcons } from "@expo/vector-icons";
 import type { ListItemSwipeableProps } from "@rneui/themed";
 import { Button, Chip, ListItem, useTheme } from "@rneui/themed";
 import type { FC, ReactElement, ReactNode } from "react";
@@ -19,6 +18,7 @@ import {
   View,
 } from "react-native";
 import { shallowEqual } from "react-redux";
+import shoppingCartIcon from "../../../../Icons/shoppingCartIcon";
 import { useAppSelector } from "../../../../redux/hooks";
 import {
   checkIfAnyItemsAddedToOneVendor,
@@ -40,23 +40,11 @@ import {
   WIDTH_100,
 } from "../../../../shared/styles/sharedStyles";
 import type { ItemName } from "../../../../types/api";
-import type {
-  Icon,
-  KeyExtractor,
-  RenderItem,
-} from "../../../../types/missingTypes";
+import type { KeyExtractor, RenderItem } from "../../../../types/missingTypes";
 import type { ShoppingCartStackScreenProps } from "../../../../types/navigation";
 import { itemLookup } from "../../../../types/navigation";
 import CartQRCodeImage from "../QRImage/CartQRCodeImage";
 import SingleCartListItems from "./SingleCartListItems";
-
-const shoppingCartIcon: Icon = (
-  <MaterialIcons
-    name="shopping-cart"
-    color="white"
-    size={24}
-  />
-);
 
 const keyExtractor: KeyExtractor<ItemName> = item => item;
 
