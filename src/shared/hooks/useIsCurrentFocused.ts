@@ -1,17 +1,14 @@
-import { useFocusEffect } from "@react-navigation/native";
-import type { FC } from "react";
+import type { ParamListBase, RouteProp } from "@react-navigation/native";
+import { useFocusEffect, useRoute } from "@react-navigation/native";
 import { useCallback } from "react";
-import type { AnyObject, EmptyObject } from "../../types/missingTypes";
 
-const useIsCurrentFocused = <P extends AnyObject = EmptyObject>(
-  component: FC<P>
-) => {
-  const { name } = component;
+const useIsCurrentFocused = <P extends RouteProp<ParamListBase>>() => {
+  const { name } = useRoute<P>();
   useFocusEffect(
     useCallback(() => {
-      console.log(`%c${name} Focused`, "font-size: 20px");
+      console.log(`%c${name} Screen Focused`, "font-size: 20px");
       return () => {
-        console.log(`%c${name} Blurred`, "font-size: 20px");
+        console.log(`%c${name} Screen Blurred`, "font-size: 20px");
       };
     }, [name])
   );

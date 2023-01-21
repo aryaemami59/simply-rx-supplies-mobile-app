@@ -1,4 +1,3 @@
-import type { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
 import { Header, SearchBar } from "@rneui/themed";
 import type { FC } from "react";
 import { memo, useCallback, useMemo, useRef } from "react";
@@ -15,10 +14,7 @@ import {
   WIDTH_80,
 } from "../../shared/styles/sharedStyles";
 import type { CenterComponent, SearchBarRef } from "../../types/missingTypes";
-import type {
-  HeaderHomeStackNavigatorProps,
-  RootTabParamList,
-} from "../../types/navigation";
+import type { HeaderHomeStackNavigatorProps } from "../../types/navigation";
 import { itemLookup } from "../../types/navigation";
 import HeaderRightComponent from "./HeaderRightComponent";
 import SearchClearIcon from "./SearchClearIcon";
@@ -61,17 +57,18 @@ const HeaderHomeStackNavigator: FC<Props> = ({
   options,
 }) => {
   const searchRef = useRef<SearchBarRef>(null);
-  const myNavigation = navigation as BottomTabNavigationProp<RootTabParamList>;
+  // const myNavigation = navigation as BottomTabNavigationProp<RootTabParamList>;
 
   const focusHandler: NonNullable<TextInputProps["onFocus"]> = useCallback(
     e => {
       const ref = searchRef.current;
-      myNavigation.navigate(itemLookup, {
+      navigation.navigate(itemLookup, {
+        // myNavigation.navigate(itemLookup, {
         inputFocused: true,
       });
       // ref?.blur();
     },
-    [myNavigation]
+    [navigation]
   );
 
   const centerComponent: CenterComponent = useMemo(

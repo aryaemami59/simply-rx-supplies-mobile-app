@@ -28,7 +28,6 @@ import {
 import ItemNameProvider from "../../../../shared/contexts/ItemNameProvider";
 import VendorNameProvider from "../../../../shared/contexts/VendorNameProvider";
 import useOfficialVendorName from "../../../../shared/hooks/useOfficialVendorName";
-import useScreenInfo from "../../../../shared/hooks/useScreenInfo";
 import {
   AI_CENTER,
   BACKGROUND_MAIN_COLOR,
@@ -57,7 +56,6 @@ const viewStyle: StyleProp<ViewStyle> = [
 type Props = ShoppingCartStackScreenProps<"CartColumnListItems">;
 
 const CartColumnListItemsScreen: FC<Props> = ({ navigation, route }) => {
-  useScreenInfo();
   const { vendorName } = route.params;
   const renderItems: RenderItem<ItemName> = useCallback(
     ({ item }) => (

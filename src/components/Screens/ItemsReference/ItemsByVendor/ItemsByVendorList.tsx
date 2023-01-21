@@ -5,7 +5,6 @@ import { memo, useCallback, useMemo } from "react";
 import type { PressableProps, StyleProp, ViewStyle } from "react-native";
 import TouchableScale from "react-native-touchable-scale";
 import useOfficialVendorName from "../../../../shared/hooks/useOfficialVendorName";
-import useScreenInfo from "../../../../shared/hooks/useScreenInfo";
 import useVendorName from "../../../../shared/hooks/useVendorName";
 import {
   AI_CENTER,
@@ -15,7 +14,6 @@ import type { ItemsReferenceTabScreenProps } from "../../../../types/navigation"
 import { itemsByVendorListItems } from "../../../../types/navigation";
 
 const ItemsByVendorList: FC = () => {
-  useScreenInfo();
   const vendorName = useVendorName();
   const officialVendorName = useOfficialVendorName(vendorName);
   const { background: backgroundColor } = useTheme().theme.colors;

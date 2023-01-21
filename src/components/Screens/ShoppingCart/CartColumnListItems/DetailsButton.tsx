@@ -4,7 +4,6 @@ import type { FC } from "react";
 import { memo, useCallback } from "react";
 import type { TouchableWithoutFeedbackProps } from "react-native";
 import useItemName from "../../../../shared/hooks/useItemName";
-import useScreenInfo from "../../../../shared/hooks/useScreenInfo";
 import useVendorName from "../../../../shared/hooks/useVendorName";
 import { JC_SPACE_EVENLY } from "../../../../shared/styles/sharedStyles";
 import type { ShoppingCartStackScreenProps } from "../../../../types/navigation";
@@ -16,7 +15,6 @@ type Props = {
 };
 
 const DetailsButton: FC<Props> = ({ reset }) => {
-  useScreenInfo();
   const itemName = useItemName();
   const vendorName = useVendorName();
   const navigation =

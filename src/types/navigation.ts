@@ -39,7 +39,7 @@ export const itemDetails = "ItemDetails" as const;
 // Param lists for all navigators
 export type RootTabParamList = {
   Home: undefined;
-  ItemLookup: { inputFocused: boolean } | undefined;
+  ItemLookup: { inputFocused: boolean };
   ShoppingCartStackNavigator:
     | NavigatorScreenParams<ShoppingCartStackParamList>
     | undefined;
@@ -54,7 +54,7 @@ export type ShoppingCartStackParamList = {
   };
   BarcodeImage: { src: Src; itemName: ItemName };
   CartColumnListItems: { vendorName: VendorNameType };
-  ItemLookup: { inputFocused: boolean } | undefined;
+  ItemLookup: { inputFocused: boolean };
   ItemDetails: { itemName: ItemName; vendorName: VendorNameType };
 };
 

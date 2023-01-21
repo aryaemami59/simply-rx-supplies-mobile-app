@@ -8,7 +8,6 @@ import TouchableScale from "react-native-touchable-scale";
 import { useAppSelector } from "../../../redux/hooks";
 import { addedItemsLength } from "../../../redux/selectors";
 import useOfficialVendorName from "../../../shared/hooks/useOfficialVendorName";
-import useScreenInfo from "../../../shared/hooks/useScreenInfo";
 import useVendorName from "../../../shared/hooks/useVendorName";
 import {
   AI_CENTER,
@@ -19,7 +18,6 @@ import type { ShoppingCartStackScreenProps } from "../../../types/navigation";
 import { cartColumnListItems } from "../../../types/navigation";
 
 const CartVendorColumns: FC = () => {
-  useScreenInfo();
   const vendorName = useVendorName();
   const officialVendorName = useOfficialVendorName(vendorName);
   const addedItemsLen = useAppSelector(addedItemsLength(vendorName));

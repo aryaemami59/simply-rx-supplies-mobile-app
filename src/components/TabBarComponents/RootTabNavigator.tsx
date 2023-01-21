@@ -27,7 +27,9 @@ import ShoppingCartStackNavigator from "../StackNavigatorComponents/ShoppingCart
 
 const Tab = createBottomTabNavigator<RootTabParamList>();
 // const Tab = createBottomTabNavigator();
-const initialParams = { inputFocused: true };
+const initialParams: NonNullable<RootTabParamList["ItemLookup"]> = {
+  inputFocused: true,
+};
 
 const RootTabNavigator: FC = () => {
   const ifItemsAdded = useAppSelector(checkIfAnyItemsAdded);

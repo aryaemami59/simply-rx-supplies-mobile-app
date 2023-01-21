@@ -1,12 +1,9 @@
 import { EvilIcons } from "@expo/vector-icons";
-import {
-  useFocusEffect,
-  useNavigation,
-  useRoute,
-} from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
+import { SearchBar } from "@rneui/base";
 import type { SearchBarBaseProps } from "@rneui/base/dist/SearchBar/types";
 import type { HeaderProps } from "@rneui/themed";
-import { Header, SearchBar, useTheme } from "@rneui/themed";
+import { Header } from "@rneui/themed";
 import type { FC } from "react";
 import { memo, useCallback, useMemo, useRef, useState } from "react";
 import type { TextInputProps } from "react-native";
@@ -68,22 +65,41 @@ const containerStyle: SearchBarBaseProps["containerStyle"] = [
   BACKGROUND_TRANSPARENT,
 ];
 
-const InputField: FC = () => {
-  const { params } = useRoute<RootTabScreenProps<"ItemLookup">["route"]>();
+type Props = {
+  inputFocused: boolean;
+};
+
+const InputField: FC<Props> = ({ inputFocused }) => {
+  // const { params } = useRoute<RootTabScreenProps<"ItemLookup">["route"]>();
   const inputRef = useRef<SearchBarRef>(null);
   const view = useRef<AnimatableViewRef>(null);
   const [val, setVal] = useState("");
+
+  // useEffect(() => {
+  //   console.log(params);
+  // }, [params]);
+  // useDependencyChangeLogger(params, "params");
   const itemNames = useAppSelector(selectItemNamesArr, shallowEqual);
-  const { theme } = useTheme();
+  // const { theme } = useTheme();
   const dispatch = useAppDispatch();
-  const inputFocused = !!params?.inputFocused;
+  // const inputFocused = params?.inputFocused;
   // const [focused, setFocused] = useState(inputFocused);
+  const navigation =
+    useNavigation<RootTabScreenProps<"ItemLookup">["navigation"]>();
 
   const focusHandler: NonNullable<TextInputProps["onFocus"]> = useCallback(
     e => {
-      // e.currentTarget.focus();
-      inputRef.current?.focus();
       view.current?.transitionTo(WIDTH_100);
+      // setFocused(true);
+      // inputFocused || navigation.setParams({ inputFocused: true });
+      console.log("focusHandler");
+      // e.currentTarget.focus();
+      // inputRef.current?.focus();
+      // setFocused(f => {
+      //   view.current?.transitionTo(WIDTH_100);
+      //   navigation.setParams({ inputFocused: true });
+      //   return true;
+      // });
       // console.log(e.currentTarget.focus());
       // console.log("focused");
       // setFocused(true);
@@ -93,7 +109,15 @@ const InputField: FC = () => {
 
   const blurHandler: NonNullable<TextInputProps["onBlur"]> = useCallback(e => {
     view.current?.transitionTo(WIDTH_80);
-    inputRef.current?.blur();
+    // setFocused(false);
+    // inputFocused && navigation.setParams({ inputFocused: false });
+    console.log("blurHandler");
+    // setFocused(f => {
+    //   view.current?.transitionTo(WIDTH_80);
+    //   navigation.setParams({ inputFocused: false });
+    //   return false;
+    // });
+    // inputRef.current?.blur();
     // console.log(e);
     // console.log("blurred");
     // setFocused(false);
@@ -109,24 +133,57 @@ const InputField: FC = () => {
   //   inputRef.current?.focus();
   // }, []);
 
-  const navigation =
-    useNavigation<RootTabScreenProps<"ItemLookup">["navigation"]>();
-
   useMounted(InputField);
-  useIsCurrentFocused(InputField);
+  useIsCurrentFocused();
   useCountRender(InputField);
+  // useImperativeHandle();
 
   useFocusEffect(
     useCallback(() => {
       const ref = inputRef.current;
-      navigation.addListener("focus", () => ref?.focus);
-      navigation.addListener("blur", () => ref?.blur);
-      console.log(inputFocused);
+      // console.log(ref?.searchBar.input);
+      // console.log(ref?.searchBar.input.isFocused());
+      // navigation.addListener("focus", () => ref?.focus);
+      // navigation.addListener("blur", () => ref?.blur);
+      // console.log(inputFocused);
+
       // console.log(inputRef.current?.searchBar.input);
       //   const task = InteractionManager.runAfterInteractions(() => {
+      // ref?.focus();
       const task = InteractionManager.runAfterInteractions(() => {
-        // inputRef.current?.focus();
+        // ref?.searchBar.input.focus();
+        inputRef.current?.focus();
+        // if (ref?.searchBar.input.isFocused()) {
+        //   navigation.setParams({ inputFocused: true });
+        // }
+        // navigation.setOptions({  })
         // ref?.focus();
+        // setFocused(!!inputFocused);
+        // inputFocused
+        //   ? setFocused(e => {
+        //       inputRef.current?.focus();
+        //       navigation.setParams({ inputFocused: true });
+        //       return true;
+        //     })
+        //   : setFocused(e => {
+        //       inputRef.current?.blur();
+        //       navigation.setParams({ inputFocused: false });
+        //       return false;
+        //     });
+        // inputRef.current?.focus();
+        // if (inputFocused) {
+        //   navigation.setParams({ inputFocused: true });
+        // } else {
+        //   navigation.setParams({ inputFocused: false });
+        // }
+        // if (inputFocused) {
+        //   inputRef.current?.focus();
+        // } else {
+        //   inputRef.current?.blur();
+        // }
+        // inputFocused ? ref?.focus() : ref?.blur();
+        // inputFocused ? inputRef.current?.focus() : inputRef.current?.blur();
+        // console.log(ref?.isFocused);
         // focusHandler();
         //   if (inputFocused) {
         //   inputRef.current?.focus();
@@ -137,9 +194,28 @@ const InputField: FC = () => {
       // }
       // });
       return () => {
+        // if (ref?.searchBar.input.isFocused()) {
+        //   navigation.setParams({ inputFocused: true });
+        // }
+        // navigation.setParams({ inputFocused: false });
+        // inputRef.current?.blur();
+        // if (inputFocused) {
+        //   inputRef.current?.blur();
+        // } else {
+        //   inputRef.current?.focus();
+        // }
+        // if (inputFocused) {
+        //   inputRef.current?.blur();
+        // } else {
+        //   inputRef.current?.focus();
+        // }
+        // focused ? ref?.focus() : ref?.blur();
+        // inputFocused
+        //   ? navigation.setParams({ inputFocused: true })
+        //   : navigation.setParams({ inputFocused: false });
         task.cancel();
-        navigation.removeListener("focus", () => ref?.focus);
-        navigation.removeListener("blur", () => ref?.blur);
+        // navigation.removeListener("focus", () => ref?.focus);
+        // navigation.removeListener("blur", () => ref?.blur);
         // inputRef.current?.blur();
         // inputRef.current?.focus();
         // console.log("unmount");
@@ -152,8 +228,21 @@ const InputField: FC = () => {
         //   blurHandler();
         // }
       };
-    }, [inputFocused, navigation])
+    }, [])
   );
+
+  // useLayoutEffect(() => {
+  //   const unsubscribe = navigation.addListener("blur", () => {
+  //     inputRef.current?.blur();
+  //   });
+  //   return unsubscribe;
+  // }, [navigation]);
+  // useLayoutEffect(() => {
+  //   const unsubscribe = navigation.addListener("focus", () => {
+  //     inputFocused ? inputRef.current?.focus() : inputRef.current?.blur();
+  //   });
+  //   return unsubscribe;
+  // }, [inputFocused, navigation]);
 
   // useEffect(() => {
   //   const ref = inputRef.current;
@@ -190,6 +279,7 @@ const InputField: FC = () => {
   const centerComponent: CenterComponent = useMemo(
     () => (
       <Animatable.View
+        // onTransitionBegin={}
         // easing="ease-in-out"
         // animation="ease-in-out"
         // useNativeDriver
@@ -198,11 +288,12 @@ const InputField: FC = () => {
         <SearchBar
           // onKeyboardHide={}
           returnKeyType="search"
+          // ref={}
           ref={inputRef}
           // lightTheme
-          keyboardAppearance={theme.mode}
-          // autoFocus
-          // focusable
+          // keyboardAppearance={theme.mode}
+          autoFocus
+          focusable
           onFocus={focusHandler}
           onBlur={blurHandler}
           containerStyle={containerStyle}
@@ -225,7 +316,7 @@ const InputField: FC = () => {
       clearHandler,
       clearIcon,
       focusHandler,
-      theme.mode,
+      // theme.mode,
       val,
     ]
   );

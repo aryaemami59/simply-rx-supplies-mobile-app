@@ -70,6 +70,8 @@ export const homeOptions: BottomTabNavigationOptions = {
 export const itemLookupOptions: BottomTabNavigationOptions = {
   header: tabHeader,
   headerShown,
+  // freezeOnBlur: true,
+  // lazy: false,
   tabBarIcon: itemLookupTabBarIcon,
 } as const;
 
