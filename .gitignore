@@ -16,3 +16,4 @@ web-build/
 .eslintrc.js
 .eslintignore
 .vscode
+webpack.config.ts
