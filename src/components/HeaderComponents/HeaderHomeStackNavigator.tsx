@@ -66,7 +66,7 @@ const HeaderHomeStackNavigator: FC<Props> = ({
         // myNavigation.navigate(itemLookup, {
         inputFocused: true,
       });
-      // ref?.blur();
+      ref?.blur();
     },
     [navigation]
   );

@@ -13,6 +13,7 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
+    "jsx": "react-native",
     "noImplicitAny": true,
     "typeRoots": ["src/types", "src/react-app-env.d.ts"],
     "skipLibCheck": true

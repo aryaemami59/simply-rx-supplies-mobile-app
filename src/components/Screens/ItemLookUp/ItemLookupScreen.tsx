@@ -1,6 +1,5 @@
-import { useFocusEffect } from "@react-navigation/native";
 import type { FC } from "react";
-import { memo, useCallback } from "react";
+import { memo } from "react";
 import { FlatList } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { shallowEqual } from "react-redux";
@@ -28,18 +27,17 @@ type Props = RootTabScreenProps<"ItemLookup">;
 
 const ItemLookupScreen: FC<Props> = ({ navigation, route }) => {
   const listItems = useAppSelector(selectAllListItems, shallowEqual);
-  useFocusEffect(
-    useCallback(() => {
-      route.params?.inputFocused
-        ? navigation.setParams({ inputFocused: true })
-        : navigation.setParams({ inputFocused: false });
-    }, [navigation, route.params?.inputFocused])
-  );
+  // useFocusEffect(
+  //   useCallback(() => {
+  //     route.params.inputFocused ||
+  //       navigation.setParams({ inputFocused: false });
+  //   }, [navigation, route.params.inputFocused])
+  // );
 
   return (
     <SafeAreaProvider>
-      {/* <InputField /> */}
-      <InputField inputFocused={route.params?.inputFocused} />
+      <InputField />
+      {/* <InputField inputFocused={route.params.inputFocused} /> */}
       <BottomSheetComponent />
       <FlatList
         removeClippedSubviews
