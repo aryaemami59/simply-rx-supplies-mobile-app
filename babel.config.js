@@ -2,7 +2,13 @@
 module.exports = api => {
   api.cache(true);
   return {
-    plugins: ["react-native-reanimated/plugin"],
+    plugins:
+      process.env.NODE_ENV !== "production"
+        ? [
+            "react-native-reanimated/plugin",
+            "babel-plugin-typescript-to-proptypes",
+          ]
+        : ["react-native-reanimated/plugin"],
     presets: ["babel-preset-expo"],
   };
 };
