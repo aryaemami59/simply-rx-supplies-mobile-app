@@ -18,3 +18,5 @@ web-build/
 .vscode
 webpack.config.ts
 babel.config.js
+eas.json
+app.json
