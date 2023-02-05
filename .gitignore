@@ -17,3 +17,4 @@ web-build/
 .eslintignore
 .vscode
 webpack.config.ts
+babel.config.js
