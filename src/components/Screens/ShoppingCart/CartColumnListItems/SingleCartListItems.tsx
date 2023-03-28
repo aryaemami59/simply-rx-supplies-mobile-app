@@ -4,7 +4,6 @@ import type { FC, ReactNode } from "react";
 import { memo, useCallback, useMemo, useState } from "react";
 import type { StyleProp, ViewStyle } from "react-native";
 import { View } from "react-native";
-// import Collapsible from "react-native-collapsible";
 import Collapsible from "react-native-collapsible";
 import {
   AI_CENTER,

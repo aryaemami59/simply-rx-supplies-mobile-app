@@ -16,7 +16,7 @@ module.exports = async (env: Environment, argv: Arguments) => {
     },
     argv
   );
-  config.module!.rules = [{ include: "react-native-reanimated" }];
+  // config.module!.rules = [{ include: "react-native-reanimated" }];
   // Customize the config before returning it.
   return config;
 };
