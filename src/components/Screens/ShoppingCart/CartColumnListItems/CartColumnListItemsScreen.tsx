@@ -97,7 +97,8 @@ const CartColumnListItemsScreen: FC<Props> = ({ navigation, route }) => {
 
   const clickHandler: NonNullable<TouchableWithoutFeedbackProps["onPress"]> =
     useCallback(() => {
-      navigation.navigate(itemLookup);
+      // navigation.navigate("ItemLookup");
+      navigation.navigate(itemLookup, { inputFocused: true });
     }, [navigation]);
 
   const { background: backgroundColor, black } = useTheme().theme.colors;

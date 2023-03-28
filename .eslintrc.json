@@ -43,6 +43,7 @@
     "eslint-plugin-prettier",
     "react-perf",
     "prefer-arrow-functions",
+    "prefer-arrow",
     "prettier",
     "jsx-a11y"
   ],
@@ -85,6 +86,7 @@
       }
     ],
     "react/jsx-props-no-spreading": [0],
+    "prefer-arrow/prefer-arrow-functions": [2],
     "react/require-default-props": [0]
   },
   "settings": {

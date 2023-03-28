@@ -1,21 +1,10 @@
 {
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
-    "target": "ESNext",
-    "lib": ["ESNext", "DOM"],
-    "module": "ES6",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "allowJs": true,
-    "noEmit": true,
-    "isolatedModules": true,
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
-    "jsx": "react-native",
-    "noImplicitAny": true,
-    "typeRoots": ["src/types", "src/react-app-env.d.ts"],
-    "skipLibCheck": true
-  }
+    "noImplicitAny": true
+  },
+  "include": ["**/*"],
+  "files": ["./webpack.config.js"]
 }
