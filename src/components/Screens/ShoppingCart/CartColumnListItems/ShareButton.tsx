@@ -3,9 +3,9 @@ import type { FC } from "react";
 import { memo, useCallback, useMemo } from "react";
 import type { ShareContent, TouchableWithoutFeedbackProps } from "react-native";
 import { Share } from "react-native";
+import useItemName from "../../../../hooks/useItemName";
 import { useAppSelector } from "../../../../redux/hooks";
 import { selectItemNumber, selectItemSrc } from "../../../../redux/selectors";
-import useItemName from "../../../../shared/hooks/useItemName";
 import { JC_SPACE_EVENLY } from "../../../../shared/styles/sharedStyles";
 import ShareIconNode from "./ShareIconNode";
 

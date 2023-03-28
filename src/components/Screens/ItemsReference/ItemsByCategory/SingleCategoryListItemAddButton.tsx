@@ -1,10 +1,10 @@
 import { Chip } from "@rneui/themed";
 import type { FC } from "react";
 import { memo, useCallback } from "react";
+import useItemName from "../../../../hooks/useItemName";
 import { addItems } from "../../../../redux/addedSlice";
 import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
 import { checkIfAddedToAllVendors } from "../../../../redux/selectors";
-import useItemName from "../../../../shared/hooks/useItemName";
 import {
   BACKGROUND_MAIN_COLOR,
   FONT_WEIGHT_700,

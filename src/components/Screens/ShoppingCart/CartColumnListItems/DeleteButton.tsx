@@ -2,10 +2,10 @@ import { Button } from "@rneui/themed";
 import type { FC } from "react";
 import { memo, useCallback } from "react";
 import type { TouchableWithoutFeedbackProps } from "react-native";
+import useItemName from "../../../../hooks/useItemName";
+import useVendorName from "../../../../hooks/useVendorName";
 import { removeItems } from "../../../../redux/addedSlice";
 import { useAppDispatch } from "../../../../redux/hooks";
-import useItemName from "../../../../shared/hooks/useItemName";
-import useVendorName from "../../../../shared/hooks/useVendorName";
 import { JC_SPACE_EVENLY } from "../../../../shared/styles/sharedStyles";
 import DeleteIconNode from "./DeleteIconNode";
 

@@ -3,14 +3,14 @@ import type { FC } from "react";
 import { memo, useCallback, useMemo } from "react";
 import type { StyleProp, ViewStyle } from "react-native";
 import addIcon from "../../../../Icons/addIcon";
+import useItemName from "../../../../hooks/useItemName";
+import useVendorName from "../../../../hooks/useVendorName";
 import { addItemsByVendor } from "../../../../redux/addedSlice";
 import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
 import {
   checkIfAddedToAllVendors,
   checkIfItemAddedToOneVendor,
 } from "../../../../redux/selectors";
-import useItemName from "../../../../shared/hooks/useItemName";
-import useVendorName from "../../../../shared/hooks/useVendorName";
 import {
   BACKGROUND_MAIN_COLOR,
   FONT_WEIGHT_700,

@@ -14,12 +14,12 @@ import type { TextInputProps } from "react-native";
 import { InteractionManager, StyleSheet } from "react-native";
 import * as Animatable from "react-native-animatable";
 import { shallowEqual } from "react-redux";
+import useComponentMountLogger from "../../../../hooks/loggers/useComponentMountLogger";
+import useComponentUpdateLogger from "../../../../hooks/loggers/useComponentUpdateLogger";
+import useIsCurrentFocused from "../../../../hooks/loggers/useIsCurrentFocused";
 import { clearListItems, setListItems } from "../../../../redux/addedSlice";
 import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
 import { selectItemNamesArr } from "../../../../redux/selectors";
-import useCountRender from "../../../../shared/hooks/useCountRender";
-import useIsCurrentFocused from "../../../../shared/hooks/useIsCurrentFocused";
-import useMounted from "../../../../shared/hooks/useMounted";
 import {
   BACKGROUND_TRANSPARENT,
   COLOR_WHITE,
@@ -93,7 +93,7 @@ const InputField: FC = () => {
       view.current?.transitionTo(WIDTH_100);
       // navigation.setParams({ inputFocused: true });
       // setFocused(true);
-      console.log("focusHandler");
+      // console.log("focusHandler");
       return true;
     },
     []
@@ -110,7 +110,7 @@ const InputField: FC = () => {
     // setFocused(false);
     // focused.current = false;
     // inputFocused && navigation.setParams({ inputFocused: false });
-    console.log("blurHandler");
+    // console.log("blurHandler");
     return false;
   }, []);
 
@@ -120,9 +120,9 @@ const InputField: FC = () => {
       dispatch(clearListItems());
     }, [dispatch]);
 
-  useMounted(InputField);
+  useComponentMountLogger();
   useIsCurrentFocused();
-  useCountRender(InputField);
+  useComponentUpdateLogger();
 
   // useEffect(() => {
   // console.log(focused);
@@ -142,7 +142,7 @@ const InputField: FC = () => {
       // const ref = inputRef.current;
       // console.log(focused);
       const task = InteractionManager.runAfterInteractions(() => {
-        console.log(inputFocused);
+        // console.log(inputFocused);
         // console.log(inputRef.current?.onFocus);
         // inputFocused
         //   ? navigation.setParams({ inputFocused: true })

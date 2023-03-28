@@ -3,7 +3,7 @@ import type { FC } from "react";
 import { memo, useMemo } from "react";
 import type { StyleProp, ViewStyle } from "react-native";
 import { Text, View } from "react-native";
-import useItemName from "../../../../shared/hooks/useItemName";
+import useItemName from "../../../../hooks/useItemName";
 import { AI_CENTER, TEXT_CENTER } from "../../../../shared/styles/sharedStyles";
 
 const ItemNameCart: FC = () => {

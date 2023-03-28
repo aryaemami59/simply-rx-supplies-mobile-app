@@ -5,9 +5,9 @@ import type { FC } from "react";
 import { memo, useCallback, useState } from "react";
 import { Keyboard, StyleSheet, View } from "react-native";
 import { shallowEqual } from "react-redux";
+import useVendorNamesList from "../../../../hooks/useVendorNamesList";
 import { useAppSelector } from "../../../../redux/hooks";
 import { selectAllVendorOfficialNames } from "../../../../redux/selectors";
-import useVendorNamesList from "../../../../shared/hooks/useVendorNamesList";
 import type { OnPress } from "../../../../types/missingTypes";
 import BottomSheetVendorCheckbox from "./BottomSheetVendorCheckbox";
 

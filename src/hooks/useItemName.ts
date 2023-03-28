@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { ItemNameContext } from "../contexts/ItemNameProvider";
+import { ItemNameContext } from "../shared/contexts/ItemNameProvider";
 
 const useItemName = () => useContext(ItemNameContext);
 

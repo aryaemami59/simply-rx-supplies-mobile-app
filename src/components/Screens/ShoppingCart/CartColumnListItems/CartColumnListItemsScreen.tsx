@@ -19,6 +19,7 @@ import {
 } from "react-native";
 import { shallowEqual } from "react-redux";
 import shoppingCartIcon from "../../../../Icons/shoppingCartIcon";
+import useOfficialVendorName from "../../../../hooks/useOfficialVendorName";
 import { useAppSelector } from "../../../../redux/hooks";
 import {
   checkIfAnyItemsAddedToOneVendor,
@@ -27,7 +28,6 @@ import {
 } from "../../../../redux/selectors";
 import ItemNameProvider from "../../../../shared/contexts/ItemNameProvider";
 import VendorNameProvider from "../../../../shared/contexts/VendorNameProvider";
-import useOfficialVendorName from "../../../../shared/hooks/useOfficialVendorName";
 import {
   AI_CENTER,
   BACKGROUND_MAIN_COLOR,

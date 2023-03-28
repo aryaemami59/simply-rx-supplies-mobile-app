@@ -1,5 +1,5 @@
-import { useAppSelector } from "../../redux/hooks";
-import { checkIfLoading, selectErrMsg } from "../../redux/selectors";
+import { useAppSelector } from "../redux/hooks";
+import { checkIfLoading, selectErrMsg } from "../redux/selectors";
 
 const useIsLoading = () => {
   const isLoading = useAppSelector(checkIfLoading);

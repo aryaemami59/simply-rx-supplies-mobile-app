@@ -5,10 +5,10 @@ import { memo, useCallback, useMemo } from "react";
 import type { StyleProp, ViewStyle } from "react-native";
 import { StyleSheet } from "react-native";
 import TouchableScale from "react-native-touchable-scale";
+import useOfficialVendorName from "../../../hooks/useOfficialVendorName";
+import useVendorName from "../../../hooks/useVendorName";
 import { useAppSelector } from "../../../redux/hooks";
 import { addedItemsLength } from "../../../redux/selectors";
-import useOfficialVendorName from "../../../shared/hooks/useOfficialVendorName";
-import useVendorName from "../../../shared/hooks/useVendorName";
 import {
   AI_CENTER,
   FONT_WEIGHT_BOLD,

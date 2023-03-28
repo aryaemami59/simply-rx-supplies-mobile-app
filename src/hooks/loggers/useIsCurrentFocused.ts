@@ -6,9 +6,9 @@ const useIsCurrentFocused = <P extends RouteProp<ParamListBase>>() => {
   const { name } = useRoute<P>();
   useFocusEffect(
     useCallback(() => {
-      console.log(`%c${name} Screen Focused`, "font-size: 20px");
+      console.log(`%c${name} Screen Focused`, "font-size: 16px");
       return () => {
-        console.log(`%c${name} Screen Blurred`, "font-size: 20px");
+        console.log(`%c${name} Screen Blurred`, "font-size: 16px");
       };
     }, [name])
   );

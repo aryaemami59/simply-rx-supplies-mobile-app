@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { VendorNameContext } from "../contexts/VendorNameProvider";
+import { VendorNameContext } from "../shared/contexts/VendorNameProvider";
 
 const useVendorName = () => useContext(VendorNameContext);
 
