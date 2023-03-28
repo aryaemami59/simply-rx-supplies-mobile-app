@@ -8,7 +8,6 @@
     "@react-native-community",
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
-    "plugin:@typescript-eslint/recommended",
     "airbnb",
     "airbnb-typescript",
     "airbnb/hooks",
@@ -21,7 +20,6 @@
     "plugin:@typescript-eslint/recommended",
     "plugin:@typescript-eslint/recommended-requiring-type-checking",
     "plugin:@typescript-eslint/strict",
-    "prettier/prettier",
     "plugin:prettier/recommended",
     "plugin:react-native/all"
   ],
@@ -40,23 +38,51 @@
     "react",
     "react-native",
     "@typescript-eslint",
-    "eslint-plugin-prettier",
-    "react-perf",
     "prefer-arrow-functions",
-    "prefer-arrow",
+    "react-perf",
     "prettier",
+    "react-redux",
     "jsx-a11y"
   ],
   "root": true,
   "rules": {
-    "@typescript-eslint/ban-ts-comment": [0],
     "@typescript-eslint/consistent-type-definitions": [2, "type"],
     "@typescript-eslint/consistent-type-imports": [2],
-    "@typescript-eslint/naming-convention": [0],
+    "@typescript-eslint/naming-convention": [
+      2,
+      {
+        "format": ["PascalCase"],
+        "selector": ["typeLike"]
+      },
+      {
+        "format": ["PascalCase", "camelCase"],
+        "selector": ["variable"],
+        "types": ["function"]
+      },
+      {
+        "format": ["camelCase", "UPPER_CASE"],
+        "selector": ["variable"],
+        "types": ["array", "boolean", "number", "string"]
+      },
+      {
+        "format": null,
+        "modifiers": ["requiresQuotes"],
+        "selector": ["objectLiteralProperty"]
+      },
+      {
+        "format": ["camelCase"],
+        "selector": ["parameter"]
+      }
+    ],
     "@typescript-eslint/no-floating-promises": [0],
     "@typescript-eslint/no-throw-literal": [0],
     "no-console": [0],
-    "no-param-reassign": [2, { "props": false }],
+    "no-param-reassign": [
+      2,
+      {
+        "props": false
+      }
+    ],
     "prefer-arrow-functions/prefer-arrow-functions": [
       2,
       {
@@ -86,7 +112,6 @@
       }
     ],
     "react/jsx-props-no-spreading": [0],
-    "prefer-arrow/prefer-arrow-functions": [2],
     "react/require-default-props": [0]
   },
   "settings": {

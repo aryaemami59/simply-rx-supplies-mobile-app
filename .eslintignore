@@ -3,7 +3,5 @@ dist
 assets
 .expo
 webpack.config.ts
-webpack.config.js
-expo
 .expo-shared
 .vscode

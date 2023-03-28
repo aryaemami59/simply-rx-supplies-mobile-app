@@ -14,15 +14,15 @@ import AddIcon from "./AddIcon";
 
 const SingleCategoryListItemAddButton: FC = () => {
   const itemName = useItemName();
-  const IfAddedToAllVendors = useAppSelector(
+  const ifAddedToAllVendors = useAppSelector(
     checkIfAddedToAllVendors(itemName)
   );
 
   const dispatch = useAppDispatch();
 
   const clickHandler: OnPress = useCallback(() => {
-    IfAddedToAllVendors || dispatch(addItems(itemName));
-  }, [IfAddedToAllVendors, dispatch, itemName]);
+    ifAddedToAllVendors || dispatch(addItems(itemName));
+  }, [ifAddedToAllVendors, dispatch, itemName]);
 
   return (
     <Chip
@@ -30,7 +30,7 @@ const SingleCategoryListItemAddButton: FC = () => {
       size="lg"
       onPress={clickHandler}
       title="Add"
-      disabled={IfAddedToAllVendors}
+      disabled={ifAddedToAllVendors}
       titleStyle={FONT_WEIGHT_700}
       buttonStyle={BACKGROUND_MAIN_COLOR}
       icon={AddIcon}

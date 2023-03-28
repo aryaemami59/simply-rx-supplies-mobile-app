@@ -14,7 +14,7 @@ import type { OnPress } from "../../../../types/missingTypes";
 
 const AddItemButton: FC = () => {
   const itemName = useItemName();
-  const IfAddedToAllVendors = useAppSelector(
+  const ifAddedToAllVendors = useAppSelector(
     checkIfAddedToAllVendors(itemName)
   );
 
@@ -29,7 +29,7 @@ const AddItemButton: FC = () => {
       raised
       size="lg"
       onPress={clickHandler}
-      disabled={IfAddedToAllVendors}
+      disabled={ifAddedToAllVendors}
       title="Add"
       titleStyle={FONT_WEIGHT_700}
       buttonStyle={BACKGROUND_MAIN_COLOR}
