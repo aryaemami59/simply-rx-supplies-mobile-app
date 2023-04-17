@@ -32,7 +32,6 @@ const styles = StyleSheet.create({
   searchBarContainer: {
     borderBottomWidth: 0,
     borderTopWidth: 0,
-    // height: 50,
   },
   searchBarInputContainer: {
     backgroundColor: SEARCH_BAR_COLOR,
@@ -57,13 +56,11 @@ const HeaderHomeStackNavigator: FC<Props> = ({
   options,
 }) => {
   const searchRef = useRef<SearchBarRef>(null);
-  // const myNavigation = navigation as BottomTabNavigationProp<RootTabParamList>;
 
   const focusHandler: NonNullable<TextInputProps["onFocus"]> = useCallback(
     e => {
       const ref = searchRef.current;
       navigation.navigate(itemLookup, {
-        // myNavigation.navigate(itemLookup, {
         inputFocused: true,
       });
       ref?.blur();

@@ -1,7 +1,7 @@
 import { MaterialIcons } from "@expo/vector-icons";
 import type { Icon } from "../types/missingTypes";
 
-const addIcon: Icon = (
+const AddIcon: Icon = (
   <MaterialIcons
     name="add"
     color="white"
@@ -9,4 +9,4 @@ const addIcon: Icon = (
   />
 );
 
-export default addIcon;
+export default AddIcon;

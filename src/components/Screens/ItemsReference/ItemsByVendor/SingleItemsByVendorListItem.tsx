@@ -2,7 +2,7 @@ import { Chip, ListItem, useTheme } from "@rneui/themed";
 import type { FC } from "react";
 import { memo, useCallback, useMemo } from "react";
 import type { StyleProp, ViewStyle } from "react-native";
-import addIcon from "../../../../Icons/addIcon";
+import AddIcon from "../../../../Icons/AddIcon";
 import useItemName from "../../../../hooks/useItemName";
 import useVendorName from "../../../../hooks/useVendorName";
 import { addItemsByVendor } from "../../../../redux/addedSlice";
@@ -55,7 +55,7 @@ const SingleItemsByVendorListItem: FC = () => {
           disabled={ifAdded}
           titleStyle={FONT_WEIGHT_700}
           buttonStyle={BACKGROUND_MAIN_COLOR}
-          icon={addIcon}
+          icon={AddIcon}
         />
       </ListItem.Content>
     </ListItem>

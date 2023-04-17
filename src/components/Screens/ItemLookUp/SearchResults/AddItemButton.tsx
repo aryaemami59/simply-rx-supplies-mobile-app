@@ -1,7 +1,7 @@
 import { Chip } from "@rneui/themed";
 import type { FC } from "react";
 import { memo, useCallback } from "react";
-import addIcon from "../../../../Icons/addIcon";
+import AddIcon from "../../../../Icons/AddIcon";
 import useItemName from "../../../../hooks/useItemName";
 import { addItems } from "../../../../redux/addedSlice";
 import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
@@ -33,7 +33,7 @@ const AddItemButton: FC = () => {
       title="Add"
       titleStyle={FONT_WEIGHT_700}
       buttonStyle={BACKGROUND_MAIN_COLOR}
-      icon={addIcon}
+      icon={AddIcon}
     />
   );
 };

@@ -1,6 +1,7 @@
 import { Chip } from "@rneui/themed";
 import type { FC } from "react";
 import { memo, useCallback } from "react";
+import AddIcon from "../../../../Icons/AddIcon";
 import useItemName from "../../../../hooks/useItemName";
 import { addItems } from "../../../../redux/addedSlice";
 import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
@@ -10,7 +11,6 @@ import {
   FONT_WEIGHT_700,
 } from "../../../../shared/styles/sharedStyles";
 import type { OnPress } from "../../../../types/missingTypes";
-import AddIcon from "./AddIcon";
 
 const SingleCategoryListItemAddButton: FC = () => {
   const itemName = useItemName();
