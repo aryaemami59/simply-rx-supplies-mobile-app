@@ -21,7 +21,10 @@ const SingleCategoryListItemAddButton: FC = () => {
   const dispatch = useAppDispatch();
 
   const clickHandler: OnPress = useCallback(() => {
-    ifAddedToAllVendors || dispatch(addItems(itemName));
+    if (!ifAddedToAllVendors) {
+      dispatch(addItems(itemName));
+    }
+    // ifAddedToAllVendors || dispatch(addItems(itemName));
   }, [ifAddedToAllVendors, dispatch, itemName]);
 
   return (

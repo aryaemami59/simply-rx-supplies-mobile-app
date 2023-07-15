@@ -1,7 +1,0 @@
-node_modules
-.expo
-.expo-shared
-.vscode
-webpack.config.ts
-assets
-dist

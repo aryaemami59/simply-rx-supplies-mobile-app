@@ -31,9 +31,11 @@ const BottomSheetVendorCheckbox: FC<Props> = ({ title, vendorName }) => {
   );
 
   const onToggleCheck: OnPress = useCallback(() => {
-    checked
-      ? dispatch(setVendorsForAllUncheck(vendorName))
-      : dispatch(setVendorsForAllCheck(vendorName));
+    if (checked) {
+      dispatch(setVendorsForAllUncheck(vendorName));
+    } else {
+      dispatch(setVendorsForAllCheck(vendorName));
+    }
     setChecked(prev => !prev);
   }, [checked, dispatch, vendorName]);
 

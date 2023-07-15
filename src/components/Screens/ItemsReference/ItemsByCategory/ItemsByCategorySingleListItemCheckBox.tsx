@@ -24,7 +24,10 @@ const ItemsByCategorySingleListItemCheckBox: FC = () => {
 
   const onToggleSwitch: NonNullable<PressableProps["onPress"]> =
     useCallback(() => {
-      ifAddedToVendor || dispatch(setVendors({ itemName, vendorName }));
+      if (!ifAddedToVendor) {
+        dispatch(setVendors({ itemName, vendorName }));
+      }
+      // ifAddedToVendor || dispatch(setVendors({ itemName, vendorName }));
     }, [dispatch, ifAddedToVendor, itemName, vendorName]);
 
   return (

@@ -78,7 +78,9 @@ const CartColumnListItemsScreen: FC<Props> = ({ navigation, route }) => {
 
   const openLink: NonNullable<TouchableWithoutFeedbackProps["onPress"]> =
     useCallback(() => {
-      Linking.openURL(vendorLink).catch(e => console.log(e));
+      Linking.openURL(vendorLink).catch(e => {
+        console.log(e);
+      });
     }, [vendorLink]);
 
   const officialVendorName = useOfficialVendorName(vendorName);

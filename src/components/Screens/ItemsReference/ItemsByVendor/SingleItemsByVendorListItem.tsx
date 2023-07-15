@@ -27,7 +27,10 @@ const SingleItemsByVendorListItem: FC = () => {
   );
 
   const clickHandler: OnPress = useCallback(() => {
-    ifAddedToAllVendors || dispatch(addItemsByVendor({ itemName, vendorName }));
+    if (!ifAddedToAllVendors) {
+      dispatch(addItemsByVendor({ itemName, vendorName }));
+    }
+    // ifAddedToAllVendors || dispatch(addItemsByVendor({ itemName, vendorName }));
   }, [vendorName, ifAddedToAllVendors, dispatch, itemName]);
 
   const ifAdded = useAppSelector(

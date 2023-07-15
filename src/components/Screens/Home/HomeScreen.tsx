@@ -29,37 +29,31 @@ type Props = RootTabScreenProps<"Home">;
 const HomeScreen: FC<Props> = ({ navigation, route }) => {
   const { background } = useTheme().theme.colors;
 
-  const navigateToItemLookup: OnPress = useCallback(
-    () => navigation.navigate(itemLookup, { inputFocused: false }),
-    [navigation]
-  );
+  const navigateToItemLookup: OnPress = useCallback(() => {
+    navigation.navigate(itemLookup, { inputFocused: false });
+  }, [navigation]);
 
-  const navigateToItemsByVendor: OnPress = useCallback(
-    () =>
-      navigation.navigate(itemsReferenceStackNavigator, {
-        screen: itemsReferenceScreen,
-        params: {
-          screen: itemsByVendor,
-        },
-      }),
-    [navigation]
-  );
+  const navigateToItemsByVendor: OnPress = useCallback(() => {
+    navigation.navigate(itemsReferenceStackNavigator, {
+      screen: itemsReferenceScreen,
+      params: {
+        screen: itemsByVendor,
+      },
+    });
+  }, [navigation]);
 
-  const navigateToItemsByCategory: OnPress = useCallback(
-    () =>
-      navigation.navigate(itemsReferenceStackNavigator, {
-        screen: itemsReferenceScreen,
-        params: {
-          screen: itemsByCategory,
-        },
-      }),
-    [navigation]
-  );
+  const navigateToItemsByCategory: OnPress = useCallback(() => {
+    navigation.navigate(itemsReferenceStackNavigator, {
+      screen: itemsReferenceScreen,
+      params: {
+        screen: itemsByCategory,
+      },
+    });
+  }, [navigation]);
 
-  const navigateToShoppingCart: OnPress = useCallback(
-    () => navigation.navigate(shoppingCartStackNavigator),
-    [navigation]
-  );
+  const navigateToShoppingCart: OnPress = useCallback(() => {
+    navigation.navigate(shoppingCartStackNavigator);
+  }, [navigation]);
 
   const viewStyle: StyleProp<ViewStyle> = useMemo(
     () => ({ backgroundColor: background }),

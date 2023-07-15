@@ -74,21 +74,21 @@ export type RootTabScreenProps<T extends keyof RootTabParamList> =
   BottomTabScreenProps<RootTabParamList, T>;
 
 export type ShoppingCartStackScreenProps<
-  T extends keyof ShoppingCartStackParamList
+  T extends keyof ShoppingCartStackParamList,
 > = CompositeScreenProps<
   StackScreenProps<ShoppingCartStackParamList, T>,
   RootTabScreenProps<keyof RootTabParamList>
 >;
 
 export type ItemsReferenceStackScreenProps<
-  T extends keyof ItemsReferenceStackParamList
+  T extends keyof ItemsReferenceStackParamList,
 > = CompositeScreenProps<
   StackScreenProps<ItemsReferenceStackParamList, T>,
   RootTabScreenProps<keyof RootTabParamList>
 >;
 
 export type ItemsReferenceTabScreenProps<
-  T extends keyof ItemsReferenceTopTabParamList
+  T extends keyof ItemsReferenceTopTabParamList,
 > = CompositeScreenProps<
   MaterialTopTabScreenProps<ItemsReferenceTopTabParamList, T>,
   ItemsReferenceStackScreenProps<keyof ItemsReferenceStackParamList>

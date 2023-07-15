@@ -173,7 +173,10 @@ export const addedSlice = createSlice({
       { payload: vendorName }: PayloadAction<VendorNameType>
     ) => {
       Object.values(state.itemsObj).forEach(({ vendorsToAdd }) => {
-        vendorsToAdd.includes(vendorName) || vendorsToAdd.push(vendorName);
+        if (!vendorsToAdd.includes(vendorName)) {
+          vendorsToAdd.push(vendorName);
+        }
+        // vendorsToAdd.includes(vendorName) || vendorsToAdd.push(vendorName);
       });
     },
   },

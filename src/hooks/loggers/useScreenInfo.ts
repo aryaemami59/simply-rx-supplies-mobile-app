@@ -21,7 +21,7 @@ type Options<P extends AnyObject = EmptyObject> = {
 const useScreenInfo = <
   P extends RouteProp<ParamListBase>,
   T extends NavigationProp<RootTabParamList>,
-  R extends AnyObject = EmptyObject
+  R extends AnyObject = EmptyObject,
 >(
   options: Options<R> = {
     showParentInfo: true,

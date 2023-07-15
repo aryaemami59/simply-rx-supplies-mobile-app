@@ -29,7 +29,7 @@ export type HeaderTitleStyle = NonNullable<
 export type TabHeader = Header<BottomTabNavigationOptions>;
 export type StackHeader = Header<StackNavigationOptions>;
 export type Header<
-  T extends BottomTabNavigationOptions | StackNavigationOptions
+  T extends BottomTabNavigationOptions | StackNavigationOptions,
 > = NonNullable<T["header"]>;
 export type TabBarIcon = NonNullable<BottomTabNavigationOptions["tabBarIcon"]>;
 export type HeaderRight = NonNullable<StackNavigationOptions["headerRight"]>;
@@ -60,7 +60,7 @@ export type Composite = AnyFunction | AnyArray | AnyObject;
 export type ObjectOrArray = AnyArray | AnyObject;
 
 export type Equals<X, Y> = (<T>() => T extends X ? 1 : 2) extends <
-  T
+  T,
 >() => T extends Y ? 1 : 2
   ? true
   : false;

@@ -54,12 +54,12 @@ type Props = ShoppingCartStackScreenProps<"QRImage">;
 const QRImageScreen: FC<Props> = ({ navigation, route }) => {
   const { itemNumbers, itemsAdded } = route.params;
 
-  const svg = useRef<Svg>(null!);
+  const svg = useRef<Svg>(null);
 
   const shareQR: NonNullable<TouchableWithoutFeedbackProps["onPress"]> =
     useCallback(() => {
       console.debug(svg);
-      svg.current.toDataURL((data: string) => {
+      svg.current?.toDataURL((data: string) => {
         const shareImageBase64: ShareContent = {
           title: "QRCode",
           message: `this is the QR code image for the following items: \n${itemsAdded.join(
@@ -67,7 +67,9 @@ const QRImageScreen: FC<Props> = ({ navigation, route }) => {
           )}`,
           url: `data:image/png;base64,${data}`,
         };
-        Share.share(shareImageBase64).catch(e => console.log(e));
+        Share.share(shareImageBase64).catch(e => {
+          console.log(e);
+        });
       });
     }, [itemsAdded]);
 

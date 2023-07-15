@@ -16,7 +16,7 @@ export type FetchedState<T extends ObjectOrArray> = {
  */
 const useFetch = <T extends ObjectOrArray>(
   url: string,
-  init: RequestInit = {}
+  init?: RequestInit
 ): FetchedState<T> => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);

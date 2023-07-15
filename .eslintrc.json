@@ -1,7 +1,7 @@
 {
   "env": {
     "browser": true,
-    "es2022": true,
+    "es2024": true,
     "react-native/react-native": true
   },
   "extends": [
@@ -11,26 +11,32 @@
     "airbnb",
     "airbnb-typescript",
     "airbnb/hooks",
-    "react-app",
+    // "react-app",
     "plugin:react/recommended",
     "plugin:react/jsx-runtime",
     "plugin:jsx-a11y/strict",
     "plugin:react-redux/all",
     "plugin:react-perf/all",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:@typescript-eslint/recommended-requiring-type-checking",
-    "plugin:@typescript-eslint/strict",
+    "plugin:@typescript-eslint/strict-type-checked",
+    "plugin:@typescript-eslint/stylistic-type-checked",
     "plugin:prettier/recommended",
     "plugin:react-native/all"
   ],
   "overrides": [],
+  "ignorePatterns": [
+    "node_modules",
+    ".expo",
+    ".expo-shared",
+    ".vscode",
+    "webpack.config.ts",
+    "assets",
+    "dist"
+  ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "ecmaFeatures": {
-      "jsx": true
-    },
+    "ecmaFeatures": { "jsx": true },
     "ecmaVersion": "latest",
-    "project": ["./tsconfig.json"],
+    "project": true,
     "sourceType": "module",
     "tsconfigRootDir": "./"
   },
@@ -69,29 +75,13 @@
         "modifiers": ["requiresQuotes"],
         "selector": ["objectLiteralProperty"]
       },
-      {
-        "format": ["camelCase"],
-        "selector": ["parameter"]
-      }
+      { "format": ["camelCase"], "selector": ["parameter"] }
     ],
     "@typescript-eslint/no-floating-promises": [0],
     "@typescript-eslint/no-throw-literal": [0],
     "no-console": [0],
-    "no-param-reassign": [
-      2,
-      {
-        "props": false
-      }
-    ],
-    "prefer-arrow-functions/prefer-arrow-functions": [
-      2,
-      {
-        "classPropertiesAllowed": false,
-        "disallowPrototype": true,
-        "returnStyle": "unchanged",
-        "singleReturnOnly": false
-      }
-    ],
+    "no-param-reassign": [2, { "props": false }],
+    "prefer-arrow-functions/prefer-arrow-functions": [2],
     "prettier/prettier": [
       2,
       {
@@ -99,7 +89,8 @@
         "bracketSameLine": true,
         "endOfLine": "auto",
         "parser": "typescript",
-        "singleAttributePerLine": true
+        "singleAttributePerLine": true,
+        "trailingComma": "es5"
       }
     ],
     "react-native/no-color-literals": [0],
@@ -112,11 +103,9 @@
       }
     ],
     "react/jsx-props-no-spreading": [0],
-    "react/require-default-props": [0]
+    "react/require-default-props": [0],
+    "@typescript-eslint/no-use-before-define": [0],
+    "@typescript-eslint/no-unused-vars": [2, { "args": "none" }]
   },
-  "settings": {
-    "react": {
-      "version": "detect"
-    }
-  }
+  "settings": { "react": { "version": "detect" } }
 }
