@@ -3,6 +3,7 @@ import { memo } from "react";
 import { FlatList } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { shallowEqual } from "react-redux";
+
 import { useAppSelector } from "../../../redux/hooks";
 import { selectAllListItems } from "../../../redux/selectors";
 import ItemNameProvider from "../../../shared/contexts/ItemNameProvider";

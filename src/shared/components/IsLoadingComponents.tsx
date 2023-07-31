@@ -1,6 +1,7 @@
 import type { FC } from "react";
 import { memo } from "react";
 import { ActivityIndicator, View } from "react-native";
+
 import { JC_AI_CENTER_HEIGHT100 } from "../styles/sharedStyles";
 
 const IsLoadingComponents: FC = () => (

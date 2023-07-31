@@ -10,6 +10,7 @@ import {
 } from "@react-navigation/native";
 import type { FC } from "react";
 import { useEffect, useMemo } from "react";
+
 import type { AnyObject, EmptyObject } from "../../types/missingTypes";
 import type { RootTabParamList } from "../../types/navigation";
 

@@ -4,6 +4,7 @@ import { memo, useCallback } from "react";
 import { TouchableOpacity } from "react-native";
 import QRCode from "react-native-qrcode-svg";
 import { shallowEqual } from "react-redux";
+
 import { useAppSelector } from "../../../../redux/hooks";
 import {
   selectItemsAddedByVendor,
@@ -20,6 +21,7 @@ type Props = {
 
 const CartQRCodeImage: FC<Props> = ({ vendorName }) => {
   const itemNumbers = useAppSelector(selectQRCodeContent(vendorName));
+  console.log(itemNumbers);
   const itemsAdded = useAppSelector(
     selectItemsAddedByVendor(vendorName),
     shallowEqual

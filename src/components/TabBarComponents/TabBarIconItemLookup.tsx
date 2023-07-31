@@ -1,6 +1,7 @@
 import { FontAwesome } from "@expo/vector-icons";
 import type { FC } from "react";
 import { memo } from "react";
+
 import { AI_CENTER } from "../../shared/styles/sharedStyles";
 import type { TabBarIconProps } from "../../types/missingTypes";
 

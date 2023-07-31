@@ -1,10 +1,28 @@
 {
-  "extends": "expo/tsconfig.base",
   "compilerOptions": {
+    "experimentalDecorators": true,
+    "extendedDiagnostics": true,
     "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "module": "ESNext",
+    "noErrorTruncation": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": true,
+    "noUncheckedIndexedAccess": true,
     "strict": true,
-    "noImplicitAny": true
+    "strictFunctionTypes": true,
+    "strictNullChecks": true,
+    "strictPropertyInitialization": true,
+    "useDefineForClassFields": true,
+    "useUnknownInCatchVariables": true
   },
+  "extends": "expo/tsconfig.base",
+  "files": ["webpack.config.js"],
   "include": ["**/*"],
-  "files": ["./webpack.config.js"]
+  // "exclude": ["dist"],
+  "ts-node": {
+    "esm": true,
+    "experimentalSpecifierResolution": "node",
+    "transpileOnly": true
+  }
 }

@@ -3,6 +3,7 @@ import type { FC } from "react";
 import { memo, useCallback, useEffect, useMemo } from "react";
 import type { StyleProp, ViewStyle } from "react-native";
 import { FlatList, View } from "react-native";
+
 import useItemNames from "../../../../hooks/useItemNames";
 import useOfficialVendorName from "../../../../hooks/useOfficialVendorName";
 import ItemNameProvider from "../../../../shared/contexts/ItemNameProvider";

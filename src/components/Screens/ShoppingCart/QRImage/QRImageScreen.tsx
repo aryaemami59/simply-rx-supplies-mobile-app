@@ -20,6 +20,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import type { QRCodeProps } from "react-native-qrcode-svg";
 import QRCode from "react-native-qrcode-svg";
 import type Svg from "react-native-svg/lib/typescript/elements/Svg";
+
 import {
   AI_CENTER,
   HEIGHT_100,

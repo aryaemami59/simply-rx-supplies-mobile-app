@@ -1,5 +1,5 @@
 import { NavigationContainer } from "@react-navigation/native";
-import { ThemeProvider, createTheme } from "@rneui/themed";
+import { createTheme, ThemeProvider } from "@rneui/themed";
 // import whyDidYouRender from "@welldone-software/why-did-you-render";
 import type { FC } from "react";
 import { memo } from "react";
@@ -7,6 +7,7 @@ import { Provider as PaperProvider } from "react-native-paper";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { enableScreens } from "react-native-screens";
 import { Provider } from "react-redux";
+
 import Main from "./src/components/Main";
 import { fetchItems } from "./src/redux/addedSlice";
 import { store } from "./src/redux/store";

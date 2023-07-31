@@ -9,6 +9,7 @@ import type {
 } from "react-native";
 import { TouchableOpacity } from "react-native";
 import { shallowEqual } from "react-redux";
+
 import { useAppSelector } from "../../../../../redux/hooks";
 import {
   selectItemSrc,

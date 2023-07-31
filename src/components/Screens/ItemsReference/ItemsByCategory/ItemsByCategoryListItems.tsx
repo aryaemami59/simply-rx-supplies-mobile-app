@@ -4,6 +4,7 @@ import { memo, useEffect, useMemo } from "react";
 import type { StyleProp, ViewStyle } from "react-native";
 import { FlatList, View } from "react-native";
 import { shallowEqual } from "react-redux";
+
 import { useAppSelector } from "../../../../redux/hooks";
 import { selectCategoriesItemNames } from "../../../../redux/selectors";
 import ItemNameProvider from "../../../../shared/contexts/ItemNameProvider";

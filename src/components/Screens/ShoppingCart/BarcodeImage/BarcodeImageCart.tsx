@@ -8,6 +8,7 @@ import type {
   TouchableWithoutFeedbackProps,
 } from "react-native";
 import { Image, StyleSheet, TouchableOpacity } from "react-native";
+
 import useItemName from "../../../../hooks/useItemName";
 import { useAppSelector } from "../../../../redux/hooks";
 import { selectItemSrc } from "../../../../redux/selectors";

@@ -14,6 +14,7 @@ import type { TextInputProps } from "react-native";
 import { InteractionManager, StyleSheet } from "react-native";
 import * as Animatable from "react-native-animatable";
 import { shallowEqual } from "react-redux";
+
 import useComponentMountLogger from "../../../../hooks/loggers/useComponentMountLogger";
 import useComponentUpdateLogger from "../../../../hooks/loggers/useComponentUpdateLogger";
 import useIsCurrentFocused from "../../../../hooks/loggers/useIsCurrentFocused";
@@ -28,8 +29,8 @@ import {
   JC_AI_CENTER,
   MAIN_COLOR,
   SEARCH_BAR_COLOR,
-  WIDTH_100,
   WIDTH_80,
+  WIDTH_100,
 } from "../../../../shared/styles/sharedStyles";
 import type {
   AnimatableViewRef,

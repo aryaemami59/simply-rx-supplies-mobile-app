@@ -2,6 +2,7 @@ import { Button } from "@rneui/themed";
 import type { FC } from "react";
 import { memo, useCallback } from "react";
 import type { TouchableWithoutFeedbackProps } from "react-native";
+
 import useItemName from "../../../../hooks/useItemName";
 import useVendorName from "../../../../hooks/useVendorName";
 import { removeItems } from "../../../../redux/addedSlice";

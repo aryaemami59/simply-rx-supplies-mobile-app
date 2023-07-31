@@ -3,6 +3,7 @@ import type { FC } from "react";
 import { memo, useMemo } from "react";
 import type { StyleProp, ViewStyle } from "react-native";
 import { shallowEqual } from "react-redux";
+
 import useItemName from "../../../../hooks/useItemName";
 import { useAppSelector } from "../../../../redux/hooks";
 import { selectVendorsByItemName } from "../../../../redux/selectors";

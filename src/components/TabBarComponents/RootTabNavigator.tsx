@@ -4,6 +4,7 @@ import { useTheme } from "@rneui/themed";
 import type { FC } from "react";
 import { memo, useMemo } from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+
 import { useAppSelector } from "../../redux/hooks";
 import { checkIfAnyItemsAdded } from "../../redux/selectors";
 import {

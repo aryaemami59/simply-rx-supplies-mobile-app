@@ -1,4 +1,5 @@
 import { FontAwesome } from "@expo/vector-icons";
+
 import { ICON_GRAY_COLOR } from "../../shared/styles/sharedStyles";
 
 const SearchIcon = (

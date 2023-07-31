@@ -3,6 +3,7 @@ import type { FC } from "react";
 import { memo, useMemo } from "react";
 import type { StyleProp, TextStyle } from "react-native";
 import { Text, View } from "react-native";
+
 import useItemName from "../../../../hooks/useItemName";
 import { useAppSelector } from "../../../../redux/hooks";
 import { selectItemNumber } from "../../../../redux/selectors";

@@ -1,8 +1,9 @@
 import { Chip } from "@rneui/themed";
 import type { FC } from "react";
 import { memo, useCallback } from "react";
-import AddIcon from "../../../../Icons/AddIcon";
+
 import useItemName from "../../../../hooks/useItemName";
+import AddIcon from "../../../../Icons/AddIcon";
 import { addItems } from "../../../../redux/addedSlice";
 import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
 import { checkIfAddedToAllVendors } from "../../../../redux/selectors";

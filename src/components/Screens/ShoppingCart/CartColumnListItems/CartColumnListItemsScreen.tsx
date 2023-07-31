@@ -18,8 +18,9 @@ import {
   View,
 } from "react-native";
 import { shallowEqual } from "react-redux";
-import shoppingCartIcon from "../../../../Icons/shoppingCartIcon";
+
 import useOfficialVendorName from "../../../../hooks/useOfficialVendorName";
+import shoppingCartIcon from "../../../../Icons/shoppingCartIcon";
 import { useAppSelector } from "../../../../redux/hooks";
 import {
   checkIfAnyItemsAddedToOneVendor,

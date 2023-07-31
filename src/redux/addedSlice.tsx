@@ -1,6 +1,8 @@
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { createAsyncThunk, createSlice, current } from "@reduxjs/toolkit";
 import axios from "axios";
+import QRCode from "qrcode";
+
 import GITHUB_URL_ITEMS from "../data/fetchInfo";
 import type {
   Category,
@@ -60,7 +62,12 @@ export const addedSlice = createSlice({
             const qr = state.vendorsObj[vendorName].itemsAdded
               .map(itemAddedName => state.itemsObj[itemAddedName].itemNumber)
               .join(state.vendorsObj[vendorName].joinChars);
-            state.vendorsObj[vendorName].qrContent = qr;
+            // state.vendorsObj[vendorName].qrContent = qr;
+            QRCode.toDataURL(qr, (error, url) => {
+              console.log(error);
+              console.log(url);
+              state.vendorsObj[vendorName].qrContent = url;
+            });
             state.vendorsObj[vendorName].qrText = qr;
             state.listItems = state.listItems.filter(
               listItemName => listItemName !== itemName
@@ -97,7 +104,10 @@ export const addedSlice = createSlice({
       const qr = state.vendorsObj[vendorName].itemsAdded
         .map(itemAddedName => state.itemsObj[itemAddedName].itemNumber)
         .join(state.vendorsObj[vendorName].joinChars);
-      state.vendorsObj[vendorName].qrContent = qr;
+      // state.vendorsObj[vendorName].qrContent = qr;
+      QRCode.toDataURL(qr, (error, url) => {
+        state.vendorsObj[vendorName].qrContent = url;
+      });
       state.vendorsObj[vendorName].qrText = qr;
     },
     removeItems: (state, action: PayloadAction<VendorAndItemName>) => {
@@ -111,7 +121,11 @@ export const addedSlice = createSlice({
       const qr = state.vendorsObj[vendorName].itemsAdded
         .map(itemAddedName => state.itemsObj[itemAddedName].itemNumber)
         .join(state.vendorsObj[vendorName].joinChars);
-      state.vendorsObj[vendorName].qrContent = qr;
+      // state.vendorsObj[vendorName].qrContent = qr;
+      QRCode.toDataURL(qr, (error, url) => {
+        console.log(url);
+        state.vendorsObj[vendorName].qrContent = url;
+      });
       state.vendorsObj[vendorName].qrText = qr;
     },
     setListItems: (state, action: PayloadAction<ItemName[]>) => {

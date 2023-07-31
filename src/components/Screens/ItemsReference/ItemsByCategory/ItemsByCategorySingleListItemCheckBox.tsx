@@ -2,6 +2,7 @@ import { ListItem } from "@rneui/themed";
 import type { FC } from "react";
 import { memo, useCallback } from "react";
 import type { PressableProps } from "react-native";
+
 import useItemName from "../../../../hooks/useItemName";
 import useOfficialVendorName from "../../../../hooks/useOfficialVendorName";
 import useVendorName from "../../../../hooks/useVendorName";

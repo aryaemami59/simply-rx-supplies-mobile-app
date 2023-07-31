@@ -2,9 +2,10 @@ import { Chip, ListItem, useTheme } from "@rneui/themed";
 import type { FC } from "react";
 import { memo, useCallback, useMemo } from "react";
 import type { StyleProp, ViewStyle } from "react-native";
-import AddIcon from "../../../../Icons/AddIcon";
+
 import useItemName from "../../../../hooks/useItemName";
 import useVendorName from "../../../../hooks/useVendorName";
+import AddIcon from "../../../../Icons/AddIcon";
 import { addItemsByVendor } from "../../../../redux/addedSlice";
 import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
 import {

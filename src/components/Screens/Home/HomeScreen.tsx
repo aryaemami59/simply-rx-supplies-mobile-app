@@ -4,6 +4,7 @@ import { memo, useCallback, useMemo } from "react";
 import type { StyleProp, ViewStyle } from "react-native";
 import { StyleSheet, View } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+
 import categoryIcon from "../../../Icons/categoryIcon";
 import searchIcon from "../../../Icons/searchIcon";
 import shoppingCartIcon from "../../../Icons/shoppingCartIcon";

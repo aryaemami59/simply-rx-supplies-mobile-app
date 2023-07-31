@@ -1,4 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
+
 import { addedReducer } from "./addedSlice";
 
 export const store = configureStore({

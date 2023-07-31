@@ -1,6 +1,7 @@
 import type { BottomTabNavigationOptions } from "@react-navigation/bottom-tabs";
 import type { MaterialTopTabNavigationOptions } from "@react-navigation/material-top-tabs";
 import type { StackNavigationOptions } from "@react-navigation/stack";
+
 import { HeaderRightFC } from "../../components/HeaderComponents/HeaderRightComponent";
 import {
   stackHeader,

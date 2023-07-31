@@ -1,4 +1,5 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+
 import type { Icon } from "../types/missingTypes";
 
 const storeSearchIcon: Icon = (

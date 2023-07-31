@@ -3,6 +3,7 @@ import type { FC } from "react";
 import { memo, useMemo } from "react";
 import type { StyleProp, ViewStyle } from "react-native";
 import { FlatList, View } from "react-native";
+
 import useVendorNamesList from "../../../../hooks/useVendorNamesList";
 import VendorNameProvider from "../../../../shared/contexts/VendorNameProvider";
 import { HEIGHT_100 } from "../../../../shared/styles/sharedStyles";

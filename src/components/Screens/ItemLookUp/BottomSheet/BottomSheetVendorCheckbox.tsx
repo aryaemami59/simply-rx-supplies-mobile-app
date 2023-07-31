@@ -3,6 +3,7 @@ import type { FC } from "react";
 import { memo, useCallback, useMemo, useState } from "react";
 import type { StyleProp, ViewStyle } from "react-native";
 import { TouchableHighlight } from "react-native";
+
 import {
   setVendorsForAllCheck,
   setVendorsForAllUncheck,

@@ -4,6 +4,7 @@ import type { FC } from "react";
 import { memo, useCallback, useMemo } from "react";
 import type { PressableProps, StyleProp, ViewStyle } from "react-native";
 import TouchableScale from "react-native-touchable-scale";
+
 import useOfficialVendorName from "../../../../hooks/useOfficialVendorName";
 import useVendorName from "../../../../hooks/useVendorName";
 import {

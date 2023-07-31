@@ -11,7 +11,6 @@
     "airbnb",
     "airbnb-typescript",
     "airbnb/hooks",
-    // "react-app",
     "plugin:react/recommended",
     "plugin:react/jsx-runtime",
     "plugin:jsx-a11y/strict",
@@ -42,13 +41,14 @@
   },
   "plugins": [
     "react",
-    "react-native",
     "@typescript-eslint",
     "prefer-arrow-functions",
     "react-perf",
     "prettier",
     "react-redux",
-    "jsx-a11y"
+    "jsx-a11y",
+    "simple-import-sort",
+    "react-native"
   ],
   "root": true,
   "rules": {
@@ -105,7 +105,9 @@
     "react/jsx-props-no-spreading": [0],
     "react/require-default-props": [0],
     "@typescript-eslint/no-use-before-define": [0],
-    "@typescript-eslint/no-unused-vars": [2, { "args": "none" }]
+    "@typescript-eslint/no-unused-vars": [2, { "args": "none" }],
+    "simple-import-sort/exports": [2],
+    "simple-import-sort/imports": [2]
   },
   "settings": { "react": { "version": "detect" } }
 }

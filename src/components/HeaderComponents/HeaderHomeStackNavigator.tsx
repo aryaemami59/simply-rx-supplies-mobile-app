@@ -3,6 +3,7 @@ import type { FC } from "react";
 import { memo, useCallback, useMemo, useRef } from "react";
 import type { StyleProp, TextInputProps, ViewStyle } from "react-native";
 import { StyleSheet } from "react-native";
+
 import {
   BACKGROUND_TRANSPARENT,
   COLOR_WHITE,

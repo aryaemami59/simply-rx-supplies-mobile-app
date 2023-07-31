@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
+
 import type { ObjectOrArray } from "../types/missingTypes";
 
 export type FetchedState<T extends ObjectOrArray> = {

@@ -5,6 +5,7 @@ import { memo, useCallback, useMemo, useState } from "react";
 import type { StyleProp, ViewStyle } from "react-native";
 import { View } from "react-native";
 import Collapsible from "react-native-collapsible";
+
 import {
   AI_CENTER,
   JC_SPACE_BETWEEN,

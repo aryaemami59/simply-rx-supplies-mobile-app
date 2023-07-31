@@ -4,6 +4,7 @@ import { memo, useMemo } from "react";
 import type { StyleProp, ViewStyle } from "react-native";
 import { FlatList, View } from "react-native";
 import { shallowEqual } from "react-redux";
+
 import { useAppSelector } from "../../../../redux/hooks";
 import { selectCategoriesArr } from "../../../../redux/selectors";
 import { HEIGHT_100 } from "../../../../shared/styles/sharedStyles";
