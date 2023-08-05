@@ -149,7 +149,9 @@ const InputField: FC = () => {
         //   ? navigation.setParams({ inputFocused: true })
         //   : navigation.setParams({ inputFocused: false });
         // focused && ref?.focus();
-        inputFocused && inputRef.current?.focus();
+        if (inputFocused) {
+          inputRef.current?.focus();
+        }
         // inputFocused ? inputRef.current?.focus() : inputRef.current?.blur();
       });
       return () => {
@@ -158,9 +160,11 @@ const InputField: FC = () => {
         // navigation.setParams({ inputFocused });
         blurHandler();
         // inputRef.current?.blur();
-        inputFocused
-          ? navigation.setParams({ inputFocused: true })
-          : navigation.setParams({ inputFocused: false });
+        if (inputFocused) {
+          navigation.setParams({ inputFocused: true });
+        } else {
+          navigation.setParams({ inputFocused: false });
+        }
         task.cancel();
       };
     }, [blurHandler, inputFocused, navigation])
