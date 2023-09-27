@@ -1,4 +1,4 @@
-import type { Icon } from "../../../../types/missingTypes";
+import type { Icon } from "../../../../types/tsHelpers";
 import DeleteIcon from "./DeleteIcon";
 
 const DeleteIconNode: Icon = <DeleteIcon />;

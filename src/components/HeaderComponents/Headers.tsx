@@ -1,4 +1,4 @@
-import type { StackHeader, TabHeader } from "../../types/missingTypes";
+import type { StackHeader, TabHeader } from "../../types/tsHelpers";
 import HeaderHomeStackNavigator from "./HeaderHomeStackNavigator";
 
 // export const stackHeader: Header<StackNavigationOptions> = props => (

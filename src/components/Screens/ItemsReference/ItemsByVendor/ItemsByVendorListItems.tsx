@@ -1,47 +1,47 @@
 import { useTheme } from "@rneui/themed";
 import type { FC } from "react";
 import { memo, useCallback, useEffect, useMemo } from "react";
-import type { StyleProp, ViewStyle } from "react-native";
+import type { ListRenderItem, StyleProp, ViewStyle } from "react-native";
 import { FlatList, View } from "react-native";
 
-import useItemNames from "../../../../hooks/useItemNames";
+import useItemIds from "../../../../hooks/useItemIds";
 import useOfficialVendorName from "../../../../hooks/useOfficialVendorName";
-import ItemNameProvider from "../../../../shared/contexts/ItemNameProvider";
-import VendorNameProvider from "../../../../shared/contexts/VendorNameProvider";
+import ItemIdProvider from "../../../../shared/contexts/ItemIdProvider";
+import VendorIdProvider from "../../../../shared/contexts/VendorIdProvider";
 import { HEIGHT_100 } from "../../../../shared/styles/sharedStyles";
-import type { ItemName } from "../../../../types/api";
-import type { KeyExtractor, RenderItem } from "../../../../types/missingTypes";
 import type { ItemsReferenceStackScreenProps } from "../../../../types/navigation";
+import type { KeyExtractor } from "../../../../types/tsHelpers";
 import SingleItemsByVendorListItem from "./SingleItemsByVendorListItem";
 
-const keyExtractor: KeyExtractor<ItemName> = item => item;
+const keyExtractor: KeyExtractor<number> = item => `${item}`;
 
 type Props = ItemsReferenceStackScreenProps<"ItemsByVendorListItems">;
 
 const ItemsByVendorListItems: FC<Props> = ({ navigation, route }) => {
-  const { vendorName } = route.params;
-  const officialVendorName = useOfficialVendorName(vendorName);
+  const { vendorId } = route.params;
+  const officialVendorName = useOfficialVendorName(vendorId);
 
-  const renderItems: RenderItem<ItemName> = useCallback(
+  const renderItems = useCallback<ListRenderItem<number>>(
     ({ item }) => (
-      <ItemNameProvider itemName={item}>
-        <VendorNameProvider vendorName={vendorName}>
+      <ItemIdProvider itemId={item}>
+        <VendorIdProvider vendorId={vendorId}>
           <SingleItemsByVendorListItem />
-        </VendorNameProvider>
-      </ItemNameProvider>
+        </VendorIdProvider>
+      </ItemIdProvider>
     ),
-    [vendorName]
+    [vendorId]
   );
 
-  const itemNames = useItemNames(vendorName);
+  const itemIds = useItemIds(vendorId);
 
-  const options: NonNullable<Parameters<typeof navigation.setOptions>[number]> =
-    useMemo(
-      () => ({
-        headerTitle: officialVendorName,
-      }),
-      [officialVendorName]
-    );
+  const options = useMemo<
+    NonNullable<Parameters<typeof navigation.setOptions>[0]>
+  >(
+    () => ({
+      headerTitle: officialVendorName,
+    }),
+    [officialVendorName]
+  );
 
   useEffect(() => {
     navigation.setOptions(options);
@@ -49,7 +49,7 @@ const ItemsByVendorListItems: FC<Props> = ({ navigation, route }) => {
 
   const { background } = useTheme().theme.colors;
 
-  const style: StyleProp<ViewStyle> = useMemo(
+  const style = useMemo<StyleProp<ViewStyle>>(
     () => [{ backgroundColor: background }, HEIGHT_100],
     [background]
   );
@@ -58,7 +58,7 @@ const ItemsByVendorListItems: FC<Props> = ({ navigation, route }) => {
     <View style={style}>
       <FlatList
         removeClippedSubviews
-        data={itemNames}
+        data={itemIds}
         renderItem={renderItems}
         keyExtractor={keyExtractor}
         keyboardShouldPersistTaps="handled"

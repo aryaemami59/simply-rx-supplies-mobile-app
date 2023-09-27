@@ -1,6 +1,6 @@
 import { FontAwesome5 } from "@expo/vector-icons";
 
-import type { Icon } from "../types/missingTypes";
+import type { Icon } from "../types/tsHelpers";
 
 const searchIcon: Icon = (
   <FontAwesome5

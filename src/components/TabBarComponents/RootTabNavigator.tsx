@@ -37,7 +37,7 @@ const RootTabNavigator: FC = () => {
   const { background: backgroundColor } = useTheme().theme.colors;
   const tabBarBadge = ifItemsAdded ? "" : undefined;
 
-  const options: NonNullable<BottomTabNavigationOptions> = useMemo(
+  const options = useMemo<NonNullable<BottomTabNavigationOptions>>(
     () => ({
       ...shoppingCartOptions,
       tabBarBadge,
@@ -45,21 +45,22 @@ const RootTabNavigator: FC = () => {
     [tabBarBadge]
   );
 
-  const homeGroupOptions: NonNullable<BottomTabNavigationOptions> = useMemo(
+  const homeGroupOptions = useMemo<NonNullable<BottomTabNavigationOptions>>(
     () => ({
       tabBarStyle: { backgroundColor },
     }),
     [backgroundColor]
   );
 
-  const navigatorScreenOptions: NonNullable<BottomTabNavigationOptions> =
-    useMemo(
-      () => ({
-        ...HEADER_SHOWN_FALSE,
-        ...homeGroupOptions,
-      }),
-      [homeGroupOptions]
-    );
+  const navigatorScreenOptions = useMemo<
+    NonNullable<BottomTabNavigationOptions>
+  >(
+    () => ({
+      ...HEADER_SHOWN_FALSE,
+      ...homeGroupOptions,
+    }),
+    [homeGroupOptions]
+  );
 
   return (
     <SafeAreaProvider>

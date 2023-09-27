@@ -1,31 +1,31 @@
 import { useTheme } from "@rneui/themed";
 import type { FC } from "react";
 import { memo, useMemo } from "react";
-import type { StyleProp, ViewStyle } from "react-native";
+import type { ListRenderItem, StyleProp, ViewStyle } from "react-native";
 import { FlatList, View } from "react-native";
-import { shallowEqual } from "react-redux";
 
+import { ADAPTER_SELECTORS } from "../../../../redux/adapterSelectors";
 import { useAppSelector } from "../../../../redux/hooks";
-import { selectCategoriesArr } from "../../../../redux/selectors";
 import { HEIGHT_100 } from "../../../../shared/styles/sharedStyles";
-import type { Category } from "../../../../types/api";
-import type { KeyExtractor, RenderItem } from "../../../../types/missingTypes";
 import type { ItemsReferenceTabScreenProps } from "../../../../types/navigation";
+import type { KeyExtractor } from "../../../../types/tsHelpers";
 import ItemsByCategoryList from "./ItemsByCategoryList";
 
-const renderItem: RenderItem<Category> = ({ item }) => (
-  <ItemsByCategoryList category={item} />
+const renderItem: ListRenderItem<number> = ({ item }) => (
+  <ItemsByCategoryList categoryId={item} />
 );
 
-const keyExtractor: KeyExtractor<Category> = item => item;
+const keyExtractor: KeyExtractor<number> = item => `${item}`;
 
 type Props = ItemsReferenceTabScreenProps<"ItemsByCategory">;
 
 const ItemsByCategoryScreen: FC<Props> = ({ navigation, route }) => {
-  const categories = useAppSelector(selectCategoriesArr, shallowEqual);
+  const categoryIds = useAppSelector(
+    ADAPTER_SELECTORS.GLOBAL.categories.selectIds
+  );
   const { background: backgroundColor } = useTheme().theme.colors;
 
-  const style: StyleProp<ViewStyle> = useMemo(
+  const style = useMemo<StyleProp<ViewStyle>>(
     () => [HEIGHT_100, { backgroundColor }],
     [backgroundColor]
   );
@@ -35,7 +35,7 @@ const ItemsByCategoryScreen: FC<Props> = ({ navigation, route }) => {
       <FlatList
         keyExtractor={keyExtractor}
         removeClippedSubviews
-        data={categories}
+        data={categoryIds}
         renderItem={renderItem}
         keyboardShouldPersistTaps="handled"
         initialNumToRender={10}

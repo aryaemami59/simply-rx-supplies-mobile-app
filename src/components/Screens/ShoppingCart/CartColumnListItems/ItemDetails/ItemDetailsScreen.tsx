@@ -1,19 +1,12 @@
 import { Image, ListItem, Text, useTheme } from "@rneui/themed";
 import type { FC } from "react";
 import { memo, useCallback, useMemo } from "react";
-import type {
-  ImageURISource,
-  StyleProp,
-  TouchableWithoutFeedbackProps,
-  ViewStyle,
-} from "react-native";
+import type { ImageURISource, StyleProp, ViewStyle } from "react-native";
 import { TouchableOpacity } from "react-native";
-import { shallowEqual } from "react-redux";
 
 import { useAppSelector } from "../../../../../redux/hooks";
 import {
   selectItemSrc,
-  selectVendorsByItemName,
   selectVendorsOfficialNames,
 } from "../../../../../redux/selectors";
 import {
@@ -27,6 +20,7 @@ import {
 } from "../../../../../shared/styles/sharedStyles";
 import type { ShoppingCartStackScreenProps } from "../../../../../types/navigation";
 import { barcodeImage } from "../../../../../types/navigation";
+import type { OnPress } from "../../../../../types/tsHelpers";
 
 type Props = ShoppingCartStackScreenProps<"ItemDetails">;
 
@@ -36,33 +30,27 @@ const imageContainerStyle: StyleProp<ViewStyle> = [
 ];
 
 const ItemDetailsScreen: FC<Props> = ({ navigation, route }) => {
-  const { itemName } = route.params;
-  const vendors = useAppSelector(
-    selectVendorsByItemName(itemName),
-    shallowEqual
-  );
-  const src = useAppSelector(selectItemSrc(itemName));
+  const { itemId } = route.params;
+  const src = useAppSelector(state => selectItemSrc(state, itemId));
   const { background: backgroundColor } = useTheme().theme.colors;
 
-  const officialVendorNames = useAppSelector(
-    selectVendorsOfficialNames(vendors),
-    shallowEqual
+  const officialVendorNames = useAppSelector(state =>
+    selectVendorsOfficialNames(state, itemId)
   );
 
-  const clickHandler: NonNullable<TouchableWithoutFeedbackProps["onPress"]> =
-    useCallback(() => {
-      navigation.navigate(barcodeImage, {
-        src,
-        itemName,
-      });
-    }, [itemName, navigation, src]);
+  const clickHandler = useCallback<OnPress>(() => {
+    navigation.navigate(barcodeImage, {
+      src,
+      itemId,
+    });
+  }, [itemId, navigation, src]);
 
-  const containerStyle: StyleProp<ViewStyle> = useMemo(
+  const containerStyle = useMemo<StyleProp<ViewStyle>>(
     () => [HEIGHT_100, AI_FLEX_START, JC_SPACE_BETWEEN, { backgroundColor }],
     [backgroundColor]
   );
 
-  const source: ImageURISource = useMemo(() => ({ uri: src }), [src]);
+  const source = useMemo<ImageURISource>(() => ({ uri: src }), [src]);
 
   return (
     <ListItem containerStyle={containerStyle}>
@@ -70,7 +58,7 @@ const ItemDetailsScreen: FC<Props> = ({ navigation, route }) => {
         <Text
           h2
           style={TEXT_CENTER}>
-          {itemName}
+          {itemId}
         </Text>
         <TouchableOpacity onPress={clickHandler}>
           <Image

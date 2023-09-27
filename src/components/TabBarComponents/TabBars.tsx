@@ -1,4 +1,4 @@
-import type { TabBarIcon } from "../../types/missingTypes";
+import type { TabBarIcon } from "../../types/tsHelpers";
 import TabBarIconHome from "./TabBarIconHome";
 import TabBarIconItemLookup from "./TabBarIconItemLookup";
 import TabBarIconItemsReference from "./TabBarIconItemsReference";

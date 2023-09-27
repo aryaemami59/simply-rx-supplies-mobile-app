@@ -1,32 +1,31 @@
 import { useTheme } from "@rneui/themed";
 import type { FC } from "react";
 import { memo, useMemo } from "react";
-import type { StyleProp, ViewStyle } from "react-native";
+import type { ListRenderItem, StyleProp, ViewStyle } from "react-native";
 import { FlatList, View } from "react-native";
 
-import useVendorNamesList from "../../../../hooks/useVendorNamesList";
-import VendorNameProvider from "../../../../shared/contexts/VendorNameProvider";
+import useVendorIds from "../../../../hooks/useVendorIds";
+import VendorIdProvider from "../../../../shared/contexts/VendorIdProvider";
 import { HEIGHT_100 } from "../../../../shared/styles/sharedStyles";
-import type { VendorNameType } from "../../../../types/api";
-import type { KeyExtractor, RenderItem } from "../../../../types/missingTypes";
 import type { ItemsReferenceTabScreenProps } from "../../../../types/navigation";
+import type { KeyExtractor } from "../../../../types/tsHelpers";
 import ItemsByVendorList from "./ItemsByVendorList";
 
-const renderItem: RenderItem<VendorNameType> = ({ item }) => (
-  <VendorNameProvider vendorName={item}>
+const renderItem: ListRenderItem<number> = ({ item }) => (
+  <VendorIdProvider vendorId={item}>
     <ItemsByVendorList />
-  </VendorNameProvider>
+  </VendorIdProvider>
 );
 
-const keyExtractor: KeyExtractor<VendorNameType> = item => item;
+const keyExtractor: KeyExtractor<number> = item => `${item}`;
 
 type Props = ItemsReferenceTabScreenProps<"ItemsByVendor">;
 
 const ItemsByVendorScreen: FC<Props> = ({ navigation, route }) => {
-  const allVendors = useVendorNamesList();
+  const vendorIds = useVendorIds();
   const { background: backgroundColor } = useTheme().theme.colors;
 
-  const style: StyleProp<ViewStyle> = useMemo(
+  const style = useMemo<StyleProp<ViewStyle>>(
     () => [HEIGHT_100, { backgroundColor }],
     [backgroundColor]
   );
@@ -36,7 +35,7 @@ const ItemsByVendorScreen: FC<Props> = ({ navigation, route }) => {
       <FlatList
         keyExtractor={keyExtractor}
         removeClippedSubviews
-        data={allVendors}
+        data={vendorIds}
         renderItem={renderItem}
         keyboardShouldPersistTaps="handled"
         initialNumToRender={10}

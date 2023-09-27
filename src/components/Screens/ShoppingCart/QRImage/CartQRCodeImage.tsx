@@ -3,40 +3,30 @@ import type { FC } from "react";
 import { memo, useCallback } from "react";
 import { TouchableOpacity } from "react-native";
 import QRCode from "react-native-qrcode-svg";
-import { shallowEqual } from "react-redux";
 
 import { useAppSelector } from "../../../../redux/hooks";
-import {
-  selectItemsAddedByVendor,
-  selectQRCodeContent,
-} from "../../../../redux/selectors";
-import type { VendorNameType } from "../../../../types/api";
-import type { OnPress } from "../../../../types/missingTypes";
+import { selectQRCodeText } from "../../../../redux/selectors";
 import type { ShoppingCartStackScreenProps } from "../../../../types/navigation";
 import { qrImage } from "../../../../types/navigation";
+import type { OnPress } from "../../../../types/tsHelpers";
 
 type Props = {
-  vendorName: VendorNameType;
+  cartId: number;
 };
 
-const CartQRCodeImage: FC<Props> = ({ vendorName }) => {
-  const itemNumbers = useAppSelector(selectQRCodeContent(vendorName));
-  console.log(itemNumbers);
-  const itemsAdded = useAppSelector(
-    selectItemsAddedByVendor(vendorName),
-    shallowEqual
-  );
+const CartQRCodeImage: FC<Props> = ({ cartId }) => {
+  const qrCodeText = useAppSelector(state => selectQRCodeText(state, cartId));
 
   const navigation =
     useNavigation<ShoppingCartStackScreenProps<"QRImage">["navigation"]>();
 
-  const clickHandler: OnPress = useCallback(() => {
-    navigation.navigate(qrImage, { itemNumbers, itemsAdded });
-  }, [itemNumbers, itemsAdded, navigation]);
+  const clickHandler = useCallback<OnPress>(() => {
+    navigation.navigate(qrImage, { qrCodeText, cartId });
+  }, [navigation, qrCodeText, cartId]);
 
   return (
     <TouchableOpacity onPress={clickHandler}>
-      <QRCode value={itemNumbers} />
+      <QRCode value={qrCodeText} />
     </TouchableOpacity>
   );
 };

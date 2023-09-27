@@ -3,32 +3,37 @@ import type { FC } from "react";
 import { memo, useCallback } from "react";
 import type { PressableProps } from "react-native";
 
-import useItemName from "../../../../hooks/useItemName";
+import useItemId from "../../../../hooks/useItemId";
 import useOfficialVendorName from "../../../../hooks/useOfficialVendorName";
-import useVendorName from "../../../../hooks/useVendorName";
-import { setVendors } from "../../../../redux/addedSlice";
+import useVendorId from "../../../../hooks/useVendorId";
+import { toggleVendorForOneSearchResultItem } from "../../../../redux/addedSlice";
 import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
 import {
-  checkVendorsAdded,
-  checkVendorsToAdd,
+  checkIfAddedToVendor,
+  isVendorChecked,
 } from "../../../../redux/selectors";
 import { BACKGROUND_TRANSPARENT } from "../../../../shared/styles/sharedStyles";
 
 const SearchResultsCheckBox: FC = () => {
-  const vendorName = useVendorName();
-  const itemName = useItemName();
-  const officialVendorName = useOfficialVendorName(vendorName);
+  const vendorId = useVendorId();
+  const itemId = useItemId();
+  const officialVendorName = useOfficialVendorName(vendorId);
 
   const dispatch = useAppDispatch();
 
-  const checked = useAppSelector(checkVendorsToAdd(vendorName, itemName));
+  const checked = useAppSelector(state =>
+    isVendorChecked(state, itemId, vendorId)
+  );
 
-  const disabled = useAppSelector(checkVendorsAdded(vendorName, itemName));
+  const disabled = useAppSelector(state =>
+    checkIfAddedToVendor(state, vendorId, itemId)
+  );
 
-  const clickHandler: NonNullable<PressableProps["onPress"]> =
-    useCallback(() => {
-      dispatch(setVendors({ itemName, vendorName }));
-    }, [dispatch, itemName, vendorName]);
+  const clickHandler = useCallback<
+    NonNullable<PressableProps["onPress"]>
+  >(() => {
+    dispatch(toggleVendorForOneSearchResultItem({ itemId, vendorId }));
+  }, [dispatch, itemId, vendorId]);
 
   return (
     <ListItem.CheckBox

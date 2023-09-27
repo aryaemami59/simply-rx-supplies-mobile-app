@@ -1,12 +1,11 @@
-import type { ListItemSwipeableProps } from "@rneui/themed";
 import { Button, Chip, ListItem, useTheme } from "@rneui/themed";
-import type { FC, ReactElement, ReactNode } from "react";
+import type { FC, ReactNode } from "react";
 import { memo, useCallback, useEffect, useMemo } from "react";
 import type {
   FlatListProps,
+  ListRenderItem,
   StyleProp,
   TextStyle,
-  TouchableWithoutFeedbackProps,
   ViewStyle,
 } from "react-native";
 import {
@@ -17,18 +16,17 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { shallowEqual } from "react-redux";
 
 import useOfficialVendorName from "../../../../hooks/useOfficialVendorName";
 import shoppingCartIcon from "../../../../Icons/shoppingCartIcon";
 import { useAppSelector } from "../../../../redux/hooks";
 import {
-  checkIfAnyItemsAddedToOneVendor,
-  selectAddedItemsByVendor,
+  checkIfAnyAddedToOneVendor,
+  selectCartItemsIds,
   selectVendorsLinks,
 } from "../../../../redux/selectors";
-import ItemNameProvider from "../../../../shared/contexts/ItemNameProvider";
-import VendorNameProvider from "../../../../shared/contexts/VendorNameProvider";
+import ItemIdProvider from "../../../../shared/contexts/ItemIdProvider";
+import VendorIdProvider from "../../../../shared/contexts/VendorIdProvider";
 import {
   AI_CENTER,
   BACKGROUND_MAIN_COLOR,
@@ -39,14 +37,13 @@ import {
   TEXT_UNDERLINE,
   WIDTH_100,
 } from "../../../../shared/styles/sharedStyles";
-import type { ItemName } from "../../../../types/api";
-import type { KeyExtractor, RenderItem } from "../../../../types/missingTypes";
 import type { ShoppingCartStackScreenProps } from "../../../../types/navigation";
 import { itemLookup } from "../../../../types/navigation";
+import type { KeyExtractor, OnPress } from "../../../../types/tsHelpers";
 import CartQRCodeImage from "../QRImage/CartQRCodeImage";
 import SingleCartListItems from "./SingleCartListItems";
 
-const keyExtractor: KeyExtractor<ItemName> = item => item;
+const keyExtractor: KeyExtractor<number> = item => `${item}`;
 
 const viewStyle: StyleProp<ViewStyle> = [
   AI_CENTER,
@@ -57,96 +54,91 @@ const viewStyle: StyleProp<ViewStyle> = [
 type Props = ShoppingCartStackScreenProps<"CartColumnListItems">;
 
 const CartColumnListItemsScreen: FC<Props> = ({ navigation, route }) => {
-  const { vendorName } = route.params;
-  const renderItems: RenderItem<ItemName> = useCallback(
+  const { vendorId } = route.params;
+  const renderItems = useCallback<ListRenderItem<number>>(
     ({ item }) => (
-      <ItemNameProvider itemName={item}>
-        <VendorNameProvider vendorName={vendorName}>
+      <ItemIdProvider itemId={item}>
+        <VendorIdProvider vendorId={vendorId}>
           <SingleCartListItems />
-        </VendorNameProvider>
-      </ItemNameProvider>
+        </VendorIdProvider>
+      </ItemIdProvider>
     ),
-    [vendorName]
+    [vendorId]
   );
-  const addedItems = useAppSelector(
-    selectAddedItemsByVendor(vendorName),
-    shallowEqual
+  const cartItemsIds = useAppSelector(state =>
+    selectCartItemsIds(state, vendorId)
   );
-  const vendorLink = useAppSelector(selectVendorsLinks(vendorName));
-  const ifAnyItemsAdded = useAppSelector(
-    checkIfAnyItemsAddedToOneVendor(vendorName)
+  const vendorLink = useAppSelector(state =>
+    selectVendorsLinks(state, vendorId)
+  );
+  const ifAnyItemsAdded = useAppSelector(state =>
+    checkIfAnyAddedToOneVendor(state, vendorId)
   );
 
-  const openLink: NonNullable<TouchableWithoutFeedbackProps["onPress"]> =
-    useCallback(() => {
-      Linking.openURL(vendorLink).catch(e => {
-        console.log(e);
-      });
-    }, [vendorLink]);
+  const openLink = useCallback<OnPress>(() => {
+    Linking.openURL(vendorLink).catch(e => {
+      console.log(e);
+    });
+  }, [vendorLink]);
 
-  const officialVendorName = useOfficialVendorName(vendorName);
+  const officialVendorName = useOfficialVendorName(vendorId);
 
-  const options: NonNullable<Parameters<typeof navigation.setOptions>[number]> =
-    useMemo(
-      () => ({
-        headerTitle: officialVendorName,
-      }),
-      [officialVendorName]
-    );
+  const options = useMemo<
+    NonNullable<Parameters<typeof navigation.setOptions>[0]>
+  >(
+    () => ({
+      headerTitle: officialVendorName,
+    }),
+    [officialVendorName]
+  );
 
   useEffect(() => {
     navigation.setOptions(options);
   }, [navigation, options]);
 
-  const clickHandler: NonNullable<TouchableWithoutFeedbackProps["onPress"]> =
-    useCallback(() => {
-      // navigation.navigate("ItemLookup");
-      navigation.navigate(itemLookup, { inputFocused: true });
-    }, [navigation]);
+  const clickHandler = useCallback<OnPress>(() => {
+    navigation.navigate(itemLookup, { inputFocused: true });
+  }, [navigation]);
 
   const { background: backgroundColor, black } = useTheme().theme.colors;
 
-  const style: StyleProp<ViewStyle> = useMemo(
+  const style = useMemo<StyleProp<ViewStyle>>(
     () => [HEIGHT_100, { backgroundColor }],
     [backgroundColor]
   );
 
-  const containerStyle: StyleProp<ViewStyle> = useMemo(
+  const containerStyle = useMemo<StyleProp<ViewStyle>>(
     () => ({ backgroundColor }),
     [backgroundColor]
   );
 
-  const textStyle: StyleProp<TextStyle> = useMemo(
+  const textStyle = useMemo<StyleProp<TextStyle>>(
     () => [TEXT_UNDERLINE, { color: black }],
     [black]
   );
 
-  const emptyContainerStyle: StyleProp<ViewStyle> = useMemo(
+  const emptyContainerStyle = useMemo<StyleProp<ViewStyle>>(
     () => [HEIGHT_100, styles.emptyContainer, { backgroundColor }],
     [backgroundColor]
   );
 
-  const emptyTextStyle: StyleProp<TextStyle> = useMemo(
+  const emptyTextStyle = useMemo<StyleProp<TextStyle>>(
     () => [TEXT_CENTER, styles.textStyle, { color: black }],
     [black]
   );
 
-  const rightContent: Extract<
-    ListItemSwipeableProps["rightContent"],
-    ReactNode
-  > = useMemo(() => <Button title="Details" />, []);
+  const rightContent = useMemo<ReactNode>(() => <Button title="Details" />, []);
 
-  const ListHeaderComponent: Extract<
-    ReactElement | null,
-    FlatListProps<ItemName>["ListHeaderComponent"]
-  > = useMemo(
+  const ListHeaderComponent = useMemo<
+    FlatListProps<number>["ListHeaderComponent"]
+  >(
     () =>
       ifAnyItemsAdded ? (
         <ListItem.Swipeable
           containerStyle={containerStyle}
           rightContent={rightContent}>
           <View style={viewStyle}>
-            <CartQRCodeImage vendorName={vendorName} />
+            <CartQRCodeImage cartId={vendorId} />
             <View style={styles.CartQRCodeImageContainer}>
               <TouchableOpacity onPress={openLink}>
                 <Text style={textStyle}>{officialVendorName} Website</Text>
@@ -162,14 +154,11 @@ const CartColumnListItemsScreen: FC<Props> = ({ navigation, route }) => {
       openLink,
       rightContent,
       textStyle,
-      vendorName,
+      vendorId,
     ]
   );
 
-  const ListEmptyComponent: Extract<
-    ReactElement,
-    FlatListProps<ItemName>["ListEmptyComponent"]
-  > = useMemo(
+  const ListEmptyComponent = useMemo(
     () => (
       <View style={emptyContainerStyle}>
         <Text style={emptyTextStyle}>No Item Has Been Added Yet!</Text>
@@ -211,7 +200,7 @@ const CartColumnListItemsScreen: FC<Props> = ({ navigation, route }) => {
         ListEmptyComponent={ListEmptyComponent}
         removeClippedSubviews
         maxToRenderPerBatch={5}
-        data={addedItems}
+        data={cartItemsIds}
         renderItem={renderItems}
         keyExtractor={keyExtractor}
         keyboardShouldPersistTaps="handled"

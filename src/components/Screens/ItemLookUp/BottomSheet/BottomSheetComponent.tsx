@@ -4,21 +4,18 @@ import { Button } from "@rneui/themed";
 import type { FC } from "react";
 import { memo, useCallback, useState } from "react";
 import { Keyboard, StyleSheet, View } from "react-native";
-import { shallowEqual } from "react-redux";
 
-import useVendorNamesList from "../../../../hooks/useVendorNamesList";
-import { useAppSelector } from "../../../../redux/hooks";
-import { selectAllVendorOfficialNames } from "../../../../redux/selectors";
-import type { OnPress } from "../../../../types/missingTypes";
+import useVendorIds from "../../../../hooks/useVendorIds";
+import type { OnPress } from "../../../../types/tsHelpers";
 import BottomSheetVendorCheckbox from "./BottomSheetVendorCheckbox";
 
 const BottomSheetComponent: FC = () => {
   const [visible, setVisible] = useState(false);
-  const vendors = useVendorNamesList();
-  const officialVendorNames = useAppSelector(
-    selectAllVendorOfficialNames,
-    shallowEqual
-  );
+  const vendorIds = useVendorIds();
+  // const officialVendorNames = useAppSelector(
+  //   selectAllVendorOfficialNames,
+  //   shallowEqual
+  // );
 
   const showBottomSheet: OnPress = useCallback(() => {
     Keyboard.dismiss();
@@ -41,11 +38,10 @@ const BottomSheetComponent: FC = () => {
         onBackdropPress={hideBottomSheet}
         containerStyle={styles.bottomSheetContainer}>
         <View>
-          {officialVendorNames.map((officialVendorName, index) => (
+          {vendorIds.map(vendorId => (
             <BottomSheetVendorCheckbox
-              key={officialVendorName}
-              title={officialVendorName}
-              vendorName={vendors[index]}
+              key={vendorId}
+              vendorId={vendorId}
             />
           ))}
         </View>

@@ -6,7 +6,6 @@ import type {
   ScrollViewProps,
   ShareContent,
   StyleProp,
-  TouchableWithoutFeedbackProps,
   ViewStyle,
 } from "react-native";
 import {
@@ -21,6 +20,11 @@ import type { QRCodeProps } from "react-native-qrcode-svg";
 import QRCode from "react-native-qrcode-svg";
 import type Svg from "react-native-svg/lib/typescript/elements/Svg";
 
+import { useAppSelector } from "../../../../redux/hooks";
+import {
+  selectCartItemNames,
+  selectCartItemNamesStringified,
+} from "../../../../redux/selectors";
 import {
   AI_CENTER,
   HEIGHT_100,
@@ -30,6 +34,7 @@ import {
   TEXT_CENTER,
 } from "../../../../shared/styles/sharedStyles";
 import type { ShoppingCartStackScreenProps } from "../../../../types/navigation";
+import type { OnPress } from "../../../../types/tsHelpers";
 
 const styles = StyleSheet.create({
   container: {
@@ -53,34 +58,36 @@ const contentContainerStyle: ScrollViewProps["contentContainerStyle"] = [
 type Props = ShoppingCartStackScreenProps<"QRImage">;
 
 const QRImageScreen: FC<Props> = ({ navigation, route }) => {
-  const { itemNumbers, itemsAdded } = route.params;
+  const { qrCodeText, cartId } = route.params;
 
   const svg = useRef<Svg>(null);
 
-  const shareQR: NonNullable<TouchableWithoutFeedbackProps["onPress"]> =
-    useCallback(() => {
-      console.debug(svg);
-      svg.current?.toDataURL((data: string) => {
-        const shareImageBase64: ShareContent = {
-          title: "QRCode",
-          message: `this is the QR code image for the following items: \n${itemsAdded.join(
-            ", "
-          )}`,
-          url: `data:image/png;base64,${data}`,
-        };
-        Share.share(shareImageBase64).catch(e => {
-          console.log(e);
-        });
-      });
-    }, [itemsAdded]);
+  const itemNames = useAppSelector(state => selectCartItemNames(state, cartId));
 
-  const getRef: NonNullable<QRCodeProps["getRef"]> = useCallback((e: Svg) => {
+  const itemNamesStringified = useAppSelector(state =>
+    selectCartItemNamesStringified(state, cartId)
+  );
+
+  const shareQR = useCallback<OnPress>(() => {
+    svg.current?.toDataURL((data: string) => {
+      const shareImageBase64: ShareContent = {
+        title: "QRCode",
+        message: `this is the QR code image for the following items: \n${itemNamesStringified}`,
+        url: `data:image/png;base64,${data}`,
+      };
+      Share.share(shareImageBase64).catch(e => {
+        console.log(e);
+      });
+    });
+  }, [itemNamesStringified]);
+
+  const getRef = useCallback<NonNullable<QRCodeProps["getRef"]>>((e: Svg) => {
     svg.current = e;
   }, []);
 
   const { background: backgroundColor } = useTheme().theme.colors;
 
-  const style: StyleProp<ViewStyle> = useMemo(
+  const style = useMemo<StyleProp<ViewStyle>>(
     () => [HEIGHT_100, JC_SPACE_AROUND, { backgroundColor }],
     [backgroundColor]
   );
@@ -90,7 +97,7 @@ const QRImageScreen: FC<Props> = ({ navigation, route }) => {
       <ScrollView contentContainerStyle={contentContainerStyle}>
         <TouchableOpacity onPress={shareQR}>
           <QRCode
-            value={itemNumbers}
+            value={qrCodeText}
             size={300}
             getRef={getRef}
           />
@@ -108,7 +115,7 @@ const QRImageScreen: FC<Props> = ({ navigation, route }) => {
           h4>
           Items Included:
         </Text>
-        {itemsAdded.map(itemName => (
+        {itemNames.map(itemName => (
           <Text
             key={itemName}
             style={TEXT_CENTER}>

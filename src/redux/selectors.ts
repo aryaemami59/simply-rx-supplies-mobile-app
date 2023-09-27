@@ -1,130 +1,221 @@
-import type {
-  Category,
-  ItemName,
-  ItemNumber,
-  Link,
-  OfficialVendorNameType,
-  Src,
-  VendorNameType,
-} from "../types/api";
-import type { RootState } from "./store";
+import type { ItemNameAndKeywords } from "../types/api";
+import type { RootSelectorParamsProvider } from "../types/reduxHelperTypes";
+import setSelectorNames from "../utils/setSelectorNames";
+import withEmptyArrayFallback from "../utils/withEmptyArrayFallback";
+import { ADAPTER_SELECTORS, getAllEntitySelectors } from "./adapterSelectors";
+import { apiSelectors } from "./apiSlice";
+import { createSelectorWeakmap } from "./createSelectors";
+import { DRAFT_SAFE_SELECTORS } from "./draftSafeSelectors";
+import { TOP_LEVEL_SELECTORS } from "./topLevelSelectors";
 
-export const selectAddedItemsByVendor =
-  (vendorName: VendorNameType) =>
-  (state: RootState): ItemName[] =>
-    state.added.vendorsObj[vendorName].itemsAdded;
+const ROOT_SELECTOR_PARAMS_PROVIDER: RootSelectorParamsProvider = {
+  getItemId: (state, itemId) => itemId,
+  getCartIdAndItemId: (state, cartId, itemId) => itemId,
+  getItemIdAndCartId: (state, itemId, cartId) => cartId,
+} as const satisfies RootSelectorParamsProvider;
 
-export const selectVendorsArr = (state: RootState): VendorNameType[] =>
-  state.added.vendorsArr;
+export const selectVendorsLinks = createSelectorWeakmap(
+  [ADAPTER_SELECTORS.GLOBAL.vendors.selectById],
+  vendor => vendor?.link ?? ""
+);
 
-export const selectVendorsLinks =
-  (vendorName: VendorNameType) =>
-  (state: RootState): Link =>
-    state.added.vendorsObj[vendorName].link;
+export const selectItemNumber = createSelectorWeakmap(
+  [ADAPTER_SELECTORS.GLOBAL.items.selectById],
+  item => item?.itemNumber ?? ""
+);
 
-export const selectCategoriesArr = (state: RootState): Category[] =>
-  state.added.categoriesArr;
+export const selectItemSrc = createSelectorWeakmap(
+  [ADAPTER_SELECTORS.GLOBAL.items.selectById],
+  item => item?.src ?? ""
+);
 
-export const addedItemsLength =
-  (vendorName: VendorNameType) =>
-  (state: RootState): number =>
-    state.added.vendorsObj[vendorName].itemsAdded.length;
+export const selectItemName = createSelectorWeakmap(
+  [ADAPTER_SELECTORS.GLOBAL.items.selectById],
+  item => item?.name ?? ""
+);
 
-export const selectItemNamesByVendor =
-  (vendorName: VendorNameType) =>
-  (state: RootState): ItemName[] =>
-    Object.values(state.added.itemsObj)
-      .filter(({ vendors }) => vendors.includes(vendorName))
-      .map(({ name }) => name);
+export const selectVendorIdsByItemId = createSelectorWeakmap(
+  [ADAPTER_SELECTORS.GLOBAL.items.selectById],
+  item => withEmptyArrayFallback(item?.vendorIds)
+);
 
-export const selectCategoriesItemNames =
-  (categoryParam: Category) =>
-  (state: RootState): ItemName[] =>
-    Object.values(state.added.itemsObj)
-      .filter(({ category }) => category.includes(categoryParam))
-      .map(({ name }) => name);
+export const selectItemNamesAndKeywords = createSelectorWeakmap(
+  [ADAPTER_SELECTORS.GLOBAL.items.selectAll],
+  items =>
+    items.map<ItemNameAndKeywords>(({ name, keywords, id }) => ({
+      name,
+      keywords,
+      id,
+    }))
+);
 
-export const selectQRCodeContent =
-  (vendorName: VendorNameType) =>
-  (state: RootState): string =>
-    state.added.vendorsObj[vendorName].qrContent;
+export const selectCartsItemIdsLength = createSelectorWeakmap(
+  [ADAPTER_SELECTORS.GLOBAL.cart.selectAll],
+  carts => carts.map(({ itemIds }) => itemIds.length)
+);
 
-export const checkIfAddedToAllVendors =
-  (itemName: ItemName) =>
-  (state: RootState): boolean =>
-    state.added.itemsObj[itemName].vendorsAdded.length ===
-    state.added.itemsObj[itemName].vendors.length;
+export const checkIfAnyItemsAdded = createSelectorWeakmap(
+  [selectCartsItemIdsLength],
+  itemIdsLengthArray =>
+    itemIdsLengthArray.reduce<boolean>(
+      (accumulator, itemIdsLength) => itemIdsLength > 0 || accumulator,
+      false
+    )
+);
 
-export const checkIfItemAddedToOneVendor =
-  (vendorName: VendorNameType, itemName: ItemName) =>
-  (state: RootState): boolean =>
-    state.added.itemsObj[itemName].vendorsAdded.includes(vendorName);
+export const selectCartItemsIds = createSelectorWeakmap(
+  [ADAPTER_SELECTORS.GLOBAL.cart.selectById],
+  cart => withEmptyArrayFallback(cart?.itemIds)
+);
+// TODO: maybe remove?
+export const selectCartItemNames = createSelectorWeakmap(
+  [selectCartItemsIds, ADAPTER_SELECTORS.GLOBAL.items.selectEntities],
+  (cartItemIds, itemsEntities) =>
+    cartItemIds.map<string>(cartItemId => itemsEntities[cartItemId]?.name ?? "")
+);
 
-export const selectVendorsByItemName =
-  (itemName: ItemName) =>
-  (state: RootState): VendorNameType[] =>
-    state.added.itemsObj[itemName].vendors;
+export const selectCartItemNamesStringified = createSelectorWeakmap(
+  [selectCartItemsIds, ADAPTER_SELECTORS.GLOBAL.items.selectEntities],
+  (cartItemIds, itemsEntities) =>
+    cartItemIds
+      .map<string>(cartItemId => itemsEntities[cartItemId]?.name ?? "")
+      .join(", ")
+);
 
-export const checkVendorsToAdd =
-  (vendorName: VendorNameType, itemName: ItemName) =>
-  (state: RootState): boolean =>
-    state.added.itemsObj[itemName].vendorsToAdd.includes(vendorName);
+export const selectCheckedVendorIds = createSelectorWeakmap(
+  [ADAPTER_SELECTORS.GLOBAL.itemVendors.selectById],
+  checkedVendorItem =>
+    withEmptyArrayFallback(checkedVendorItem?.checkedVendorIds)
+);
 
-export const selectItemNumber =
-  (itemName: ItemName) =>
-  (state: RootState): ItemNumber =>
-    state.added.itemsObj[itemName].itemNumber;
+export const isVendorChecked = createSelectorWeakmap(
+  [
+    ADAPTER_SELECTORS.GLOBAL.itemVendors.selectById,
+    ROOT_SELECTOR_PARAMS_PROVIDER.getItemIdAndCartId,
+  ],
+  (checkedVendorItem, vendorId) =>
+    !!checkedVendorItem?.checkedVendorIds.includes(vendorId)
+);
 
-export const selectItemSrc =
-  (itemName: ItemName) =>
-  (state: RootState): Src =>
-    state.added.itemsObj[itemName].src;
+export const isMinimized = createSelectorWeakmap(
+  [
+    ADAPTER_SELECTORS.GLOBAL.cartItems.selectById,
+    ROOT_SELECTOR_PARAMS_PROVIDER.getCartIdAndItemId,
+  ],
+  (cartItems, itemId) => !!cartItems?.minimizedItemIds.includes(itemId)
+);
 
-export const checkVendorsAdded =
-  (vendorName: VendorNameType, itemName: ItemName) =>
-  (state: RootState): boolean =>
-    state.added.itemsObj[itemName].vendorsAdded.includes(vendorName);
+export const selectCategoryName = createSelectorWeakmap(
+  [ADAPTER_SELECTORS.GLOBAL.categories.selectById],
+  category => category?.name ?? "Vials"
+);
 
-export const selectItemNamesArr = (state: RootState): ItemName[] =>
-  state.added.itemsArr;
+export const selectCategoryItemIds = createSelectorWeakmap(
+  [ADAPTER_SELECTORS.GLOBAL.categories.selectById],
+  category => withEmptyArrayFallback(category?.itemIds)
+);
 
-export const selectVendorOfficialName =
-  (vendorName: VendorNameType) =>
-  (state: RootState): OfficialVendorNameType =>
-    state.added.vendorsObj[vendorName].officialName;
+export const checkIfAddedToVendor = createSelectorWeakmap(
+  [selectCartItemsIds, ROOT_SELECTOR_PARAMS_PROVIDER.getCartIdAndItemId],
+  (cartItemsIds, itemId) => cartItemsIds.includes(itemId)
+);
 
-export const selectAllVendorOfficialNames = (
-  state: RootState
-): OfficialVendorNameType[] =>
-  state.added.vendorsArr.map(
-    (vendorName: VendorNameType): OfficialVendorNameType =>
-      state.added.vendorsObj[vendorName].officialName
-  );
+export const selectCartItemsLength = createSelectorWeakmap(
+  [selectCartItemsIds],
+  cartItemIds => cartItemIds.length
+);
 
-export const selectVendorsOfficialNames =
-  (vendors: VendorNameType[]) =>
-  (state: RootState): OfficialVendorNameType[] =>
-    vendors.map(vendorName => state.added.vendorsObj[vendorName].officialName);
+export const checkIfAnyAddedToOneVendor = createSelectorWeakmap(
+  [selectCartItemsLength],
+  cartItemIdsLength => cartItemIdsLength > 0
+);
 
-export const selectItemsAddedByVendor =
-  (vendorName: VendorNameType) =>
-  (state: RootState): ItemName[] =>
-    state.added.vendorsObj[vendorName].itemsAdded;
+export const selectQRCodeText = createSelectorWeakmap(
+  [
+    selectCartItemsIds,
+    ADAPTER_SELECTORS.GLOBAL.items.selectEntities,
+    ADAPTER_SELECTORS.GLOBAL.vendors.selectById,
+  ],
+  (cartItemIds, itemEntities, vendor) =>
+    cartItemIds
+      .map(cartItemId => itemEntities[cartItemId]?.itemNumber)
+      .join(vendor?.joinChars)
+);
 
-export const checkIfAnyItemsAdded = (state: RootState): boolean =>
-  Object.values(state.added.vendorsObj).reduce(
-    (acc, { itemsAdded }) => !!itemsAdded.length || acc,
-    false
-  );
+export const selectOfficialName = createSelectorWeakmap(
+  [ADAPTER_SELECTORS.GLOBAL.vendors.selectById],
+  vendor => vendor?.officialName ?? "GNFR"
+);
 
-export const checkIfAnyItemsAddedToOneVendor =
-  (vendorName: VendorNameType) =>
-  (state: RootState): boolean =>
-    !!state.added.vendorsObj[vendorName].itemsAdded.length;
+export const selectVendorItemIds = createSelectorWeakmap(
+  [ADAPTER_SELECTORS.GLOBAL.vendors.selectById],
+  vendor => withEmptyArrayFallback(vendor?.itemIds)
+);
 
-export const selectAllListItems = (state: RootState) => state.added.listItems;
+const selectCartsByItemId = createSelectorWeakmap(
+  [
+    ADAPTER_SELECTORS.GLOBAL.items.selectById,
+    ADAPTER_SELECTORS.GLOBAL.cart.selectAll,
+  ],
+  (item, carts) =>
+    withEmptyArrayFallback(
+      carts.filter(cart => item?.vendorIds.includes(cart.id))
+    )
+);
 
-export const checkIfLoading = (state: RootState): boolean =>
-  state.added.isLoading;
+export const checkIfAddedToAllVendors = createSelectorWeakmap(
+  [selectCartsByItemId, ROOT_SELECTOR_PARAMS_PROVIDER.getItemId],
+  (carts, itemId) =>
+    carts.reduce<boolean>(
+      (accumulator, cart) => cart.itemIds.includes(itemId) && accumulator,
+      true
+    )
+);
+// TODO: maybe remove?
+export const selectVendorsOfficialNames = createSelectorWeakmap(
+  [ADAPTER_SELECTORS.GLOBAL.vendors.selectEntities, selectVendorIdsByItemId],
+  (entities, vendorIds) =>
+    vendorIds.map(e => entities[e]?.officialName ?? "GNFR")
+);
 
-export const selectErrMsg = (state: RootState): string => state.added.errMsg;
+const mainSelectors = {
+  selectItemNumber,
+  selectItemSrc,
+  selectItemName,
+  selectVendorIdsByItemId,
+  selectItemNamesAndKeywords,
+  checkIfAnyItemsAdded,
+  selectCartItemsIds,
+  selectCartItemNamesStringified,
+  selectCheckedVendorIds,
+  isVendorChecked,
+  isMinimized,
+  selectCategoryName,
+  selectCategoryItemIds,
+  checkIfAddedToVendor,
+  selectCartItemsLength,
+  checkIfAnyAddedToOneVendor,
+  selectQRCodeText,
+  selectOfficialName,
+  selectVendorItemIds,
+  selectCartsByItemId,
+  checkIfAddedToAllVendors,
+  selectCartsItemIdsLength,
+} as const;
+
+const allSelectors = setSelectorNames({
+  ...mainSelectors,
+  ...apiSelectors,
+  ...DRAFT_SAFE_SELECTORS,
+  ...getAllEntitySelectors(),
+  ...TOP_LEVEL_SELECTORS,
+} as const);
+
+export const resetAllSelectors = () => {
+  Object.values(allSelectors).forEach(e => {
+    e.clearCache();
+    e.resetRecomputations();
+  });
+};
+
+export default allSelectors;

@@ -1,4 +1,4 @@
-import type { Icon } from "../../../../types/missingTypes";
+import type { Icon } from "../../../../types/tsHelpers";
 import ShareIcon from "./ShareIcon";
 
 const ShareIconNode: Icon = <ShareIcon />;

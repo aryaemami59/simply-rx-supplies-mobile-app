@@ -5,23 +5,22 @@ import type { StyleProp, ViewStyle } from "react-native";
 import { TouchableHighlight } from "react-native";
 
 import {
-  setVendorsForAllCheck,
-  setVendorsForAllUncheck,
+  checkOneVendorForAllSearchResults,
+  unCheckOneVendorForAllSearchResults,
 } from "../../../../redux/addedSlice";
-import { useAppDispatch } from "../../../../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
+import { selectOfficialName } from "../../../../redux/selectors";
 import { WIDTH_100 } from "../../../../shared/styles/sharedStyles";
-import type {
-  OfficialVendorNameType,
-  VendorNameType,
-} from "../../../../types/api";
-import type { OnPress } from "../../../../types/missingTypes";
+import type { OnPress } from "../../../../types/tsHelpers";
 
 type Props = {
-  title: OfficialVendorNameType;
-  vendorName: VendorNameType;
+  vendorId: number;
 };
 
-const BottomSheetVendorCheckbox: FC<Props> = ({ title, vendorName }) => {
+const BottomSheetVendorCheckbox: FC<Props> = ({ vendorId }) => {
+  const officialVendorName = useAppSelector(state =>
+    selectOfficialName(state, vendorId)
+  );
   const [checked, setChecked] = useState(true);
   const dispatch = useAppDispatch();
   const { background } = useTheme().theme.colors;
@@ -33,12 +32,12 @@ const BottomSheetVendorCheckbox: FC<Props> = ({ title, vendorName }) => {
 
   const onToggleCheck: OnPress = useCallback(() => {
     if (checked) {
-      dispatch(setVendorsForAllUncheck(vendorName));
+      dispatch(checkOneVendorForAllSearchResults({ vendorId }));
     } else {
-      dispatch(setVendorsForAllCheck(vendorName));
+      dispatch(unCheckOneVendorForAllSearchResults({ vendorId }));
     }
     setChecked(prev => !prev);
-  }, [checked, dispatch, vendorName]);
+  }, [checked, dispatch, vendorId]);
 
   return (
     <TouchableHighlight
@@ -51,7 +50,7 @@ const BottomSheetVendorCheckbox: FC<Props> = ({ title, vendorName }) => {
         <ListItem.Content style={WIDTH_100}>
           <ListItem.CheckBox
             checked={checked}
-            title={title}
+            title={officialVendorName}
             onPress={onToggleCheck}
           />
         </ListItem.Content>

@@ -1,7 +1,7 @@
 import type { HeaderProps } from "@rneui/base";
 import type { ReactElement } from "react";
 
-import type { HeaderRight } from "../../types/missingTypes";
+import type { HeaderRight } from "../../types/tsHelpers";
 import DarkModeIcon from "./DarkModeIcon";
 
 const HeaderRightComponent: Extract<

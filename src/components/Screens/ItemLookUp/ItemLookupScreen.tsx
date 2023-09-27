@@ -1,33 +1,34 @@
 import type { FC } from "react";
 import { memo } from "react";
+import type { ListRenderItem } from "react-native";
 import { FlatList } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import { shallowEqual } from "react-redux";
 
+import { ADAPTER_SELECTORS } from "../../../redux/adapterSelectors";
 import { useAppSelector } from "../../../redux/hooks";
-import { selectAllListItems } from "../../../redux/selectors";
-import ItemNameProvider from "../../../shared/contexts/ItemNameProvider";
-import type { ItemName } from "../../../types/api";
-import type { KeyExtractor, RenderItem } from "../../../types/missingTypes";
+import ItemIdProvider from "../../../shared/contexts/ItemIdProvider";
 import type { RootTabScreenProps } from "../../../types/navigation";
+import type { KeyExtractor } from "../../../types/tsHelpers";
 import BottomSheetComponent from "./BottomSheet/BottomSheetComponent";
 import InputField from "./SearchBar/InputField";
 import SingleSearchResultsListItem from "./SearchResults/SingleSearchResultsListItem";
 
-const renderItems: RenderItem<ItemName> = ({ item }) => (
-  <ItemNameProvider
+const renderItems: ListRenderItem<number> = ({ item }) => (
+  <ItemIdProvider
     key={item}
-    itemName={item}>
+    itemId={item}>
     <SingleSearchResultsListItem />
-  </ItemNameProvider>
+  </ItemIdProvider>
 );
 
-const keyExtractor: KeyExtractor<ItemName> = item => item;
+const keyExtractor: KeyExtractor<number> = item => `${item}`;
 
 type Props = RootTabScreenProps<"ItemLookup">;
 
 const ItemLookupScreen: FC<Props> = ({ navigation, route }) => {
-  const listItems = useAppSelector(selectAllListItems, shallowEqual);
+  const searchResultsIds = useAppSelector(
+    ADAPTER_SELECTORS.GLOBAL.searchResults.selectIds
+  );
   // useFocusEffect(
   //   useCallback(() => {
   //     route.params.inputFocused ||
@@ -43,7 +44,7 @@ const ItemLookupScreen: FC<Props> = ({ navigation, route }) => {
       <FlatList
         removeClippedSubviews
         maxToRenderPerBatch={5}
-        data={listItems}
+        data={searchResultsIds}
         renderItem={renderItems}
         keyExtractor={keyExtractor}
         keyboardShouldPersistTaps="handled"

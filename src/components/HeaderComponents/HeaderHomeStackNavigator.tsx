@@ -14,9 +14,9 @@ import {
   SEARCH_BAR_COLOR,
   WIDTH_80,
 } from "../../shared/styles/sharedStyles";
-import type { CenterComponent, SearchBarRef } from "../../types/missingTypes";
 import type { HeaderHomeStackNavigatorProps } from "../../types/navigation";
 import { itemLookup } from "../../types/navigation";
+import type { CenterComponent, SearchBarRef } from "../../types/tsHelpers";
 import HeaderRightComponent from "./HeaderRightComponent";
 import SearchClearIcon from "./SearchClearIcon";
 import SearchIcon from "./SearchIcon";

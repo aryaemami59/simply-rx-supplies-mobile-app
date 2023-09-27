@@ -1,15 +1,10 @@
 import { useNavigation } from "@react-navigation/native";
 import type { FC } from "react";
 import { memo, useCallback, useMemo } from "react";
-import type {
-  ImageStyle,
-  ImageURISource,
-  StyleProp,
-  TouchableWithoutFeedbackProps,
-} from "react-native";
+import type { ImageStyle, ImageURISource, StyleProp } from "react-native";
 import { Image, StyleSheet, TouchableOpacity } from "react-native";
 
-import useItemName from "../../../../hooks/useItemName";
+import useItemId from "../../../../hooks/useItemId";
 import { useAppSelector } from "../../../../redux/hooks";
 import { selectItemSrc } from "../../../../redux/selectors";
 import {
@@ -18,6 +13,7 @@ import {
 } from "../../../../shared/styles/sharedStyles";
 import type { ShoppingCartStackScreenProps } from "../../../../types/navigation";
 import { barcodeImage } from "../../../../types/navigation";
+import type { OnPress } from "../../../../types/tsHelpers";
 
 const styles = StyleSheet.create({
   ImageStyle: {
@@ -28,18 +24,17 @@ const styles = StyleSheet.create({
 const style: StyleProp<ImageStyle> = [styles.ImageStyle, BARCODE_ASPECT_RATIO];
 
 const BarcodeImageCart: FC = () => {
-  const itemName = useItemName();
-  const src = useAppSelector(selectItemSrc(itemName));
+  const itemId = useItemId();
+  const src = useAppSelector(state => selectItemSrc(state, itemId));
 
   const navigation =
     useNavigation<ShoppingCartStackScreenProps<"BarcodeImage">["navigation"]>();
 
-  const clickHandler: NonNullable<TouchableWithoutFeedbackProps["onPress"]> =
-    useCallback(() => {
-      navigation.push(barcodeImage, { src, itemName });
-    }, [itemName, navigation, src]);
+  const clickHandler = useCallback<OnPress>(() => {
+    navigation.push(barcodeImage, { src, itemId });
+  }, [itemId, navigation, src]);
 
-  const source: ImageURISource = useMemo(() => ({ uri: src }), [src]);
+  const source = useMemo<ImageURISource>(() => ({ uri: src }), [src]);
 
   return (
     <TouchableOpacity

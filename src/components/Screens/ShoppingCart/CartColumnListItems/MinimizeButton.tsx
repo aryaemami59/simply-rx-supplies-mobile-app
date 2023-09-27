@@ -4,7 +4,7 @@ import { memo, useCallback } from "react";
 import type { TouchableWithoutFeedbackProps } from "react-native";
 
 import { JC_SPACE_EVENLY } from "../../../../shared/styles/sharedStyles";
-import type { Icon } from "../../../../types/missingTypes";
+import type { Icon } from "../../../../types/tsHelpers";
 import ExpandIconNode from "./ExpandIconNode";
 import MinimizeIconNode from "./MinimizeIconNode";
 

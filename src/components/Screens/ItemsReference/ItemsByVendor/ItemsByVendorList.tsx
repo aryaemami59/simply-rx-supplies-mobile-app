@@ -6,7 +6,7 @@ import type { PressableProps, StyleProp, ViewStyle } from "react-native";
 import TouchableScale from "react-native-touchable-scale";
 
 import useOfficialVendorName from "../../../../hooks/useOfficialVendorName";
-import useVendorName from "../../../../hooks/useVendorName";
+import useVendorId from "../../../../hooks/useVendorId";
 import {
   AI_CENTER,
   JC_SPACE_BETWEEN,
@@ -15,8 +15,8 @@ import type { ItemsReferenceTabScreenProps } from "../../../../types/navigation"
 import { itemsByVendorListItems } from "../../../../types/navigation";
 
 const ItemsByVendorList: FC = () => {
-  const vendorName = useVendorName();
-  const officialVendorName = useOfficialVendorName(vendorName);
+  const vendorId = useVendorId();
+  const officialVendorName = useOfficialVendorName(vendorId);
   const { background: backgroundColor } = useTheme().theme.colors;
 
   const navigation =
@@ -24,12 +24,13 @@ const ItemsByVendorList: FC = () => {
       ItemsReferenceTabScreenProps<"ItemsByVendor">["navigation"]
     >();
 
-  const clickHandler: NonNullable<PressableProps["onPress"]> =
-    useCallback(() => {
-      navigation.push(itemsByVendorListItems, { vendorName });
-    }, [navigation, vendorName]);
+  const clickHandler = useCallback<
+    NonNullable<PressableProps["onPress"]>
+  >(() => {
+    navigation.push(itemsByVendorListItems, { vendorId });
+  }, [navigation, vendorId]);
 
-  const containerStyle: StyleProp<ViewStyle> = useMemo(
+  const containerStyle = useMemo<StyleProp<ViewStyle>>(
     () => [AI_CENTER, JC_SPACE_BETWEEN, { backgroundColor }],
     [backgroundColor]
   );

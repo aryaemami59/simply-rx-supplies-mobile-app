@@ -5,31 +5,37 @@ import { memo, useCallback, useMemo } from "react";
 import type { PressableProps, StyleProp, ViewStyle } from "react-native";
 import TouchableScale from "react-native-touchable-scale";
 
+import { useAppSelector } from "../../../../redux/hooks";
+import { selectCategoryName } from "../../../../redux/selectors";
 import {
   AI_CENTER,
   JC_SPACE_BETWEEN,
 } from "../../../../shared/styles/sharedStyles";
-import type { Category } from "../../../../types/api";
 import type { ItemsReferenceTabScreenProps } from "../../../../types/navigation";
 import { itemsByCategoryListItems } from "../../../../types/navigation";
 
 type Props = {
-  category: Category;
+  categoryId: number;
 };
 
-const ItemsByCategoryList: FC<Props> = ({ category }) => {
+const ItemsByCategoryList: FC<Props> = ({ categoryId }) => {
   const navigation =
     useNavigation<
       ItemsReferenceTabScreenProps<"ItemsByCategory">["navigation"]
     >();
   const { background } = useTheme().theme.colors;
 
-  const clickHandler: NonNullable<PressableProps["onPress"]> =
-    useCallback(() => {
-      navigation.push(itemsByCategoryListItems, { category });
-    }, [navigation, category]);
+  const categoryName = useAppSelector(state =>
+    selectCategoryName(state, categoryId)
+  );
 
-  const containerStyle: StyleProp<ViewStyle> = useMemo(
+  const clickHandler = useCallback<
+    NonNullable<PressableProps["onPress"]>
+  >(() => {
+    navigation.push(itemsByCategoryListItems, { categoryId });
+  }, [navigation, categoryId]);
+
+  const containerStyle = useMemo<StyleProp<ViewStyle>>(
     () => [AI_CENTER, JC_SPACE_BETWEEN, { backgroundColor: background }],
     [background]
   );
@@ -41,7 +47,7 @@ const ItemsByCategoryList: FC<Props> = ({ category }) => {
       Component={TouchableScale}
       onPress={clickHandler}>
       <ListItem.Content>
-        <ListItem.Title>{category}</ListItem.Title>
+        <ListItem.Title>{categoryName}</ListItem.Title>
       </ListItem.Content>
     </ListItem>
   );

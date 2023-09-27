@@ -3,7 +3,7 @@ import type { FC } from "react";
 import { memo } from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
-import useIsLoading from "../../hooks/useIsLoading";
+import { useGetMainQuery } from "../../redux/apiSlice";
 import ErrMsgComponent from "../../shared/components/ErrMsgComponent";
 import IsLoadingComponents from "../../shared/components/IsLoadingComponents";
 import {
@@ -28,11 +28,11 @@ const Stack = createStackNavigator<ItemsReferenceStackParamList>();
 type Props = RootTabScreenProps<"ItemsReferenceStackNavigator">;
 
 const ItemsReferenceStackNavigator: FC<Props> = ({ navigation, route }) => {
-  const [isLoading, errMsg] = useIsLoading();
+  const { isError, isLoading } = useGetMainQuery();
+
+  if (isError) return <ErrMsgComponent />;
 
   if (isLoading) return <IsLoadingComponents />;
-
-  if (errMsg) return <ErrMsgComponent />;
 
   return (
     <SafeAreaProvider>

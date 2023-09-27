@@ -1,13 +1,13 @@
 import { Button } from "@rneui/themed";
 import type { FC } from "react";
 import { memo, useCallback } from "react";
-import type { TouchableWithoutFeedbackProps } from "react-native";
 
-import useItemName from "../../../../hooks/useItemName";
-import useVendorName from "../../../../hooks/useVendorName";
-import { removeItems } from "../../../../redux/addedSlice";
+import useItemId from "../../../../hooks/useItemId";
+import useVendorId from "../../../../hooks/useVendorId";
+import { deleteOneItemFromCart } from "../../../../redux/addedSlice";
 import { useAppDispatch } from "../../../../redux/hooks";
 import { JC_SPACE_EVENLY } from "../../../../shared/styles/sharedStyles";
+import type { OnPress } from "../../../../types/tsHelpers";
 import DeleteIconNode from "./DeleteIconNode";
 
 type Props = {
@@ -15,15 +15,14 @@ type Props = {
 };
 
 const DeleteButton: FC<Props> = ({ reset }) => {
-  const itemName = useItemName();
-  const vendorName = useVendorName();
+  const itemId = useItemId();
+  const vendorId = useVendorId();
   const dispatch = useAppDispatch();
 
-  const clickHandler: NonNullable<TouchableWithoutFeedbackProps["onPress"]> =
-    useCallback(() => {
-      reset();
-      dispatch(removeItems({ itemName, vendorName }));
-    }, [dispatch, itemName, reset, vendorName]);
+  const clickHandler = useCallback<OnPress>(() => {
+    reset();
+    dispatch(deleteOneItemFromCart({ itemId, vendorId }));
+  }, [dispatch, itemId, reset, vendorId]);
 
   return (
     <Button

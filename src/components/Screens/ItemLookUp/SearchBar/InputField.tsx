@@ -13,14 +13,16 @@ import { memo, useCallback, useMemo, useRef, useState } from "react";
 import type { TextInputProps } from "react-native";
 import { InteractionManager, StyleSheet } from "react-native";
 import * as Animatable from "react-native-animatable";
-import { shallowEqual } from "react-redux";
 
 import useComponentMountLogger from "../../../../hooks/loggers/useComponentMountLogger";
 import useComponentUpdateLogger from "../../../../hooks/loggers/useComponentUpdateLogger";
 import useIsCurrentFocused from "../../../../hooks/loggers/useIsCurrentFocused";
-import { clearListItems, setListItems } from "../../../../redux/addedSlice";
+import {
+  clearSearchResults,
+  setSearchResults,
+} from "../../../../redux/addedSlice";
 import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
-import { selectItemNamesArr } from "../../../../redux/selectors";
+import { selectItemNamesAndKeywords } from "../../../../redux/selectors";
 import {
   BACKGROUND_TRANSPARENT,
   COLOR_WHITE,
@@ -32,14 +34,16 @@ import {
   WIDTH_80,
   WIDTH_100,
 } from "../../../../shared/styles/sharedStyles";
+import type { RootTabScreenProps } from "../../../../types/navigation";
 import type {
   AnimatableViewRef,
   CenterComponent,
   Icon,
   SearchBarRef,
-} from "../../../../types/missingTypes";
-import type { RootTabScreenProps } from "../../../../types/navigation";
-import search from "../../../../utils/search";
+} from "../../../../types/tsHelpers";
+import EMPTY_ARRAY from "../../../../utils/emptyArray";
+import isEmptyArray from "../../../../utils/predicates/isEmptyArray";
+import search from "../../../../utils/search/search";
 import HeaderRightComponent from "../../../HeaderComponents/HeaderRightComponent";
 import SearchIcon from "../../../HeaderComponents/SearchIcon";
 
@@ -81,7 +85,7 @@ const InputField: FC = () => {
   //   console.log(params);
   // }, [params]);
   // useDependencyChangeLogger(params, "params");
-  const itemNames = useAppSelector(selectItemNamesArr, shallowEqual);
+  const itemNamesAndKeywords = useAppSelector(selectItemNamesAndKeywords);
   // const { theme } = useTheme();
   const dispatch = useAppDispatch();
   const { inputFocused } = route.params;
@@ -115,11 +119,12 @@ const InputField: FC = () => {
     return false;
   }, []);
 
-  const clearHandler: NonNullable<SearchBarBaseProps["onClear"]> =
-    useCallback((): void => {
-      setVal("");
-      dispatch(clearListItems());
-    }, [dispatch]);
+  const clearHandler = useCallback<
+    NonNullable<SearchBarBaseProps["onClear"]>
+  >(() => {
+    setVal("");
+    dispatch(clearSearchResults());
+  }, [dispatch]);
 
   useComponentMountLogger();
   useIsCurrentFocused();
@@ -170,16 +175,22 @@ const InputField: FC = () => {
     }, [blurHandler, inputFocused, navigation])
   );
 
-  const changeVal: NonNullable<TextInputProps["onChangeText"]> = useCallback(
+  const changeVal = useCallback<NonNullable<TextInputProps["onChangeText"]>>(
     (text: string) => {
-      const listItems = search(text, itemNames);
+      const listItems = search(text, itemNamesAndKeywords);
       setVal(text);
-      dispatch(setListItems(listItems));
+      const searchResultsIds = isEmptyArray(listItems)
+        ? EMPTY_ARRAY
+        : listItems.map<number>(({ id }) => id);
+      if (isEmptyArray(searchResultsIds)) {
+        dispatch(clearSearchResults());
+      }
+      dispatch(setSearchResults(searchResultsIds));
     },
-    [dispatch, itemNames]
+    [dispatch, itemNamesAndKeywords]
   );
 
-  const clearIcon: Icon = useMemo(
+  const clearIcon = useMemo<Icon>(
     () => (
       <EvilIcons
         name="close"
@@ -191,7 +202,7 @@ const InputField: FC = () => {
     [clearHandler]
   );
 
-  const centerComponent: CenterComponent = useMemo(
+  const centerComponent = useMemo<CenterComponent>(
     () => (
       <Animatable.View
         // onTransitionBegin={}

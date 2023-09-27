@@ -2,31 +2,30 @@ import { Chip } from "@rneui/themed";
 import type { FC } from "react";
 import { memo, useCallback } from "react";
 
-import useItemName from "../../../../hooks/useItemName";
+import useItemId from "../../../../hooks/useItemId";
 import AddIcon from "../../../../Icons/AddIcon";
-import { addItems } from "../../../../redux/addedSlice";
+import { addItemToCarts } from "../../../../redux/addedSlice";
 import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
 import { checkIfAddedToAllVendors } from "../../../../redux/selectors";
 import {
   BACKGROUND_MAIN_COLOR,
   FONT_WEIGHT_700,
 } from "../../../../shared/styles/sharedStyles";
-import type { OnPress } from "../../../../types/missingTypes";
+import type { OnPress } from "../../../../types/tsHelpers";
 
 const SingleCategoryListItemAddButton: FC = () => {
-  const itemName = useItemName();
-  const ifAddedToAllVendors = useAppSelector(
-    checkIfAddedToAllVendors(itemName)
+  const itemId = useItemId();
+  const ifAddedToAllVendors = useAppSelector(state =>
+    checkIfAddedToAllVendors(state, itemId)
   );
 
   const dispatch = useAppDispatch();
 
-  const clickHandler: OnPress = useCallback(() => {
+  const clickHandler = useCallback<OnPress>(() => {
     if (!ifAddedToAllVendors) {
-      dispatch(addItems(itemName));
+      dispatch(addItemToCarts({ itemId }));
     }
-    // ifAddedToAllVendors || dispatch(addItems(itemName));
-  }, [ifAddedToAllVendors, dispatch, itemName]);
+  }, [ifAddedToAllVendors, dispatch, itemId]);
 
   return (
     <Chip

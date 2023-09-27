@@ -17,7 +17,7 @@ import type {
   HeaderRight,
   HeaderStyle,
   HeaderTitleStyle,
-} from "../../types/missingTypes";
+} from "../../types/tsHelpers";
 import { MAIN_COLOR } from "../styles/sharedStyles";
 
 const headerShown = false as const;

@@ -11,8 +11,8 @@ import {
 import type { FC } from "react";
 import { useEffect, useMemo } from "react";
 
-import type { AnyObject, EmptyObject } from "../../types/missingTypes";
 import type { RootTabParamList } from "../../types/navigation";
+import type { AnyObject, EmptyObject } from "../../types/tsHelpers";
 
 type Options<P extends AnyObject = EmptyObject> = {
   showParentInfo?: boolean;

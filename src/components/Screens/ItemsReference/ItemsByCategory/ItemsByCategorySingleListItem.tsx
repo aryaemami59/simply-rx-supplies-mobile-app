@@ -2,25 +2,26 @@ import { ListItem, useTheme } from "@rneui/themed";
 import type { FC } from "react";
 import { memo, useMemo } from "react";
 import type { StyleProp, ViewStyle } from "react-native";
-import { shallowEqual } from "react-redux";
 
-import useItemName from "../../../../hooks/useItemName";
+import useItemId from "../../../../hooks/useItemId";
 import { useAppSelector } from "../../../../redux/hooks";
-import { selectVendorsByItemName } from "../../../../redux/selectors";
-import VendorNameProvider from "../../../../shared/contexts/VendorNameProvider";
+import {
+  selectItemName,
+  selectVendorIdsByItemId,
+} from "../../../../redux/selectors";
+import VendorIdProvider from "../../../../shared/contexts/VendorIdProvider";
 import ItemsByCategorySingleListItemCheckBox from "./ItemsByCategorySingleListItemCheckBox";
 import SingleCategoryListItemAddButton from "./SingleCategoryListItemAddButton";
 
 const ItemsByCategorySingleListItem: FC = () => {
-  const itemName = useItemName();
+  const itemId = useItemId();
+  const vendorIds = useAppSelector(state =>
+    selectVendorIdsByItemId(state, itemId)
+  );
+  const itemName = useAppSelector(state => selectItemName(state, itemId));
   const { background: backgroundColor } = useTheme().theme.colors;
 
-  const vendors = useAppSelector(
-    selectVendorsByItemName(itemName),
-    shallowEqual
-  );
-
-  const containerStyle: StyleProp<ViewStyle> = useMemo(
+  const containerStyle = useMemo<StyleProp<ViewStyle>>(
     () => ({ backgroundColor }),
     [backgroundColor]
   );
@@ -31,12 +32,12 @@ const ItemsByCategorySingleListItem: FC = () => {
       containerStyle={containerStyle}>
       <ListItem.Content>
         <ListItem.Title>{itemName}</ListItem.Title>
-        {vendors.map(vendorName => (
-          <VendorNameProvider
-            vendorName={vendorName}
-            key={vendorName}>
+        {vendorIds.map(vendorId => (
+          <VendorIdProvider
+            vendorId={vendorId}
+            key={vendorId}>
             <ItemsByCategorySingleListItemCheckBox />
-          </VendorNameProvider>
+          </VendorIdProvider>
         ))}
       </ListItem.Content>
       <ListItem.Content right>

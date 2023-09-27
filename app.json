@@ -17,9 +17,7 @@
       "fallbackToCacheTimeout": 0,
       "url": "https://u.expo.dev/f28497ee-7028-4428-9dab-66dd58ea0afe"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
       "backgroundColor": "#ffffff",
@@ -32,6 +30,7 @@
       }
     },
     "web": {
+      "bundler": "metro",
       "favicon": "./assets/favicon.png"
     },
     "extra": {

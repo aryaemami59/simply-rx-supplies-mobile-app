@@ -1,6 +1,6 @@
 import { MaterialIcons } from "@expo/vector-icons";
 
-import type { Icon } from "../types/missingTypes";
+import type { Icon } from "../types/tsHelpers";
 
 const AddIcon: Icon = (
   <MaterialIcons

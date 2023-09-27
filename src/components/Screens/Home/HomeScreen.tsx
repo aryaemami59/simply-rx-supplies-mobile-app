@@ -14,7 +14,6 @@ import {
   FONT_WEIGHT_700,
   MAIN_COLOR,
 } from "../../../shared/styles/sharedStyles";
-import type { OnPress } from "../../../types/missingTypes";
 import type { RootTabScreenProps } from "../../../types/navigation";
 import {
   itemLookup,
@@ -24,6 +23,7 @@ import {
   itemsReferenceStackNavigator,
   shoppingCartStackNavigator,
 } from "../../../types/navigation";
+import type { OnPress } from "../../../types/tsHelpers";
 
 type Props = RootTabScreenProps<"Home">;
 

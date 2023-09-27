@@ -3,42 +3,43 @@ import type { FC } from "react";
 import { memo, useCallback, useMemo } from "react";
 import type { StyleProp, ViewStyle } from "react-native";
 
-import useItemName from "../../../../hooks/useItemName";
-import useVendorName from "../../../../hooks/useVendorName";
+import useItemId from "../../../../hooks/useItemId";
+import useVendorId from "../../../../hooks/useVendorId";
 import AddIcon from "../../../../Icons/AddIcon";
-import { addItemsByVendor } from "../../../../redux/addedSlice";
+import { addItemToCarts } from "../../../../redux/addedSlice";
 import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
 import {
   checkIfAddedToAllVendors,
-  checkIfItemAddedToOneVendor,
+  checkIfAddedToVendor,
+  selectItemName,
 } from "../../../../redux/selectors";
 import {
   BACKGROUND_MAIN_COLOR,
   FONT_WEIGHT_700,
 } from "../../../../shared/styles/sharedStyles";
-import type { OnPress } from "../../../../types/missingTypes";
+import type { OnPress } from "../../../../types/tsHelpers";
 
 const SingleItemsByVendorListItem: FC = () => {
-  const itemName = useItemName();
-  const vendorName = useVendorName();
+  const itemId = useItemId();
+  const vendorId = useVendorId();
+  const itemName = useAppSelector(state => selectItemName(state, itemId));
   const { background } = useTheme().theme.colors;
   const dispatch = useAppDispatch();
-  const ifAddedToAllVendors = useAppSelector(
-    checkIfAddedToAllVendors(itemName)
+  const ifAddedToAllVendors = useAppSelector(state =>
+    checkIfAddedToAllVendors(state, itemId)
   );
 
-  const clickHandler: OnPress = useCallback(() => {
+  const clickHandler = useCallback<OnPress>(() => {
     if (!ifAddedToAllVendors) {
-      dispatch(addItemsByVendor({ itemName, vendorName }));
+      dispatch(addItemToCarts({ itemId }));
     }
-    // ifAddedToAllVendors || dispatch(addItemsByVendor({ itemName, vendorName }));
-  }, [vendorName, ifAddedToAllVendors, dispatch, itemName]);
+  }, [dispatch, ifAddedToAllVendors, itemId]);
 
-  const ifAdded = useAppSelector(
-    checkIfItemAddedToOneVendor(vendorName, itemName)
+  const ifAdded = useAppSelector(state =>
+    checkIfAddedToVendor(state, vendorId, itemId)
   );
 
-  const containerStyle: StyleProp<ViewStyle> = useMemo(
+  const containerStyle = useMemo<StyleProp<ViewStyle>>(
     () => ({ backgroundColor: background }),
     [background]
   );

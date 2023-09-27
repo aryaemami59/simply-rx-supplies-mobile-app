@@ -1,4 +1,4 @@
-import type { EmptyArray } from "../types/missingTypes";
+import type { EmptyArray } from "../types/tsHelpers";
 
 const difference = <T>(firstArray: T[], secondArray: T[]): T[] | EmptyArray =>
   firstArray.filter(e => !secondArray.includes(e));

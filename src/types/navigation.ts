@@ -12,14 +12,6 @@ import type {
   StackScreenProps,
 } from "@react-navigation/stack";
 
-import type {
-  Category,
-  ItemName,
-  ItemNumber,
-  Src,
-  VendorNameType,
-} from "./api";
-
 // Hardcoded screen names
 export const home = "Home" as const;
 export const itemLookup = "ItemLookup" as const;
@@ -50,19 +42,19 @@ export type RootTabParamList = {
 export type ShoppingCartStackParamList = {
   ShoppingCartScreen: undefined;
   QRImage: {
-    itemNumbers: ItemNumber;
-    itemsAdded: ItemName[];
+    qrCodeText: string;
+    cartId: number;
   };
-  BarcodeImage: { src: Src; itemName: ItemName };
-  CartColumnListItems: { vendorName: VendorNameType };
+  BarcodeImage: { src: string; itemId: number };
+  CartColumnListItems: { vendorId: number };
   ItemLookup: { inputFocused: boolean };
-  ItemDetails: { itemName: ItemName; vendorName: VendorNameType };
+  ItemDetails: { itemId: number; vendorId: number };
 };
 
 export type ItemsReferenceStackParamList = {
   ItemsReferenceScreen: NavigatorScreenParams<ItemsReferenceTopTabParamList>;
-  ItemsByVendorListItems: { vendorName: VendorNameType };
-  ItemsByCategoryListItems: { category: Category };
+  ItemsByVendorListItems: { vendorId: number };
+  ItemsByCategoryListItems: { categoryId: number };
 };
 
 export type ItemsReferenceTopTabParamList = {

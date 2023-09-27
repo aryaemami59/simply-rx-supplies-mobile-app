@@ -1,5 +1,7 @@
 import "react-native-collapsible";
 
+import type { ReactNode } from "react";
+
 declare module "ts-node/register" {}
 
 declare module "react-native-collapsible" {

@@ -4,7 +4,7 @@ import { memo } from "react";
 
 import { useAppSelector } from "../../redux/hooks";
 import { checkIfAnyItemsAdded } from "../../redux/selectors";
-import type { TabBarIconProps } from "../../types/missingTypes";
+import type { TabBarIconProps } from "../../types/tsHelpers";
 
 type Props = TabBarIconProps;
 

@@ -3,38 +3,35 @@ import type { FC } from "react";
 import { memo, useCallback } from "react";
 import type { PressableProps } from "react-native";
 
-import useItemName from "../../../../hooks/useItemName";
+import useItemId from "../../../../hooks/useItemId";
 import useOfficialVendorName from "../../../../hooks/useOfficialVendorName";
-import useVendorName from "../../../../hooks/useVendorName";
-import { setVendors } from "../../../../redux/addedSlice";
+import useVendorId from "../../../../hooks/useVendorId";
+import { toggleVendorForOneSearchResultItem } from "../../../../redux/addedSlice";
 import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
-import {
-  checkIfItemAddedToOneVendor,
-  checkVendorsToAdd,
-} from "../../../../redux/selectors";
+import { checkIfAddedToVendor } from "../../../../redux/selectors";
 
 const ItemsByCategorySingleListItemCheckBox: FC = () => {
-  const vendorName = useVendorName();
-  const itemName = useItemName();
+  const vendorId = useVendorId();
+  const itemId = useItemId();
   const dispatch = useAppDispatch();
-  const officialVendorName = useOfficialVendorName(vendorName);
-  const ifAddedToVendor = useAppSelector(
-    checkIfItemAddedToOneVendor(vendorName, itemName)
+  const officialVendorName = useOfficialVendorName(vendorId);
+  const ifAddedToVendor = useAppSelector(state =>
+    checkIfAddedToVendor(state, vendorId, itemId)
   );
-  const checked = useAppSelector(checkVendorsToAdd(vendorName, itemName));
+  // const checked = useAppSelector(checkVendorsToAdd(vendorName, itemName));
 
-  const onToggleSwitch: NonNullable<PressableProps["onPress"]> =
-    useCallback(() => {
-      if (!ifAddedToVendor) {
-        dispatch(setVendors({ itemName, vendorName }));
-      }
-      // ifAddedToVendor || dispatch(setVendors({ itemName, vendorName }));
-    }, [dispatch, ifAddedToVendor, itemName, vendorName]);
+  const onToggleSwitch = useCallback<
+    NonNullable<PressableProps["onPress"]>
+  >(() => {
+    if (!ifAddedToVendor) {
+      dispatch(toggleVendorForOneSearchResultItem({ itemId, vendorId }));
+    }
+  }, [dispatch, ifAddedToVendor, itemId, vendorId]);
 
   return (
     <ListItem.CheckBox
       title={officialVendorName}
-      checked={checked}
+      checked={!ifAddedToVendor}
       disabled={ifAddedToVendor}
       onPress={onToggleSwitch}
     />

@@ -7,9 +7,9 @@ import { StyleSheet } from "react-native";
 import TouchableScale from "react-native-touchable-scale";
 
 import useOfficialVendorName from "../../../hooks/useOfficialVendorName";
-import useVendorName from "../../../hooks/useVendorName";
+import useVendorId from "../../../hooks/useVendorId";
 import { useAppSelector } from "../../../redux/hooks";
-import { addedItemsLength } from "../../../redux/selectors";
+import { selectCartItemsLength } from "../../../redux/selectors";
 import {
   AI_CENTER,
   FONT_WEIGHT_BOLD,
@@ -19,12 +19,14 @@ import type { ShoppingCartStackScreenProps } from "../../../types/navigation";
 import { cartColumnListItems } from "../../../types/navigation";
 
 const CartVendorColumns: FC = () => {
-  const vendorName = useVendorName();
-  const officialVendorName = useOfficialVendorName(vendorName);
-  const addedItemsLen = useAppSelector(addedItemsLength(vendorName));
+  const vendorId = useVendorId();
+  const officialVendorName = useOfficialVendorName(vendorId);
+  const cartItemsLength = useAppSelector(state =>
+    selectCartItemsLength(state, vendorId)
+  );
   const { background } = useTheme().theme.colors;
 
-  const status = addedItemsLen ? "success" : "primary";
+  const status = cartItemsLength ? "success" : "primary";
 
   const navigation =
     useNavigation<
@@ -32,8 +34,8 @@ const CartVendorColumns: FC = () => {
     >();
 
   const clickHandler = useCallback(() => {
-    navigation.push(cartColumnListItems, { vendorName });
-  }, [navigation, vendorName]);
+    navigation.push(cartColumnListItems, { vendorId });
+  }, [navigation, vendorId]);
 
   const containerStyle: StyleProp<ViewStyle> = useMemo(
     () => [AI_CENTER, JC_SPACE_BETWEEN, { backgroundColor: background }],
@@ -53,7 +55,7 @@ const CartVendorColumns: FC = () => {
           <Badge
             textStyle={FONT_WEIGHT_BOLD}
             status={status}
-            value={addedItemsLen}
+            value={cartItemsLength}
             containerStyle={styles.badgeContainer}
           />
         </>

@@ -4,14 +4,17 @@ import { memo, useMemo } from "react";
 import type { StyleProp, ViewStyle } from "react-native";
 import { Text, View } from "react-native";
 
-import useItemName from "../../../../hooks/useItemName";
+import useItemId from "../../../../hooks/useItemId";
+import { useAppSelector } from "../../../../redux/hooks";
+import { selectItemName } from "../../../../redux/selectors";
 import { AI_CENTER, TEXT_CENTER } from "../../../../shared/styles/sharedStyles";
 
 const ItemNameCart: FC = () => {
-  const itemName = useItemName();
+  const itemId = useItemId();
+  const itemName = useAppSelector(state => selectItemName(state, itemId));
   const { black } = useTheme().theme.colors;
 
-  const style: StyleProp<ViewStyle> = useMemo(
+  const style = useMemo<StyleProp<ViewStyle>>(
     () => [TEXT_CENTER, { color: black }],
     [black]
   );

@@ -2,13 +2,13 @@ import { useNavigation } from "@react-navigation/native";
 import { Button } from "@rneui/themed";
 import type { FC } from "react";
 import { memo, useCallback } from "react";
-import type { TouchableWithoutFeedbackProps } from "react-native";
 
-import useItemName from "../../../../hooks/useItemName";
-import useVendorName from "../../../../hooks/useVendorName";
+import useItemId from "../../../../hooks/useItemId";
+import useVendorId from "../../../../hooks/useVendorId";
 import { JC_SPACE_EVENLY } from "../../../../shared/styles/sharedStyles";
 import type { ShoppingCartStackScreenProps } from "../../../../types/navigation";
 import { itemDetails } from "../../../../types/navigation";
+import type { OnPress } from "../../../../types/tsHelpers";
 import DetailsIconNode from "./DetailsIconNode";
 
 type Props = {
@@ -16,16 +16,15 @@ type Props = {
 };
 
 const DetailsButton: FC<Props> = ({ reset }) => {
-  const itemName = useItemName();
-  const vendorName = useVendorName();
+  const itemId = useItemId();
+  const vendorId = useVendorId();
   const navigation =
     useNavigation<ShoppingCartStackScreenProps<"ItemDetails">["navigation"]>();
 
-  const clickHandler: NonNullable<TouchableWithoutFeedbackProps["onPress"]> =
-    useCallback(() => {
-      reset();
-      navigation.push(itemDetails, { itemName, vendorName });
-    }, [itemName, navigation, reset, vendorName]);
+  const clickHandler = useCallback<OnPress>(() => {
+    reset();
+    navigation.push(itemDetails, { itemId, vendorId });
+  }, [itemId, navigation, reset, vendorId]);
 
   return (
     <Button
