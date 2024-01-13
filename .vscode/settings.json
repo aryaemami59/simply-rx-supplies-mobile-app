@@ -9,9 +9,9 @@
   "editor.defaultFormatter": "dbaeumer.vscode-eslint",
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
-    "source.addMissingImports": true,
-    "source.fixAll": true,
-    "source.organizeImports": true
+    "source.addMissingImports": "explicit",
+    "source.fixAll": "explicit",
+    "source.organizeImports": "explicit"
   },
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
@@ -20,5 +20,6 @@
   "[jsonc]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": true
-  }
+  },
+  "editor.inlineSuggest.showToolbar": "onHover"
 }
