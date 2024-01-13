@@ -1,20 +1,14 @@
 import type {
   autotrackMemoize,
-  defaultMemoize,
   EntityAdapter,
   EntityId,
   EntitySelectors,
   EntityState,
-  OutputSelector,
+  lruMemoize,
   Selector,
   weakMapMemoize,
 } from "@reduxjs/toolkit";
-import type {
-  CreateSelectorOptions,
-  GetParamsFromSelectors,
-  SelectorArray,
-  SelectorResultArray,
-} from "reselect";
+import type { SelectorArray } from "reselect";
 
 import type {
   createAppSelector,
@@ -264,70 +258,70 @@ export type DropFirst<T extends unknown[]> = T extends [unknown, ...infer U]
 export type Expand<T> = T extends (...args: infer A) => infer R
   ? (...args: Expand<A>) => Expand<R>
   : T extends infer O
-  ? {
-      [K in keyof O]: O[K];
-    }
-  : never;
+    ? {
+        [K in keyof O]: O[K];
+      }
+    : never;
 
 /**
  * An instance of createSelector, customized with a given memoize implementation
  * This is a typed version of  `CreateSelectorFunction`.
  */
-export type TypedCreateSelectorFunction<
-  State,
-  MemoizeFunction extends (
-    func: (...args: unknown[]) => unknown,
-    ...options: never[]
-  ) => (...args: unknown[]) => unknown,
-  MemoizeOptions extends unknown[] = DropFirst<Parameters<MemoizeFunction>>,
-  Keys = Expand<
-    Pick<ReturnType<MemoizeFunction>, keyof ReturnType<MemoizeFunction>>
-  >,
-> = {
-  /** Input selectors as separate inline arguments */
-  <Selectors extends readonly Selector<State>[], Result>(
-    ...items: [
-      ...Selectors,
-      (...args: SelectorResultArray<Selectors>) => Result,
-    ]
-  ): OutputSelector<
-    Selectors,
-    Result,
-    (...args: SelectorResultArray<Selectors>) => Result,
-    GetParamsFromSelectors<Selectors>,
-    Keys
-  > &
-    Keys;
-  /** Input selectors as separate inline arguments with memoizeOptions passed */
-  <Selectors extends readonly Selector<State>[], Result>(
-    ...items: [
-      ...Selectors,
-      (...args: SelectorResultArray<Selectors>) => Result,
-      CreateSelectorOptions<MemoizeOptions>,
-    ]
-  ): OutputSelector<
-    Selectors,
-    Result,
-    (...args: SelectorResultArray<Selectors>) => Result,
-    GetParamsFromSelectors<Selectors>,
-    Keys
-  > &
-    Keys;
-  /** Input selectors as a separate array */
-  <Selectors extends readonly Selector<State>[], Result>(
-    selectors: [...Selectors],
-    combiner: (...args: SelectorResultArray<Selectors>) => Result,
-    options?: CreateSelectorOptions<MemoizeOptions>
-  ): OutputSelector<
-    Selectors,
-    Result,
-    (...args: SelectorResultArray<Selectors>) => Result,
-    GetParamsFromSelectors<Selectors>,
-    Keys
-  > &
-    Keys;
-};
+// export type TypedCreateSelectorFunction<
+//   State,
+//   MemoizeFunction extends (
+//     func: (...args: unknown[]) => unknown,
+//     ...options: never[]
+//   ) => (...args: unknown[]) => unknown,
+//   MemoizeOptions extends unknown[] = DropFirst<Parameters<MemoizeFunction>>,
+//   Keys = Expand<
+//     Pick<ReturnType<MemoizeFunction>, keyof ReturnType<MemoizeFunction>>
+//   >,
+// > = {
+//   /** Input selectors as separate inline arguments */
+//   <Selectors extends readonly Selector<State>[], Result>(
+//     ...items: [
+//       ...Selectors,
+//       (...args: SelectorResultArray<Selectors>) => Result,
+//     ]
+//   ): OutputSelector<
+//     Selectors,
+//     Result,
+//     (...args: SelectorResultArray<Selectors>) => Result,
+//     GetParamsFromSelectors<Selectors>,
+//     Keys
+//   > &
+//     Keys;
+//   /** Input selectors as separate inline arguments with memoizeOptions passed */
+//   <Selectors extends readonly Selector<State>[], Result>(
+//     ...items: [
+//       ...Selectors,
+//       (...args: SelectorResultArray<Selectors>) => Result,
+//       CreateSelectorOptions<MemoizeOptions>,
+//     ]
+//   ): OutputSelector<
+//     Selectors,
+//     Result,
+//     (...args: SelectorResultArray<Selectors>) => Result,
+//     GetParamsFromSelectors<Selectors>,
+//     Keys
+//   > &
+//     Keys;
+//   /** Input selectors as a separate array */
+//   <Selectors extends readonly Selector<State>[], Result>(
+//     selectors: [...Selectors],
+//     combiner: (...args: SelectorResultArray<Selectors>) => Result,
+//     options?: CreateSelectorOptions<MemoizeOptions>
+//   ): OutputSelector<
+//     Selectors,
+//     Result,
+//     (...args: SelectorResultArray<Selectors>) => Result,
+//     GetParamsFromSelectors<Selectors>,
+//     Keys
+//   > &
+//     Keys;
+// };
 
-export type DefaultMemoize = typeof defaultMemoize;
+export type LruMemoize = typeof lruMemoize;
 export type WeakMapMemoize = typeof weakMapMemoize;
 export type AutotrackMemoize = typeof autotrackMemoize;
