@@ -4,7 +4,7 @@ import setSelectorNames from "../utils/setSelectorNames";
 import withEmptyArrayFallback from "../utils/withEmptyArrayFallback";
 import { ADAPTER_SELECTORS, getAllEntitySelectors } from "./adapterSelectors";
 import { apiSelectors } from "./apiSlice";
-import { createSelectorWeakmap } from "./createSelectors";
+import { createSelectorWeakMap } from "./createSelectors";
 import { DRAFT_SAFE_SELECTORS } from "./draftSafeSelectors";
 import { TOP_LEVEL_SELECTORS } from "./topLevelSelectors";
 
@@ -14,32 +14,32 @@ const ROOT_SELECTOR_PARAMS_PROVIDER: RootSelectorParamsProvider = {
   getItemIdAndCartId: (state, itemId, cartId) => cartId,
 } as const satisfies RootSelectorParamsProvider;
 
-export const selectVendorsLinks = createSelectorWeakmap(
+export const selectVendorsLinks = createSelectorWeakMap(
   [ADAPTER_SELECTORS.GLOBAL.vendors.selectById],
   vendor => vendor?.link ?? ""
 );
 
-export const selectItemNumber = createSelectorWeakmap(
+export const selectItemNumber = createSelectorWeakMap(
   [ADAPTER_SELECTORS.GLOBAL.items.selectById],
   item => item?.itemNumber ?? ""
 );
 
-export const selectItemSrc = createSelectorWeakmap(
+export const selectItemSrc = createSelectorWeakMap(
   [ADAPTER_SELECTORS.GLOBAL.items.selectById],
   item => item?.src ?? ""
 );
 
-export const selectItemName = createSelectorWeakmap(
+export const selectItemName = createSelectorWeakMap(
   [ADAPTER_SELECTORS.GLOBAL.items.selectById],
   item => item?.name ?? ""
 );
 
-export const selectVendorIdsByItemId = createSelectorWeakmap(
+export const selectVendorIdsByItemId = createSelectorWeakMap(
   [ADAPTER_SELECTORS.GLOBAL.items.selectById],
   item => withEmptyArrayFallback(item?.vendorIds)
 );
 
-export const selectItemNamesAndKeywords = createSelectorWeakmap(
+export const selectItemNamesAndKeywords = createSelectorWeakMap(
   [ADAPTER_SELECTORS.GLOBAL.items.selectAll],
   items =>
     items.map<ItemNameAndKeywords>(({ name, keywords, id }) => ({
@@ -49,12 +49,12 @@ export const selectItemNamesAndKeywords = createSelectorWeakmap(
     }))
 );
 
-export const selectCartsItemIdsLength = createSelectorWeakmap(
+export const selectCartsItemIdsLength = createSelectorWeakMap(
   [ADAPTER_SELECTORS.GLOBAL.cart.selectAll],
   carts => carts.map(({ itemIds }) => itemIds.length)
 );
 
-export const checkIfAnyItemsAdded = createSelectorWeakmap(
+export const checkIfAnyItemsAdded = createSelectorWeakMap(
   [selectCartsItemIdsLength],
   itemIdsLengthArray =>
     itemIdsLengthArray.reduce<boolean>(
@@ -63,18 +63,18 @@ export const checkIfAnyItemsAdded = createSelectorWeakmap(
     )
 );
 
-export const selectCartItemsIds = createSelectorWeakmap(
+export const selectCartItemsIds = createSelectorWeakMap(
   [ADAPTER_SELECTORS.GLOBAL.cart.selectById],
   cart => withEmptyArrayFallback(cart?.itemIds)
 );
 // TODO: maybe remove?
-export const selectCartItemNames = createSelectorWeakmap(
+export const selectCartItemNames = createSelectorWeakMap(
   [selectCartItemsIds, ADAPTER_SELECTORS.GLOBAL.items.selectEntities],
   (cartItemIds, itemsEntities) =>
     cartItemIds.map<string>(cartItemId => itemsEntities[cartItemId]?.name ?? "")
 );
 
-export const selectCartItemNamesStringified = createSelectorWeakmap(
+export const selectCartItemNamesStringified = createSelectorWeakMap(
   [selectCartItemsIds, ADAPTER_SELECTORS.GLOBAL.items.selectEntities],
   (cartItemIds, itemsEntities) =>
     cartItemIds
@@ -82,13 +82,13 @@ export const selectCartItemNamesStringified = createSelectorWeakmap(
       .join(", ")
 );
 
-export const selectCheckedVendorIds = createSelectorWeakmap(
+export const selectCheckedVendorIds = createSelectorWeakMap(
   [ADAPTER_SELECTORS.GLOBAL.itemVendors.selectById],
   checkedVendorItem =>
     withEmptyArrayFallback(checkedVendorItem?.checkedVendorIds)
 );
 
-export const isVendorChecked = createSelectorWeakmap(
+export const isVendorChecked = createSelectorWeakMap(
   [
     ADAPTER_SELECTORS.GLOBAL.itemVendors.selectById,
     ROOT_SELECTOR_PARAMS_PROVIDER.getItemIdAndCartId,
@@ -97,7 +97,7 @@ export const isVendorChecked = createSelectorWeakmap(
     !!checkedVendorItem?.checkedVendorIds.includes(vendorId)
 );
 
-export const isMinimized = createSelectorWeakmap(
+export const isMinimized = createSelectorWeakMap(
   [
     ADAPTER_SELECTORS.GLOBAL.cartItems.selectById,
     ROOT_SELECTOR_PARAMS_PROVIDER.getCartIdAndItemId,
@@ -105,32 +105,32 @@ export const isMinimized = createSelectorWeakmap(
   (cartItems, itemId) => !!cartItems?.minimizedItemIds.includes(itemId)
 );
 
-export const selectCategoryName = createSelectorWeakmap(
+export const selectCategoryName = createSelectorWeakMap(
   [ADAPTER_SELECTORS.GLOBAL.categories.selectById],
   category => category?.name ?? "Vials"
 );
 
-export const selectCategoryItemIds = createSelectorWeakmap(
+export const selectCategoryItemIds = createSelectorWeakMap(
   [ADAPTER_SELECTORS.GLOBAL.categories.selectById],
   category => withEmptyArrayFallback(category?.itemIds)
 );
 
-export const checkIfAddedToVendor = createSelectorWeakmap(
+export const checkIfAddedToVendor = createSelectorWeakMap(
   [selectCartItemsIds, ROOT_SELECTOR_PARAMS_PROVIDER.getCartIdAndItemId],
   (cartItemsIds, itemId) => cartItemsIds.includes(itemId)
 );
 
-export const selectCartItemsLength = createSelectorWeakmap(
+export const selectCartItemsLength = createSelectorWeakMap(
   [selectCartItemsIds],
   cartItemIds => cartItemIds.length
 );
 
-export const checkIfAnyAddedToOneVendor = createSelectorWeakmap(
+export const checkIfAnyAddedToOneVendor = createSelectorWeakMap(
   [selectCartItemsLength],
   cartItemIdsLength => cartItemIdsLength > 0
 );
 
-export const selectQRCodeText = createSelectorWeakmap(
+export const selectQRCodeText = createSelectorWeakMap(
   [
     selectCartItemsIds,
     ADAPTER_SELECTORS.GLOBAL.items.selectEntities,
@@ -142,17 +142,17 @@ export const selectQRCodeText = createSelectorWeakmap(
       .join(vendor?.joinChars)
 );
 
-export const selectOfficialName = createSelectorWeakmap(
+export const selectOfficialName = createSelectorWeakMap(
   [ADAPTER_SELECTORS.GLOBAL.vendors.selectById],
   vendor => vendor?.officialName ?? "GNFR"
 );
 
-export const selectVendorItemIds = createSelectorWeakmap(
+export const selectVendorItemIds = createSelectorWeakMap(
   [ADAPTER_SELECTORS.GLOBAL.vendors.selectById],
   vendor => withEmptyArrayFallback(vendor?.itemIds)
 );
 
-const selectCartsByItemId = createSelectorWeakmap(
+const selectCartsByItemId = createSelectorWeakMap(
   [
     ADAPTER_SELECTORS.GLOBAL.items.selectById,
     ADAPTER_SELECTORS.GLOBAL.cart.selectAll,
@@ -163,7 +163,7 @@ const selectCartsByItemId = createSelectorWeakmap(
     )
 );
 
-export const checkIfAddedToAllVendors = createSelectorWeakmap(
+export const checkIfAddedToAllVendors = createSelectorWeakMap(
   [selectCartsByItemId, ROOT_SELECTOR_PARAMS_PROVIDER.getItemId],
   (carts, itemId) =>
     carts.reduce<boolean>(
@@ -172,7 +172,7 @@ export const checkIfAddedToAllVendors = createSelectorWeakmap(
     )
 );
 // TODO: maybe remove?
-export const selectVendorsOfficialNames = createSelectorWeakmap(
+export const selectVendorsOfficialNames = createSelectorWeakMap(
   [ADAPTER_SELECTORS.GLOBAL.vendors.selectEntities, selectVendorIdsByItemId],
   (entities, vendorIds) =>
     vendorIds.map(e => entities[e]?.officialName ?? "GNFR")

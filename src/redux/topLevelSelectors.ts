@@ -3,19 +3,19 @@ import type {
   AppSelector,
   TopLevelSelectorsForAddedState,
 } from "../types/reduxHelperTypes";
-import { createSelectorWeakmap } from "./createSelectors";
+import { createSelectorWeakMap } from "./createSelectors";
 
 export const selectAdded: AppSelector<AddedState, never> = state => state.added;
 
 export const TOP_LEVEL_SELECTORS: TopLevelSelectorsForAddedState = {
-  searchResults: createSelectorWeakmap(
+  searchResults: createSelectorWeakMap(
     [selectAdded],
     added => added.searchResults
   ),
 
-  cart: createSelectorWeakmap([selectAdded], added => added.cart),
+  cart: createSelectorWeakMap([selectAdded], added => added.cart),
 
-  itemVendors: createSelectorWeakmap([selectAdded], added => added.itemVendors),
+  itemVendors: createSelectorWeakMap([selectAdded], added => added.itemVendors),
 
-  cartItems: createSelectorWeakmap([selectAdded], added => added.cartItems),
+  cartItems: createSelectorWeakMap([selectAdded], added => added.cartItems),
 } as const satisfies TopLevelSelectorsForAddedState;

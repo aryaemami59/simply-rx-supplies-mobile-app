@@ -5,7 +5,7 @@ import type { Supplies } from "../types/api";
 import type { Cart, SuppliesState } from "../types/reduxHelperTypes";
 import EMPTY_ARRAY from "../utils/emptyArray";
 import ADAPTER_INITIAL_STATES from "./adapterInitialStates";
-import { createSelectorWeakmap } from "./createSelectors";
+import { createSelectorWeakMap } from "./createSelectors";
 import ENTITY_ADAPTERS from "./entityAdapters";
 
 const apiSlice = createApi({
@@ -35,26 +35,26 @@ export const { useGetMainQuery, endpoints } = apiSlice;
 
 export const selectMainResults = endpoints.getMain.select();
 
-export const selectMainData = createSelectorWeakmap(
+export const selectMainData = createSelectorWeakMap(
   [selectMainResults],
   results => results.data
 );
 
-export const selectItemsData = createSelectorWeakmap([selectMainData], data =>
+export const selectItemsData = createSelectorWeakMap([selectMainData], data =>
   ENTITY_ADAPTERS.items.setAll(
     ADAPTER_INITIAL_STATES.items,
     data?.items ?? EMPTY_ARRAY
   )
 );
 
-export const selectVendorsData = createSelectorWeakmap([selectMainData], data =>
+export const selectVendorsData = createSelectorWeakMap([selectMainData], data =>
   ENTITY_ADAPTERS.vendors.setAll(
     ADAPTER_INITIAL_STATES.vendors,
     data?.vendors ?? EMPTY_ARRAY
   )
 );
 
-export const selectCategoriesData = createSelectorWeakmap(
+export const selectCategoriesData = createSelectorWeakMap(
   [selectMainData],
   data =>
     ENTITY_ADAPTERS.categories.setAll(
