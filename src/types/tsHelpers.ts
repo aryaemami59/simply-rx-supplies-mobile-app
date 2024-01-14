@@ -15,22 +15,28 @@ export type TabBarIconProps = Parameters<
   NonNullable<BottomTabNavigationOptions["tabBarIcon"]>
 >[number];
 
-// export type RenderItem<T> = NonNullable<ListRenderItem<T>>;
-
 export type SearchBarRef = PropsWithChildren<SearchBarProps> &
   TextInput &
   SearchBarType;
+
 export type AnimatableViewRef = Animatable.View & View;
+
 export type HeaderStyle = NonNullable<StackNavigationOptions["headerStyle"]>;
+
 export type HeaderTitleStyle = NonNullable<
   StackNavigationOptions["headerTitleStyle"]
 >;
+
 export type TabHeader = Header<BottomTabNavigationOptions>;
+
 export type StackHeader = Header<StackNavigationOptions>;
+
 export type Header<
   T extends BottomTabNavigationOptions | StackNavigationOptions,
 > = NonNullable<T["header"]>;
+
 export type TabBarIcon = NonNullable<BottomTabNavigationOptions["tabBarIcon"]>;
+
 export type HeaderRight = NonNullable<StackNavigationOptions["headerRight"]>;
 
 export type OnPress = NonNullable<TouchableWithoutFeedbackProps["onPress"]>;
@@ -53,13 +59,13 @@ export type Composite = AnyFunction | AnyArray | AnyObject;
 
 export type ObjectOrArray = AnyArray | AnyObject;
 
-export type Equals<X, Y> = (<T>() => T extends X ? 1 : 2) extends <
-  T,
->() => T extends Y ? 1 : 2
-  ? true
-  : false;
+export type Equals<X, Y> =
+  (<T>() => T extends X ? 1 : 2) extends <T>() => T extends Y ? 1 : 2
+    ? true
+    : false;
 
 export type Without<T, U> = { [P in Exclude<keyof T, keyof U>]?: never };
+
 export type XOR<T, U> = T | U extends object
   ? (Without<T, U> & U) | (Without<U, T> & T)
   : T | U;
@@ -115,7 +121,7 @@ export type ObjectEntries<
 
 export type Predicate<T> = (value: unknown) => value is T;
 
-export type ObjectChecker<T extends UnknownObject> = {
+export type ObjectChecker<T extends object> = {
   [K in keyof T]: Predicate<T[K]>;
 };
 
@@ -132,41 +138,3 @@ export type NeverFunction = (...args: never[]) => unknown;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type AnyFunction = (...args: any[]) => unknown;
-
-export type DropLast<T extends unknown[]> = T extends [...infer U, unknown]
-  ? U
-  : never;
-
-/**
- * The infamous "convert a union type to an intersection type" hack
- * Source: https://github.com/sindresorhus/type-fest/blob/main/source/union-to-intersection.d.ts
- * Reference: https://github.com/microsoft/TypeScript/issues/29594
- */
-export type UnionToIntersection<Union> = (
-  Union extends unknown ? (distributedUnion: Union) => void : never
-) extends (mergedIntersection: infer Intersection) => void
-  ? Intersection
-  : never;
-
-export type Push<T extends unknown[], V> = [...T, V];
-export type LastOf<T> = UnionToIntersection<
-  T extends unknown ? () => T : never
-> extends () => infer R
-  ? R
-  : never;
-export type TuplifyUnion<
-  T,
-  L = LastOf<T>,
-  N = [T] extends [never] ? true : false,
-> = true extends N ? [] : Push<TuplifyUnion<Exclude<T, L>>, L>;
-/**
- * Converts "the values of an object" into a tuple, like a type-level `Object.values()`
- * Source: https://stackoverflow.com/a/68695508/62937
- */
-export type ObjValueTuple<
-  T,
-  KS extends unknown[] = TuplifyUnion<keyof T>,
-  R extends unknown[] = [],
-> = KS extends [infer K, ...infer KT]
-  ? ObjValueTuple<T, KT, [...R, T[K & keyof T]]>
-  : R;
