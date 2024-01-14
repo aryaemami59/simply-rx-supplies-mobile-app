@@ -27,11 +27,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
-    },
-    "web": {
-      "bundler": "metro",
-      "favicon": "./assets/favicon.png"
+      },
+      "package": "com.aryaemami59.rxsupplies"
     },
     "extra": {
       "eas": {
