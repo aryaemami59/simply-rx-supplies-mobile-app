@@ -1,9 +1,9 @@
 import { createDraftSafeSelectorCreator } from "@reduxjs/toolkit";
 import {
-  unstable_autotrackMemoize as autotrackMemoize,
   createSelector,
   createSelectorCreator,
   lruMemoize,
+  unstable_autotrackMemoize as autotrackMemoize,
   weakMapMemoize,
 } from "reselect";
 
