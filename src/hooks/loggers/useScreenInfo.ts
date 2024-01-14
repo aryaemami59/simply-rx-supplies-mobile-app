@@ -59,7 +59,7 @@ const useScreenInfo = <
 
   useEffect(() => {
     console.log(
-      `${component?.name ? `${component.name}` : ""} %o : ${
+      `${component?.name ? component.name : ""} %o : ${
         parentName ? `Parent Name: %c${parentName}%c` : "%cTOP LEVEL"
       }`,
       { [name]: info },

@@ -38,8 +38,8 @@ const ShareButton: FC<Props> = ({ reset }) => {
 
   const shareContent = useMemo<ShareContent>(
     () => ({
-      title: `${itemNumber}`,
-      message: `${itemName}`,
+      title: itemNumber,
+      message: itemName,
       url: src,
     }),
     [itemNumber, itemName, src]
