@@ -6,6 +6,7 @@
   },
   "extends": [
     "@react-native-community",
+    "@react-native",
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "airbnb",
@@ -14,20 +15,19 @@
     "plugin:react/recommended",
     "plugin:react/jsx-runtime",
     "plugin:jsx-a11y/strict",
-    "plugin:react-redux/all",
+    // "plugin:react-redux/all",
     "plugin:react-perf/all",
     "plugin:@typescript-eslint/strict-type-checked",
     "plugin:@typescript-eslint/stylistic-type-checked",
     "plugin:prettier/recommended",
     "plugin:react-native/all"
   ],
-  "overrides": [],
   "ignorePatterns": [
     "node_modules",
     ".expo",
     ".expo-shared",
     ".vscode",
-    "webpack.config.ts",
+    "*.config.*",
     "assets",
     "dist"
   ],
