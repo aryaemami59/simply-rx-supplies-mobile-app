@@ -1,6 +1,5 @@
 import type { ConfigFunction } from "@babel/core";
 
-// /** @type {import('@babel/core').ConfigFunction} */
 const config: ConfigFunction = api => {
   // api.cache(false);
   api.cache.forever();
@@ -14,7 +13,8 @@ const config: ConfigFunction = api => {
     ],
     presets: [
       // ["@babel/preset-env", { targets: { node: "current" } }],
-      ["babel-preset-expo", { targets: { node: "current" } }],
+      ["babel-preset-expo"],
+      // ["babel-preset-expo", { targets: { node: "current" } }],
       // ["@babel/preset-typescript", { targets: { node: "current" } }],
     ],
   };
