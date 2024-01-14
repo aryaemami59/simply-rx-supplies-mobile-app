@@ -29,10 +29,7 @@ const myTheme = createTheme({
 
 const App: FC = () => (
   <SafeAreaProvider>
-    <Provider
-      store={store}
-      noopCheck="always"
-      stabilityCheck="always">
+    <Provider store={store}>
       <PaperProvider>
         <ThemeProvider theme={myTheme}>
           <NavigationContainer>
