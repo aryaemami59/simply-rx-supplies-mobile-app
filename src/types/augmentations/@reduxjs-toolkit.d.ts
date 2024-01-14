@@ -1,4 +1,4 @@
-import type { EntityId, EntityState } from "@reduxjs/toolkit/react";
+import type { EntityId, EntityState } from "@reduxjs/toolkit";
 
 import type { ExtendedEntitySelectors } from "../reduxHelperTypes";
 

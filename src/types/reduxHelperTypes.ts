@@ -1,14 +1,16 @@
 import type {
-  autotrackMemoize,
   EntityAdapter,
   EntityId,
   EntitySelectors,
   EntityState,
-  lruMemoize,
-  Selector,
-  weakMapMemoize,
 } from "@reduxjs/toolkit";
-import type { SelectorArray } from "reselect";
+import type {
+  lruMemoize,
+  OutputSelector,
+  Selector,
+  unstable_autotrackMemoize as autotrackMemoize,
+  weakMapMemoize,
+} from "reselect";
 
 import type {
   createAppSelector,
@@ -16,7 +18,6 @@ import type {
 } from "../redux/createSelectors";
 import type { RootState } from "../redux/store";
 import type { Category, Item, Vendor } from "./api";
-import type { AnyFunction } from "./tsHelpers";
 
 /**
  * Controls the one to many relationship between an item and its vendors in the search results and the side bar accordion.
@@ -152,28 +153,34 @@ export type RootSelectorParamsProvider = SelectorParamsProvider<
   ]
 >;
 
-export type WithOutputSelectorFields<T extends AnyFunction = AnyFunction> =
-  T & {
-    /** The final function passed to `createSelector` */
-    resultFunc: AnyFunction;
-    /** The same function, memoized */
-    memoizedResultFunc: AnyFunction & { clearCache: () => void };
-    /** Returns the last result calculated by the selector */
-    lastResult: () => ReturnType<T>;
-    /** An array of the input selectors */
-    dependencies: SelectorArray;
-    /** Counts the number of times the output has been recalculated */
-    recomputations: () => number;
-    /** Resets the count of recomputations count to 0 */
-    resetRecomputations: () => number;
-    clearCache: () => void;
-  };
+// export type WithOutputSelectorFields<T extends AnyFunction = AnyFunction> =
+//   T & {
+//     /** The final function passed to `createSelector` */
+//     resultFunc: AnyFunction;
+//     /** The same function, memoized */
+//     memoizedResultFunc: AnyFunction & { clearCache: () => void };
+//     /** Returns the last result calculated by the selector */
+//     lastResult: () => ReturnType<T>;
+//     /** An array of the input selectors */
+//     dependencies: SelectorArray;
+//     /** Counts the number of times the output has been recalculated */
+//     recomputations: () => number;
+//     /** Resets the count of recomputations count to 0 */
+//     resetRecomputations: () => number;
+//     clearCache: () => void;
+//   };
 
 export type ExtendedEntitySelectors<T, V, Id extends EntityId> = {
-  [K in keyof EntitySelectors<T, V, Id>]: WithOutputSelectorFields<
-    EntitySelectors<T, V, Id>[K]
+  [K in keyof EntitySelectors<T, V, Id>]: OutputSelector<
+    [EntitySelectors<T, V, Id>[K]],
+    ReturnType<EntitySelectors<T, V, Id>[K]>
   >;
 };
+// export type ExtendedEntitySelectors<T, V, Id extends EntityId> = {
+//   [K in keyof EntitySelectors<T, V, Id>]: WithOutputSelectorFields<
+//     EntitySelectors<T, V, Id>[K]
+//   >;
+// };
 
 export type AdapterGlobalizedSelectors = {
   readonly [K in keyof AdaptersHelper]: ExtendedEntitySelectors<
